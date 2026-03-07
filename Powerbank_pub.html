@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>GREENBRIDGE — Powerbanks & Solutions Énergétiques</title>
+<meta name="description" content="GREENBRIDGE — Powerbanks assemblées au Sénégal & Côte d'Ivoire. Cellules testées, garantie 1 an.">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>
+:root{
+  --topbar-h:44px;
+  --header-h:66px;
+  --maxw:1100px;
+
+  --brand-green:#04462e;
+  --green-dark:#061f14;
+  --green-mid:#073217;
+  --gold:#d4af37;
+
+  --bg-main:#f6fbfe;
+  --card-bg: rgba(255,255,255,0.48);
+  --card-bg-strong: rgba(255,255,255,0.92);
+  --card-border: rgba(6,42,32,0.28);
+  --text:#041a13;
+  --muted:#4f6360;
+
+  --electric-yellow:#ffd600;
+  --shadow: 0 12px 36px rgba(6,42,32,0.06);
+
+  --model-img-fit: cover;
+}
+
+/* Reset + ensure background fills entire document */
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;padding:0;font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial;color:var(--text);-webkit-font-smoothing:antialiased;}
+html {
+  background-image: url('Energie_blanche.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: var(--bg-main);
+  min-height:100%;
+}
+body {
+  background: transparent;
+  min-height:100%;
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%;height:auto}
+
+/* subtle overlay */
+.bg-overlay{position:fixed;inset:0;z-index:8;pointer-events:none;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.015));backdrop-filter:saturate(105%) blur(0.3px)}
+
+/* Topbar & Header */
+.topbar{position:fixed;top:0;left:0;right:0;height:var(--topbar-h);background:var(--green-dark);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;z-index:1600;font-size:13px}
+.topbar a{color:#fff;font-weight:600}
+.header{position:fixed;top:var(--topbar-h);left:0;right:0;height:var(--header-h);background:linear-gradient(90deg,var(--green-mid),#0b4d26);display:flex;align-items:center;justify-content:space-between;padding:0 5vw;z-index:1595;box-shadow:0 4px 12px rgba(0,0,0,.20)}
+.logo-text{display:flex;align-items:center;gap:10px}
+.logo-text img{height:48px;display:block}
+
+/* GREENBRIDGE */
+.company-name{
+  font-size:36px;
+  font-weight:800;
+  letter-spacing:1px;
+  padding:6px 10px;
+  border-radius:8px;
+  color:var(--brand-green);
+  -webkit-text-stroke:0.95px var(--gold);
+  text-shadow:0 3px 6px rgba(0,0,0,0.45);
+}
+
+/* Navigation — keep visible on all sizes, but compact on mobile */
+nav{display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+nav a{color:#fff;font-size:14px;font-weight:600;padding:8px 10px;border-radius:8px;transition:all .18s;white-space:nowrap}
+nav a:hover{color:var(--gold)}
+nav a.active{color:var(--gold);background:linear-gradient(90deg, rgba(212,175,55,0.06), rgba(212,175,55,0.03));border:1px solid rgba(212,175,55,0.12);padding:10px 14px}
+
+/* Electric band (orbs) — unchanged */
+.electric-band {
+  position: fixed;
+  top: calc(var(--topbar-h) + var(--header-h) - 6px);
+  left: 0;
+  right: 0;
+  height: 14px;
+  z-index: 99999;
+  pointer-events: none;
+  overflow: visible;
+  transform: translateZ(0);
+}
+.electric-band .container { position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 100vw; max-width: none; padding: 0; height: 100%; pointer-events: none; box-sizing: border-box; }
+.lightning-svg { width: 100vw; height: 100%; display: block; pointer-events: none; opacity: 0; transition: opacity .22s ease; mix-blend-mode: screen; }
+.electric-band.connected .lightning-svg { opacity: 1; }
+.orb{position:absolute;width:12px;height:12px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #fff8b0, var(--electric-yellow));box-shadow:0 0 18px rgba(255,214,0,0.98);}
+
+/* main container */
+.container{ max-width:var(--maxw); margin:0 auto; padding:18px 14px 120px; position:relative; z-index:40; background: transparent; }
+
+/* Product card */
+.product-card { width: min(980px,94%); margin: 28px auto 22px; background: var(--card-bg-strong); border: 1px solid rgba(6,42,32,0.06); border-radius:14px; padding:18px; box-shadow:var(--shadow); color:var(--text); display:flex; flex-direction:row; gap:18px; align-items:flex-start; position:relative; overflow:hidden; backdrop-filter: blur(3px) saturate(105%); }
+.product-card::before{ content:""; position:absolute; right:-2%; top:0; bottom:0; width:46%; max-width:480px; background-image: url('assets/batteries-faint.png'); background-size:contain; background-repeat:no-repeat; background-position:center right; opacity:0.045; pointer-events:none; transform:translateX(4%); filter:grayscale(90%) blur(0.35px) }
+/* left overlay slightly darker to help text read on busy backgrounds */
+.product-card::after{ content:""; position:absolute; left:0; top:0; bottom:0; width:48%; background:linear-gradient(90deg, rgba(4,30,20,0.06) 0%, rgba(255,255,255,0.28) 55%); pointer-events:none }
+
+/* MODELS section */
+.models-wrapper{ margin-top:24px; padding: 18px 12px 36px; width: 100%; max-width: 100vw; box-sizing: border-box; position: relative; background: transparent; z-index:60; }
+
+/* models header */
+.models-header{display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.models-title{font-weight:800;font-size:22px;color:var(--brand-green);letter-spacing:0.4px;background: rgba(255,255,255,0.6);padding:8px 14px;border-radius:10px;box-shadow: 0 8px 20px rgba(6,42,32,0.06)}
+
+/* grid */
+.models{display:grid;grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));gap:18px;align-items:stretch;max-width:var(--maxw);margin:0 auto;padding:6px 14px;box-sizing:border-box}
+
+/* model cards — force opaque white background so text is always readable */
+.models .model{
+  display:flex;flex-direction:column;justify-content:space-between;gap:12px;padding:14px;border-radius:12px;
+  background: #ffffff; /* solid white for full readability */
+  border: 1px solid rgba(6,42,32,0.06);
+  box-shadow: 0 14px 30px rgba(6,42,32,0.06);
+  cursor:pointer;transition: transform 180ms ease, box-shadow 180ms ease;min-height:240px;overflow:hidden;color:var(--text);
+}
+.models .model .thumb{position:relative;flex:0 0 56%;height:0;padding-bottom:56%;overflow:hidden;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.10));display:block}
+.models .model .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:var(--model-img-fit);object-position:center center;border-radius:8px;box-shadow:0 6px 20px rgba(6,42,32,0.06)}
+.model .meta{flex:1 1 auto;display:flex;flex-direction:column;justify-content:flex-start;min-height:0}
+.model .meta h4{margin:0;font-size:18px;color:var(--brand-green);font-weight:800}
+.model .meta p{margin:10px 0 0;font-size:14px;color:var(--muted);line-height:1.35;flex:1 1 auto}
+.model .actions{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex:0 0 auto}
+
+/* other UI pieces */
+.product-info{flex:1;min-width:260px;padding-right:6px}
+.top-label{display:inline-block;padding:7px 10px;border-radius:999px;background:rgba(6,120,60,0.06);color:var(--brand-green);font-weight:800;margin-bottom:8px;font-size:13px}
+.product-title{font-size:20px;font-weight:800;margin:6px 0 6px;color:var(--brand-green);line-height:1.08}
+.product-sub{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.35}
+
+.features{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.feature-pill{background:rgba(255,255,255,0.98);padding:7px 10px;border-radius:999px;border:1px solid rgba(6,42,32,0.04);color:var(--brand-green);font-weight:800;font-size:13px}
+
+.specs-block{margin-top:12px}
+.specs-title{font-weight:800;margin-bottom:8px;font-size:15px}
+.spec-list{display:flex;flex-direction:column;gap:8px;color:var(--text);font-size:15px;line-height:1.45}
+.spec-list > div{background: rgba(255,255,255,0.98); padding:10px 12px; border-radius:10px; border:1px solid rgba(6,42,32,0.04); box-shadow: 0 6px 14px rgba(6,42,32,0.03)}
+
+/* product side */
+.product-side{width:340px;display:flex;flex-direction:column;gap:12px;align-items:stretch}
+.product-image{width:100%;height:220px;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#fbfeff,#f3f9fc);display:flex;align-items:center;justify-content:center;border:1px solid rgba(6,42,32,0.04)}
+.product-image img{width:92%;height:92%;object-fit:contain;cursor:pointer;transition:transform .35s;border-radius:8px}
+.cta-group{display:flex;flex-direction:column;gap:10px}
+.btn-primary{background:linear-gradient(90deg,var(--brand-green),var(--green-mid));color:#fff;border:0;padding:12px 14px;border-radius:12px;font-weight:900;cursor:pointer;box-shadow:0 12px 30px rgba(4,70,46,0.14);font-size:15px}
+.btn-secondary{background:#fff;border:1px solid rgba(6,42,32,0.06);padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:800}
+.btn-small{background:transparent;border:1px solid rgba(6,42,32,0.06);padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:700}
+
+.details-panel{display:none;margin:12px auto 0;width:min(980px,94%);background:rgba(255,255,255,0.96);border:2px solid rgba(6,42,32,0.06);border-radius:12px;padding:14px;color:var(--text);box-shadow:0 12px 30px rgba(6,42,32,0.05);line-height:1.5}
+
+/* featured / footer */
+.futures-title{text-align:center;margin-top:24px;margin-bottom:10px}
+.futures-title h2{font-weight:800;font-size:22px;color:var(--brand-green);letter-spacing:0.4px;margin:0;padding:0}
+.featured{margin-top:10px;border-radius:12px;overflow:hidden;border: 1px solid rgba(212,175,55,0.22);background: rgba(255,255,255,0.90);box-shadow: var(--shadow)}
+.featured-hero{position:relative;height:320px;overflow:hidden;background:#000}
+.slide{position:absolute;inset:0;background-size:cover;background-position:center center;opacity:0;transition:opacity 900ms ease, transform 900ms;transform:scale(1.06)}
+.slide.active{opacity:1;transform:scale(1.12)}
+.featured-copy{padding:18px;text-align:center}
+.featured-copy h3{margin:0;color:var(--brand-green);font-weight:800;letter-spacing:0.3px;font-size:18px}
+.featured-copy p{color:var(--muted);margin-top:10px;line-height:1.45}
+.availability-badge{display:inline-block;margin-top:12px;padding:8px 14px;border-radius:999px;background: linear-gradient(90deg, #ffda00, #ffb300);color:#08110a;font-weight:900;font-size:14px;box-shadow:0 10px 30px rgba(255,180,0,0.18);transform-origin:center;animation: pulse 2200ms infinite;border: 1px solid rgba(0,0,0,0.06);}
+
+@keyframes pulse { 0% { transform: scale(1); filter:brightness(1); } 50% { transform: scale(1.04); filter:brightness(1.06); } 100% { transform: scale(1); filter:brightness(1); } }
+
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.56);display:none;align-items:flex-end;justify-content:center;z-index:4000}
+.modal{width:100%;max-height:78vh;background:#fff;border-top-left-radius:14px;border-top-right-radius:14px;padding:18px;overflow:auto;box-shadow:0 -14px 40px rgba(0,0,0,0.3)}
+.modal .close{position:absolute;right:16px;top:12px;background:transparent;border:0;font-size:18px;cursor:pointer}
+.fab{position:fixed;right:14px;bottom:18px;width:56px;height:56px;border-radius:14px;background:linear-gradient(90deg,var(--brand-green),var(--green-mid));color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 14px 36px rgba(4,70,46,0.14);z-index:3000;cursor:pointer;font-size:18px}
+
+footer{background:var(--green-dark);color:#fff;padding:18px 5vw 36px;text-align:center;margin-top:18px}
+.footer-company{display:block;margin:0 auto 8px;font-size:18px;font-weight:800;color:var(--brand-green);-webkit-text-stroke:0.7px var(--gold);text-shadow:0 3px 6px rgba(0,0,0,0.6);padding:6px 10px;border-radius:6px;background: linear-gradient(90deg, rgba(212,175,55,0.02), rgba(255,255,255,0) 40%)}
+
+/* responsive adjustments */
+@media (max-width:900px){
+  .product-card{flex-direction:column;gap:12px;padding:14px}
+  .product-side{order:-1;width:100%}
+  .product-side{flex-direction:column}
+  .product-image{height:260px;border-radius:12px}
+  .product-info{padding-right:0}
+  .cta-group{flex-direction:row;gap:8px}
+  .cta-group .btn-primary, .cta-group .btn-secondary {flex:1;min-width:0}
+  .btn-small{align-self:flex-end}
+  .spec-list > div{font-size:14px}
+  .models{grid-template-columns:repeat(2,1fr);gap:12px}
+  /* hide decorative heavy right image on small screens to improve text contrast */
+  .product-card::before{display:none}
+  .product-card::after{width:100%;background:linear-gradient(180deg, rgba(4,30,20,0.04) 0%, rgba(255,255,255,0.86) 100%);}
+}
+@media (max-width:640px){
+  .company-name{font-size:30px}
+  /* keep nav visible and compact on small screens */
+  nav{display:flex;gap:8px;justify-content:center}
+  nav a{font-size:13px;padding:6px 8px}
+  .models{grid-template-columns:1fr}
+  .product-title{font-size:18px}
+  .btn-primary{font-size:14px;padding:10px 12px}
+  .models .model{min-height:260px}
+  .model .thumb{flex:0 0 58%;height:0;padding-bottom:58%}
+  .product-image img{width:86%;height:86%;object-fit:contain}
+  /* make CTA vertical & full width on phone */
+  .cta-group{flex-direction:column}
+  .cta-group .btn-primary, .cta-group .btn-secondary {width:100%}
+  .btn-small{width:auto}
+  /* remove background image on very small screens to reduce noise */
+  html { background-image: none; background-color: var(--bg-main); }
+  /* ensure models wrapper and cards are fully opaque on mobile */
+  .models-wrapper{ background: rgba(255,255,255,0.98); border-radius:12px; padding:12px; box-shadow: 0 10px 30px rgba(6,42,32,0.06); margin-top:14px; }
+  .models .model{ background:#ffffff; box-shadow:0 12px 28px rgba(6,42,32,0.06) }
+}
+@media (max-width:420px){
+  .cta-group{flex-direction:column}
+  .cta-group .btn-primary, .cta-group .btn-secondary {width:100%}
+  .btn-small{width:auto}
+  .product-image{height:220px}
+  .spec-list > div{font-size:14px;padding:10px}
+  .product-card{padding:12px}
+  .models .model{min-height:260px}
+}
+:focus{outline: 3px solid rgba(4,70,46,0.12);outline-offset:3px}
+</style>
+</head>
+<body>
+  <div class="bg-overlay" aria-hidden="true"></div>
+
+  <!-- Topbar -->
+  <div class="topbar" role="banner">
+    <div class="left">Assemblés au Sénégal &amp; en Côte d'Ivoire</div>
+    <div class="right"><a href="mailto:contact@greenbridge.sn">contact@greenbridge.sn</a></div>
+  </div>
+
+  <!-- Header (no hamburger) -->
+  <header class="header" role="banner" aria-label="En-tête">
+    <div class="logo-text">
+      <img src="green bridge domo.png" alt="Logo GREENBRIDGE">
+      <div class="company-name" tabindex="0">GREENBRIDGE</div>
+    </div>
+
+    <nav aria-label="Navigation principale" class="main-nav">
+      <a href="#" class="active">Accueil</a>
+      <a href="#models">Modèles</a>
+      <a href="#futures">Projets</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Electric band (orbs & lightning visible immediately) -->
+  <div class="electric-band connected" id="electricBand" aria-hidden="true">
+    <div class="container" aria-hidden="true">
+      <svg class="lightning-svg" viewBox="0 0 2000 40" preserveAspectRatio="none" aria-hidden="true">
+        <path class="zap" id="zap1" d="M10,22 C260,4 520,36 840,20 C1120,8 1440,34 1760,18 C1880,6 1960,28 1990,22" stroke-opacity="0.18"/>
+        <path class="zap" id="zap2" d="M10,24 C280,36 600,6 860,22 C1140,36 1460,6 1800,22 C1880,36 1960,10 1990,22" stroke-opacity="0.12"/>
+        <path class="zap" id="zapBright" d="M20,22 C300,6 600,34 880,16 C1240,0 1520,32 1860,14 C1960,2 1980,30 1990,22" stroke-opacity="1" stroke-dasharray="520" stroke-dashoffset="520"/>
+      </svg>
+
+      <div class="orbs" id="orbs">
+        <div class="orb" id="orbA"></div>
+        <div class="orb" id="orbB"></div>
+        <div class="orb" id="orbC"></div>
+      </div>
+
+      <div class="glowline" id="glowline"></div>
+    </div>
+  </div>
+
+  <div class="page-spacer" style="height: calc(var(--topbar-h) + var(--header-h) + 8px);" aria-hidden="true"></div>
+
+  <main class="container" role="main" aria-live="polite">
+    <!-- Product card -->
+    <section class="product-card" role="region" aria-label="Produit principal">
+      <div class="product-info">
+        <div class="top-label">Batterie externe haute performance</div>
+        <div class="product-title" id="heroTitle">GreenMini — 10 000 mAh</div>
+        <div class="product-sub" id="heroSubtitle">Ultra-compact</div>
+
+        <div class="features" aria-hidden="false" style="margin-top:8px">
+          <div class="feature-pill">Durabilité</div>
+          <div class="feature-pill">Solidité</div>
+          <div class="feature-pill">Technique</div>
+        </div>
+
+        <div class="specs-block">
+          <div class="specs-title">Technique — Spécifications</div>
+          <div class="spec-list" id="specList"></div>
+        </div>
+      </div>
+
+      <div class="product-side">
+        <div class="product-image" id="productImageBox" title="Cliquer pour changer d'image" role="button" tabindex="0">
+          <img id="heroMainImage" src="Pwkb_Mini_3.png" alt="GreenMini image">
+        </div>
+
+        <div class="cta-group" aria-label="Actions produit">
+          <button id="orderBtnTop" class="btn-primary"><i class="fa-brands fa-whatsapp"></i> Commander / Échantillon</button>
+          <button id="infoBtnHero" class="btn-secondary"><i class="fa-solid fa-circle-info"></i> Infos techniques</button>
+          <button id="detailsToggle" class="btn-small"><i class="fa-solid fa-list"></i> Afficher détails</button>
+        </div>
+      </div>
+    </section>
+
+    <div id="detailsPanel" class="details-panel" aria-hidden="true"></div>
+
+    <!-- Models: forced opaque on mobile -->
+    <section class="models-wrapper" id="models" role="region" aria-label="Nos modèles">
+      <div class="models-header">
+        <div class="models-title">Nos modèles</div>
+      </div>
+
+      <div class="models" role="list">
+        <div class="model" role="button" onclick="selectModel(0)" tabindex="0" aria-label="GreenMini 10k">
+          <div class="thumb"><img src="Pwkb_Mini_3.png" alt="GreenMini"></div>
+          <div class="meta">
+            <h4>GreenMini</h4>
+            <p>GreenMini — 10 000 mAh<br><small>Ultra-compact, idéal pour sac &amp; poche.</small></p>
+          </div>
+          <div class="actions"><button class="btn-small" onclick="openTechModal(0);event.stopPropagation()">Infos</button></div>
+        </div>
+
+        <div class="model" role="button" onclick="selectModel(1)" tabindex="0" aria-label="GreenCore 12k">
+          <div class="thumb"><img src="pwbk_11.png" alt="GreenCore"></div>
+          <div class="meta">
+            <h4>GreenCore</h4>
+            <p>GreenCore — 12 000 mAh<br><small>Modulaire • Boîtier sans soudure.</small></p>
+          </div>
+          <div class="actions"><button class="btn-small" onclick="openTechModal(1);event.stopPropagation()">Infos</button></div>
+        </div>
+
+        <div class="model" role="button" onclick="selectModel(2)" tabindex="0" aria-label="GreenPro 20k">
+          <div class="thumb"><img src="pwkb_6.png" alt="GreenPro"></div>
+          <div class="meta">
+            <h4>GreenPro</h4>
+            <p>GreenPro — 20 000 mAh<br><small>Multi-appareils • Puissance &amp; autonomie</small></p>
+          </div>
+          <div class="actions"><button class="btn-small" onclick="openTechModal(2);event.stopPropagation()">Infos</button></div>
+        </div>
+
+        <div class="model" role="button" onclick="selectModel(3)" tabindex="0" aria-label="GreenRugged 20k">
+          <div class="thumb"><img src="assets/greenrugged-1.jpg" alt="GreenRugged"></div>
+          <div class="meta">
+            <h4>GreenRugged</h4>
+            <p>GreenRugged — 20 000 mAh<br><small>IP65 • Résistant • Usage terrain</small></p>
+          </div>
+          <div class="actions"><button class="btn-small" onclick="openTechModal(3);event.stopPropagation()">Infos</button></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="futures-title" aria-hidden="false">
+      <h2>Pack 2.5 kWh — Solution modulaire</h2>
+    </div>
+
+    <section class="featured" id="futures" aria-label="Pack 2.5 kWh">
+      <div class="featured-hero" id="featuredHero" aria-hidden="false">
+        <div class="slide" id="slide0" style="background-image:url('pack_batterie_1.png')"></div>
+        <div class="slide" id="slide1" style="background-image:url('Pack_batterie_2.png')"></div>
+      </div>
+      <div class="featured-copy">
+        <h3>Batterie 2.5 kWh — Assemblée &amp; pensée pour l'Afrique</h3>
+        <p>Pack 2.5 kWh modulaire, conçu pour stockage médical &amp; usages PME.</p>
+        <div class="availability-badge">Disponible 05/2026</div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Floating WhatsApp -->
+  <div id="fab" class="fab" role="button" aria-label="Commander via WhatsApp"><i class="fa-brands fa-whatsapp" style="font-size:20px"></i></div>
+
+  <!-- Modal technical info -->
+  <div id="modalOverlay" class="modal-overlay" role="dialog" aria-hidden="true">
+    <div class="modal" role="document">
+      <button class="close" aria-label="Fermer"><i class="fa-solid fa-times"></i></button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-company">GREENBRIDGE</div>
+    <div style="color:#e6f7ea">© <span id="year"></span> GREENBRIDGE — Assemblé au Sénégal &amp; en Côte d'Ivoire</div>
+  </footer>
+
+<script>
+/* Models data */
+const models = [
+  { id:'greenmini', title:'GreenMini — 10 000 mAh', subtitle:'Ultra-compact', images:['Pwkb_Mini_3.png','Pwkb_mini_2.png','PWBK_mini_4.png'], specs:['10 000 mAh (≈9 200 mAh réel)','1× USB-C in/out','Protection anti-surchauffe'], details:`<ul><li>Capacité : 10 000 mAh</li><li>Charge rapide (option)</li></ul>` },
+  { id:'greencore', title:'GreenCore — 12 000 mAh', subtitle:'Modulaire • Réparable', images:['pwbk_11.png','pwbk_3.png','Pwkb_4.png'], specs:['12 000 mAh (≈11 000 mAh réel)','2× USB 5V/2.4A','Protection anti-inversion'], details:`<ul><li>Boîtier sans soudure</li><li>Cellules testées</li><li>Garantie : 1 an</li></ul>` },
+  { id:'greenpro', title:'GreenPro — 20 000 mAh', subtitle:'Multi-appareils', images:['pwkb_6.png','pwbk_9.png','pwkb_10.png'], specs:['20 000 mAh','PD optionnel','Multi sorties'], details:`<ul><li>Capacité : 20 000 mAh</li><li>Charge simultanée</li></ul>` },
+  { id:'greenrugged', title:'GreenRugged — 20 000 mAh', subtitle:'IP65 • Terrain', images:['assets/greenrugged-1.jpg','assets/greenrugged-2.jpg','assets/greenrugged-3.jpg'], specs:['20 000 mAh • IP65','Boîtier renforcé'], details:`<ul><li>Étanche IP65</li><li>Renforts anti-chocs</li></ul>` }
+];
+
+const heroImg = document.getElementById('heroMainImage');
+const specListEl = document.getElementById('specList');
+const detailsPanel = document.getElementById('detailsPanel');
+const fab = document.getElementById('fab');
+const modalOverlay = document.getElementById('modalOverlay');
+const modalContent = document.getElementById('modalContent');
+
+let currentModel = 0;
+let currentImage = 0;
+let heroTimer = null;
+const SLIDE_INTERVAL_MS = 5000; // 5s
+
+function renderSpecs(index){
+  const m = models[index] || models[0];
+  specListEl.innerHTML = '';
+  (m.specs||[]).forEach(s=>{
+    const d = document.createElement('div');
+    d.textContent = s;
+    specListEl.appendChild(d);
+  });
+}
+
+/* slideshow control */
+function startHeroSlideshow() {
+  stopHeroSlideshow();
+  heroTimer = setInterval(()=> {
+    const m = models[currentModel] || models[0];
+    if(!m.images || m.images.length === 0) return;
+    currentImage = (currentImage + 1) % m.images.length;
+    heroImg.src = m.images[currentImage];
+  }, SLIDE_INTERVAL_MS);
+}
+function stopHeroSlideshow() {
+  if(heroTimer) { clearInterval(heroTimer); heroTimer = null; }
+}
+
+/* select model */
+function selectModel(i){
+  currentModel = i;
+  const m = models[i] || models[0];
+  document.getElementById('heroTitle').textContent = m.title;
+  document.getElementById('heroSubtitle').textContent = m.subtitle || '';
+  currentImage = 0;
+  heroImg.src = (m.images && m.images[0]) ? m.images[0] : heroImg.src;
+  heroImg.alt = m.title;
+  detailsPanel.innerHTML = `<strong style="font-weight:800">${m.title}</strong><div style="margin-top:8px">${m.details}</div>`;
+  detailsPanel.style.display = 'none';
+  detailsPanel.setAttribute('aria-hidden','true');
+  renderSpecs(i);
+  const wa = 'https://wa.me/?text=' + encodeURIComponent(`Bonjour, je souhaite commander / obtenir un échantillon de : ${m.title}`);
+  fab.onclick = ()=> window.open(wa,'_blank');
+  document.getElementById('orderBtnTop').onclick = ()=> window.open(wa,'_blank');
+  document.getElementById('infoBtnHero').onclick = ()=> openTechModal(i);
+
+  startHeroSlideshow();
+}
+
+/* manual click cycles and restarts timer */
+document.querySelector('.product-image').addEventListener('click', ()=>{
+  const m = models[currentModel] || models[0];
+  if(!m.images || m.images.length === 0) return;
+  currentImage = (currentImage + 1) % m.images.length;
+  heroImg.style.transform = 'scale(0.98)';
+  setTimeout(()=> heroImg.style.transform = 'scale(1)', 120);
+  heroImg.src = m.images[currentImage];
+  startHeroSlideshow();
+});
+document.querySelector('.product-image').addEventListener('keydown', (e)=>{
+  if(e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    document.querySelector('.product-image').click();
+  }
+});
+
+/* details toggle */
+document.getElementById('detailsToggle').addEventListener('click', ()=>{
+  const vis = detailsPanel.style.display === 'block';
+  if(vis){ detailsPanel.style.display='none'; detailsPanel.setAttribute('aria-hidden','true'); }
+  else { detailsPanel.style.display='block'; detailsPanel.setAttribute('aria-hidden','false'); detailsPanel.scrollIntoView({behavior:'smooth',block:'center'}); }
+});
+
+/* modal */
+function openTechModal(i){
+  const m = models[i] || models[0];
+  modalContent.innerHTML = `<h2 style="margin-top:0">${m.title}</h2>${m.details}<div style="margin-top:12px;font-weight:800">Caractéristiques</div><ul>${(m.specs||[]).map(s=>`<li>${s}</li>`).join('')}</ul>`;
+  modalOverlay.style.display = 'flex';
+  modalOverlay.setAttribute('aria-hidden','false');
+}
+function closeTechModal(){ modalOverlay.style.display='none'; modalOverlay.setAttribute('aria-hidden','true'); }
+modalOverlay.addEventListener('click', (ev)=> { if(ev.target === modalOverlay) closeTechModal(); });
+document.addEventListener('click', (e)=>{ if(e.target && e.target.closest && e.target.closest('.close')) closeTechModal(); });
+
+/* Electric visuals */
+(function(){
+  const electricBand = document.getElementById('electricBand');
+  if (!electricBand) return;
+  const orbA = document.getElementById('orbA');
+  const orbB = document.getElementById('orbB');
+  const orbC = document.getElementById('orbC');
+  const orbs = [orbA, orbB, orbC];
+  const zapBright = document.getElementById('zapBright');
+
+  const params = [
+    {rxRatio: 0.50, ry: 8,  speed: 0.06, phase: 0},
+    {rxRatio: 0.33, ry: 6,  speed: 0.08, phase: Math.PI/2},
+    {rxRatio: 0.42, ry: 10, speed: 0.05, phase: Math.PI}
+  ];
+
+  orbs.forEach((o,i)=> {
+    if(o) {
+      o.classList.add('buzz');
+      o.style.animationDelay = (i*120) + 'ms';
+      o.style.opacity = '1';
+    }
+  });
+
+  let t0 = performance.now();
+  function tick(now) {
+    const time = (now - t0) / 1000;
+    const cont = electricBand.querySelector('.container');
+    if(!cont) { requestAnimationFrame(tick); return; }
+    const rect = cont.getBoundingClientRect();
+    const cx = rect.width / 2;
+    const cy = rect.height / 2;
+
+    for (let i=0;i<orbs.length;i++){
+      const orb = orbs[i];
+      if(!orb) continue;
+      const p = params[i];
+      const rx = Math.max(Math.min(rect.width * p.rxRatio, 4000), 120);
+      const ry = p.ry;
+      const angle = (time * p.speed * Math.PI * 2) + p.phase;
+      const x = cx + Math.cos(angle) * rx;
+      const y = cy + Math.sin(angle) * ry;
+      orb.style.left = x + 'px';
+      orb.style.top = y + 'px';
+      orb.style.transform = 'translate(-50%,-50%)';
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  function sparkSVG() {
+    if(!zapBright) return;
+    zapBright.style.transition = 'none';
+    try {
+      const len = zapBright.getTotalLength ? zapBright.getTotalLength() : 520;
+      zapBright.setAttribute('stroke-dasharray', String(len));
+      zapBright.setAttribute('stroke-dashoffset', String(len));
+      setTimeout(()=> {
+        zapBright.style.transition = 'stroke-dashoffset 380ms ease-out, opacity 160ms';
+        zapBright.setAttribute('stroke-dashoffset','0');
+        setTimeout(()=> {
+          zapBright.setAttribute('stroke-dashoffset', String(len));
+        }, 320);
+      }, 60);
+    } catch(e) {
+      zapBright.setAttribute('stroke-dasharray','520');
+      zapBright.setAttribute('stroke-dashoffset','520');
+      setTimeout(()=> { zapBright.style.transition = 'stroke-dashoffset 360ms ease-out'; zapBright.setAttribute('stroke-dashoffset','0'); }, 80);
+    }
+  }
+
+  function spawnSparks(){
+    const cont = electricBand.querySelector('.container');
+    if(!cont) return;
+    for(let i=0;i<10;i++){
+      const s = document.createElement('div');
+      s.style.position = 'absolute';
+      s.style.left = (3 + Math.random()*94) + '%';
+      s.style.top = (20 + Math.random()*50) + '%';
+      s.style.width = '2px';
+      s.style.height = (8 + Math.random()*22) + 'px';
+      s.style.borderRadius = '2px';
+      s.style.background = 'linear-gradient(180deg, rgba(255,246,180,1), rgba(255,214,0,0.95))';
+      s.style.filter = 'blur(6px)';
+      s.style.opacity = '0';
+      s.style.transform = 'translateY(6px)';
+      s.style.pointerEvents = 'none';
+      s.style.zIndex = '1';
+      cont.appendChild(s);
+      setTimeout(()=> { s.style.transition = 'all 260ms ease-out'; s.style.opacity='1'; s.style.transform='translateY(-6px)'; }, 20 + i*25);
+      setTimeout(()=> { s.style.transition = 'all 420ms ease-in'; s.style.opacity='0'; s.style.transform='translateY(-20px)'; }, 280 + i*40);
+      setTimeout(()=> { if(s.parentNode) s.parentNode.removeChild(s); }, 760 + i*40);
+    }
+  }
+
+  function activate() {
+    electricBand.classList.add('connected');
+    spawnSparks();
+    sparkSVG();
+    setInterval(()=> {
+      spawnSparks();
+      if(Math.random() > 0.45) sparkSVG();
+    }, 900 + Math.random()*900);
+  }
+
+  const title = document.querySelector('.company-name');
+  if(title) {
+    title.addEventListener('click', ()=> {
+      const on = electricBand.classList.toggle('connected');
+      if(on) { spawnSparks(); sparkSVG(); }
+    });
+  }
+
+  activate();
+  window.addEventListener('resize', ()=> { t0 = performance.now(); });
+
+})();
+
+/* featured slider */
+(function(){
+  const slides = [document.getElementById('slide0'), document.getElementById('slide1')];
+  let idx = 0;
+  function show(i){ slides.forEach((s,si)=> s.classList.toggle('active', si===i)); }
+  show(0);
+  setInterval(()=>{ idx = (idx+1) % slides.length; show(idx); }, 4800);
+  const hero = document.getElementById('featuredHero');
+  if(hero) hero.addEventListener('click', ()=>{ idx = (idx+1) % slides.length; show(idx); });
+})();
+
+/* init */
+document.addEventListener('DOMContentLoaded', ()=>{
+  selectModel(currentModel);
+  startHeroSlideshow();
+  document.getElementById('year').textContent = new Date().getFullYear();
+  document.querySelectorAll('.models .model').forEach((el, idx)=> {
+    el.addEventListener('keydown', (e)=> { if(e.key==='Enter'||e.key===' ') { e.preventDefault(); selectModel(idx); }});
+  });
+});
+</script>
+</body>
+</html>
