@@ -19,10 +19,9 @@
   --gold:#d4af37;
 
   --bg-main:#f6fbfe;
-  --card-bg-desktop: rgba(255,255,255,0.18); /* plus transparent pour laisser voir le fond */
-  --card-bg-overlay: rgba(255,255,255,0.98); /* opaque pour overlay mobile */
-  --card-bg-strong: rgba(255,255,255,0.62);
-  --card-border: rgba(6,42,32,0.28);
+  --card-bg-desktop: rgba(255,255,255,0.14); /* plus transparent pour voir le fond */
+  --card-bg-overlay: rgba(255,255,255,0.98);  /* opaque pour overlay mobile */
+  --card-border: rgba(6,42,32,0.06);
   --text:#041a13;
   --muted:#4f6360;
 
@@ -40,7 +39,7 @@ html {
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-attachment: fixed; /* overridden on mobile via script */
   background-color: var(--bg-main);
   min-height:100%;
 }
@@ -59,12 +58,7 @@ img{display:block;max-width:100%;height:auto}
 .logo-text img{height:48px;display:block}
 
 /* BRAND + NAV */
-.company-name{
-  font-size:36px;font-weight:800;letter-spacing:1px;padding:6px 10px;border-radius:8px;color:var(--brand-green);
-  -webkit-text-stroke:0.95px var(--gold);text-shadow:0 3px 6px rgba(0,0,0,0.45);
-}
-
-/* navigation */
+.company-name{font-size:36px;font-weight:800;letter-spacing:1px;padding:6px 10px;border-radius:8px;color:var(--brand-green);-webkit-text-stroke:0.95px var(--gold);text-shadow:0 3px 6px rgba(0,0,0,0.45)}
 nav{display:flex;gap:14px;align-items:center}
 nav a{color:#fff;font-size:14px;font-weight:600;padding:8px 10px;border-radius:8px;transition:all .18s}
 nav a:hover{color:var(--gold)}
@@ -80,13 +74,12 @@ nav a.active{color:var(--gold);background:linear-gradient(90deg, rgba(212,175,55
 /* container */
 .container{max-width:var(--maxw);margin:0 auto;padding:18px 14px 120px;position:relative;z-index:40;background: transparent;}
 
-/* Product card: more transparent on desktop to show background,
-   but use opaque background for the mobile overlay (see media queries) */
+/* Product card */
 .product-card{
   width:min(980px,94%);
   margin:28px auto 22px;
-  background: var(--card-bg-desktop); /* desktop translucent */
-  border: 1px solid rgba(6,42,32,0.06);
+  background: var(--card-bg-desktop); /* desktop translucent to show bg */
+  border: 1px solid var(--card-border);
   border-radius:14px;
   padding:18px;
   box-shadow:var(--shadow);
@@ -101,16 +94,16 @@ nav a.active{color:var(--gold);background:linear-gradient(90deg, rgba(212,175,55
 /* mobile close control hidden on desktop */
 .product-card .close-mobile{display:none;position:absolute;right:12px;top:10px;background:transparent;border:0;font-size:22px;color:var(--muted);cursor:pointer;z-index:5}
 
-/* models */
+/* MODELS */
 .models-wrapper{margin-top:24px;padding:18px 12px 36px;width:100%;max-width:100vw;box-sizing:border-box;position:relative;background:transparent;z-index:60}
 .models-header{display:flex;align-items:center;justify-content:center;margin-bottom:12px}
 .models-title{font-weight:800;font-size:22px;color:var(--brand-green);letter-spacing:0.4px;background:rgba(255,255,255,0.6);padding:8px 14px;border-radius:10px;box-shadow:0 8px 20px rgba(6,42,32,0.06)}
 .models{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;align-items:stretch;max-width:var(--maxw);margin:0 auto;padding:6px 14px;box-sizing:border-box}
 
-/* model cards: keep quite translucent so background shows, but increase text contrast */
+/* model cards */
 .models .model{
   display:flex;flex-direction:column;justify-content:space-between;gap:12px;padding:14px;border-radius:12px;
-  background: rgba(255,255,255,0.06); /* allow background to show through */
+  background: rgba(255,255,255,0.06); /* lets background show */
   border: 1px solid rgba(6,42,32,0.06);
   box-shadow: 0 8px 20px rgba(6,42,32,0.04);
   cursor:pointer;transition: transform 200ms ease, box-shadow 200ms ease;min-height:240px;overflow:hidden;backdrop-filter: blur(4px) saturate(110%);
@@ -119,25 +112,24 @@ nav a.active{color:var(--gold);background:linear-gradient(90deg, rgba(212,175,55
 .models .model .thumb{position:relative;flex:0 0 56%;height:0;padding-bottom:56%;overflow:hidden;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.06))}
 .models .model .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:var(--model-img-fit);object-position:center center;border-radius:8px}
 .model .meta{flex:1 1 auto;display:flex;flex-direction:column;justify-content:flex-start;min-height:0}
-.model .meta h4{margin:0;font-size:18px;color:var(--brand-green);font-weight:800;text-shadow:0 1px 2px rgba(0,0,0,0.10)}
-.model .meta p{margin:10px 0 0;font-size:14px;color:var(--muted);line-height:1.25;text-shadow:0 1px 2px rgba(0,0,0,0.06)}
+.model .meta h4{margin:0;font-size:18px;color:var(--brand-green);font-weight:800;text-shadow:0 1px 2px rgba(0,0,0,0.08)}
+.model .meta p{margin:10px 0 0;font-size:14px;color:var(--muted);line-height:1.25;text-shadow:0 1px 2px rgba(0,0,0,0.04)}
 .model .actions{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex:0 0 auto}
 .models .model:hover,.models .model:focus{transform: translateY(-6px);box-shadow: 0 18px 40px rgba(6,42,32,0.08);outline:none}
 
 /* other UI */
 .product-info{flex:1;min-width:260px;padding-right:6px}
 .top-label{display:inline-block;padding:7px 10px;border-radius:999px;background:rgba(6,120,60,0.06);color:var(--brand-green);font-weight:800;margin-bottom:8px;font-size:13px}
-.product-title{font-size:20px;font-weight:800;margin:6px 0 6px;color:var(--text);line-height:1.08;text-shadow:0 1px 2px rgba(0,0,0,0.12)}
-.product-sub{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.35;text-shadow:0 1px 2px rgba(0,0,0,0.06)}
+.product-title{font-size:20px;font-weight:800;margin:6px 0 6px;color:var(--text);line-height:1.08;text-shadow:0 1px 2px rgba(0,0,0,0.10)}
+.product-sub{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.35;text-shadow:0 1px 2px rgba(0,0,0,0.05)}
 .features{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
-.feature-pill{background:rgba(255,255,255,0.92);padding:7px 10px;border-radius:999px;border:1px solid rgba(6,42,32,0.04);color:var(--brand-green);font-weight:800;font-size:13px}
+.feature-pill{background:rgba(255,255,255,0.95);padding:7px 10px;border-radius:999px;border:1px solid rgba(6,42,32,0.04);color:var(--brand-green);font-weight:800;font-size:13px}
 
 .specs-block{margin-top:12px}
 .specs-title{font-weight:800;margin-bottom:8px;font-size:15px}
 .spec-list{display:flex;flex-direction:column;gap:8px;color:var(--text);font-size:15px;line-height:1.45}
 .spec-list > div{background: rgba(255,255,255,0.96); padding:10px 12px; border-radius:10px; border:1px solid rgba(6,42,32,0.04); box-shadow: 0 6px 14px rgba(6,42,32,0.03)}
 
-/* product side */
 .product-side{width:340px;display:flex;flex-direction:column;gap:12px;align-items:stretch}
 .product-image{width:100%;height:220px;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#fbfeff,#f3f9fc);display:flex;align-items:center;justify-content:center;border:1px solid rgba(6,42,32,0.04)}
 .product-image img{width:92%;height:92%;object-fit:contain;cursor:pointer;transition:transform .35s;border-radius:8px}
@@ -146,7 +138,7 @@ nav a.active{color:var(--gold);background:linear-gradient(90deg, rgba(212,175,55
 .btn-secondary{background:#fff;border:1px solid rgba(6,42,32,0.06);padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:800}
 .btn-small{background:transparent;border:1px solid rgba(6,42,32,0.06);padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:700}
 
-/* DETAILS PANEL (now inside product-card for consistent behavior) */
+/* DETAILS PANEL inside product card */
 .details-panel{
   display:none;
   margin-top:12px;
@@ -167,7 +159,7 @@ nav a.active{color:var(--gold);background:linear-gradient(90deg, rgba(212,175,55
 .slide{position:absolute;inset:0;background-size:cover;background-position:center center;opacity:0;transition:opacity 900ms ease, transform 900ms;transform:scale(1.06)}
 .slide.active{opacity:1;transform:scale(1.12)}
 .featured-copy{padding:18px;text-align:center}
-.availability-badge{display:inline-block;margin-top:12px;padding:8px 14px;border-radius:999px;background: linear-gradient(90deg, #ffda00, #ffb300);color:#08110a;font-weight:900;font-size:14px;box-shadow:0 10px 30px rgba(255,180,0,0.18);transform-origin:center;animation: pulse 2200ms infinite;border: 1px solid rgba(0,0,0,0.06);}
+.availability-badge{display:inline-block;margin-top:12px;padding:8px 14px;border-radius:999px;background: linear-gradient(90deg, #ffda00, #ffb300);color:#08110a;font-weight:900;font-size:14px;box-shadow:0 10px 30px rgba(255,180,0,0.18);transform-origin:center;animation: pulse 2200ms infinite;border:1px solid rgba(0,0,0,0.06)}
 
 @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.04); } 100% { transform: scale(1); } }
 
@@ -179,7 +171,7 @@ nav a.active{color:var(--gold);background:linear-gradient(90deg, rgba(212,175,55
 footer{background:var(--green-dark);color:#fff;padding:18px 5vw 36px;text-align:center;margin-top:18px}
 .footer-company{display:block;margin:0 auto 8px;font-size:18px;font-weight:800;color:var(--brand-green);-webkit-text-stroke:0.7px var(--gold);text-shadow:0 3px 6px rgba(0,0,0,0.6);padding:6px 10px;border-radius:6px;background:linear-gradient(90deg, rgba(212,175,55,0.02), rgba(255,255,255,0) 40%)}
 
-/* responsive tweaks */
+/* responsive */
 @media (max-width:900px){
   .product-card{flex-direction:column;gap:12px;padding:14px}
   .product-side{order:-1;width:100%}
@@ -193,7 +185,7 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 36px;text-align:
   .models{grid-template-columns:repeat(2,1fr);gap:12px}
 }
 
-/* MOBILE: hide product-card by default; overlay shows with opaque background */
+/* MOBILE: hide product card by default and show overlay opaque when opened */
 @media (max-width:640px){
   .company-name{font-size:30px}
   nav{display:none}
@@ -204,7 +196,6 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 36px;text-align:
   .model .thumb{flex:0 0 58%;height:0;padding-bottom:58%}
   .product-image img{width:86%;height:86%;object-fit:contain}
 
-  /* Hide product card by default on mobile; when .show-on-mobile it's displayed as opaque overlay */
   .product-card{ display:none !important; position:fixed; left:8px; right:8px; top: calc(var(--topbar-h) + var(--header-h) + 8px); z-index:2200; width: calc(100% - 16px); max-width:none; margin:0; padding:16px; border-radius:12px; box-shadow:0 18px 40px rgba(6,42,32,0.20); background: var(--card-bg-overlay); flex-direction:column; overflow:auto; max-height: calc(100vh - (var(--topbar-h) + var(--header-h) + 32px)); }
   .product-card.show-on-mobile{ display:flex !important; animation: slideIn 220ms ease; }
   @keyframes slideIn { from { transform: translateY(-8px); opacity:0 } to { transform: translateY(0); opacity:1 } }
@@ -214,13 +205,13 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 36px;text-align:
   .cta-group{flex-direction:column}
   .cta-group .btn-primary, .cta-group .btn-secondary { width:100% }
 
-  /* Make model cards slightly more opaque on mobile so text is super readable */
-  .models-wrapper{ background: rgba(255,255,255,0.92); border-radius:12px; padding:12px; box-shadow:0 10px 30px rgba(6,42,32,0.06); margin-top:14px; }
+  /* make models list easy-to-read on mobile */
+  .models-wrapper{ background: rgba(255,255,255,0.94); border-radius:12px; padding:12px; box-shadow:0 10px 30px rgba(6,42,32,0.06); margin-top:14px; }
   .models .model{ background:#ffffff; box-shadow:0 12px 28px rgba(6,42,32,0.06) }
 
-  /* ensure background still shows a bit on mobile */
-  html { background-image: url('Energie_blanche.png'); background-attachment: scroll; }
+  html { background-attachment: scroll; } /* fallback for some mobiles */
 }
+
 @media (max-width:420px){
   .product-image{height:220px}
   .spec-list > div{font-size:14px;padding:10px}
@@ -253,7 +244,7 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 36px;text-align:
       <a href="#contact">Contact</a>
     </nav>
 
-    <!-- burger intentionally hidden for this promotional page -->
+    <!-- burger hidden for promo -->
     <button class="mobile-nav-toggle" id="mobileToggle" aria-label="Ouvrir le menu" style="display:none;">
       <i class="fa-solid fa-bars"></i>
     </button>
@@ -281,7 +272,7 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 36px;text-align:
   <div class="page-spacer" style="height: calc(var(--topbar-h) + var(--header-h) + 8px);" aria-hidden="true"></div>
 
   <main class="container" role="main" aria-live="polite">
-    <!-- Product card (hidden on mobile until a model is clicked) -->
+    <!-- Product card (hidden on mobile until model clicked) -->
     <section class="product-card" role="region" aria-label="Produit principal" aria-hidden="false">
       <button class="close-mobile" aria-label="Fermer la fiche mobile" title="Fermer">&times;</button>
 
@@ -314,11 +305,11 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 36px;text-align:
         </div>
       </div>
 
-      <!-- DETAILS PANEL moved inside product-card for reliable visibility -->
+      <!-- DETAILS PANEL INSIDE CARD -->
       <div id="detailsPanel" class="details-panel" aria-hidden="true"></div>
     </section>
 
-    <!-- Models list (visible first) -->
+    <!-- Models -->
     <section class="models-wrapper" id="models" role="region" aria-label="Nos modèles">
       <div class="models-header">
         <div class="models-title">Nos modèles</div>
@@ -457,7 +448,7 @@ function stopHeroSlideshow() {
   if(heroTimer) { clearInterval(heroTimer); heroTimer = null; }
 }
 
-/* select model: update hero content; on mobile, show overlay; on desktop update in place */
+/* select model: update hero content; on mobile, show overlay; on desktop update inline */
 function selectModel(i){
   currentModel = i;
   updateHero(i);
@@ -471,15 +462,15 @@ function selectModel(i){
   if(window.matchMedia('(max-width:640px)').matches){
     productCard.classList.add('show-on-mobile');
     productCard.setAttribute('aria-hidden','false');
-    // ensure details are hidden by default when opening overlay
+    // hide details by default when opening overlay
     detailsPanel.style.display = 'none';
     detailsPanel.setAttribute('aria-hidden','true');
+    // focus primary action
     setTimeout(()=> {
       const primary = productCard.querySelector('.btn-primary');
       if(primary) primary.focus();
     }, 120);
   } else {
-    // desktop: ensure product card is visible inline and details hidden (user toggles)
     productCard.setAttribute('aria-hidden','false');
     detailsPanel.style.display = 'none';
     detailsPanel.setAttribute('aria-hidden','true');
@@ -548,6 +539,23 @@ if(closeMobileBtn){
   });
 }
 
+/* Fix for some mobile browsers: prefer background-attachment scroll to ensure bg visible */
+function adaptForMobileBackground(){
+  if(window.matchMedia('(max-width:640px)').matches){
+    document.documentElement.style.backgroundAttachment = 'scroll';
+    // ensure productCard hidden by default on mobile
+    if(productCard) {
+      productCard.classList.remove('show-on-mobile');
+      productCard.style.display = '';
+      productCard.setAttribute('aria-hidden','true');
+    }
+  } else {
+    document.documentElement.style.backgroundAttachment = 'fixed';
+    if(productCard){
+      productCard.setAttribute('aria-hidden','false');
+    }
+  }
+}
 /* electric visuals (kept) */
 (function(){
   const electricBand = document.getElementById('electricBand');
@@ -662,7 +670,7 @@ if(closeMobileBtn){
   }
 
   activate();
-  window.addEventListener('resize', ()=> { t0 = performance.now(); });
+  window.addEventListener('resize', ()=> { adaptForMobileBackground(); t0 = performance.now(); });
 })();
 
 /* featured slider */
@@ -679,12 +687,15 @@ if(closeMobileBtn){
 /* init */
 document.addEventListener('DOMContentLoaded', ()=>{
   // mobile: show models list first (product card hidden). desktop: show first model in place.
+  adaptForMobileBackground();
   if(window.matchMedia('(max-width:640px)').matches){
-    updateHero(0);
-    productCard.classList.remove('show-on-mobile');
-    productCard.setAttribute('aria-hidden','true');
+    updateHero(0); // fill model data but KEEP product card hidden
+    if(productCard){
+      productCard.classList.remove('show-on-mobile');
+      productCard.setAttribute('aria-hidden','true');
+    }
   } else {
-    selectModel(0);
+    selectModel(0); // desktop: show product in-place
   }
 
   startHeroSlideshow();
@@ -693,6 +704,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
     el.addEventListener('keydown', (e)=> { if(e.key==='Enter'||e.key===' ') { e.preventDefault(); selectModel(idx); }});
   });
 });
+
+/* respond to resize as well */
+window.addEventListener('resize', adaptForMobileBackground);
 </script>
 </body>
 </html>
