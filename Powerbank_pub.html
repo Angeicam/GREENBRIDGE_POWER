@@ -20,7 +20,7 @@
 
   --bg-main:#f6fbfe;
   --card-bg: rgba(255,255,255,0.48);
-  --card-bg-strong: rgba(255,255,255,0.92); /* increased opacity for readability */
+  --card-bg-strong: rgba(255,255,255,0.92);
   --card-border: rgba(6,42,32,0.28);
   --text:#041a13;
   --muted:#4f6360;
@@ -71,16 +71,12 @@ img{display:block;max-width:100%;height:auto}
   -webkit-text-stroke:0.95px var(--gold);
   text-shadow:0 3px 6px rgba(0,0,0,0.45);
 }
-nav{display:flex;gap:14px;align-items:center}
-nav a{color:#fff;font-size:14px;font-weight:600;padding:8px 10px;border-radius:8px;transition:all .18s}
+
+/* Navigation — keep visible on all sizes, but compact on mobile */
+nav{display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+nav a{color:#fff;font-size:14px;font-weight:600;padding:8px 10px;border-radius:8px;transition:all .18s;white-space:nowrap}
 nav a:hover{color:var(--gold)}
 nav a.active{color:var(--gold);background:linear-gradient(90deg, rgba(212,175,55,0.06), rgba(212,175,55,0.03));border:1px solid rgba(212,175,55,0.12);padding:10px 14px}
-
-/* Mobile nav (hidden by default) */
-.mobile-nav-toggle{display:none;background:transparent;border:0;color:#fff;font-size:18px;cursor:pointer}
-.mobile-nav{display:none;position:fixed;top:calc(var(--topbar-h) + var(--header-h));right:0;left:0;background:linear-gradient(180deg, rgba(6,30,22,0.98), rgba(6,30,22,0.98));padding:12px 5vw;z-index:2000;box-shadow:0 10px 40px rgba(0,0,0,0.3)}
-.mobile-nav a{display:block;padding:12px 14px;border-radius:10px;color:#eaffef;margin-bottom:8px}
-.mobile-nav.show{display:block}
 
 /* Electric band (orbs) */
 .electric-band {
@@ -164,16 +160,11 @@ nav a.active{color:var(--gold);background:linear-gradient(90deg, rgba(212,175,55
 }
 
 /* Product card */
-/* Increased background opacity and reduced bright overlay on the left so text is readable */
 .product-card {width: min(980px,94%);margin: 28px auto 22px;background: var(--card-bg-strong);border: 1px solid rgba(6,42,32,0.06);border-radius:14px;padding:18px;box-shadow:var(--shadow);color:var(--text);display:flex;flex-direction:row;gap:18px;align-items:flex-start;position:relative;overflow:hidden;backdrop-filter: blur(3px) saturate(105%)}
 .product-card::before{content:"";position:absolute;right:-2%;top:0;bottom:0;width:46%;max-width:480px;background-image: url('assets/batteries-faint.png');background-size:contain;background-repeat:no-repeat;background-position:center right;opacity:0.045;pointer-events:none;transform:translateX(4%);filter:grayscale(90%) blur(0.35px)}
-/* subtle darker gradient on left so text stands out over background */
 .product-card::after{content:"";position:absolute;left:0;top:0;bottom:0;width:48%;background:linear-gradient(90deg, rgba(4,30,20,0.06) 0%, rgba(255,255,255,0.28) 55%);pointer-events:none}
 
-/* Product card children */
-.product-card > *{position:relative;z-index:2}
-
-/* MODELS section */
+/* MODELS */
 .models-wrapper{
   margin-top:24px;
   padding: 18px 12px 36px;
@@ -192,23 +183,20 @@ nav a.active{color:var(--gold);background:linear-gradient(90deg, rgba(212,175,55
 /* grid */
 .models{display:grid;grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));gap:18px;align-items:stretch;max-width:var(--maxw);margin:0 auto;padding:6px 14px;box-sizing:border-box}
 
-/* model cards: made more opaque and higher contrast for readability */
+/* model cards */
 .models .model{
   display:flex;flex-direction:column;justify-content:space-between;gap:12px;padding:14px;border-radius:12px;
-  background: rgba(255,255,255,0.92); /* stronger background for readability */
+  background: #ffffff;
   border: 1px solid rgba(6,42,32,0.06);
-  box-shadow: 0 12px 28px rgba(6,42,32,0.06);
-  cursor:pointer;transition: transform 200ms ease, box-shadow 200ms ease;min-height:240px;overflow:hidden;backdrop-filter: none;
-  color:var(--text);
+  box-shadow: 0 14px 30px rgba(6,42,32,0.06);
+  cursor:pointer;transition: transform 180ms ease, box-shadow 180ms ease;min-height:240px;overflow:hidden;color:var(--text);
 }
 .models .model .thumb{position:relative;flex:0 0 56%;height:0;padding-bottom:56%;overflow:hidden;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.10));display:block}
-.models .model .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:var(--model-img-fit);object-position:center center;border-radius:8px;filter: none;box-shadow: 0 8px 22px rgba(6,42,32,0.06)}
+.models .model .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:var(--model-img-fit);object-position:center center;border-radius:8px;box-shadow:0 6px 20px rgba(6,42,32,0.06)}
 .model .meta{flex:1 1 auto;display:flex;flex-direction:column;justify-content:flex-start;min-height:0}
 .model .meta h4{margin:0;font-size:18px;color:var(--brand-green);font-weight:800}
 .model .meta p{margin:10px 0 0;font-size:14px;color:var(--muted);line-height:1.35;flex:1 1 auto}
 .model .actions{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex:0 0 auto}
-.model .actions .btn-small{padding:8px 12px}
-.models .model:hover,.models .model:focus{transform: translateY(-6px);box-shadow: 0 20px 46px rgba(6,42,32,0.10);outline:none}
 
 /* other UI pieces */
 .product-info{flex:1;min-width:260px;padding-right:6px}
@@ -235,7 +223,7 @@ nav a.active{color:var(--gold);background:linear-gradient(90deg, rgba(212,175,55
 
 .details-panel{display:none;margin:12px auto 0;width:min(980px,94%);background:rgba(255,255,255,0.96);border:2px solid rgba(6,42,32,0.06);border-radius:12px;padding:14px;color:var(--text);box-shadow:0 12px 30px rgba(6,42,32,0.05);line-height:1.5}
 
-/* featured / footer unchanged */
+/* featured / footer */
 .futures-title{text-align:center;margin-top:24px;margin-bottom:10px}
 .futures-title h2{font-weight:800;font-size:22px;color:var(--brand-green);letter-spacing:0.4px;margin:0;padding:0}
 .featured{margin-top:10px;border-radius:12px;overflow:hidden;border: 1px solid rgba(212,175,55,0.22);background: rgba(255,255,255,0.90);box-shadow: var(--shadow)}
@@ -273,24 +261,47 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 36px;text-align:
   .product-card::before{display:none}
   .product-card::after{width:100%;background:linear-gradient(180deg, rgba(4,30,20,0.04) 0%, rgba(255,255,255,0.86) 100%);}
 }
+
+/* MOBILE: restore background but add overlay for readability (Option B) */
 @media (max-width:640px){
   .company-name{font-size:30px}
-  nav{display:none}
-  .mobile-nav-toggle{display:block}
-  .mobile-nav{display:none}
+  nav{display:flex;gap:8px;justify-content:center}
+  nav a{font-size:13px;padding:6px 8px}
   .models{grid-template-columns:1fr}
   .product-title{font-size:18px}
   .btn-primary{font-size:14px;padding:10px 12px}
   .models .model{min-height:260px}
   .model .thumb{flex:0 0 58%;height:0;padding-bottom:58%}
   .product-image img{width:86%;height:86%;object-fit:contain}
-  /* make CTA vertical & full width on phone */
+  /* CTA vertical & full width */
   .cta-group{flex-direction:column}
   .cta-group .btn-primary, .cta-group .btn-secondary {width:100%}
   .btn-small{width:auto}
-  /* reduce background visual noise on very small screens */
-  html { background-image: none; background-color: var(--bg-main); }
+  /* allow the background image on mobile, but use scroll (more reliable) */
+  html {
+    background-image: url('Energie_blanche.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+  }
+  /* subtle fixed overlay to protect contrast under header area */
+  .container::before{
+    content: "";
+    position: fixed;
+    inset: calc(var(--topbar-h) + var(--header-h)) 0 0 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.18), rgba(255,255,255,0.00));
+    pointer-events: none;
+    z-index: 30;
+  }
+  /* ensure models wrapper and cards are fully readable */
+  .models-wrapper{ background: rgba(255,255,255,0.92); border-radius:12px; padding:12px; box-shadow: 0 10px 30px rgba(6,42,32,0.06); margin-top:14px; }
+  .models .model{ background:#ffffff; box-shadow:0 12px 28px rgba(6,42,32,0.06) }
+  /* remove heavy decorative image on very small screens */
+  .product-card::before{display:none}
+  .product-card{background: rgba(255,255,255,0.96)}
 }
+
 @media (max-width:420px){
   .cta-group{flex-direction:column}
   .cta-group .btn-primary, .cta-group .btn-secondary {width:100%}
@@ -325,21 +336,9 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 36px;text-align:
       <a href="#futures">Projets</a>
       <a href="#contact">Contact</a>
     </nav>
-
-    <button class="mobile-nav-toggle" id="mobileToggle" aria-label="Ouvrir le menu" aria-expanded="false">
-      <i class="fa-solid fa-bars"></i>
-    </button>
   </header>
 
-  <!-- Mobile nav -->
-  <div class="mobile-nav" id="mobileNav" aria-hidden="true">
-    <a href="#" onclick="toggleMobileNav()">Accueil</a>
-    <a href="#models" onclick="toggleMobileNav()">Modèles</a>
-    <a href="#futures" onclick="toggleMobileNav()">Projets</a>
-    <a href="#contact" onclick="toggleMobileNav()">Contact</a>
-  </div>
-
-  <!-- Electric band (orbs & lightning visible immediately) -->
+  <!-- Electric band -->
   <div class="electric-band connected" id="electricBand" aria-hidden="true">
     <div class="container" aria-hidden="true">
       <svg class="lightning-svg" viewBox="0 0 2000 40" preserveAspectRatio="none" aria-hidden="true">
@@ -395,7 +394,7 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 36px;text-align:
 
     <div id="detailsPanel" class="details-panel" aria-hidden="true"></div>
 
-    <!-- Models: transparent cards on top of the page background -->
+    <!-- Models -->
     <section class="models-wrapper" id="models" role="region" aria-label="Nos modèles">
       <div class="models-header">
         <div class="models-title">Nos modèles</div>
@@ -526,7 +525,7 @@ function selectModel(i){
   document.getElementById('heroTitle').textContent = m.title;
   document.getElementById('heroSubtitle').textContent = m.subtitle || '';
   currentImage = 0;
-  heroImg.src = m.images && m.images[0] ? m.images[0] : heroImg.src;
+  heroImg.src = (m.images && m.images[0]) ? m.images[0] : heroImg.src;
   heroImg.alt = m.title;
   detailsPanel.innerHTML = `<strong style="font-weight:800">${m.title}</strong><div style="margin-top:8px">${m.details}</div>`;
   detailsPanel.style.display = 'none';
@@ -703,16 +702,6 @@ document.addEventListener('click', (e)=>{ if(e.target && e.target.closest && e.t
   const hero = document.getElementById('featuredHero');
   if(hero) hero.addEventListener('click', ()=>{ idx = (idx+1) % slides.length; show(idx); });
 })();
-
-/* mobile nav toggle */
-const mobileToggle = document.getElementById('mobileToggle');
-const mobileNav = document.getElementById('mobileNav');
-function toggleMobileNav() {
-  const isShown = mobileNav.classList.toggle('show');
-  mobileNav.setAttribute('aria-hidden', String(!isShown));
-  mobileToggle.setAttribute('aria-expanded', String(isShown));
-}
-if(mobileToggle) mobileToggle.addEventListener('click', toggleMobileNav);
 
 /* init */
 document.addEventListener('DOMContentLoaded', ()=>{
