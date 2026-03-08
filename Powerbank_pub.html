@@ -68,7 +68,7 @@ nav a.active{color:var(--gold);background:linear-gradient(90deg, rgba(212,175,55
 .orb{position:absolute;width:12px;height:12px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #fff8b0, var(--electric-yellow));box-shadow:0 0 18px rgba(255,214,0,0.98), 0 0 40px rgba(255,214,0,0.22);transform:translate(-50%,-50%);opacity:1;}
 
 /* layout */
-.container{max-width:var(--maxw);margin:0 auto;padding:18px 14px 140px;position:relative;z-index:40}
+.container{max-width:var(--maxw);margin:0 auto;padding:18px 14px 160px;position:relative;z-index:40}
 
 /* Models section styled as requested */
 .models-wrapper{margin-top:24px;padding:18px 12px 36px;width:100%;max-width:100vw;position:relative;background:transparent;z-index:60}
@@ -138,7 +138,26 @@ nav a.active{color:var(--gold);background:linear-gradient(90deg, rgba(212,175,55
 /* details panel */
 .details-panel{display:none;margin-top:12px;width:100%;background:rgba(255,255,255,0.98);border-radius:10px;padding:12px;color:var(--text);box-shadow:0 8px 24px rgba(6,42,32,0.06);border:1px solid rgba(6,42,32,0.04);line-height:1.45}
 
-/* FEATURED (single image) */
+/* PRO MODE UI */
+.pro-panel{display:none;margin-top:12px;background:rgba(255,255,255,0.98);border-radius:10px;padding:12px;color:var(--text);box-shadow:0 8px 24px rgba(6,42,32,0.06);border:1px solid rgba(6,42,32,0.04)}
+.pro-controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.led-sim{display:flex;gap:10px;align-items:center}
+
+/* LED visual */
+.led-indicator{width:36px;height:36px;border-radius:50%;background:#2b2b2b;box-shadow:0 6px 18px rgba(0,0,0,0.3);transition:all .25s;display:inline-block;vertical-align:middle}
+.led-low{background:rgba(255,236,179,0.14);box-shadow:0 0 8px rgba(255,230,120,0.08), 0 6px 18px rgba(0,0,0,0.15)}
+.led-med{background:rgba(255,236,179,0.28);box-shadow:0 0 14px rgba(255,230,120,0.22), 0 8px 26px rgba(0,0,0,0.12)}
+.led-high{background:rgba(255,236,179,0.6);box-shadow:0 0 22px rgba(255,230,120,0.35), 0 10px 30px rgba(0,0,0,0.08)}
+
+@keyframes blink-slow { 0%{opacity:1} 50%{opacity:0.15} 100%{opacity:1} }
+@keyframes blink-med { 0%{opacity:1} 50%{opacity:0.05} 100%{opacity:1} }
+@keyframes blink-fast { 0%{opacity:1} 50%{opacity:0.02} 100%{opacity:1} }
+
+.blink-slow{animation:blink-slow 1.2s linear infinite}
+.blink-med{animation:blink-med 0.6s linear infinite}
+.blink-fast{animation:blink-fast 0.25s linear infinite}
+
+/* featured + others kept mostly same */
 .futures-title{display:flex;align-items:center;justify-content:center;margin-top:24px;margin-bottom:10px}
 .futures-title .models-title{padding:8px 14px}
 .featured{margin-top:10px;border-radius:12px;overflow:hidden;border:1px solid rgba(212,175,55,0.12);background:rgba(255,255,255,0.94);box-shadow:var(--shadow)}
@@ -146,8 +165,6 @@ nav a.active{color:var(--gold);background:linear-gradient(90deg, rgba(212,175,55
 .featured-hero .slide{position:absolute;inset:0;opacity:0;transition:opacity 700ms ease, transform 700ms;transform:scale(1.03)}
 .featured-hero .slide.active{opacity:1;transform:scale(1);z-index:2}
 .featured-hero img{width:100%;height:100%;object-fit:cover;object-position:center center;display:block}
-
-/* featured copy + availability */
 .featured-copy{padding:14px 18px;text-align:center}
 .featured-copy h3{margin:0;color:var(--brand-green);font-weight:800;letter-spacing:0.3px;font-size:18px}
 .featured-copy p{color:rgba(2,17,10,0.95);margin-top:10px;line-height:1.45}
@@ -246,7 +263,7 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
           <div class="thumb"><img src="pwkb_123.png" alt="GreenCore"></div>
           <div class="meta">
             <h4>GreenCore</h4>
-            <p>GreenCore — 12 000 mAh<br><small>Modulaire • Boîtier sans soudure.</small></p>
+            <p>GreenCore — 12 000 mAh<br><small>Modulaire • Type-C charge rapide</small></p>
           </div>
           <div class="actions"><button class="btn-small" onclick="openTechModal(1);event.stopPropagation()">Infos</button></div>
         </div>
@@ -271,7 +288,7 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
       </div>
     </section>
 
-    <!-- Product card (GreenMini details shown when selected; starts visible on desktop) -->
+    <!-- Product card (details shown when selected; starts visible on desktop) -->
     <section class="product-card" role="region" aria-label="Produit principal" aria-hidden="true">
       <button class="close-mobile" aria-label="Fermer la fiche mobile" title="Fermer" onclick="closeOverlay()">×</button>
 
@@ -279,7 +296,6 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
         <div class="top-label">Batterie externe haute performance</div>
         <div>
           <span class="product-title" id="heroTitle">GreenMini — 10 000 mAh</span>
-          <!-- warranty badge (hidden by default, shown via JS for GreenMini) -->
           <span id="warrantyBadge" class="warranty-badge" style="display:none">Garantie 5 ans — 100 premiers clients</span>
         </div>
         <div class="product-sub" id="heroSubtitle">Ultra-compact</div>
@@ -296,6 +312,16 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
         </div>
 
         <div id="detailsPanel" class="details-panel" aria-hidden="true"></div>
+
+        <!-- Pro Mode -->
+        <div style="margin-top:12px">
+          <button id="proToggle" class="btn-small" aria-pressed="false">Mode Pro</button>
+        </div>
+
+        <div id="proPanel" class="pro-panel" aria-hidden="true">
+          <!-- Content filled by JS -->
+        </div>
+
       </div>
 
       <div class="product-side">
@@ -356,7 +382,7 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
   </footer>
 
 <script>
-/* Models data (GreenMini updated with full tech details) */
+/* Models data — GreenMini and GreenCore enriched (GreenCore: Samsung, 32W, Type-C QC, no PD; led modes added) */
 const models = [
   {
     id:'greenmini',
@@ -413,15 +439,45 @@ const models = [
   {
     id:'greencore',
     title:'GreenCore — 12 000 mAh',
-    subtitle:'Modulaire • Réparable',
+    subtitle:'Modulaire • Type-C charge rapide',
     images:['pwkb_123.png','Pwbk_21.png','pwbk_213.png'],
     specs:[
-      '12 000 mAh (≈11 000 mAh réel)',
-      '2× USB 5V/2.4A',
-      'Protection anti-inversion',
-      'Boîtier sans soudure, réparable localement'
+      'Cellules : Samsung — sélectionnées & testées',
+      'Capacité nominale : 12 000 mAh (≈11 000 mAh usable)',
+      'Puissance pack approximative : ~32 W',
+      'Type-C charge rapide (Quick Charge / QC compatible)',
+      'Pas de Power Delivery (PD) — tests mesurés : 4.66 V → 1.52 A',
+      'Lampe de nuit LED intégrée — activation : appuyez 2 fois sur le bouton (Mode Pro)'
     ],
-    details:`<ul><li>Boîtier sans soudure</li><li>Cellules testées</li><li>Garantie : 1 an</li></ul>`
+    // LED modes array (6 modes) for the pro UI
+    ledModes: [
+      { id:0, name:'Veille — faible intensité' },
+      { id:1, name:'Veille — intensité moyenne' },
+      { id:2, name:'Veille — intensité haute' },
+      { id:3, name:'Clignotement lent' },
+      { id:4, name:'Clignotement secours — moyen' },
+      { id:5, name:'Clignotement secours — rapide' }
+    ],
+    details: `
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
+        <strong>GreenCore — 12 000 mAh</strong><br>
+        Technologie : <strong>Samsung</strong>, cellules testées et triées. Charge rapide via USB-C (Quick Charge / Type-C fast). Puissance pack : ~32 W.
+      </p>
+
+      <div style="margin-top:8px">
+        <strong>Charge / Mesures</strong>
+        <ul>
+          <li>Charge Type-C rapide (QC)</li>
+          <li>Power Delivery (PD) : <strong>Non</strong> (mesure effectuée : <strong>4.66 V / 1.52 A</strong>)</li>
+        </ul>
+
+        <strong>Lumière de nuit LED</strong>
+        <ul>
+          <li>Activation : appuyez 2 fois sur le bouton (double-appui)</li>
+          <li>6 modes disponibles : veille faible, veille moyenne, veille haute, clignotement lent, clignotement secours moyen, clignotement secours rapide</li>
+        </ul>
+      </div>
+    `
   },
   {
     id:'greenpro',
@@ -452,6 +508,15 @@ let currentImage = 0;
 let heroTimer = null;
 const SLIDE_INTERVAL_MS = 5000;
 
+/* LED simulation state (for pro mode) */
+let ledState = {
+  modes: [],        // array of mode objects (populated from model)
+  index: 0,         // current mode index
+  visible: false,   // if LED simulation is present
+  clickCount: 0,    // for detecting double-press
+  clickTimer: null
+};
+
 /* Render specs list */
 function renderSpecs(index){
   const m = models[index] || models[0];
@@ -461,6 +526,58 @@ function renderSpecs(index){
     d.textContent = s;
     specListEl.appendChild(d);
   });
+}
+
+/* Build Pro Panel HTML (including LED simulator for Greencore) */
+function buildProPanelHTML(model){
+  if(!model) return '';
+  let html = `
+    <div style="font-weight:800;margin-bottom:8px">Informations avancées — Mode Pro</div>
+    <div style="margin-bottom:8px">
+      <strong>Technologie :</strong> ${model.id === 'greencore' ? 'Samsung (cellules triées & testées)' : (model.specs && model.specs[0] ? model.specs[0] : '—')}
+    </div>
+    <div style="margin-bottom:8px">
+      <strong>Puissance approximative :</strong> ${model.id === 'greencore' ? '~32 W' : 'Voir fiche technique'}
+    </div>
+  `;
+
+  if(model.id === 'greencore'){
+    html += `
+      <div style="margin-top:8px">
+        <strong>Charge / PD</strong>
+        <ul>
+          <li>Type-C charge rapide (Quick Charge compatible)</li>
+          <li>Power Delivery (PD) : <strong>Non</strong> — Mesure : <strong>4.66 V / 1.52 A</strong></li>
+        </ul>
+      </div>
+
+      <div style="margin-top:10px">
+        <strong>Lampe de nuit LED — activation :</strong>
+        <div style="margin-top:6px">Appuyez <strong>2 fois</strong> sur le bouton simulé ci-dessous pour activer / changer le mode (double-appui).</div>
+
+        <div class="pro-controls" style="margin-top:10px">
+          <div class="led-sim" aria-hidden="false">
+            <div id="ledIndicator" class="led-indicator" role="img" aria-label="LED status"></div>
+            <div style="display:flex;flex-direction:column">
+              <button id="ledButton" class="btn-small" aria-pressed="false">Bouton (appuyez 2 fois)</button>
+              <small style="color:#23403a;margin-top:6px">Mode actuel : <span id="ledModeName">—</span></small>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:10px">
+          <strong>Liste des modes LED :</strong>
+          <ol id="ledModesList" style="margin-top:6px">
+            ${model.ledModes.map(l=>`<li>${l.name}</li>`).join('')}
+          </ol>
+        </div>
+      </div>
+    `;
+  } else {
+    html += `<div style="margin-top:8px;color:#666">Aucun contrôleur LED avancé pour ce modèle.</div>`;
+  }
+
+  return html;
 }
 
 /* Update product panel */
@@ -473,7 +590,7 @@ function updateHero(index){
   document.getElementById('detailsPanel').innerHTML = `<strong style="font-weight:800">${m.title}</strong><div style="margin-top:8px">${m.details}</div>`;
   renderSpecs(index);
 
-  // Warranty badge visibility (mettre en évidence pour GreenMini)
+  // Warranty badge visibility (make sure only for GreenMini)
   const wb = document.getElementById('warrantyBadge');
   if(wb){
     if(m.id === 'greenmini'){
@@ -483,6 +600,26 @@ function updateHero(index){
       wb.style.display = 'none';
       wb.setAttribute('aria-hidden','true');
     }
+  }
+
+  // prepare pro panel content (hidden by default)
+  const proPanel = document.getElementById('proPanel');
+  proPanel.innerHTML = buildProPanelHTML(m);
+  proPanel.style.display = 'none';
+  proPanel.setAttribute('aria-hidden','true');
+
+  // configure LED state when greencore selected
+  if(m.id === 'greencore'){
+    ledState.modes = m.ledModes.slice();
+    ledState.index = 0;
+    ledState.visible = true;
+    // wait a tick to attach button listeners after DOM insertion
+    setTimeout(initLedControls, 60);
+  } else {
+    ledState.modes = [];
+    ledState.visible = false;
+    // detach any pending timer
+    if(ledState.clickTimer){ clearTimeout(ledState.clickTimer); ledState.clickTimer = null; ledState.clickCount = 0; }
   }
 }
 
@@ -559,6 +696,26 @@ document.getElementById('detailsToggle').addEventListener('click', ()=>{
   }
 });
 
+/* Mode Pro toggle */
+const proToggleBtn = document.getElementById('proToggle');
+proToggleBtn.addEventListener('click', ()=>{
+  const proPanel = document.getElementById('proPanel');
+  const isShown = proPanel.style.display === 'block';
+  if(isShown){
+    proPanel.style.display = 'none';
+    proPanel.setAttribute('aria-hidden','true');
+    proToggleBtn.setAttribute('aria-pressed','false');
+    proToggleBtn.textContent = 'Mode Pro';
+  } else {
+    proPanel.style.display = 'block';
+    proPanel.setAttribute('aria-hidden','false');
+    proToggleBtn.setAttribute('aria-pressed','true');
+    proToggleBtn.textContent = 'Mode Pro (actif)';
+    // scroll into view for mobile
+    if(window.matchMedia('(max-width:640px)').matches) productCard.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+});
+
 /* Modal helpers */
 function openModal(html){
   modalContent.innerHTML = html;
@@ -573,7 +730,6 @@ function closeModal(){
 /* Tech modal for models */
 function openTechModal(i){
   const m = models[i] || models[0];
-  // Enhanced modal content: formatted, include inputs/outputs clearly for GreenMini
   let html = `
     <h2 style="margin-top:0">${m.title}</h2>
     ${m.details}
@@ -583,7 +739,7 @@ function openTechModal(i){
   openModal(html);
 }
 
-/* Pack modal: IMAGE 2 first, then comment, then IMAGE 3 */
+/* Pack modal */
 function openPackModal(){
   const html = `
     <div style="width:100%;margin-bottom:12px"><img src="Future_Pack_2.png" alt="Pack vue 2" style="width:100%;height:auto;border-radius:8px;object-fit:cover"></div>
@@ -651,6 +807,95 @@ modalOverlay.addEventListener('click', (ev)=> { if(ev.target === modalOverlay) c
   }
   requestAnimationFrame(tick);
 })();
+
+/* LED controls initialization: attach listener for double-press simulation and update visual */
+function initLedControls(){
+  const btn = document.getElementById('ledButton');
+  const indicator = document.getElementById('ledIndicator');
+  const modeName = document.getElementById('ledModeName');
+  const modesListEl = document.getElementById('ledModesList');
+
+  if(!btn || !indicator || !modeName || !ledState.modes.length) return;
+
+  // set initial mode
+  ledState.index = 0;
+  applyLedMode(ledState.index);
+
+  // clean previous listeners by cloning node
+  const newBtn = btn.cloneNode(true);
+  btn.parentNode.replaceChild(newBtn, btn);
+
+  newBtn.addEventListener('click', ()=> {
+    // count clicks to detect "2 presses" inside 600ms
+    ledState.clickCount += 1;
+    if(ledState.clickTimer) clearTimeout(ledState.clickTimer);
+    ledState.clickTimer = setTimeout(()=> {
+      // single click only -> reset (we expect double)
+      ledState.clickCount = 0;
+      ledState.clickTimer = null;
+    }, 600);
+
+    if(ledState.clickCount >= 2){
+      // double-press detected
+      ledState.clickCount = 0;
+      if(ledState.clickTimer){ clearTimeout(ledState.clickTimer); ledState.clickTimer = null; }
+      // advance mode index
+      ledState.index = (ledState.index + 1) % ledState.modes.length;
+      applyLedMode(ledState.index);
+    }
+  });
+
+  // also support double-click event for convenience
+  newBtn.addEventListener('dblclick', (e) => {
+    e.preventDefault();
+    ledState.index = (ledState.index + 1) % ledState.modes.length;
+    applyLedMode(ledState.index);
+  });
+
+  // render modes list visually (guard)
+  if(modesListEl){
+    modesListEl.innerHTML = ledState.modes.map((m, idx)=>`<li${idx===ledState.index ? ' style="font-weight:800"' : ''}>${m.name}</li>`).join('');
+  }
+}
+
+/* Apply LED mode visuals */
+function applyLedMode(idx){
+  const indicator = document.getElementById('ledIndicator');
+  const modeName = document.getElementById('ledModeName');
+  const modesListEl = document.getElementById('ledModesList');
+
+  if(!indicator || !modeName || !ledState.modes.length) return;
+
+  const mode = ledState.modes[idx] || {name:'—'};
+  // reset classes
+  indicator.className = 'led-indicator';
+
+  // map modes to visual styles:
+  // 0: veille faible --> led-low
+  // 1: veille moyenne --> led-med
+  // 2: veille haute --> led-high
+  // 3: clignotement lent --> led-high + blink-slow
+  // 4: clignotement secours moyen --> led-high + blink-med
+  // 5: clignotement secours rapide --> led-high + blink-fast
+  switch(idx){
+    case 0: indicator.classList.add('led-low'); break;
+    case 1: indicator.classList.add('led-med'); break;
+    case 2: indicator.classList.add('led-high'); break;
+    case 3: indicator.classList.add('led-high','blink-slow'); break;
+    case 4: indicator.classList.add('led-high','blink-med'); break;
+    case 5: indicator.classList.add('led-high','blink-fast'); break;
+    default: indicator.classList.add('led-low'); break;
+  }
+  modeName.textContent = mode.name;
+
+  // highlight current mode in the list (if present)
+  if(modesListEl){
+    modesListEl.querySelectorAll('li').forEach((li, i)=> {
+      li.style.fontWeight = (i === idx) ? '800' : '400';
+      li.style.opacity = (i === idx) ? '1' : '0.7';
+    });
+  }
+}
 
 /* Init: show GreenMini on desktop, keep hidden on mobile until click */
 document.addEventListener('DOMContentLoaded', ()=>{
