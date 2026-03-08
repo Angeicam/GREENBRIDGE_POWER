@@ -18,7 +18,6 @@
   --green-mid:#073217;
   --gold:#d4af37;
 
-  /* texte principal — rendu un poil plus foncé */
   --text:#02110a;
   --muted:#23403a;
 
@@ -48,7 +47,6 @@ img{display:block;max-width:100%;height:auto}
 /* Topbar & Header */
 .topbar{position:fixed;top:0;left:0;right:0;height:var(--topbar-h);background:var(--green-dark);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;z-index:1600;font-size:13px}
 .topbar .left{font-weight:600}
-/* adresse mail retirée — right laissé vide pour garder l'espacement */
 .topbar .right{color:#fff;font-weight:700;text-decoration:none; text-transform:none;}
 .header{position:fixed;top:var(--topbar-h);left:0;right:0;height:var(--header-h);background:linear-gradient(90deg,var(--green-mid),#0b4d26);display:flex;align-items:center;justify-content:space-between;padding:0 5vw;z-index:1595;box-shadow:0 4px 12px rgba(0,0,0,.20)}
 .logo-text{display:flex;align-items:center;gap:10px}
@@ -83,7 +81,7 @@ nav a.active{color:var(--gold);background:linear-gradient(90deg, rgba(212,175,55
 .models .thumb{position:relative;flex:0 0 56%;height:0;padding-bottom:56%;overflow:hidden;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.10))}
 .models .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;border-radius:8px}
 
-/* RENDRE LES ECRITURES DES MODELES PLUS FONCEES */
+/* model text more contrasted */
 .model .meta h4{margin:0;font-size:18px;color:var(--text);font-weight:900}
 .model .meta p{margin:10px 0 0;font-size:14px;color:rgba(2,17,10,0.95);line-height:1.25;font-weight:600}
 .model .meta p small{display:block;color:rgba(2,17,10,0.88);font-weight:500;margin-top:4px}
@@ -99,7 +97,23 @@ nav a.active{color:var(--gold);background:linear-gradient(90deg, rgba(212,175,55
 .product-info{flex:1;min-width:260px;padding-right:6px}
 .top-label{display:inline-block;padding:7px 10px;border-radius:999px;background:rgba(6,120,60,0.06);color:var(--brand-green);font-weight:800;margin-bottom:8px;font-size:13px}
 .product-title{font-size:20px;font-weight:900;margin:6px 0 6px;color:var(--text);line-height:1.08}
-/* rendre le sous-titre du produit plus foncé */
+
+/* warranty badge (prominent) */
+.warranty-badge{
+  display:inline-block;
+  margin-left:8px;
+  vertical-align:middle;
+  padding:8px 12px;
+  border-radius:999px;
+  background:linear-gradient(90deg,#ffd54a,#ffb300);
+  color:#08110a;
+  font-weight:900;
+  font-size:13px;
+  box-shadow:0 10px 30px rgba(255,180,0,0.18);
+  border:1px solid rgba(0,0,0,0.06);
+}
+
+/* product subtitle more contrasted */
 .product-sub{font-size:13px;color:rgba(2,17,10,0.95);margin-bottom:10px;line-height:1.35}
 .features{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
 .feature-pill{background:rgba(255,255,255,0.92);padding:7px 10px;border-radius:999px;border:1px solid rgba(6,42,32,0.04);color:var(--brand-green);font-weight:800;font-size:13px}
@@ -113,7 +127,7 @@ nav a.active{color:var(--gold);background:linear-gradient(90deg, rgba(212,175,55
 /* product side */
 .product-side{width:340px;display:flex;flex-direction:column;gap:12px;align-items:stretch}
 .product-image{width:100%;height:220px;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#fbfeff,#f3f9fc);display:flex;align-items:center;justify-content:center;border:1px solid rgba(6,42,32,0.04)}
-.product-image img{width:100%;height:100%;object-fit:contain;object-position:center;cursor:pointer;transition:transform .35s;border-radius:8px}
+.product-image img{width:100%;height:100%;object-fit:contain;object-position:center;display:block;cursor:pointer;transition:transform .35s;border-radius:8px}
 
 /* CTA */
 .cta-group{display:flex;flex-direction:column;gap:10px}
@@ -134,7 +148,6 @@ nav a.active{color:var(--gold);background:linear-gradient(90deg, rgba(212,175,55
 .featured-hero img{width:100%;height:100%;object-fit:cover;object-position:center center;display:block}
 
 /* featured copy + availability */
-/* rendu du texte de la section projets plus foncé */
 .featured-copy{padding:14px 18px;text-align:center}
 .featured-copy h3{margin:0;color:var(--brand-green);font-weight:800;letter-spacing:0.3px;font-size:18px}
 .featured-copy p{color:rgba(2,17,10,0.95);margin-top:10px;line-height:1.45}
@@ -174,7 +187,6 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
   <!-- Topbar -->
   <div class="topbar" role="banner">
     <div class="left">Assemblés au Sénégal &amp; en Côte d'Ivoire</div>
-    <!-- adresse mail retirée comme demandé -->
     <div class="right" aria-hidden="true"></div>
   </div>
 
@@ -265,7 +277,11 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
 
       <div class="product-info">
         <div class="top-label">Batterie externe haute performance</div>
-        <div class="product-title" id="heroTitle">GreenMini — 10 000 mAh</div>
+        <div>
+          <span class="product-title" id="heroTitle">GreenMini — 10 000 mAh</span>
+          <!-- warranty badge (hidden by default, shown via JS for GreenMini) -->
+          <span id="warrantyBadge" class="warranty-badge" style="display:none">Garantie 5 ans — 100 premiers clients</span>
+        </div>
         <div class="product-sub" id="heroSubtitle">Ultra-compact</div>
 
         <div class="features" aria-hidden="false" style="margin-top:8px">
@@ -340,12 +356,89 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
   </footer>
 
 <script>
-/* Models data (unchanged) */
+/* Models data (GreenMini updated with full tech details) */
 const models = [
-  { id:'greenmini', title:'GreenMini — 10 000 mAh', subtitle:'Ultra-compact', images:['Pwkb_Mini_3.png','Pwkb_mini_2.png','PWBK_mini_4.png'], specs:['10 000 mAh (≈9 200 mAh réel)','1× USB-C in/out','Protection anti-surchauffe'], details:`<ul><li>Capacité : 10 000 mAh</li><li>Charge rapide (option)</li></ul>` },
-  { id:'greencore', title:'GreenCore — 12 000 mAh', subtitle:'Modulaire • Réparable', images:['pwkb_123.png','Pwbk_21.png','pwbk_213.png'], specs:['12 000 mAh (≈11 000 mAh réel)','2× USB 5V/2.4A','Protection anti-inversion'], details:`<ul><li>Boîtier sans soudure</li><li>Cellules testées</li><li>Garantie : 1 an</li></ul>` },
-  { id:'greenpro', title:'GreenPro — 20 000 mAh', subtitle:'Multi-appareils', images:['pwkb_6.png','pwbk_9.png','pwkb_10.png'], specs:['20 000 mAh','PD optionnel','Multi sorties'], details:`<ul><li>Capacité : 20 000 mAh</li><li>Charge simultanée</li></ul>` },
-  { id:'greenrugged', title:'GreenRugged — 20 000 mAh', subtitle:'IP65 • Terrain', images:['assets/greenrugged-1.jpg','assets/greenrugged-2.jpg','assets/greenrugged-3.jpg'], specs:['20 000 mAh • IP65','Boîtier renforcé'], details:`<ul><li>Étanche IP65</li><li>Renforts anti-chocs</li></ul>` }
+  {
+    id:'greenmini',
+    title:'GreenMini — 10 000 mAh',
+    subtitle:'Ultra-compact',
+    images:['Pwkb_Mini_3.png','Pwkb_mini_2.png','PWBK_mini_4.png'],
+    specs:[
+      'Cellules : Samsung (3 cellules) • testées à >100% capacité',
+      'Capacité nominale : 10 000 mAh (≈9 200 mAh réel usable)',
+      'Puissance pack approximative : ~32 W',
+      'Écran digital : affichage % batterie (ex : 12%, 13%, ...)',
+      'Ports : 1× USB-C (in/out) + 2× USB-A (Q3 & autre)',
+      'Garantie spéciale : 5 ans pour les 100 premiers clients'
+    ],
+    details: `
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
+        <strong>GreenMini — 10 000 mAh</strong><br>
+        Technologie : <strong>Samsung, 3 cellules</strong> (cellules testées et sélectionnées — capacité effective supérieure à 100% des références de lot).
+        Puissance moyenne du pack : <strong>~32 W</strong>. Écran digital intégré (indicateur précis en %) pour visualiser l'autonomie en temps réel.
+      </p>
+
+      <div style="margin-top:8px">
+        <strong>Entrées (Input)</strong>
+        <ul>
+          <li>5V en continu — 4.5A (charge rapide en USB-C)</li>
+          <li>9V en continu — 2.5A</li>
+          <li>12V en continu — 1.85A (max)</li>
+        </ul>
+
+        <strong>Sorties (Output)</strong>
+        <ul>
+          <li>USB-C (PD / in/out) : 5V en continu — 4.5A ; 9V — 2.5A ; 12V — 1.85A (selon negotiation PD)</li>
+          <li>USB-A (Q3) : 5V en continu — 2.1A</li>
+          <li>Autre USB-A : 5V en continu — 1A</li>
+        </ul>
+      </div>
+
+      <div style="margin-top:8px">
+        <strong>Sécurité & qualité</strong>
+        <ul>
+          <li>Protections : anti-surcharge, anti-court-circuit, détection inversion, protection température</li>
+          <li>Cellules testées individuellement — tri de lots Samsung</li>
+          <li>Boîtier conçu pour dissipation thermique optimisée</li>
+        </ul>
+      </div>
+
+      <div style="margin-top:10px">
+        <strong style="color:#08110a;background:linear-gradient(90deg,#ffd54a,#ffb300);padding:6px 10px;border-radius:8px;display:inline-block">
+          Offre : <span style="font-weight:900">Garantie 5 ans — réservée aux 100 premiers clients</span>
+        </strong>
+      </div>
+    `
+  },
+  {
+    id:'greencore',
+    title:'GreenCore — 12 000 mAh',
+    subtitle:'Modulaire • Réparable',
+    images:['pwkb_123.png','Pwbk_21.png','pwbk_213.png'],
+    specs:[
+      '12 000 mAh (≈11 000 mAh réel)',
+      '2× USB 5V/2.4A',
+      'Protection anti-inversion',
+      'Boîtier sans soudure, réparable localement'
+    ],
+    details:`<ul><li>Boîtier sans soudure</li><li>Cellules testées</li><li>Garantie : 1 an</li></ul>`
+  },
+  {
+    id:'greenpro',
+    title:'GreenPro — 20 000 mAh',
+    subtitle:'Multi-appareils',
+    images:['pwkb_6.png','pwbk_9.png','pwkb_10.png'],
+    specs:['20 000 mAh','PD optionnel','Multi sorties'],
+    details:`<ul><li>Capacité : 20 000 mAh</li><li>Charge simultanée</li></ul>`
+  },
+  {
+    id:'greenrugged',
+    title:'GreenRugged — 20 000 mAh',
+    subtitle:'IP65 • Terrain',
+    images:['assets/greenrugged-1.jpg','assets/greenrugged-2.jpg','assets/greenrugged-3.jpg'],
+    specs:['20 000 mAh • IP65','Boîtier renforcé'],
+    details:`<ul><li>Étanche IP65</li><li>Renforts anti-chocs</li></ul>`
+  }
 ];
 
 const productCard = document.querySelector('.product-card');
@@ -379,6 +472,18 @@ function updateHero(index){
   heroImg.alt = m.title;
   document.getElementById('detailsPanel').innerHTML = `<strong style="font-weight:800">${m.title}</strong><div style="margin-top:8px">${m.details}</div>`;
   renderSpecs(index);
+
+  // Warranty badge visibility (mettre en évidence pour GreenMini)
+  const wb = document.getElementById('warrantyBadge');
+  if(wb){
+    if(m.id === 'greenmini'){
+      wb.style.display = 'inline-block';
+      wb.setAttribute('aria-hidden','false');
+    } else {
+      wb.style.display = 'none';
+      wb.setAttribute('aria-hidden','true');
+    }
+  }
 }
 
 /* Slideshow for product images */
@@ -468,10 +573,11 @@ function closeModal(){
 /* Tech modal for models */
 function openTechModal(i){
   const m = models[i] || models[0];
-  const html = `
+  // Enhanced modal content: formatted, include inputs/outputs clearly for GreenMini
+  let html = `
     <h2 style="margin-top:0">${m.title}</h2>
     ${m.details}
-    <div style="margin-top:12px;font-weight:800">Caractéristiques</div>
+    <div style="margin-top:12px;font-weight:800">Caractéristiques rapides</div>
     <ul>${(m.specs||[]).map(s=>`<li>${s}</li>`).join('')}</ul>
   `;
   openModal(html);
@@ -520,7 +626,7 @@ modalOverlay.addEventListener('click', (ev)=> { if(ev.target === modalOverlay) c
     {rxRatio:0.33, ry:6, speed:0.08, phase:Math.PI/2},
     {rxRatio:0.42, ry:10, speed:0.05, phase:Math.PI}
   ];
-  orbs.forEach((o,i)=>{ if(o){ o.style.opacity='1'; o.classList.add('buzz'); o.style.animationDelay=(i*120)+'ms'; }});
+  orbs.forEach((o,i)=>{ if(o){ o.style.opacity='1'; o.classList.add('buzz'); o.style.animationDelay=(i*120)+'ms'; }});  
   let t0 = performance.now();
   function tick(now){
     const time = (now - t0)/1000;
