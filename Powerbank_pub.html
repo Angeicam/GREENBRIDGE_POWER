@@ -18,16 +18,15 @@
   --green-mid:#073217;
   --gold:#d4af37;
 
-  --bg-main:#f6fbfe;
-  --card-bg-desktop: rgba(255,255,255,0.14); /* plus transparent pour voir le fond */
-  --card-bg-overlay: rgba(255,255,255,0.98);  /* opaque pour overlay mobile */
+  /* Uniform card backgrounds: same everywhere for consistent look */
+  --card-bg-desktop: rgba(255,255,255,0.92);
+  --card-bg-overlay: rgba(255,255,255,0.92);
   --card-border: rgba(6,42,32,0.06);
   --text:#041a13;
   --muted:#4f6360;
 
   --electric-yellow:#ffd600;
   --shadow: 0 12px 36px rgba(6,42,32,0.06);
-
   --model-img-fit: cover;
 }
 
@@ -39,8 +38,8 @@ html {
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  background-attachment: fixed; /* overridden on mobile via script */
-  background-color: var(--bg-main);
+  background-attachment: scroll; /* enforce mobile-friendly behavior for consistent background */
+  background-color: #f6fbfe;
   min-height:100%;
 }
 body { background: transparent; min-height:100%; }
@@ -64,7 +63,7 @@ nav a{color:#fff;font-size:14px;font-weight:600;padding:8px 10px;border-radius:8
 nav a:hover{color:var(--gold)}
 nav a.active{color:var(--gold);background:linear-gradient(90deg, rgba(212,175,55,0.06), rgba(212,175,55,0.03));border:1px solid rgba(212,175,55,0.12);padding:10px 14px}
 
-/* Electric band (visuals) */
+/* Electric band visuals */
 .electric-band { position: fixed; top: calc(var(--topbar-h) + var(--header-h) - 6px); left: 0; right: 0; height: 14px; z-index: 99999; pointer-events: none; overflow: visible; transform: translateZ(0); }
 .electric-band .container { position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 100vw; max-width: none; padding: 0; height: 100%; pointer-events: none; box-sizing: border-box; }
 .lightning-svg{width:100vw;height:100%;display:block;pointer-events:none;opacity:0;transition:opacity .22s ease;mix-blend-mode:screen}
@@ -74,11 +73,11 @@ nav a.active{color:var(--gold);background:linear-gradient(90deg, rgba(212,175,55
 /* container */
 .container{max-width:var(--maxw);margin:0 auto;padding:18px 14px 120px;position:relative;z-index:40;background: transparent;}
 
-/* Product card */
+/* Product card (uniform background) */
 .product-card{
   width:min(980px,94%);
   margin:28px auto 22px;
-  background: var(--card-bg-desktop); /* desktop translucent to show bg */
+  background: var(--card-bg-desktop);
   border: 1px solid var(--card-border);
   border-radius:14px;
   padding:18px;
@@ -88,10 +87,9 @@ nav a.active{color:var(--gold);background:linear-gradient(90deg, rgba(212,175,55
   position:relative;overflow:hidden;backdrop-filter: blur(3px) saturate(105%);
 }
 .product-card::before{content:"";position:absolute;right:-2%;top:0;bottom:0;width:46%;max-width:480px;background-image: url('assets/batteries-faint.png');background-size:contain;background-repeat:no-repeat;background-position:center right;opacity:0.045;pointer-events:none;transform:translateX(4%);filter:grayscale(90%) blur(0.35px)}
-.product-card::after{content:"";position:absolute;left:0;top:0;bottom:0;width:42%;background:linear-gradient(90deg, rgba(255,255,255,0.78), rgba(255,255,255,0.32) 60%);pointer-events:none}
+/* tone down the white overlay that could wash the background */
+.product-card::after{content:"";position:absolute;left:0;top:0;bottom:0;width:42%;background:linear-gradient(90deg, rgba(255,255,255,0.64), rgba(255,255,255,0.28) 60%);pointer-events:none;opacity:0.14}
 .product-card > *{position:relative;z-index:2}
-
-/* mobile close control hidden on desktop */
 .product-card .close-mobile{display:none;position:absolute;right:12px;top:10px;background:transparent;border:0;font-size:22px;color:var(--muted);cursor:pointer;z-index:5}
 
 /* MODELS */
@@ -103,7 +101,7 @@ nav a.active{color:var(--gold);background:linear-gradient(90deg, rgba(212,175,55
 /* model cards */
 .models .model{
   display:flex;flex-direction:column;justify-content:space-between;gap:12px;padding:14px;border-radius:12px;
-  background: rgba(255,255,255,0.06); /* lets background show */
+  background: rgba(255,255,255,0.92); /* uniform with product card */
   border: 1px solid rgba(6,42,32,0.06);
   box-shadow: 0 8px 20px rgba(6,42,32,0.04);
   cursor:pointer;transition: transform 200ms ease, box-shadow 200ms ease;min-height:240px;overflow:hidden;backdrop-filter: blur(4px) saturate(110%);
@@ -185,7 +183,7 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 36px;text-align:
   .models{grid-template-columns:repeat(2,1fr);gap:12px}
 }
 
-/* MOBILE: hide product card by default and show overlay opaque when opened */
+/* MOBILE: keep behavior (models shown first), but visuals consistent with desktop */
 @media (max-width:640px){
   .company-name{font-size:30px}
   nav{display:none}
@@ -196,6 +194,7 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 36px;text-align:
   .model .thumb{flex:0 0 58%;height:0;padding-bottom:58%}
   .product-image img{width:86%;height:86%;object-fit:contain}
 
+  /* overlay uses the same translucent background as desktop */
   .product-card{ display:none !important; position:fixed; left:8px; right:8px; top: calc(var(--topbar-h) + var(--header-h) + 8px); z-index:2200; width: calc(100% - 16px); max-width:none; margin:0; padding:16px; border-radius:12px; box-shadow:0 18px 40px rgba(6,42,32,0.20); background: var(--card-bg-overlay); flex-direction:column; overflow:auto; max-height: calc(100vh - (var(--topbar-h) + var(--header-h) + 32px)); }
   .product-card.show-on-mobile{ display:flex !important; animation: slideIn 220ms ease; }
   @keyframes slideIn { from { transform: translateY(-8px); opacity:0 } to { transform: translateY(0); opacity:1 } }
@@ -205,11 +204,9 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 36px;text-align:
   .cta-group{flex-direction:column}
   .cta-group .btn-primary, .cta-group .btn-secondary { width:100% }
 
-  /* make models list easy-to-read on mobile */
+  /* mobile models list lightly opaque to keep readability */
   .models-wrapper{ background: rgba(255,255,255,0.94); border-radius:12px; padding:12px; box-shadow:0 10px 30px rgba(6,42,32,0.06); margin-top:14px; }
-  .models .model{ background:#ffffff; box-shadow:0 12px 28px rgba(6,42,32,0.06) }
-
-  html { background-attachment: scroll; } /* fallback for some mobiles */
+  .models .model{ background: rgba(255,255,255,0.92); box-shadow:0 12px 28px rgba(6,42,32,0.06) }
 }
 
 @media (max-width:420px){
@@ -458,14 +455,13 @@ function selectModel(i){
   document.getElementById('orderBtnTop').onclick = ()=> window.open(wa,'_blank');
   document.getElementById('infoBtnHero').onclick = ()=> openTechModal(i);
 
-  // show overlay on small screens
+  // show overlay on small screens (but overlay uses same translucent bg as desktop)
   if(window.matchMedia('(max-width:640px)').matches){
     productCard.classList.add('show-on-mobile');
     productCard.setAttribute('aria-hidden','false');
     // hide details by default when opening overlay
     detailsPanel.style.display = 'none';
     detailsPanel.setAttribute('aria-hidden','true');
-    // focus primary action
     setTimeout(()=> {
       const primary = productCard.querySelector('.btn-primary');
       if(primary) primary.focus();
@@ -474,6 +470,8 @@ function selectModel(i){
     productCard.setAttribute('aria-hidden','false');
     detailsPanel.style.display = 'none';
     detailsPanel.setAttribute('aria-hidden','true');
+    // scroll into view on desktop
+    productCard.scrollIntoView({behavior:'smooth', block:'center'});
   }
 
   currentImage = 0;
@@ -497,7 +495,7 @@ if(productImageEl){
   });
 }
 
-/* details toggle (works now because detailsPanel is inside product-card) */
+/* details toggle (works because detailsPanel is inside product-card) */
 document.getElementById('detailsToggle').addEventListener('click', ()=>{
   const vis = detailsPanel.style.display === 'block';
   if(vis){
@@ -506,7 +504,6 @@ document.getElementById('detailsToggle').addEventListener('click', ()=>{
   } else {
     detailsPanel.style.display='block';
     detailsPanel.setAttribute('aria-hidden','false');
-    // on mobile scroll product card slightly so panel is visible
     if(window.matchMedia('(max-width:640px)').matches){
       productCard.scrollIntoView({behavior:'smooth', block:'center'});
     } else {
@@ -539,24 +536,24 @@ if(closeMobileBtn){
   });
 }
 
-/* Fix for some mobile browsers: prefer background-attachment scroll to ensure bg visible */
+/* Ensure background & productCard default behavior on resize */
 function adaptForMobileBackground(){
   if(window.matchMedia('(max-width:640px)').matches){
     document.documentElement.style.backgroundAttachment = 'scroll';
-    // ensure productCard hidden by default on mobile
     if(productCard) {
       productCard.classList.remove('show-on-mobile');
-      productCard.style.display = '';
       productCard.setAttribute('aria-hidden','true');
     }
   } else {
-    document.documentElement.style.backgroundAttachment = 'fixed';
+    document.documentElement.style.backgroundAttachment = 'scroll';
     if(productCard){
+      // desktop shows inline product card
       productCard.setAttribute('aria-hidden','false');
     }
   }
 }
-/* electric visuals (kept) */
+
+/* electric visuals */
 (function(){
   const electricBand = document.getElementById('electricBand');
   if (!electricBand) return;
@@ -686,16 +683,17 @@ function adaptForMobileBackground(){
 
 /* init */
 document.addEventListener('DOMContentLoaded', ()=>{
-  // mobile: show models list first (product card hidden). desktop: show first model in place.
   adaptForMobileBackground();
   if(window.matchMedia('(max-width:640px)').matches){
-    updateHero(0); // fill model data but KEEP product card hidden
+    // fill first model data but keep card hidden until user clicks a model
+    updateHero(0);
     if(productCard){
       productCard.classList.remove('show-on-mobile');
       productCard.setAttribute('aria-hidden','true');
     }
   } else {
-    selectModel(0); // desktop: show product in-place
+    // desktop: show first model in place
+    selectModel(0);
   }
 
   startHeroSlideshow();
@@ -705,7 +703,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   });
 });
 
-/* respond to resize as well */
+/* respond to resize */
 window.addEventListener('resize', adaptForMobileBackground);
 </script>
 </body>
