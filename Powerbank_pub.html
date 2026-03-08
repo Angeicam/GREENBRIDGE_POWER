@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
 <title>GREENBRIDGE — Powerbanks & Solutions Énergétiques</title>
-<meta name="description" content="GREENBRIDGE — Powerbanks assemblées au Sénégal & Côte d'Ivoire. Cellules testées, garantie 1 an.">
+<meta name="description" content="GREENBRIDGE — Powerbanks assemblées au Sénégal & Côte d'Ivoire. Cellules testées, garantie limitée pour premiers clients.">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <style>
@@ -259,20 +259,20 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
           <div class="actions"><button class="btn-small" onclick="openTechModal(0);event.stopPropagation()">Infos</button></div>
         </div>
 
-        <div class="model" role="button" onclick="selectModel(1)" tabindex="0" aria-label="GreenCore 12k">
+        <div class="model" role="button" onclick="selectModel(1)" tabindex="0" aria-label="GreenCore 9k">
           <div class="thumb"><img src="pwkb_123.png" alt="GreenCore"></div>
           <div class="meta">
             <h4>GreenCore</h4>
-            <p>GreenCore — 12 000 mAh<br><small>Modulaire • Type-C charge rapide</small></p>
+            <p>GreenCore — ≈ 9 000 mAh<br><small>Modulaire • Type-C charge rapide</small></p>
           </div>
           <div class="actions"><button class="btn-small" onclick="openTechModal(1);event.stopPropagation()">Infos</button></div>
         </div>
 
-        <div class="model" role="button" onclick="selectModel(2)" tabindex="0" aria-label="GreenPro 20k">
+        <div class="model" role="button" onclick="selectModel(2)" tabindex="0" aria-label="GreenPro 12k">
           <div class="thumb"><img src="pwkb_6.png" alt="GreenPro"></div>
           <div class="meta">
             <h4>GreenPro</h4>
-            <p>GreenPro — 20 000 mAh<br><small>Multi-appareils • Puissance &amp; autonomie</small></p>
+            <p>GreenPro — ≈ 12 000 mAh<br><small>Charge rapide USB-C • Pack haute qualité</small></p>
           </div>
           <div class="actions"><button class="btn-small" onclick="openTechModal(2);event.stopPropagation()">Infos</button></div>
         </div>
@@ -296,7 +296,7 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
         <div class="top-label">Batterie externe haute performance</div>
         <div>
           <span class="product-title" id="heroTitle">GreenMini — 10 000 mAh</span>
-          <span id="warrantyBadge" class="warranty-badge" style="display:none">Garantie 5 ans — 100 premiers clients</span>
+          <span id="warrantyBadge" class="warranty-badge" style="display:none">Garantie 3 ans — 100 premiers clients</span>
         </div>
         <div class="product-sub" id="heroSubtitle">Ultra-compact</div>
 
@@ -382,7 +382,11 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
   </footer>
 
 <script>
-/* Models data — GreenMini and GreenCore enriched (GreenCore: Samsung, 32W, Type-C QC, no PD; led modes added) */
+/* Models data — updated per vos dernières infos :
+   - GreenMini et GreenCore : Garantie 3 ans — 100 premiers clients
+   - GreenCore capacity ≈ 9000 mAh
+   - GreenPro ≈ 12 000 mAh, charge rapide USB-C, pack de haute qualité
+*/
 const models = [
   {
     id:'greenmini',
@@ -391,11 +395,11 @@ const models = [
     images:['Pwkb_Mini_3.png','Pwkb_mini_2.png','PWBK_mini_4.png'],
     specs:[
       'Cellules : Samsung (3 cellules) • testées à >100% capacité',
-      'Capacité nominale : 10 000 mAh (≈9 200 mAh réel usable)',
+      'Capacité nominale : 10 000 mAh (≈9 200 mAh usable)',
       'Puissance pack approximative : ~32 W',
       'Écran digital : affichage % batterie (ex : 12%, 13%, ...)',
       'Ports : 1× USB-C (in/out) + 2× USB-A (Q3 & autre)',
-      'Garantie spéciale : 5 ans pour les 100 premiers clients'
+      'Garantie spéciale : 3 ans pour les 100 premiers clients'
     ],
     details: `
       <p style="margin-top:0;color:#23403a;line-height:1.45">
@@ -431,23 +435,24 @@ const models = [
 
       <div style="margin-top:10px">
         <strong style="color:#08110a;background:linear-gradient(90deg,#ffd54a,#ffb300);padding:6px 10px;border-radius:8px;display:inline-block">
-          Offre : <span style="font-weight:900">Garantie 5 ans — réservée aux 100 premiers clients</span>
+          Offre : <span style="font-weight:900">Garantie 3 ans — réservée aux 100 premiers clients</span>
         </strong>
       </div>
     `
   },
   {
     id:'greencore',
-    title:'GreenCore — 12 000 mAh',
+    title:'GreenCore — ≈ 9 000 mAh',
     subtitle:'Modulaire • Type-C charge rapide',
     images:['pwkb_123.png','Pwbk_21.png','pwbk_213.png'],
     specs:[
       'Cellules : Samsung — sélectionnées & testées',
-      'Capacité nominale : 12 000 mAh (≈11 000 mAh usable)',
+      'Capacité nominale : ≈ 9 000 mAh (usable ≈ 8 200 mAh)',
       'Puissance pack approximative : ~32 W',
       'Type-C charge rapide (Quick Charge / QC compatible)',
       'Pas de Power Delivery (PD) — tests mesurés : 4.66 V → 1.52 A',
-      'Lampe de nuit LED intégrée — activation : appuyez 2 fois sur le bouton (Mode Pro)'
+      'Lampe de nuit LED intégrée — activation : appuyez 2 fois sur le bouton (Mode Pro)',
+      'Garantie spéciale : 3 ans pour les 100 premiers clients'
     ],
     // LED modes array (6 modes) for the pro UI
     ledModes: [
@@ -460,7 +465,7 @@ const models = [
     ],
     details: `
       <p style="margin-top:0;color:#23403a;line-height:1.45">
-        <strong>GreenCore — 12 000 mAh</strong><br>
+        <strong>GreenCore — ≈ 9 000 mAh</strong><br>
         Technologie : <strong>Samsung</strong>, cellules testées et triées. Charge rapide via USB-C (Quick Charge / Type-C fast). Puissance pack : ~32 W.
       </p>
 
@@ -477,15 +482,39 @@ const models = [
           <li>6 modes disponibles : veille faible, veille moyenne, veille haute, clignotement lent, clignotement secours moyen, clignotement secours rapide</li>
         </ul>
       </div>
+
+      <div style="margin-top:10px">
+        <strong style="color:#08110a;background:linear-gradient(90deg,#ffd54a,#ffb300);padding:6px 10px;border-radius:8px;display:inline-block">
+          Offre : <span style="font-weight:900">Garantie 3 ans — réservée aux 100 premiers clients</span>
+        </strong>
+      </div>
     `
   },
   {
     id:'greenpro',
-    title:'GreenPro — 20 000 mAh',
-    subtitle:'Multi-appareils',
+    title:'GreenPro — ≈ 12 000 mAh',
+    subtitle:'Multi-appareils • Charge rapide USB-C',
     images:['pwkb_6.png','pwbk_9.png','pwkb_10.png'],
-    specs:['20 000 mAh','PD optionnel','Multi sorties'],
-    details:`<ul><li>Capacité : 20 000 mAh</li><li>Charge simultanée</li></ul>`
+    specs:[
+      'Capacité nominale : ≈ 12 000 mAh',
+      'Charge rapide : USB-C (PD optionnel selon SKU)',
+      'Cellules : pack de haute qualité, triées pour durabilité',
+      'Conçu pour multi-appareils et charge simultanée'
+    ],
+    details: `
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
+        <strong>GreenPro — ≈ 12 000 mAh</strong><br>
+        Pack constitué de cellules de haute qualité, sélectionnées pour stabilité et longévité. Charge rapide via USB-C, conçu pour alimenter plusieurs appareils simultanément.
+      </p>
+
+      <div style="margin-top:8px">
+        <strong>Entrées / Sorties</strong>
+        <ul>
+          <li>Entrée USB-C : charge rapide (valeurs selon adaptateur)</li>
+          <li>Sorties : USB-C + USB-A multiples, PD disponible sur certaines variantes (SKU)</li>
+        </ul>
+      </div>
+    `
   },
   {
     id:'greenrugged',
@@ -537,7 +566,7 @@ function buildProPanelHTML(model){
       <strong>Technologie :</strong> ${model.id === 'greencore' ? 'Samsung (cellules triées & testées)' : (model.specs && model.specs[0] ? model.specs[0] : '—')}
     </div>
     <div style="margin-bottom:8px">
-      <strong>Puissance approximative :</strong> ${model.id === 'greencore' ? '~32 W' : 'Voir fiche technique'}
+      <strong>Puissance approximative :</strong> ${model.id === 'greencore' || model.id==='greenmini' ? '~32 W' : 'Voir fiche technique'}
     </div>
   `;
 
@@ -546,7 +575,7 @@ function buildProPanelHTML(model){
       <div style="margin-top:8px">
         <strong>Charge / PD</strong>
         <ul>
-          <li>Type-C charge rapide (Quick Charge compatible)</li>
+          <li>Type-C charge rapide (QC)</li>
           <li>Power Delivery (PD) : <strong>Non</strong> — Mesure : <strong>4.66 V / 1.52 A</strong></li>
         </ul>
       </div>
@@ -590,12 +619,13 @@ function updateHero(index){
   document.getElementById('detailsPanel').innerHTML = `<strong style="font-weight:800">${m.title}</strong><div style="margin-top:8px">${m.details}</div>`;
   renderSpecs(index);
 
-  // Warranty badge visibility (make sure only for GreenMini)
+  // Warranty badge visibility (GreenMini & GreenCore)
   const wb = document.getElementById('warrantyBadge');
   if(wb){
-    if(m.id === 'greenmini'){
+    if(m.id === 'greenmini' || m.id === 'greencore'){
       wb.style.display = 'inline-block';
       wb.setAttribute('aria-hidden','false');
+      wb.textContent = 'Garantie 3 ans — 100 premiers clients';
     } else {
       wb.style.display = 'none';
       wb.setAttribute('aria-hidden','true');
@@ -618,7 +648,6 @@ function updateHero(index){
   } else {
     ledState.modes = [];
     ledState.visible = false;
-    // detach any pending timer
     if(ledState.clickTimer){ clearTimeout(ledState.clickTimer); ledState.clickTimer = null; ledState.clickCount = 0; }
   }
 }
@@ -711,7 +740,6 @@ proToggleBtn.addEventListener('click', ()=>{
     proPanel.setAttribute('aria-hidden','false');
     proToggleBtn.setAttribute('aria-pressed','true');
     proToggleBtn.textContent = 'Mode Pro (actif)';
-    // scroll into view for mobile
     if(window.matchMedia('(max-width:640px)').matches) productCard.scrollIntoView({behavior:'smooth', block:'center'});
   }
 });
