@@ -28,6 +28,8 @@
 
   --electric-yellow:#ffd600;
   --shadow: 0 12px 36px rgba(6,42,32,0.06);
+
+  --whatsapp-green: #25D366;
 }
 
 /* Reset/base */
@@ -49,17 +51,22 @@ img{display:block;max-width:100%;height:auto}
 .topbar .left{font-weight:600}
 .topbar .right{color:#fff;font-weight:700;text-decoration:none; text-transform:none;}
 
-/* Header: logo on the left, centered name vertically */
+/* Header: logo on the left, company name larger */
 .header{position:fixed;top:var(--topbar-h);left:0;right:0;height:var(--header-h);background:linear-gradient(90deg,var(--green-mid),#0b4d26);display:flex;align-items:center;justify-content:flex-start;padding:0 5vw;z-index:1595;box-shadow:0 4px 12px rgba(0,0,0,.20)}
-.logo-text{display:flex;align-items:center;gap:10px;position:relative}
+.logo-text{display:flex;align-items:center;gap:12px}
 .logo-text img{height:48px;display:block}
-.company-name{font-size:28px;font-weight:800;letter-spacing:1px;padding:6px 10px;border-radius:8px;color:var(--brand-green);-webkit-text-stroke:0.95px var(--gold);text-shadow:0 3px 6px rgba(0,0,0,0.45);}
+.company-name{
+  font-size:36px;            /* agrandi comme demandé */
+  font-weight:800;
+  letter-spacing:1px;
+  padding:6px 10px;
+  border-radius:8px;
+  color:var(--brand-green);
+  -webkit-text-stroke:0.95px var(--gold);
+  text-shadow:0 3px 6px rgba(0,0,0,0.45);
+}
 
-/* logo-orbs: small area under the logo where energy balls rotate */
-.logo-orbs{position:absolute;left:0;top:calc(100% + 8px);width:140px;height:44px;pointer-events:none;display:block;overflow:visible}
-.logo-orbs .orb--logo{position:absolute;width:12px;height:12px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #fff8b0, var(--electric-yellow));box-shadow:0 0 18px rgba(255,214,0,0.98), 0 0 40px rgba(255,214,0,0.22);transform:translate(-50%,-50%);opacity:1;}
-
-/* electric band (rest of page) */
+/* electric band (top lightning across page) */
 .electric-band{position:fixed;top:calc(var(--topbar-h)+var(--header-h)-6px);left:0;right:0;height:14px;z-index:99990;pointer-events:none;overflow:visible;transform:translateZ(0)}
 .electric-band .container{position:relative;width:100%;height:100%}
 .lightning-svg{width:100vw;height:100%;display:block;pointer-events:none;opacity:0;mix-blend-mode:screen;transition:opacity .22s}
@@ -172,6 +179,25 @@ img{display:block;max-width:100%;height:auto}
 .modal{width:100%;max-width:920px;background:#fff;border-radius:12px;padding:18px;overflow:auto;box-shadow:0 24px 60px rgba(0,0,0,0.45);max-height:86vh;position:relative}
 .modal .close{position:absolute;right:16px;top:12px;background:transparent;border:0;font-size:18px;cursor:pointer}
 
+/* WhatsApp FAB */
+.fab{
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:fixed;
+  right:14px;
+  bottom:18px;
+  z-index:4000;
+  box-shadow:0 10px 30px rgba(2,50,26,0.25);
+  background:var(--whatsapp-green);
+  border: 3px solid rgba(255,255,255,0.06);
+}
+.fab a{display:flex;align-items:center;justify-content:center;width:100%;height:100%;color:#fff;font-size:22px}
+.fab:focus, .fab a:focus{outline:3px solid rgba(255,255,255,0.12);outline-offset:2px}
+
 /* footer */
 footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:center;margin-top:28px;position:relative;z-index:50}
 .footer-company{display:block;margin:0 auto 8px;font-size:18px;font-weight:800;color:var(--brand-green);-webkit-text-stroke:0.7px var(--gold);text-shadow:0 3px 6px rgba(0,0,0,0.6);padding:6px 10px;border-radius:6px}
@@ -179,7 +205,7 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
 /* responsive */
 @media (max-width:900px){ .product-card{flex-direction:column;padding:14px}.product-side{order:-1;width:100%}.featured-hero{height:280px} }
 @media (max-width:640px){
-  .company-name{font-size:24px}
+  .company-name{font-size:30px}
   .models{grid-template-columns:1fr}
   .featured-hero{height:220px}
   /* overlay behavior on mobile */
@@ -187,7 +213,7 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
   .product-card.show-on-mobile{ display:flex !important; animation: slideIn 220ms ease; }
   .product-card .close-mobile{ display:block; }
 
-  .logo-orbs{left:0;right:auto;width:120px}
+  .fab{ right:12px; bottom:14px; width:50px; height:50px; font-size:20px }
 }
 @media (max-width:420px){ .featured-hero{height:200px} }
 
@@ -204,18 +230,11 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
     <div class="right" aria-hidden="true"></div>
   </div>
 
-  <!-- Header : logo à gauche, name, orbs rotating under the logo -->
+  <!-- Header : logo à gauche, nom agrandi -->
   <header class="header" role="banner" aria-label="En-tête">
     <div class="logo-text" aria-hidden="false">
       <img src="green bridge domo.png" alt="Logo GREENBRIDGE" />
       <div class="company-name">GREENBRIDGE</div>
-
-      <!-- logo-orbs container: orbs that rotate under the logo -->
-      <div class="logo-orbs" aria-hidden="true">
-        <div class="orb--logo" id="logoOrbA"></div>
-        <div class="orb--logo" id="logoOrbB"></div>
-        <div class="orb--logo" id="logoOrbC"></div>
-      </div>
     </div>
   </header>
 
@@ -358,9 +377,9 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
 
   </main>
 
-  <!-- Floating WhatsApp (kept for fallback ordering) -->
-  <div id="fab" class="fab" role="button" aria-label="Commander via WhatsApp" style="position:fixed;right:14px;bottom:18px;z-index:3000">
-    <a id="fabLink" href="https://wa.me/" target="_blank" style="color:#fff;text-decoration:none"><i class="fa-brands fa-whatsapp" style="font-size:20px"></i></a>
+  <!-- WhatsApp FAB (visible, green) -->
+  <div id="fab" class="fab" role="button" aria-label="Commander via WhatsApp">
+    <a id="fabLink" href="https://wa.me/" target="_blank" aria-label="Commander via WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
   </div>
 
   <!-- Modal -->
@@ -378,7 +397,7 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
 
 <script>
 /* ===========================
-   Données modèles (inchangées)
+   Données modèles (complètes)
    =========================== */
 const models = [
   {
@@ -394,7 +413,43 @@ const models = [
       'Ports : 1× USB-C (in/out) + 2× USB-A (Q3 & autre)',
       'Garantie spéciale : 3 ans pour les 100 premiers clients'
     ],
-    details: `...` // (trimmed in this block for brevity — full content kept below in original version)
+    details: `
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
+        <strong>GreenMini — 10 000 mAh</strong><br>
+        Technologie : <strong>Samsung, 3 cellules</strong> (cellules testées et sélectionnées).
+        Puissance moyenne du pack : <strong>~32 W</strong>. Écran digital intégré (indicateur précis en %) pour visualiser l'autonomie en temps réel.
+      </p>
+
+      <div style="margin-top:8px">
+        <strong>Entrées (Input)</strong>
+        <ul>
+          <li>5V en continu — 4.5A</li>
+          <li>9V en continu — 2.5A</li>
+          <li>12V en continu — 1.85A (max)</li>
+        </ul>
+
+        <strong>Sorties (Output)</strong>
+        <ul>
+          <li>USB-C (in/out) : 5V — 4.5A ; 9V — 2.5A ; 12V — 1.85A (selon negotiation)</li>
+          <li>USB-A (Q3) : 5V — 2.1A</li>
+          <li>USB-A secondaire : 5V — 1A</li>
+        </ul>
+      </div>
+
+      <div style="margin-top:8px">
+        <strong>Sécurité & qualité</strong>
+        <ul>
+          <li>Protections : anti-surcharge, anti-court-circuit, détection inversion, protection température</li>
+          <li>Cellules testées individuellement — tri de lots Samsung</li>
+        </ul>
+      </div>
+
+      <div style="margin-top:10px">
+        <strong style="color:#08110a;background:linear-gradient(90deg,#ffd54a,#ffb300);padding:6px 10px;border-radius:8px;display:inline-block">
+          Offre : <span style="font-weight:900">Garantie 3 ans — réservée aux 100 premiers clients</span>
+        </strong>
+      </div>
+    `
   },
   {
     id:'greencore',
@@ -418,7 +473,32 @@ const models = [
       { id:4, name:'Clignotement secours — moyen' },
       { id:5, name:'Clignotement secours — rapide' }
     ],
-    details: `...`
+    details: `
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
+        <strong>GreenCore — ≈ 9 000 mAh</strong><br>
+        Technologie : <strong>Samsung</strong>, cellules testées et triées. Charge rapide via USB-C (Quick Charge). Puissance pack : ~32 W.
+      </p>
+
+      <div style="margin-top:8px">
+        <strong>Charge / Mesures</strong>
+        <ul>
+          <li>Charge Type-C rapide (QC)</li>
+          <li>Power Delivery (PD) : <strong>Non</strong> (mesure : <strong>4.66 V / 1.52 A</strong>)</li>
+        </ul>
+
+        <strong>Lumière de nuit LED</strong>
+        <ul>
+          <li>Activation : appuyez 2 fois sur le bouton (double-appui)</li>
+          <li>6 modes disponibles : veille faible, veille moyenne, veille haute, clignotement lent, clignotement secours moyen, clignotement secours rapide</li>
+        </ul>
+      </div>
+
+      <div style="margin-top:10px">
+        <strong style="color:#08110a;background:linear-gradient(90deg,#ffd54a,#ffb300);padding:6px 10px;border-radius:8px;display:inline-block">
+          Offre : <span style="font-weight:900">Garantie 3 ans — réservée aux 100 premiers clients</span>
+        </strong>
+      </div>
+    `
   },
   {
     id:'greenpro',
@@ -431,7 +511,20 @@ const models = [
       'Cellules : pack de haute qualité, triées pour durabilité',
       'Conçu pour multi-appareils et charge simultanée'
     ],
-    details: `...`
+    details: `
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
+        <strong>GreenPro — ≈ 12 000 mAh</strong><br>
+        Pack constitué de cellules de haute qualité, sélectionnées pour stabilité et longévité. Charge rapide via USB-C, conçu pour alimenter plusieurs appareils simultanément.
+      </p>
+
+      <div style="margin-top:8px">
+        <strong>Entrées / Sorties</strong>
+        <ul>
+          <li>Entrée USB-C : charge rapide (valeurs selon adaptateur)</li>
+          <li>Sorties : USB-C + USB-A multiples, PD disponible sur certaines variantes (SKU)</li>
+        </ul>
+      </div>
+    `
   },
   {
     id:'greenrugged',
@@ -439,15 +532,13 @@ const models = [
     subtitle:'IP65 • Terrain',
     images:['assets/greenrugged-1.jpg','assets/greenrugged-2.jpg','assets/greenrugged-3.jpg'],
     specs:['20 000 mAh • IP65','Boîtier renforcé'],
-    details:`...`
+    details:`<ul><li>Étanche IP65</li><li>Renforts anti-chocs</li></ul>`
   }
 ];
 
 /* ===========================
-   UI logic (full implementation)
+   DOM / UI logic
    =========================== */
-
-/* Cache common DOM nodes */
 const productCard = document.querySelector('.product-card');
 const heroImg = document.getElementById('heroMainImage');
 const specListEl = document.getElementById('specList');
@@ -554,7 +645,7 @@ function updateHero(index){
     }
   }
 
-  // Set WhatsApp link for ordering
+  // Set WhatsApp link for ordering (pre-fill message)
   fabLink.href = 'https://wa.me/?text=' + encodeURIComponent(`Bonjour, je souhaite commander / obtenir un échantillon de : ${m.title}`);
 
   // prepare pro panel content (hidden by default)
@@ -751,45 +842,6 @@ modalOverlay.addEventListener('click', (ev)=> { if(ev.target === modalOverlay) c
     }
     requestAnimationFrame(tick);
   }
-  requestAnimationFrame(tick);
-})();
-
-/* Logo orbs animation: rotates specifically under the logo */
-(function initLogoOrbs(){
-  const logoText = document.querySelector('.logo-text');
-  if(!logoText) return;
-  const orbA = document.getElementById('logoOrbA');
-  const orbB = document.getElementById('logoOrbB');
-  const orbC = document.getElementById('logoOrbC');
-  const orbs = [orbA, orbB, orbC];
-  const params = [
-    {rx:36, ry:10, speed:0.9, phase:0},
-    {rx:26, ry:8, speed:1.2, phase:Math.PI*0.7},
-    {rx:18, ry:6, speed:1.6, phase:Math.PI*1.3}
-  ];
-  orbs.forEach((o)=>{ if(o) o.style.opacity='1'; });
-
-  let t0 = performance.now();
-  function tick(now){
-    const time = (now - t0)/1000;
-    const rect = logoText.getBoundingClientRect();
-    // anchor just under the logo image - compute anchor center:
-    const anchorX = rect.left + (rect.width * 0.12); // slightly left where the image sits
-    const anchorY = rect.top + rect.height + 6; // below logo
-    for(let i=0;i<orbs.length;i++){
-      const orb = orbs[i]; if(!orb) continue;
-      const p = params[i];
-      const angle = (time * p.speed * Math.PI * 2) + p.phase;
-      const x = anchorX + Math.cos(angle) * p.rx;
-      const y = anchorY + Math.sin(angle) * p.ry;
-      orb.style.left = (x - rect.left) + 'px'; // position relative to logo-orbs container
-      orb.style.top = (y - rect.top) + 'px';
-      orb.style.transform = 'translate(-50%,-50%)';
-    }
-    requestAnimationFrame(tick);
-  }
-  // We need to ensure positioning uses .logo-orbs container as offset; to make left/top relative,
-  // set container to positioned element (it already is absolute within .logo-text).
   requestAnimationFrame(tick);
 })();
 
