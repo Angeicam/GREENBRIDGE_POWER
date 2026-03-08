@@ -18,6 +18,7 @@
   --green-mid:#073217;
   --gold:#d4af37;
 
+  /* texte principal — rendu un poil plus foncé */
   --text:#02110a;
   --muted:#23403a;
 
@@ -47,7 +48,8 @@ img{display:block;max-width:100%;height:auto}
 /* Topbar & Header */
 .topbar{position:fixed;top:0;left:0;right:0;height:var(--topbar-h);background:var(--green-dark);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;z-index:1600;font-size:13px}
 .topbar .left{font-weight:600}
-.topbar .right a{color:#fff;font-weight:700;text-decoration:none; text-transform:none;} /* restored mail style */
+/* adresse mail retirée — right laissé vide pour garder l'espacement */
+.topbar .right{color:#fff;font-weight:700;text-decoration:none; text-transform:none;}
 .header{position:fixed;top:var(--topbar-h);left:0;right:0;height:var(--header-h);background:linear-gradient(90deg,var(--green-mid),#0b4d26);display:flex;align-items:center;justify-content:space-between;padding:0 5vw;z-index:1595;box-shadow:0 4px 12px rgba(0,0,0,.20)}
 .logo-text{display:flex;align-items:center;gap:10px}
 .logo-text img{height:48px;display:block}
@@ -80,19 +82,25 @@ nav a.active{color:var(--gold);background:linear-gradient(90deg, rgba(212,175,55
 .models .model{display:flex;flex-direction:column;justify-content:space-between;gap:12px;padding:14px;border-radius:12px;background:var(--card-bg-desktop);border:1px solid var(--card-border);box-shadow:0 8px 20px rgba(6,42,32,0.04);cursor:pointer;min-height:240px;backdrop-filter:blur(4px) saturate(110%);color:var(--text)}
 .models .thumb{position:relative;flex:0 0 56%;height:0;padding-bottom:56%;overflow:hidden;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.10))}
 .models .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;border-radius:8px}
-.model .meta h4{margin:0;font-size:18px;color:var(--text);font-weight:800}
-.model .meta p{margin:10px 0 0;font-size:14px;color:var(--muted);line-height:1.25}
+
+/* RENDRE LES ECRITURES DES MODELES PLUS FONCEES */
+.model .meta h4{margin:0;font-size:18px;color:var(--text);font-weight:900}
+.model .meta p{margin:10px 0 0;font-size:14px;color:rgba(2,17,10,0.95);line-height:1.25;font-weight:600}
+.model .meta p small{display:block;color:rgba(2,17,10,0.88);font-weight:500;margin-top:4px}
+
+/* keep actions */
 .model .actions{display:flex;align-items:center;justify-content:flex-end;gap:8px}
 .models .model:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(6,42,32,0.08)}
 
- /* product card (detail) */
+/* product card (detail) */
 .product-card{width:min(980px,94%);margin:22px auto 28px;background:var(--card-bg-desktop);border:1px solid var(--card-border);border-radius:14px;padding:18px;box-shadow:var(--shadow);color:var(--text);display:flex;gap:18px;align-items:flex-start;position:relative;overflow:hidden;backdrop-filter:blur(3px) saturate(105%)}
 .product-card > *{position:relative;z-index:2}
 .product-card .close-mobile{display:none;position:absolute;right:12px;top:10px;background:transparent;border:0;font-size:22px;color:var(--muted);cursor:pointer;z-index:5}
 .product-info{flex:1;min-width:260px;padding-right:6px}
 .top-label{display:inline-block;padding:7px 10px;border-radius:999px;background:rgba(6,120,60,0.06);color:var(--brand-green);font-weight:800;margin-bottom:8px;font-size:13px}
-.product-title{font-size:20px;font-weight:800;margin:6px 0 6px;color:var(--text);line-height:1.08}
-.product-sub{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.35}
+.product-title{font-size:20px;font-weight:900;margin:6px 0 6px;color:var(--text);line-height:1.08}
+/* rendre le sous-titre du produit plus foncé */
+.product-sub{font-size:13px;color:rgba(2,17,10,0.95);margin-bottom:10px;line-height:1.35}
 .features{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
 .feature-pill{background:rgba(255,255,255,0.92);padding:7px 10px;border-radius:999px;border:1px solid rgba(6,42,32,0.04);color:var(--brand-green);font-weight:800;font-size:13px}
 
@@ -126,9 +134,11 @@ nav a.active{color:var(--gold);background:linear-gradient(90deg, rgba(212,175,55
 .featured-hero img{width:100%;height:100%;object-fit:cover;object-position:center center;display:block}
 
 /* featured copy + availability */
+/* rendu du texte de la section projets plus foncé */
 .featured-copy{padding:14px 18px;text-align:center}
 .featured-copy h3{margin:0;color:var(--brand-green);font-weight:800;letter-spacing:0.3px;font-size:18px}
-.featured-copy p{color:var(--muted);margin-top:10px;line-height:1.45}
+.featured-copy p{color:rgba(2,17,10,0.95);margin-top:10px;line-height:1.45}
+.featured-copy ul{color:rgba(2,17,10,0.95);line-height:1.45}
 .availability-badge{display:inline-block;margin-top:12px;padding:10px 18px;border-radius:999px;background: linear-gradient(90deg,#ffd54a,#ffb300);color:#08110a;font-weight:900;font-size:16px;box-shadow:0 10px 30px rgba(255,180,0,0.18);border:1px solid rgba(0,0,0,0.06)}
 
 /* modal */
@@ -164,7 +174,8 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
   <!-- Topbar -->
   <div class="topbar" role="banner">
     <div class="left">Assemblés au Sénégal &amp; en Côte d'Ivoire</div>
-    <div class="right"><a href="mailto:contact@greenbridge.sn">contact@greenbridge.sn</a></div>
+    <!-- adresse mail retirée comme demandé -->
+    <div class="right" aria-hidden="true"></div>
   </div>
 
   <!-- Header -->
