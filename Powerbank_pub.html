@@ -41,7 +41,7 @@ a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%;height:auto}
 
 /* fixed background visible on mobile & desktop */
-.page-bg{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:url('Energie_blanche.png');background-size:cover;background-position:center center;background-repeat:no-repeat}
+.page-bg{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:url('Energie_blanche.png');background-size:cover;background-position:center center;background-repeat:no-repeat;opacity:0.28}
 
 /* subtle overlay */
 .bg-overlay{position:fixed;inset:0;z-index:8;pointer-events:none;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.015));}
@@ -83,17 +83,17 @@ img{display:block;max-width:100%;height:auto}
 .models-title{font-weight:800;font-size:22px;color:var(--brand-green);letter-spacing:0.4px;background:rgba(255,255,255,0.6);padding:8px 14px;border-radius:10px;box-shadow:0 8px 20px rgba(6,42,32,0.06)}
 .models{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;align-items:stretch;max-width:var(--maxw);margin:0 auto;padding:6px 14px;box-sizing:border-box}
 
-/* model cards */
-.models .model{display:flex;flex-direction:column;justify-content:space-between;gap:12px;padding:14px;border-radius:12px;background:var(--card-bg-desktop);border:1px solid var(--card-border);box-shadow:0 8px 20px rgba(6,42,32,0.04);cursor:pointer;min-height:240px;backdrop-filter:blur(4px) saturate(110%);color:var(--text)}
-.models .thumb{position:relative;flex:0 0 56%;height:0;padding-bottom:56%;overflow:hidden;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.10))}
-.models .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;border-radius:8px}
+/* model cards - less floating: remove heavy background/shadow */
+.models .model{display:flex;flex-direction:column;justify-content:space-between;gap:12px;padding:14px;border-radius:12px;background:transparent;border:0;box-shadow:none;cursor:pointer;min-height:240px;backdrop-filter:none;color:var(--text)}
+.models .thumb{position:relative;flex:0 0 56%;height:0;padding-bottom:56%;overflow:hidden;border-radius:8px;background:transparent}
+.models .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;border-radius:8px;box-shadow:none;}
 
 /* model text */
 .model .meta h4{margin:0;font-size:18px;color:var(--text);font-weight:900}
 .model .meta p{margin:10px 0 0;font-size:14px;color:rgba(2,17,10,0.95);line-height:1.25;font-weight:600}
 .model .meta p small{display:block;color:rgba(2,17,10,0.88);font-weight:500;margin-top:4px}
 
-/* product card (detail) */
+/* product card (detail) - on desktop keep subtle card, on mobile make it solid white */
 .product-card{width:min(980px,94%);margin:22px auto 28px;background:var(--card-bg-desktop);border:1px solid var(--card-border);border-radius:14px;padding:18px;box-shadow:var(--shadow);color:var(--text);display:flex;gap:18px;align-items:flex-start;position:relative;overflow:hidden;backdrop-filter:blur(3px) saturate(105%)}
 .product-card > *{position:relative;z-index:2}
 .product-card .close-mobile{display:none;position:absolute;right:12px;top:10px;background:transparent;border:0;font-size:22px;color:var(--muted);cursor:pointer;z-index:5}
@@ -129,8 +129,10 @@ img{display:block;max-width:100%;height:auto}
 
 /* product side */
 .product-side{width:340px;display:flex;flex-direction:column;gap:12px;align-items:stretch}
-.product-image{width:100%;height:220px;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#fbfeff,#f3f9fc);display:flex;align-items:center;justify-content:center;border:1px solid rgba(6,42,32,0.04)}
-.product-image img{width:100%;height:100%;object-fit:contain;object-position:center;display:block;cursor:pointer;transition:transform .35s;border-radius:8px}
+
+/* product image: remove heavy shadows and floating effect; keep image contained and flat */
+.product-image{width:100%;height:220px;border-radius:12px;overflow:hidden;background:transparent;display:flex;align-items:center;justify-content:center;border:0}
+.product-image img{width:100%;height:100%;object-fit:contain;object-position:center;display:block;cursor:pointer;transition:none;border-radius:8px;box-shadow:none}
 
 /* CTA */
 .cta-group{display:flex;flex-direction:column;gap:10px}
@@ -152,6 +154,7 @@ img{display:block;max-width:100%;height:auto}
 .led-med{background:rgba(255,236,179,0.28);box-shadow:0 0 14px rgba(255,230,120,0.22), 0 8px 26px rgba(0,0,0,0.12)}
 .led-high{background:rgba(255,236,179,0.6);box-shadow:0 0 22px rgba(255,230,120,0.35), 0 10px 30px rgba(0,0,0,0.08)}
 
+/* blinking */
 @keyframes blink-slow { 0%{opacity:1} 50%{opacity:0.15} 100%{opacity:1} }
 @keyframes blink-med { 0%{opacity:1} 50%{opacity:0.05} 100%{opacity:1} }
 @keyframes blink-fast { 0%{opacity:1} 50%{opacity:0.02} 100%{opacity:1} }
@@ -208,8 +211,8 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
   .company-name{font-size:30px}
   .models{grid-template-columns:1fr}
   .featured-hero{height:220px}
-  /* overlay behavior on mobile */
-  .product-card{ display:none !important; position:fixed; left:8px; right:8px; top: calc(var(--topbar-h) + var(--header-h) + 8px); z-index:2200; width: calc(100% - 16px); margin:0; padding:16px; border-radius:12px; box-shadow:0 18px 40px rgba(6,42,32,0.20); background: var(--card-bg-overlay); flex-direction:column; overflow:auto; max-height: calc(100vh - (var(--topbar-h) + var(--header-h) + 32px)); }
+  /* overlay behavior on mobile: make product card simple white panel (no float) */
+  .product-card{ display:none !important; position:fixed; left:8px; right:8px; top: calc(var(--topbar-h) + var(--header-h) + 8px); z-index:2200; width: calc(100% - 16px); margin:0; padding:16px; border-radius:12px; box-shadow:none; background: #ffffff; flex-direction:column; overflow:auto; max-height: calc(100vh - (var(--topbar-h) + var(--header-h) + 32px)); border:1px solid rgba(6,42,32,0.06) }
   .product-card.show-on-mobile{ display:flex !important; animation: slideIn 220ms ease; }
   .product-card .close-mobile{ display:block; }
 
@@ -404,7 +407,7 @@ const models = [
     id:'greenmini',
     title:'GreenMini — 10 000 mAh',
     subtitle:'Ultra-compact',
-    images:['Pwkb_Mini_3.png','Pwkb_mini_2.png','PWBK_mini_4.png'],
+    images:['Pwkb_Mini_3.png','Pwkb_mini_213.png','PWBK_mini_4.png'],
     specs:[
       'Cellules : Samsung (3 cellules) • testées à >100% capacité',
       'Capacité nominale : 10 000 mAh (≈9 200 mAh usable)',
@@ -710,15 +713,14 @@ function closeOverlay(){
   if(first) first.focus();
 }
 
-/* Product image click cycles images */
+/* Product image click cycles images - removed scaling to avoid "floating" look */
 const productImageEl = document.querySelector('.product-image');
 if(productImageEl){
   productImageEl.addEventListener('click', ()=>{
     const m = models[currentModel] || models[0];
     if(!m.images || m.images.length===0) return;
     currentImage = (currentImage + 1) % m.images.length;
-    heroImg.style.transform = 'scale(0.98)';
-    setTimeout(()=> heroImg.style.transform = 'scale(1)', 120);
+    // removed transform scaling to avoid floating effect on phone
     heroImg.src = m.images[currentImage];
     startHeroSlideshow();
   });
