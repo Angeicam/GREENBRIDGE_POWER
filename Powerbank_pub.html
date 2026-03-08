@@ -18,13 +18,16 @@
   --green-mid:#073217;
   --gold:#d4af37;
 
-  --card-bg: rgba(255,255,255,0.92);
+  --bg-main:#f6fbfe;
+  --card-bg-desktop: rgba(255,255,255,0.12); /* very translucent to show bg */
+  --card-bg-overlay: rgba(255,255,255,0.98); /* opaque overlay on mobile */
   --card-border: rgba(6,42,32,0.06);
   --text:#041a13;
   --muted:#4f6360;
 
   --electric-yellow:#ffd600;
   --shadow: 0 12px 36px rgba(6,42,32,0.06);
+
   --model-img-fit: cover;
 }
 
@@ -36,8 +39,8 @@ html {
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  background-attachment: fixed; /* try to keep same behavior as desktop */
-  background-color: #f6fbfe;
+  background-attachment: fixed;
+  background-color: var(--bg-main);
   min-height:100%;
 }
 body { background: transparent; min-height:100%; }
@@ -55,7 +58,10 @@ img{display:block;max-width:100%;height:auto}
 .logo-text img{height:48px;display:block}
 
 /* BRAND + NAV */
-.company-name{font-size:36px;font-weight:800;letter-spacing:1px;padding:6px 10px;border-radius:8px;color:var(--brand-green);-webkit-text-stroke:0.95px var(--gold);text-shadow:0 3px 6px rgba(0,0,0,0.45)}
+.company-name{
+  font-size:36px;font-weight:800;letter-spacing:1px;padding:6px 10px;border-radius:8px;color:var(--brand-green);
+  -webkit-text-stroke:0.95px var(--gold);text-shadow:0 3px 6px rgba(0,0,0,0.45);
+}
 nav{display:flex;gap:14px;align-items:center}
 nav a{color:#fff;font-size:14px;font-weight:600;padding:8px 10px;border-radius:8px;transition:all .18s}
 nav a:hover{color:var(--gold)}
@@ -68,14 +74,38 @@ nav a.active{color:var(--gold);background:linear-gradient(90deg, rgba(212,175,55
 .electric-band.connected .lightning-svg { opacity: 1; }
 .orb{position:absolute;width:12px;height:12px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #fff8b0, var(--electric-yellow));box-shadow:0 0 18px rgba(255,214,0,0.98);}
 
-/* container */
+/* main container */
 .container{max-width:var(--maxw);margin:0 auto;padding:18px 14px 120px;position:relative;z-index:40;background: transparent;}
 
-/* Product card (same on desktop & mobile) */
+/* --- MODELS (put first in DOM so visible before product-card) --- */
+.models-wrapper{margin-top:24px;padding:18px 12px 36px;width:100%;max-width:100vw;box-sizing:border-box;position:relative;background:transparent;z-index:60}
+.models-header{display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.models-title{font-weight:800;font-size:22px;color:var(--brand-green);letter-spacing:0.4px;background:rgba(255,255,255,0.6);padding:8px 14px;border-radius:10px;box-shadow:0 8px 20px rgba(6,42,32,0.06)}
+.models{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;align-items:stretch;max-width:var(--maxw);margin:0 auto;padding:6px 14px;box-sizing:border-box}
+
+/* model cards: translucent so background is visible, but text contrasted */
+.models .model{
+  display:flex;flex-direction:column;justify-content:space-between;gap:12px;padding:14px;border-radius:12px;
+  background: var(--card-bg-desktop); /* translucent card */
+  border: 1px solid var(--card-border);
+  box-shadow: 0 8px 20px rgba(6,42,32,0.04);
+  cursor:pointer;transition: transform 200ms ease, box-shadow 200ms ease;min-height:240px;overflow:hidden;backdrop-filter: blur(4px) saturate(110%);
+  color:var(--text);
+}
+.models .model .thumb{position:relative;flex:0 0 56%;height:0;padding-bottom:56%;overflow:hidden;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.10))}
+.models .model .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:var(--model-img-fit);object-position:center center;border-radius:8px}
+.model .meta{flex:1 1 auto;display:flex;flex-direction:column;justify-content:flex-start;min-height:0}
+.model .meta h4{margin:0;font-size:18px;color:var(--brand-green);font-weight:800;text-shadow:0 1px 2px rgba(0,0,0,0.06)}
+.model .meta p{margin:10px 0 0;font-size:14px;color:var(--muted);line-height:1.25;text-shadow:0 1px 2px rgba(0,0,0,0.04)}
+.model .actions{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex:0 0 auto}
+.models .model:hover,.models .model:focus{transform: translateY(-6px);box-shadow: 0 18px 40px rgba(6,42,32,0.08);outline:none}
+
+/* --- PRODUCT CARD (detail card) --- */
+/* On desktop it's inline under models; on mobile hidden until model click (then overlay opaque) */
 .product-card{
   width:min(980px,94%);
-  margin:28px auto 22px;
-  background: var(--card-bg);
+  margin:22px auto 28px;
+  background: var(--card-bg-desktop);
   border: 1px solid var(--card-border);
   border-radius:14px;
   padding:18px;
@@ -85,47 +115,27 @@ nav a.active{color:var(--gold);background:linear-gradient(90deg, rgba(212,175,55
   position:relative;overflow:hidden;backdrop-filter: blur(3px) saturate(105%);
 }
 .product-card::before{content:"";position:absolute;right:-2%;top:0;bottom:0;width:46%;max-width:480px;background-image: url('assets/batteries-faint.png');background-size:contain;background-repeat:no-repeat;background-position:center right;opacity:0.045;pointer-events:none;transform:translateX(4%);filter:grayscale(90%) blur(0.35px)}
-/* subtle overlay same as desktop */
-.product-card::after{content:"";position:absolute;left:0;top:0;bottom:0;width:42%;background:linear-gradient(90deg, rgba(255,255,255,0.64), rgba(255,255,255,0.28) 60%);pointer-events:none;opacity:0.14}
+.product-card::after{content:"";position:absolute;left:0;top:0;bottom:0;width:42%;background:linear-gradient(90deg, rgba(255,255,255,0.78), rgba(255,255,255,0.32) 60%);pointer-events:none;opacity:0.14}
 .product-card > *{position:relative;z-index:2}
-.product-card .close-mobile{display:none;}
 
-/* MODELS */
-.models-wrapper{margin-top:24px;padding:18px 12px 36px;width:100%;max-width:100vw;box-sizing:border-box;position:relative;background:transparent;z-index:60}
-.models-header{display:flex;align-items:center;justify-content:center;margin-bottom:12px}
-.models-title{font-weight:800;font-size:22px;color:var(--brand-green);letter-spacing:0.4px;background:rgba(255,255,255,0.6);padding:8px 14px;border-radius:10px;box-shadow:0 8px 20px rgba(6,42,32,0.06)}
-.models{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;align-items:stretch;max-width:var(--maxw);margin:0 auto;padding:6px 14px;box-sizing:border-box}
+/* mobile overlay controls (hidden by default) */
+.product-card .close-mobile{display:none;position:absolute;right:12px;top:10px;background:transparent;border:0;font-size:22px;color:var(--muted);cursor:pointer;z-index:5}
 
-/* model cards */
-.models .model{
-  display:flex;flex-direction:column;justify-content:space-between;gap:12px;padding:14px;border-radius:12px;
-  background: var(--card-bg);
-  border: 1px solid rgba(6,42,32,0.06);
-  box-shadow: 0 8px 20px rgba(6,42,32,0.04);
-  cursor:pointer;transition: transform 200ms ease, box-shadow 200ms ease;min-height:240px;overflow:hidden;backdrop-filter: blur(4px) saturate(110%);
-  color:var(--text);
-}
-.models .model .thumb{position:relative;flex:0 0 56%;height:0;padding-bottom:56%;overflow:hidden;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.06))}
-.models .model .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:var(--model-img-fit);object-position:center center;border-radius:8px}
-.model .meta{flex:1 1 auto;display:flex;flex-direction:column;justify-content:flex-start;min-height:0}
-.model .meta h4{margin:0;font-size:18px;color:var(--brand-green);font-weight:800;text-shadow:0 1px 2px rgba(0,0,0,0.08)}
-.model .meta p{margin:10px 0 0;font-size:14px;color:var(--muted);line-height:1.25;text-shadow:0 1px 2px rgba(0,0,0,0.04)}
-.model .actions{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex:0 0 auto}
-.models .model:hover,.models .model:focus{transform: translateY(-6px);box-shadow: 0 18px 40px rgba(6,42,32,0.08);outline:none}
-
-/* other UI */
+/* product info */
 .product-info{flex:1;min-width:260px;padding-right:6px}
 .top-label{display:inline-block;padding:7px 10px;border-radius:999px;background:rgba(6,120,60,0.06);color:var(--brand-green);font-weight:800;margin-bottom:8px;font-size:13px}
-.product-title{font-size:20px;font-weight:800;margin:6px 0 6px;color:var(--text);line-height:1.08;text-shadow:0 1px 2px rgba(0,0,0,0.10)}
-.product-sub{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.35;text-shadow:0 1px 2px rgba(0,0,0,0.05)}
+.product-title{font-size:20px;font-weight:800;margin:6px 0 6px;color:var(--text);line-height:1.08;text-shadow:0 1px 2px rgba(0,0,0,0.08)}
+.product-sub{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.35}
 .features{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
-.feature-pill{background:rgba(255,255,255,0.95);padding:7px 10px;border-radius:999px;border:1px solid rgba(6,42,32,0.04);color:var(--brand-green);font-weight:800;font-size:13px}
+.feature-pill{background:rgba(255,255,255,0.92);padding:7px 10px;border-radius:999px;border:1px solid rgba(6,42,32,0.04);color:var(--brand-green);font-weight:800;font-size:13px}
 
+/* specs */
 .specs-block{margin-top:12px}
 .specs-title{font-weight:800;margin-bottom:8px;font-size:15px}
 .spec-list{display:flex;flex-direction:column;gap:8px;color:var(--text);font-size:15px;line-height:1.45}
 .spec-list > div{background: rgba(255,255,255,0.96); padding:10px 12px; border-radius:10px; border:1px solid rgba(6,42,32,0.04); box-shadow: 0 6px 14px rgba(6,42,32,0.03)}
 
+/* product side */
 .product-side{width:340px;display:flex;flex-direction:column;gap:12px;align-items:stretch}
 .product-image{width:100%;height:220px;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#fbfeff,#f3f9fc);display:flex;align-items:center;justify-content:center;border:1px solid rgba(6,42,32,0.04)}
 .product-image img{width:92%;height:92%;object-fit:contain;cursor:pointer;transition:transform .35s;border-radius:8px}
@@ -134,7 +144,7 @@ nav a.active{color:var(--gold);background:linear-gradient(90deg, rgba(212,175,55
 .btn-secondary{background:#fff;border:1px solid rgba(6,42,32,0.06);padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:800}
 .btn-small{background:transparent;border:1px solid rgba(6,42,32,0.06);padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:700}
 
-/* DETAILS PANEL inside product card */
+/* details panel (inside product-card) */
 .details-panel{
   display:none;
   margin-top:12px;
@@ -155,7 +165,7 @@ nav a.active{color:var(--gold);background:linear-gradient(90deg, rgba(212,175,55
 .slide{position:absolute;inset:0;background-size:cover;background-position:center center;opacity:0;transition:opacity 900ms ease, transform 900ms;transform:scale(1.06)}
 .slide.active{opacity:1;transform:scale(1.12)}
 .featured-copy{padding:18px;text-align:center}
-.availability-badge{display:inline-block;margin-top:12px;padding:8px 14px;border-radius:999px;background: linear-gradient(90deg, #ffda00, #ffb300);color:#08110a;font-weight:900;font-size:14px;box-shadow:0 10px 30px rgba(255,180,0,0.18);transform-origin:center;animation: pulse 2200ms infinite;border:1px solid rgba(0,0,0,0.06)}
+.availability-badge{display:inline-block;margin-top:12px;padding:8px 14px;border-radius:999px;background: linear-gradient(90deg, #ffda00, #ffb300);color:#08110a;font-weight:900;font-size:14px;box-shadow:0 10px 30px rgba(255,180,0,0.18);transform-origin:center;animation: pulse 2200ms infinite;border: 1px solid rgba(0,0,0,0.06);}
 
 @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.04); } 100% { transform: scale(1); } }
 
@@ -167,7 +177,7 @@ nav a.active{color:var(--gold);background:linear-gradient(90deg, rgba(212,175,55
 footer{background:var(--green-dark);color:#fff;padding:18px 5vw 36px;text-align:center;margin-top:18px}
 .footer-company{display:block;margin:0 auto 8px;font-size:18px;font-weight:800;color:var(--brand-green);-webkit-text-stroke:0.7px var(--gold);text-shadow:0 3px 6px rgba(0,0,0,0.6);padding:6px 10px;border-radius:6px;background:linear-gradient(90deg, rgba(212,175,55,0.02), rgba(255,255,255,0) 40%)}
 
-/* responsive: keep layout adapted but same visuals as desktop */
+/* responsive tweaks */
 @media (max-width:900px){
   .product-card{flex-direction:column;gap:12px;padding:14px}
   .product-side{order:-1;width:100%}
@@ -181,7 +191,7 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 36px;text-align:
   .models{grid-template-columns:repeat(2,1fr);gap:12px}
 }
 
-/* mobile: keep same card visuals and inline behavior */
+/* MOBILE: hide product-card by default; overlay shows with opaque background when .show-on-mobile */
 @media (max-width:640px){
   .company-name{font-size:30px}
   nav{display:none}
@@ -192,18 +202,23 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 36px;text-align:
   .model .thumb{flex:0 0 58%;height:0;padding-bottom:58%}
   .product-image img{width:86%;height:86%;object-fit:contain}
 
-  /* important: keep product card visible inline (no overlay) */
-  .product-card{ position:relative; display:flex !important; max-width: 98%; width: calc(100% - 24px); margin: 18px auto; }
+  /* Hide product card inline on mobile; show as opaque overlay when .show-on-mobile is added */
+  .product-card{ display:none !important; position:fixed; left:8px; right:8px; top: calc(var(--topbar-h) + var(--header-h) + 8px); z-index:2200; width: calc(100% - 16px); max-width:none; margin:0; padding:16px; border-radius:12px; box-shadow:0 18px 40px rgba(6,42,32,0.20); background: var(--card-bg-overlay); flex-direction:column; overflow:auto; max-height: calc(100vh - (var(--topbar-h) + var(--header-h) + 32px)); }
+  .product-card.show-on-mobile{ display:flex !important; animation: slideIn 220ms ease; }
+  @keyframes slideIn { from { transform: translateY(-8px); opacity:0 } to { transform: translateY(0); opacity:1 } }
+  .product-card .close-mobile{ display:block; }
 
   .details-panel{ position:relative; max-height:none; overflow:visible; }
   .cta-group{flex-direction:column}
   .cta-group .btn-primary, .cta-group .btn-secondary { width:100% }
 
-  /* models appearance consistent with desktop */
-  .models-wrapper{ background: transparent; padding: 18px 12px 36px; }
-  .models .model{ background: var(--card-bg); }
-}
+  /* make models list slightly more readable on mobile (still not fully opaque) */
+  .models-wrapper{ background: rgba(255,255,255,0.92); border-radius:12px; padding:12px; box-shadow:0 10px 30px rgba(6,42,32,0.06); margin-top:14px; }
+  .models .model{ background: rgba(255,255,255,0.98); box-shadow:0 12px 28px rgba(6,42,32,0.06); color:var(--text); }
 
+  /* ensure mobile uses scroll attachment to avoid iOS artifacts */
+  html { background-attachment: scroll; }
+}
 @media (max-width:420px){
   .product-image{height:220px}
   .spec-list > div{font-size:14px;padding:10px}
@@ -236,7 +251,7 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 36px;text-align:
       <a href="#contact">Contact</a>
     </nav>
 
-    <!-- burger hidden for promo -->
+    <!-- burger intentionally hidden for single-page promo -->
     <button class="mobile-nav-toggle" id="mobileToggle" aria-label="Ouvrir le menu" style="display:none;">
       <i class="fa-solid fa-bars"></i>
     </button>
@@ -264,42 +279,8 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 36px;text-align:
   <div class="page-spacer" style="height: calc(var(--topbar-h) + var(--header-h) + 8px);" aria-hidden="true"></div>
 
   <main class="container" role="main" aria-live="polite">
-    <!-- Product card (now visible inline on all devices) -->
-    <section class="product-card" role="region" aria-label="Produit principal" aria-hidden="false">
-      <div class="product-info">
-        <div class="top-label">Batterie externe haute performance</div>
-        <div class="product-title" id="heroTitle">GreenMini — 10 000 mAh</div>
-        <div class="product-sub" id="heroSubtitle">Ultra-compact</div>
 
-        <div class="features" aria-hidden="false" style="margin-top:8px">
-          <div class="feature-pill">Durabilité</div>
-          <div class="feature-pill">Solidité</div>
-          <div class="feature-pill">Technique</div>
-        </div>
-
-        <div class="specs-block">
-          <div class="specs-title">Technique — Spécifications</div>
-          <div class="spec-list" id="specList"></div>
-        </div>
-      </div>
-
-      <div class="product-side">
-        <div class="product-image" id="productImageBox" title="Cliquer pour changer d'image" role="button" tabindex="0">
-          <img id="heroMainImage" src="Pwkb_Mini_3.png" alt="GreenMini image">
-        </div>
-
-        <div class="cta-group" aria-label="Actions produit">
-          <button id="orderBtnTop" class="btn-primary"><i class="fa-brands fa-whatsapp"></i> Commander / Échantillon</button>
-          <button id="infoBtnHero" class="btn-secondary"><i class="fa-solid fa-circle-info"></i> Infos techniques</button>
-          <button id="detailsToggle" class="btn-small"><i class="fa-solid fa-list"></i> Afficher détails</button>
-        </div>
-      </div>
-
-      <!-- DETAILS PANEL INSIDE CARD -->
-      <div id="detailsPanel" class="details-panel" aria-hidden="true"></div>
-    </section>
-
-    <!-- Models -->
+    <!-- MODELS LIST (displayed first so user sees them immediately) -->
     <section class="models-wrapper" id="models" role="region" aria-label="Nos modèles">
       <div class="models-header">
         <div class="models-title">Nos modèles</div>
@@ -340,6 +321,43 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 36px;text-align:
             <p>GreenRugged — 20 000 mAh<br><small>IP65 • Résistant • Usage terrain</small></p>
           </div>
           <div class="actions"><button class="btn-small" onclick="openTechModal(3);event.stopPropagation()">Infos</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCT CARD (details) - hidden on mobile until user clicks a model -->
+    <section class="product-card" role="region" aria-label="Produit principal" aria-hidden="true">
+      <button class="close-mobile" aria-label="Fermer la fiche mobile" title="Fermer" onclick="closeOverlay()">×</button>
+
+      <div class="product-info">
+        <div class="top-label">Batterie externe haute performance</div>
+        <div class="product-title" id="heroTitle">GreenMini — 10 000 mAh</div>
+        <div class="product-sub" id="heroSubtitle">Ultra-compact</div>
+
+        <div class="features" aria-hidden="false" style="margin-top:8px">
+          <div class="feature-pill">Durabilité</div>
+          <div class="feature-pill">Solidité</div>
+          <div class="feature-pill">Technique</div>
+        </div>
+
+        <div class="specs-block">
+          <div class="specs-title">Technique — Spécifications</div>
+          <div class="spec-list" id="specList"></div>
+        </div>
+
+        <!-- details panel inside product card -->
+        <div id="detailsPanel" class="details-panel" aria-hidden="true"></div>
+      </div>
+
+      <div class="product-side">
+        <div class="product-image" id="productImageBox" title="Cliquer pour changer d'image" role="button" tabindex="0">
+          <img id="heroMainImage" src="Pwkb_Mini_3.png" alt="GreenMini image">
+        </div>
+
+        <div class="cta-group" aria-label="Actions produit">
+          <button id="orderBtnTop" class="btn-primary"><i class="fa-brands fa-whatsapp"></i> Commander / Échantillon</button>
+          <button id="infoBtnHero" class="btn-secondary"><i class="fa-solid fa-circle-info"></i> Infos techniques</button>
+          <button id="detailsToggle" class="btn-small"><i class="fa-solid fa-list"></i> Afficher détails</button>
         </div>
       </div>
     </section>
@@ -387,6 +405,7 @@ const models = [
   { id:'greenrugged', title:'GreenRugged — 20 000 mAh', subtitle:'IP65 • Terrain', images:['assets/greenrugged-1.jpg','assets/greenrugged-2.jpg','assets/greenrugged-3.jpg'], specs:['20 000 mAh • IP65','Boîtier renforcé'], details:`<ul><li>Étanche IP65</li><li>Renforts anti-chocs</li></ul>` }
 ];
 
+const modelsEls = document.querySelectorAll('.models .model');
 const productCard = document.querySelector('.product-card');
 const heroImg = document.getElementById('heroMainImage');
 const detailsPanel = document.getElementById('detailsPanel');
@@ -400,18 +419,6 @@ let currentImage = 0;
 let heroTimer = null;
 const SLIDE_INTERVAL_MS = 5000; // 5s
 
-/* update hero DOM with model data */
-function updateHero(index){
-  const m = models[index] || models[0];
-  document.getElementById('heroTitle').textContent = m.title;
-  document.getElementById('heroSubtitle').textContent = m.subtitle || '';
-  heroImg.src = (m.images && m.images[0]) ? m.images[0] : heroImg.src;
-  heroImg.alt = m.title;
-  detailsPanel.innerHTML = `<strong style="font-weight:800">${m.title}</strong><div style="margin-top:8px">${m.details}</div>`;
-  renderSpecs(index);
-}
-
-/* render specs */
 function renderSpecs(index){
   const m = models[index] || models[0];
   specListEl.innerHTML = '';
@@ -420,6 +427,16 @@ function renderSpecs(index){
     d.textContent = s;
     specListEl.appendChild(d);
   });
+}
+
+function updateHero(index){
+  const m = models[index] || models[0];
+  document.getElementById('heroTitle').textContent = m.title;
+  document.getElementById('heroSubtitle').textContent = m.subtitle || '';
+  heroImg.src = (m.images && m.images[0]) ? m.images[0] : heroImg.src;
+  heroImg.alt = m.title;
+  detailsPanel.innerHTML = `<strong style="font-weight:800">${m.title}</strong><div style="margin-top:8px">${m.details}</div>`;
+  renderSpecs(index);
 }
 
 /* slideshow */
@@ -436,7 +453,7 @@ function stopHeroSlideshow() {
   if(heroTimer) { clearInterval(heroTimer); heroTimer = null; }
 }
 
-/* select model: ALWAYS update inline (same on phone & desktop) */
+/* open overlay on mobile or show inline on desktop */
 function selectModel(i){
   currentModel = i;
   updateHero(i);
@@ -446,17 +463,42 @@ function selectModel(i){
   document.getElementById('orderBtnTop').onclick = ()=> window.open(wa,'_blank');
   document.getElementById('infoBtnHero').onclick = ()=> openTechModal(i);
 
-  detailsPanel.style.display = 'none';
-  detailsPanel.setAttribute('aria-hidden','true');
+  // mobile: open overlay (opaque); desktop: keep inline visible
+  if(window.matchMedia('(max-width:640px)').matches){
+    productCard.classList.add('show-on-mobile');
+    productCard.setAttribute('aria-hidden','false');
+    // ensure details hidden by default
+    detailsPanel.style.display = 'none';
+    detailsPanel.setAttribute('aria-hidden','true');
+    setTimeout(()=> {
+      const primary = productCard.querySelector('.btn-primary');
+      if(primary) primary.focus();
+    }, 120);
+  } else {
+    // desktop: place product-card inline and show it
+    productCard.classList.remove('show-on-mobile');
+    productCard.style.display = 'flex';
+    productCard.setAttribute('aria-hidden','false');
+    detailsPanel.style.display = 'none';
+    detailsPanel.setAttribute('aria-hidden','true');
+    productCard.scrollIntoView({behavior:'smooth', block:'center'});
+  }
 
   currentImage = 0;
   startHeroSlideshow();
-
-  // keep same UX on desktop & mobile: scroll into view so user sees updated card
-  if(productCard) productCard.scrollIntoView({behavior:'smooth', block:'center'});
 }
 
-/* product image click cycles images */
+/* close overlay on mobile */
+function closeOverlay(){
+  productCard.classList.remove('show-on-mobile');
+  productCard.setAttribute('aria-hidden','true');
+  detailsPanel.style.display = 'none';
+  detailsPanel.setAttribute('aria-hidden','true');
+  // focus back to first model
+  if(modelsEls && modelsEls[0]) modelsEls[0].focus();
+}
+
+/* image click cycles */
 const productImageEl = document.querySelector('.product-image');
 if(productImageEl){
   productImageEl.addEventListener('click', ()=>{
@@ -473,7 +515,7 @@ if(productImageEl){
   });
 }
 
-/* details toggle */
+/* details toggle (panel inside product card) */
 document.getElementById('detailsToggle').addEventListener('click', ()=>{
   const vis = detailsPanel.style.display === 'block';
   if(vis){
@@ -482,7 +524,11 @@ document.getElementById('detailsToggle').addEventListener('click', ()=>{
   } else {
     detailsPanel.style.display='block';
     detailsPanel.setAttribute('aria-hidden','false');
-    detailsPanel.scrollIntoView({behavior:'smooth', block:'nearest'});
+    if(window.matchMedia('(max-width:640px)').matches){
+      productCard.scrollIntoView({behavior:'smooth', block:'center'});
+    } else {
+      detailsPanel.scrollIntoView({behavior:'smooth', block:'nearest'});
+    }
   }
 });
 
@@ -497,7 +543,7 @@ function closeTechModal(){ modalOverlay.style.display='none'; modalOverlay.setAt
 modalOverlay.addEventListener('click', (ev)=> { if(ev.target === modalOverlay) closeTechModal(); });
 document.addEventListener('click', (e)=>{ if(e.target && e.target.closest && e.target.closest('.close')) closeTechModal(); });
 
-/* electric visuals (kept intact) */
+/* electric visuals kept (no changes) */
 (function(){
   const electricBand = document.getElementById('electricBand');
   if (!electricBand) return;
@@ -506,21 +552,12 @@ document.addEventListener('click', (e)=>{ if(e.target && e.target.closest && e.t
   const orbC = document.getElementById('orbC');
   const orbs = [orbA, orbB, orbC];
   const zapBright = document.getElementById('zapBright');
-
   const params = [
     {rxRatio: 0.50, ry: 8,  speed: 0.06, phase: 0},
     {rxRatio: 0.33, ry: 6,  speed: 0.08, phase: Math.PI/2},
     {rxRatio: 0.42, ry: 10, speed: 0.05, phase: Math.PI}
   ];
-
-  orbs.forEach((o,i)=> {
-    if(o) {
-      o.classList.add('buzz');
-      o.style.animationDelay = (i*120) + 'ms';
-      o.style.opacity = '1';
-    }
-  });
-
+  orbs.forEach((o,i)=> { if(o){ o.classList.add('buzz'); o.style.animationDelay = (i*120) + 'ms'; o.style.opacity = '1'; } });
   let t0 = performance.now();
   function tick(now) {
     const time = (now - t0) / 1000;
@@ -529,7 +566,6 @@ document.addEventListener('click', (e)=>{ if(e.target && e.target.closest && e.t
     const rect = cont.getBoundingClientRect();
     const cx = rect.width / 2;
     const cy = rect.height / 2;
-
     for (let i=0;i<orbs.length;i++){
       const orb = orbs[i];
       if(!orb) continue;
@@ -546,7 +582,6 @@ document.addEventListener('click', (e)=>{ if(e.target && e.target.closest && e.t
     requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
-
   function sparkSVG() {
     if(!zapBright) return;
     zapBright.style.transition = 'none';
@@ -557,9 +592,7 @@ document.addEventListener('click', (e)=>{ if(e.target && e.target.closest && e.t
       setTimeout(()=> {
         zapBright.style.transition = 'stroke-dashoffset 380ms ease-out, opacity 160ms';
         zapBright.setAttribute('stroke-dashoffset','0');
-        setTimeout(()=> {
-          zapBright.setAttribute('stroke-dashoffset', String(len));
-        }, 320);
+        setTimeout(()=> { zapBright.setAttribute('stroke-dashoffset', String(len)); }, 320);
       }, 60);
     } catch(e) {
       zapBright.setAttribute('stroke-dasharray','520');
@@ -567,7 +600,6 @@ document.addEventListener('click', (e)=>{ if(e.target && e.target.closest && e.t
       setTimeout(()=> { zapBright.style.transition = 'stroke-dashoffset 360ms ease-out'; zapBright.setAttribute('stroke-dashoffset','0'); }, 80);
     }
   }
-
   function spawnSparks(){
     const cont = electricBand.querySelector('.container');
     if(!cont) return;
@@ -591,7 +623,6 @@ document.addEventListener('click', (e)=>{ if(e.target && e.target.closest && e.t
       setTimeout(()=> { if(s.parentNode) s.parentNode.removeChild(s); }, 760 + i*40);
     }
   }
-
   function activate() {
     electricBand.classList.add('connected');
     spawnSparks();
@@ -601,15 +632,8 @@ document.addEventListener('click', (e)=>{ if(e.target && e.target.closest && e.t
       if(Math.random() > 0.45) sparkSVG();
     }, 900 + Math.random()*900);
   }
-
   const title = document.querySelector('.company-name');
-  if(title) {
-    title.addEventListener('click', ()=> {
-      const on = electricBand.classList.toggle('connected');
-      if(on) { spawnSparks(); sparkSVG(); }
-    });
-  }
-
+  if(title) title.addEventListener('click', ()=> { const on = electricBand.classList.toggle('connected'); if(on) { spawnSparks(); sparkSVG(); } });
   activate();
   window.addEventListener('resize', ()=> { t0 = performance.now(); });
 })();
@@ -627,13 +651,37 @@ document.addEventListener('click', (e)=>{ if(e.target && e.target.closest && e.t
 
 /* init */
 document.addEventListener('DOMContentLoaded', ()=>{
-  // Always show product-card inline same as desktop
-  selectModel(0);
+  // Desktop: show first model inline; Mobile: show models first, product card hidden until user clicks
+  if(window.matchMedia('(max-width:640px)').matches){
+    updateHero(0);
+    productCard.classList.remove('show-on-mobile');
+    productCard.setAttribute('aria-hidden','true');
+  } else {
+    selectModel(0);
+  }
+
   startHeroSlideshow();
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // keyboard support for models
   document.querySelectorAll('.models .model').forEach((el, idx)=> {
     el.addEventListener('keydown', (e)=> { if(e.key==='Enter'||e.key===' ') { e.preventDefault(); selectModel(idx); }});
   });
+});
+
+/* helper to close overlay when orientation/resize moves to desktop */
+window.addEventListener('resize', ()=>{
+  if(!window.matchMedia('(max-width:640px)').matches){
+    productCard.classList.remove('show-on-mobile');
+    productCard.style.display = 'flex';
+    productCard.setAttribute('aria-hidden','false');
+  } else {
+    // keep hidden until user clicks
+    if(!productCard.classList.contains('show-on-mobile')){
+      productCard.style.display = 'none';
+      productCard.setAttribute('aria-hidden','true');
+    }
+  }
 });
 </script>
 </body>
