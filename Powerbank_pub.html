@@ -30,20 +30,24 @@
   --shadow: 0 12px 36px rgba(6,42,32,0.06);
 }
 
-/* Reset */
+/* Reset/base */
 *{box-sizing:border-box}
 html,body{height:100%;margin:0;padding:0;font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial;color:var(--text);-webkit-font-smoothing:antialiased;}
-html { background-color: var(--bg-main); min-height:100%; }
-body { background: transparent; min-height:100%; }
+html{background-color:var(--bg-main);min-height:100%}
+body{background:transparent;min-height:100%}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%;height:auto}
 
-/* Fixed background image visible on mobile & desktop */
-.page-bg{ position:fixed; inset:0; z-index:0; pointer-events:none; background-image: url('Energie_blanche.png'); background-size: cover; background-position: center center; background-repeat: no-repeat; }
+/* fixed background visible on mobile & desktop */
+.page-bg{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:url('Energie_blanche.png');background-size:cover;background-position:center center;background-repeat:no-repeat}
 
 /* subtle overlay */
 .bg-overlay{position:fixed;inset:0;z-index:8;pointer-events:none;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.015));}
 
 /* Topbar & Header */
 .topbar{position:fixed;top:0;left:0;right:0;height:var(--topbar-h);background:var(--green-dark);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;z-index:1600;font-size:13px}
+.topbar .left{font-weight:600}
+.topbar .right a{color:#fff;font-weight:700;text-decoration:none; text-transform:none;} /* restored mail style */
 .header{position:fixed;top:var(--topbar-h);left:0;right:0;height:var(--header-h);background:linear-gradient(90deg,var(--green-mid),#0b4d26);display:flex;align-items:center;justify-content:space-between;padding:0 5vw;z-index:1595;box-shadow:0 4px 12px rgba(0,0,0,.20)}
 .logo-text{display:flex;align-items:center;gap:10px}
 .logo-text img{height:48px;display:block}
@@ -55,30 +59,34 @@ nav a{color:#fff;font-size:14px;font-weight:600;padding:8px 10px;border-radius:8
 nav a:hover{color:var(--gold)}
 nav a.active{color:var(--gold);background:linear-gradient(90deg, rgba(212,175,55,0.06), rgba(212,175,55,0.03));border:1px solid rgba(212,175,55,0.12);padding:10px 14px}
 
-/* electric visuals (kept) */
-.electric-band { position: fixed; top: calc(var(--topbar-h) + var(--header-h) - 6px); left: 0; right: 0; height: 14px; z-index: 99999; pointer-events: none; overflow: visible; }
-.lightning-svg{width:100vw;height:100%;display:block;pointer-events:none;opacity:0;mix-blend-mode:screen}
-.electric-band.connected .lightning-svg { opacity: 1; }
-.orb{position:absolute;width:12px;height:12px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #fff8b0, var(--electric-yellow));box-shadow:0 0 18px rgba(255,214,0,0.98);}
+/* electric band */
+.electric-band{position:fixed;top:calc(var(--topbar-h)+var(--header-h)-6px);left:0;right:0;height:14px;z-index:99999;pointer-events:none;overflow:visible;transform:translateZ(0)}
+.electric-band .container{position:relative;width:100%;height:100%}
+.lightning-svg{width:100vw;height:100%;display:block;pointer-events:none;opacity:0;mix-blend-mode:screen;transition:opacity .22s}
+.electric-band.connected .lightning-svg{opacity:1}
+.orbs{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
+.orb{position:absolute;width:12px;height:12px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #fff8b0, var(--electric-yellow));box-shadow:0 0 18px rgba(255,214,0,0.98), 0 0 40px rgba(255,214,0,0.22);transform:translate(-50%,-50%);opacity:1;}
 
 /* layout */
-.container{max-width:var(--maxw);margin:0 auto;padding:18px 14px 140px;position:relative;z-index:40;background: transparent;}
+.container{max-width:var(--maxw);margin:0 auto;padding:18px 14px 140px;position:relative;z-index:40}
 
-/* Models section */
+/* Models section styled as requested */
 .models-wrapper{margin-top:24px;padding:18px 12px 36px;width:100%;max-width:100vw;position:relative;background:transparent;z-index:60}
 .models-header{display:flex;align-items:center;justify-content:center;margin-bottom:12px}
 .models-title{font-weight:800;font-size:22px;color:var(--brand-green);letter-spacing:0.4px;background:rgba(255,255,255,0.6);padding:8px 14px;border-radius:10px;box-shadow:0 8px 20px rgba(6,42,32,0.06)}
 .models{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;align-items:stretch;max-width:var(--maxw);margin:0 auto;padding:6px 14px;box-sizing:border-box}
 
-/* model card */
-.models .model{display:flex;flex-direction:column;justify-content:space-between;gap:12px;padding:14px;border-radius:12px;background: var(--card-bg-desktop);border: 1px solid var(--card-border);box-shadow: 0 8px 20px rgba(6,42,32,0.04);cursor:pointer;min-height:240px;backdrop-filter: blur(4px) saturate(110%);color:var(--text)}
+/* model cards (transparent on desktop) */
+.models .model{display:flex;flex-direction:column;justify-content:space-between;gap:12px;padding:14px;border-radius:12px;background:var(--card-bg-desktop);border:1px solid var(--card-border);box-shadow:0 8px 20px rgba(6,42,32,0.04);cursor:pointer;min-height:240px;backdrop-filter:blur(4px) saturate(110%);color:var(--text)}
 .models .thumb{position:relative;flex:0 0 56%;height:0;padding-bottom:56%;overflow:hidden;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.10))}
-.models .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;border-radius:8px}
+.models .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;border-radius:8px}
 .model .meta h4{margin:0;font-size:18px;color:var(--text);font-weight:800}
 .model .meta p{margin:10px 0 0;font-size:14px;color:var(--muted);line-height:1.25}
+.model .actions{display:flex;align-items:center;justify-content:flex-end;gap:8px}
+.models .model:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(6,42,32,0.08)}
 
-/* product card */
-.product-card{width:min(980px,94%);margin:22px auto 28px;background: var(--card-bg-desktop);border: 1px solid var(--card-border);border-radius:14px;padding:18px;box-shadow:var(--shadow);color:var(--text);display:flex;gap:18px;align-items:flex-start;position:relative;overflow:hidden;backdrop-filter: blur(3px) saturate(105%)}
+ /* product card (detail) */
+.product-card{width:min(980px,94%);margin:22px auto 28px;background:var(--card-bg-desktop);border:1px solid var(--card-border);border-radius:14px;padding:18px;box-shadow:var(--shadow);color:var(--text);display:flex;gap:18px;align-items:flex-start;position:relative;overflow:hidden;backdrop-filter:blur(3px) saturate(105%)}
 .product-card > *{position:relative;z-index:2}
 .product-card .close-mobile{display:none;position:absolute;right:12px;top:10px;background:transparent;border:0;font-size:22px;color:var(--muted);cursor:pointer;z-index:5}
 .product-info{flex:1;min-width:260px;padding-right:6px}
@@ -90,13 +98,14 @@ nav a.active{color:var(--gold);background:linear-gradient(90deg, rgba(212,175,55
 
 /* specs */
 .specs-block{margin-top:12px}
+.specs-title{font-weight:800;margin-bottom:8px;font-size:15px}
 .spec-list{display:flex;flex-direction:column;gap:8px;color:var(--text);font-size:15px}
-.spec-list > div{background: rgba(255,255,255,0.96); padding:10px 12px; border-radius:10px; border:1px solid rgba(6,42,32,0.04); box-shadow: 0 6px 14px rgba(6,42,32,0.03)}
+.spec-list > div{background:rgba(255,255,255,0.96);padding:10px 12px;border-radius:10px;border:1px solid rgba(6,42,32,0.04);box-shadow:0 6px 14px rgba(6,42,32,0.03)}
 
 /* product side */
 .product-side{width:340px;display:flex;flex-direction:column;gap:12px;align-items:stretch}
 .product-image{width:100%;height:220px;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#fbfeff,#f3f9fc);display:flex;align-items:center;justify-content:center;border:1px solid rgba(6,42,32,0.04)}
-.product-image img{width:100%;height:100%;object-fit:contain;object-position:center center;cursor:pointer;transition:transform .35s;border-radius:8px}
+.product-image img{width:100%;height:100%;object-fit:contain;object-position:center;cursor:pointer;transition:transform .35s;border-radius:8px}
 
 /* CTA */
 .cta-group{display:flex;flex-direction:column;gap:10px}
@@ -107,33 +116,22 @@ nav a.active{color:var(--gold);background:linear-gradient(90deg, rgba(212,175,55
 /* details panel */
 .details-panel{display:none;margin-top:12px;width:100%;background:rgba(255,255,255,0.98);border-radius:10px;padding:12px;color:var(--text);box-shadow:0 8px 24px rgba(6,42,32,0.06);border:1px solid rgba(6,42,32,0.04);line-height:1.45}
 
-/* FEATURED / CAROUSEL - "Projets à venir" with same framed title as models */
+/* FEATURED (single image) */
 .futures-title{display:flex;align-items:center;justify-content:center;margin-top:24px;margin-bottom:10px}
-.futures-title .models-title{ /* reuse styling but allow different label */
-  padding:8px 16px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.6), rgba(255,255,255,0.5));
-  border-radius:10px;
-}
+.futures-title .models-title{padding:8px 14px}
 .featured{margin-top:10px;border-radius:12px;overflow:hidden;border:1px solid rgba(212,175,55,0.12);background:rgba(255,255,255,0.94);box-shadow:var(--shadow)}
 .featured-hero{position:relative;height:320px;overflow:hidden;background:#000}
-.featured-hero .slide{position:absolute;inset:0;opacity:0;transition:opacity 700ms ease, transform 700ms;transform:scale(1.03);display:flex;align-items:center;justify-content:center}
+.featured-hero .slide{position:absolute;inset:0;opacity:0;transition:opacity 700ms ease, transform 700ms;transform:scale(1.03)}
 .featured-hero .slide.active{opacity:1;transform:scale(1);z-index:2}
 .featured-hero img{width:100%;height:100%;object-fit:cover;object-position:center center;display:block}
 
-/* featured copy + bigger availability badge */
+/* featured copy + availability */
 .featured-copy{padding:14px 18px;text-align:center}
 .featured-copy h3{margin:0;color:var(--brand-green);font-weight:800;letter-spacing:0.3px;font-size:18px}
 .featured-copy p{color:var(--muted);margin-top:10px;line-height:1.45}
-.availability-badge{
-  display:inline-block;margin-top:12px;padding:10px 18px;border-radius:999px;background: linear-gradient(90deg, #ffd54a, #ffb300);color:#08110a;font-weight:900;font-size:16px;box-shadow:0 10px 30px rgba(255,180,0,0.18);border: 1px solid rgba(0,0,0,0.06);
-}
+.availability-badge{display:inline-block;margin-top:12px;padding:10px 18px;border-radius:999px;background: linear-gradient(90deg,#ffd54a,#ffb300);color:#08110a;font-weight:900;font-size:16px;box-shadow:0 10px 30px rgba(255,180,0,0.18);border:1px solid rgba(0,0,0,0.06)}
 
-/* carousel dots */
-.carousel-dots{display:flex;gap:8px;justify-content:center;margin-top:10px}
-.carousel-dot{width:10px;height:10px;border-radius:999px;background:rgba(4,70,46,0.18);cursor:pointer;transition:all 180ms}
-.carousel-dot.active{background:var(--brand-green);transform:scale(1.1)}
-
-/* modal (reused for both tech info and pack info) */
+/* modal */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.56);display:none;align-items:center;justify-content:center;z-index:5000;padding:20px}
 .modal{width:100%;max-width:920px;background:#fff;border-radius:12px;padding:18px;overflow:auto;box-shadow:0 24px 60px rgba(0,0,0,0.45);max-height:86vh;position:relative}
 .modal .close{position:absolute;right:16px;top:12px;background:transparent;border:0;font-size:18px;cursor:pointer}
@@ -143,27 +141,20 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
 .footer-company{display:block;margin:0 auto 8px;font-size:18px;font-weight:800;color:var(--brand-green);-webkit-text-stroke:0.7px var(--gold);text-shadow:0 3px 6px rgba(0,0,0,0.6);padding:6px 10px;border-radius:6px}
 
 /* responsive */
-@media (max-width:900px){
-  .product-card{flex-direction:column;gap:12px;padding:14px}
-  .product-side{order:-1;width:100%}
-  .product-image{height:260px}
-  .featured-hero{height:280px}
-}
+@media (max-width:900px){ .product-card{flex-direction:column;padding:14px}.product-side{order:-1;width:100%}.featured-hero{height:280px} }
 @media (max-width:640px){
   .company-name{font-size:30px}
   nav{display:none}
   .models{grid-template-columns:1fr}
-  .product-image img{object-fit:contain}
   .featured-hero{height:220px}
+  /* overlay behavior on mobile */
   .product-card{ display:none !important; position:fixed; left:8px; right:8px; top: calc(var(--topbar-h) + var(--header-h) + 8px); z-index:2200; width: calc(100% - 16px); margin:0; padding:16px; border-radius:12px; box-shadow:0 18px 40px rgba(6,42,32,0.20); background: var(--card-bg-overlay); flex-direction:column; overflow:auto; max-height: calc(100vh - (var(--topbar-h) + var(--header-h) + 32px)); }
   .product-card.show-on-mobile{ display:flex !important; animation: slideIn 220ms ease; }
   .product-card .close-mobile{ display:block; }
-  .modal{width:100%;}
-  .availability-badge{font-size:15px;padding:10px 14px}
 }
-@media (max-width:420px){
-  .featured-hero{height:200px}
-}
+@media (max-width:420px){ .featured-hero{height:200px} }
+
+@keyframes slideIn { from { transform: translateY(-8px); opacity:0 } to { transform: translateY(0); opacity:1 } }
 </style>
 </head>
 <body>
@@ -193,13 +184,13 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
     <button class="mobile-nav-toggle" id="mobileToggle" aria-label="Ouvrir le menu" style="display:none;"><i class="fa-solid fa-bars"></i></button>
   </header>
 
-  <!-- Electric band -->
+  <!-- Electric band (orbs + svg) -->
   <div class="electric-band connected" id="electricBand" aria-hidden="true">
-    <div class="container" aria-hidden="true">
+    <div class="container">
       <svg class="lightning-svg" viewBox="0 0 2000 40" preserveAspectRatio="none" aria-hidden="true">
-        <path class="zap" id="zap1" d="M10,22 C260,4 520,36 840,20 C1120,8 1440,34 1760,18 C1880,6 1960,28 1990,22" stroke-opacity="0.18"/>
-        <path class="zap" id="zap2" d="M10,24 C280,36 600,6 860,22 C1140,36 1460,6 1800,22 C1880,36 1960,10 1990,22" stroke-opacity="0.12"/>
-        <path class="zap" id="zapBright" d="M20,22 C300,6 600,34 880,16 C1240,0 1520,32 1860,14 C1960,2 1980,30 1990,22" stroke-opacity="1" stroke-dasharray="520" stroke-dashoffset="520"/>
+        <path class="zap" id="zap1" d="M10,22 C260,4 520,36 840,20 C1120,8 1440,34 1760,18 C1880,6 1960,28 1990,22" stroke-opacity="0.18" stroke="url(#g)"/>
+        <path class="zap" id="zap2" d="M10,24 C280,36 600,6 860,22 C1140,36 1460,6 1800,22 C1880,36 1960,10 1990,22" stroke-opacity="0.12" stroke="url(#g)"/>
+        <path class="zap" id="zapBright" d="M20,22 C300,6 600,34 880,16 C1240,0 1520,32 1860,14 C1960,2 1980,30 1990,22" stroke-opacity="1"/>
       </svg>
 
       <div class="orbs" id="orbs">
@@ -207,8 +198,6 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
         <div class="orb" id="orbB" aria-hidden="true"></div>
         <div class="orb" id="orbC" aria-hidden="true"></div>
       </div>
-
-      <div class="glowline" id="glowline"></div>
     </div>
   </div>
 
@@ -216,11 +205,9 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
 
   <main class="container" role="main">
 
-    <!-- Models -->
+    <!-- Models list (visible first) -->
     <section class="models-wrapper" id="models" role="region" aria-label="Nos modèles">
-      <div class="models-header">
-        <div class="models-title">Nos modèles</div>
-      </div>
+      <div class="models-header"><div class="models-title">Nos modèles</div></div>
 
       <div class="models" role="list">
         <div class="model" role="button" onclick="selectModel(0)" tabindex="0" aria-label="GreenMini 10k">
@@ -261,7 +248,7 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
       </div>
     </section>
 
-    <!-- Product card (hidden on mobile until click) -->
+    <!-- Product card (GreenMini details shown when selected; starts visible on desktop) -->
     <section class="product-card" role="region" aria-label="Produit principal" aria-hidden="true">
       <button class="close-mobile" aria-label="Fermer la fiche mobile" title="Fermer" onclick="closeOverlay()">×</button>
 
@@ -297,7 +284,7 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
       </div>
     </section>
 
-    <!-- FEATURED / CAROUSEL - Projets à venir -->
+    <!-- Featured: Projets à venir — single image (vue 1) -->
     <div class="futures-title" id="futures">
       <div class="models-title">Projets à venir</div>
     </div>
@@ -305,8 +292,6 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
     <section class="featured" aria-label="Pack 2.5 kWh — Solution modulaire">
       <div class="featured-hero" id="featuredHero" aria-hidden="false">
         <div class="slide active" data-index="0"><img src="Future_Pack_1.png" alt="Pack 2.5 kWh vue 1"></div>
-        <div class="slide" data-index="1"><img src="Future_Pack_2.png" alt="Pack 2.5 kWh vue 2"></div>
-        <div class="slide" data-index="2"><img src="Future_Pack_3.png" alt="Pack 2.5 kWh vue 3"></div>
       </div>
 
       <div class="featured-copy">
@@ -316,8 +301,6 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
         <div style="margin-top:12px">
           <span class="availability-badge" id="availabilityBadge">Disponible 05/2026</span>
         </div>
-
-        <div class="carousel-dots" id="carouselDots" aria-hidden="false" role="tablist"></div>
 
         <div style="margin-top:12px">
           <button class="btn-secondary" onclick="openPackModal()">Infos pack</button>
@@ -332,7 +315,7 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
     <a href="https://wa.me/" target="_blank" style="color:#fff;text-decoration:none"><i class="fa-brands fa-whatsapp" style="font-size:20px"></i></a>
   </div>
 
-  <!-- Modal (reused) -->
+  <!-- Modal -->
   <div id="modalOverlay" class="modal-overlay" role="dialog" aria-hidden="true">
     <div class="modal" role="document" aria-modal="true">
       <button class="close" aria-label="Fermer" onclick="closeModal()">✕</button>
@@ -346,7 +329,7 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
   </footer>
 
 <script>
-/* Models */
+/* Models data (unchanged) */
 const models = [
   { id:'greenmini', title:'GreenMini — 10 000 mAh', subtitle:'Ultra-compact', images:['Pwkb_Mini_3.png','Pwkb_mini_2.png','PWBK_mini_4.png'], specs:['10 000 mAh (≈9 200 mAh réel)','1× USB-C in/out','Protection anti-surchauffe'], details:`<ul><li>Capacité : 10 000 mAh</li><li>Charge rapide (option)</li></ul>` },
   { id:'greencore', title:'GreenCore — 12 000 mAh', subtitle:'Modulaire • Réparable', images:['pwbk_11.png','pwbk_3.png','Pwkb_4.png'], specs:['12 000 mAh (≈11 000 mAh réel)','2× USB 5V/2.4A','Protection anti-inversion'], details:`<ul><li>Boîtier sans soudure</li><li>Cellules testées</li><li>Garantie : 1 an</li></ul>` },
@@ -356,18 +339,16 @@ const models = [
 
 const productCard = document.querySelector('.product-card');
 const heroImg = document.getElementById('heroMainImage');
-const detailsPanel = document.getElementById('detailsPanel');
 const specListEl = document.getElementById('specList');
 const modalOverlay = document.getElementById('modalOverlay');
 const modalContent = document.getElementById('modalContent');
-const availabilityBadge = document.getElementById('availabilityBadge');
 
 let currentModel = 0;
 let currentImage = 0;
 let heroTimer = null;
-const SLIDE_INTERVAL_MS = 5000; // 5s
+const SLIDE_INTERVAL_MS = 5000;
 
-/* render specs */
+/* Render specs list */
 function renderSpecs(index){
   const m = models[index] || models[0];
   specListEl.innerHTML = '';
@@ -378,32 +359,30 @@ function renderSpecs(index){
   });
 }
 
-/* update product panel */
+/* Update product panel */
 function updateHero(index){
   const m = models[index] || models[0];
   document.getElementById('heroTitle').textContent = m.title;
   document.getElementById('heroSubtitle').textContent = m.subtitle || '';
   heroImg.src = (m.images && m.images[0]) ? m.images[0] : heroImg.src;
   heroImg.alt = m.title;
-  detailsPanel.innerHTML = `<strong style="font-weight:800">${m.title}</strong><div style="margin-top:8px">${m.details}</div>`;
+  document.getElementById('detailsPanel').innerHTML = `<strong style="font-weight:800">${m.title}</strong><div style="margin-top:8px">${m.details}</div>`;
   renderSpecs(index);
 }
 
-/* hero product slideshow */
-function startHeroSlideshow() {
+/* Slideshow for product images */
+function startHeroSlideshow(){
   stopHeroSlideshow();
-  heroTimer = setInterval(()=> {
+  heroTimer = setInterval(()=>{
     const m = models[currentModel] || models[0];
-    if(!m.images || m.images.length === 0) return;
+    if(!m.images || m.images.length===0) return;
     currentImage = (currentImage + 1) % m.images.length;
     heroImg.src = m.images[currentImage];
   }, SLIDE_INTERVAL_MS);
 }
-function stopHeroSlideshow() {
-  if(heroTimer) { clearInterval(heroTimer); heroTimer = null; }
-}
+function stopHeroSlideshow(){ if(heroTimer){ clearInterval(heroTimer); heroTimer = null; } }
 
-/* select model show overlay on mobile or inline on desktop */
+/* Select model behavior: desktop inline, mobile overlay */
 function selectModel(i){
   currentModel = i;
   updateHero(i);
@@ -413,38 +392,37 @@ function selectModel(i){
   if(window.matchMedia('(max-width:640px)').matches){
     productCard.classList.add('show-on-mobile');
     productCard.setAttribute('aria-hidden','false');
-    detailsPanel.style.display = 'none';
-    detailsPanel.setAttribute('aria-hidden','true');
-    setTimeout(()=> { const primary = productCard.querySelector('.btn-primary'); if(primary) primary.focus(); }, 120);
+    document.getElementById('detailsPanel').style.display = 'none';
+    document.getElementById('detailsPanel').setAttribute('aria-hidden','true');
+    setTimeout(()=>{ const p = productCard.querySelector('.btn-primary'); if(p) p.focus(); }, 120);
   } else {
     productCard.classList.remove('show-on-mobile');
     productCard.style.display = 'flex';
     productCard.setAttribute('aria-hidden','false');
-    detailsPanel.style.display = 'none';
-    detailsPanel.setAttribute('aria-hidden','true');
+    document.getElementById('detailsPanel').style.display = 'none';
+    document.getElementById('detailsPanel').setAttribute('aria-hidden','true');
     productCard.scrollIntoView({behavior:'smooth', block:'center'});
   }
-
   currentImage = 0;
   startHeroSlideshow();
 }
 
-/* close overlay on mobile */
+/* Close mobile overlay */
 function closeOverlay(){
   productCard.classList.remove('show-on-mobile');
   productCard.setAttribute('aria-hidden','true');
-  detailsPanel.style.display = 'none';
-  detailsPanel.setAttribute('aria-hidden','true');
-  const firstModel = document.querySelector('.models .model');
-  if(firstModel) firstModel.focus();
+  document.getElementById('detailsPanel').style.display = 'none';
+  document.getElementById('detailsPanel').setAttribute('aria-hidden','true');
+  const first = document.querySelector('.models .model');
+  if(first) first.focus();
 }
 
-/* product image click cycles images */
+/* Product image click cycles images */
 const productImageEl = document.querySelector('.product-image');
 if(productImageEl){
   productImageEl.addEventListener('click', ()=>{
     const m = models[currentModel] || models[0];
-    if(!m.images || m.images.length === 0) return;
+    if(!m.images || m.images.length===0) return;
     currentImage = (currentImage + 1) % m.images.length;
     heroImg.style.transform = 'scale(0.98)';
     setTimeout(()=> heroImg.style.transform = 'scale(1)', 120);
@@ -453,36 +431,30 @@ if(productImageEl){
   });
 }
 
-/* details toggle */
+/* Details toggle */
 document.getElementById('detailsToggle').addEventListener('click', ()=>{
-  const vis = detailsPanel.style.display === 'block';
-  if(vis){
-    detailsPanel.style.display='none';
-    detailsPanel.setAttribute('aria-hidden','true');
-  } else {
-    detailsPanel.style.display='block';
-    detailsPanel.setAttribute('aria-hidden','false');
-    if(window.matchMedia('(max-width:640px)').matches){
-      productCard.scrollIntoView({behavior:'smooth', block:'center'});
-    } else {
-      detailsPanel.scrollIntoView({behavior:'smooth', block:'nearest'});
-    }
+  const panel = document.getElementById('detailsPanel');
+  const vis = panel.style.display === 'block';
+  if(vis){ panel.style.display='none'; panel.setAttribute('aria-hidden','true'); }
+  else {
+    panel.style.display='block'; panel.setAttribute('aria-hidden','false');
+    if(window.matchMedia('(max-width:640px)').matches) productCard.scrollIntoView({behavior:'smooth', block:'center'});
+    else panel.scrollIntoView({behavior:'smooth', block:'nearest'});
   }
 });
 
-/* modal helpers */
+/* Modal helpers */
 function openModal(html){
   modalContent.innerHTML = html;
   modalOverlay.style.display = 'flex';
   modalOverlay.setAttribute('aria-hidden','false');
-  // lock focus to modal optionally
 }
 function closeModal(){
   modalOverlay.style.display = 'none';
   modalOverlay.setAttribute('aria-hidden','true');
 }
 
-/* open technical modal for models */
+/* Tech modal for models */
 function openTechModal(i){
   const m = models[i] || models[0];
   const html = `
@@ -494,59 +466,53 @@ function openTechModal(i){
   openModal(html);
 }
 
-/* open pack modal (image 3 + speech) */
+/* Pack modal: IMAGE 2 first, then comment, then IMAGE 3 */
 function openPackModal(){
-  // text tailored for CI & Senegal, marketing + technical bullets
-  const speech = `
+  const html = `
+    <div style="width:100%;margin-bottom:12px"><img src="Future_Pack_2.png" alt="Pack vue 2" style="width:100%;height:auto;border-radius:8px;object-fit:cover"></div>
+
     <h2 style="margin-top:0">Pack modulaire 2.5 kWh — GreenBridge</h2>
-    <p style="margin-top:8px;color:#23403a;line-height:1.45">
-      Prévu pour une sortie commerciale le <strong>31/05/2026</strong>, ce pack de <strong>2.5 kWh</strong> a été pensé et dimensionné pour les besoins concrets
-      des ménages, centres de santé et petites entreprises en <strong>Côte d'Ivoire</strong> et au <strong>Sénégal</strong>.
-      En s'appuyant sur des cellules <strong>LiFePO₄ prismatiques</strong> (robustes, longue durée), la solution offre :
+    <p style="color:#23403a;line-height:1.45">
+      Prévu pour une sortie commerciale le <strong>31/05/2026</strong>, le pack <strong>2.5 kWh</strong> a été conçu pour la Côte d'Ivoire et le Sénégal.
+      Basé sur des cellules <strong>LiFePO₄ prismatiques</strong>, il est modulaire, réparable localement et adapté au stockage médical, PME, agriculture et élevage.
     </p>
-    <ul style="margin-top:8px;color:#23403a;line-height:1.45">
-      <li>Recharge par prise secteur (AC) et par panneau solaire (PV) — double entrée pour flexibilité terrain.</li>
-      <li>Autonomie suffisante pour maintenir réfrigérateurs médicaux, pompes solaires, éclairage et appareils essentiels.</li>
-      <li>Design modulaire : empilable et réparables localement — idéales pour déploiement hors-réseau.</li>
-      <li>Usage agricole & élevage : alimentation de pompes, pompes d'irrigation, contrôles et outils électriques.</li>
-      <li>Mise en place & maintenance simplifiées pour les équipes locales — pensé pour les réalités ouest-africaines.</li>
+    <ul style="color:#23403a;line-height:1.45">
+      <li>Recharge par prise secteur et par panneau solaire (double entrée).</li>
+      <li>Alimente réfrigérateurs médicaux, pompes, éclairage et appareils essentiels.</li>
+      <li>Déploiement simple hors réseau, maintenance locale facilitée.</li>
+      <li>Optimisé pour les usages agricoles et petites industries en Afrique de l'Ouest.</li>
     </ul>
-    <p style="margin-top:8px;color:#23403a;line-height:1.45">
-      Ce produit est conçu pour permettre la continuité des installations en cas de coupure, pour alimenter les activités
-      économiques locales et améliorer la résilience des communautés rurales et urbaines.
-    </p>
-    <div style="margin-top:12px;">
-      <img src="Future_Pack_3.png" alt="Pack 2.5 kWh - vue détaillée" style="width:100%;height:auto;border-radius:8px;display:block;margin-bottom:12px;object-fit:cover;object-position:center center">
-    </div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;">
+
+    <div style="width:100%;margin-top:12px"><img src="Future_Pack_3.png" alt="Pack vue 3" style="width:100%;height:auto;border-radius:8px;object-fit:cover"></div>
+
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;">
       <span style="background:linear-gradient(90deg,#ffd54a,#ffb300);padding:10px 14px;border-radius:999px;font-weight:900;color:#08110a">Disponible 31/05/2026</span>
       <button onclick="closeModal()" style="padding:10px 14px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);background:#fff;cursor:pointer">Fermer</button>
     </div>
   `;
-  openModal(speech);
+  openModal(html);
 }
 
-/* close modal when clicking overlay background */
+/* close modal when clicking backdrop */
 modalOverlay.addEventListener('click', (ev)=> { if(ev.target === modalOverlay) closeModal(); });
 
-/* Electric visuals (orb motion + sparks) */
+/* Electric orbs animation (preserved + working) */
 (function(){
   const electricBand = document.getElementById('electricBand');
-  if (!electricBand) return;
+  if(!electricBand) return;
   const orbA = document.getElementById('orbA');
   const orbB = document.getElementById('orbB');
   const orbC = document.getElementById('orbC');
   const orbs = [orbA, orbB, orbC];
-  const zapBright = document.getElementById('zapBright');
   const params = [
-    {rxRatio: 0.50, ry: 8,  speed: 0.06, phase: 0},
-    {rxRatio: 0.33, ry: 6,  speed: 0.08, phase: Math.PI/2},
-    {rxRatio: 0.42, ry: 10, speed: 0.05, phase: Math.PI}
+    {rxRatio:0.5, ry:8, speed:0.06, phase:0},
+    {rxRatio:0.33, ry:6, speed:0.08, phase:Math.PI/2},
+    {rxRatio:0.42, ry:10, speed:0.05, phase:Math.PI}
   ];
-  orbs.forEach((o,i)=>{ if(o){ o.classList.add('buzz'); o.style.animationDelay = (i*120)+'ms'; o.style.opacity='1'; }});
+  orbs.forEach((o,i)=>{ if(o){ o.style.opacity='1'; o.classList.add('buzz'); o.style.animationDelay=(i*120)+'ms'; }});
   let t0 = performance.now();
   function tick(now){
-    const time = (now - t0) / 1000;
+    const time = (now - t0)/1000;
     const cont = electricBand.querySelector('.container');
     if(!cont){ requestAnimationFrame(tick); return; }
     const rect = cont.getBoundingClientRect();
@@ -560,116 +526,16 @@ modalOverlay.addEventListener('click', (ev)=> { if(ev.target === modalOverlay) c
       const angle = (time * p.speed * Math.PI * 2) + p.phase;
       const x = cx + Math.cos(angle) * rx;
       const y = cy + Math.sin(angle) * ry;
-      orb.style.left = x + 'px'; orb.style.top = y + 'px';
+      orb.style.left = x + 'px';
+      orb.style.top = y + 'px';
       orb.style.transform = 'translate(-50%,-50%)';
     }
     requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
-
-  function sparkSVG(){
-    if(!zapBright) return;
-    try {
-      const len = zapBright.getTotalLength ? zapBright.getTotalLength() : 520;
-      zapBright.setAttribute('stroke-dasharray', String(len));
-      zapBright.setAttribute('stroke-dashoffset', String(len));
-      setTimeout(()=> { zapBright.style.transition = 'stroke-dashoffset 380ms ease-out, opacity 160ms'; zapBright.setAttribute('stroke-dashoffset','0');
-        setTimeout(()=> { zapBright.setAttribute('stroke-dashoffset', String(len)); }, 320);
-      }, 60);
-    } catch(e) {}
-  }
-
-  function spawnSparks(){
-    const cont = electricBand.querySelector('.container'); if(!cont) return;
-    for(let i=0;i<10;i++){
-      const s = document.createElement('div');
-      s.style.position='absolute';
-      s.style.left=(3+Math.random()*94)+'%';
-      s.style.top=(20+Math.random()*50)+'%';
-      s.style.width='2px';
-      s.style.height=(8+Math.random()*22)+'px';
-      s.style.borderRadius='2px';
-      s.style.background='linear-gradient(180deg, rgba(255,246,180,1), rgba(255,214,0,0.95))';
-      s.style.filter='blur(6px)';
-      s.style.opacity='0';
-      s.style.transform='translateY(6px)';
-      s.style.pointerEvents='none';
-      s.style.zIndex='1';
-      cont.appendChild(s);
-      setTimeout(()=> { s.style.transition='all 260ms ease-out'; s.style.opacity='1'; s.style.transform='translateY(-6px)'; }, 20 + i*25);
-      setTimeout(()=> { s.style.transition='all 420ms ease-in'; s.style.opacity='0'; s.style.transform='translateY(-20px)'; }, 280 + i*40);
-      setTimeout(()=> { if(s.parentNode) s.parentNode.removeChild(s); }, 760 + i*40);
-    }
-  }
-
-  function activate(){
-    electricBand.classList.add('connected');
-    spawnSparks(); sparkSVG();
-    setInterval(()=>{ spawnSparks(); if(Math.random() > 0.45) sparkSVG(); }, 900 + Math.random()*900);
-  }
-
-  const title = document.querySelector('.company-name');
-  if(title){ title.addEventListener('click', ()=> { const on = electricBand.classList.toggle('connected'); if(on){ spawnSparks(); sparkSVG(); } }); }
-  activate();
 })();
 
-/* Featured carousel (3 images) */
-(function(){
-  const hero = document.getElementById('featuredHero');
-  const slides = Array.from(hero.querySelectorAll('.slide'));
-  const dotsContainer = document.getElementById('carouselDots');
-  let idx = 0;
-  let timer = null;
-  const INTERVAL = 4200;
-
-  function createDots(){
-    slides.forEach((s,i)=>{
-      const d = document.createElement('button');
-      d.className = 'carousel-dot' + (i===0 ? ' active' : '');
-      d.setAttribute('aria-label','Afficher image ' + (i+1));
-      d.setAttribute('data-index', String(i));
-      d.addEventListener('click', ()=> show(i));
-      dotsContainer.appendChild(d);
-    });
-  }
-  function updateDots(){
-    const dots = dotsContainer.querySelectorAll('.carousel-dot');
-    dots.forEach((dot,di)=> dot.classList.toggle('active', di===idx));
-  }
-  function show(i){
-    slides.forEach((s,si)=> s.classList.toggle('active', si===i));
-    idx = i;
-    updateDots();
-    restart();
-  }
-  function next(){ idx = (idx + 1) % slides.length; show(idx); }
-  function start(){ stop(); timer = setInterval(next, INTERVAL); }
-  function stop(){ if(timer){ clearInterval(timer); timer = null; } }
-  function restart(){ stop(); start(); }
-
-  // touch swipe
-  (function addTouch(){
-    let startX = 0, deltaX = 0;
-    hero.addEventListener('touchstart', (e)=> { startX = e.touches[0].clientX; deltaX = 0; stop(); });
-    hero.addEventListener('touchmove', (e)=> { deltaX = e.touches[0].clientX - startX; });
-    hero.addEventListener('touchend', ()=> {
-      if(Math.abs(deltaX) > 40){
-        if(deltaX < 0) next();
-        else show((idx - 1 + slides.length) % slides.length);
-      }
-      start();
-    });
-  })();
-
-  // click to advance
-  hero.addEventListener('click', ()=> next());
-
-  createDots();
-  show(0);
-  start();
-})();
-
-/* init */
+/* Init: show GreenMini on desktop, keep hidden on mobile until click */
 document.addEventListener('DOMContentLoaded', ()=>{
   if(window.matchMedia('(max-width:640px)').matches){
     updateHero(0);
@@ -684,7 +550,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   });
 });
 
-/* ensure overlay state on resize */
+/* adapt overlay on resize */
 window.addEventListener('resize', ()=>{
   if(!window.matchMedia('(max-width:640px)').matches){
     productCard.classList.remove('show-on-mobile');
