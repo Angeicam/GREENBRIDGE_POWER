@@ -171,7 +171,7 @@ img{display:block;max-width:100%;height:auto}
 /* product side */
 .product-side{width:340px;display:flex;flex-direction:column;gap:12px;align-items:stretch}
 .product-image{width:100%;height:220px;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#fbfeff,#f3f9fc);display:flex;align-items:center;justify-content:center;border:1px solid rgba(6,42,32,0.04)}
-.product-image img{width:100%;height:100%;object-fit:contain;object-position:center;display:block;cursor:pointer;transition:transform .35s;border-radius:8px}
+.product-image img{width:100%;height:100%;object-fit:contain;object-position:center;display:block;border-radius:8px}
 
 /* CTA */
 .cta-group{display:flex;flex-direction:column;gap:10px}
@@ -255,7 +255,6 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
   .product-card .close-mobile{ display:block; }
 
   .fab{ right:12px; bottom:14px; width:50px; height:50px; font-size:20px }
-  .card-info-btn{ top:8px; right:8px; width:34px; height:34px }
 }
 @media (max-width:420px){ .featured-hero{height:200px} }
 
@@ -419,7 +418,7 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
       </div>
 
       <div class="product-side">
-        <div class="product-image" id="productImageBox" title="Cliquer pour changer d'image" role="button" tabindex="0">
+        <div class="product-image" id="productImageBox" title="Image produit (clic désactivé)" role="button" tabindex="0">
           <img id="heroMainImage" src="Pwkb_Mini_3.png" alt="GreenMini image">
         </div>
 
@@ -778,17 +777,14 @@ function closeOverlay(){
   if(first) first.focus();
 }
 
-/* Product image click cycles images */
+/* Product image click: DISABLED as requested (does nothing) */
 const productImageEl = document.querySelector('.product-image');
 if(productImageEl){
-  productImageEl.addEventListener('click', ()=>{
-    const m = models[currentModel] || models[0];
-    if(!m.images || m.images.length===0) return;
-    currentImage = (currentImage + 1) % m.images.length;
-    heroImg.style.transform = 'scale(0.98)';
-    setTimeout(()=> heroImg.style.transform = 'scale(1)', 120);
-    heroImg.src = m.images[currentImage];
-    startHeroSlideshow();
+  productImageEl.addEventListener('click', (e) => {
+    // intentionally do nothing on image click (user requested "plus rien")
+    e.stopPropagation();
+    e.preventDefault();
+    return false;
   });
 }
 
