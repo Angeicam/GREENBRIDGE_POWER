@@ -56,7 +56,7 @@ img{display:block;max-width:100%;height:auto}
 .logo-text{display:flex;align-items:center;gap:12px}
 .logo-text img{height:48px;display:block}
 .company-name{
-  font-size:36px;            /* agrandi comme demandé */
+  font-size:36px;
   font-weight:800;
   letter-spacing:1px;
   padding:6px 10px;
@@ -84,30 +84,50 @@ img{display:block;max-width:100%;height:auto}
 .models{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;align-items:stretch;max-width:var(--maxw);margin:0 auto;padding:6px 14px;box-sizing:border-box}
 
 /* model cards */
-.models .model{position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:12px;padding:14px;border-radius:12px;background:var(--card-bg-desktop);border:1px solid var(--card-border);box-shadow:0 8px 20px rgba(6,42,32,0.04);cursor:pointer;min-height:240px;backdrop-filter:blur(4px) saturate(110%);color:var(--text)}
+.models .model{position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:12px;padding:18px;border-radius:12px;background:var(--card-bg-desktop);border:1px solid var(--card-border);box-shadow:0 8px 20px rgba(6,42,32,0.04);cursor:pointer;min-height:260px;backdrop-filter:blur(4px) saturate(110%);color:var(--text);overflow:visible}
 .models .thumb{position:relative;flex:0 0 56%;height:0;padding-bottom:56%;overflow:hidden;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.10))}
 .models .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;border-radius:8px}
 
-/* TOP-CENTER price pill on cards */
-.price-pill{
+/* INFO icon on right */
+.card-info-btn{
   position:absolute;
-  top:10px;
-  left:50%;
-  transform:translateX(-50%);
-  z-index:6;
+  top:12px;
+  right:12px;
+  z-index:8;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:#fff;
+  border:2px solid var(--brand-green);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--brand-green);
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:0 6px 18px rgba(4,70,46,0.08);
+}
+.card-info-btn:focus{outline:3px solid rgba(4,70,46,0.12);outline-offset:2px}
+
+/* Demander prix button inside card actions (bottom) */
+.price-btn{
+  width:100%;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:10px 12px;
   background:var(--brand-green);
   color:#fff;
-  padding:8px 12px;
-  border-radius:999px;
+  border:0;
+  border-radius:10px;
   font-weight:800;
-  display:inline-flex;
-  gap:8px;
-  align-items:center;
-  box-shadow:0 8px 20px rgba(4,70,46,0.16);
-  border:2px solid rgba(255,255,255,0.06);
   cursor:pointer;
-  font-size:13px;
+  box-shadow:0 8px 20px rgba(4,70,46,0.12);
+  transition:transform .12s ease;
 }
+.price-btn:active{transform:translateY(1px)}
+.price-btn i{font-size:16px}
 
 /* model text */
 .model .meta h4{margin:0;font-size:18px;color:var(--text);font-weight:900}
@@ -235,6 +255,7 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
   .product-card .close-mobile{ display:block; }
 
   .fab{ right:12px; bottom:14px; width:50px; height:50px; font-size:20px }
+  .card-info-btn{ top:8px; right:8px; width:34px; height:34px }
 }
 @media (max-width:420px){ .featured-hero{height:200px} }
 
@@ -286,9 +307,9 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
 
       <div class="models" role="list">
         <div class="model" role="button" onclick="selectModel(0)" tabindex="0" aria-label="GreenMini 10k">
-          <!-- top-center price pill -->
-          <button class="price-pill" onclick="requestPrice(0); event.stopPropagation()">
-            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Demander prix
+          <!-- info icon on right -->
+          <button class="card-info-btn" aria-label="Infos GreenMini" onclick="openTechModal(0); event.stopPropagation();">
+            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
           </button>
 
           <div class="thumb"><img src="Pwkb_Mini_3.png" alt="GreenMini"></div>
@@ -296,12 +317,17 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
             <h4>GreenMini</h4>
             <p>GreenMini ≈ 9 000 mAh<br><small>Ultra-compact, idéal pour sac &amp; poche.</small></p>
           </div>
-          <div class="actions"><button class="btn-small" onclick="openTechModal(0);event.stopPropagation()">Infos</button></div>
+
+          <div class="actions" style="margin-top:8px">
+            <button class="price-btn" onclick="requestPrice(0); event.stopPropagation();" aria-label="Demander prix GreenMini">
+              <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Demander prix
+            </button>
+          </div>
         </div>
 
         <div class="model" role="button" onclick="selectModel(1)" tabindex="0" aria-label="GreenCore 9k">
-          <button class="price-pill" onclick="requestPrice(1); event.stopPropagation()">
-            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Demander prix
+          <button class="card-info-btn" aria-label="Infos GreenCore" onclick="openTechModal(1); event.stopPropagation();">
+            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
           </button>
 
           <div class="thumb"><img src="pwkb_123.png" alt="GreenCore"></div>
@@ -309,12 +335,17 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
             <h4>GreenCore</h4>
             <p>GreenCore ≈ 9 000 mAh<br><small>Modulaire • Type-C charge rapide</small></p>
           </div>
-          <div class="actions"><button class="btn-small" onclick="openTechModal(1);event.stopPropagation()">Infos</button></div>
+
+          <div class="actions" style="margin-top:8px">
+            <button class="price-btn" onclick="requestPrice(1); event.stopPropagation();" aria-label="Demander prix GreenCore">
+              <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Demander prix
+            </button>
+          </div>
         </div>
 
         <div class="model" role="button" onclick="selectModel(2)" tabindex="0" aria-label="GreenPro 12k">
-          <button class="price-pill" onclick="requestPrice(2); event.stopPropagation()">
-            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Demander prix
+          <button class="card-info-btn" aria-label="Infos GreenPro" onclick="openTechModal(2); event.stopPropagation();">
+            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
           </button>
 
           <div class="thumb"><img src="pwkb_6.png" alt="GreenPro"></div>
@@ -322,13 +353,18 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
             <h4>GreenPro</h4>
             <p>GreenPro ≈ 12 000 mAh<br><small>Charge rapide USB-C • Pack haute qualité</small></p>
           </div>
-          <div class="actions"><button class="btn-small" onclick="openTechModal(2);event.stopPropagation()">Infos</button></div>
+
+          <div class="actions" style="margin-top:8px">
+            <button class="price-btn" onclick="requestPrice(2); event.stopPropagation();" aria-label="Demander prix GreenPro">
+              <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Demander prix
+            </button>
+          </div>
         </div>
 
         <!-- Modèle mis à jour : GreenWireless -->
         <div class="model" role="button" onclick="selectModel(3)" tabindex="0" aria-label="GreenWireless 20k">
-          <button class="price-pill" onclick="requestPrice(3); event.stopPropagation()">
-            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Demander prix
+          <button class="card-info-btn" aria-label="Infos GreenWireless" onclick="openTechModal(3); event.stopPropagation();">
+            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
           </button>
 
           <div class="thumb"><img src="pwkb_wireless_1.png" alt="GreenWireless"></div>
@@ -336,7 +372,12 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
             <h4>GreenWireless</h4>
             <p>GreenWireless — 20 000 mAh<br><small>Boîtier amovible • Charge rapide PD / QC3.0 • Sans-fil</small></p>
           </div>
-          <div class="actions"><button class="btn-small" onclick="openTechModal(3);event.stopPropagation()">Infos</button></div>
+
+          <div class="actions" style="margin-top:8px">
+            <button class="price-btn" onclick="requestPrice(3); event.stopPropagation();" aria-label="Demander prix GreenWireless">
+              <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Demander prix
+            </button>
+          </div>
         </div>
       </div>
     </section>
