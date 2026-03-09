@@ -56,7 +56,7 @@ img{display:block;max-width:100%;height:auto}
 .logo-text{display:flex;align-items:center;gap:12px}
 .logo-text img{height:48px;display:block}
 .company-name{
-  font-size:36px;
+  font-size:36px;            /* agrandi comme demandé */
   font-weight:800;
   letter-spacing:1px;
   padding:6px 10px;
@@ -84,50 +84,9 @@ img{display:block;max-width:100%;height:auto}
 .models{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;align-items:stretch;max-width:var(--maxw);margin:0 auto;padding:6px 14px;box-sizing:border-box}
 
 /* model cards */
-.models .model{position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:12px;padding:18px;border-radius:12px;background:var(--card-bg-desktop);border:1px solid var(--card-border);box-shadow:0 8px 20px rgba(6,42,32,0.04);cursor:pointer;min-height:260px;backdrop-filter:blur(4px) saturate(110%);color:var(--text);overflow:visible}
+.models .model{display:flex;flex-direction:column;justify-content:space-between;gap:12px;padding:14px;border-radius:12px;background:var(--card-bg-desktop);border:1px solid var(--card-border);box-shadow:0 8px 20px rgba(6,42,32,0.04);cursor:pointer;min-height:240px;backdrop-filter:blur(4px) saturate(110%);color:var(--text)}
 .models .thumb{position:relative;flex:0 0 56%;height:0;padding-bottom:56%;overflow:hidden;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.10))}
 .models .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;border-radius:8px}
-
-/* INFO icon on right */
-.card-info-btn{
-  position:absolute;
-  top:12px;
-  right:12px;
-  z-index:8;
-  width:38px;
-  height:38px;
-  border-radius:50%;
-  background:#fff;
-  border:2px solid var(--brand-green);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:var(--brand-green);
-  font-weight:800;
-  cursor:pointer;
-  box-shadow:0 6px 18px rgba(4,70,46,0.08);
-}
-.card-info-btn:focus{outline:3px solid rgba(4,70,46,0.12);outline-offset:2px}
-
-/* Demander prix button inside card actions (bottom) */
-.price-btn{
-  width:100%;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  padding:10px 12px;
-  background:var(--brand-green);
-  color:#fff;
-  border:0;
-  border-radius:10px;
-  font-weight:800;
-  cursor:pointer;
-  box-shadow:0 8px 20px rgba(4,70,46,0.12);
-  transition:transform .12s ease;
-}
-.price-btn:active{transform:translateY(1px)}
-.price-btn i{font-size:16px}
 
 /* model text */
 .model .meta h4{margin:0;font-size:18px;color:var(--text);font-weight:900}
@@ -171,7 +130,7 @@ img{display:block;max-width:100%;height:auto}
 /* product side */
 .product-side{width:340px;display:flex;flex-direction:column;gap:12px;align-items:stretch}
 .product-image{width:100%;height:220px;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#fbfeff,#f3f9fc);display:flex;align-items:center;justify-content:center;border:1px solid rgba(6,42,32,0.04)}
-.product-image img{width:100%;height:100%;object-fit:contain;object-position:center;display:block;border-radius:8px}
+.product-image img{width:100%;height:100%;object-fit:contain;object-position:center;display:block;cursor:pointer;transition:transform .35s;border-radius:8px}
 
 /* CTA */
 .cta-group{display:flex;flex-direction:column;gap:10px}
@@ -220,7 +179,7 @@ img{display:block;max-width:100%;height:auto}
 .modal{width:100%;max-width:920px;background:#fff;border-radius:12px;padding:18px;overflow:auto;box-shadow:0 24px 60px rgba(0,0,0,0.45);max-height:86vh;position:relative}
 .modal .close{position:absolute;right:16px;top:12px;background:transparent;border:0;font-size:18px;cursor:pointer}
 
-/* WhatsApp FAB (restored) - using brand green for visual consistency */
+/* WhatsApp FAB */
 .fab{
   width:58px;
   height:58px;
@@ -232,8 +191,8 @@ img{display:block;max-width:100%;height:auto}
   right:14px;
   bottom:18px;
   z-index:4000;
-  box-shadow:0 10px 30px rgba(4,70,46,0.18);
-  background:var(--brand-green);
+  box-shadow:0 10px 30px rgba(2,50,26,0.25);
+  background:var(--whatsapp-green);
   border: 3px solid rgba(255,255,255,0.06);
 }
 .fab a{display:flex;align-items:center;justify-content:center;width:100%;height:100%;color:#fff;font-size:22px}
@@ -306,77 +265,40 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
 
       <div class="models" role="list">
         <div class="model" role="button" onclick="selectModel(0)" tabindex="0" aria-label="GreenMini 10k">
-          <!-- info icon on right -->
-          <button class="card-info-btn" aria-label="Infos GreenMini" onclick="openTechModal(0); event.stopPropagation();">
-            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
-          </button>
-
           <div class="thumb"><img src="Pwkb_Mini_3.png" alt="GreenMini"></div>
           <div class="meta">
             <h4>GreenMini</h4>
             <p>GreenMini ≈ 9 000 mAh<br><small>Ultra-compact, idéal pour sac &amp; poche.</small></p>
           </div>
-
-          <div class="actions" style="margin-top:8px">
-            <button class="price-btn" onclick="requestPrice(0); event.stopPropagation();" aria-label="Demander prix GreenMini">
-              <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Demander prix
-            </button>
-          </div>
+          <div class="actions"><button class="btn-small" onclick="openTechModal(0);event.stopPropagation()">Infos</button></div>
         </div>
 
         <div class="model" role="button" onclick="selectModel(1)" tabindex="0" aria-label="GreenCore 9k">
-          <button class="card-info-btn" aria-label="Infos GreenCore" onclick="openTechModal(1); event.stopPropagation();">
-            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
-          </button>
-
           <div class="thumb"><img src="pwkb_123.png" alt="GreenCore"></div>
           <div class="meta">
             <h4>GreenCore</h4>
             <p>GreenCore ≈ 9 000 mAh<br><small>Modulaire • Type-C charge rapide</small></p>
           </div>
-
-          <div class="actions" style="margin-top:8px">
-            <button class="price-btn" onclick="requestPrice(1); event.stopPropagation();" aria-label="Demander prix GreenCore">
-              <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Demander prix
-            </button>
-          </div>
+          <div class="actions"><button class="btn-small" onclick="openTechModal(1);event.stopPropagation()">Infos</button></div>
         </div>
 
         <div class="model" role="button" onclick="selectModel(2)" tabindex="0" aria-label="GreenPro 12k">
-          <button class="card-info-btn" aria-label="Infos GreenPro" onclick="openTechModal(2); event.stopPropagation();">
-            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
-          </button>
-
           <div class="thumb"><img src="pwkb_6.png" alt="GreenPro"></div>
           <div class="meta">
             <h4>GreenPro</h4>
             <p>GreenPro ≈ 12 000 mAh<br><small>Charge rapide USB-C • Pack haute qualité</small></p>
           </div>
-
-          <div class="actions" style="margin-top:8px">
-            <button class="price-btn" onclick="requestPrice(2); event.stopPropagation();" aria-label="Demander prix GreenPro">
-              <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Demander prix
-            </button>
-          </div>
+          <div class="actions"><button class="btn-small" onclick="openTechModal(2);event.stopPropagation()">Infos</button></div>
         </div>
 
         <!-- Modèle mis à jour : GreenWireless -->
         <div class="model" role="button" onclick="selectModel(3)" tabindex="0" aria-label="GreenWireless 20k">
-          <button class="card-info-btn" aria-label="Infos GreenWireless" onclick="openTechModal(3); event.stopPropagation();">
-            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
-          </button>
-
           <div class="thumb"><img src="pwkb_wireless_1.png" alt="GreenWireless"></div>
           <div class="meta">
             <h4>GreenWireless</h4>
             <p>GreenWireless — 20 000 mAh<br><small>Boîtier amovible • Charge rapide PD / QC3.0 • Sans-fil</small></p>
           </div>
-
-          <div class="actions" style="margin-top:8px">
-            <button class="price-btn" onclick="requestPrice(3); event.stopPropagation();" aria-label="Demander prix GreenWireless">
-              <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Demander prix
-            </button>
-          </div>
+          <div class="actions"><button class="btn-small" onclick="openTechModal(3);event.stopPropagation()">Infos</button></div>
         </div>
       </div>
     </section>
@@ -418,16 +340,13 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
       </div>
 
       <div class="product-side">
-        <div class="product-image" id="productImageBox" title="Image produit (clic désactivé)" role="button" tabindex="0">
+        <div class="product-image" id="productImageBox" title="Cliquer pour changer d'image" role="button" tabindex="0">
           <img id="heroMainImage" src="Pwkb_Mini_3.png" alt="GreenMini image">
         </div>
 
         <div class="cta-group" aria-label="Actions produit">
-          <!-- MAIN button: Demander prix for currently shown model -->
-          <button id="orderBtnTop" class="btn-primary" type="button" onclick="requestPrice(currentModel)">
-            <i class="fa-brands fa-whatsapp"></i> Demander prix
-          </button>
-
+          <!-- orderBtnTop href sera mis à jour dynamiquement par JS pour inclure le numéro et le message -->
+          <a id="orderBtnTop" class="btn-primary" href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Commander / Échantillon</a>
           <button id="infoBtnHero" class="btn-secondary" onclick="openTechModal(currentModel)"><i class="fa-solid fa-circle-info"></i> Infos techniques</button>
           <button id="detailsToggle" class="btn-small"><i class="fa-solid fa-list"></i> Afficher détails</button>
         </div>
@@ -460,9 +379,10 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
 
   </main>
 
-  <!-- WhatsApp FAB (restored on the right) -->
+  <!-- WhatsApp FAB (visible, green) -->
+  <!-- href par défaut vers le numéro, JS mettra le message pré-rempli -->
   <div id="fab" class="fab" role="button" aria-label="Commander via WhatsApp">
-    <a id="fabLink" href="#" target="_blank" rel="noopener noreferrer" aria-label="Commander via WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+    <a id="fabLink" href="https://wa.me/221774015004" target="_blank" rel="noopener noreferrer" aria-label="Commander via WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
   </div>
 
   <!-- Modal -->
@@ -503,6 +423,20 @@ const models = [
         Technologie : <strong>Samsung, 3 cellules</strong> (cellules testées et sélectionnées).
         Puissance moyenne du pack : <strong>~32 W</strong>. Écran digital intégré (indicateur précis en %) pour visualiser l'autonomie en temps réel.
       </p>
+      <div style="margin-top:8px">
+        <strong>Entrées (Input)</strong>
+        <ul>
+          <li>5V en continu — 4.5A</li>
+          <li>9V en continu — 2.5A</li>
+          <li>12V en continu — 1.85A (max)</li>
+        </ul>
+        <strong>Sorties (Output)</strong>
+        <ul>
+          <li>USB-C (in/out) : 5V — 4.5A ; 9V — 2.5A ; 12V — 1.85A (selon negotiation)</li>
+          <li>USB-A (Q3) : 5V — 2.1A</li>
+          <li>USB-A secondaire : 5V — 1A</li>
+        </ul>
+      </div>
     `
   },
   {
@@ -533,6 +467,13 @@ const models = [
         <strong>GreenCore — ≈ 9 000 mAh</strong><br>
         Technologie : <strong>Samsung</strong>, cellules testées et triées. Charge rapide via USB-C (Quick Charge). Puissance pack : ~32 W.
       </p>
+      <div style="margin-top:8px">
+        <strong>Charge / Mesures</strong>
+        <ul>
+          <li>Charge Type-C rapide (QC)</li>
+          <li>Power Delivery (PD) : <strong>Non</strong> (mesure : <strong>4.66 V / 1.52 A</strong>)</li>
+        </ul>
+      </div>
     `
   },
   {
@@ -553,6 +494,7 @@ const models = [
       </p>
     `
   },
+  /* Modèle mis à jour : GreenWireless (remplace GreenRugged) */
   {
     id:'greenwireless',
     title:'GreenWireless — 20 000 mAh',
@@ -574,6 +516,34 @@ const models = [
         <strong>GreenWireless — Boîtier amovible &amp; haute performance</strong><br>
         Assemblé avec cellules <strong>Samsung</strong> ou <strong>LG</strong> de type <strong>18650</strong> (haut rendement). Conçu pour offrir une grande capacité et une maintenance locale facile via un boîtier amovible.
       </p>
+
+      <div style="margin-top:8px">
+        <strong>Caractéristiques principales</strong>
+        <ul>
+          <li>Fonction : affichage numérique (LCD) de la puissance restante, boîtier détachable sans soudure.</li>
+          <li>Prise en charge : peut accueillir et charger jusqu'à <strong>5 × 18650 (têtes plates)</strong> via le boîtier de batterie.</li>
+          <li>Système : protection anti-retour de connexion, protections électroniques complète (surcharge, court-circuit, inversion).</li>
+          <li>Charge rapide : USB-C PD (12V) et USB-A QC3.0 — charge rapide filaire + chargeur sans fil intégré (version wireless).</li>
+          <li>Mode DIY : kit d'alimentation mobile auto-configuré, montage simple sans soudure — adapté au bricolage et à la réparation locale.</li>
+          <li>Interfaces : Micro USB, port Apple (adaptateur), Type-C in/out, bornes USB-A QC3.0.</li>
+          <li>Usage : idéal pour utilisateurs ayant de gros besoins de charge ; convient pour terrain et usage urbain.</li>
+          <li>Capacité réelle : ≈ <strong>15 000 mAh utilisable</strong> (dépend des cellules et du câblage interne).</li>
+        </ul>
+      </div>
+
+      <div style="margin-top:8px">
+        <strong>Exemples d'utilisation</strong>
+        <ul>
+          <li>Alimentation d'appareils 5V/9V/12V via PD/QC pour smartphone, routeur, petits appareils 12V.</li>
+          <li>Démontage/remplacement facile des cellules pour maintenance ou upgrade local.</li>
+        </ul>
+      </div>
+
+      <div style="margin-top:10px">
+        <strong style="color:#08110a;background:linear-gradient(90deg,#ffd54a,#ffb300);padding:6px 10px;border-radius:8px;display:inline-block">
+          Offre : <span style="font-weight:900">Garantie 2 ans — réservée aux 50 premiers clients</span>
+        </strong>
+      </div>
     `
   }
 ];
@@ -593,27 +563,18 @@ const orderBtnTop = document.getElementById('orderBtnTop');
 // Use international format without '+' for wa.me
 const WHATSAPP_NUMBER = '221774015004';
 
-// General info message (FAB uses this)
-const GENERAL_INFO_MESSAGE = 'Bonjour, je souhaite des informations générales sur les powerbanks GREENBRIDGE. Merci.';
-const GENERAL_WA_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=` + encodeURIComponent(GENERAL_INFO_MESSAGE);
-
 let currentModel = 0;
 let currentImage = 0;
 let heroTimer = null;
 const SLIDE_INTERVAL_MS = 5000;
 
-/* Minimal WhatsApp helper: opens wa.me with a prefilled message */
-function openWhatsAppMessage(message){
-  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=` + encodeURIComponent(message);
-  window.open(url, '_blank', 'noopener');
-}
-
-/* Request price for a specific product (index) */
-function requestPrice(index){
-  const m = models[index] || models[0];
-  const msg = `Bonjour, quel est le prix pour ${m.title} (ref: ${m.id}) ? Merci.`;
-  openWhatsAppMessage(msg);
-}
+/* LED simulation state (for pro mode) */
+let ledState = {
+  modes: [],
+  index: 0,
+  clickCount: 0,
+  clickTimer: null
+};
 
 /* Render specs list */
 function renderSpecs(index){
@@ -666,7 +627,7 @@ function buildProPanelHTML(model){
         <div style="margin-top:10px">
           <strong>Liste des modes LED :</strong>
           <ol id="ledModesList" style="margin-top:6px">
-            ${model.ledModes ? model.ledModes.map(l=>`<li>${l.name}</li>`).join('') : ''}
+            ${model.ledModes.map(l=>`<li>${l.name}</li>`).join('')}
           </ol>
         </div>
       </div>
@@ -713,6 +674,20 @@ function updateHero(index){
       wb.style.display = 'none';
       wb.setAttribute('aria-hidden','true');
     }
+  }
+
+  // Set WhatsApp link for ordering (pre-fill message)
+  // Format wa.me: https://wa.me/<number>?text=<urlencoded message>
+  // number should be international without + (already in WHATSAPP_NUMBER)
+  const prefillMessage = `Bonjour, je souhaite commander / obtenir un échantillon de : ${m.title} (ref: ${m.id})`;
+  const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=` + encodeURIComponent(prefillMessage);
+
+  // Update floating FAB and order button
+  if(fabLink){
+    fabLink.href = waUrl;
+  }
+  if(orderBtnTop){
+    orderBtnTop.href = waUrl;
   }
 
   // prepare pro panel content (hidden by default)
@@ -777,14 +752,17 @@ function closeOverlay(){
   if(first) first.focus();
 }
 
-/* Product image click: DISABLED as requested (does nothing) */
+/* Product image click cycles images */
 const productImageEl = document.querySelector('.product-image');
 if(productImageEl){
-  productImageEl.addEventListener('click', (e) => {
-    // intentionally do nothing on image click (user requested "plus rien")
-    e.stopPropagation();
-    e.preventDefault();
-    return false;
+  productImageEl.addEventListener('click', ()=>{
+    const m = models[currentModel] || models[0];
+    if(!m.images || m.images.length===0) return;
+    currentImage = (currentImage + 1) % m.images.length;
+    heroImg.style.transform = 'scale(0.98)';
+    setTimeout(()=> heroImg.style.transform = 'scale(1)', 120);
+    heroImg.src = m.images[currentImage];
+    startHeroSlideshow();
   });
 }
 
@@ -886,7 +864,6 @@ modalOverlay.addEventListener('click', (ev)=> { if(ev.target === modalOverlay) c
     {rxRatio:0.42, ry:10, speed:0.05, phase:Math.PI}
   ];
   orbs.forEach((o,i)=>{ if(o){ o.style.opacity='1'; }});
-
   let t0 = performance.now();
   function tick(now){
     const time = (now - t0)/1000;
@@ -994,11 +971,6 @@ function applyLedMode(idx){
 
 /* Init: show first model on desktop */
 document.addEventListener('DOMContentLoaded', ()=>{
-  // set FAB to general info link
-  if(fabLink){
-    fabLink.href = GENERAL_WA_URL;
-  }
-
   if(window.matchMedia('(max-width:640px)').matches){
     updateHero(0);
     productCard.classList.remove('show-on-mobile');
