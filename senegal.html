@@ -56,7 +56,7 @@ img{display:block;max-width:100%;height:auto}
 .logo-text{display:flex;align-items:center;gap:12px}
 .logo-text img{height:48px;display:block}
 .company-name{
-  font-size:36px;
+  font-size:36px;            /* agrandi comme demandé */
   font-weight:800;
   letter-spacing:1px;
   padding:6px 10px;
@@ -270,7 +270,7 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
             <h4>GreenMini</h4>
             <p>GreenMini ≈ 9 000 mAh<br><small>Ultra-compact, idéal pour sac &amp; poche.</small></p>
           </div>
-          <div class="actions"><button class="btn-small" onclick="requestPrice(0); event.stopPropagation()">Demander prix</button></div>
+          <div class="actions"><button class="btn-small" onclick="openTechModal(0);event.stopPropagation()">Infos</button></div>
         </div>
 
         <div class="model" role="button" onclick="selectModel(1)" tabindex="0" aria-label="GreenCore 9k">
@@ -279,7 +279,7 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
             <h4>GreenCore</h4>
             <p>GreenCore ≈ 9 000 mAh<br><small>Modulaire • Type-C charge rapide</small></p>
           </div>
-          <div class="actions"><button class="btn-small" onclick="requestPrice(1); event.stopPropagation()">Demander prix</button></div>
+          <div class="actions"><button class="btn-small" onclick="openTechModal(1);event.stopPropagation()">Infos</button></div>
         </div>
 
         <div class="model" role="button" onclick="selectModel(2)" tabindex="0" aria-label="GreenPro 12k">
@@ -288,7 +288,7 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
             <h4>GreenPro</h4>
             <p>GreenPro ≈ 12 000 mAh<br><small>Charge rapide USB-C • Pack haute qualité</small></p>
           </div>
-          <div class="actions"><button class="btn-small" onclick="requestPrice(2); event.stopPropagation()">Demander prix</button></div>
+          <div class="actions"><button class="btn-small" onclick="openTechModal(2);event.stopPropagation()">Infos</button></div>
         </div>
 
         <!-- Modèle mis à jour : GreenWireless -->
@@ -298,7 +298,7 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
             <h4>GreenWireless</h4>
             <p>GreenWireless — 20 000 mAh<br><small>Boîtier amovible • Charge rapide PD / QC3.0 • Sans-fil</small></p>
           </div>
-          <div class="actions"><button class="btn-small" onclick="requestPrice(3); event.stopPropagation()">Demander prix</button></div>
+          <div class="actions"><button class="btn-small" onclick="openTechModal(3);event.stopPropagation()">Infos</button></div>
         </div>
       </div>
     </section>
@@ -345,9 +345,8 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
         </div>
 
         <div class="cta-group" aria-label="Actions produit">
-          <!-- MAIN on-screen button: now 'Infos générales' (général, non lié au produit) -->
-          <a id="orderBtnTop" class="btn-primary" href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Informations générales</a>
-          <!-- keep technical info modal (product-specific) -->
+          <!-- orderBtnTop href sera mis à jour dynamiquement par JS pour inclure le numéro et le message -->
+          <a id="orderBtnTop" class="btn-primary" href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Commander / Échantillon</a>
           <button id="infoBtnHero" class="btn-secondary" onclick="openTechModal(currentModel)"><i class="fa-solid fa-circle-info"></i> Infos techniques</button>
           <button id="detailsToggle" class="btn-small"><i class="fa-solid fa-list"></i> Afficher détails</button>
         </div>
@@ -381,8 +380,8 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
   </main>
 
   <!-- WhatsApp FAB (visible, green) -->
-  <!-- Now points to GENERAL INFO message -->
-  <div id="fab" class="fab" role="button" aria-label="Informations générales via WhatsApp">
+  <!-- href par défaut vers le numéro, JS mettra le message pré-rempli -->
+  <div id="fab" class="fab" role="button" aria-label="Commander via WhatsApp">
     <a id="fabLink" href="https://wa.me/221774015004" target="_blank" rel="noopener noreferrer" aria-label="Commander via WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
   </div>
 
@@ -564,10 +563,6 @@ const orderBtnTop = document.getElementById('orderBtnTop');
 // Use international format without '+' for wa.me
 const WHATSAPP_NUMBER = '221774015004';
 
-// Pre-made general message used by main on-screen button and FAB
-const GENERAL_INFO_MESSAGE = 'Bonjour, je souhaite des informations générales sur les powerbanks GREENBRIDGE. Merci.';
-const GENERAL_WA_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=` + encodeURIComponent(GENERAL_INFO_MESSAGE);
-
 let currentModel = 0;
 let currentImage = 0;
 let heroTimer = null;
@@ -580,19 +575,6 @@ let ledState = {
   clickCount: 0,
   clickTimer: null
 };
-
-/* Utility: open WhatsApp with a message (new tab) */
-function openWhatsAppMessage(message){
-  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=` + encodeURIComponent(message);
-  window.open(url, '_blank', 'noopener');
-}
-
-/* Request price for a specific product (called from model card buttons) */
-function requestPrice(index){
-  const m = models[index] || models[0];
-  const msg = `Bonjour, quel est le prix pour ${m.title} (ref: ${m.id}) ? Merci.`;
-  openWhatsAppMessage(msg);
-}
 
 /* Render specs list */
 function renderSpecs(index){
@@ -694,12 +676,18 @@ function updateHero(index){
     }
   }
 
-  // MAIN on-screen button & FAB should point to GENERAL info (not product specific)
+  // Set WhatsApp link for ordering (pre-fill message)
+  // Format wa.me: https://wa.me/<number>?text=<urlencoded message>
+  // number should be international without + (already in WHATSAPP_NUMBER)
+  const prefillMessage = `Bonjour, je souhaite commander / obtenir un échantillon de : ${m.title} (ref: ${m.id})`;
+  const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=` + encodeURIComponent(prefillMessage);
+
+  // Update floating FAB and order button
   if(fabLink){
-    fabLink.href = GENERAL_WA_URL;
+    fabLink.href = waUrl;
   }
   if(orderBtnTop){
-    orderBtnTop.href = GENERAL_WA_URL;
+    orderBtnTop.href = waUrl;
   }
 
   // prepare pro panel content (hidden by default)
@@ -994,10 +982,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
   document.querySelectorAll('.models .model').forEach((el, idx)=> {
     el.addEventListener('keydown', (e)=> { if(e.key==='Enter'||e.key===' ') { e.preventDefault(); selectModel(idx); }});
   });
-
-  // ensure FAB and main on-screen button use general info message on load
-  if(fabLink) fabLink.href = GENERAL_WA_URL;
-  if(orderBtnTop) orderBtnTop.href = GENERAL_WA_URL;
 });
 
 /* adapt overlay on resize */
