@@ -57,7 +57,7 @@ html, body{
   color:#fff;
   scroll-behavior:smooth;
   overflow-x:hidden;
-  overflow-y:scroll;
+  overflow-y:auto;
   min-height:100%;
   width:100%;
 }
@@ -70,12 +70,10 @@ body{
   position:relative;
   -webkit-overflow-scrolling:touch;
 }
-
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
 button{font-family:inherit}
 
-/* Background fixed and stable on mobile */
 .page-bg{
   position:fixed;
   inset:0;
@@ -190,10 +188,10 @@ header{
 .brand-stack{
   display:flex;
   flex-direction:column;
-  align-items:flex-start;
+  align-items:center;
   justify-content:flex-start;
   line-height:1;
-  text-align:left;
+  text-align:center;
   min-width:0;
   margin:0;
   padding:0;
@@ -214,7 +212,7 @@ header{
   top:2px;
   white-space:nowrap;
   line-height:1;
-  text-align:left;
+  text-align:center;
   width:max-content;
   display:block;
 }
@@ -230,7 +228,7 @@ header{
   -webkit-text-stroke:0.4px rgba(212,175,55,0.55);
   white-space:nowrap;
   line-height:1;
-  text-align:left;
+  text-align:center;
   width:max-content;
   display:block;
 }
@@ -679,16 +677,16 @@ main.container{
   padding:12px
 }
 .modal{
-  width:min(360px,88vw);
+  width:min(320px,86vw);
   background:#fff;
   border-radius:16px;
-  padding:12px;
+  padding:10px 10px 10px;
   overflow:auto;
   box-shadow:0 20px 45px rgba(0,0,0,0.42);
-  max-height:78vh;
+  max-height:70vh;
   position:relative
 }
-.modal h2{font-size:18px}
+.modal h2{font-size:16px; margin-right:28px}
 .modal .close{
   position:absolute;
   right:8px;
@@ -854,7 +852,7 @@ footer{
   .logo-text img{height:50px}
   .fab{width:50px;height:50px}
   .fab button{font-size:20px}
-  .modal{width:min(90vw,360px)}
+  .modal{width:min(90vw,340px)}
 }
 @media (max-width:768px){
   .company-name{font-size:26px}
@@ -870,11 +868,11 @@ footer{
   .featured-hero{height:220px}
   .product-card{display:none !important;}
   .modal{
-    width:min(92vw,320px);
-    max-height:68vh;
+    width:min(92vw,310px);
+    max-height:65vh;
     padding:10px;
   }
-  .modal h2{font-size:16px}
+  .modal h2{font-size:15px}
 }
 @media (max-width:480px){
   .hero-content{
@@ -907,7 +905,7 @@ footer{
 
 <div class="topbar" role="banner">
   <div class="promo-wrap" aria-hidden="true">
-    <div class="promo-text"><i class="fa-solid fa-bolt"></i><span>PROMOTION</span></div>
+    <div class="promo-text"><i class="fa-solid fa-bolt"></i><span>Assemblé en Afrique de l'Ouest</span></div>
   </div>
   <div class="right" aria-hidden="true">
     <div class="flag-slider">
@@ -1558,7 +1556,6 @@ function sendWhatsApp(country){
   window.open(url, '_blank', 'noopener,noreferrer');
 }
 
-/* Desktop = mail direct, mobile = WhatsApp chooser */
 function buildMailtoUrl(modelIndex){
   const m = models[modelIndex] || models[0];
   const subject = `Commande GreenBridge — ${m.title}`;
