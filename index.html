@@ -941,33 +941,20 @@ footer{
     padding:10px 20px
   }
   .company-name{font-size:30px}
-  .logo-text img{height:50px}
+  .mobile-nav.open{max-height:85vh}
+  .mobile-nav .inner{padding-bottom:20px}
+  .gb-btn{width:42px;height:42px;font-size:24px}
   .whatsapp-choice{grid-template-columns:1fr}
   .fab{width:50px;height:50px}
   .fab button{font-size:20px}
 }
 @media (max-width:768px){
   .company-name{font-size:26px}
-  .topbar{
-    gap:10px;
-    font-size:12px;
-    padding:0 3.5vw;
-  }
-  .featured-hero{height:240px}
+  .topbar .right{gap:10px;font-size:13px}
   .card .image-wrap{height:200px}
   .card-content{padding:16px 12px 18px}
-}
-@media (max-width:640px){
-  .promo-chip{
-    font-size:11px;
-    letter-spacing:0.7px;
-    padding:6px 12px;
-  }
-  .company-name{font-size:24px}
-  .company-tagline{font-size:12px; letter-spacing:4px}
-  .logo-text img{height:46px}
-  .featured-hero{height:220px}
-  .product-card{display:none !important;}
+  .hero-content h1 { font-size:28px; }
+  .hero-content p { font-size:14px; }
 }
 @media (max-width:480px){
   .hero-content{
@@ -990,13 +977,8 @@ footer{
     padding:12px 28px;
     font-size:15px;
   }
-  .featured-hero{height:200px}
 }
 
-@keyframes slideIn{
-  from{transform:translateY(-8px);opacity:0}
-  to{transform:translateY(0);opacity:1}
-}
 </style>
 </head>
 <body>
@@ -1004,7 +986,7 @@ footer{
   <img class="page-bg" src="Energie_blanche.png" alt="" aria-hidden="true">
   <div class="page-bg-overlay" aria-hidden="true"></div>
 
-  <div class="topbar" role="banner">
+  <div class="topbar" role="banner" aria-hidden="false">
     <div class="left">
       <div class="flag-slider" aria-hidden="true">
         <img id="flagImage" src="https://flagcdn.com/w40/ci.png" alt="Drapeau Côte d'Ivoire">
@@ -1012,7 +994,7 @@ footer{
     </div>
 
     <div class="promo-marquee" aria-hidden="true">
-      <div class="promo-chip"><i class="fa-solid fa-bolt"></i><span>PROMOTION EXCEPTIONNELLE</span></div>
+      <div class="promo-chip"><i class="fa-solid fa-bolt"></i><span>PROMOTION</span></div>
     </div>
 
     <div class="right" aria-hidden="true"></div>
@@ -1020,9 +1002,7 @@ footer{
 
   <header role="banner" aria-label="En-tête">
     <div class="logo-text">
-      <a href="GreenBrigde technologies.html" aria-label="Accueil">
-        <img src="green bridge domo.png" alt="Logo GreenBridge" loading="eager" fetchpriority="high">
-      </a>
+      <img src="green bridge domo.png" alt="Logo GreenBridge" loading="eager" fetchpriority="high">
     </div>
     <div class="brand-stack">
       <div class="company-name">GREENBRIDGE</div>
