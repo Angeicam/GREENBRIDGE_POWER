@@ -43,7 +43,6 @@
   --muted-text-size:15px;
 
   --electric-yellow:#ffd600;
-
   --whatsapp-green:#25D366;
 }
 
@@ -122,49 +121,30 @@ button, input, select{font-family:inherit}
 .topbar .left{flex:0 0 auto}
 .topbar .right{flex:0 0 auto}
 
-.promo-marquee{
+.promo-wrap{
   flex:1;
-  overflow:hidden;
-  white-space:nowrap;
-  text-align:center;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
   min-width:0;
 }
-.promo-chip{
+.promo-text{
   display:inline-flex;
   align-items:center;
-  gap:10px;
-  padding:7px 16px;
-  border-radius:999px;
-  color:#fff;
-  font-weight:900;
-  letter-spacing:1px;
+  gap:8px;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:1.2px;
   text-transform:uppercase;
-  background:linear-gradient(90deg, #0b4d26, #073217);
-  border:1px solid rgba(212,175,55,0.75);
-  box-shadow:0 8px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.10);
-  text-shadow:0 2px 6px rgba(0,0,0,0.35);
-  position:relative;
-  overflow:hidden;
-}
-.promo-chip::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:999px;
-  background:linear-gradient(120deg, transparent 0%, rgba(212,175,55,0.10) 48%, transparent 100%);
-  opacity:.9;
-}
-.promo-chip span{
-  position:relative;
-  z-index:1;
-  color:#fff;
-  -webkit-text-stroke:0.55px var(--gold-base);
-  text-shadow:0 2px 6px rgba(0,0,0,0.42);
-}
-.promo-chip i{
-  position:relative;
-  z-index:1;
   color:var(--gold-base);
+  -webkit-text-stroke:0.5px rgba(4,70,46,0.85);
+  text-shadow:0 2px 6px rgba(0,0,0,0.35);
+  white-space:nowrap;
+  position:relative;
+}
+.promo-text i{
+  color:var(--gold-base);
+  font-size:11px;
 }
 .flag-slider{
   width:38px;
@@ -409,7 +389,7 @@ header{
   cursor:pointer;
   min-height:240px;
   backdrop-filter:blur(4px) saturate(110%);
-  color:var(--text,#02110a)
+  color:#02110a
 }
 .models .thumb{
   position:relative;
@@ -432,7 +412,7 @@ header{
 .model .meta h4{
   margin:0;
   font-size:18px;
-  color:var(--text,#02110a);
+  color:#02110a;
   font-weight:900
 }
 .model .meta p{
@@ -449,229 +429,12 @@ header{
   margin-top:4px
 }
 
-/* product card */
+/* product card hidden on purpose */
 .product-card{
-  width:min(980px,94%);
-  margin:22px auto 28px;
-  background:rgba(255,255,255,0.12);
-  border:1px solid rgba(6,42,32,0.06);
-  border-radius:14px;
-  padding:18px;
-  box-shadow:0 12px 36px rgba(6,42,32,0.06);
-  color:var(--text,#02110a);
-  display:flex;
-  gap:18px;
-  align-items:flex-start;
-  position:relative;
-  overflow:hidden;
-  backdrop-filter:blur(3px) saturate(105%)
-}
-.product-card > *{position:relative;z-index:2}
-.product-card .close-mobile{
-  display:none;
-  position:absolute;
-  right:12px;
-  top:10px;
-  background:transparent;
-  border:0;
-  font-size:22px;
-  color:var(--muted,#23403a);
-  cursor:pointer;
-  z-index:5
-}
-.product-info{
-  flex:1;
-  min-width:260px;
-  padding-right:6px
-}
-.top-label{
-  display:inline-block;
-  padding:7px 10px;
-  border-radius:999px;
-  background:rgba(6,120,60,0.06);
-  color:var(--brand-green);
-  font-weight:800;
-  margin-bottom:8px;
-  font-size:13px
-}
-.product-title{
-  font-size:20px;
-  font-weight:900;
-  margin:6px 0 6px;
-  color:var(--text,#02110a);
-  line-height:1.08
-}
-.warranty-badge{
-  display:inline-block;
-  margin-left:8px;
-  vertical-align:middle;
-  padding:8px 12px;
-  border-radius:999px;
-  background:linear-gradient(90deg,#ffd54a,#ffb300);
-  color:#08110a;
-  font-weight:900;
-  font-size:13px;
-  box-shadow:0 10px 30px rgba(255,180,0,0.18);
-  border:1px solid rgba(0,0,0,0.06)
-}
-.product-sub{
-  font-size:13px;
-  color:rgba(2,17,10,0.95);
-  margin-bottom:10px;
-  line-height:1.35
-}
-.features{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-top:6px
-}
-.feature-pill{
-  background:rgba(255,255,255,0.92);
-  padding:7px 10px;
-  border-radius:999px;
-  border:1px solid rgba(6,42,32,0.04);
-  color:var(--brand-green);
-  font-weight:800;
-  font-size:13px
-}
-.specs-block{margin-top:12px}
-.specs-title{
-  font-weight:800;
-  margin-bottom:8px;
-  font-size:15px
-}
-.spec-list{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  color:var(--text,#02110a);
-  font-size:15px
-}
-.spec-list > div{
-  background:rgba(255,255,255,0.96);
-  padding:10px 12px;
-  border-radius:10px;
-  border:1px solid rgba(6,42,32,0.04);
-  box-shadow:0 6px 14px rgba(6,42,32,0.03)
-}
-.product-side{
-  width:340px;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  align-items:stretch
-}
-.product-image{
-  width:100%;
-  height:220px;
-  border-radius:12px;
-  overflow:hidden;
-  background:linear-gradient(180deg,#fbfeff,#f3f9fc);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border:1px solid rgba(6,42,32,0.04)
-}
-.product-image img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  object-position:center;
-  display:block;
-  cursor:pointer;
-  transition:transform .35s;
-  border-radius:8px
+  display:none !important;
 }
 
-.cta-group{
-  display:flex;
-  flex-direction:column;
-  gap:10px
-}
-.btn-primary{
-  background:linear-gradient(90deg,var(--brand-green),var(--green-mid));
-  color:#fff;
-  border:0;
-  padding:12px 14px;
-  border-radius:12px;
-  font-weight:900;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px
-}
-.btn-secondary{
-  background:#fff;
-  border:1px solid rgba(6,42,32,0.06);
-  padding:10px 12px;
-  border-radius:10px;
-  cursor:pointer;
-  font-weight:800
-}
-.btn-small{
-  background:transparent;
-  border:1px solid rgba(6,42,32,0.06);
-  padding:8px 10px;
-  border-radius:8px;
-  cursor:pointer;
-  font-weight:700
-}
-
-/* details */
-.details-panel{
-  display:none;
-  margin-top:12px;
-  width:100%;
-  background:rgba(255,255,255,0.98);
-  border-radius:10px;
-  padding:12px;
-  color:var(--text,#02110a);
-  box-shadow:0 8px 24px rgba(6,42,32,0.06);
-  border:1px solid rgba(6,42,32,0.04);
-  line-height:1.45
-}
-
-/* pro */
-.pro-panel{
-  display:none;
-  margin-top:12px;
-  background:rgba(255,255,255,0.98);
-  border-radius:10px;
-  padding:12px;
-  color:var(--text,#02110a);
-  box-shadow:0 8px 24px rgba(6,42,32,0.06);
-  border:1px solid rgba(6,42,32,0.04)
-}
-.pro-controls{
-  display:flex;
-  gap:10px;
-  align-items:center;
-  flex-wrap:wrap
-}
-.led-sim{display:flex;gap:10px;align-items:center}
-.led-indicator{
-  width:36px;
-  height:36px;
-  border-radius:50%;
-  background:#2b2b2b;
-  box-shadow:0 6px 18px rgba(0,0,0,0.3);
-  transition:all .25s;
-  display:inline-block;
-  vertical-align:middle
-}
-.led-low{background:rgba(255,236,179,0.14);box-shadow:0 0 8px rgba(255,230,120,0.08), 0 6px 18px rgba(0,0,0,0.15)}
-.led-med{background:rgba(255,236,179,0.28);box-shadow:0 0 14px rgba(255,230,120,0.22), 0 8px 26px rgba(0,0,0,0.12)}
-.led-high{background:rgba(255,236,179,0.6);box-shadow:0 0 22px rgba(255,230,120,0.35), 0 10px 30px rgba(0,0,0,0.08)}
-
-@keyframes blink-slow { 0%{opacity:1} 50%{opacity:0.15} 100%{opacity:1} }
-@keyframes blink-med { 0%{opacity:1} 50%{opacity:0.05} 100%{opacity:1} }
-@keyframes blink-fast { 0%{opacity:1} 50%{opacity:0.02} 100%{opacity:1} }
-.blink-slow{animation:blink-slow 1.2s linear infinite}
-.blink-med{animation:blink-med 0.6s linear infinite}
-.blink-fast{animation:blink-fast 0.25s linear infinite}
-
+/* featured */
 .futures-title{
   display:flex;
   align-items:center;
@@ -727,10 +490,6 @@ header{
 .featured-copy p{
   color:rgba(2,17,10,0.95);
   margin-top:10px;
-  line-height:1.45
-}
-.featured-copy ul{
-  color:rgba(2,17,10,0.95);
   line-height:1.45
 }
 .availability-badge{
@@ -917,8 +676,6 @@ footer{
   .grid-4{grid-template-columns:repeat(2,1fr)}
 }
 @media (max-width:900px){
-  .product-card{flex-direction:column;padding:14px}
-  .product-side{order:-1;width:100%}
   .featured-hero{height:280px}
 }
 @media (max-width:820px){
@@ -941,20 +698,31 @@ footer{
     padding:10px 20px
   }
   .company-name{font-size:30px}
-  .mobile-nav.open{max-height:85vh}
-  .mobile-nav .inner{padding-bottom:20px}
-  .gb-btn{width:42px;height:42px;font-size:24px}
+  .logo-text img{height:50px}
   .whatsapp-choice{grid-template-columns:1fr}
   .fab{width:50px;height:50px}
   .fab button{font-size:20px}
 }
 @media (max-width:768px){
   .company-name{font-size:26px}
-  .topbar .right{gap:10px;font-size:13px}
+  .topbar{
+    gap:10px;
+    font-size:12px;
+    padding:0 3.5vw;
+  }
+  .featured-hero{height:240px}
   .card .image-wrap{height:200px}
   .card-content{padding:16px 12px 18px}
-  .hero-content h1 { font-size:28px; }
-  .hero-content p { font-size:14px; }
+}
+@media (max-width:640px){
+  .promo-text{
+    font-size:11px;
+    letter-spacing:0.8px;
+  }
+  .company-name{font-size:24px}
+  .company-tagline{font-size:12px; letter-spacing:4px}
+  .logo-text img{height:46px}
+  .featured-hero{height:220px}
 }
 @media (max-width:480px){
   .hero-content{
@@ -993,8 +761,8 @@ footer{
       </div>
     </div>
 
-    <div class="promo-marquee" aria-hidden="true">
-      <div class="promo-chip"><i class="fa-solid fa-bolt"></i><span>PROMOTION</span></div>
+    <div class="promo-wrap" aria-hidden="true">
+      <div class="promo-text"><i class="fa-solid fa-bolt"></i><span>PROMOTION</span></div>
     </div>
 
     <div class="right" aria-hidden="true"></div>
@@ -1003,10 +771,10 @@ footer{
   <header role="banner" aria-label="En-tête">
     <div class="logo-text">
       <img src="green bridge domo.png" alt="Logo GreenBridge" loading="eager" fetchpriority="high">
-    </div>
-    <div class="brand-stack">
-      <div class="company-name">GREENBRIDGE</div>
-      <div class="company-tagline">TECHNOLOGIES</div>
+      <div class="brand-stack">
+        <div class="company-name">GREENBRIDGE</div>
+        <div class="company-tagline">TECHNOLOGIES</div>
+      </div>
     </div>
   </header>
 
@@ -1089,58 +857,6 @@ footer{
         </div>
       </div>
     </section>
-
-    <section class="product-card" role="region" aria-label="Produit principal" aria-hidden="true">
-      <button class="close-mobile" aria-label="Fermer la fiche mobile" title="Fermer" onclick="closeOverlay()">×</button>
-
-      <div class="product-info">
-        <div class="top-label">Batterie externe haute performance</div>
-        <div>
-          <span class="product-title" id="heroTitle">GreenMini — 10 000 mAh</span>
-          <span id="warrantyBadge" class="warranty-badge" style="display:none">Garantie 3 ans — 100 premiers clients</span>
-        </div>
-        <div class="product-sub" id="heroSubtitle">Ultra-compact</div>
-
-        <div class="features" aria-hidden="false" style="margin-top:8px">
-          <div class="feature-pill">Durabilité</div>
-          <div class="feature-pill">Solidité</div>
-          <div class="feature-pill">Technique</div>
-        </div>
-
-        <div class="specs-block">
-          <div class="specs-title">Technique — Spécifications</div>
-          <div class="spec-list" id="specList"></div>
-        </div>
-
-        <div id="detailsPanel" class="details-panel" aria-hidden="true"></div>
-
-        <div style="margin-top:12px">
-          <button id="proToggle" class="btn-small" aria-pressed="false" type="button">Mode Pro</button>
-        </div>
-
-        <div id="proPanel" class="pro-panel" aria-hidden="true"></div>
-      </div>
-
-      <div class="product-side">
-        <div class="product-image" id="productImageBox" title="Cliquer pour changer d'image" role="button" tabindex="0">
-          <img id="heroMainImage" src="Pwkb_Mini_3.png" alt="GreenMini image" loading="eager" fetchpriority="high">
-        </div>
-
-        <div class="cta-group" aria-label="Actions produit">
-          <button id="orderBtnTop" class="btn-primary" type="button">
-            <i class="fa-brands fa-whatsapp"></i> Commander
-          </button>
-          <button id="infoBtnHero" class="btn-secondary" type="button" onclick="openTechModal(currentModel)">
-            <i class="fa-solid fa-circle-info"></i> Infos techniques
-          </button>
-          <button id="detailsToggle" class="btn-small" type="button"><i class="fa-solid fa-list"></i> Afficher détails</button>
-        </div>
-      </div>
-    </section>
-
-    <div class="futures-title" id="futures">
-      <div class="models-title">Projets à venir</div>
-    </div>
 
     <section class="featured" aria-label="Pack 2.5 kWh — Solution modulaire">
       <div class="featured-hero" id="featuredHero" aria-hidden="false">
@@ -1358,13 +1074,11 @@ const models = [
   }
 ];
 
-const productCard = document.querySelector('.product-card');
 const heroImg = document.getElementById('heroMainImage');
 const specListEl = document.getElementById('specList');
 const modalOverlay = document.getElementById('modalOverlay');
 const modalContent = document.getElementById('modalContent');
 const fabButton = document.getElementById('fabButton');
-const orderBtnTop = document.getElementById('orderBtnTop');
 
 let currentModel = 0;
 let currentImage = 0;
@@ -1481,13 +1195,13 @@ function buildProPanelHTML(model){
 
 function updateHero(index){
   const m = models[index] || models[0];
-  document.getElementById('heroTitle').textContent = m.title;
-  document.getElementById('heroSubtitle').textContent = m.subtitle || '';
   heroImg.src = (m.images && m.images[0]) ? m.images[0] : heroImg.src;
   heroImg.alt = m.title;
 
   const detailsPanel = document.getElementById('detailsPanel');
-  detailsPanel.innerHTML = `<strong style="font-weight:800">${m.title}</strong><div style="margin-top:8px">${m.details}</div>`;
+  if(detailsPanel){
+    detailsPanel.innerHTML = `<strong style="font-weight:800">${m.title}</strong><div style="margin-top:8px">${m.details}</div>`;
+  }
   renderSpecs(index);
 
   const wb = document.getElementById('warrantyBadge');
@@ -1503,11 +1217,11 @@ function updateHero(index){
   }
 
   const proPanel = document.getElementById('proPanel');
-  proPanel.innerHTML = buildProPanelHTML(m);
-  proPanel.style.display = 'none';
-  proPanel.setAttribute('aria-hidden','true');
-  document.getElementById('proToggle').setAttribute('aria-pressed','false');
-  document.getElementById('proToggle').textContent = 'Mode Pro';
+  if(proPanel){
+    proPanel.innerHTML = buildProPanelHTML(m);
+    proPanel.style.display = 'none';
+    proPanel.setAttribute('aria-hidden','true');
+  }
 
   if(m.id === 'greencore'){
     ledState.modes = m.ledModes.slice();
@@ -1542,7 +1256,6 @@ function stopHeroSlideshow(){
 function selectModel(i){
   currentModel = i;
   updateHero(i);
-  productCard.scrollIntoView({behavior:'smooth', block:'start'});
   currentImage = 0;
   startHeroSlideshow();
 }
@@ -1563,85 +1276,6 @@ if(productImageEl){
     heroImg.src = m.images[currentImage];
     startHeroSlideshow();
   });
-}
-
-document.getElementById('detailsToggle').addEventListener('click', ()=>{
-  const panel = document.getElementById('detailsPanel');
-  const vis = panel.style.display === 'block';
-  if(vis){
-    panel.style.display='none';
-    panel.setAttribute('aria-hidden','true');
-  } else {
-    panel.style.display='block';
-    panel.setAttribute('aria-hidden','false');
-    panel.scrollIntoView({behavior:'smooth', block:'nearest'});
-  }
-});
-
-const proToggleBtn = document.getElementById('proToggle');
-proToggleBtn.addEventListener('click', ()=>{
-  const proPanel = document.getElementById('proPanel');
-  const isShown = proPanel.style.display === 'block';
-  if(isShown){
-    proPanel.style.display = 'none';
-    proPanel.setAttribute('aria-hidden','true');
-    proToggleBtn.setAttribute('aria-pressed','false');
-    proToggleBtn.textContent = 'Mode Pro';
-  } else {
-    proPanel.style.display = 'block';
-    proPanel.setAttribute('aria-hidden','false');
-    proToggleBtn.setAttribute('aria-pressed','true');
-    proToggleBtn.textContent = 'Mode Pro (actif)';
-    proPanel.scrollIntoView({behavior:'smooth', block:'nearest'});
-  }
-});
-
-/* WhatsApp choice modal */
-function openCountryModal(){
-  const html = `
-    <h2 style="margin:0 40px 6px 0;font-size:22px;color:#08110a">Commander via WhatsApp</h2>
-    <p style="margin:0;color:#315348;line-height:1.45;font-size:14px">
-      Choisis le pays de commande. Le message sera pré-rempli avec le bon numéro.
-    </p>
-
-    <div class="whatsapp-choice">
-      <button class="whatsapp-card" type="button" onclick="sendWhatsApp('senegal')">
-        <div class="top">
-          <div class="flag"><img src="https://flagcdn.com/w80/sn.png" alt="Drapeau Sénégal"></div>
-          <div>
-            <h4>Sénégal</h4>
-            <p>Commander pour le Sénégal via WhatsApp, avec le message adapté.</p>
-          </div>
-        </div>
-        <div class="go"><i class="fa-brands fa-whatsapp"></i> Continuer</div>
-      </button>
-
-      <button class="whatsapp-card" type="button" onclick="sendWhatsApp('coteivoire')">
-        <div class="top">
-          <div class="flag"><img src="https://flagcdn.com/w80/ci.png" alt="Drapeau Côte d'Ivoire"></div>
-          <div>
-            <h4>Côte d'Ivoire</h4>
-            <p>Commander pour la Côte d'Ivoire avec le message adapté.</p>
-          </div>
-        </div>
-        <div class="go"><i class="fa-brands fa-whatsapp"></i> Continuer</div>
-      </button>
-    </div>
-
-    <div style="margin-top:12px;text-align:right">
-      <button type="button" class="btn-secondary" onclick="closeModal()">Fermer</button>
-    </div>
-  `;
-  openModal(html);
-}
-
-function sendWhatsApp(country){
-  const number = whatsappNumbers[country] || whatsappNumbers.senegal;
-  const countryLabel = country === 'coteivoire' ? "la Côte d'Ivoire" : 'le Sénégal';
-  const message = `Bonjour, je souhaite commander un produit GreenBridge pour ${countryLabel}. Merci de me communiquer les modèles disponibles et les prix.`;
-  const url = `https://wa.me/${number}?text=` + encodeURIComponent(message);
-  closeModal();
-  window.open(url, '_blank', 'noopener,noreferrer');
 }
 
 function openModal(html){
@@ -1699,7 +1333,54 @@ modalOverlay.addEventListener('click', (ev)=>{
   if(ev.target === modalOverlay) closeModal();
 });
 
-/* Electric effect */
+/* WhatsApp choice modal */
+function openCountryModal(){
+  const html = `
+    <h2 style="margin:0 40px 6px 0;font-size:22px;color:#08110a">Commander via WhatsApp</h2>
+    <p style="margin:0;color:#315348;line-height:1.45;font-size:14px">
+      Choisis le pays de commande. Le message sera pré-rempli avec le bon numéro.
+    </p>
+
+    <div class="whatsapp-choice">
+      <button class="whatsapp-card" type="button" onclick="sendWhatsApp('senegal')">
+        <div class="top">
+          <div class="flag"><img src="https://flagcdn.com/w80/sn.png" alt="Drapeau Sénégal"></div>
+          <div>
+            <h4>Sénégal</h4>
+            <p>Commander pour le Sénégal via WhatsApp, avec le message adapté.</p>
+          </div>
+        </div>
+        <div class="go"><i class="fa-brands fa-whatsapp"></i> Continuer</div>
+      </button>
+
+      <button class="whatsapp-card" type="button" onclick="sendWhatsApp('coteivoire')">
+        <div class="top">
+          <div class="flag"><img src="https://flagcdn.com/w80/ci.png" alt="Drapeau Côte d'Ivoire"></div>
+          <div>
+            <h4>Côte d'Ivoire</h4>
+            <p>Commander pour la Côte d'Ivoire avec le message adapté.</p>
+          </div>
+        </div>
+        <div class="go"><i class="fa-brands fa-whatsapp"></i> Continuer</div>
+      </button>
+    </div>
+
+    <div style="margin-top:12px;text-align:right">
+      <button type="button" class="btn-secondary" onclick="closeModal()">Fermer</button>
+    </div>
+  `;
+  openModal(html);
+}
+
+function sendWhatsApp(country){
+  const number = whatsappNumbers[country] || whatsappNumbers.senegal;
+  const countryLabel = country === 'coteivoire' ? "la Côte d'Ivoire" : 'le Sénégal';
+  const message = `Bonjour, je souhaite commander un produit GreenBridge pour ${countryLabel}. Merci de me communiquer les modèles disponibles et les prix.`;
+  const url = `https://wa.me/${number}?text=` + encodeURIComponent(message);
+  closeModal();
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
+
 (function(){
   const electricBand = document.getElementById('electricBand');
   if(!electricBand) return;
@@ -1934,7 +1615,6 @@ function applyLedMode(idx){
 document.addEventListener('DOMContentLoaded', ()=>{
   preloadImages(allImageUrls());
 
-  updateHero(0);
   document.getElementById('year').textContent = new Date().getFullYear();
 
   document.querySelectorAll('.models .model').forEach((el, idx)=>{
@@ -1946,30 +1626,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
     });
   });
 
-  if(orderBtnTop){
-    orderBtnTop.addEventListener('click', openCountryModal);
-  }
   if(fabButton){
     fabButton.addEventListener('click', openCountryModal);
   }
-
-  if(document.querySelector('.product-image')){
-    document.querySelector('.product-image').addEventListener('keydown', (e)=>{
-      if(e.key === 'Enter' || e.key === ' '){
-        e.preventDefault();
-        const m = models[currentModel] || models[0];
-        if(m.images && m.images.length){
-          currentImage = (currentImage + 1) % m.images.length;
-          heroImg.src = m.images[currentImage];
-          startHeroSlideshow();
-        }
-      }
-    });
-  }
-});
-
-window.addEventListener('resize', ()=>{
-  productCard.style.display = 'flex';
 });
 </script>
 </body>
