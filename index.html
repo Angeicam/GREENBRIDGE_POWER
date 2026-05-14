@@ -43,8 +43,6 @@
   --muted-text-size:15px;
 
   --electric-yellow:#ffd600;
-  --release-orange:#ff7a18;
-  --release-orange-2:#ffb347;
 
   --whatsapp-green:#25D366;
 }
@@ -141,36 +139,33 @@ button, input, select{font-family:inherit}
   font-weight:900;
   letter-spacing:1px;
   text-transform:uppercase;
-  background:linear-gradient(90deg, #ff5a1f, #ff9d1a 30%, #ff7a18 60%, #d93b15);
-  box-shadow:0 8px 24px rgba(255,122,24,0.28), inset 0 1px 0 rgba(255,255,255,0.18);
-  border:1px solid rgba(255,255,255,0.12);
+  background:linear-gradient(90deg, #0b4d26, #073217);
+  border:1px solid rgba(212,175,55,0.75);
+  box-shadow:0 8px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.10);
   text-shadow:0 2px 6px rgba(0,0,0,0.35);
   position:relative;
   overflow:hidden;
 }
-.promo-chip::before{
+.promo-chip::after{
   content:"";
   position:absolute;
-  inset:-40% -30%;
-  background:linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.22) 45%, transparent 60%);
-  transform:translateX(-60%) skewX(-18deg);
-  animation:shine 3.5s ease-in-out infinite;
-}
-@keyframes shine{
-  0%{transform:translateX(-60%) skewX(-18deg)}
-  55%{transform:translateX(90%) skewX(-18deg)}
-  100%{transform:translateX(90%) skewX(-18deg)}
+  inset:0;
+  border-radius:999px;
+  background:linear-gradient(120deg, transparent 0%, rgba(212,175,55,0.10) 48%, transparent 100%);
+  opacity:.9;
 }
 .promo-chip span{
   position:relative;
   z-index:1;
+  color:#fff;
+  -webkit-text-stroke:0.55px var(--gold-base);
+  text-shadow:0 2px 6px rgba(0,0,0,0.42);
 }
 .promo-chip i{
   position:relative;
   z-index:1;
-  color:#fff6d2;
+  color:var(--gold-base);
 }
-
 .flag-slider{
   width:38px;
   height:26px;
@@ -198,20 +193,17 @@ header{
   background:linear-gradient(90deg,var(--green-mid),var(--green-mid-2));
   display:flex;
   align-items:center;
-  justify-content:center;
+  justify-content:flex-start;
   padding:0 5vw;
   z-index:1490;
   box-shadow:0 4px 12px rgba(0,0,0,.25);
 }
 
 .logo-text{
-  position:absolute;
-  left:5vw;
-  top:50%;
-  transform:translateY(-50%);
   display:flex;
   align-items:flex-start;
   gap:12px;
+  flex:0 0 auto;
 }
 .logo-text img{
   height:56px;
@@ -222,10 +214,10 @@ header{
 .brand-stack{
   display:flex;
   flex-direction:column;
-  align-items:center;
+  align-items:flex-start;
   justify-content:flex-start;
   line-height:1;
-  text-align:center;
+  text-align:left;
   min-width:0;
   margin:0;
   padding:0;
@@ -245,7 +237,7 @@ header{
   text-shadow:0 3px 6px rgba(0,0,0,0.6);
   white-space:nowrap;
   line-height:1;
-  text-align:center;
+  text-align:left;
   width:max-content;
   display:block;
 }
@@ -262,7 +254,7 @@ header{
   -webkit-text-stroke:0.4px rgba(212,175,55,0.55);
   white-space:nowrap;
   line-height:1;
-  text-align:center;
+  text-align:left;
   width:max-content;
   display:block;
 }
@@ -763,46 +755,58 @@ header{
   align-items:center;
   justify-content:center;
   z-index:5000;
-  padding:20px
+  padding:18px
 }
 .modal{
-  width:min(560px,100%);
+  width:min(480px,92vw);
   background:#fff;
   border-radius:18px;
-  padding:16px;
+  padding:16px 16px 14px;
   overflow:auto;
   box-shadow:0 24px 60px rgba(0,0,0,0.45);
-  max-height:86vh;
+  max-height:84vh;
   position:relative
 }
 .modal .close{
   position:absolute;
-  right:16px;
-  top:12px;
-  background:transparent;
-  border:0;
-  font-size:18px;
-  cursor:pointer
+  right:10px;
+  top:10px;
+  width:34px;
+  height:34px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
+  border:1px solid rgba(6,42,32,0.12);
+  border-radius:50%;
+  font-size:16px;
+  cursor:pointer;
+  box-shadow:0 6px 14px rgba(0,0,0,0.10);
+  color:#0b2418;
 }
+.modal .close:hover{
+  background:#f6faf7;
+}
+
 .whatsapp-choice{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:12px;
+  gap:10px;
   margin-top:14px;
 }
 .whatsapp-card{
   border:1px solid rgba(6,42,32,0.08);
   background:linear-gradient(180deg, #ffffff 0%, #f7fbf9 100%);
-  border-radius:16px;
-  padding:14px;
+  border-radius:14px;
+  padding:12px;
   cursor:pointer;
   text-align:left;
-  box-shadow:0 10px 24px rgba(6,42,32,0.06);
+  box-shadow:0 8px 18px rgba(6,42,32,0.06);
   transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
 }
 .whatsapp-card:hover{
   transform:translateY(-2px);
-  box-shadow:0 16px 30px rgba(6,42,32,0.10);
+  box-shadow:0 14px 24px rgba(6,42,32,0.10);
   border-color:rgba(4,70,46,0.22);
 }
 .whatsapp-card .top{
@@ -811,12 +815,12 @@ header{
   gap:10px;
 }
 .whatsapp-card .flag{
-  width:42px;
-  height:30px;
-  border-radius:8px;
+  width:40px;
+  height:28px;
+  border-radius:7px;
   overflow:hidden;
   border:1px solid rgba(0,0,0,0.08);
-  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
   flex:0 0 auto;
 }
 .whatsapp-card .flag img{
@@ -826,26 +830,26 @@ header{
 }
 .whatsapp-card h4{
   margin:0;
-  font-size:16px;
+  font-size:15px;
   color:#082014;
 }
 .whatsapp-card p{
-  margin:8px 0 0;
+  margin:6px 0 0;
   color:#315348;
-  font-size:13px;
+  font-size:12px;
   line-height:1.45;
 }
 .whatsapp-card .go{
-  margin-top:12px;
+  margin-top:10px;
   display:inline-flex;
   align-items:center;
-  gap:8px;
-  padding:9px 12px;
+  gap:7px;
+  padding:8px 11px;
   border-radius:999px;
   background:linear-gradient(90deg, var(--brand-green), var(--green-mid));
   color:#fff;
   font-weight:800;
-  font-size:13px;
+  font-size:12px;
 }
 
 /* WhatsApp FAB */
@@ -938,9 +942,9 @@ footer{
   }
   .company-name{font-size:30px}
   .logo-text img{height:50px}
+  .whatsapp-choice{grid-template-columns:1fr}
   .fab{width:50px;height:50px}
   .fab button{font-size:20px}
-  .whatsapp-choice{grid-template-columns:1fr}
 }
 @media (max-width:768px){
   .company-name{font-size:26px}
@@ -963,20 +967,7 @@ footer{
   .company-tagline{font-size:12px; letter-spacing:4px}
   .logo-text img{height:46px}
   .featured-hero{height:220px}
-  .product-card{
-    display:flex;
-    position:relative;
-    width:min(980px,94%);
-    margin:18px auto 24px;
-    padding:14px;
-    border-radius:14px;
-    box-shadow:0 12px 30px rgba(6,42,32,0.16);
-    background:rgba(255,255,255,0.96);
-    flex-direction:column;
-    overflow:hidden;
-    max-height:none;
-  }
-  .product-card .close-mobile{display:none}
+  .product-card{display:none !important;}
 }
 @media (max-width:480px){
   .hero-content{
@@ -1628,7 +1619,7 @@ proToggleBtn.addEventListener('click', ()=>{
 /* WhatsApp choice modal */
 function openCountryModal(){
   const html = `
-    <h2 style="margin:0 0 6px;font-size:22px;color:#08110a">Commander via WhatsApp</h2>
+    <h2 style="margin:0 40px 6px 0;font-size:22px;color:#08110a">Commander via WhatsApp</h2>
     <p style="margin:0;color:#315348;line-height:1.45;font-size:14px">
       Choisis le pays de commande. Le message sera pré-rempli avec le bon numéro.
     </p>
