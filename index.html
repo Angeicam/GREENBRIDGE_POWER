@@ -38,8 +38,15 @@ html,body{
   color:var(--text);
   -webkit-font-smoothing:antialiased;
 }
-html{background-color:var(--bg-main);min-height:100%}
-body{background:transparent;min-height:100%}
+html{
+  background-color:var(--bg-main);
+  min-height:100%;
+}
+body{
+  background:transparent;
+  min-height:100%;
+  overflow-x:hidden;
+}
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%;height:auto}
 
@@ -78,7 +85,7 @@ img{display:block;max-width:100%;height:auto}
   justify-content:space-between;
   padding:0 5vw;
   z-index:1600;
-  font-size:13px
+  font-size:13px;
 }
 .topbar .left{font-weight:600}
 .topbar .right{
@@ -106,11 +113,11 @@ img{display:block;max-width:100%;height:auto}
 .logo-text{
   display:flex;
   align-items:center;
-  gap:12px
+  gap:12px;
 }
 .logo-text img{
   height:48px;
-  display:block
+  display:block;
 }
 .brand-stack{
   display:flex;
@@ -121,14 +128,13 @@ img{display:block;max-width:100%;height:auto}
   text-align:center;
   min-width:0;
   margin:0;
-  padding:0
+  padding:0;
 }
 .company-name{
   font-size:36px;
   font-weight:800;
   letter-spacing:1px;
-  padding:0;
-  margin:0;
+  padding:6px 10px;
   border-radius:8px;
   color:var(--brand-green);
   -webkit-text-stroke:0.95px var(--gold);
@@ -139,7 +145,7 @@ img{display:block;max-width:100%;height:auto}
   line-height:1;
   text-align:center;
   width:max-content;
-  display:block
+  display:block;
 }
 .company-tagline{
   font-size:14px;
@@ -155,10 +161,10 @@ img{display:block;max-width:100%;height:auto}
   line-height:1;
   text-align:center;
   width:max-content;
-  display:block
+  display:block;
 }
 
-/* electric band (top lightning across page) */
+/* electric band */
 .electric-band{
   position:fixed;
   top:calc(var(--topbar-h)+var(--header-h)-6px);
@@ -168,12 +174,12 @@ img{display:block;max-width:100%;height:auto}
   z-index:1600;
   pointer-events:none;
   overflow:visible;
-  transform:translateZ(0)
+  transform:translateZ(0);
 }
 .electric-band .container{
   position:relative;
   width:100%;
-  height:100%
+  height:100%;
 }
 .lightning-svg{
   width:100vw;
@@ -182,7 +188,7 @@ img{display:block;max-width:100%;height:auto}
   pointer-events:none;
   opacity:0;
   mix-blend-mode:screen;
-  transition:opacity .22s
+  transition:opacity .22s;
 }
 .electric-band.connected .lightning-svg{opacity:1}
 .orbs{
@@ -191,7 +197,7 @@ img{display:block;max-width:100%;height:auto}
   top:0;
   width:100%;
   height:100%;
-  pointer-events:none
+  pointer-events:none;
 }
 .orb{
   position:absolute;
@@ -210,7 +216,7 @@ img{display:block;max-width:100%;height:auto}
   margin:0 auto;
   padding:18px 14px 160px;
   position:relative;
-  z-index:40
+  z-index:40;
 }
 
 /* Models section */
@@ -221,13 +227,13 @@ img{display:block;max-width:100%;height:auto}
   max-width:100vw;
   position:relative;
   background:transparent;
-  z-index:60
+  z-index:60;
 }
 .models-header{
   display:flex;
   align-items:center;
   justify-content:center;
-  margin-bottom:12px
+  margin-bottom:12px;
 }
 .models-title{
   font-weight:800;
@@ -237,7 +243,7 @@ img{display:block;max-width:100%;height:auto}
   background:rgba(255,255,255,0.6);
   padding:8px 14px;
   border-radius:10px;
-  box-shadow:0 8px 20px rgba(6,42,32,0.06)
+  box-shadow:0 8px 20px rgba(6,42,32,0.06);
 }
 .models{
   display:grid;
@@ -247,7 +253,7 @@ img{display:block;max-width:100%;height:auto}
   max-width:var(--maxw);
   margin:0 auto;
   padding:6px 14px;
-  box-sizing:border-box
+  box-sizing:border-box;
 }
 
 /* model cards */
@@ -264,7 +270,7 @@ img{display:block;max-width:100%;height:auto}
   cursor:pointer;
   min-height:240px;
   backdrop-filter:blur(4px) saturate(110%);
-  color:var(--text)
+  color:var(--text);
 }
 .models .thumb{
   position:relative;
@@ -273,7 +279,7 @@ img{display:block;max-width:100%;height:auto}
   padding-bottom:56%;
   overflow:hidden;
   border-radius:10px;
-  background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.10))
+  background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.10));
 }
 .models .thumb img{
   position:absolute;
@@ -282,7 +288,7 @@ img{display:block;max-width:100%;height:auto}
   height:100%;
   object-fit:cover;
   object-position:center;
-  border-radius:8px
+  border-radius:8px;
 }
 
 /* model text */
@@ -290,23 +296,23 @@ img{display:block;max-width:100%;height:auto}
   margin:0;
   font-size:18px;
   color:var(--text);
-  font-weight:900
+  font-weight:900;
 }
 .model .meta p{
   margin:10px 0 0;
   font-size:14px;
   color:rgba(2,17,10,0.95);
   line-height:1.25;
-  font-weight:600
+  font-weight:600;
 }
 .model .meta p small{
   display:block;
   color:rgba(2,17,10,0.88);
   font-weight:500;
-  margin-top:4px
+  margin-top:4px;
 }
 
-/* product card (detail) */
+/* product card */
 .product-card{
   width:min(980px,94%);
   margin:22px auto 28px;
@@ -321,7 +327,7 @@ img{display:block;max-width:100%;height:auto}
   align-items:flex-start;
   position:relative;
   overflow:hidden;
-  backdrop-filter:blur(3px) saturate(105%)
+  backdrop-filter:blur(3px) saturate(105%);
 }
 .product-card > *{position:relative;z-index:2}
 .product-card .close-mobile{
@@ -334,12 +340,12 @@ img{display:block;max-width:100%;height:auto}
   font-size:22px;
   color:var(--muted);
   cursor:pointer;
-  z-index:5
+  z-index:5;
 }
 .product-info{
   flex:1;
   min-width:260px;
-  padding-right:6px
+  padding-right:6px;
 }
 .top-label{
   display:inline-block;
@@ -349,14 +355,14 @@ img{display:block;max-width:100%;height:auto}
   color:var(--brand-green);
   font-weight:800;
   margin-bottom:8px;
-  font-size:13px
+  font-size:13px;
 }
 .product-title{
   font-size:20px;
   font-weight:900;
   margin:6px 0 6px;
   color:var(--text);
-  line-height:1.08
+  line-height:1.08;
 }
 
 /* warranty badge */
@@ -371,7 +377,7 @@ img{display:block;max-width:100%;height:auto}
   font-weight:900;
   font-size:13px;
   box-shadow:0 10px 30px rgba(255,180,0,0.18);
-  border:1px solid rgba(0,0,0,0.06)
+  border:1px solid rgba(0,0,0,0.06);
 }
 
 /* product subtitle */
@@ -379,13 +385,13 @@ img{display:block;max-width:100%;height:auto}
   font-size:13px;
   color:rgba(2,17,10,0.95);
   margin-bottom:10px;
-  line-height:1.35
+  line-height:1.35;
 }
 .features{
   display:flex;
   gap:8px;
   flex-wrap:wrap;
-  margin-top:6px
+  margin-top:6px;
 }
 .feature-pill{
   background:rgba(255,255,255,0.92);
@@ -394,7 +400,7 @@ img{display:block;max-width:100%;height:auto}
   border:1px solid rgba(6,42,32,0.04);
   color:var(--brand-green);
   font-weight:800;
-  font-size:13px
+  font-size:13px;
 }
 
 /* specs */
@@ -402,21 +408,21 @@ img{display:block;max-width:100%;height:auto}
 .specs-title{
   font-weight:800;
   margin-bottom:8px;
-  font-size:15px
+  font-size:15px;
 }
 .spec-list{
   display:flex;
   flex-direction:column;
   gap:8px;
   color:var(--text);
-  font-size:15px
+  font-size:15px;
 }
 .spec-list > div{
   background:rgba(255,255,255,0.96);
   padding:10px 12px;
   border-radius:10px;
   border:1px solid rgba(6,42,32,0.04);
-  box-shadow:0 6px 14px rgba(6,42,32,0.03)
+  box-shadow:0 6px 14px rgba(6,42,32,0.03);
 }
 
 /* product side */
@@ -425,7 +431,7 @@ img{display:block;max-width:100%;height:auto}
   display:flex;
   flex-direction:column;
   gap:12px;
-  align-items:stretch
+  align-items:stretch;
 }
 .product-image{
   width:100%;
@@ -436,7 +442,7 @@ img{display:block;max-width:100%;height:auto}
   display:flex;
   align-items:center;
   justify-content:center;
-  border:1px solid rgba(6,42,32,0.04)
+  border:1px solid rgba(6,42,32,0.04);
 }
 .product-image img{
   width:100%;
@@ -446,14 +452,14 @@ img{display:block;max-width:100%;height:auto}
   display:block;
   cursor:pointer;
   transition:transform .35s;
-  border-radius:8px
+  border-radius:8px;
 }
 
 /* CTA */
 .cta-group{
   display:flex;
   flex-direction:column;
-  gap:10px
+  gap:10px;
 }
 .btn-primary{
   background:linear-gradient(90deg,var(--brand-green),var(--green-mid));
@@ -462,7 +468,7 @@ img{display:block;max-width:100%;height:auto}
   padding:12px 14px;
   border-radius:12px;
   font-weight:900;
-  cursor:pointer
+  cursor:pointer;
 }
 .btn-secondary{
   background:#fff;
@@ -470,7 +476,7 @@ img{display:block;max-width:100%;height:auto}
   padding:10px 12px;
   border-radius:10px;
   cursor:pointer;
-  font-weight:800
+  font-weight:800;
 }
 .btn-small{
   background:transparent;
@@ -478,7 +484,7 @@ img{display:block;max-width:100%;height:auto}
   padding:8px 10px;
   border-radius:8px;
   cursor:pointer;
-  font-weight:700
+  font-weight:700;
 }
 
 /* details panel */
@@ -492,7 +498,7 @@ img{display:block;max-width:100%;height:auto}
   color:var(--text);
   box-shadow:0 8px 24px rgba(6,42,32,0.06);
   border:1px solid rgba(6,42,32,0.04);
-  line-height:1.45
+  line-height:1.45;
 }
 
 /* PRO MODE UI */
@@ -504,18 +510,18 @@ img{display:block;max-width:100%;height:auto}
   padding:12px;
   color:var(--text);
   box-shadow:0 8px 24px rgba(6,42,32,0.06);
-  border:1px solid rgba(6,42,32,0.04)
+  border:1px solid rgba(6,42,32,0.04);
 }
 .pro-controls{
   display:flex;
   gap:10px;
   align-items:center;
-  flex-wrap:wrap
+  flex-wrap:wrap;
 }
 .led-sim{
   display:flex;
   gap:10px;
-  align-items:center
+  align-items:center;
 }
 
 /* LED visual */
@@ -527,19 +533,19 @@ img{display:block;max-width:100%;height:auto}
   box-shadow:0 6px 18px rgba(0,0,0,0.3);
   transition:all .25s;
   display:inline-block;
-  vertical-align:middle
+  vertical-align:middle;
 }
 .led-low{
   background:rgba(255,236,179,0.14);
-  box-shadow:0 0 8px rgba(255,230,120,0.08), 0 6px 18px rgba(0,0,0,0.15)
+  box-shadow:0 0 8px rgba(255,230,120,0.08), 0 6px 18px rgba(0,0,0,0.15);
 }
 .led-med{
   background:rgba(255,236,179,0.28);
-  box-shadow:0 0 14px rgba(255,230,120,0.22), 0 8px 26px rgba(0,0,0,0.12)
+  box-shadow:0 0 14px rgba(255,230,120,0.22), 0 8px 26px rgba(0,0,0,0.12);
 }
 .led-high{
   background:rgba(255,236,179,0.6);
-  box-shadow:0 0 22px rgba(255,230,120,0.35), 0 10px 30px rgba(0,0,0,0.08)
+  box-shadow:0 0 22px rgba(255,230,120,0.35), 0 10px 30px rgba(0,0,0,0.08);
 }
 @keyframes blink-slow { 0%{opacity:1} 50%{opacity:0.15} 100%{opacity:1} }
 @keyframes blink-med { 0%{opacity:1} 50%{opacity:0.05} 100%{opacity:1} }
@@ -554,7 +560,7 @@ img{display:block;max-width:100%;height:auto}
   align-items:center;
   justify-content:center;
   margin-top:24px;
-  margin-bottom:10px
+  margin-bottom:10px;
 }
 .futures-title .models-title{padding:8px 14px}
 .featured{
@@ -563,48 +569,48 @@ img{display:block;max-width:100%;height:auto}
   overflow:hidden;
   border:1px solid rgba(212,175,55,0.12);
   background:rgba(255,255,255,0.94);
-  box-shadow:var(--shadow)
+  box-shadow:var(--shadow);
 }
 .featured-hero{
   position:relative;
   height:320px;
   overflow:hidden;
-  background:#000
+  background:#000;
 }
 .featured-hero .slide{
   position:absolute;
   inset:0;
   opacity:0;
   transition:opacity 700ms ease, transform 700ms;
-  transform:scale(1.03)
+  transform:scale(1.03);
 }
 .featured-hero .slide.active{
   opacity:1;
   transform:scale(1);
-  z-index:2
+  z-index:2;
 }
 .featured-hero img{
   width:100%;
   height:100%;
   object-fit:cover;
   object-position:center center;
-  display:block
+  display:block;
 }
 .featured-copy{
   padding:14px 18px;
-  text-align:center
+  text-align:center;
 }
 .featured-copy h3{
   margin:0;
   color:var(--brand-green);
   font-weight:800;
   letter-spacing:0.3px;
-  font-size:18px
+  font-size:18px;
 }
 .featured-copy p{
   color:rgba(2,17,10,0.95);
   margin-top:10px;
-  line-height:1.45
+  line-height:1.45;
 }
 .availability-badge{
   display:inline-block;
@@ -616,7 +622,7 @@ img{display:block;max-width:100%;height:auto}
   font-weight:900;
   font-size:16px;
   box-shadow:0 10px 30px rgba(255,180,0,0.18);
-  border:1px solid rgba(0,0,0,0.06)
+  border:1px solid rgba(0,0,0,0.06);
 }
 
 /* modal */
@@ -628,26 +634,18 @@ img{display:block;max-width:100%;height:auto}
   align-items:center;
   justify-content:center;
   z-index:5000;
-  padding:20px
+  padding:20px;
 }
 .modal{
-  width:min(920px,94vw);
+  width:100%;
+  max-width:920px;
   background:#fff;
   border-radius:12px;
   padding:18px;
   overflow:auto;
   box-shadow:0 24px 60px rgba(0,0,0,0.45);
   max-height:86vh;
-  position:relative
-}
-.modal.compact{
-  width:min(360px,90vw);
-  max-height:58vh;
-  padding:12px
-}
-.modal.compact h2{
-  font-size:16px;
-  margin-top:0
+  position:relative;
 }
 .modal .close{
   position:absolute;
@@ -656,74 +654,10 @@ img{display:block;max-width:100%;height:auto}
   background:transparent;
   border:0;
   font-size:18px;
-  cursor:pointer
-}
-.modal.compact .close{
-  right:10px;
-  top:8px;
-  font-size:16px
-}
-
-/* WhatsApp / contact modal cards */
-.whatsapp-choice{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:10px;
-  margin-top:12px
-}
-.whatsapp-card{
-  border:1px solid rgba(6,42,32,0.08);
-  background:linear-gradient(180deg, #ffffff 0%, #f7fbf9 100%);
-  border-radius:12px;
-  padding:10px;
   cursor:pointer;
-  text-align:left;
-  box-shadow:0 8px 18px rgba(6,42,32,0.06)
-}
-.whatsapp-card .top{
-  display:flex;
-  align-items:center;
-  gap:10px
-}
-.whatsapp-card .flag{
-  width:36px;
-  height:26px;
-  border-radius:6px;
-  overflow:hidden;
-  border:1px solid rgba(0,0,0,0.08);
-  box-shadow:0 4px 10px rgba(0,0,0,0.08);
-  flex:0 0 auto
-}
-.whatsapp-card .flag img{
-  width:100%;
-  height:100%;
-  object-fit:cover
-}
-.whatsapp-card h4{
-  margin:0;
-  font-size:14px;
-  color:#082014
-}
-.whatsapp-card p{
-  margin:5px 0 0;
-  color:#315348;
-  font-size:12px;
-  line-height:1.35
-}
-.whatsapp-card .go{
-  margin-top:9px;
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-  padding:7px 10px;
-  border-radius:999px;
-  background:linear-gradient(90deg, var(--brand-green), var(--green-mid));
-  color:#fff;
-  font-weight:800;
-  font-size:12px
 }
 
-/* Contact FAB */
+/* WhatsApp FAB */
 .fab{
   width:58px;
   height:58px;
@@ -738,7 +672,6 @@ img{display:block;max-width:100%;height:auto}
   box-shadow:0 10px 30px rgba(2,50,26,0.25);
   background:var(--whatsapp-green);
   border:3px solid rgba(255,255,255,0.06);
-  cursor:pointer
 }
 .fab a{
   display:flex;
@@ -747,11 +680,11 @@ img{display:block;max-width:100%;height:auto}
   width:100%;
   height:100%;
   color:#fff;
-  font-size:22px
+  font-size:22px;
 }
 .fab:focus, .fab a:focus{
   outline:3px solid rgba(255,255,255,0.12);
-  outline-offset:2px
+  outline-offset:2px;
 }
 
 /* footer */
@@ -762,7 +695,7 @@ footer{
   text-align:center;
   margin-top:28px;
   position:relative;
-  z-index:50
+  z-index:50;
 }
 .footer-company{
   display:block;
@@ -774,9 +707,13 @@ footer{
   text-shadow:0 3px 6px rgba(0,0,0,0.6);
   padding:6px 10px;
   border-radius:6px;
-  width:max-content
+  width:max-content;
 }
-.footer-contact{margin-top:6px;color:#e6f7ea;line-height:1.6}
+.footer-contact{
+  margin-top:6px;
+  color:#e6f7ea;
+  line-height:1.6;
+}
 
 @media (max-width:900px){
   .product-card{flex-direction:column;padding:14px}
@@ -787,7 +724,6 @@ footer{
   .company-name{font-size:30px}
   .models{grid-template-columns:1fr}
   .featured-hero{height:220px}
-
   .product-card{
     display:none !important;
     position:fixed;
@@ -803,11 +739,11 @@ footer{
     background:var(--card-bg-overlay);
     flex-direction:column;
     overflow:auto;
-    max-height:calc(100vh - (var(--topbar-h) + var(--header-h) + 32px))
+    max-height:calc(100vh - (var(--topbar-h) + var(--header-h) + 32px));
   }
   .product-card.show-on-mobile{
     display:flex !important;
-    animation:slideIn 220ms ease
+    animation:slideIn 220ms ease;
   }
   .product-card .close-mobile{display:block}
   .fab{
@@ -815,16 +751,7 @@ footer{
     bottom:14px;
     width:50px;
     height:50px;
-    font-size:20px
-  }
-
-  .modal{
-    width:min(94vw,420px);
-    max-height:80vh;
-  }
-  .modal.compact{
-    width:min(94vw,320px);
-    max-height:56vh;
+    font-size:20px;
   }
 }
 @media (max-width:420px){
@@ -844,14 +771,14 @@ footer{
 
 <!-- Topbar -->
 <div class="topbar" role="banner">
-  <div class="left">Assemblé au Sénégal</div>
+  <div class="left">Assemblés au Sénégal</div>
   <div class="right" aria-hidden="true"></div>
 </div>
 
-<!-- Header : logo à gauche, nom agrandi -->
+<!-- Header -->
 <header class="header" role="banner" aria-label="En-tête">
   <div class="logo-text" aria-hidden="false">
-    <img src="green bridge domo.png" alt="Logo GREENBRIDGE" />
+    <img src="green bridge domo.png" alt="Logo GREENBRIDGE">
     <div class="brand-stack">
       <div class="company-name">GREENBRIDGE</div>
       <div class="company-tagline">TECHNOLOGIES</div>
@@ -859,15 +786,14 @@ footer{
   </div>
 </header>
 
-<!-- Electric band (subtle lightning across top) -->
+<!-- Electric band -->
 <div class="electric-band connected" id="electricBand" aria-hidden="true">
   <div class="container">
     <svg class="lightning-svg" viewBox="0 0 2000 40" preserveAspectRatio="none" aria-hidden="true">
-      <path class="zap" id="zap1" d="M10,22 C260,4 520,36 840,20 C1120,8 1440,34 1760,18 C1880,6 1960,28 1990,22" stroke-opacity="0.18"/>
-      <path class="zap" id="zap2" d="M10,24 C280,36 600,6 860,22 C1140,36 1460,6 1800,22 C1880,36 1960,10 1990,22" stroke-opacity="0.12"/>
-      <path class="zap" id="zapBright" d="M20,22 C300,6 600,34 880,16 C1240,0 1520,32 1860,14 C1960,2 1980,30 1990,22" stroke-opacity="1"/>
+      <path class="zap" d="M10,22 C260,4 520,36 840,20 C1120,8 1440,34 1760,18 C1880,6 1960,28 1990,22" stroke-opacity="0.18"></path>
+      <path class="zap" d="M10,24 C280,36 600,6 860,22 C1140,36 1460,6 1800,22 C1880,36 1960,10 1990,22" stroke-opacity="0.12"></path>
+      <path class="zap" id="zapBright" d="M20,22 C300,6 600,34 880,16 C1240,0 1520,32 1860,14 C1960,2 1980,30 1990,22" stroke-opacity="1"></path>
     </svg>
-
     <div class="orbs" id="topOrbs">
       <div class="orb" id="topOrbA" aria-hidden="true"></div>
       <div class="orb" id="topOrbB" aria-hidden="true"></div>
@@ -912,7 +838,6 @@ footer{
         <div class="actions"><button class="btn-small" onclick="openTechModal(2);event.stopPropagation()">Infos</button></div>
       </div>
 
-      <!-- Modèle mis à jour : GreenWireless -->
       <div class="model" role="button" onclick="selectModel(3)" tabindex="0" aria-label="GreenWireless 20k">
         <div class="thumb"><img src="pwkb_wireless_1.png" alt="GreenWireless"></div>
         <div class="meta">
@@ -954,9 +879,7 @@ footer{
         <button id="proToggle" class="btn-small" aria-pressed="false" type="button">Mode Pro</button>
       </div>
 
-      <div id="proPanel" class="pro-panel" aria-hidden="true">
-        <!-- Content filled by JS -->
-      </div>
+      <div id="proPanel" class="pro-panel" aria-hidden="true"></div>
     </div>
 
     <div class="product-side">
@@ -1015,13 +938,10 @@ footer{
 
 <footer>
   <div class="footer-company">GREENBRIDGE</div>
-  <div style="color:#e6f7ea">© <span id="year"></span> GREENBRIDGE — Assemblé en Afrique de l'Ouest</div>
+  <div style="color:#e6f7ea">© <span id="year"></span> GREENBRIDGE — Assemblé au Sénégal</div>
 </footer>
 
 <script>
-/* ===========================
-   Données modèles
-   =========================== */
 const models = [
   {
     id:'greenmini',
@@ -1178,8 +1098,8 @@ const modalBox = document.getElementById('modalBox');
 const modalContent = document.getElementById('modalContent');
 const fabLink = document.getElementById('fabLink');
 const orderBtnTop = document.getElementById('orderBtnTop');
-
-const WHATSAPP_NUMBER = '221774015004';
+const detailsPanel = document.getElementById('detailsPanel');
+const proPanel = document.getElementById('proPanel');
 
 let currentModel = 0;
 let currentImage = 0;
@@ -1194,7 +1114,6 @@ let ledState = {
   clickTimer: null
 };
 
-/* Render specs list */
 function renderSpecs(index){
   const m = models[index] || models[0];
   specListEl.innerHTML = '';
@@ -1205,7 +1124,6 @@ function renderSpecs(index){
   });
 }
 
-/* Build Pro Panel HTML */
 function buildProPanelHTML(model){
   if(!model) return '';
   let html = `
@@ -1250,7 +1168,7 @@ function buildProPanelHTML(model){
         </div>
       </div>
     `;
-  } else if(model.id === 'greenwireless') {
+  } else if (model.id === 'greenwireless') {
     html += `
       <div style="margin-top:8px">
         <strong>GreenWireless — Détails techniques</strong>
@@ -1270,10 +1188,15 @@ function buildProPanelHTML(model){
   return html;
 }
 
-/* Open / close modal */
-function openModal(html, compact = false){
+function openModal(html){
   modalContent.innerHTML = html;
-  modalBox.classList.toggle('compact', compact);
+  modalBox.classList.remove('compact');
+  modalOverlay.style.display = 'flex';
+  modalOverlay.setAttribute('aria-hidden','false');
+}
+function openCompactModal(html){
+  modalContent.innerHTML = html;
+  modalBox.classList.add('compact');
   modalOverlay.style.display = 'flex';
   modalOverlay.setAttribute('aria-hidden','false');
 }
@@ -1282,28 +1205,20 @@ function closeModal(){
   modalOverlay.setAttribute('aria-hidden','true');
 }
 
-/* Tech modal for models */
 function openTechModal(i){
   const m = models[i] || models[0];
-  let html = `
+  const html = `
     <h2 style="margin-top:0">${m.title}</h2>
-    <div style="font-size:14px;line-height:1.45;color:#23403a">${m.subtitle || ''}</div>
-    <div style="margin-top:8px">${m.details}</div>
-    <div style="margin-top:10px;font-weight:800">Caractéristiques rapides</div>
-    <ul style="margin:8px 0 0 18px;padding:0;line-height:1.4">
-      ${(m.specs || []).map(s=>`<li>${s}</li>`).join('')}
-    </ul>
+    ${m.details}
+    <div style="margin-top:12px;font-weight:800">Caractéristiques rapides</div>
+    <ul>${(m.specs || []).map(s=>`<li>${s}</li>`).join('')}</ul>
   `;
-  openModal(html, true);
+  openCompactModal(html);
 }
 
-/* Pack modal */
 function openPackModal(){
   const html = `
-    <div style="width:100%;margin-bottom:12px">
-      <img src="Future_pack_2.1.png" alt="Pack vue 2" style="width:100%;height:auto;border-radius:8px;object-fit:cover">
-    </div>
-
+    <div style="width:100%;margin-bottom:12px"><img src="Future_pack_2.1.png" alt="Pack vue 2" style="width:100%;height:auto;border-radius:8px;object-fit:cover"></div>
     <h2 style="margin-top:0">Pack modulaire 2.5 kWh — GreenBridge</h2>
     <p style="color:#23403a;line-height:1.45">
       Prévu pour une sortie commerciale le <strong>31/05/2026</strong>, le pack <strong>2.5 kWh</strong> a été conçu pour le Sénégal.
@@ -1315,20 +1230,15 @@ function openPackModal(){
       <li>Déploiement simple hors réseau, maintenance locale facilitée.</li>
       <li>Optimisé pour les usages agricoles et petites industries en Afrique de l'Ouest.</li>
     </ul>
-
-    <div style="width:100%;margin-top:12px">
-      <img src="Future_Pack_3.png" alt="Pack vue 3" style="width:100%;height:auto;border-radius:8px;object-fit:cover">
-    </div>
-
+    <div style="width:100%;margin-top:12px"><img src="Future_Pack_3.png" alt="Pack vue 3" style="width:100%;height:auto;border-radius:8px;object-fit:cover"></div>
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;">
       <span style="background:linear-gradient(90deg,#ffd54a,#ffb300);padding:10px 14px;border-radius:999px;font-weight:900;color:#08110a">Disponible 31/05/2026</span>
       <button onclick="closeModal()" style="padding:10px 14px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);background:#fff;cursor:pointer">Fermer</button>
     </div>
   `;
-  openModal(html, false);
+  openModal(html);
 }
 
-/* WhatsApp modal: Côte d'Ivoire first, then Senegal */
 function openCountryModal(){
   const html = `
     <h2 style="margin:0 36px 6px 0;font-size:18px;color:#08110a">Commander via WhatsApp</h2>
@@ -1362,10 +1272,14 @@ function openCountryModal(){
       <button type="button" class="btn-secondary" onclick="closeModal()">Fermer</button>
     </div>
   `;
-  openModal(html, false);
+  openModal(html);
 }
 
 function sendWhatsApp(country){
+  const whatsappNumbers = {
+    coteivoire: '22507070707',
+    senegal: '221774015004'
+  };
   const number = whatsappNumbers[country] || whatsappNumbers.senegal;
   const countryLabel = country === 'coteivoire' ? "la Côte d'Ivoire" : 'le Sénégal';
   const message = `Bonjour, je souhaite commander un produit GreenBridge pour ${countryLabel}. Merci de me communiquer les modèles disponibles et les prix.`;
@@ -1395,17 +1309,20 @@ function refreshContactAction(){
   if(isDesktop){
     if(orderBtnTop){
       orderBtnTop.innerHTML = '<i class="fa-solid fa-envelope"></i> Envoyer un mail';
-      orderBtnTop.onclick = ()=>{ window.location.href = buildMailtoUrl(currentModel); };
+      orderBtnTop.href = buildMailtoUrl(currentModel);
+      orderBtnTop.removeAttribute('onclick');
     }
     if(fabLink){
       fabLink.innerHTML = '<i class="fa-solid fa-envelope" aria-hidden="true"></i>';
       fabLink.href = buildMailtoUrl(currentModel);
       fabLink.setAttribute('aria-label','Envoyer un mail');
+      fabLink.onclick = null;
     }
   } else {
     if(orderBtnTop){
       orderBtnTop.innerHTML = '<i class="fa-brands fa-whatsapp"></i> Commander';
-      orderBtnTop.onclick = openCountryModal;
+      orderBtnTop.href = '#';
+      orderBtnTop.onclick = (e)=>{ e.preventDefault(); openCountryModal(); };
     }
     if(fabLink){
       fabLink.innerHTML = '<i class="fa-brands fa-whatsapp" aria-hidden="true"></i>';
@@ -1416,9 +1333,50 @@ function refreshContactAction(){
   }
 }
 
-modalOverlay.addEventListener('click', ev=>{
-  if(ev.target === modalOverlay) closeModal();
-});
+function renderHeroCard(m){
+  document.getElementById('heroTitle').textContent = m.title;
+  document.getElementById('heroSubtitle').textContent = m.subtitle || '';
+  heroImg.src = (m.images && m.images[0]) ? m.images[0] : heroImg.src;
+  heroImg.alt = m.title;
+  detailsPanel.innerHTML = `<strong style="font-weight:800">${m.title}</strong><div style="margin-top:8px">${m.details}</div>`;
+  renderSpecs(currentModel);
+
+  const wb = document.getElementById('warrantyBadge');
+  if(wb){
+    if(m.warranty){
+      wb.style.display = 'inline-block';
+      wb.setAttribute('aria-hidden','false');
+      wb.textContent = m.warranty;
+    } else {
+      wb.style.display = 'none';
+      wb.setAttribute('aria-hidden','true');
+    }
+  }
+
+  proPanel.innerHTML = buildProPanelHTML(m);
+  proPanel.style.display = 'none';
+  proPanel.setAttribute('aria-hidden','true');
+  const proToggle = document.getElementById('proToggle');
+  if(proToggle){
+    proToggle.setAttribute('aria-pressed','false');
+    proToggle.textContent = 'Mode Pro';
+  }
+
+  if(m.id === 'greencore'){
+    ledState.modes = m.ledModes.slice();
+    ledState.index = 0;
+    setTimeout(initLedControls, 60);
+  } else {
+    ledState.modes = [];
+    if(ledState.clickTimer){
+      clearTimeout(ledState.clickTimer);
+      ledState.clickTimer = null;
+      ledState.clickCount = 0;
+    }
+  }
+
+  refreshContactAction();
+}
 
 /* Slideshow for product images */
 function startHeroSlideshow(){
@@ -1437,71 +1395,17 @@ function stopHeroSlideshow(){
   }
 }
 
-/* Update product panel */
-function updateHero(index){
-  const m = models[index] || models[0];
-  document.getElementById('heroTitle').textContent = m.title;
-  document.getElementById('heroSubtitle').textContent = m.subtitle || '';
-  heroImg.src = (m.images && m.images[0]) ? m.images[0] : heroImg.src;
-  heroImg.alt = m.title;
-
-  document.getElementById('detailsPanel').innerHTML = `<strong style="font-weight:800">${m.title}</strong><div style="margin-top:8px">${m.details}</div>`;
-  renderSpecs(index);
-
-  const wb = document.getElementById('warrantyBadge');
-  if(wb){
-    if(m.warranty){
-      wb.style.display = 'inline-block';
-      wb.setAttribute('aria-hidden','false');
-      wb.textContent = m.warranty;
-    } else {
-      wb.style.display = 'none';
-      wb.setAttribute('aria-hidden','true');
-    }
-  }
-
-  const prefillMessage = `Bonjour, je souhaite commander / obtenir le prix de la batterie externe : ${m.title} (ref: ${m.id})`;
-  const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=` + encodeURIComponent(prefillMessage);
-
-  if(fabLink && window.matchMedia('(max-width:768px)').matches){
-    fabLink.href = '#';
-  }
-  if(orderBtnTop){
-    orderBtnTop.setAttribute('data-wa', waUrl);
-  }
-
-  const proPanel = document.getElementById('proPanel');
-  proPanel.innerHTML = buildProPanelHTML(m);
-  proPanel.style.display = 'none';
-  proPanel.setAttribute('aria-hidden','true');
-
-  if(m.id === 'greencore'){
-    ledState.modes = m.ledModes.slice();
-    ledState.index = 0;
-    setTimeout(initLedControls, 60);
-  } else {
-    ledState.modes = [];
-    if(ledState.clickTimer){
-      clearTimeout(ledState.clickTimer);
-      ledState.clickTimer = null;
-      ledState.clickCount = 0;
-    }
-  }
-
-  refreshContactAction();
-}
-
-/* Select model behavior */
+/* Select model behavior: desktop inline, mobile overlay */
 function selectModel(i){
   currentModel = i;
-  updateHero(i);
+  const m = models[i] || models[0];
+  renderHeroCard(m);
 
   if(window.matchMedia('(max-width:640px)').matches){
     productCard.classList.add('show-on-mobile');
     productCard.setAttribute('aria-hidden','false');
-    const details = document.getElementById('detailsPanel');
-    details.style.display = 'block';
-    details.setAttribute('aria-hidden','false');
+    detailsPanel.style.display = 'block';
+    detailsPanel.setAttribute('aria-hidden','false');
     setTimeout(()=>{
       const p = productCard.querySelector('.btn-primary');
       if(p) p.focus();
@@ -1510,9 +1414,8 @@ function selectModel(i){
     productCard.classList.remove('show-on-mobile');
     productCard.style.display = 'flex';
     productCard.setAttribute('aria-hidden','false');
-    const details = document.getElementById('detailsPanel');
-    details.style.display = 'block';
-    details.setAttribute('aria-hidden','false');
+    detailsPanel.style.display = 'block';
+    detailsPanel.setAttribute('aria-hidden','false');
     productCard.scrollIntoView({behavior:'smooth', block:'center'});
   }
 
@@ -1524,9 +1427,8 @@ function selectModel(i){
 function closeOverlay(){
   productCard.classList.remove('show-on-mobile');
   productCard.setAttribute('aria-hidden','true');
-  const details = document.getElementById('detailsPanel');
-  details.style.display = 'none';
-  details.setAttribute('aria-hidden','true');
+  detailsPanel.style.display = 'none';
+  detailsPanel.setAttribute('aria-hidden','true');
   const first = document.querySelector('.models .model');
   if(first) first.focus();
 }
@@ -1563,7 +1465,6 @@ document.getElementById('detailsToggle').addEventListener('click', ()=>{
 /* Mode Pro toggle */
 const proToggleBtn = document.getElementById('proToggle');
 proToggleBtn.addEventListener('click', ()=>{
-  const proPanel = document.getElementById('proPanel');
   const isShown = proPanel.style.display === 'block';
   if(isShown){
     proPanel.style.display = 'none';
@@ -1579,7 +1480,7 @@ proToggleBtn.addEventListener('click', ()=>{
   }
 });
 
-/* close modal when clicking backdrop */
+/* Modal backdrop close */
 modalOverlay.addEventListener('click', ev=>{
   if(ev.target === modalOverlay) closeModal();
 });
@@ -1598,7 +1499,7 @@ modalOverlay.addEventListener('click', ev=>{
     {rxRatio:0.42, ry:10, speed:0.05, phase:Math.PI}
   ];
 
-  orbs.forEach((o,i)=>{
+  orbs.forEach((o)=>{
     if(o){
       o.style.opacity='1';
     }
@@ -1628,7 +1529,7 @@ modalOverlay.addEventListener('click', ev=>{
   requestAnimationFrame(tick);
 })();
 
-/* LED controls initialization */
+/* LED controls */
 function initLedControls(){
   const btn = document.getElementById('ledButton');
   const indicator = document.getElementById('ledIndicator');
@@ -1702,22 +1603,23 @@ function applyLedMode(idx){
   }
 }
 
-/* Init */
+/* init */
 document.addEventListener('DOMContentLoaded', ()=>{
   document.getElementById('year').textContent = new Date().getFullYear();
 
+  // show the first product card by default on desktop
   if(window.matchMedia('(max-width:640px)').matches){
-    updateHero(0);
+    detailsPanel.style.display = 'none';
     productCard.classList.remove('show-on-mobile');
     productCard.setAttribute('aria-hidden','true');
-    document.getElementById('detailsPanel').style.display = 'none';
   } else {
     selectModel(0);
   }
 
+  // make cards keyboard accessible
   document.querySelectorAll('.models .model').forEach((el, idx)=>{
     el.addEventListener('keydown', (e)=>{
-      if(e.key==='Enter' || e.key===' '){
+      if(e.key === 'Enter' || e.key === ' '){
         e.preventDefault();
         selectModel(idx);
       }
@@ -1726,7 +1628,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   refreshContactAction();
 
-  /* On desktop, clicking the main FAB should respect current mode */
+  // ensure the contact button uses the right action at load
   if(window.matchMedia('(min-width:769px)').matches){
     fabLink.href = buildMailtoUrl(currentModel);
   } else {
@@ -1735,7 +1637,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   }
 });
 
-/* adapt overlay on resize */
+/* adapt on resize */
 window.addEventListener('resize', ()=>{
   refreshContactAction();
 
