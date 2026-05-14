@@ -17,26 +17,34 @@
 <link rel="preload" as="image" href="pwkb_6.png">
 <link rel="preload" as="image" href="pwkb_wireless_1.png">
 <link rel="preload" as="image" href="Nos_produits_1.png">
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
 <style>
 :root{
-  --topbar-h:48px;
+  --topbar-h:40px;
   --header-h:72px;
   --maxw:1100px;
+
   --brand-green:#04462e;
   --green-dark:#061f14;
   --green-mid:#073217;
   --green-mid-2:#0b4d26;
+
   --accent:#7cb342;
   --accent-2:#a8e6a1;
   --bg:#0a4d2e;
+
   --gold-base:#d4af37;
   --gold-hover:#e6c95a;
+
   --muted-text-color:#e6f7ea;
+  --muted-text-size:15px;
+
   --electric-yellow:#ffd600;
   --whatsapp-green:#25D366;
+
   --card-bg-desktop: rgba(255,255,255,0.12);
   --card-bg-overlay: rgba(255,255,255,0.98);
   --card-border: rgba(6,42,32,0.06);
@@ -64,6 +72,7 @@ body{
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
 button{font-family:inherit}
+
 .page-bg{
   position:fixed;
   inset:0;
@@ -98,22 +107,12 @@ button{font-family:inherit}
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:14px;
+  gap:10px;
   padding:0 5vw;
   z-index:1500;
-  font-size:14px;
+  font-size:12px;
   overflow:hidden;
 }
-.topbar .left,
-.topbar .right{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  white-space:nowrap;
-  min-width:0;
-}
-.topbar .left{flex:0 0 auto}
-.topbar .right{flex:0 0 auto}
 .promo-wrap{
   flex:1;
   display:flex;
@@ -124,24 +123,32 @@ button{font-family:inherit}
 .promo-text{
   display:inline-flex;
   align-items:center;
-  gap:8px;
-  font-size:12px;
+  gap:7px;
+  font-size:11px;
   font-weight:800;
-  letter-spacing:1.2px;
+  letter-spacing:1px;
   text-transform:uppercase;
   color:var(--gold-base);
-  -webkit-text-stroke:0.5px rgba(4,70,46,0.85);
+  -webkit-text-stroke:0.45px rgba(4,70,46,0.85);
   text-shadow:0 2px 6px rgba(0,0,0,0.35);
   white-space:nowrap;
 }
+.promo-text i{
+  color:var(--gold-base);
+  font-size:10px;
+}
+.right{
+  flex:0 0 auto;
+  display:flex;
+  align-items:center;
+}
 .flag-slider{
-  width:38px;
-  height:26px;
+  width:34px;
+  height:22px;
   overflow:hidden;
-  border-radius:7px;
+  border-radius:6px;
   box-shadow:0 4px 12px rgba(0,0,0,0.30);
   background:#fff;
-  flex:0 0 auto;
   border:1px solid rgba(255,255,255,0.10);
 }
 .flag-slider img{
@@ -180,10 +187,10 @@ header{
 .brand-stack{
   display:flex;
   flex-direction:column;
-  align-items:center;
+  align-items:flex-start;
   justify-content:flex-start;
   line-height:1;
-  text-align:center;
+  text-align:left;
   min-width:0;
   margin:0;
   padding:0;
@@ -200,9 +207,11 @@ header{
   color:#04462e;
   -webkit-text-stroke:0.95px var(--gold-base);
   text-shadow:0 3px 6px rgba(0,0,0,0.6);
+  position:relative;
+  top:2px;
   white-space:nowrap;
   line-height:1;
-  text-align:center;
+  text-align:left;
   width:max-content;
   display:block;
 }
@@ -218,7 +227,7 @@ header{
   -webkit-text-stroke:0.4px rgba(212,175,55,0.55);
   white-space:nowrap;
   line-height:1;
-  text-align:center;
+  text-align:left;
   width:max-content;
   display:block;
 }
@@ -287,9 +296,9 @@ header{
 }
 .electric-band.connected .orb{opacity:1}
 @keyframes buzz{
-  0%{transform:translate(-50%,-50%) translateX(-2px)}
-  50%{transform:translate(-50%,-50%) translateX(2px)}
-  100%{transform:translate(-50%,-50%) translateX(-2px)}
+  0% { transform: translate(-50%,-50%) translateX(-2px); }
+  50% { transform: translate(-50%,-50%) translateX(2px); }
+  100% { transform: translate(-50%,-50%) translateX(-2px); }
 }
 .orb.buzz{animation:buzz 0.9s linear infinite}
 .glowline{
@@ -311,9 +320,9 @@ header{
   animation:pulse 2s ease-in-out infinite;
 }
 @keyframes pulse{
-  0%{transform:translate(-50%,-50%) scaleX(.6); opacity:.6}
-  50%{transform:translate(-50%,-50%) scaleX(1); opacity:1}
-  100%{transform:translate(-50%,-50%) scaleX(.6); opacity:.6}
+  0%{ transform: translate(-50%,-50%) scaleX(.6); opacity:.6 }
+  50%{ transform: translate(-50%,-50%) scaleX(1); opacity:1 }
+  100%{ transform: translate(-50%,-50%) scaleX(.6); opacity:.6 }
 }
 
 .container{
@@ -324,14 +333,13 @@ header{
   z-index:40
 }
 
-/* Models section */
+/* Models */
 .models-wrapper{
   margin-top:24px;
-  padding:18px 12px 36px;
+  padding:18px 12px 12px;
   width:100%;
   max-width:100vw;
   position:relative;
-  background:transparent;
   z-index:60
 }
 .models-header{
@@ -412,7 +420,6 @@ header{
   font-weight:500;
   margin-top:4px
 }
-
 .btn-small{
   background:transparent;
   border:1px solid rgba(6,42,32,0.06);
@@ -423,7 +430,9 @@ header{
   color:#08110a;
 }
 
+/* Product card (hidden until click) */
 .product-card{
+  display:none;
   width:min(980px,94%);
   margin:22px auto 28px;
   background:var(--card-bg-desktop);
@@ -432,12 +441,11 @@ header{
   padding:18px;
   box-shadow:0 12px 36px rgba(6,42,32,0.06);
   color:#02110a;
-  display:flex;
   gap:18px;
   align-items:flex-start;
   position:relative;
   overflow:hidden;
-  backdrop-filter:blur(3px) saturate(105%)
+  backdrop-filter:blur(3px) saturate(105%);
 }
 .product-card > *{position:relative;z-index:2}
 .product-info{
@@ -583,6 +591,7 @@ header{
   line-height:1.45
 }
 
+/* Projects */
 .futures-title{
   display:flex;
   align-items:center;
@@ -662,46 +671,47 @@ header{
   align-items:center;
   justify-content:center;
   z-index:5000;
-  padding:18px
+  padding:14px
 }
 .modal{
-  width:min(480px,92vw);
+  width:min(360px,88vw);
   background:#fff;
-  border-radius:18px;
-  padding:16px 16px 14px;
+  border-radius:16px;
+  padding:12px 12px 12px;
   overflow:auto;
-  box-shadow:0 24px 60px rgba(0,0,0,0.45);
-  max-height:84vh;
+  box-shadow:0 20px 45px rgba(0,0,0,0.42);
+  max-height:78vh;
   position:relative
 }
+.modal h2{font-size:18px}
 .modal .close{
   position:absolute;
-  right:10px;
-  top:10px;
-  width:34px;
-  height:34px;
+  right:8px;
+  top:8px;
+  width:30px;
+  height:30px;
   display:flex;
   align-items:center;
   justify-content:center;
   background:#fff;
   border:1px solid rgba(6,42,32,0.12);
   border-radius:50%;
-  font-size:16px;
+  font-size:15px;
   cursor:pointer;
   box-shadow:0 6px 14px rgba(0,0,0,0.10);
   color:#0b2418;
 }
 .whatsapp-choice{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:1fr;
   gap:10px;
-  margin-top:14px;
+  margin-top:12px;
 }
 .whatsapp-card{
   border:1px solid rgba(6,42,32,0.08);
   background:linear-gradient(180deg, #ffffff 0%, #f7fbf9 100%);
-  border-radius:14px;
-  padding:12px;
+  border-radius:12px;
+  padding:10px;
   cursor:pointer;
   text-align:left;
   box-shadow:0 8px 18px rgba(6,42,32,0.06);
@@ -712,9 +722,9 @@ header{
   gap:10px;
 }
 .whatsapp-card .flag{
-  width:40px;
-  height:28px;
-  border-radius:7px;
+  width:36px;
+  height:26px;
+  border-radius:6px;
   overflow:hidden;
   border:1px solid rgba(0,0,0,0.08);
   box-shadow:0 4px 10px rgba(0,0,0,0.08);
@@ -727,21 +737,21 @@ header{
 }
 .whatsapp-card h4{
   margin:0;
-  font-size:15px;
+  font-size:14px;
   color:#082014;
 }
 .whatsapp-card p{
-  margin:6px 0 0;
+  margin:5px 0 0;
   color:#315348;
   font-size:12px;
-  line-height:1.45;
+  line-height:1.35;
 }
 .whatsapp-card .go{
-  margin-top:10px;
+  margin-top:9px;
   display:inline-flex;
   align-items:center;
   gap:7px;
-  padding:8px 11px;
+  padding:7px 10px;
   border-radius:999px;
   background:linear-gradient(90deg, var(--brand-green), var(--green-mid));
   color:#fff;
@@ -781,6 +791,7 @@ header{
   outline-offset:2px
 }
 
+/* footer */
 footer{
   background:var(--green-dark);
   color:#fff;
@@ -808,16 +819,16 @@ footer{
   line-height:1.6
 }
 
+/* responsive */
 @media (max-width:1100px){
-  .grid-4{grid-template-columns:repeat(2,1fr)}
+  .models{grid-template-columns:repeat(2,1fr)}
 }
 @media (max-width:900px){
-  .product-card{flex-direction:column;padding:14px}
-  .product-side{order:-1;width:100%}
   .featured-hero{height:280px}
+  .product-card{width:min(980px,94%)}
 }
 @media (max-width:820px){
-  .grid-4{grid-template-columns:1fr;gap:20px}
+  .models{grid-template-columns:1fr;gap:20px}
   .card{min-height:auto;text-align:center}
   .card .image-wrap{
     height:220px;
@@ -840,27 +851,21 @@ footer{
   .whatsapp-choice{grid-template-columns:1fr}
   .fab{width:50px;height:50px}
   .fab button{font-size:20px}
+  .modal{width:min(92vw,380px)}
 }
 @media (max-width:768px){
   .company-name{font-size:26px}
-  .topbar{
-    gap:10px;
-    font-size:12px;
-    padding:0 3.5vw;
-  }
   .featured-hero{height:240px}
   .card .image-wrap{height:200px}
   .card-content{padding:16px 12px 18px}
 }
 @media (max-width:640px){
-  .promo-text{
-    font-size:11px;
-    letter-spacing:0.8px;
-  }
+  .promo-text{font-size:10px;letter-spacing:0.7px}
   .company-name{font-size:24px}
   .company-tagline{font-size:12px; letter-spacing:4px}
   .logo-text img{height:46px}
   .featured-hero{height:220px}
+  .product-card{display:none !important;}
 }
 @media (max-width:480px){
   .hero-content{
@@ -895,9 +900,9 @@ footer{
   <div class="promo-wrap" aria-hidden="true">
     <div class="promo-text"><i class="fa-solid fa-bolt"></i><span>PROMOTION</span></div>
   </div>
-  <div class="right">
-    <div class="flag-slider" aria-hidden="true">
-      <img id="flagImage" src="https://flagcdn.com/w40/ci.png" alt="Drapeau Côte d'Ivoire">
+  <div class="right" aria-hidden="true">
+    <div class="flag-slider">
+      <img id="flagImage" src="https://flagcdn.com/w80/ci.png" alt="Drapeau Côte d'Ivoire">
     </div>
   </div>
 </div>
@@ -931,6 +936,7 @@ footer{
 <div style="height:calc(var(--topbar-h) + var(--header-h) + 8px);" aria-hidden="true"></div>
 
 <main class="container" role="main">
+
   <section class="models-wrapper" id="models" role="region" aria-label="Nos modèles">
     <div class="models-header"><div class="models-title">Nos modèles</div></div>
 
@@ -971,7 +977,7 @@ footer{
         <div class="actions"><button class="btn-small" onclick="openTechModal(3);event.stopPropagation()">Infos</button></div>
       </div>
 
-      <div class="model" role="button" onclick="selectModel(4)" tabindex="0" aria-label="Chargeur PC Portable">
+      <div class="model" role="button" onclick="selectModel(4)" tabindex="0" aria-label="Chargeur ordinateur portable">
         <div class="thumb"><img src="chargeur_pc.png" alt="Chargeur ordinateur portable" loading="lazy"></div>
         <div class="meta">
           <h4>Chargeur PC Portable</h4>
@@ -1036,20 +1042,24 @@ footer{
   </div>
 
   <section class="featured" aria-label="Pack 2.5 kWh — Solution modulaire">
-    <div class="featured-hero" id="featuredHero">
+    <div class="featured-hero" id="featuredHero" aria-hidden="false">
       <div class="slide active" data-index="0"><img src="Future_Pack_1.png" alt="Pack 2.5 kWh vue 1" loading="lazy"></div>
     </div>
+
     <div class="featured-copy">
       <h3>Batterie 2.5 kWh — Assemblée &amp; pensée pour l'Afrique</h3>
       <p>Pack 2.5 kWh modulaire, conçu pour stockage médical &amp; usages PME.</p>
+
       <div style="margin-top:12px">
         <span class="availability-badge" id="availabilityBadge">Disponible 05/2026</span>
       </div>
+
       <div style="margin-top:12px">
         <button class="btn-secondary" type="button" onclick="openPackModal()">Infos pack</button>
       </div>
     </div>
   </section>
+
 </main>
 
 <div id="fab" class="fab" role="button" aria-label="Commander via WhatsApp">
@@ -1090,7 +1100,7 @@ const models = [
       <p style="margin-top:0;color:#23403a;line-height:1.45">
         <strong>GreenMini — 10 000 mAh</strong><br>
         Technologie : <strong>Samsung, 3 cellules</strong> (cellules testées et sélectionnées).
-        Puissance moyenne du pack : <strong>~32 W</strong>. Écran digital intégré pour visualiser l'autonomie.
+        Puissance moyenne du pack : <strong>~32 W</strong>.
       </p>
       <div style="margin-top:8px">
         <strong>Entrées (Input)</strong>
@@ -1326,9 +1336,11 @@ function buildProPanelHTML(model){
           <li>Power Delivery (PD) : <strong>Non</strong> — Mesure : <strong>4.66 V / 1.52 A</strong></li>
         </ul>
       </div>
+
       <div style="margin-top:10px">
         <strong>Lampe de nuit LED — activation :</strong>
         <div style="margin-top:6px">Appuyez <strong>2 fois</strong> sur le bouton simulé ci-dessous pour changer le mode.</div>
+
         <div class="pro-controls" style="margin-top:10px">
           <div class="led-sim" aria-hidden="false">
             <div id="ledIndicator" class="led-indicator" role="img" aria-label="LED status"></div>
@@ -1338,6 +1350,7 @@ function buildProPanelHTML(model){
             </div>
           </div>
         </div>
+
         <div style="margin-top:10px">
           <strong>Liste des modes LED :</strong>
           <ol id="ledModesList" style="margin-top:6px">
@@ -1362,6 +1375,7 @@ function buildProPanelHTML(model){
   } else {
     html += `<div style="margin-top:8px;color:#666">Aucun contrôleur LED avancé pour ce modèle.</div>`;
   }
+
   return html;
 }
 
@@ -1371,9 +1385,8 @@ function updateHero(index){
   document.getElementById('heroSubtitle').textContent = m.subtitle || '';
   heroImg.src = (m.images && m.images[0]) ? m.images[0] : heroImg.src;
   heroImg.alt = m.title;
+
   detailsPanel.innerHTML = `<strong style="font-weight:800">${m.title}</strong><div style="margin-top:8px">${m.details}</div>`;
-  detailsPanel.style.display = 'block';
-  detailsPanel.setAttribute('aria-hidden','false');
   renderSpecs(index);
 
   const wb = document.getElementById('warrantyBadge');
@@ -1393,8 +1406,11 @@ function updateHero(index){
     proPanel.innerHTML = buildProPanelHTML(m);
     proPanel.style.display = 'none';
     proPanel.setAttribute('aria-hidden','true');
-    document.getElementById('proToggle').setAttribute('aria-pressed','false');
-    document.getElementById('proToggle').textContent = 'Mode Pro';
+    const proToggle = document.getElementById('proToggle');
+    if(proToggle){
+      proToggle.setAttribute('aria-pressed','false');
+      proToggle.textContent = 'Mode Pro';
+    }
   }
 
   if(m.id === 'greencore'){
@@ -1430,11 +1446,13 @@ function stopHeroSlideshow(){
 function selectModel(i){
   currentModel = i;
   updateHero(i);
-  productCard.setAttribute('aria-hidden','false');
   productCard.style.display = 'flex';
-  productCard.scrollIntoView({behavior:'smooth', block:'start'});
+  productCard.setAttribute('aria-hidden','false');
+  detailsPanel.style.display = 'block';
+  detailsPanel.setAttribute('aria-hidden','false');
   currentImage = 0;
   startHeroSlideshow();
+  productCard.scrollIntoView({behavior:'smooth', block:'start'});
 }
 
 function openModal(html){
@@ -1485,8 +1503,8 @@ function openPackModal(){
 
 function openCountryModal(){
   const html = `
-    <h2 style="margin:0 40px 6px 0;font-size:22px;color:#08110a">Commander via WhatsApp</h2>
-    <p style="margin:0;color:#315348;line-height:1.45;font-size:14px">
+    <h2 style="margin:0 36px 6px 0;font-size:18px;color:#08110a">Commander via WhatsApp</h2>
+    <p style="margin:0;color:#315348;line-height:1.45;font-size:13px">
       Choisis le pays de commande. Le message sera pré-rempli avec le bon numéro.
     </p>
     <div class="whatsapp-choice">
@@ -1495,17 +1513,18 @@ function openCountryModal(){
           <div class="flag"><img src="https://flagcdn.com/w80/sn.png" alt="Drapeau Sénégal"></div>
           <div>
             <h4>Sénégal</h4>
-            <p>Commander pour le Sénégal via WhatsApp, avec le message adapté.</p>
+            <p>Commander pour le Sénégal via WhatsApp.</p>
           </div>
         </div>
         <div class="go"><i class="fa-brands fa-whatsapp"></i> Continuer</div>
       </button>
+
       <button class="whatsapp-card" type="button" onclick="sendWhatsApp('coteivoire')">
         <div class="top">
           <div class="flag"><img src="https://flagcdn.com/w80/ci.png" alt="Drapeau Côte d'Ivoire"></div>
           <div>
             <h4>Côte d'Ivoire</h4>
-            <p>Commander pour la Côte d'Ivoire avec le message adapté.</p>
+            <p>Commander pour la Côte d'Ivoire via WhatsApp.</p>
           </div>
         </div>
         <div class="go"><i class="fa-brands fa-whatsapp"></i> Continuer</div>
@@ -1525,9 +1544,9 @@ function sendWhatsApp(country){
   closeModal();
   window.open(url, '_blank', 'noopener,noreferrer');
 }
+
 modalOverlay.addEventListener('click', ev=>{ if(ev.target === modalOverlay) closeModal(); });
 
-/* details toggle */
 document.getElementById('detailsToggle').addEventListener('click', ()=>{
   const vis = detailsPanel.style.display === 'block';
   if(vis){
@@ -1536,28 +1555,28 @@ document.getElementById('detailsToggle').addEventListener('click', ()=>{
   } else {
     detailsPanel.style.display='block';
     detailsPanel.setAttribute('aria-hidden','false');
-    detailsPanel.scrollIntoView({behavior:'smooth', block:'nearest'});
   }
 });
 
-/* pro toggle */
-document.getElementById('proToggle').addEventListener('click', ()=>{
-  const proPanel = document.getElementById('proPanel');
-  const isShown = proPanel.style.display === 'block';
-  if(isShown){
-    proPanel.style.display = 'none';
-    proPanel.setAttribute('aria-hidden','true');
-    document.getElementById('proToggle').setAttribute('aria-pressed','false');
-    document.getElementById('proToggle').textContent = 'Mode Pro';
-  } else {
-    proPanel.style.display = 'block';
-    proPanel.setAttribute('aria-hidden','false');
-    document.getElementById('proToggle').setAttribute('aria-pressed','true');
-    document.getElementById('proToggle').textContent = 'Mode Pro (actif)';
-  }
-});
+const proToggleBtn = document.getElementById('proToggle');
+if(proToggleBtn){
+  proToggleBtn.addEventListener('click', ()=>{
+    const proPanel = document.getElementById('proPanel');
+    const isShown = proPanel.style.display === 'block';
+    if(isShown){
+      proPanel.style.display = 'none';
+      proPanel.setAttribute('aria-hidden','true');
+      proToggleBtn.setAttribute('aria-pressed','false');
+      proToggleBtn.textContent = 'Mode Pro';
+    } else {
+      proPanel.style.display = 'block';
+      proPanel.setAttribute('aria-hidden','false');
+      proToggleBtn.setAttribute('aria-pressed','true');
+      proToggleBtn.textContent = 'Mode Pro (actif)';
+    }
+  });
+}
 
-/* image click cycle */
 const productImageBox = document.getElementById('productImageBox');
 if(productImageBox){
   productImageBox.addEventListener('click', ()=>{
@@ -1575,7 +1594,7 @@ const orderBtn = document.getElementById('orderBtnTop');
 if(orderBtn) orderBtn.addEventListener('click', openCountryModal);
 if(fabButton) fabButton.addEventListener('click', openCountryModal);
 
-/* electric effect */
+/* Electric band + orbs */
 (function(){
   const electricBand = document.getElementById('electricBand');
   if(!electricBand) return;
@@ -1751,10 +1770,12 @@ function initLedControls(){
     modesListEl.innerHTML = ledState.modes.map((m, idx)=>`<li${idx===ledState.index ? ' style="font-weight:800"' : ''}>${m.name}</li>`).join('');
   }
 }
+
 function applyLedMode(idx){
   const indicator = document.getElementById('ledIndicator');
   const modeName = document.getElementById('ledModeName');
   const modesListEl = document.getElementById('ledModesList');
+
   if(!indicator || !modeName || !ledState.modes.length) return;
 
   const mode = ledState.modes[idx] || {name:'—'};
@@ -1779,7 +1800,7 @@ function applyLedMode(idx){
   }
 }
 
-/* flags */
+/* Flag alternates every 5 seconds */
 (function(){
   const flagImage = document.getElementById('flagImage');
   if(!flagImage) return;
@@ -1788,6 +1809,7 @@ function applyLedMode(idx){
     {src:'https://flagcdn.com/w80/sn.png', alt:'Drapeau Sénégal'}
   ];
   let currentFlag = 0;
+
   setInterval(()=>{
     currentFlag = (currentFlag + 1) % flags.length;
     flagImage.style.opacity = '0.25';
@@ -1798,12 +1820,11 @@ function applyLedMode(idx){
       flagImage.style.opacity = '1';
       flagImage.style.transform = 'scale(1)';
     }, 180);
-  }, 3000);
+  }, 5000);
 })();
 
 document.addEventListener('DOMContentLoaded', ()=>{
   preloadImages(allImageUrls());
-  updateHero(0);
   document.getElementById('year').textContent = new Date().getFullYear();
 
   document.querySelectorAll('.models .model').forEach((el, idx)=>{
@@ -1814,16 +1835,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
       }
     });
   });
-
-  if(heroImg){
-    const m = models[0];
-    heroImg.alt = m.title;
-  }
 });
 
 window.addEventListener('resize', ()=>{
-  if(productCard){
-    productCard.style.display = 'flex';
+  if(productCard && window.matchMedia('(max-width:640px)').matches){
+    productCard.style.display = 'none';
   }
 });
 </script>
