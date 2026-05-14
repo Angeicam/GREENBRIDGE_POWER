@@ -7,6 +7,10 @@
 <meta name="description" content="GREENBRIDGE TECHNOLOGIES — Solutions énergétiques, powerbanks, chargeurs et stabilisateur WiFi.">
 <meta name="theme-color" content="#0a4d2e">
 
+<link rel="icon" type="image/png" href="green bridge domo.png">
+<link rel="shortcut icon" type="image/png" href="green bridge domo.png">
+<link rel="apple-touch-icon" href="green bridge domo.png">
+
 <link rel="preload" as="image" href="Energie_blanche.png">
 <link rel="preload" as="image" href="green bridge domo.png">
 <link rel="preload" as="image" href="Pwkb_Mini_3.png">
@@ -67,7 +71,6 @@ a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
 button, input, select{font-family:inherit}
 
-/* Background stable on mobile */
 .page-bg{
   position:fixed;
   inset:0;
@@ -108,7 +111,8 @@ button, input, select{font-family:inherit}
   font-size:14px;
   overflow:hidden;
 }
-.topbar .left, .topbar .right{
+.topbar .left,
+.topbar .right{
   display:flex;
   align-items:center;
   gap:10px;
@@ -116,23 +120,24 @@ button, input, select{font-family:inherit}
   min-width:0;
 }
 .topbar .left{
-  color:#fff;
-  font-weight:700;
+  flex:0 0 auto;
 }
 .topbar .right{
   flex:0 0 auto;
 }
+
 .promo-marquee{
   flex:1;
   overflow:hidden;
   white-space:nowrap;
   text-align:center;
-  color:var(--release-orange-2);
+  color:var(--gold-base);
   font-weight:800;
   letter-spacing:1.2px;
   text-transform:uppercase;
   min-width:0;
   text-shadow:0 2px 6px rgba(0,0,0,0.35);
+  -webkit-text-stroke:0.35px rgba(4,70,46,0.65);
 }
 .promo-marquee span{
   display:inline-block;
@@ -176,6 +181,10 @@ header{
 }
 
 .logo-text{
+  position:absolute;
+  left:5vw;
+  top:50%;
+  transform:translateY(-50%);
   display:flex;
   align-items:flex-start;
   gap:12px;
@@ -196,6 +205,8 @@ header{
   min-width:0;
   margin:0;
   padding:0;
+  position:relative;
+  top:1px;
 }
 
 .company-name{
@@ -208,8 +219,6 @@ header{
   color:#04462e;
   -webkit-text-stroke:0.95px var(--gold-base);
   text-shadow:0 3px 6px rgba(0,0,0,0.6);
-  position:relative;
-  top:2px;
   white-space:nowrap;
   line-height:1;
   text-align:center;
@@ -234,7 +243,6 @@ header{
   display:block;
 }
 
-/* Electric band */
 .electric-band{
   position:fixed;
   top:calc(var(--topbar-h) + var(--header-h) - 6px);
@@ -335,7 +343,6 @@ header{
   z-index:40
 }
 
-/* Models section */
 .models-wrapper{
   margin-top:24px;
   padding:18px 12px 36px;
@@ -371,7 +378,6 @@ header{
   padding:6px 14px;
   box-sizing:border-box
 }
-
 .models .model{
   display:flex;
   flex-direction:column;
@@ -385,7 +391,7 @@ header{
   cursor:pointer;
   min-height:240px;
   backdrop-filter:blur(4px) saturate(110%);
-  color:var(--text)
+  color:var(--text,#02110a)
 }
 .models .thumb{
   position:relative;
@@ -405,11 +411,10 @@ header{
   object-position:center;
   border-radius:8px
 }
-
 .model .meta h4{
   margin:0;
   font-size:18px;
-  color:var(--text);
+  color:var(--text,#02110a);
   font-weight:900
 }
 .model .meta p{
@@ -426,7 +431,6 @@ header{
   margin-top:4px
 }
 
-/* product card */
 .product-card{
   width:min(980px,94%);
   margin:22px auto 28px;
@@ -435,7 +439,7 @@ header{
   border-radius:14px;
   padding:18px;
   box-shadow:0 12px 36px rgba(6,42,32,0.06);
-  color:var(--text);
+  color:var(--text,#02110a);
   display:flex;
   gap:18px;
   align-items:flex-start;
@@ -452,7 +456,7 @@ header{
   background:transparent;
   border:0;
   font-size:22px;
-  color:var(--muted);
+  color:var(--muted,#23403a);
   cursor:pointer;
   z-index:5
 }
@@ -475,10 +479,9 @@ header{
   font-size:20px;
   font-weight:900;
   margin:6px 0 6px;
-  color:var(--text);
+  color:var(--text,#02110a);
   line-height:1.08
 }
-
 .warranty-badge{
   display:inline-block;
   margin-left:8px;
@@ -513,7 +516,6 @@ header{
   font-weight:800;
   font-size:13px
 }
-
 .specs-block{margin-top:12px}
 .specs-title{
   font-weight:800;
@@ -524,7 +526,7 @@ header{
   display:flex;
   flex-direction:column;
   gap:8px;
-  color:var(--text);
+  color:var(--text,#02110a);
   font-size:15px
 }
 .spec-list > div{
@@ -534,7 +536,6 @@ header{
   border:1px solid rgba(6,42,32,0.04);
   box-shadow:0 6px 14px rgba(6,42,32,0.03)
 }
-
 .product-side{
   width:340px;
   display:flex;
@@ -599,7 +600,6 @@ header{
   font-weight:700
 }
 
-/* details */
 .details-panel{
   display:none;
   margin-top:12px;
@@ -607,20 +607,19 @@ header{
   background:rgba(255,255,255,0.98);
   border-radius:10px;
   padding:12px;
-  color:var(--text);
+  color:var(--text,#02110a);
   box-shadow:0 8px 24px rgba(6,42,32,0.06);
   border:1px solid rgba(6,42,32,0.04);
   line-height:1.45
 }
 
-/* pro */
 .pro-panel{
   display:none;
   margin-top:12px;
   background:rgba(255,255,255,0.98);
   border-radius:10px;
   padding:12px;
-  color:var(--text);
+  color:var(--text,#02110a);
   box-shadow:0 8px 24px rgba(6,42,32,0.06);
   border:1px solid rgba(6,42,32,0.04)
 }
@@ -648,7 +647,6 @@ header{
 @keyframes blink-slow { 0%{opacity:1} 50%{opacity:0.15} 100%{opacity:1} }
 @keyframes blink-med { 0%{opacity:1} 50%{opacity:0.05} 100%{opacity:1} }
 @keyframes blink-fast { 0%{opacity:1} 50%{opacity:0.02} 100%{opacity:1} }
-
 .blink-slow{animation:blink-slow 1.2s linear infinite}
 .blink-med{animation:blink-med 0.6s linear infinite}
 .blink-fast{animation:blink-fast 0.25s linear infinite}
@@ -727,7 +725,6 @@ header{
   border:1px solid rgba(0,0,0,0.06)
 }
 
-/* modal */
 .modal-overlay{
   position:fixed;
   inset:0;
@@ -791,7 +788,6 @@ header{
   outline-offset:2px
 }
 
-/* footer */
 footer{
   background:var(--green-dark);
   color:#fff;
@@ -813,8 +809,12 @@ footer{
   border-radius:6px;
   width:max-content
 }
+.footer-contact{
+  margin-top:6px;
+  color:#e6f7ea;
+  line-height:1.6
+}
 
-/* responsive */
 @media (max-width:1100px){
   .grid-4{grid-template-columns:repeat(2,1fr)}
 }
@@ -824,7 +824,6 @@ footer{
   .featured-hero{height:280px}
 }
 @media (max-width:820px){
-  .hero-content{max-width:86vw}
   .grid-4{grid-template-columns:1fr;gap:20px}
   .card{min-height:auto;text-align:center}
   .card .image-wrap{
@@ -844,6 +843,7 @@ footer{
     padding:10px 20px
   }
   .company-name{font-size:30px}
+  .logo-text img{height:50px}
   .fab{width:50px;height:50px}
   .fab button{font-size:20px}
 }
@@ -854,7 +854,6 @@ footer{
     font-size:12px;
     padding:0 3.5vw;
   }
-  .topbar .left{max-width:38vw; overflow:hidden; text-overflow:ellipsis}
   .featured-hero{height:240px}
   .card .image-wrap{height:200px}
   .card-content{padding:16px 12px 18px}
@@ -928,17 +927,17 @@ footer{
   <div class="page-bg-overlay" aria-hidden="true"></div>
 
   <div class="topbar" role="banner">
-    <div class="left">Assemblé en Afrique de l'Ouest</div>
-
-    <div class="promo-marquee" aria-hidden="true">
-      <span>PROMOTION EXCEPTIONNELLE — PROMOTION EXCEPTIONNELLE — PROMOTION EXCEPTIONNELLE —</span>
-    </div>
-
-    <div class="right">
+    <div class="left">
       <div class="flag-slider" aria-hidden="true">
         <img id="flagImage" src="https://flagcdn.com/w40/ci.png" alt="Drapeau Côte d'Ivoire">
       </div>
     </div>
+
+    <div class="promo-marquee" aria-hidden="true">
+      <span>PROMOTION — PROMOTION — PROMOTION —</span>
+    </div>
+
+    <div class="right" aria-hidden="true"></div>
   </div>
 
   <header role="banner" aria-label="En-tête">
@@ -946,10 +945,10 @@ footer{
       <a href="GreenBrigde technologies.html" aria-label="Accueil">
         <img src="green bridge domo.png" alt="Logo GreenBridge" loading="eager" fetchpriority="high">
       </a>
-      <div class="brand-stack">
-        <div class="company-name">GREENBRIDGE</div>
-        <div class="company-tagline">TECHNOLOGIES</div>
-      </div>
+    </div>
+    <div class="brand-stack">
+      <div class="company-name">GREENBRIDGE</div>
+      <div class="company-tagline">TECHNOLOGIES</div>
     </div>
   </header>
 
@@ -1058,7 +1057,7 @@ footer{
         <div id="detailsPanel" class="details-panel" aria-hidden="true"></div>
 
         <div style="margin-top:12px">
-          <button id="proToggle" class="btn-small" aria-pressed="false">Mode Pro</button>
+          <button id="proToggle" class="btn-small" aria-pressed="false" type="button">Mode Pro</button>
         </div>
 
         <div id="proPanel" class="pro-panel" aria-hidden="true"></div>
@@ -1121,13 +1120,10 @@ footer{
 
   <footer>
     <div class="footer-company">GREENBRIDGE TECHNOLOGIES</div>
-    <div style="color:#e6f7ea">© <span id="year"></span> GREENBRIDGE TECHNOLOGIES — Assemblé en Afrique de l'Ouest</div>
+    <div style="color:#e6f7ea">© <span id="year"></span> GREENBRIDGE TECHNOLOGIES — Assemblé par des africains</div>
   </footer>
 
 <script>
-/* ===========================
-   Modèles
-   =========================== */
 const models = [
   {
     id:'greenmini',
@@ -1304,9 +1300,6 @@ const models = [
   }
 ];
 
-/* ===========================
-   DOM / UI
-   =========================== */
 const productCard = document.querySelector('.product-card');
 const heroImg = document.getElementById('heroMainImage');
 const specListEl = document.getElementById('specList');
@@ -1451,16 +1444,6 @@ function updateHero(index){
     }
   }
 
-  const prefillMessage = `Bonjour, je souhaite commander / obtenir le prix de : ${m.title} (ref: ${m.id})`;
-  const waUrl = `https://wa.me/${whatsappNumbers.senegal}?text=` + encodeURIComponent(prefillMessage);
-
-  if(orderBtnTop){
-    orderBtnTop.dataset.wa = waUrl;
-  }
-  if(fabButton){
-    fabButton.dataset.wa = waUrl;
-  }
-
   const proPanel = document.getElementById('proPanel');
   proPanel.innerHTML = buildProPanelHTML(m);
   proPanel.style.display = 'none';
@@ -1580,11 +1563,10 @@ proToggleBtn.addEventListener('click', ()=>{
 
 /* WhatsApp choice modal */
 function openCountryModal(){
-  const m = models[currentModel] || models[0];
   const html = `
     <h2 style="margin-top:0">Commander via WhatsApp</h2>
     <p style="color:#23403a;line-height:1.45">
-      Pour <strong>${m.title}</strong>, choisis le pays de commande.
+      Choisis le pays de commande.
     </p>
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
       <button type="button" class="btn-primary" onclick="sendWhatsApp('senegal')">🇸🇳 Commander au Sénégal</button>
@@ -1596,16 +1578,14 @@ function openCountryModal(){
 }
 
 function sendWhatsApp(country){
-  const m = models[currentModel] || models[0];
   const number = whatsappNumbers[country] || whatsappNumbers.senegal;
   const countryLabel = country === 'coteivoire' ? "la Côte d'Ivoire" : 'le Sénégal';
-  const message = `Bonjour, je souhaite commander / obtenir le prix de : ${m.title} pour ${countryLabel}. (ref: ${m.id})`;
+  const message = `Bonjour, je souhaite commander un produit GreenBridge pour ${countryLabel}. Merci de me communiquer les modèles disponibles et les prix.`;
   const url = `https://wa.me/${number}?text=` + encodeURIComponent(message);
   closeModal();
   window.open(url, '_blank', 'noopener,noreferrer');
 }
 
-/* Modal helpers */
 function openModal(html){
   modalContent.innerHTML = html;
   modalOverlay.style.display = 'flex';
@@ -1893,7 +1873,6 @@ function applyLedMode(idx){
   }, 3000);
 })();
 
-/* Preload and init */
 document.addEventListener('DOMContentLoaded', ()=>{
   preloadImages(allImageUrls());
 
@@ -1922,6 +1901,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   if(fabButton){
     fabButton.addEventListener('click', openCountryModal);
   }
+
   if(document.querySelector('.product-image')){
     document.querySelector('.product-image').addEventListener('keydown', (e)=>{
       if(e.key === 'Enter' || e.key === ' '){
@@ -1937,7 +1917,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
   }
 });
 
-/* Adapt overlay on resize */
 window.addEventListener('resize', ()=>{
   if(!window.matchMedia('(max-width:640px)').matches){
     productCard.classList.remove('show-on-mobile');
