@@ -8,7 +8,6 @@
 <meta name="theme-color" content="#0a4d2e">
 
 <link rel="icon" type="image/png" href="green bridge domo.png">
-<link rel="shortcut icon" type="image/png" href="green bridge domo.png">
 <link rel="apple-touch-icon" href="green bridge domo.png">
 
 <link rel="preload" as="image" href="Energie_blanche.png">
@@ -59,7 +58,9 @@ html, body{
   color:#fff;
   scroll-behavior:smooth;
   overflow-x:hidden;
+  overflow-y:auto;
   min-height:100%;
+  scrollbar-gutter:stable both-edges;
 }
 body{
   min-height:100vh;
@@ -71,6 +72,7 @@ a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
 button, input, select{font-family:inherit}
 
+/* Background stable on mobile */
 .page-bg{
   position:fixed;
   inset:0;
@@ -119,43 +121,65 @@ button, input, select{font-family:inherit}
   white-space:nowrap;
   min-width:0;
 }
-.topbar .left{
-  flex:0 0 auto;
-}
-.topbar .right{
-  flex:0 0 auto;
-}
+.topbar .left{flex:0 0 auto}
+.topbar .right{flex:0 0 auto}
 
 .promo-marquee{
   flex:1;
   overflow:hidden;
   white-space:nowrap;
   text-align:center;
-  color:var(--gold-base);
-  font-weight:800;
-  letter-spacing:1.2px;
-  text-transform:uppercase;
   min-width:0;
+}
+.promo-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:7px 16px;
+  border-radius:999px;
+  color:#fff;
+  font-weight:900;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  background:linear-gradient(90deg, #ff5a1f, #ff9d1a 30%, #ff7a18 60%, #d93b15);
+  box-shadow:0 8px 24px rgba(255,122,24,0.28), inset 0 1px 0 rgba(255,255,255,0.18);
+  border:1px solid rgba(255,255,255,0.12);
   text-shadow:0 2px 6px rgba(0,0,0,0.35);
-  -webkit-text-stroke:0.35px rgba(4,70,46,0.65);
-}
-.promo-marquee span{
-  display:inline-block;
-  padding-left:100%;
-  animation:marquee 13s linear infinite;
-}
-@keyframes marquee{
-  0%{transform:translateX(0)}
-  100%{transform:translateX(-100%)}
-}
-.flag-slider{
-  width:34px;
-  height:24px;
+  position:relative;
   overflow:hidden;
-  border-radius:4px;
-  box-shadow:0 2px 8px rgba(0,0,0,0.25);
+}
+.promo-chip::before{
+  content:"";
+  position:absolute;
+  inset:-40% -30%;
+  background:linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.22) 45%, transparent 60%);
+  transform:translateX(-60%) skewX(-18deg);
+  animation:shine 3.5s ease-in-out infinite;
+}
+@keyframes shine{
+  0%{transform:translateX(-60%) skewX(-18deg)}
+  55%{transform:translateX(90%) skewX(-18deg)}
+  100%{transform:translateX(90%) skewX(-18deg)}
+}
+.promo-chip span{
+  position:relative;
+  z-index:1;
+}
+.promo-chip i{
+  position:relative;
+  z-index:1;
+  color:#fff6d2;
+}
+
+.flag-slider{
+  width:38px;
+  height:26px;
+  overflow:hidden;
+  border-radius:7px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.30);
   background:#fff;
   flex:0 0 auto;
+  border:1px solid rgba(255,255,255,0.10);
 }
 .flag-slider img{
   width:100%;
@@ -243,6 +267,7 @@ header{
   display:block;
 }
 
+/* Electric band */
 .electric-band{
   position:fixed;
   top:calc(var(--topbar-h) + var(--header-h) - 6px);
@@ -343,6 +368,7 @@ header{
   z-index:40
 }
 
+/* Models section */
 .models-wrapper{
   margin-top:24px;
   padding:18px 12px 36px;
@@ -431,6 +457,7 @@ header{
   margin-top:4px
 }
 
+/* product card */
 .product-card{
   width:min(980px,94%);
   margin:22px auto 28px;
@@ -600,6 +627,7 @@ header{
   font-weight:700
 }
 
+/* details */
 .details-panel{
   display:none;
   margin-top:12px;
@@ -613,6 +641,7 @@ header{
   line-height:1.45
 }
 
+/* pro */
 .pro-panel{
   display:none;
   margin-top:12px;
@@ -725,6 +754,7 @@ header{
   border:1px solid rgba(0,0,0,0.06)
 }
 
+/* modal */
 .modal-overlay{
   position:fixed;
   inset:0;
@@ -736,11 +766,10 @@ header{
   padding:20px
 }
 .modal{
-  width:100%;
-  max-width:920px;
+  width:min(560px,100%);
   background:#fff;
-  border-radius:12px;
-  padding:18px;
+  border-radius:18px;
+  padding:16px;
   overflow:auto;
   box-shadow:0 24px 60px rgba(0,0,0,0.45);
   max-height:86vh;
@@ -754,6 +783,69 @@ header{
   border:0;
   font-size:18px;
   cursor:pointer
+}
+.whatsapp-choice{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:14px;
+}
+.whatsapp-card{
+  border:1px solid rgba(6,42,32,0.08);
+  background:linear-gradient(180deg, #ffffff 0%, #f7fbf9 100%);
+  border-radius:16px;
+  padding:14px;
+  cursor:pointer;
+  text-align:left;
+  box-shadow:0 10px 24px rgba(6,42,32,0.06);
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.whatsapp-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 16px 30px rgba(6,42,32,0.10);
+  border-color:rgba(4,70,46,0.22);
+}
+.whatsapp-card .top{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.whatsapp-card .flag{
+  width:42px;
+  height:30px;
+  border-radius:8px;
+  overflow:hidden;
+  border:1px solid rgba(0,0,0,0.08);
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  flex:0 0 auto;
+}
+.whatsapp-card .flag img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.whatsapp-card h4{
+  margin:0;
+  font-size:16px;
+  color:#082014;
+}
+.whatsapp-card p{
+  margin:8px 0 0;
+  color:#315348;
+  font-size:13px;
+  line-height:1.45;
+}
+.whatsapp-card .go{
+  margin-top:12px;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:9px 12px;
+  border-radius:999px;
+  background:linear-gradient(90deg, var(--brand-green), var(--green-mid));
+  color:#fff;
+  font-weight:800;
+  font-size:13px;
 }
 
 /* WhatsApp FAB */
@@ -788,6 +880,7 @@ header{
   outline-offset:2px
 }
 
+/* footer */
 footer{
   background:var(--green-dark);
   color:#fff;
@@ -815,6 +908,7 @@ footer{
   line-height:1.6
 }
 
+/* responsive */
 @media (max-width:1100px){
   .grid-4{grid-template-columns:repeat(2,1fr)}
 }
@@ -846,6 +940,7 @@ footer{
   .logo-text img{height:50px}
   .fab{width:50px;height:50px}
   .fab button{font-size:20px}
+  .whatsapp-choice{grid-template-columns:1fr}
 }
 @media (max-width:768px){
   .company-name{font-size:26px}
@@ -857,39 +952,31 @@ footer{
   .featured-hero{height:240px}
   .card .image-wrap{height:200px}
   .card-content{padding:16px 12px 18px}
-  .hero-content h1{font-size:28px}
-  .hero-content p{font-size:14px}
 }
 @media (max-width:640px){
-  .promo-marquee{
+  .promo-chip{
     font-size:11px;
-    letter-spacing:0.8px;
+    letter-spacing:0.7px;
+    padding:6px 12px;
   }
   .company-name{font-size:24px}
   .company-tagline{font-size:12px; letter-spacing:4px}
+  .logo-text img{height:46px}
   .featured-hero{height:220px}
   .product-card{
-    display:none !important;
-    position:fixed;
-    left:8px;
-    right:8px;
-    top:calc(var(--topbar-h) + var(--header-h) + 8px);
-    z-index:2200;
-    width:calc(100% - 16px);
-    margin:0;
-    padding:16px;
-    border-radius:12px;
-    box-shadow:0 18px 40px rgba(6,42,32,0.20);
-    background:rgba(255,255,255,0.98);
+    display:flex;
+    position:relative;
+    width:min(980px,94%);
+    margin:18px auto 24px;
+    padding:14px;
+    border-radius:14px;
+    box-shadow:0 12px 30px rgba(6,42,32,0.16);
+    background:rgba(255,255,255,0.96);
     flex-direction:column;
-    overflow:auto;
-    max-height:calc(100vh - (var(--topbar-h) + var(--header-h) + 32px));
+    overflow:hidden;
+    max-height:none;
   }
-  .product-card.show-on-mobile{
-    display:flex !important;
-    animation:slideIn 220ms ease;
-  }
-  .product-card .close-mobile{display:block}
+  .product-card .close-mobile{display:none}
 }
 @media (max-width:480px){
   .hero-content{
@@ -934,7 +1021,7 @@ footer{
     </div>
 
     <div class="promo-marquee" aria-hidden="true">
-      <span>PROMOTION — PROMOTION — PROMOTION —</span>
+      <div class="promo-chip"><i class="fa-solid fa-bolt"></i><span>PROMOTION EXCEPTIONNELLE</span></div>
     </div>
 
     <div class="right" aria-hidden="true"></div>
@@ -1484,34 +1571,12 @@ function stopHeroSlideshow(){
 function selectModel(i){
   currentModel = i;
   updateHero(i);
-
-  if(window.matchMedia('(max-width:640px)').matches){
-    productCard.classList.add('show-on-mobile');
-    productCard.setAttribute('aria-hidden','false');
-    document.getElementById('detailsPanel').style.display = 'none';
-    document.getElementById('detailsPanel').setAttribute('aria-hidden','true');
-    setTimeout(()=>{
-      const p = productCard.querySelector('.btn-primary');
-      if(p) p.focus();
-    }, 120);
-  } else {
-    productCard.classList.remove('show-on-mobile');
-    productCard.style.display = 'flex';
-    productCard.setAttribute('aria-hidden','false');
-    document.getElementById('detailsPanel').style.display = 'none';
-    document.getElementById('detailsPanel').setAttribute('aria-hidden','true');
-    productCard.scrollIntoView({behavior:'smooth', block:'center'});
-  }
-
+  productCard.scrollIntoView({behavior:'smooth', block:'start'});
   currentImage = 0;
   startHeroSlideshow();
 }
 
 function closeOverlay(){
-  productCard.classList.remove('show-on-mobile');
-  productCard.setAttribute('aria-hidden','true');
-  document.getElementById('detailsPanel').style.display = 'none';
-  document.getElementById('detailsPanel').setAttribute('aria-hidden','true');
   const first = document.querySelector('.models .model');
   if(first) first.focus();
 }
@@ -1538,8 +1603,7 @@ document.getElementById('detailsToggle').addEventListener('click', ()=>{
   } else {
     panel.style.display='block';
     panel.setAttribute('aria-hidden','false');
-    if(window.matchMedia('(max-width:640px)').matches) productCard.scrollIntoView({behavior:'smooth', block:'center'});
-    else panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+    panel.scrollIntoView({behavior:'smooth', block:'nearest'});
   }
 });
 
@@ -1557,21 +1621,44 @@ proToggleBtn.addEventListener('click', ()=>{
     proPanel.setAttribute('aria-hidden','false');
     proToggleBtn.setAttribute('aria-pressed','true');
     proToggleBtn.textContent = 'Mode Pro (actif)';
-    if(window.matchMedia('(max-width:640px)').matches) productCard.scrollIntoView({behavior:'smooth', block:'center'});
+    proPanel.scrollIntoView({behavior:'smooth', block:'nearest'});
   }
 });
 
 /* WhatsApp choice modal */
 function openCountryModal(){
   const html = `
-    <h2 style="margin-top:0">Commander via WhatsApp</h2>
-    <p style="color:#23403a;line-height:1.45">
-      Choisis le pays de commande.
+    <h2 style="margin:0 0 6px;font-size:22px;color:#08110a">Commander via WhatsApp</h2>
+    <p style="margin:0;color:#315348;line-height:1.45;font-size:14px">
+      Choisis le pays de commande. Le message sera pré-rempli avec le bon numéro.
     </p>
-    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
-      <button type="button" class="btn-primary" onclick="sendWhatsApp('senegal')">🇸🇳 Commander au Sénégal</button>
-      <button type="button" class="btn-primary" onclick="sendWhatsApp('coteivoire')">🇨🇮 Commander en Côte d'Ivoire</button>
-      <button type="button" class="btn-secondary" onclick="closeModal()">Annuler</button>
+
+    <div class="whatsapp-choice">
+      <button class="whatsapp-card" type="button" onclick="sendWhatsApp('senegal')">
+        <div class="top">
+          <div class="flag"><img src="https://flagcdn.com/w80/sn.png" alt="Drapeau Sénégal"></div>
+          <div>
+            <h4>Sénégal</h4>
+            <p>Commander pour le Sénégal via WhatsApp, avec le message adapté.</p>
+          </div>
+        </div>
+        <div class="go"><i class="fa-brands fa-whatsapp"></i> Continuer</div>
+      </button>
+
+      <button class="whatsapp-card" type="button" onclick="sendWhatsApp('coteivoire')">
+        <div class="top">
+          <div class="flag"><img src="https://flagcdn.com/w80/ci.png" alt="Drapeau Côte d'Ivoire"></div>
+          <div>
+            <h4>Côte d'Ivoire</h4>
+            <p>Commander pour la Côte d'Ivoire avec le message adapté.</p>
+          </div>
+        </div>
+        <div class="go"><i class="fa-brands fa-whatsapp"></i> Continuer</div>
+      </button>
+    </div>
+
+    <div style="margin-top:12px;text-align:right">
+      <button type="button" class="btn-secondary" onclick="closeModal()">Fermer</button>
     </div>
   `;
   openModal(html);
@@ -1855,8 +1942,8 @@ function applyLedMode(idx){
   const flagImage = document.getElementById('flagImage');
   if(!flagImage) return;
   const flags = [
-    {src:'https://flagcdn.com/w40/ci.png', alt:"Drapeau Côte d'Ivoire"},
-    {src:'https://flagcdn.com/w40/sn.png', alt:'Drapeau Sénégal'}
+    {src:'https://flagcdn.com/w80/ci.png', alt:"Drapeau Côte d'Ivoire"},
+    {src:'https://flagcdn.com/w80/sn.png', alt:'Drapeau Sénégal'}
   ];
   let currentFlag = 0;
 
@@ -1876,14 +1963,7 @@ function applyLedMode(idx){
 document.addEventListener('DOMContentLoaded', ()=>{
   preloadImages(allImageUrls());
 
-  if(window.matchMedia('(max-width:640px)').matches){
-    updateHero(0);
-    productCard.classList.remove('show-on-mobile');
-    productCard.setAttribute('aria-hidden','true');
-  } else {
-    selectModel(0);
-  }
-
+  updateHero(0);
   document.getElementById('year').textContent = new Date().getFullYear();
 
   document.querySelectorAll('.models .model').forEach((el, idx)=>{
@@ -1918,16 +1998,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 });
 
 window.addEventListener('resize', ()=>{
-  if(!window.matchMedia('(max-width:640px)').matches){
-    productCard.classList.remove('show-on-mobile');
-    productCard.style.display = 'flex';
-    productCard.setAttribute('aria-hidden','false');
-  } else {
-    if(!productCard.classList.contains('show-on-mobile')){
-      productCard.style.display = 'none';
-      productCard.setAttribute('aria-hidden','true');
-    }
-  }
+  productCard.style.display = 'flex';
 });
 </script>
 </body>
