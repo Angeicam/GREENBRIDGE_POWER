@@ -124,19 +124,15 @@ button{font-family:inherit}
 .promo-text{
   display:inline-flex;
   align-items:center;
-  gap:7px;
+  gap:0;
   font-size:10px;
   font-weight:800;
   letter-spacing:0.9px;
   text-transform:uppercase;
-  color:var(--gold-base);
-  -webkit-text-stroke:0.45px rgba(4,70,46,0.85);
+  color:#fff;
+  -webkit-text-stroke:0.35px rgba(255,255,255,0.18);
   text-shadow:0 2px 6px rgba(0,0,0,0.35);
   white-space:nowrap;
-}
-.promo-text i{
-  color:var(--gold-base);
-  font-size:10px;
 }
 .right{
   flex:0 0 auto;
@@ -674,19 +670,19 @@ main.container{
   align-items:center;
   justify-content:center;
   z-index:5000;
-  padding:12px
+  padding:10px
 }
 .modal{
-  width:min(320px,86vw);
+  width:min(290px,84vw);
   background:#fff;
   border-radius:16px;
-  padding:10px 10px 10px;
+  padding:10px;
   overflow:auto;
   box-shadow:0 20px 45px rgba(0,0,0,0.42);
-  max-height:70vh;
+  max-height:58vh;
   position:relative
 }
-.modal h2{font-size:16px; margin-right:28px}
+.modal h2{font-size:15px;margin-top:0;margin-right:28px}
 .modal .close{
   position:absolute;
   right:8px;
@@ -852,24 +848,23 @@ footer{
   .logo-text img{height:50px}
   .fab{width:50px;height:50px}
   .fab button{font-size:20px}
-  .modal{width:min(90vw,340px)}
+  .modal{width:min(88vw,300px);max-height:54vh}
 }
 @media (max-width:768px){
   .company-name{font-size:26px}
   .featured-hero{height:240px}
   .card .image-wrap{height:200px}
   .card-content{padding:16px 12px 18px}
+  .modal{width:min(90vw,295px);max-height:52vh}
 }
 @media (max-width:640px){
-  .promo-text{font-size:10px;letter-spacing:0.6px}
-  .company-name{font-size:24px}
   .company-tagline{font-size:12px; letter-spacing:4px}
   .logo-text img{height:46px}
   .featured-hero{height:220px}
   .product-card{display:none !important;}
   .modal{
-    width:min(92vw,310px);
-    max-height:65vh;
+    width:min(92vw,290px);
+    max-height:50vh;
     padding:10px;
   }
   .modal h2{font-size:15px}
@@ -905,7 +900,7 @@ footer{
 
 <div class="topbar" role="banner">
   <div class="promo-wrap" aria-hidden="true">
-    <div class="promo-text"><i class="fa-solid fa-bolt"></i><span>Assemblé en Afrique de l'Ouest</span></div>
+    <div class="promo-text"><span>Assemblé en Afrique de l'Ouest</span></div>
   </div>
   <div class="right" aria-hidden="true">
     <div class="flag-slider">
