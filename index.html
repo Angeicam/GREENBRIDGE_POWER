@@ -7,7 +7,6 @@
 <meta name="description" content="GREENBRIDGE TECHNOLOGIES — Solutions énergétiques, powerbanks, chargeurs et stabilisateur WiFi.">
 <meta name="theme-color" content="#0a4d2e">
 
-<!-- Preload images visibles dès l’ouverture -->
 <link rel="preload" as="image" href="Energie_blanche.png">
 <link rel="preload" as="image" href="green bridge domo.png">
 <link rel="preload" as="image" href="Pwkb_Mini_3.png">
@@ -56,43 +55,40 @@ html, body{
   color:#fff;
   scroll-behavior:smooth;
   overflow-x:hidden;
-}
-html{min-height:100%}
-body{
   min-height:100%;
+}
+body{
+  min-height:100vh;
+  min-height:100dvh;
   background:var(--bg);
   overscroll-behavior-y:none;
 }
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
+button, input, select{font-family:inherit}
 
-/* Background fix mobile */
+/* Background stable on mobile */
 .page-bg{
   position:fixed;
   inset:0;
   z-index:0;
   pointer-events:none;
-  background-color:var(--bg);
-  background-image:url('Energie_blanche.png');
-  background-size:cover;
-  background-position:center center;
-  background-repeat:no-repeat;
+  width:100vw;
+  height:100vh;
+  height:100dvh;
+  object-fit:cover;
+  object-position:center center;
   transform:translateZ(0);
+  backface-visibility:hidden;
   will-change:transform;
+  background:var(--bg);
 }
-.page-bg::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(180deg, rgba(10,77,46,0.08), rgba(10,77,46,0.02));
-}
-
-.bg-overlay{
+.page-bg-overlay{
   position:fixed;
   inset:0;
-  z-index:8;
+  z-index:1;
   pointer-events:none;
-  background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02));
+  background:linear-gradient(180deg, rgba(10,77,46,0.06), rgba(10,77,46,0.02));
 }
 
 /* Topbar */
@@ -115,23 +111,28 @@ img{max-width:100%;display:block}
 .topbar .left, .topbar .right{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:10px;
   white-space:nowrap;
+  min-width:0;
 }
-.topbar .left a, .topbar .right a{transition:color .18s}
-.topbar .left a:hover, .topbar .right a:hover{color:var(--accent-2)}
-
+.topbar .left{
+  color:#fff;
+  font-weight:700;
+}
+.topbar .right{
+  flex:0 0 auto;
+}
 .promo-marquee{
   flex:1;
   overflow:hidden;
   white-space:nowrap;
   text-align:center;
-  color:#fff;
+  color:var(--release-orange-2);
   font-weight:800;
   letter-spacing:1.2px;
   text-transform:uppercase;
-  position:relative;
   min-width:0;
+  text-shadow:0 2px 6px rgba(0,0,0,0.35);
 }
 .promo-marquee span{
   display:inline-block;
@@ -142,7 +143,6 @@ img{max-width:100%;display:block}
   0%{transform:translateX(0)}
   100%{transform:translateX(-100%)}
 }
-
 .flag-slider{
   width:34px;
   height:24px;
@@ -169,7 +169,7 @@ header{
   background:linear-gradient(90deg,var(--green-mid),var(--green-mid-2));
   display:flex;
   align-items:center;
-  justify-content:space-between;
+  justify-content:center;
   padding:0 5vw;
   z-index:1490;
   box-shadow:0 4px 12px rgba(0,0,0,.25);
@@ -189,10 +189,10 @@ header{
 .brand-stack{
   display:flex;
   flex-direction:column;
-  align-items:flex-start;
+  align-items:center;
   justify-content:flex-start;
   line-height:1;
-  text-align:left;
+  text-align:center;
   min-width:0;
   margin:0;
   padding:0;
@@ -212,7 +212,7 @@ header{
   top:2px;
   white-space:nowrap;
   line-height:1;
-  text-align:left;
+  text-align:center;
   width:max-content;
   display:block;
 }
@@ -229,105 +229,10 @@ header{
   -webkit-text-stroke:0.4px rgba(212,175,55,0.55);
   white-space:nowrap;
   line-height:1;
-  text-align:left;
+  text-align:center;
   width:max-content;
   display:block;
 }
-
-nav{
-  display:flex;
-  gap:18px;
-  align-items:center;
-}
-nav a{
-  color:#fff;
-  font-size:15px;
-  font-weight:600;
-  padding:8px 10px;
-  border-radius:8px;
-  transition:all .18s;
-}
-nav a:hover{color:var(--accent-2)}
-nav a.active{
-  color:var(--accent-2);
-  background:linear-gradient(90deg, rgba(212,175,55,0.06), rgba(212,175,55,0.03));
-  border:1px solid rgba(212,175,55,0.12);
-  padding:10px 14px;
-  font-weight:800;
-  border-radius:10px;
-}
-
-.burger{
-  display:none;
-  width:44px;
-  height:44px;
-  border-radius:8px;
-  border:none;
-  background:transparent;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer
-}
-.burger .icon{display:block;position:relative;width:26px;height:18px}
-.burger .icon span{
-  position:absolute;
-  left:0;
-  right:0;
-  height:3px;
-  background:#fff;
-  border-radius:2px;
-  transition:all .25s
-}
-.burger .icon span:nth-child(1){top:0}
-.burger .icon span:nth-child(2){top:7.5px}
-.burger .icon span:nth-child(3){top:15px}
-.burger.open .icon span:nth-child(1){transform: translateY(7.5px) rotate(45deg)}
-.burger.open .icon span:nth-child(2){opacity:0}
-.burger.open .icon span:nth-child(3){transform: translateY(-7.5px) rotate(-45deg)}
-
-.mobile-nav{
-  display:none;
-  position:fixed;
-  top:calc(var(--topbar-h)+var(--header-h));
-  left:0;
-  right:0;
-  background:var(--bg);
-  z-index:1480;
-  overflow:auto;
-  transition:max-height .28s ease;
-  box-shadow:0 12px 40px rgba(0,0,0,.45);
-  max-height:0;
-}
-.mobile-nav.open{display:block;max-height:70vh}
-.mobile-nav .inner{
-  padding:12px 5vw;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  align-items:stretch;
-}
-.mobile-nav .contact{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-  padding:8px 12px;
-  border-bottom:1px solid rgba(255,255,255,0.04);
-  margin-bottom:6px;
-  color:var(--muted-text-color);
-}
-.mobile-nav a{
-  padding:12px;
-  color:#fff;
-  width:100%;
-  text-align:left;
-  border-radius:8px;
-  font-weight:700;
-  display:flex;
-  justify-content:space-between;
-  align-items:center
-}
-.mobile-nav a:hover{background:rgba(124,179,66,0.06);color:var(--accent-2)}
-.mobile-nav a.active{background: linear-gradient(90deg, rgba(212,175,55,0.06), rgba(212,175,55,0.03)); color:var(--accent-2)}
 
 /* Electric band */
 .electric-band{
@@ -467,7 +372,6 @@ nav a.active{
   box-sizing:border-box
 }
 
-/* model cards */
 .models .model{
   display:flex;
   flex-direction:column;
@@ -502,7 +406,6 @@ nav a.active{
   border-radius:8px
 }
 
-/* model text */
 .model .meta h4{
   margin:0;
   font-size:18px;
@@ -523,7 +426,7 @@ nav a.active{
   margin-top:4px
 }
 
-/* product card (detail) */
+/* product card */
 .product-card{
   width:min(980px,94%);
   margin:22px auto 28px;
@@ -576,7 +479,6 @@ nav a.active{
   line-height:1.08
 }
 
-/* warranty badge */
 .warranty-badge{
   display:inline-block;
   margin-left:8px;
@@ -590,8 +492,6 @@ nav a.active{
   box-shadow:0 10px 30px rgba(255,180,0,0.18);
   border:1px solid rgba(0,0,0,0.06)
 }
-
-/* product subtitle */
 .product-sub{
   font-size:13px;
   color:rgba(2,17,10,0.95);
@@ -614,7 +514,6 @@ nav a.active{
   font-size:13px
 }
 
-/* specs */
 .specs-block{margin-top:12px}
 .specs-title{
   font-weight:800;
@@ -636,7 +535,6 @@ nav a.active{
   box-shadow:0 6px 14px rgba(6,42,32,0.03)
 }
 
-/* product side */
 .product-side{
   width:340px;
   display:flex;
@@ -666,7 +564,6 @@ nav a.active{
   border-radius:8px
 }
 
-/* CTA */
 .cta-group{
   display:flex;
   flex-direction:column;
@@ -701,18 +598,8 @@ nav a.active{
   cursor:pointer;
   font-weight:700
 }
-.country-select{
-  width:100%;
-  background:#fff;
-  border:1px solid rgba(6,42,32,0.06);
-  padding:10px 12px;
-  border-radius:10px;
-  cursor:pointer;
-  font-weight:800;
-  color:var(--text)
-}
 
-/* details panel */
+/* details */
 .details-panel{
   display:none;
   margin-top:12px;
@@ -726,7 +613,7 @@ nav a.active{
   line-height:1.45
 }
 
-/* PRO MODE UI */
+/* pro */
 .pro-panel{
   display:none;
   margin-top:12px;
@@ -744,8 +631,6 @@ nav a.active{
   flex-wrap:wrap
 }
 .led-sim{display:flex;gap:10px;align-items:center}
-
-/* LED visual */
 .led-indicator{
   width:36px;
   height:36px;
@@ -768,7 +653,6 @@ nav a.active{
 .blink-med{animation:blink-med 0.6s linear infinite}
 .blink-fast{animation:blink-fast 0.25s linear infinite}
 
-/* featured + others */
 .futures-title{
   display:flex;
   align-items:center;
@@ -890,17 +774,19 @@ nav a.active{
   box-shadow:0 10px 30px rgba(2,50,26,0.25);
   background:var(--whatsapp-green);
   border:3px solid rgba(255,255,255,0.06);
+  cursor:pointer;
 }
-.fab a{
-  display:flex;
-  align-items:center;
-  justify-content:center;
+.fab button{
   width:100%;
   height:100%;
+  border:0;
+  background:transparent;
   color:#fff;
-  font-size:22px
+  font-size:22px;
+  cursor:pointer;
+  border-radius:50%;
 }
-.fab:focus, .fab a:focus{
+.fab:focus, .fab button:focus{
   outline:3px solid rgba(255,255,255,0.12);
   outline-offset:2px
 }
@@ -924,7 +810,8 @@ footer{
   -webkit-text-stroke:0.7px var(--gold-base);
   text-shadow:0 3px 6px rgba(0,0,0,0.6);
   padding:6px 10px;
-  border-radius:6px
+  border-radius:6px;
+  width:max-content
 }
 
 /* responsive */
@@ -937,8 +824,6 @@ footer{
   .featured-hero{height:280px}
 }
 @media (max-width:820px){
-  nav{display:none}
-  .burger{display:flex}
   .hero-content{max-width:86vw}
   .grid-4{grid-template-columns:1fr;gap:20px}
   .card{min-height:auto;text-align:center}
@@ -959,17 +844,17 @@ footer{
     padding:10px 20px
   }
   .company-name{font-size:30px}
-  .mobile-nav.open{max-height:85vh}
-  .mobile-nav .inner{padding-bottom:20px}
-  .fab{width:50px;height:50px;font-size:20px}
+  .fab{width:50px;height:50px}
+  .fab button{font-size:20px}
 }
 @media (max-width:768px){
   .company-name{font-size:26px}
   .topbar{
     gap:10px;
     font-size:12px;
+    padding:0 3.5vw;
   }
-  .topbar .left, .topbar .right{gap:8px}
+  .topbar .left{max-width:38vw; overflow:hidden; text-overflow:ellipsis}
   .featured-hero{height:240px}
   .card .image-wrap{height:200px}
   .card-content{padding:16px 12px 18px}
@@ -981,11 +866,6 @@ footer{
     font-size:11px;
     letter-spacing:0.8px;
   }
-  .topbar{
-    padding:0 3.5vw;
-  }
-  .topbar .left{max-width:38vw; overflow:hidden; text-overflow:ellipsis}
-  .topbar .right{max-width:30vw; overflow:hidden}
   .company-name{font-size:24px}
   .company-tagline{font-size:12px; letter-spacing:4px}
   .featured-hero{height:220px}
@@ -1044,51 +924,35 @@ footer{
 </head>
 <body>
 
-  <div class="page-bg" aria-hidden="true"></div>
-  <div class="bg-overlay" aria-hidden="true"></div>
+  <img class="page-bg" src="Energie_blanche.png" alt="" aria-hidden="true">
+  <div class="page-bg-overlay" aria-hidden="true"></div>
 
-  <!-- Topbar -->
   <div class="topbar" role="banner">
-    <div class="left">
-      <a href="#" aria-label="Localisation"><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Abidjan, Côte d’Ivoire</a>
-    </div>
+    <div class="left">Assemblé en Afrique de l'Ouest</div>
 
     <div class="promo-marquee" aria-hidden="true">
       <span>PROMOTION EXCEPTIONNELLE — PROMOTION EXCEPTIONNELLE — PROMOTION EXCEPTIONNELLE —</span>
     </div>
 
     <div class="right">
-      <a href="tel:+22507070707"><i class="fas fa-phone" aria-hidden="true"></i> +225 07 07 07 07 07</a>
       <div class="flag-slider" aria-hidden="true">
         <img id="flagImage" src="https://flagcdn.com/w40/ci.png" alt="Drapeau Côte d'Ivoire">
       </div>
     </div>
   </div>
 
-  <!-- Header -->
-  <header role="navigation" aria-label="Main">
+  <header role="banner" aria-label="En-tête">
     <div class="logo-text">
-      <a href="GreenBrigde technologies.html"><img src="green bridge domo.png" alt="Logo GreenBridge" loading="eager" fetchpriority="high"></a>
+      <a href="GreenBrigde technologies.html" aria-label="Accueil">
+        <img src="green bridge domo.png" alt="Logo GreenBridge" loading="eager" fetchpriority="high">
+      </a>
       <div class="brand-stack">
         <div class="company-name">GREENBRIDGE</div>
         <div class="company-tagline">TECHNOLOGIES</div>
       </div>
     </div>
-
-    <nav aria-label="Menu principal">
-      <a href="GreenBrigde technologies.html">Accueil</a>
-      <a href="etude_dimensionnement_2.html">Étude</a>
-      <a href="#produits" class="active">Nos Produits</a>
-      <a href="Projets.html">Projets futurs</a>
-      <a href="maintenance.html">Maintenance</a>
-    </nav>
-
-    <button class="burger" aria-label="Ouvrir le menu mobile" id="burgerBtn" aria-expanded="false">
-      <span class="icon"><span></span><span></span><span></span></span>
-    </button>
   </header>
 
-  <!-- Electric band -->
   <div class="electric-band" id="electricBand" aria-hidden="true">
     <div class="container" aria-hidden="true">
       <svg class="lightning-svg" viewBox="0 0 2000 40" preserveAspectRatio="none" aria-hidden="true">
@@ -1105,27 +969,10 @@ footer{
     </div>
   </div>
 
-  <!-- Mobile nav -->
-  <div class="mobile-nav" id="mobileNav" aria-hidden="true">
-    <div class="inner">
-      <div class="contact" aria-hidden="false">
-        <div><strong>GREENBRIDGE TECHNOLOGIES</strong></div>
-        <div><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Abidjan, Côte d’Ivoire</div>
-        <div><a href="tel:+22507070707"><i class="fas fa-phone" aria-hidden="true"></i> +225 07 07 07 07 07</a></div>
-      </div>
-      <a href="GreenBrigde technologies.html" class="mobile-link">Accueil</a>
-      <a href="etude_dimensionnement_2.html" class="mobile-link">Étude</a>
-      <a href="#produits" class="mobile-link active">Nos Produits</a>
-      <a href="Projets.html" class="mobile-link">Projets futurs</a>
-      <a href="maintenance.html" class="mobile-link">Maintenance</a>
-    </div>
-  </div>
-
   <div style="height:calc(var(--topbar-h) + var(--header-h) + 8px);" aria-hidden="true"></div>
 
   <main class="container" role="main">
 
-    <!-- Models list -->
     <section class="models-wrapper" id="models" role="region" aria-label="Nos modèles">
       <div class="models-header"><div class="models-title">Nos modèles</div></div>
 
@@ -1186,7 +1033,6 @@ footer{
       </div>
     </section>
 
-    <!-- Product card -->
     <section class="product-card" role="region" aria-label="Produit principal" aria-hidden="true">
       <button class="close-mobile" aria-label="Fermer la fiche mobile" title="Fermer" onclick="closeOverlay()">×</button>
 
@@ -1224,23 +1070,17 @@ footer{
         </div>
 
         <div class="cta-group" aria-label="Actions produit">
-          <select id="countrySelector" class="country-select" aria-label="Choisir le pays WhatsApp">
-            <option value="senegal" selected>🇸🇳 Sénégal</option>
-            <option value="coteivoire">🇨🇮 Côte d'Ivoire</option>
-          </select>
-
-          <a id="orderBtnTop" class="btn-primary" href="#" target="_blank" rel="noopener noreferrer">
+          <button id="orderBtnTop" class="btn-primary" type="button">
             <i class="fa-brands fa-whatsapp"></i> Commander
-          </a>
-          <button id="infoBtnHero" class="btn-secondary" onclick="openTechModal(currentModel)">
+          </button>
+          <button id="infoBtnHero" class="btn-secondary" type="button" onclick="openTechModal(currentModel)">
             <i class="fa-solid fa-circle-info"></i> Infos techniques
           </button>
-          <button id="detailsToggle" class="btn-small"><i class="fa-solid fa-list"></i> Afficher détails</button>
+          <button id="detailsToggle" class="btn-small" type="button"><i class="fa-solid fa-list"></i> Afficher détails</button>
         </div>
       </div>
     </section>
 
-    <!-- Featured -->
     <div class="futures-title" id="futures">
       <div class="models-title">Projets à venir</div>
     </div>
@@ -1259,21 +1099,19 @@ footer{
         </div>
 
         <div style="margin-top:12px">
-          <button class="btn-secondary" onclick="openPackModal()">Infos pack</button>
+          <button class="btn-secondary" type="button" onclick="openPackModal()">Infos pack</button>
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- WhatsApp FAB -->
   <div id="fab" class="fab" role="button" aria-label="Commander via WhatsApp">
-    <a id="fabLink" href="https://wa.me/221774015004" target="_blank" rel="noopener noreferrer" aria-label="Commander via WhatsApp">
+    <button id="fabButton" type="button" aria-label="Commander via WhatsApp">
       <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-    </a>
+    </button>
   </div>
 
-  <!-- Modal -->
   <div id="modalOverlay" class="modal-overlay" role="dialog" aria-hidden="true">
     <div class="modal" role="document" aria-modal="true">
       <button class="close" aria-label="Fermer" onclick="closeModal()">✕</button>
@@ -1288,7 +1126,7 @@ footer{
 
 <script>
 /* ===========================
-   Données modèles
+   Modèles
    =========================== */
 const models = [
   {
@@ -1300,8 +1138,8 @@ const models = [
       'Cellules : Samsung (3 cellules) • testées à >100% capacité',
       'Capacité nominale : 10 000 mAh (≈9 200 mAh usable)',
       'Puissance pack approximative : ~32 W',
-      'Écran digital : affichage % batterie (ex : 12%, 13%, ...)',
-      'Ports : 1× USB-C (in/out) + 2× USB-A (Q3 & autre)',
+      'Écran digital : affichage % batterie',
+      'Ports : 1× USB-C (in/out) + 2× USB-A',
       'Garantie spéciale : 3 ans pour les 100 premiers clients'
     ],
     warranty:'Garantie 3 ans — 100 premiers clients',
@@ -1309,7 +1147,7 @@ const models = [
       <p style="margin-top:0;color:#23403a;line-height:1.45">
         <strong>GreenMini — 10 000 mAh</strong><br>
         Technologie : <strong>Samsung, 3 cellules</strong> (cellules testées et sélectionnées).
-        Puissance moyenne du pack : <strong>~32 W</strong>. Écran digital intégré (indicateur précis en %) pour visualiser l'autonomie en temps réel.
+        Puissance moyenne du pack : <strong>~32 W</strong>.
       </p>
       <div style="margin-top:8px">
         <strong>Entrées (Input)</strong>
@@ -1320,9 +1158,9 @@ const models = [
         </ul>
         <strong>Sorties (Output)</strong>
         <ul>
-          <li>USB-C (in/out) : 5V — 4.5A ; 9V — 2.5A ; 12V — 1.85A (selon negotiation)</li>
-          <li>USB-A (Q3) : 5V — 2.1A</li>
-          <li>USB-A secondaire : 5V — 1A</li>
+          <li>USB-C (in/out)</li>
+          <li>USB-A (Q3)</li>
+          <li>USB-A secondaire</li>
         </ul>
       </div>
     `
@@ -1338,7 +1176,7 @@ const models = [
       'Puissance pack approximative : ~32 W',
       'Type-C charge rapide (Quick Charge / QC compatible)',
       'Pas de Power Delivery (PD) — tests mesurés : 4.66 V → 1.52 A',
-      'Lampe de nuit LED intégrée — activation : appuyez 2 fois sur le bouton (Mode Pro)',
+      'Lampe de nuit LED intégrée — activation : appuyez 2 fois sur le bouton',
       'Garantie spéciale : 3 ans pour les 100 premiers clients'
     ],
     warranty:'Garantie 3 ans — 100 premiers clients',
@@ -1353,7 +1191,7 @@ const models = [
     details:`
       <p style="margin-top:0;color:#23403a;line-height:1.45">
         <strong>GreenCore — ≈ 9 000 mAh</strong><br>
-        Technologie : <strong>Samsung</strong>, cellules testées et triées. Charge rapide via USB-C (Quick Charge). Puissance pack : ~32 W.
+        Technologie : <strong>Samsung</strong>, cellules testées et triées. Charge rapide via USB-C (Quick Charge).
       </p>
       <div style="margin-top:8px">
         <strong>Charge / Mesures</strong>
@@ -1378,7 +1216,7 @@ const models = [
     details:`
       <p style="margin-top:0;color:#23403a;line-height:1.45">
         <strong>GreenPro — ≈ 12 000 mAh</strong><br>
-        Pack constitué de cellules de haute qualité, sélectionnées pour stabilité et longévité. Charge rapide via USB-C, conçu pour alimenter plusieurs appareils simultanément.
+        Pack constitué de cellules de haute qualité, sélectionnées pour stabilité et longévité. Charge rapide via USB-C.
       </p>
     `
   },
@@ -1388,48 +1226,29 @@ const models = [
     subtitle:'Boîtier amovible • PD / QC3.0 • Sans-fil • DIY',
     images:['pwkb_wireless_1.png','pwkb_wireless_2.png','pwkb_wireless_3.png'],
     specs:[
-      'Cellules : Samsung ou LG — 18650 hautes performances (configuration supportant jusqu\'à 5×18650)',
-      'Capacité nominale : 20 000 mAh (capacité réelle utilisable ≈ 15 000 mAh)',
-      'Sorties : USB-C PD (12V), USB-A QC3.0, port micro, port Apple (adaptateur selon SKU)',
-      'Charge rapide sans fil intégrée (Wireless Fast Charge)',
-      'Boîtier de batterie amovible — kit DIY sans soudure (boîte de rangement / pack amovible)',
-      'Écran LCD digital : affichage % batterie et états de charge',
-      'Protections : anti-surcharge, anti-court-circuit, protection inversion de polarité, gestion thermique',
+      'Cellules : Samsung ou LG — 18650 hautes performances',
+      'Capacité nominale : 20 000 mAh (utilisable ≈ 15 000 mAh)',
+      'Sorties : USB-C PD (12V), USB-A QC3.0',
+      'Charge rapide sans fil intégrée',
+      'Boîtier de batterie amovible — kit DIY sans soudure',
+      'Écran LCD digital : affichage % batterie',
+      'Protections : anti-surcharge, anti-court-circuit, inversion de polarité',
       'Garantie spéciale : 2 ans pour les 50 premiers clients'
     ],
     warranty:'Garantie 2 ans — 50 premiers clients',
     details:`
       <p style="margin-top:0;color:#23403a;line-height:1.45">
         <strong>GreenWireless — Boîtier amovible &amp; haute performance</strong><br>
-        Assemblé avec cellules <strong>Samsung</strong> ou <strong>LG</strong> de type <strong>18650</strong> (haut rendement). Conçu pour offrir une grande capacité et une maintenance locale facile via un boîtier amovible.
+        Assemblé avec cellules <strong>Samsung</strong> ou <strong>LG</strong> de type <strong>18650</strong>.
       </p>
-
       <div style="margin-top:8px">
         <strong>Caractéristiques principales</strong>
         <ul>
-          <li>Fonction : affichage numérique (LCD) de la puissance restante, boîtier détachable sans soudure.</li>
-          <li>Prise en charge : peut accueillir et charger jusqu'à <strong>5 × 18650 (têtes plates)</strong> via le boîtier de batterie.</li>
-          <li>Système : protection anti-retour de connexion, protections électroniques complète (surcharge, court-circuit, inversion).</li>
-          <li>Charge rapide : USB-C PD (12V) et USB-A QC3.0 — charge rapide filaire + chargeur sans fil intégré (version wireless).</li>
-          <li>Mode DIY : kit d'alimentation mobile auto-configuré, montage simple sans soudure — adapté au bricolage et à la réparation locale.</li>
-          <li>Interfaces : Micro USB, port Apple (adaptateur), Type-C in/out, bornes USB-A QC3.0.</li>
-          <li>Usage : idéal pour utilisateurs ayant de gros besoins de charge ; convient pour terrain et usage urbain.</li>
-          <li>Capacité réelle : ≈ <strong>15 000 mAh utilisable</strong> (dépend des cellules et du câblage interne).</li>
+          <li>Affichage LCD de la charge restante.</li>
+          <li>Charge rapide filaire + chargeur sans fil intégré.</li>
+          <li>Connexion protégée anti-inversion.</li>
+          <li>Capacité réelle : ≈ <strong>15 000 mAh utilisable</strong>.</li>
         </ul>
-      </div>
-
-      <div style="margin-top:8px">
-        <strong>Exemples d'utilisation</strong>
-        <ul>
-          <li>Alimentation d'appareils 5V/9V/12V via PD/QC pour smartphone, routeur, petits appareils 12V.</li>
-          <li>Démontage/remplacement facile des cellules pour maintenance ou upgrade local.</li>
-        </ul>
-      </div>
-
-      <div style="margin-top:10px">
-        <strong style="color:#08110a;background:linear-gradient(90deg,#ffd54a,#ffb300);padding:6px 10px;border-radius:8px;display:inline-block">
-          Offre : <span style="font-weight:900">Garantie 2 ans — réservée aux 50 premiers clients</span>
-        </strong>
       </div>
     `
   },
@@ -1486,34 +1305,26 @@ const models = [
 ];
 
 /* ===========================
-   DOM / UI logic
+   DOM / UI
    =========================== */
 const productCard = document.querySelector('.product-card');
 const heroImg = document.getElementById('heroMainImage');
 const specListEl = document.getElementById('specList');
 const modalOverlay = document.getElementById('modalOverlay');
 const modalContent = document.getElementById('modalContent');
-const fabLink = document.getElementById('fabLink');
+const fabButton = document.getElementById('fabButton');
 const orderBtnTop = document.getElementById('orderBtnTop');
-const countrySelector = document.getElementById('countrySelector');
-
-const whatsappNumbers = {
-  senegal: '221774015004',
-  coteivoire: '22507070707'
-};
-
-let selectedCountry = 'senegal';
-
-function getCurrentWhatsAppNumber(){
-  return whatsappNumbers[selectedCountry] || whatsappNumbers.senegal;
-}
 
 let currentModel = 0;
 let currentImage = 0;
 let heroTimer = null;
 const SLIDE_INTERVAL_MS = 5000;
 
-/* LED simulation state */
+const whatsappNumbers = {
+  senegal: '221774015004',
+  coteivoire: '22507070707'
+};
+
 let ledState = {
   modes: [],
   index: 0,
@@ -1521,7 +1332,28 @@ let ledState = {
   clickTimer: null
 };
 
-/* Render specs list */
+function preloadImages(urls){
+  urls.forEach(src=>{
+    const img = new Image();
+    img.src = src;
+  });
+}
+
+function allImageUrls(){
+  const list = [
+    'Energie_blanche.png',
+    'green bridge domo.png',
+    'Nos_produits_1.png',
+    'Future_Pack_1.png',
+    'Future_pack_2.1.png',
+    'Future_Pack_3.png'
+  ];
+  models.forEach(m=>{
+    if(Array.isArray(m.images)) list.push(...m.images);
+  });
+  return [...new Set(list)];
+}
+
 function renderSpecs(index){
   const m = models[index] || models[0];
   specListEl.innerHTML = '';
@@ -1532,7 +1364,6 @@ function renderSpecs(index){
   });
 }
 
-/* Build Pro Panel HTML */
 function buildProPanelHTML(model){
   if(!model) return '';
   let html = `
@@ -1557,13 +1388,13 @@ function buildProPanelHTML(model){
 
       <div style="margin-top:10px">
         <strong>Lampe de nuit LED — activation :</strong>
-        <div style="margin-top:6px">Appuyez <strong>2 fois</strong> sur le bouton simulé ci-dessous pour activer / changer le mode (double-appui).</div>
+        <div style="margin-top:6px">Appuyez <strong>2 fois</strong> sur le bouton simulé ci-dessous pour changer le mode.</div>
 
         <div class="pro-controls" style="margin-top:10px">
           <div class="led-sim" aria-hidden="false">
             <div id="ledIndicator" class="led-indicator" role="img" aria-label="LED status"></div>
             <div style="display:flex;flex-direction:column">
-              <button id="ledButton" class="btn-small" aria-pressed="false">Bouton (appuyez 2 fois)</button>
+              <button id="ledButton" class="btn-small" aria-pressed="false" type="button">Bouton (appuyez 2 fois)</button>
               <small style="color:#23403a;margin-top:6px">Mode actuel : <span id="ledModeName">—</span></small>
             </div>
           </div>
@@ -1577,15 +1408,15 @@ function buildProPanelHTML(model){
         </div>
       </div>
     `;
-  } else if(model.id === 'greenwireless'){
+  } else if(model.id === 'greenwireless') {
     html += `
       <div style="margin-top:8px">
         <strong>GreenWireless — Détails techniques</strong>
         <ul>
-          <li>Supporte 5×18650 (têtes plates) dans boîtier amovible — maintenance locale facilitée.</li>
+          <li>Supporte 5×18650 (têtes plates) dans boîtier amovible.</li>
           <li>PD (12V) &amp; QC3.0 pour charge rapide filaire.</li>
-          <li>Charge sans fil intégrée (wireless fast charge) — compatible smartphones récents.</li>
-          <li>Écran LCD pour affichage de pourcentage et état de charge.</li>
+          <li>Charge sans fil intégrée compatible smartphones récents.</li>
+          <li>Écran LCD pour affichage du pourcentage.</li>
           <li>Design modulable : boîtier détachable, connexion protégée anti-inversion.</li>
         </ul>
       </div>
@@ -1597,7 +1428,6 @@ function buildProPanelHTML(model){
   return html;
 }
 
-/* Update product panel */
 function updateHero(index){
   const m = models[index] || models[0];
   document.getElementById('heroTitle').textContent = m.title;
@@ -1605,7 +1435,8 @@ function updateHero(index){
   heroImg.src = (m.images && m.images[0]) ? m.images[0] : heroImg.src;
   heroImg.alt = m.title;
 
-  document.getElementById('detailsPanel').innerHTML = `<strong style="font-weight:800">${m.title}</strong><div style="margin-top:8px">${m.details}</div>`;
+  const detailsPanel = document.getElementById('detailsPanel');
+  detailsPanel.innerHTML = `<strong style="font-weight:800">${m.title}</strong><div style="margin-top:8px">${m.details}</div>`;
   renderSpecs(index);
 
   const wb = document.getElementById('warrantyBadge');
@@ -1621,10 +1452,14 @@ function updateHero(index){
   }
 
   const prefillMessage = `Bonjour, je souhaite commander / obtenir le prix de : ${m.title} (ref: ${m.id})`;
-  const waUrl = `https://wa.me/${getCurrentWhatsAppNumber()}?text=` + encodeURIComponent(prefillMessage);
+  const waUrl = `https://wa.me/${whatsappNumbers.senegal}?text=` + encodeURIComponent(prefillMessage);
 
-  if(fabLink) fabLink.href = waUrl;
-  if(orderBtnTop) orderBtnTop.href = waUrl;
+  if(orderBtnTop){
+    orderBtnTop.dataset.wa = waUrl;
+  }
+  if(fabButton){
+    fabButton.dataset.wa = waUrl;
+  }
 
   const proPanel = document.getElementById('proPanel');
   proPanel.innerHTML = buildProPanelHTML(m);
@@ -1647,12 +1482,11 @@ function updateHero(index){
   }
 }
 
-/* Slideshow for product images */
 function startHeroSlideshow(){
   stopHeroSlideshow();
   heroTimer = setInterval(()=>{
     const m = models[currentModel] || models[0];
-    if(!m.images || m.images.length === 0) return;
+    if(!m.images || m.images.length===0) return;
     currentImage = (currentImage + 1) % m.images.length;
     heroImg.src = m.images[currentImage];
   }, SLIDE_INTERVAL_MS);
@@ -1664,7 +1498,6 @@ function stopHeroSlideshow(){
   }
 }
 
-/* Select model behavior */
 function selectModel(i){
   currentModel = i;
   updateHero(i);
@@ -1686,11 +1519,11 @@ function selectModel(i){
     document.getElementById('detailsPanel').setAttribute('aria-hidden','true');
     productCard.scrollIntoView({behavior:'smooth', block:'center'});
   }
+
   currentImage = 0;
   startHeroSlideshow();
 }
 
-/* Close mobile overlay */
 function closeOverlay(){
   productCard.classList.remove('show-on-mobile');
   productCard.setAttribute('aria-hidden','true');
@@ -1700,7 +1533,6 @@ function closeOverlay(){
   if(first) first.focus();
 }
 
-/* Product image click cycles images */
 const productImageEl = document.querySelector('.product-image');
 if(productImageEl){
   productImageEl.addEventListener('click', ()=>{
@@ -1714,7 +1546,6 @@ if(productImageEl){
   });
 }
 
-/* Details toggle */
 document.getElementById('detailsToggle').addEventListener('click', ()=>{
   const panel = document.getElementById('detailsPanel');
   const vis = panel.style.display === 'block';
@@ -1729,7 +1560,6 @@ document.getElementById('detailsToggle').addEventListener('click', ()=>{
   }
 });
 
-/* Mode Pro toggle */
 const proToggleBtn = document.getElementById('proToggle');
 proToggleBtn.addEventListener('click', ()=>{
   const proPanel = document.getElementById('proPanel');
@@ -1748,11 +1578,32 @@ proToggleBtn.addEventListener('click', ()=>{
   }
 });
 
-/* Country selector */
-countrySelector.addEventListener('change', function(){
-  selectedCountry = this.value;
-  updateHero(currentModel);
-});
+/* WhatsApp choice modal */
+function openCountryModal(){
+  const m = models[currentModel] || models[0];
+  const html = `
+    <h2 style="margin-top:0">Commander via WhatsApp</h2>
+    <p style="color:#23403a;line-height:1.45">
+      Pour <strong>${m.title}</strong>, choisis le pays de commande.
+    </p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+      <button type="button" class="btn-primary" onclick="sendWhatsApp('senegal')">🇸🇳 Commander au Sénégal</button>
+      <button type="button" class="btn-primary" onclick="sendWhatsApp('coteivoire')">🇨🇮 Commander en Côte d'Ivoire</button>
+      <button type="button" class="btn-secondary" onclick="closeModal()">Annuler</button>
+    </div>
+  `;
+  openModal(html);
+}
+
+function sendWhatsApp(country){
+  const m = models[currentModel] || models[0];
+  const number = whatsappNumbers[country] || whatsappNumbers.senegal;
+  const countryLabel = country === 'coteivoire' ? "la Côte d'Ivoire" : 'le Sénégal';
+  const message = `Bonjour, je souhaite commander / obtenir le prix de : ${m.title} pour ${countryLabel}. (ref: ${m.id})`;
+  const url = `https://wa.me/${number}?text=` + encodeURIComponent(message);
+  closeModal();
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
 
 /* Modal helpers */
 function openModal(html){
@@ -1765,10 +1616,9 @@ function closeModal(){
   modalOverlay.setAttribute('aria-hidden','true');
 }
 
-/* Tech modal for models */
 function openTechModal(i){
   const m = models[i] || models[0];
-  let html = `
+  const html = `
     <h2 style="margin-top:0">${m.title}</h2>
     ${m.details}
     <div style="margin-top:12px;font-weight:800">Caractéristiques rapides</div>
@@ -1777,7 +1627,6 @@ function openTechModal(i){
   openModal(html);
 }
 
-/* Pack modal */
 function openPackModal(){
   const html = `
     <div style="width:100%;margin-bottom:12px">
@@ -1808,12 +1657,11 @@ function openPackModal(){
   openModal(html);
 }
 
-/* close modal when clicking backdrop */
 modalOverlay.addEventListener('click', (ev)=>{
   if(ev.target === modalOverlay) closeModal();
 });
 
-/* Electric orbs animation */
+/* Electric effect */
 (function(){
   const electricBand = document.getElementById('electricBand');
   if(!electricBand) return;
@@ -2022,7 +1870,7 @@ function applyLedMode(idx){
   }
 }
 
-/* Flags alternated every 3 seconds */
+/* Flags every 3 seconds */
 (function(){
   const flagImage = document.getElementById('flagImage');
   if(!flagImage) return;
@@ -2045,8 +1893,10 @@ function applyLedMode(idx){
   }, 3000);
 })();
 
-/* Init */
+/* Preload and init */
 document.addEventListener('DOMContentLoaded', ()=>{
+  preloadImages(allImageUrls());
+
   if(window.matchMedia('(max-width:640px)').matches){
     updateHero(0);
     productCard.classList.remove('show-on-mobile');
@@ -2065,9 +1915,29 @@ document.addEventListener('DOMContentLoaded', ()=>{
       }
     });
   });
+
+  if(orderBtnTop){
+    orderBtnTop.addEventListener('click', openCountryModal);
+  }
+  if(fabButton){
+    fabButton.addEventListener('click', openCountryModal);
+  }
+  if(document.querySelector('.product-image')){
+    document.querySelector('.product-image').addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        const m = models[currentModel] || models[0];
+        if(m.images && m.images.length){
+          currentImage = (currentImage + 1) % m.images.length;
+          heroImg.src = m.images[currentImage];
+          startHeroSlideshow();
+        }
+      }
+    });
+  }
 });
 
-/* adapt overlay on resize */
+/* Adapt overlay on resize */
 window.addEventListener('resize', ()=>{
   if(!window.matchMedia('(max-width:640px)').matches){
     productCard.classList.remove('show-on-mobile');
