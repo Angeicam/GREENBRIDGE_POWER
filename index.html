@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
 <title>GREENBRIDGE — Powerbanks & Solutions Énergétiques</title>
-<meta name="description" content="GREENBRIDGE — Powerbanks assemblées au Sénégal . Cellules testées, garanties pour premiers clients.">
+<meta name="description" content="GREENBRIDGE — Powerbanks assemblées en Afrique de l'Ouest. Cellules testées, garanties pour premiers clients.">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <style>
@@ -39,6 +39,7 @@ html{background-color:var(--bg-main);min-height:100%}
 body{background:transparent;min-height:100%}
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%;height:auto}
+select,button{font-family:inherit}
 
 /* fixed background visible on mobile & desktop */
 .page-bg{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:url('Energie_blanche.png');background-size:cover;background-position:center center;background-repeat:no-repeat}
@@ -50,13 +51,28 @@ img{display:block;max-width:100%;height:auto}
 .topbar{position:fixed;top:0;left:0;right:0;height:var(--topbar-h);background:var(--green-dark);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;z-index:1600;font-size:13px}
 .topbar .left{font-weight:600}
 .topbar .right{color:#fff;font-weight:700;text-decoration:none; text-transform:none;}
+.topbar-flags{display:flex;align-items:center;gap:12px;flex-wrap:nowrap}
+.flag-slider{
+  width:34px;
+  height:24px;
+  overflow:hidden;
+  border-radius:4px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.25);
+  background:#fff;
+}
+.flag-slider img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:opacity .35s ease, transform .35s ease;
+}
 
 /* Header: logo on the left, company name larger */
 .header{position:fixed;top:var(--topbar-h);left:0;right:0;height:var(--header-h);background:linear-gradient(90deg,var(--green-mid),#0b4d26);display:flex;align-items:center;justify-content:flex-start;padding:0 5vw;z-index:1595;box-shadow:0 4px 12px rgba(0,0,0,.20)}
 .logo-text{display:flex;align-items:center;gap:12px}
 .logo-text img{height:48px;display:block}
 .company-name{
-  font-size:36px;            /* agrandi comme demandé */
+  font-size:36px;
   font-weight:800;
   letter-spacing:1px;
   padding:6px 10px;
@@ -134,9 +150,19 @@ img{display:block;max-width:100%;height:auto}
 
 /* CTA */
 .cta-group{display:flex;flex-direction:column;gap:10px}
-.btn-primary{background:linear-gradient(90deg,var(--brand-green),var(--green-mid));color:#fff;border:0;padding:12px 14px;border-radius:12px;font-weight:900;cursor:pointer}
+.btn-primary{background:linear-gradient(90deg,var(--brand-green),var(--green-mid));color:#fff;border:0;padding:12px 14px;border-radius:12px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
 .btn-secondary{background:#fff;border:1px solid rgba(6,42,32,0.06);padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:800}
 .btn-small{background:transparent;border:1px solid rgba(6,42,32,0.06);padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:700}
+.country-select{
+  width:100%;
+  background:#fff;
+  border:1px solid rgba(6,42,32,0.06);
+  padding:10px 12px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:800;
+  color:var(--text);
+}
 
 /* details panel */
 .details-panel{display:none;margin-top:12px;width:100%;background:rgba(255,255,255,0.98);border-radius:10px;padding:12px;color:var(--text);box-shadow:0 8px 24px rgba(6,42,32,0.06);border:1px solid rgba(6,42,32,0.04);line-height:1.45}
@@ -203,19 +229,41 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
 .footer-company{display:block;margin:0 auto 8px;font-size:18px;font-weight:800;color:var(--brand-green);-webkit-text-stroke:0.7px var(--gold);text-shadow:0 3px 6px rgba(0,0,0,0.6);padding:6px 10px;border-radius:6px}
 
 /* responsive */
-@media (max-width:900px){ .product-card{flex-direction:column;padding:14px}.product-side{order:-1;width:100%}.featured-hero{height:280px} }
+@media (max-width:900px){
+  .product-card{flex-direction:column;padding:14px}
+  .product-side{order:-1;width:100%}
+  .featured-hero{height:280px}
+}
 @media (max-width:640px){
   .company-name{font-size:30px}
   .models{grid-template-columns:1fr}
   .featured-hero{height:220px}
-  /* overlay behavior on mobile */
-  .product-card{ display:none !important; position:fixed; left:8px; right:8px; top: calc(var(--topbar-h) + var(--header-h) + 8px); z-index:2200; width: calc(100% - 16px); margin:0; padding:16px; border-radius:12px; box-shadow:0 18px 40px rgba(6,42,32,0.20); background: var(--card-bg-overlay); flex-direction:column; overflow:auto; max-height: calc(100vh - (var(--topbar-h) + var(--header-h) + 32px)); }
+  .topbar-flags{gap:8px}
+  .product-card{
+    display:none !important;
+    position:fixed;
+    left:8px;
+    right:8px;
+    top: calc(var(--topbar-h) + var(--header-h) + 8px);
+    z-index:2200;
+    width: calc(100% - 16px);
+    margin:0;
+    padding:16px;
+    border-radius:12px;
+    box-shadow:0 18px 40px rgba(6,42,32,0.20);
+    background: var(--card-bg-overlay);
+    flex-direction:column;
+    overflow:auto;
+    max-height: calc(100vh - (var(--topbar-h) + var(--header-h) + 32px));
+  }
   .product-card.show-on-mobile{ display:flex !important; animation: slideIn 220ms ease; }
   .product-card .close-mobile{ display:block; }
 
   .fab{ right:12px; bottom:14px; width:50px; height:50px; font-size:20px }
 }
-@media (max-width:420px){ .featured-hero{height:200px} }
+@media (max-width:420px){
+  .featured-hero{height:200px}
+}
 
 @keyframes slideIn { from { transform: translateY(-8px); opacity:0 } to { transform: translateY(0); opacity:1 } }
 </style>
@@ -226,7 +274,12 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
 
   <!-- Topbar -->
   <div class="topbar" role="banner">
-    <div class="left">Assemblés au Sénégal </div>
+    <div class="left topbar-flags">
+      <span>Assemblé en Afrique de l'Ouest</span>
+      <div class="flag-slider" aria-hidden="true">
+        <img id="flagImage" src="https://flagcdn.com/w40/ci.png" alt="Drapeau Côte d'Ivoire">
+      </div>
+    </div>
     <div class="right" aria-hidden="true"></div>
   </div>
 
@@ -291,7 +344,6 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
           <div class="actions"><button class="btn-small" onclick="openTechModal(2);event.stopPropagation()">Infos</button></div>
         </div>
 
-        <!-- Modèle mis à jour : GreenWireless -->
         <div class="model" role="button" onclick="selectModel(3)" tabindex="0" aria-label="GreenWireless 20k">
           <div class="thumb"><img src="pwkb_wireless_1.png" alt="GreenWireless"></div>
           <div class="meta">
@@ -299,6 +351,33 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
             <p>GreenWireless — 20 000 mAh<br><small>Boîtier amovible • Charge rapide PD / QC3.0 • Sans-fil</small></p>
           </div>
           <div class="actions"><button class="btn-small" onclick="openTechModal(3);event.stopPropagation()">Infos</button></div>
+        </div>
+
+        <div class="model" role="button" onclick="selectModel(4)" tabindex="0" aria-label="Chargeur ordinateur portable">
+          <div class="thumb"><img src="chargeur_pc.png" alt="Chargeur ordinateur portable"></div>
+          <div class="meta">
+            <h4>Chargeur PC Portable</h4>
+            <p>65W à 100W<br><small>Charge rapide universelle pour ordinateurs portables.</small></p>
+          </div>
+          <div class="actions"><button class="btn-small" onclick="openTechModal(4);event.stopPropagation()">Infos</button></div>
+        </div>
+
+        <div class="model" role="button" onclick="selectModel(5)" tabindex="0" aria-label="PowerBank 30000 mAh">
+          <div class="thumb"><img src="powerbank_30000.png" alt="PowerBank 30000 mAh"></div>
+          <div class="meta">
+            <h4>PowerBank 30 000</h4>
+            <p>30 000 mAh<br><small>Haute capacité pour longues journées et voyages.</small></p>
+          </div>
+          <div class="actions"><button class="btn-small" onclick="openTechModal(5);event.stopPropagation()">Infos</button></div>
+        </div>
+
+        <div class="model" role="button" onclick="selectModel(6)" tabindex="0" aria-label="Stabilisateur WiFi">
+          <div class="thumb"><img src="wifi_stabilizer.png" alt="Stabilisateur WiFi"></div>
+          <div class="meta">
+            <h4>Stabilisateur WiFi</h4>
+            <p>Anti-coupure courant<br><small>Maintient modem et routeur actifs pendant les pannes.</small></p>
+          </div>
+          <div class="actions"><button class="btn-small" onclick="openTechModal(6);event.stopPropagation()">Infos</button></div>
         </div>
       </div>
     </section>
@@ -333,9 +412,7 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
           <button id="proToggle" class="btn-small" aria-pressed="false">Mode Pro</button>
         </div>
 
-        <div id="proPanel" class="pro-panel" aria-hidden="true">
-          <!-- Content filled by JS -->
-        </div>
+        <div id="proPanel" class="pro-panel" aria-hidden="true"></div>
 
       </div>
 
@@ -345,7 +422,11 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
         </div>
 
         <div class="cta-group" aria-label="Actions produit">
-          <!-- orderBtnTop href sera mis à jour dynamiquement par JS pour inclure le numéro et le message -->
+          <select id="countrySelector" class="country-select" aria-label="Choisir le pays WhatsApp">
+            <option value="senegal" selected>🇸🇳 Sénégal</option>
+            <option value="coteivoire">🇨🇮 Côte d'Ivoire</option>
+          </select>
+
           <a id="orderBtnTop" class="btn-primary" href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Commander</a>
           <button id="infoBtnHero" class="btn-secondary" onclick="openTechModal(currentModel)"><i class="fa-solid fa-circle-info"></i> Infos techniques</button>
           <button id="detailsToggle" class="btn-small"><i class="fa-solid fa-list"></i> Afficher détails</button>
@@ -379,10 +460,11 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
 
   </main>
 
-  <!-- WhatsApp FAB (visible, green) -->
-  <!-- href par défaut vers le numéro, JS mettra le message pré-rempli -->
+  <!-- WhatsApp FAB -->
   <div id="fab" class="fab" role="button" aria-label="Commander via WhatsApp">
-    <a id="fabLink" href="https://wa.me/221774015004" target="_blank" rel="noopener noreferrer" aria-label="Commander via WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+    <a id="fabLink" href="https://wa.me/221774015004" target="_blank" rel="noopener noreferrer" aria-label="Commander via WhatsApp">
+      <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+    </a>
   </div>
 
   <!-- Modal -->
@@ -395,7 +477,7 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
 
   <footer>
     <div class="footer-company">GREENBRIDGE</div>
-    <div style="color:#e6f7ea">© <span id="year"></span> GREENBRIDGE — Assemblé au Sénégal</div>
+    <div style="color:#e6f7ea">© <span id="year"></span> GREENBRIDGE — Assemblé en Afrique de l'Ouest</div>
   </footer>
 
 <script>
@@ -494,7 +576,6 @@ const models = [
       </p>
     `
   },
-  /* Modèle mis à jour : GreenWireless (remplace GreenRugged) */
   {
     id:'greenwireless',
     title:'GreenWireless — 20 000 mAh',
@@ -545,6 +626,81 @@ const models = [
         </strong>
       </div>
     `
+  },
+  {
+    id:'laptopcharger',
+    title:'Chargeur PC Portable',
+    subtitle:'Charge rapide universelle',
+    images:['chargeur_pc.png'],
+    specs:[
+      'Compatible PC portables USB-C / DC',
+      'Puissance : 65W à 100W',
+      'Protection surtension et surchauffe',
+      'Idéal pour bureau, domicile et déplacement'
+    ],
+    details: `
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
+        <strong>Chargeur pour ordinateur portable</strong><br>
+        Conçu pour les besoins du quotidien, avec une puissance stable et une compatibilité large.
+      </p>
+      <div style="margin-top:8px">
+        <ul>
+          <li>Compatible avec de nombreux modèles d’ordinateurs portables.</li>
+          <li>Sortie stable pour une meilleure protection de l’appareil.</li>
+          <li>Format pratique pour bureau et voyage.</li>
+        </ul>
+      </div>
+    `
+  },
+  {
+    id:'powerbank30k',
+    title:'PowerBank Haute Capacité 30 000 mAh',
+    subtitle:'Autonomie extrême',
+    images:['powerbank_30000.png'],
+    specs:[
+      'Capacité : 30 000 mAh',
+      'USB-C PD et charge rapide',
+      'Recharge plusieurs appareils',
+      'Idéal pour longues coupures et voyages'
+    ],
+    details: `
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
+        <strong>PowerBank 30 000 mAh</strong><br>
+        Une solution haute capacité pour smartphones, tablettes et petits appareils.
+      </p>
+      <div style="margin-top:8px">
+        <ul>
+          <li>Grande autonomie pour plusieurs recharges.</li>
+          <li>Parfaite pour les déplacements et l’usage intensif.</li>
+          <li>Pratique en cas de coupure de courant prolongée.</li>
+        </ul>
+      </div>
+    `
+  },
+  {
+    id:'wifiups',
+    title:'Stabilisateur WiFi',
+    subtitle:'Internet même sans courant',
+    images:['wifi_stabilizer.png'],
+    specs:[
+      'Backup routeur et modem',
+      'Sorties 5V / 9V / 12V',
+      'Protection surtension',
+      'Maintien du WiFi en cas de coupure'
+    ],
+    details: `
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
+        <strong>Stabilisateur WiFi anti-coupure</strong><br>
+        Permet de garder le modem et le routeur actifs pendant les coupures de courant.
+      </p>
+      <div style="margin-top:8px">
+        <ul>
+          <li>Utile pour télétravail, commerce et maison.</li>
+          <li>Réduit les interruptions internet pendant les pannes.</li>
+          <li>Compact et simple à installer.</li>
+        </ul>
+      </div>
+    `
   }
 ];
 
@@ -558,10 +714,19 @@ const modalOverlay = document.getElementById('modalOverlay');
 const modalContent = document.getElementById('modalContent');
 const fabLink = document.getElementById('fabLink');
 const orderBtnTop = document.getElementById('orderBtnTop');
+const countrySelector = document.getElementById('countrySelector');
 
-// === Configure your WhatsApp number here ===
-// Use international format without '+' for wa.me
-const WHATSAPP_NUMBER = '221774015004';
+const whatsappNumbers = {
+  senegal: '221774015004',
+  coteivoire: '22507070707'
+};
+
+let selectedCountry = 'senegal';
+
+// current WhatsApp country link update state
+function getCurrentWhatsAppNumber(){
+  return whatsappNumbers[selectedCountry] || whatsappNumbers.senegal;
+}
 
 let currentModel = 0;
 let currentImage = 0;
@@ -587,7 +752,7 @@ function renderSpecs(index){
   });
 }
 
-/* Build Pro Panel HTML (including LED simulator for GreenCore) */
+/* Build Pro Panel HTML */
 function buildProPanelHTML(model){
   if(!model) return '';
   let html = `
@@ -633,7 +798,6 @@ function buildProPanelHTML(model){
       </div>
     `;
   } else if (model.id === 'greenwireless') {
-    // special pro panel for GreenWireless
     html += `
       <div style="margin-top:8px">
         <strong>GreenWireless — Détails techniques</strong>
@@ -663,7 +827,6 @@ function updateHero(index){
   document.getElementById('detailsPanel').innerHTML = `<strong style="font-weight:800">${m.title}</strong><div style="margin-top:8px">${m.details}</div>`;
   renderSpecs(index);
 
-  // Warranty badge visibility (from model.warranty)
   const wb = document.getElementById('warrantyBadge');
   if(wb){
     if(m.warranty){
@@ -676,13 +839,9 @@ function updateHero(index){
     }
   }
 
-  // Set WhatsApp link for ordering (pre-fill message)
-  // Format wa.me: https://wa.me/<number>?text=<urlencoded message>
-  // number should be international without + (already in WHATSAPP_NUMBER)
-  const prefillMessage = `Bonjour, je souhaite commander / obtenir le prix de la batterie externe : ${m.title} (ref: ${m.id})`;
-  const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=` + encodeURIComponent(prefillMessage);
+  const prefillMessage = `Bonjour, je souhaite commander / obtenir le prix de : ${m.title} (ref: ${m.id})`;
+  const waUrl = `https://wa.me/${getCurrentWhatsAppNumber()}?text=` + encodeURIComponent(prefillMessage);
 
-  // Update floating FAB and order button
   if(fabLink){
     fabLink.href = waUrl;
   }
@@ -690,20 +849,24 @@ function updateHero(index){
     orderBtnTop.href = waUrl;
   }
 
-  // prepare pro panel content (hidden by default)
   const proPanel = document.getElementById('proPanel');
   proPanel.innerHTML = buildProPanelHTML(m);
   proPanel.style.display = 'none';
   proPanel.setAttribute('aria-hidden','true');
+  document.getElementById('proToggle').setAttribute('aria-pressed','false');
+  document.getElementById('proToggle').textContent = 'Mode Pro';
 
-  // configure LED state when greencore selected
   if(m.id === 'greencore'){
     ledState.modes = m.ledModes.slice();
     ledState.index = 0;
     setTimeout(initLedControls, 60);
   } else {
     ledState.modes = [];
-    if(ledState.clickTimer){ clearTimeout(ledState.clickTimer); ledState.clickTimer = null; ledState.clickCount = 0; }
+    if(ledState.clickTimer){
+      clearTimeout(ledState.clickTimer);
+      ledState.clickTimer = null;
+      ledState.clickCount = 0;
+    }
   }
 }
 
@@ -770,9 +933,12 @@ if(productImageEl){
 document.getElementById('detailsToggle').addEventListener('click', ()=>{
   const panel = document.getElementById('detailsPanel');
   const vis = panel.style.display === 'block';
-  if(vis){ panel.style.display='none'; panel.setAttribute('aria-hidden','true'); }
-  else {
-    panel.style.display='block'; panel.setAttribute('aria-hidden','false');
+  if(vis){
+    panel.style.display='none';
+    panel.setAttribute('aria-hidden','true');
+  } else {
+    panel.style.display='block';
+    panel.setAttribute('aria-hidden','false');
     if(window.matchMedia('(max-width:640px)').matches) productCard.scrollIntoView({behavior:'smooth', block:'center'});
     else panel.scrollIntoView({behavior:'smooth', block:'nearest'});
   }
@@ -795,6 +961,12 @@ proToggleBtn.addEventListener('click', ()=>{
     proToggleBtn.textContent = 'Mode Pro (actif)';
     if(window.matchMedia('(max-width:640px)').matches) productCard.scrollIntoView({behavior:'smooth', block:'center'});
   }
+});
+
+/* Country selector */
+countrySelector.addEventListener('change', function(){
+  selectedCountry = this.value;
+  updateHero(currentModel);
 });
 
 /* Modal helpers */
@@ -827,7 +999,7 @@ function openPackModal(){
 
     <h2 style="margin-top:0">Pack modulaire 2.5 kWh — GreenBridge</h2>
     <p style="color:#23403a;line-height:1.45">
-      Prévu pour une sortie commerciale le <strong>31/05/2026</strong>, le pack <strong>2.5 kWh</strong> a été conçu pour le Sénégal.
+      Prévu pour une sortie commerciale le <strong>31/05/2026</strong>, le pack <strong>2.5 kWh</strong> a été conçu pour le Sénégal et l'Afrique de l'Ouest.
       Basé sur des cellules <strong>LiFePO₄ prismatiques</strong>, il est modulaire, réparable localement et adapté au stockage médical, PME, agriculture et élevage.
     </p>
     <ul style="color:#23403a;line-height:1.45">
@@ -863,7 +1035,7 @@ modalOverlay.addEventListener('click', (ev)=> { if(ev.target === modalOverlay) c
     {rxRatio:0.33, ry:6, speed:0.08, phase:Math.PI/2},
     {rxRatio:0.42, ry:10, speed:0.05, phase:Math.PI}
   ];
-  orbs.forEach((o,i)=>{ if(o){ o.style.opacity='1'; }});
+  orbs.forEach((o)=>{ if(o){ o.style.opacity='1'; }});
   let t0 = performance.now();
   function tick(now){
     const time = (now - t0)/1000;
@@ -887,7 +1059,7 @@ modalOverlay.addEventListener('click', (ev)=> { if(ev.target === modalOverlay) c
   requestAnimationFrame(tick);
 })();
 
-/* LED controls initialization: attach listener for double-press simulation and update visual */
+/* LED controls initialization */
 function initLedControls(){
   const btn = document.getElementById('ledButton');
   const indicator = document.getElementById('ledIndicator');
@@ -896,42 +1068,34 @@ function initLedControls(){
 
   if(!btn || !indicator || !modeName || !ledState.modes.length) return;
 
-  // set initial mode
   ledState.index = 0;
   applyLedMode(ledState.index);
 
-  // remove previous listeners by cloning node
   const newBtn = btn.cloneNode(true);
   btn.parentNode.replaceChild(newBtn, btn);
 
   newBtn.addEventListener('click', ()=> {
-    // count clicks to detect "2 presses" inside 600ms
     ledState.clickCount += 1;
     if(ledState.clickTimer) clearTimeout(ledState.clickTimer);
     ledState.clickTimer = setTimeout(()=> {
-      // single click only -> reset (we expect double)
       ledState.clickCount = 0;
       ledState.clickTimer = null;
     }, 600);
 
     if(ledState.clickCount >= 2){
-      // double-press detected
       ledState.clickCount = 0;
       if(ledState.clickTimer){ clearTimeout(ledState.clickTimer); ledState.clickTimer = null; }
-      // advance mode index
       ledState.index = (ledState.index + 1) % ledState.modes.length;
       applyLedMode(ledState.index);
     }
   });
 
-  // also support double-click event for convenience
   newBtn.addEventListener('dblclick', (e) => {
     e.preventDefault();
     ledState.index = (ledState.index + 1) % ledState.modes.length;
     applyLedMode(ledState.index);
   });
 
-  // render modes list visually (guard)
   if(modesListEl){
     modesListEl.innerHTML = ledState.modes.map((m, idx)=>`<li${idx===ledState.index ? ' style="font-weight:800"' : ''}>${m.name}</li>`).join('');
   }
@@ -946,7 +1110,6 @@ function applyLedMode(idx){
   if(!indicator || !modeName || !ledState.modes.length) return;
 
   const mode = ledState.modes[idx] || {name:'—'};
-  // reset classes
   indicator.className = 'led-indicator';
 
   switch(idx){
@@ -960,7 +1123,6 @@ function applyLedMode(idx){
   }
   modeName.textContent = mode.name;
 
-  // highlight current mode in the list (if present)
   if(modesListEl){
     modesListEl.querySelectorAll('li').forEach((li, i)=> {
       li.style.fontWeight = (i === idx) ? '800' : '400';
@@ -969,7 +1131,7 @@ function applyLedMode(idx){
   }
 }
 
-/* Init: show first model on desktop */
+/* Init */
 document.addEventListener('DOMContentLoaded', ()=>{
   if(window.matchMedia('(max-width:640px)').matches){
     updateHero(0);
@@ -979,9 +1141,37 @@ document.addEventListener('DOMContentLoaded', ()=>{
     selectModel(0);
   }
   document.getElementById('year').textContent = new Date().getFullYear();
+
   document.querySelectorAll('.models .model').forEach((el, idx)=> {
-    el.addEventListener('keydown', (e)=> { if(e.key==='Enter'||e.key===' ') { e.preventDefault(); selectModel(idx); }});
+    el.addEventListener('keydown', (e)=> {
+      if(e.key==='Enter' || e.key===' ') {
+        e.preventDefault();
+        selectModel(idx);
+      }
+    });
   });
+
+  /* Drapeaux alternés toutes les 3 secondes */
+  const flagImage = document.getElementById('flagImage');
+  const flags = [
+    { src:'https://flagcdn.com/w40/ci.png', alt:"Drapeau Côte d'Ivoire" },
+    { src:'https://flagcdn.com/w40/sn.png', alt:'Drapeau Sénégal' }
+  ];
+  let currentFlag = 0;
+
+  setInterval(() => {
+    currentFlag = (currentFlag + 1) % flags.length;
+    if(flagImage){
+      flagImage.style.opacity = '0.25';
+      flagImage.style.transform = 'scale(0.96)';
+      setTimeout(() => {
+        flagImage.src = flags[currentFlag].src;
+        flagImage.alt = flags[currentFlag].alt;
+        flagImage.style.opacity = '1';
+        flagImage.style.transform = 'scale(1)';
+      }, 180);
+    }
+  }, 3000);
 });
 
 /* adapt overlay on resize */
