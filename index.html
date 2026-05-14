@@ -3,101 +3,68 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-<title>GREENBRIDGE TECHNOLOGIES — Powerbanks & Solutions Énergétiques</title>
-<meta name="description" content="GREENBRIDGE TECHNOLOGIES — Solutions énergétiques, powerbanks, chargeurs et stabilisateur WiFi.">
-<meta name="theme-color" content="#0a4d2e">
-
-<link rel="icon" type="image/png" href="green bridge domo.png">
-<link rel="apple-touch-icon" href="green bridge domo.png">
-
-<link rel="preload" as="image" href="Energie_blanche.png">
-<link rel="preload" as="image" href="green bridge domo.png">
-<link rel="preload" as="image" href="Pwkb_Mini_3.png">
-<link rel="preload" as="image" href="pwkb_123.png">
-<link rel="preload" as="image" href="pwkb_6.png">
-<link rel="preload" as="image" href="pwkb_wireless_1.png">
-<link rel="preload" as="image" href="Nos_produits_1.png">
-
+<title>GREENBRIDGE — Powerbanks & Solutions Énergétiques</title>
+<meta name="description" content="GREENBRIDGE — Powerbanks assemblées au Sénégal . Cellules testées, garanties pour premiers clients.">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
 <style>
 :root{
-  --topbar-h:40px;
-  --header-h:72px;
+  --topbar-h:44px;
+  --header-h:66px;
   --maxw:1100px;
-
   --brand-green:#04462e;
   --green-dark:#061f14;
   --green-mid:#073217;
-  --green-mid-2:#0b4d26;
-
-  --accent:#7cb342;
-  --accent-2:#a8e6a1;
-  --bg:#0a4d2e;
-
-  --gold-base:#d4af37;
-  --gold-hover:#e6c95a;
-
-  --muted-text-color:#e6f7ea;
-  --electric-yellow:#ffd600;
-  --whatsapp-green:#25D366;
-
+  --gold:#d4af37;
+  --text:#02110a;
+  --muted:#23403a;
+  --bg-main:#f6fbfe;
   --card-bg-desktop: rgba(255,255,255,0.12);
   --card-bg-overlay: rgba(255,255,255,0.98);
   --card-border: rgba(6,42,32,0.06);
+  --electric-yellow:#ffd600;
+  --shadow: 0 12px 36px rgba(6,42,32,0.06);
+  --whatsapp-green: #25D366;
 }
 
+/* Reset/base */
 *{box-sizing:border-box}
-html, body{
+html,body{
+  height:100%;
   margin:0;
   padding:0;
-  font-family:'Poppins',Arial,sans-serif;
-  background:var(--bg);
-  color:#fff;
-  scroll-behavior:smooth;
-  overflow-x:hidden;
-  overflow-y:auto;
-  min-height:100%;
-  width:100%;
+  font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
 }
-body{
-  min-height:100vh;
-  min-height:100dvh;
-  width:100%;
-  background:var(--bg);
-  overscroll-behavior-y:auto;
-  position:relative;
-  -webkit-overflow-scrolling:touch;
-}
+html{background-color:var(--bg-main);min-height:100%}
+body{background:transparent;min-height:100%}
 a{color:inherit;text-decoration:none}
-img{max-width:100%;display:block}
-button{font-family:inherit}
+img{display:block;max-width:100%;height:auto}
 
+/* fixed background visible on mobile & desktop */
 .page-bg{
   position:fixed;
   inset:0;
   z-index:0;
   pointer-events:none;
-  width:100vw;
-  height:100vh;
-  height:100dvh;
-  object-fit:cover;
-  object-position:center center;
-  transform:translateZ(0);
-  backface-visibility:hidden;
-  will-change:transform;
-  background:var(--bg);
-}
-.page-bg-overlay{
-  position:fixed;
-  inset:0;
-  z-index:1;
-  pointer-events:none;
-  background:linear-gradient(180deg, rgba(10,77,46,0.06), rgba(10,77,46,0.02));
+  background-image:url('Energie_blanche.png');
+  background-size:cover;
+  background-position:center center;
+  background-repeat:no-repeat;
 }
 
-/* Topbar */
+/* subtle overlay */
+.bg-overlay{
+  position:fixed;
+  inset:0;
+  z-index:8;
+  pointer-events:none;
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.015));
+}
+
+/* Topbar & Header */
 .topbar{
   position:fixed;
   top:0;
@@ -105,81 +72,45 @@ button{font-family:inherit}
   right:0;
   height:var(--topbar-h);
   background:var(--green-dark);
+  color:#fff;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:10px;
   padding:0 5vw;
-  z-index:1500;
-  font-size:12px;
-  overflow:hidden;
+  z-index:1600;
+  font-size:13px
 }
-.promo-wrap{
-  flex:1;
-  display:flex;
-  align-items:center;
-  justify-content:flex-start;
-  min-width:0;
-}
-.promo-text{
-  display:inline-flex;
-  align-items:center;
-  gap:0;
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:0.9px;
-  text-transform:uppercase;
+.topbar .left{font-weight:600}
+.topbar .right{
   color:#fff;
-  -webkit-text-stroke:0.35px rgba(255,255,255,0.18);
-  text-shadow:0 2px 6px rgba(0,0,0,0.35);
-  white-space:nowrap;
-}
-.right{
-  flex:0 0 auto;
-  display:flex;
-  align-items:center;
-}
-.flag-slider{
-  width:34px;
-  height:22px;
-  overflow:hidden;
-  border-radius:6px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.30);
-  background:#fff;
-  border:1px solid rgba(255,255,255,0.10);
-}
-.flag-slider img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition:opacity .35s ease, transform .35s ease;
+  font-weight:700;
+  text-decoration:none;
+  text-transform:none;
 }
 
-/* Header */
-header{
+/* Header: logo on the left, company name larger */
+.header{
   position:fixed;
   top:var(--topbar-h);
   left:0;
   right:0;
   height:var(--header-h);
-  background:linear-gradient(90deg,var(--green-mid),var(--green-mid-2));
+  background:linear-gradient(90deg,var(--green-mid),#0b4d26);
   display:flex;
   align-items:center;
   justify-content:flex-start;
   padding:0 5vw;
-  z-index:1490;
-  box-shadow:0 4px 12px rgba(0,0,0,.25);
+  z-index:1595;
+  box-shadow:0 4px 12px rgba(0,0,0,.20);
 }
 .logo-text{
   display:flex;
-  align-items:flex-start;
-  gap:12px;
-  flex:0 0 auto;
+  align-items:center;
+  gap:12px
 }
 .logo-text img{
-  height:56px;
-  display:block;
-  flex:0 0 auto;
+  height:48px;
+  display:block
 }
 .brand-stack{
   display:flex;
@@ -190,27 +121,25 @@ header{
   text-align:center;
   min-width:0;
   margin:0;
-  padding:0;
-  position:relative;
-  top:1px;
+  padding:0
 }
 .company-name{
-  font-size:34px;
+  font-size:36px;
   font-weight:800;
   letter-spacing:1px;
   padding:0;
   margin:0;
   border-radius:8px;
-  color:#04462e;
-  -webkit-text-stroke:0.95px var(--gold-base);
-  text-shadow:0 3px 6px rgba(0,0,0,0.6);
+  color:var(--brand-green);
+  -webkit-text-stroke:0.95px var(--gold);
+  text-shadow:0 3px 6px rgba(0,0,0,0.45);
   position:relative;
   top:2px;
   white-space:nowrap;
   line-height:1;
   text-align:center;
   width:max-content;
-  display:block;
+  display:block
 }
 .company-tagline{
   font-size:14px;
@@ -226,101 +155,56 @@ header{
   line-height:1;
   text-align:center;
   width:max-content;
-  display:block;
+  display:block
 }
 
-/* Electric band */
+/* electric band (top lightning across page) */
 .electric-band{
   position:fixed;
-  top:calc(var(--topbar-h) + var(--header-h) - 6px);
+  top:calc(var(--topbar-h)+var(--header-h)-6px);
   left:0;
   right:0;
   height:14px;
   z-index:1600;
   pointer-events:none;
   overflow:visible;
-  transform:translateZ(0);
+  transform:translateZ(0)
 }
 .electric-band .container{
-  position:absolute;
-  left:0;
-  top:50%;
-  transform:translateY(-50%);
+  position:relative;
   width:100%;
-  padding:0;
-  height:100%;
-  pointer-events:none;
-  box-sizing:border-box;
+  height:100%
 }
 .lightning-svg{
-  width:100%;
+  width:100vw;
   height:100%;
   display:block;
   pointer-events:none;
   opacity:0;
-  transition:opacity .22s ease;
   mix-blend-mode:screen;
+  transition:opacity .22s
 }
 .electric-band.connected .lightning-svg{opacity:1}
-.lightning-svg path.zap{
-  stroke:var(--electric-yellow);
-  stroke-width:2.2;
-  fill:none;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-  opacity:0.98;
-}
 .orbs{
   position:absolute;
   left:0;
   top:0;
   width:100%;
   height:100%;
-  pointer-events:none;
-  overflow:visible;
+  pointer-events:none
 }
 .orb{
   position:absolute;
-  width:8px;
-  height:8px;
+  width:12px;
+  height:12px;
   border-radius:50%;
   background:radial-gradient(circle at 30% 30%, #fff8b0, var(--electric-yellow));
-  box-shadow:0 0 12px rgba(255,214,0,0.95), 0 0 30px rgba(255,214,0,0.22);
+  box-shadow:0 0 18px rgba(255,214,0,0.98), 0 0 40px rgba(255,214,0,0.22);
   transform:translate(-50%,-50%);
-  opacity:0;
-  transition:opacity .18s linear;
-}
-.electric-band.connected .orb{opacity:1}
-@keyframes buzz{
-  0%{transform:translate(-50%,-50%) translateX(-2px)}
-  50%{transform:translate(-50%,-50%) translateX(2px)}
-  100%{transform:translate(-50%,-50%) translateX(-2px)}
-}
-.orb.buzz{animation:buzz 0.9s linear infinite}
-.glowline{
-  position:absolute;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  height:3px;
-  width:0;
-  background:linear-gradient(90deg, rgba(255,238,170,0), rgba(255,214,0,0.98), rgba(255,238,170,0));
-  border-radius:8px;
-  box-shadow:0 6px 20px rgba(255,214,0,0.12);
-  opacity:0;
-  transition:opacity .22s ease;
-}
-.electric-band.connected .glowline{
-  width:100%;
   opacity:1;
-  animation:pulse 2s ease-in-out infinite;
-}
-@keyframes pulse{
-  0%{transform:translate(-50%,-50%) scaleX(.6); opacity:.6}
-  50%{transform:translate(-50%,-50%) scaleX(1); opacity:1}
-  100%{transform:translate(-50%,-50%) scaleX(.6); opacity:.6}
 }
 
+/* layout */
 .container{
   max-width:var(--maxw);
   margin:0 auto;
@@ -328,17 +212,15 @@ header{
   position:relative;
   z-index:40
 }
-main.container{
-  min-height:calc(100vh - 160px);
-}
 
 /* Models section */
 .models-wrapper{
   margin-top:24px;
-  padding:18px 12px 12px;
+  padding:18px 12px 36px;
   width:100%;
   max-width:100vw;
   position:relative;
+  background:transparent;
   z-index:60
 }
 .models-header{
@@ -367,6 +249,8 @@ main.container{
   padding:6px 14px;
   box-sizing:border-box
 }
+
+/* model cards */
 .models .model{
   display:flex;
   flex-direction:column;
@@ -380,7 +264,7 @@ main.container{
   cursor:pointer;
   min-height:240px;
   backdrop-filter:blur(4px) saturate(110%);
-  color:#02110a
+  color:var(--text)
 }
 .models .thumb{
   position:relative;
@@ -400,10 +284,12 @@ main.container{
   object-position:center;
   border-radius:8px
 }
+
+/* model text */
 .model .meta h4{
   margin:0;
   font-size:18px;
-  color:#02110a;
+  color:var(--text);
   font-weight:900
 }
 .model .meta p{
@@ -419,34 +305,37 @@ main.container{
   font-weight:500;
   margin-top:4px
 }
-.btn-small{
-  background:transparent;
-  border:1px solid rgba(6,42,32,0.06);
-  padding:8px 10px;
-  border-radius:8px;
-  cursor:pointer;
-  font-weight:700;
-  color:#08110a;
-}
 
-/* Product card */
+/* product card (detail) */
 .product-card{
-  display:none;
   width:min(980px,94%);
   margin:22px auto 28px;
   background:var(--card-bg-desktop);
   border:1px solid var(--card-border);
   border-radius:14px;
   padding:18px;
-  box-shadow:0 12px 36px rgba(6,42,32,0.06);
-  color:#02110a;
+  box-shadow:var(--shadow);
+  color:var(--text);
+  display:flex;
   gap:18px;
   align-items:flex-start;
   position:relative;
   overflow:hidden;
-  backdrop-filter:blur(3px) saturate(105%);
+  backdrop-filter:blur(3px) saturate(105%)
 }
 .product-card > *{position:relative;z-index:2}
+.product-card .close-mobile{
+  display:none;
+  position:absolute;
+  right:12px;
+  top:10px;
+  background:transparent;
+  border:0;
+  font-size:22px;
+  color:var(--muted);
+  cursor:pointer;
+  z-index:5
+}
 .product-info{
   flex:1;
   min-width:260px;
@@ -466,9 +355,11 @@ main.container{
   font-size:20px;
   font-weight:900;
   margin:6px 0 6px;
-  color:#02110a;
+  color:var(--text);
   line-height:1.08
 }
+
+/* warranty badge */
 .warranty-badge{
   display:inline-block;
   margin-left:8px;
@@ -482,6 +373,8 @@ main.container{
   box-shadow:0 10px 30px rgba(255,180,0,0.18);
   border:1px solid rgba(0,0,0,0.06)
 }
+
+/* product subtitle */
 .product-sub{
   font-size:13px;
   color:rgba(2,17,10,0.95);
@@ -503,6 +396,8 @@ main.container{
   font-weight:800;
   font-size:13px
 }
+
+/* specs */
 .specs-block{margin-top:12px}
 .specs-title{
   font-weight:800;
@@ -513,7 +408,7 @@ main.container{
   display:flex;
   flex-direction:column;
   gap:8px;
-  color:#02110a;
+  color:var(--text);
   font-size:15px
 }
 .spec-list > div{
@@ -523,6 +418,8 @@ main.container{
   border:1px solid rgba(6,42,32,0.04);
   box-shadow:0 6px 14px rgba(6,42,32,0.03)
 }
+
+/* product side */
 .product-side{
   width:340px;
   display:flex;
@@ -551,6 +448,8 @@ main.container{
   transition:transform .35s;
   border-radius:8px
 }
+
+/* CTA */
 .cta-group{
   display:flex;
   flex-direction:column;
@@ -563,11 +462,7 @@ main.container{
   padding:12px 14px;
   border-radius:12px;
   font-weight:900;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px
+  cursor:pointer
 }
 .btn-secondary{
   background:#fff;
@@ -577,6 +472,16 @@ main.container{
   cursor:pointer;
   font-weight:800
 }
+.btn-small{
+  background:transparent;
+  border:1px solid rgba(6,42,32,0.06);
+  padding:8px 10px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:700
+}
+
+/* details panel */
 .details-panel{
   display:none;
   margin-top:12px;
@@ -584,13 +489,66 @@ main.container{
   background:rgba(255,255,255,0.98);
   border-radius:10px;
   padding:12px;
-  color:#02110a;
+  color:var(--text);
   box-shadow:0 8px 24px rgba(6,42,32,0.06);
   border:1px solid rgba(6,42,32,0.04);
   line-height:1.45
 }
 
-/* Featured */
+/* PRO MODE UI */
+.pro-panel{
+  display:none;
+  margin-top:12px;
+  background:rgba(255,255,255,0.98);
+  border-radius:10px;
+  padding:12px;
+  color:var(--text);
+  box-shadow:0 8px 24px rgba(6,42,32,0.06);
+  border:1px solid rgba(6,42,32,0.04)
+}
+.pro-controls{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  flex-wrap:wrap
+}
+.led-sim{
+  display:flex;
+  gap:10px;
+  align-items:center
+}
+
+/* LED visual */
+.led-indicator{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:#2b2b2b;
+  box-shadow:0 6px 18px rgba(0,0,0,0.3);
+  transition:all .25s;
+  display:inline-block;
+  vertical-align:middle
+}
+.led-low{
+  background:rgba(255,236,179,0.14);
+  box-shadow:0 0 8px rgba(255,230,120,0.08), 0 6px 18px rgba(0,0,0,0.15)
+}
+.led-med{
+  background:rgba(255,236,179,0.28);
+  box-shadow:0 0 14px rgba(255,230,120,0.22), 0 8px 26px rgba(0,0,0,0.12)
+}
+.led-high{
+  background:rgba(255,236,179,0.6);
+  box-shadow:0 0 22px rgba(255,230,120,0.35), 0 10px 30px rgba(0,0,0,0.08)
+}
+@keyframes blink-slow { 0%{opacity:1} 50%{opacity:0.15} 100%{opacity:1} }
+@keyframes blink-med { 0%{opacity:1} 50%{opacity:0.05} 100%{opacity:1} }
+@keyframes blink-fast { 0%{opacity:1} 50%{opacity:0.02} 100%{opacity:1} }
+.blink-slow{animation:blink-slow 1.2s linear infinite}
+.blink-med{animation:blink-med 0.6s linear infinite}
+.blink-fast{animation:blink-fast 0.25s linear infinite}
+
+/* featured + others */
 .futures-title{
   display:flex;
   align-items:center;
@@ -605,7 +563,7 @@ main.container{
   overflow:hidden;
   border:1px solid rgba(212,175,55,0.12);
   background:rgba(255,255,255,0.94);
-  box-shadow:0 12px 36px rgba(6,42,32,0.06)
+  box-shadow:var(--shadow)
 }
 .featured-hero{
   position:relative;
@@ -661,7 +619,7 @@ main.container{
   border:1px solid rgba(0,0,0,0.06)
 }
 
-/* Modal */
+/* modal */
 .modal-overlay{
   position:fixed;
   inset:0;
@@ -670,41 +628,48 @@ main.container{
   align-items:center;
   justify-content:center;
   z-index:5000;
-  padding:10px
+  padding:20px
 }
 .modal{
-  width:min(290px,84vw);
+  width:min(920px,94vw);
   background:#fff;
-  border-radius:16px;
-  padding:10px;
+  border-radius:12px;
+  padding:18px;
   overflow:auto;
-  box-shadow:0 20px 45px rgba(0,0,0,0.42);
-  max-height:58vh;
+  box-shadow:0 24px 60px rgba(0,0,0,0.45);
+  max-height:86vh;
   position:relative
 }
-.modal h2{font-size:15px;margin-top:0;margin-right:28px}
+.modal.compact{
+  width:min(360px,90vw);
+  max-height:58vh;
+  padding:12px
+}
+.modal.compact h2{
+  font-size:16px;
+  margin-top:0
+}
 .modal .close{
   position:absolute;
-  right:8px;
-  top:8px;
-  width:30px;
-  height:30px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#fff;
-  border:1px solid rgba(6,42,32,0.12);
-  border-radius:50%;
-  font-size:15px;
-  cursor:pointer;
-  box-shadow:0 6px 14px rgba(0,0,0,0.10);
-  color:#0b2418;
+  right:16px;
+  top:12px;
+  background:transparent;
+  border:0;
+  font-size:18px;
+  cursor:pointer
 }
+.modal.compact .close{
+  right:10px;
+  top:8px;
+  font-size:16px
+}
+
+/* WhatsApp / contact modal cards */
 .whatsapp-choice{
   display:grid;
   grid-template-columns:1fr;
   gap:10px;
-  margin-top:12px;
+  margin-top:12px
 }
 .whatsapp-card{
   border:1px solid rgba(6,42,32,0.08);
@@ -713,12 +678,12 @@ main.container{
   padding:10px;
   cursor:pointer;
   text-align:left;
-  box-shadow:0 8px 18px rgba(6,42,32,0.06);
+  box-shadow:0 8px 18px rgba(6,42,32,0.06)
 }
 .whatsapp-card .top{
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:10px
 }
 .whatsapp-card .flag{
   width:36px;
@@ -727,23 +692,23 @@ main.container{
   overflow:hidden;
   border:1px solid rgba(0,0,0,0.08);
   box-shadow:0 4px 10px rgba(0,0,0,0.08);
-  flex:0 0 auto;
+  flex:0 0 auto
 }
 .whatsapp-card .flag img{
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:cover
 }
 .whatsapp-card h4{
   margin:0;
   font-size:14px;
-  color:#082014;
+  color:#082014
 }
 .whatsapp-card p{
   margin:5px 0 0;
   color:#315348;
   font-size:12px;
-  line-height:1.35;
+  line-height:1.35
 }
 .whatsapp-card .go{
   margin-top:9px;
@@ -755,7 +720,7 @@ main.container{
   background:linear-gradient(90deg, var(--brand-green), var(--green-mid));
   color:#fff;
   font-weight:800;
-  font-size:12px;
+  font-size:12px
 }
 
 /* Contact FAB */
@@ -773,24 +738,23 @@ main.container{
   box-shadow:0 10px 30px rgba(2,50,26,0.25);
   background:var(--whatsapp-green);
   border:3px solid rgba(255,255,255,0.06);
-  cursor:pointer;
+  cursor:pointer
 }
-.fab button{
+.fab a{
+  display:flex;
+  align-items:center;
+  justify-content:center;
   width:100%;
   height:100%;
-  border:0;
-  background:transparent;
   color:#fff;
-  font-size:22px;
-  cursor:pointer;
-  border-radius:50%;
+  font-size:22px
 }
-.fab:focus, .fab button:focus{
+.fab:focus, .fab a:focus{
   outline:3px solid rgba(255,255,255,0.12);
   outline-offset:2px
 }
 
-/* Footer */
+/* footer */
 footer{
   background:var(--green-dark);
   color:#fff;
@@ -805,113 +769,89 @@ footer{
   margin:0 auto 8px;
   font-size:18px;
   font-weight:800;
-  color:#04462e;
-  -webkit-text-stroke:0.7px var(--gold-base);
+  color:var(--brand-green);
+  -webkit-text-stroke:0.7px var(--gold);
   text-shadow:0 3px 6px rgba(0,0,0,0.6);
   padding:6px 10px;
   border-radius:6px;
   width:max-content
 }
-.footer-contact{
-  margin-top:6px;
-  color:#e6f7ea;
-  line-height:1.6
-}
+.footer-contact{margin-top:6px;color:#e6f7ea;line-height:1.6}
 
-@media (max-width:1100px){
-  .models{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
-}
 @media (max-width:900px){
+  .product-card{flex-direction:column;padding:14px}
+  .product-side{order:-1;width:100%}
   .featured-hero{height:280px}
-  .product-card{width:min(980px,94%)}
-}
-@media (max-width:820px){
-  .models{grid-template-columns:1fr;gap:20px}
-  .card{min-height:auto;text-align:center}
-  .card .image-wrap{
-    height:220px;
-    display:flex;
-    justify-content:center;
-    align-items:center
-  }
-  .card-content{
-    padding:18px;
-    text-align:center;
-    align-items:center
-  }
-  .card .btn-card{
-    margin:12px auto 0;
-    font-size:15px;
-    padding:10px 20px
-  }
-  .company-name{font-size:30px}
-  .logo-text img{height:50px}
-  .fab{width:50px;height:50px}
-  .fab button{font-size:20px}
-  .modal{width:min(88vw,300px);max-height:54vh}
-}
-@media (max-width:768px){
-  .company-name{font-size:26px}
-  .featured-hero{height:240px}
-  .card .image-wrap{height:200px}
-  .card-content{padding:16px 12px 18px}
-  .modal{width:min(90vw,295px);max-height:52vh}
 }
 @media (max-width:640px){
-  .company-tagline{font-size:12px; letter-spacing:4px}
-  .logo-text img{height:46px}
+  .company-name{font-size:30px}
+  .models{grid-template-columns:1fr}
   .featured-hero{height:220px}
-  .product-card{display:none !important;}
+
+  .product-card{
+    display:none !important;
+    position:fixed;
+    left:8px;
+    right:8px;
+    top:calc(var(--topbar-h) + var(--header-h) + 8px);
+    z-index:2200;
+    width:calc(100% - 16px);
+    margin:0;
+    padding:16px;
+    border-radius:12px;
+    box-shadow:0 18px 40px rgba(6,42,32,0.20);
+    background:var(--card-bg-overlay);
+    flex-direction:column;
+    overflow:auto;
+    max-height:calc(100vh - (var(--topbar-h) + var(--header-h) + 32px))
+  }
+  .product-card.show-on-mobile{
+    display:flex !important;
+    animation:slideIn 220ms ease
+  }
+  .product-card .close-mobile{display:block}
+  .fab{
+    right:12px;
+    bottom:14px;
+    width:50px;
+    height:50px;
+    font-size:20px
+  }
+
   .modal{
-    width:min(92vw,290px);
-    max-height:50vh;
-    padding:10px;
+    width:min(94vw,420px);
+    max-height:80vh;
   }
-  .modal h2{font-size:15px}
+  .modal.compact{
+    width:min(94vw,320px);
+    max-height:56vh;
+  }
 }
-@media (max-width:480px){
-  .hero-content{
-    max-width:92vw;
-    padding:0 12px;
-  }
-  .hero-content h1{
-    font-size:28px;
-    font-weight:700;
-    margin:0 0 8px;
-    white-space:nowrap;
-    overflow-x:hidden;
-    text-overflow:ellipsis;
-  }
-  .hero-content p{
-    font-size:16px;
-    line-height:1.5;
-  }
-  .btn-primary{
-    padding:12px 28px;
-    font-size:15px;
-  }
+@media (max-width:420px){
+  .featured-hero{height:200px}
+}
+
+@keyframes slideIn{
+  from{transform:translateY(-8px);opacity:0}
+  to{transform:translateY(0);opacity:1}
 }
 </style>
 </head>
 <body>
 
-<img class="page-bg" src="Energie_blanche.png" alt="" aria-hidden="true">
-<div class="page-bg-overlay" aria-hidden="true"></div>
+<div class="page-bg" aria-hidden="true"></div>
+<div class="bg-overlay" aria-hidden="true"></div>
 
+<!-- Topbar -->
 <div class="topbar" role="banner">
-  <div class="promo-wrap" aria-hidden="true">
-    <div class="promo-text"><span>Assemblé en Afrique de l'Ouest</span></div>
-  </div>
-  <div class="right" aria-hidden="true">
-    <div class="flag-slider">
-      <img id="flagImage" src="https://flagcdn.com/w80/ci.png" alt="Drapeau Côte d'Ivoire">
-    </div>
-  </div>
+  <div class="left">Assemblé au Sénégal</div>
+  <div class="right" aria-hidden="true"></div>
 </div>
 
-<header role="banner" aria-label="En-tête">
-  <div class="logo-text">
-    <img src="green bridge domo.png" alt="Logo GreenBridge" loading="eager" fetchpriority="high">
+<!-- Header : logo à gauche, nom agrandi -->
+<header class="header" role="banner" aria-label="En-tête">
+  <div class="logo-text" aria-hidden="false">
+    <img src="green bridge domo.png" alt="Logo GREENBRIDGE" />
     <div class="brand-stack">
       <div class="company-name">GREENBRIDGE</div>
       <div class="company-tagline">TECHNOLOGIES</div>
@@ -919,32 +859,34 @@ footer{
   </div>
 </header>
 
+<!-- Electric band (subtle lightning across top) -->
 <div class="electric-band connected" id="electricBand" aria-hidden="true">
   <div class="container">
     <svg class="lightning-svg" viewBox="0 0 2000 40" preserveAspectRatio="none" aria-hidden="true">
-      <path class="zap" d="M10,22 C260,4 520,36 840,20 C1120,8 1440,34 1760,18 C1880,6 1960,28 1990,22" stroke-opacity="0.18"/>
-      <path class="zap" d="M10,24 C280,36 600,6 860,22 C1140,36 1460,6 1800,22 C1880,36 1960,10 1990,22" stroke-opacity="0.12"/>
-      <path class="zap" id="zapBright" d="M20,22 C300,6 600,34 880,16 C1240,0 1520,32 1860,14 C1960,2 1980,30 1990,22" stroke-opacity="1" stroke-dasharray="520" stroke-dashoffset="520"/>
+      <path class="zap" id="zap1" d="M10,22 C260,4 520,36 840,20 C1120,8 1440,34 1760,18 C1880,6 1960,28 1990,22" stroke-opacity="0.18"/>
+      <path class="zap" id="zap2" d="M10,24 C280,36 600,6 860,22 C1140,36 1460,6 1800,22 C1880,36 1960,10 1990,22" stroke-opacity="0.12"/>
+      <path class="zap" id="zapBright" d="M20,22 C300,6 600,34 880,16 C1240,0 1520,32 1860,14 C1960,2 1980,30 1990,22" stroke-opacity="1"/>
     </svg>
-    <div class="orbs">
-      <div class="orb" id="orbA"></div>
-      <div class="orb" id="orbB"></div>
-      <div class="orb" id="orbC"></div>
+
+    <div class="orbs" id="topOrbs">
+      <div class="orb" id="topOrbA" aria-hidden="true"></div>
+      <div class="orb" id="topOrbB" aria-hidden="true"></div>
+      <div class="orb" id="topOrbC" aria-hidden="true"></div>
     </div>
-    <div class="glowline" id="glowline"></div>
   </div>
 </div>
 
-<div style="height:calc(var(--topbar-h) + var(--header-h) + 8px);" aria-hidden="true"></div>
+<div style="height: calc(var(--topbar-h) + var(--header-h) + 8px);" aria-hidden="true"></div>
 
 <main class="container" role="main">
 
+  <!-- Models list -->
   <section class="models-wrapper" id="models" role="region" aria-label="Nos modèles">
     <div class="models-header"><div class="models-title">Nos modèles</div></div>
 
     <div class="models" role="list">
-      <div class="model" role="button" onclick="selectModel(0)" tabindex="0" aria-label="GreenMini">
-        <div class="thumb"><img src="Pwkb_Mini_3.png" alt="GreenMini" loading="eager" fetchpriority="high"></div>
+      <div class="model" role="button" onclick="selectModel(0)" tabindex="0" aria-label="GreenMini 10k">
+        <div class="thumb"><img src="Pwkb_Mini_3.png" alt="GreenMini"></div>
         <div class="meta">
           <h4>GreenMini</h4>
           <p>GreenMini ≈ 9 000 mAh<br><small>Ultra-compact, idéal pour sac &amp; poche.</small></p>
@@ -952,8 +894,8 @@ footer{
         <div class="actions"><button class="btn-small" onclick="openTechModal(0);event.stopPropagation()">Infos</button></div>
       </div>
 
-      <div class="model" role="button" onclick="selectModel(1)" tabindex="0" aria-label="GreenCore">
-        <div class="thumb"><img src="pwkb_123.png" alt="GreenCore" loading="eager"></div>
+      <div class="model" role="button" onclick="selectModel(1)" tabindex="0" aria-label="GreenCore 9k">
+        <div class="thumb"><img src="pwkb_123.png" alt="GreenCore"></div>
         <div class="meta">
           <h4>GreenCore</h4>
           <p>GreenCore ≈ 9 000 mAh<br><small>Modulaire • Type-C charge rapide</small></p>
@@ -961,8 +903,8 @@ footer{
         <div class="actions"><button class="btn-small" onclick="openTechModal(1);event.stopPropagation()">Infos</button></div>
       </div>
 
-      <div class="model" role="button" onclick="selectModel(2)" tabindex="0" aria-label="GreenPro">
-        <div class="thumb"><img src="pwkb_6.png" alt="GreenPro" loading="lazy"></div>
+      <div class="model" role="button" onclick="selectModel(2)" tabindex="0" aria-label="GreenPro 12k">
+        <div class="thumb"><img src="pwkb_6.png" alt="GreenPro"></div>
         <div class="meta">
           <h4>GreenPro</h4>
           <p>GreenPro ≈ 12 000 mAh<br><small>Charge rapide USB-C • Pack haute qualité</small></p>
@@ -970,36 +912,22 @@ footer{
         <div class="actions"><button class="btn-small" onclick="openTechModal(2);event.stopPropagation()">Infos</button></div>
       </div>
 
-      <div class="model" role="button" onclick="selectModel(3)" tabindex="0" aria-label="GreenWireless">
-        <div class="thumb"><img src="pwkb_wireless_1.png" alt="GreenWireless" loading="lazy"></div>
+      <!-- Modèle mis à jour : GreenWireless -->
+      <div class="model" role="button" onclick="selectModel(3)" tabindex="0" aria-label="GreenWireless 20k">
+        <div class="thumb"><img src="pwkb_wireless_1.png" alt="GreenWireless"></div>
         <div class="meta">
           <h4>GreenWireless</h4>
           <p>GreenWireless — 20 000 mAh<br><small>Boîtier amovible • Charge rapide PD / QC3.0 • Sans-fil</small></p>
         </div>
         <div class="actions"><button class="btn-small" onclick="openTechModal(3);event.stopPropagation()">Infos</button></div>
       </div>
-
-      <div class="model" role="button" onclick="selectModel(4)" tabindex="0" aria-label="Chargeur ordinateur portable">
-        <div class="thumb"><img src="chargeur_pc.png" alt="Chargeur ordinateur portable" loading="lazy"></div>
-        <div class="meta">
-          <h4>Chargeur PC Portable</h4>
-          <p>65W à 100W<br><small>Charge rapide universelle pour ordinateurs portables.</small></p>
-        </div>
-        <div class="actions"><button class="btn-small" onclick="openTechModal(4);event.stopPropagation()">Infos</button></div>
-      </div>
-
-      <div class="model" role="button" onclick="selectModel(5)" tabindex="0" aria-label="Stabilisateur WiFi">
-        <div class="thumb"><img src="wifi_stabilizer.png" alt="Stabilisateur WiFi" loading="lazy"></div>
-        <div class="meta">
-          <h4>Stabilisateur WiFi</h4>
-          <p>Anti-coupure courant<br><small>Maintient modem et routeur actifs pendant les pannes.</small></p>
-        </div>
-        <div class="actions"><button class="btn-small" onclick="openTechModal(5);event.stopPropagation()">Infos</button></div>
-      </div>
     </div>
   </section>
 
+  <!-- Product card -->
   <section class="product-card" role="region" aria-label="Produit principal" aria-hidden="true">
+    <button class="close-mobile" aria-label="Fermer la fiche mobile" title="Fermer" onclick="closeOverlay()">×</button>
+
     <div class="product-info">
       <div class="top-label">Batterie externe haute performance</div>
       <div>
@@ -1020,32 +948,38 @@ footer{
       </div>
 
       <div id="detailsPanel" class="details-panel" aria-hidden="true"></div>
+
+      <!-- Pro Mode -->
+      <div style="margin-top:12px">
+        <button id="proToggle" class="btn-small" aria-pressed="false" type="button">Mode Pro</button>
+      </div>
+
+      <div id="proPanel" class="pro-panel" aria-hidden="true">
+        <!-- Content filled by JS -->
+      </div>
     </div>
 
     <div class="product-side">
       <div class="product-image" id="productImageBox" title="Cliquer pour changer d'image" role="button" tabindex="0">
-        <img id="heroMainImage" src="Pwkb_Mini_3.png" alt="GreenMini image" loading="eager" fetchpriority="high">
+        <img id="heroMainImage" src="Pwkb_Mini_3.png" alt="GreenMini image">
       </div>
 
       <div class="cta-group" aria-label="Actions produit">
-        <button id="orderBtnTop" class="btn-primary" type="button">
-          <i class="fa-brands fa-whatsapp"></i> Commander
-        </button>
-        <button id="infoBtnHero" class="btn-secondary" type="button" onclick="openTechModal(currentModel)">
-          <i class="fa-solid fa-circle-info"></i> Infos techniques
-        </button>
+        <a id="orderBtnTop" class="btn-primary" href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Commander</a>
+        <button id="infoBtnHero" class="btn-secondary" onclick="openTechModal(currentModel)" type="button"><i class="fa-solid fa-circle-info"></i> Infos techniques</button>
         <button id="detailsToggle" class="btn-small" type="button"><i class="fa-solid fa-list"></i> Afficher détails</button>
       </div>
     </div>
   </section>
 
+  <!-- Featured -->
   <div class="futures-title" id="futures">
     <div class="models-title">Projets à venir</div>
   </div>
 
   <section class="featured" aria-label="Pack 2.5 kWh — Solution modulaire">
     <div class="featured-hero" id="featuredHero" aria-hidden="false">
-      <div class="slide active" data-index="0"><img src="Future_Pack_1.png" alt="Pack 2.5 kWh vue 1" loading="lazy"></div>
+      <div class="slide active" data-index="0"><img src="Future_Pack_1.png" alt="Pack 2.5 kWh vue 1"></div>
     </div>
 
     <div class="featured-copy">
@@ -1057,34 +991,37 @@ footer{
       </div>
 
       <div style="margin-top:12px">
-        <button class="btn-secondary" type="button" onclick="openPackModal()">Infos pack</button>
+        <button class="btn-secondary" onclick="openPackModal()" type="button">Infos pack</button>
       </div>
     </div>
   </section>
 
 </main>
 
-<div id="fab" class="fab" role="button" aria-label="Contacter">
-  <button id="fabButton" type="button" aria-label="Contacter">
+<!-- WhatsApp FAB -->
+<div id="fab" class="fab" role="button" aria-label="Commander via WhatsApp">
+  <a id="fabLink" href="https://wa.me/221774015004" target="_blank" rel="noopener noreferrer" aria-label="Commander via WhatsApp">
     <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-  </button>
+  </a>
 </div>
 
+<!-- Modal -->
 <div id="modalOverlay" class="modal-overlay" role="dialog" aria-hidden="true">
-  <div class="modal" role="document" aria-modal="true">
+  <div class="modal" id="modalBox" role="document" aria-modal="true">
     <button class="close" aria-label="Fermer" onclick="closeModal()">✕</button>
     <div id="modalContent"></div>
   </div>
 </div>
 
 <footer>
-  <div class="footer-company">GREENBRIDGE TECHNOLOGIES</div>
-  <div style="color:#e6f7ea">© <span id="year"></span> GREENBRIDGE TECHNOLOGIES — Assemblé par des africains</div>
+  <div class="footer-company">GREENBRIDGE</div>
+  <div style="color:#e6f7ea">© <span id="year"></span> GREENBRIDGE — Assemblé en Afrique de l'Ouest</div>
 </footer>
 
 <script>
-const CONTACT_EMAIL = 'contact@greenbridge.com';
-
+/* ===========================
+   Données modèles
+   =========================== */
 const models = [
   {
     id:'greenmini',
@@ -1095,16 +1032,16 @@ const models = [
       'Cellules : Samsung (3 cellules) • testées à >100% capacité',
       'Capacité nominale : 10 000 mAh (≈9 200 mAh usable)',
       'Puissance pack approximative : ~32 W',
-      'Écran digital : affichage % batterie',
-      'Ports : 1× USB-C (in/out) + 2× USB-A',
+      'Écran digital : affichage % batterie (ex : 12%, 13%, ...)',
+      'Ports : 1× USB-C (in/out) + 2× USB-A (Q3 & autre)',
       'Garantie spéciale : 3 ans pour les 100 premiers clients'
     ],
-    warranty:'Garantie 3 ans — 100 premiers clients',
-    details:`
+    warranty: 'Garantie 3 ans — 100 premiers clients',
+    details: `
       <p style="margin-top:0;color:#23403a;line-height:1.45">
         <strong>GreenMini — 10 000 mAh</strong><br>
         Technologie : <strong>Samsung, 3 cellules</strong> (cellules testées et sélectionnées).
-        Puissance moyenne du pack : <strong>~32 W</strong>. Écran digital intégré pour visualiser l'autonomie.
+        Puissance moyenne du pack : <strong>~32 W</strong>. Écran digital intégré (indicateur précis en %) pour visualiser l'autonomie en temps réel.
       </p>
       <div style="margin-top:8px">
         <strong>Entrées (Input)</strong>
@@ -1115,9 +1052,9 @@ const models = [
         </ul>
         <strong>Sorties (Output)</strong>
         <ul>
-          <li>USB-C (in/out)</li>
-          <li>USB-A (Q3)</li>
-          <li>USB-A secondaire</li>
+          <li>USB-C (in/out) : 5V — 4.5A ; 9V — 2.5A ; 12V — 1.85A (selon negotiation)</li>
+          <li>USB-A (Q3) : 5V — 2.1A</li>
+          <li>USB-A secondaire : 5V — 1A</li>
         </ul>
       </div>
     `
@@ -1133,22 +1070,22 @@ const models = [
       'Puissance pack approximative : ~32 W',
       'Type-C charge rapide (Quick Charge / QC compatible)',
       'Pas de Power Delivery (PD) — tests mesurés : 4.66 V → 1.52 A',
-      'Lampe de nuit LED intégrée — activation : appuyez 2 fois sur le bouton',
+      'Lampe de nuit LED intégrée — activation : appuyez 2 fois sur le bouton (Mode Pro)',
       'Garantie spéciale : 3 ans pour les 100 premiers clients'
     ],
-    warranty:'Garantie 3 ans — 100 premiers clients',
-    ledModes:[
-      {id:0, name:'Veille — faible intensité'},
-      {id:1, name:'Veille — intensité moyenne'},
-      {id:2, name:'Veille — intensité haute'},
-      {id:3, name:'Clignotement lent'},
-      {id:4, name:'Clignotement secours — moyen'},
-      {id:5, name:'Clignotement secours — rapide'}
+    warranty: 'Garantie 3 ans — 100 premiers clients',
+    ledModes: [
+      { id:0, name:'Veille — faible intensité' },
+      { id:1, name:'Veille — intensité moyenne' },
+      { id:2, name:'Veille — intensité haute' },
+      { id:3, name:'Clignotement lent' },
+      { id:4, name:'Clignotement secours — moyen' },
+      { id:5, name:'Clignotement secours — rapide' }
     ],
-    details:`
+    details: `
       <p style="margin-top:0;color:#23403a;line-height:1.45">
         <strong>GreenCore — ≈ 9 000 mAh</strong><br>
-        Technologie : <strong>Samsung</strong>, cellules testées et triées. Charge rapide via USB-C (Quick Charge).
+        Technologie : <strong>Samsung</strong>, cellules testées et triées. Charge rapide via USB-C (Quick Charge). Puissance pack : ~32 W.
       </p>
       <div style="margin-top:8px">
         <strong>Charge / Mesures</strong>
@@ -1170,10 +1107,10 @@ const models = [
       'Cellules : pack de haute qualité, triées pour durabilité',
       'Conçu pour multi-appareils et charge simultanée'
     ],
-    details:`
+    details: `
       <p style="margin-top:0;color:#23403a;line-height:1.45">
         <strong>GreenPro — ≈ 12 000 mAh</strong><br>
-        Pack constitué de cellules de haute qualité, sélectionnées pour stabilité et longévité. Charge rapide via USB-C.
+        Pack constitué de cellules de haute qualité, sélectionnées pour stabilité et longévité. Charge rapide via USB-C, conçu pour alimenter plusieurs appareils simultanément.
       </p>
     `
   },
@@ -1183,103 +1120,73 @@ const models = [
     subtitle:'Boîtier amovible • PD / QC3.0 • Sans-fil • DIY',
     images:['pwkb_wireless_1.png','pwkb_wireless_2.png','pwkb_wireless_3.png'],
     specs:[
-      'Cellules : Samsung ou LG — 18650 hautes performances',
-      'Capacité nominale : 20 000 mAh (utilisable ≈ 15 000 mAh)',
-      'Sorties : USB-C PD (12V), USB-A QC3.0',
-      'Charge rapide sans fil intégrée',
-      'Boîtier de batterie amovible — kit DIY sans soudure',
-      'Écran LCD digital : affichage % batterie',
-      'Protections : anti-surcharge, anti-court-circuit, inversion de polarité',
+      'Cellules : Samsung ou LG — 18650 hautes performances (configuration supportant jusqu\'à 5×18650)',
+      'Capacité nominale : 20 000 mAh (capacité réelle utilisable ≈ 15 000 mAh)',
+      'Sorties : USB-C PD (12V), USB-A QC3.0, port micro, port Apple (adaptateur selon SKU)',
+      'Charge rapide sans fil intégrée (Wireless Fast Charge)',
+      'Boîtier de batterie amovible — kit DIY sans soudure (boîte de rangement / pack amovible)',
+      'Écran LCD digital : affichage % batterie et états de charge',
+      'Protections : anti-surcharge, anti-court-circuit, protection inversion de polarité, gestion thermique',
       'Garantie spéciale : 2 ans pour les 50 premiers clients'
     ],
-    warranty:'Garantie 2 ans — 50 premiers clients',
-    details:`
+    warranty: 'Garantie 2 ans — 50 premiers clients',
+    details: `
       <p style="margin-top:0;color:#23403a;line-height:1.45">
         <strong>GreenWireless — Boîtier amovible &amp; haute performance</strong><br>
-        Assemblé avec cellules <strong>Samsung</strong> ou <strong>LG</strong> de type <strong>18650</strong>.
+        Assemblé avec cellules <strong>Samsung</strong> ou <strong>LG</strong> de type <strong>18650</strong> (haut rendement). Conçu pour offrir une grande capacité et une maintenance locale facile via un boîtier amovible.
       </p>
+
       <div style="margin-top:8px">
         <strong>Caractéristiques principales</strong>
         <ul>
-          <li>Affichage LCD de la charge restante.</li>
-          <li>Charge rapide filaire + chargeur sans fil intégré.</li>
-          <li>Connexion protégée anti-inversion.</li>
-          <li>Capacité réelle : ≈ <strong>15 000 mAh utilisable</strong>.</li>
+          <li>Fonction : affichage numérique (LCD) de la puissance restante, boîtier détachable sans soudure.</li>
+          <li>Prise en charge : peut accueillir et charger jusqu'à <strong>5 × 18650 (têtes plates)</strong> via le boîtier de batterie.</li>
+          <li>Système : protection anti-retour de connexion, protections électroniques complète (surcharge, court-circuit, inversion).</li>
+          <li>Charge rapide : USB-C PD (12V) et USB-A QC3.0 — charge rapide filaire + chargeur sans fil intégré (version wireless).</li>
+          <li>Mode DIY : kit d'alimentation mobile auto-configuré, montage simple sans soudure — adapté au bricolage et à la réparation locale.</li>
+          <li>Interfaces : Micro USB, port Apple (adaptateur), Type-C in/out, bornes USB-A QC3.0.</li>
+          <li>Usage : idéal pour utilisateurs ayant de gros besoins de charge ; convient pour terrain et usage urbain.</li>
+          <li>Capacité réelle : ≈ <strong>15 000 mAh utilisable</strong> (dépend des cellules et du câblage interne).</li>
         </ul>
       </div>
-    `
-  },
-  {
-    id:'laptopcharger',
-    title:'Chargeur PC Portable',
-    subtitle:'Charge rapide universelle',
-    images:['chargeur_pc.png'],
-    specs:[
-      'Compatible PC portables USB-C / DC',
-      'Puissance : 65W à 100W',
-      'Protection surtension et surchauffe',
-      'Idéal pour bureau, domicile et déplacement'
-    ],
-    details:`
-      <p style="margin-top:0;color:#23403a;line-height:1.45">
-        <strong>Chargeur pour ordinateur portable</strong><br>
-        Conçu pour les besoins du quotidien, avec une puissance stable et une compatibilité large.
-      </p>
+
       <div style="margin-top:8px">
+        <strong>Exemples d'utilisation</strong>
         <ul>
-          <li>Compatible avec de nombreux modèles d’ordinateurs portables.</li>
-          <li>Sortie stable pour une meilleure protection de l’appareil.</li>
-          <li>Format pratique pour bureau et voyage.</li>
+          <li>Alimentation d'appareils 5V/9V/12V via PD/QC pour smartphone, routeur, petits appareils 12V.</li>
+          <li>Démontage/remplacement facile des cellules pour maintenance ou upgrade local.</li>
         </ul>
       </div>
-    `
-  },
-  {
-    id:'wifiups',
-    title:'Stabilisateur WiFi',
-    subtitle:'Internet même sans courant',
-    images:['wifi_stabilizer.png'],
-    specs:[
-      'Backup routeur et modem',
-      'Sorties 5V / 9V / 12V',
-      'Protection surtension',
-      'Maintien du WiFi en cas de coupure'
-    ],
-    details:`
-      <p style="margin-top:0;color:#23403a;line-height:1.45">
-        <strong>Stabilisateur WiFi anti-coupure</strong><br>
-        Permet de garder le modem et le routeur actifs pendant les coupures de courant.
-      </p>
-      <div style="margin-top:8px">
-        <ul>
-          <li>Utile pour télétravail, commerce et maison.</li>
-          <li>Réduit les interruptions internet pendant les pannes.</li>
-          <li>Compact et simple à installer.</li>
-        </ul>
+
+      <div style="margin-top:10px">
+        <strong style="color:#08110a;background:linear-gradient(90deg,#ffd54a,#ffb300);padding:6px 10px;border-radius:8px;display:inline-block">
+          Offre : <span style="font-weight:900">Garantie 2 ans — réservée aux 50 premiers clients</span>
+        </strong>
       </div>
     `
   }
 ];
 
+/* ===========================
+   DOM / UI logic
+   =========================== */
+const productCard = document.querySelector('.product-card');
 const heroImg = document.getElementById('heroMainImage');
 const specListEl = document.getElementById('specList');
 const modalOverlay = document.getElementById('modalOverlay');
+const modalBox = document.getElementById('modalBox');
 const modalContent = document.getElementById('modalContent');
-const fabButton = document.getElementById('fabButton');
+const fabLink = document.getElementById('fabLink');
 const orderBtnTop = document.getElementById('orderBtnTop');
-const detailsPanel = document.getElementById('detailsPanel');
-const productCard = document.querySelector('.product-card');
+
+const WHATSAPP_NUMBER = '221774015004';
 
 let currentModel = 0;
 let currentImage = 0;
 let heroTimer = null;
 const SLIDE_INTERVAL_MS = 5000;
 
-const whatsappNumbers = {
-  senegal: '221774015004',
-  coteivoire: '22507070707'
-};
-
+/* LED simulation state */
 let ledState = {
   modes: [],
   index: 0,
@@ -1287,28 +1194,7 @@ let ledState = {
   clickTimer: null
 };
 
-function preloadImages(urls){
-  urls.forEach(src=>{
-    const img = new Image();
-    img.src = src;
-  });
-}
-
-function allImageUrls(){
-  const list = [
-    'Energie_blanche.png',
-    'green bridge domo.png',
-    'Nos_produits_1.png',
-    'Future_Pack_1.png',
-    'Future_pack_2.1.png',
-    'Future_Pack_3.png'
-  ];
-  models.forEach(m=>{
-    if(Array.isArray(m.images)) list.push(...m.images);
-  });
-  return [...new Set(list)];
-}
-
+/* Render specs list */
 function renderSpecs(index){
   const m = models[index] || models[0];
   specListEl.innerHTML = '';
@@ -1319,6 +1205,7 @@ function renderSpecs(index){
   });
 }
 
+/* Build Pro Panel HTML */
 function buildProPanelHTML(model){
   if(!model) return '';
   let html = `
@@ -1368,10 +1255,10 @@ function buildProPanelHTML(model){
       <div style="margin-top:8px">
         <strong>GreenWireless — Détails techniques</strong>
         <ul>
-          <li>Supporte 5×18650 (têtes plates) dans boîtier amovible.</li>
+          <li>Supporte 5×18650 (têtes plates) dans boîtier amovible — maintenance locale facilitée.</li>
           <li>PD (12V) &amp; QC3.0 pour charge rapide filaire.</li>
-          <li>Charge sans fil intégrée compatible smartphones récents.</li>
-          <li>Écran LCD pour affichage du pourcentage.</li>
+          <li>Charge sans fil intégrée (wireless fast charge) — compatible smartphones récents.</li>
+          <li>Écran LCD pour affichage de pourcentage et état de charge.</li>
           <li>Design modulable : boîtier détachable, connexion protégée anti-inversion.</li>
         </ul>
       </div>
@@ -1383,86 +1270,10 @@ function buildProPanelHTML(model){
   return html;
 }
 
-function updateHero(index){
-  const m = models[index] || models[0];
-  document.getElementById('heroTitle').textContent = m.title;
-  document.getElementById('heroSubtitle').textContent = m.subtitle || '';
-  heroImg.src = (m.images && m.images[0]) ? m.images[0] : heroImg.src;
-  heroImg.alt = m.title;
-
-  detailsPanel.innerHTML = `<strong style="font-weight:800">${m.title}</strong><div style="margin-top:8px">${m.details}</div>`;
-  renderSpecs(index);
-
-  const wb = document.getElementById('warrantyBadge');
-  if(wb){
-    if(m.warranty){
-      wb.style.display = 'inline-block';
-      wb.setAttribute('aria-hidden','false');
-      wb.textContent = m.warranty;
-    } else {
-      wb.style.display = 'none';
-      wb.setAttribute('aria-hidden','true');
-    }
-  }
-
-  const proPanel = document.getElementById('proPanel');
-  if(proPanel){
-    proPanel.innerHTML = buildProPanelHTML(m);
-    proPanel.style.display = 'none';
-    proPanel.setAttribute('aria-hidden','true');
-    const proToggle = document.getElementById('proToggle');
-    if(proToggle){
-      proToggle.setAttribute('aria-pressed','false');
-      proToggle.textContent = 'Mode Pro';
-    }
-  }
-
-  if(m.id === 'greencore'){
-    ledState.modes = m.ledModes.slice();
-    ledState.index = 0;
-    setTimeout(initLedControls, 60);
-  } else {
-    ledState.modes = [];
-    if(ledState.clickTimer){
-      clearTimeout(ledState.clickTimer);
-      ledState.clickTimer = null;
-      ledState.clickCount = 0;
-    }
-  }
-
-  refreshContactAction();
-}
-
-function startHeroSlideshow(){
-  stopHeroSlideshow();
-  heroTimer = setInterval(()=>{
-    const m = models[currentModel] || models[0];
-    if(!m.images || m.images.length===0) return;
-    currentImage = (currentImage + 1) % m.images.length;
-    heroImg.src = m.images[currentImage];
-  }, SLIDE_INTERVAL_MS);
-}
-function stopHeroSlideshow(){
-  if(heroTimer){
-    clearInterval(heroTimer);
-    heroTimer = null;
-  }
-}
-
-function selectModel(i){
-  currentModel = i;
-  updateHero(i);
-  productCard.style.display = 'flex';
-  productCard.setAttribute('aria-hidden','false');
-  detailsPanel.style.display = 'block';
-  detailsPanel.setAttribute('aria-hidden','false');
-  currentImage = 0;
-  startHeroSlideshow();
-  productCard.scrollIntoView({behavior:'smooth', block:'start'});
-}
-
-function openModal(html){
+/* Open / close modal */
+function openModal(html, compact = false){
   modalContent.innerHTML = html;
+  modalBox.classList.toggle('compact', compact);
   modalOverlay.style.display = 'flex';
   modalOverlay.setAttribute('aria-hidden','false');
 }
@@ -1470,24 +1281,32 @@ function closeModal(){
   modalOverlay.style.display = 'none';
   modalOverlay.setAttribute('aria-hidden','true');
 }
+
+/* Tech modal for models */
 function openTechModal(i){
   const m = models[i] || models[0];
-  const html = `
+  let html = `
     <h2 style="margin-top:0">${m.title}</h2>
-    ${m.details}
-    <div style="margin-top:12px;font-weight:800">Caractéristiques rapides</div>
-    <ul>${(m.specs || []).map(s=>`<li>${s}</li>`).join('')}</ul>
+    <div style="font-size:14px;line-height:1.45;color:#23403a">${m.subtitle || ''}</div>
+    <div style="margin-top:8px">${m.details}</div>
+    <div style="margin-top:10px;font-weight:800">Caractéristiques rapides</div>
+    <ul style="margin:8px 0 0 18px;padding:0;line-height:1.4">
+      ${(m.specs || []).map(s=>`<li>${s}</li>`).join('')}
+    </ul>
   `;
-  openModal(html);
+  openModal(html, true);
 }
+
+/* Pack modal */
 function openPackModal(){
   const html = `
     <div style="width:100%;margin-bottom:12px">
-      <img src="Future_pack_2.1.png" alt="Pack vue 2" style="width:100%;height:auto;border-radius:8px;object-fit:cover" loading="lazy">
+      <img src="Future_pack_2.1.png" alt="Pack vue 2" style="width:100%;height:auto;border-radius:8px;object-fit:cover">
     </div>
+
     <h2 style="margin-top:0">Pack modulaire 2.5 kWh — GreenBridge</h2>
     <p style="color:#23403a;line-height:1.45">
-      Prévu pour une sortie commerciale le <strong>31/05/2026</strong>, le pack <strong>2.5 kWh</strong> a été conçu pour le Sénégal et l'Afrique de l'Ouest.
+      Prévu pour une sortie commerciale le <strong>31/05/2026</strong>, le pack <strong>2.5 kWh</strong> a été conçu pour le Sénégal.
       Basé sur des cellules <strong>LiFePO₄ prismatiques</strong>, il est modulaire, réparable localement et adapté au stockage médical, PME, agriculture et élevage.
     </p>
     <ul style="color:#23403a;line-height:1.45">
@@ -1496,17 +1315,20 @@ function openPackModal(){
       <li>Déploiement simple hors réseau, maintenance locale facilitée.</li>
       <li>Optimisé pour les usages agricoles et petites industries en Afrique de l'Ouest.</li>
     </ul>
+
     <div style="width:100%;margin-top:12px">
-      <img src="Future_Pack_3.png" alt="Pack vue 3" style="width:100%;height:auto;border-radius:8px;object-fit:cover" loading="lazy">
+      <img src="Future_Pack_3.png" alt="Pack vue 3" style="width:100%;height:auto;border-radius:8px;object-fit:cover">
     </div>
+
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;">
       <span style="background:linear-gradient(90deg,#ffd54a,#ffb300);padding:10px 14px;border-radius:999px;font-weight:900;color:#08110a">Disponible 31/05/2026</span>
       <button onclick="closeModal()" style="padding:10px 14px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);background:#fff;cursor:pointer">Fermer</button>
     </div>
   `;
-  openModal(html);
+  openModal(html, false);
 }
 
+/* WhatsApp modal: Côte d'Ivoire first, then Senegal */
 function openCountryModal(){
   const html = `
     <h2 style="margin:0 36px 6px 0;font-size:18px;color:#08110a">Commander via WhatsApp</h2>
@@ -1514,17 +1336,6 @@ function openCountryModal(){
       Choisis le pays de commande. Le message sera pré-rempli avec le bon numéro.
     </p>
     <div class="whatsapp-choice">
-      <button class="whatsapp-card" type="button" onclick="sendWhatsApp('senegal')">
-        <div class="top">
-          <div class="flag"><img src="https://flagcdn.com/w80/sn.png" alt="Drapeau Sénégal"></div>
-          <div>
-            <h4>Sénégal</h4>
-            <p>Commander pour le Sénégal via WhatsApp.</p>
-          </div>
-        </div>
-        <div class="go"><i class="fa-brands fa-whatsapp"></i> Continuer</div>
-      </button>
-
       <button class="whatsapp-card" type="button" onclick="sendWhatsApp('coteivoire')">
         <div class="top">
           <div class="flag"><img src="https://flagcdn.com/w80/ci.png" alt="Drapeau Côte d'Ivoire"></div>
@@ -1535,13 +1346,25 @@ function openCountryModal(){
         </div>
         <div class="go"><i class="fa-brands fa-whatsapp"></i> Continuer</div>
       </button>
+
+      <button class="whatsapp-card" type="button" onclick="sendWhatsApp('senegal')">
+        <div class="top">
+          <div class="flag"><img src="https://flagcdn.com/w80/sn.png" alt="Drapeau Sénégal"></div>
+          <div>
+            <h4>Sénégal</h4>
+            <p>Commander pour le Sénégal via WhatsApp.</p>
+          </div>
+        </div>
+        <div class="go"><i class="fa-brands fa-whatsapp"></i> Continuer</div>
+      </button>
     </div>
     <div style="margin-top:12px;text-align:right">
       <button type="button" class="btn-secondary" onclick="closeModal()">Fermer</button>
     </div>
   `;
-  openModal(html);
+  openModal(html, false);
 }
+
 function sendWhatsApp(country){
   const number = whatsappNumbers[country] || whatsappNumbers.senegal;
   const countryLabel = country === 'coteivoire' ? "la Côte d'Ivoire" : 'le Sénégal';
@@ -1564,7 +1387,7 @@ function buildMailtoUrl(modelIndex){
     ``,
     `Cordialement,`
   ].join('\n');
-  return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  return `mailto:contact@greenbridge.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
 function refreshContactAction(){
@@ -1574,59 +1397,144 @@ function refreshContactAction(){
       orderBtnTop.innerHTML = '<i class="fa-solid fa-envelope"></i> Envoyer un mail';
       orderBtnTop.onclick = ()=>{ window.location.href = buildMailtoUrl(currentModel); };
     }
-    if(fabButton){
-      fabButton.innerHTML = '<i class="fa-solid fa-envelope" aria-hidden="true"></i>';
-      fabButton.onclick = ()=>{ window.location.href = buildMailtoUrl(currentModel); };
-      fabButton.setAttribute('aria-label','Envoyer un mail');
+    if(fabLink){
+      fabLink.innerHTML = '<i class="fa-solid fa-envelope" aria-hidden="true"></i>';
+      fabLink.href = buildMailtoUrl(currentModel);
+      fabLink.setAttribute('aria-label','Envoyer un mail');
     }
   } else {
     if(orderBtnTop){
       orderBtnTop.innerHTML = '<i class="fa-brands fa-whatsapp"></i> Commander';
       orderBtnTop.onclick = openCountryModal;
     }
-    if(fabButton){
-      fabButton.innerHTML = '<i class="fa-brands fa-whatsapp" aria-hidden="true"></i>';
-      fabButton.onclick = openCountryModal;
-      fabButton.setAttribute('aria-label','Commander via WhatsApp');
+    if(fabLink){
+      fabLink.innerHTML = '<i class="fa-brands fa-whatsapp" aria-hidden="true"></i>';
+      fabLink.href = '#';
+      fabLink.setAttribute('aria-label','Commander via WhatsApp');
+      fabLink.onclick = (e)=>{ e.preventDefault(); openCountryModal(); };
     }
   }
 }
 
-modalOverlay.addEventListener('click', ev=>{ if(ev.target === modalOverlay) closeModal(); });
-
-document.getElementById('detailsToggle').addEventListener('click', ()=>{
-  const vis = detailsPanel.style.display === 'block';
-  if(vis){
-    detailsPanel.style.display='none';
-    detailsPanel.setAttribute('aria-hidden','true');
-  } else {
-    detailsPanel.style.display='block';
-    detailsPanel.setAttribute('aria-hidden','false');
-  }
+modalOverlay.addEventListener('click', ev=>{
+  if(ev.target === modalOverlay) closeModal();
 });
 
-const proToggleBtn = document.getElementById('proToggle');
-if(proToggleBtn){
-  proToggleBtn.addEventListener('click', ()=>{
-    const proPanel = document.getElementById('proPanel');
-    const isShown = proPanel.style.display === 'block';
-    if(isShown){
-      proPanel.style.display = 'none';
-      proPanel.setAttribute('aria-hidden','true');
-      proToggleBtn.setAttribute('aria-pressed','false');
-      proToggleBtn.textContent = 'Mode Pro';
-    } else {
-      proPanel.style.display = 'block';
-      proPanel.setAttribute('aria-hidden','false');
-      proToggleBtn.setAttribute('aria-pressed','true');
-      proToggleBtn.textContent = 'Mode Pro (actif)';
-    }
-  });
+/* Slideshow for product images */
+function startHeroSlideshow(){
+  stopHeroSlideshow();
+  heroTimer = setInterval(()=>{
+    const m = models[currentModel] || models[0];
+    if(!m.images || m.images.length===0) return;
+    currentImage = (currentImage + 1) % m.images.length;
+    heroImg.src = m.images[currentImage];
+  }, SLIDE_INTERVAL_MS);
+}
+function stopHeroSlideshow(){
+  if(heroTimer){
+    clearInterval(heroTimer);
+    heroTimer = null;
+  }
 }
 
-const productImageBox = document.getElementById('productImageBox');
-if(productImageBox){
-  productImageBox.addEventListener('click', ()=>{
+/* Update product panel */
+function updateHero(index){
+  const m = models[index] || models[0];
+  document.getElementById('heroTitle').textContent = m.title;
+  document.getElementById('heroSubtitle').textContent = m.subtitle || '';
+  heroImg.src = (m.images && m.images[0]) ? m.images[0] : heroImg.src;
+  heroImg.alt = m.title;
+
+  document.getElementById('detailsPanel').innerHTML = `<strong style="font-weight:800">${m.title}</strong><div style="margin-top:8px">${m.details}</div>`;
+  renderSpecs(index);
+
+  const wb = document.getElementById('warrantyBadge');
+  if(wb){
+    if(m.warranty){
+      wb.style.display = 'inline-block';
+      wb.setAttribute('aria-hidden','false');
+      wb.textContent = m.warranty;
+    } else {
+      wb.style.display = 'none';
+      wb.setAttribute('aria-hidden','true');
+    }
+  }
+
+  const prefillMessage = `Bonjour, je souhaite commander / obtenir le prix de la batterie externe : ${m.title} (ref: ${m.id})`;
+  const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=` + encodeURIComponent(prefillMessage);
+
+  if(fabLink && window.matchMedia('(max-width:768px)').matches){
+    fabLink.href = '#';
+  }
+  if(orderBtnTop){
+    orderBtnTop.setAttribute('data-wa', waUrl);
+  }
+
+  const proPanel = document.getElementById('proPanel');
+  proPanel.innerHTML = buildProPanelHTML(m);
+  proPanel.style.display = 'none';
+  proPanel.setAttribute('aria-hidden','true');
+
+  if(m.id === 'greencore'){
+    ledState.modes = m.ledModes.slice();
+    ledState.index = 0;
+    setTimeout(initLedControls, 60);
+  } else {
+    ledState.modes = [];
+    if(ledState.clickTimer){
+      clearTimeout(ledState.clickTimer);
+      ledState.clickTimer = null;
+      ledState.clickCount = 0;
+    }
+  }
+
+  refreshContactAction();
+}
+
+/* Select model behavior */
+function selectModel(i){
+  currentModel = i;
+  updateHero(i);
+
+  if(window.matchMedia('(max-width:640px)').matches){
+    productCard.classList.add('show-on-mobile');
+    productCard.setAttribute('aria-hidden','false');
+    const details = document.getElementById('detailsPanel');
+    details.style.display = 'block';
+    details.setAttribute('aria-hidden','false');
+    setTimeout(()=>{
+      const p = productCard.querySelector('.btn-primary');
+      if(p) p.focus();
+    }, 120);
+  } else {
+    productCard.classList.remove('show-on-mobile');
+    productCard.style.display = 'flex';
+    productCard.setAttribute('aria-hidden','false');
+    const details = document.getElementById('detailsPanel');
+    details.style.display = 'block';
+    details.setAttribute('aria-hidden','false');
+    productCard.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+
+  currentImage = 0;
+  startHeroSlideshow();
+}
+
+/* Close mobile overlay */
+function closeOverlay(){
+  productCard.classList.remove('show-on-mobile');
+  productCard.setAttribute('aria-hidden','true');
+  const details = document.getElementById('detailsPanel');
+  details.style.display = 'none';
+  details.setAttribute('aria-hidden','true');
+  const first = document.querySelector('.models .model');
+  if(first) first.focus();
+}
+
+/* Product image click cycles images */
+const productImageEl = document.querySelector('.product-image');
+if(productImageEl){
+  productImageEl.addEventListener('click', ()=>{
     const m = models[currentModel] || models[0];
     if(!m.images || m.images.length===0) return;
     currentImage = (currentImage + 1) % m.images.length;
@@ -1637,38 +1545,71 @@ if(productImageBox){
   });
 }
 
-/* Electric band + orbs */
+/* Details toggle */
+document.getElementById('detailsToggle').addEventListener('click', ()=>{
+  const panel = document.getElementById('detailsPanel');
+  const vis = panel.style.display === 'block';
+  if(vis){
+    panel.style.display='none';
+    panel.setAttribute('aria-hidden','true');
+  } else {
+    panel.style.display='block';
+    panel.setAttribute('aria-hidden','false');
+    if(window.matchMedia('(max-width:640px)').matches) productCard.scrollIntoView({behavior:'smooth', block:'center'});
+    else panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+});
+
+/* Mode Pro toggle */
+const proToggleBtn = document.getElementById('proToggle');
+proToggleBtn.addEventListener('click', ()=>{
+  const proPanel = document.getElementById('proPanel');
+  const isShown = proPanel.style.display === 'block';
+  if(isShown){
+    proPanel.style.display = 'none';
+    proPanel.setAttribute('aria-hidden','true');
+    proToggleBtn.setAttribute('aria-pressed','false');
+    proToggleBtn.textContent = 'Mode Pro';
+  } else {
+    proPanel.style.display = 'block';
+    proPanel.setAttribute('aria-hidden','false');
+    proToggleBtn.setAttribute('aria-pressed','true');
+    proToggleBtn.textContent = 'Mode Pro (actif)';
+    if(window.matchMedia('(max-width:640px)').matches) productCard.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+});
+
+/* close modal when clicking backdrop */
+modalOverlay.addEventListener('click', ev=>{
+  if(ev.target === modalOverlay) closeModal();
+});
+
+/* Electric orbs animation (across top) */
 (function(){
-  const electricBand = document.getElementById('electricBand');
-  if(!electricBand) return;
-  const orbA = document.getElementById('orbA');
-  const orbB = document.getElementById('orbB');
-  const orbC = document.getElementById('orbC');
-  const orbs = [orbA, orbB, orbC];
+  const container = document.querySelector('.electric-band .container');
+  if(!container) return;
+  const a = document.getElementById('topOrbA');
+  const b = document.getElementById('topOrbB');
+  const c = document.getElementById('topOrbC');
+  const orbs = [a,b,c];
   const params = [
-    {rxRatio:0.50, ry:8, speed:0.22, phase:0},
-    {rxRatio:0.33, ry:6, speed:0.36, phase:Math.PI/2},
-    {rxRatio:0.42, ry:10, speed:0.18, phase:Math.PI}
+    {rxRatio:0.5, ry:8, speed:0.06, phase:0},
+    {rxRatio:0.33, ry:6, speed:0.08, phase:Math.PI/2},
+    {rxRatio:0.42, ry:10, speed:0.05, phase:Math.PI}
   ];
 
   orbs.forEach((o,i)=>{
     if(o){
-      o.classList.add('buzz');
-      o.style.animationDelay = (i*120) + 'ms';
+      o.style.opacity='1';
     }
   });
 
   let t0 = performance.now();
   function tick(now){
-    const time = (now - t0) / 1000;
-    const cont = electricBand.querySelector('.container');
-    if(!cont){
-      requestAnimationFrame(tick);
-      return;
-    }
-    const rect = cont.getBoundingClientRect();
-    const cx = rect.width / 2;
-    const cy = rect.height / 2;
+    const time = (now - t0)/1000;
+    const rect = container.getBoundingClientRect();
+    const cx = rect.width/2;
+    const cy = rect.height/2;
     for(let i=0;i<orbs.length;i++){
       const orb = orbs[i];
       if(!orb) continue;
@@ -1685,92 +1626,9 @@ if(productImageBox){
     requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
-
-  function sparkSVG(){
-    const zapBright = document.getElementById('zapBright');
-    if(!zapBright) return;
-    try{
-      const len = zapBright.getTotalLength ? zapBright.getTotalLength() : 520;
-      zapBright.style.transition = 'none';
-      zapBright.setAttribute('stroke-dasharray', String(len));
-      zapBright.setAttribute('stroke-dashoffset', String(len));
-      setTimeout(()=>{
-        zapBright.style.transition = 'stroke-dashoffset 380ms ease-out, opacity 160ms';
-        zapBright.setAttribute('stroke-dashoffset','0');
-        setTimeout(()=>{
-          zapBright.setAttribute('stroke-dashoffset', String(len));
-        }, 320);
-      }, 60);
-    }catch(e){
-      zapBright.setAttribute('stroke-dasharray','520');
-      zapBright.setAttribute('stroke-dashoffset','520');
-      setTimeout(()=>{
-        zapBright.style.transition = 'stroke-dashoffset 360ms ease-out';
-        zapBright.setAttribute('stroke-dashoffset','0');
-      }, 80);
-    }
-  }
-
-  function spawnSparks(){
-    const cont = electricBand.querySelector('.container');
-    if(!cont) return;
-    for(let i=0;i<10;i++){
-      const s = document.createElement('div');
-      s.style.position = 'absolute';
-      s.style.left = (3 + Math.random()*94) + '%';
-      s.style.top = (20 + Math.random()*50) + '%';
-      s.style.width = '2px';
-      s.style.height = (8 + Math.random()*22) + 'px';
-      s.style.borderRadius = '2px';
-      s.style.background = 'linear-gradient(180deg, rgba(255,246,180,1), rgba(255,214,0,0.95))';
-      s.style.filter = 'blur(6px)';
-      s.style.opacity = '0';
-      s.style.transform = 'translateY(6px)';
-      s.style.pointerEvents = 'none';
-      s.style.zIndex = '1';
-      cont.appendChild(s);
-      setTimeout(()=>{
-        s.style.transition = 'all 260ms ease-out';
-        s.style.opacity='1';
-        s.style.transform='translateY(-6px)';
-      }, 20 + i*25);
-      setTimeout(()=>{
-        s.style.transition = 'all 420ms ease-in';
-        s.style.opacity='0';
-        s.style.transform='translateY(-20px)';
-      }, 280 + i*40);
-      setTimeout(()=>{
-        if(s.parentNode) s.parentNode.removeChild(s);
-      }, 760 + i*40);
-    }
-  }
-
-  function activate(){
-    electricBand.classList.add('connected');
-    spawnSparks();
-    sparkSVG();
-    setInterval(()=>{
-      spawnSparks();
-      if(Math.random() > 0.45) sparkSVG();
-    }, 900 + Math.random()*900);
-  }
-
-  const title = document.querySelector('.company-name');
-  if(title){
-    title.addEventListener('click', ()=>{
-      const on = electricBand.classList.toggle('connected');
-      if(on){
-        spawnSparks();
-        sparkSVG();
-      }
-    });
-  }
-
-  activate();
-  window.addEventListener('resize', ()=>{ t0 = performance.now(); });
 })();
 
-/* LED controls */
+/* LED controls initialization */
 function initLedControls(){
   const btn = document.getElementById('ledButton');
   const indicator = document.getElementById('ledIndicator');
@@ -1814,6 +1672,7 @@ function initLedControls(){
   }
 }
 
+/* Apply LED mode visuals */
 function applyLedMode(idx){
   const indicator = document.getElementById('ledIndicator');
   const modeName = document.getElementById('ledModeName');
@@ -1843,52 +1702,52 @@ function applyLedMode(idx){
   }
 }
 
-/* Flag alternates every 5 seconds */
-(function(){
-  const flagImage = document.getElementById('flagImage');
-  if(!flagImage) return;
-  const flags = [
-    {src:'https://flagcdn.com/w80/ci.png', alt:"Drapeau Côte d'Ivoire"},
-    {src:'https://flagcdn.com/w80/sn.png', alt:'Drapeau Sénégal'}
-  ];
-  let currentFlag = 0;
-
-  setInterval(()=>{
-    currentFlag = (currentFlag + 1) % flags.length;
-    flagImage.style.opacity = '0.25';
-    flagImage.style.transform = 'scale(0.96)';
-    setTimeout(()=>{
-      flagImage.src = flags[currentFlag].src;
-      flagImage.alt = flags[currentFlag].alt;
-      flagImage.style.opacity = '1';
-      flagImage.style.transform = 'scale(1)';
-    }, 180);
-  }, 5000);
-})();
-
+/* Init */
 document.addEventListener('DOMContentLoaded', ()=>{
-  preloadImages(allImageUrls());
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  if(window.matchMedia('(max-width:640px)').matches){
+    updateHero(0);
+    productCard.classList.remove('show-on-mobile');
+    productCard.setAttribute('aria-hidden','true');
+    document.getElementById('detailsPanel').style.display = 'none';
+  } else {
+    selectModel(0);
+  }
 
   document.querySelectorAll('.models .model').forEach((el, idx)=>{
     el.addEventListener('keydown', (e)=>{
-      if(e.key === 'Enter' || e.key === ' '){
+      if(e.key==='Enter' || e.key===' '){
         e.preventDefault();
         selectModel(idx);
       }
     });
   });
 
-  updateHero(0);
   refreshContactAction();
-  detailsPanel.style.display = 'block';
-  detailsPanel.setAttribute('aria-hidden','false');
+
+  /* On desktop, clicking the main FAB should respect current mode */
+  if(window.matchMedia('(min-width:769px)').matches){
+    fabLink.href = buildMailtoUrl(currentModel);
+  } else {
+    fabLink.href = '#';
+    fabLink.onclick = (e)=>{ e.preventDefault(); openCountryModal(); };
+  }
 });
 
+/* adapt overlay on resize */
 window.addEventListener('resize', ()=>{
   refreshContactAction();
-  if(productCard && window.matchMedia('(max-width:640px)').matches){
-    productCard.style.display = 'none';
+
+  if(!window.matchMedia('(max-width:640px)').matches){
+    productCard.classList.remove('show-on-mobile');
+    productCard.style.display = 'flex';
+    productCard.setAttribute('aria-hidden','false');
+  } else {
+    if(!productCard.classList.contains('show-on-mobile')){
+      productCard.style.display = 'none';
+      productCard.setAttribute('aria-hidden','true');
+    }
   }
 });
 </script>
