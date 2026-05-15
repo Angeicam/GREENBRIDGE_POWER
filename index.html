@@ -17,6 +17,8 @@
 <link rel="preload" as="image" href="pwkb_6.png">
 <link rel="preload" as="image" href="pwkb_wireless_1.png">
 <link rel="preload" as="image" href="Nos_produits_1.png">
+<link rel="preload" as="image" href="chargeur_pc.png">
+<link rel="preload" as="image" href="wifi_stabilizer.png">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -380,7 +382,8 @@ main.container{
   cursor:pointer;
   min-height:240px;
   backdrop-filter:blur(4px) saturate(110%);
-  color:#02110a
+  color:#02110a;
+  user-select:none;
 }
 .models .thumb{
   position:relative;
@@ -1483,9 +1486,11 @@ function updateHero(index){
   }
 
   const proPanel = document.getElementById('proPanel');
-  proPanel.innerHTML = buildProPanelHTML(m);
-  proPanel.style.display = 'none';
-  proPanel.setAttribute('aria-hidden','true');
+  if(proPanel){
+    proPanel.innerHTML = buildProPanelHTML(m);
+    proPanel.style.display = 'none';
+    proPanel.setAttribute('aria-hidden','true');
+  }
 
   if(m.id === 'greencore'){
     ledState.modes = m.ledModes.slice();
@@ -1519,22 +1524,53 @@ function stopHeroSlideshow(){
   }
 }
 
-/* === FIX PRINCIPAL : ouverture de la fiche au clic sur les cards === */
 function selectModel(i){
   currentModel = i;
   updateHero(i);
 
-  productCard.classList.remove('show-on-mobile');
-  productCard.style.display = 'flex';
-  productCard.setAttribute('aria-hidden','false');
-
-  detailsPanel.style.display = 'block';
-  detailsPanel.setAttribute('aria-hidden','false');
+  if(window.matchMedia('(max-width:640px)').matches){
+    productCard.classList.add('show-on-mobile');
+    productCard.style.display = 'flex';
+    productCard.setAttribute('aria-hidden','false');
+    detailsPanel.style.display = 'block';
+    detailsPanel.setAttribute('aria-hidden','false');
+    setTimeout(()=>{
+      const p = productCard.querySelector('.btn-primary');
+      if(p) p.focus();
+    }, 120);
+  } else {
+    productCard.classList.remove('show-on-mobile');
+    productCard.style.display = 'flex';
+    productCard.setAttribute('aria-hidden','false');
+    detailsPanel.style.display = 'block';
+    detailsPanel.setAttribute('aria-hidden','false');
+    productCard.scrollIntoView({behavior:'smooth', block:'center'});
+  }
 
   currentImage = 0;
   startHeroSlideshow();
+}
 
-  productCard.scrollIntoView({behavior:'smooth', block:'center'});
+function closeOverlay(){
+  productCard.classList.remove('show-on-mobile');
+  productCard.setAttribute('aria-hidden','true');
+  detailsPanel.style.display = 'none';
+  detailsPanel.setAttribute('aria-hidden','true');
+  const first = document.querySelector('.models .model');
+  if(first) first.focus();
+}
+
+const productImageBox = document.getElementById('productImageBox');
+if(productImageBox){
+  productImageBox.addEventListener('click', ()=>{
+    const m = models[currentModel] || models[0];
+    if(!m.images || m.images.length===0) return;
+    currentImage = (currentImage + 1) % m.images.length;
+    heroImg.style.transform = 'scale(0.98)';
+    setTimeout(()=> heroImg.style.transform = 'scale(1)', 120);
+    heroImg.src = m.images[currentImage];
+    startHeroSlideshow();
+  });
 }
 
 function openModal(html){
@@ -1700,18 +1736,100 @@ if(proToggleBtn){
   });
 }
 
-const productImageBox = document.getElementById('productImageBox');
-if(productImageBox){
-  productImageBox.addEventListener('click', ()=>{
-    const m = models[currentModel] || models[0];
-    if(!m.images || m.images.length===0) return;
-    currentImage = (currentImage + 1) % m.images.length;
-    heroImg.style.transform = 'scale(0.98)';
-    setTimeout(()=> heroImg.style.transform = 'scale(1)', 120);
-    heroImg.src = m.images[currentImage];
-    startHeroSlideshow();
+function initLedControls(){
+  const btn = document.getElementById('ledButton');
+  const indicator = document.getElementById('ledIndicator');
+  const modeName = document.getElementById('ledModeName');
+  const modesListEl = document.getElementById('ledModesList');
+  if(!btn || !indicator || !modeName || !ledState.modes.length) return;
+
+  ledState.index = 0;
+  applyLedMode(ledState.index);
+
+  const newBtn = btn.cloneNode(true);
+  btn.parentNode.replaceChild(newBtn, btn);
+
+  newBtn.addEventListener('click', ()=>{
+    ledState.clickCount += 1;
+    if(ledState.clickTimer) clearTimeout(ledState.clickTimer);
+    ledState.clickTimer = setTimeout(()=>{
+      ledState.clickCount = 0;
+      ledState.clickTimer = null;
+    }, 600);
+
+    if(ledState.clickCount >= 2){
+      ledState.clickCount = 0;
+      if(ledState.clickTimer){
+        clearTimeout(ledState.clickTimer);
+        ledState.clickTimer = null;
+      }
+      ledState.index = (ledState.index + 1) % ledState.modes.length;
+      applyLedMode(ledState.index);
+    }
   });
+
+  newBtn.addEventListener('dblclick', (e)=>{
+    e.preventDefault();
+    ledState.index = (ledState.index + 1) % ledState.modes.length;
+    applyLedMode(ledState.index);
+  });
+
+  if(modesListEl){
+    modesListEl.innerHTML = ledState.modes.map((m, idx)=>`<li${idx===ledState.index ? ' style="font-weight:800"' : ''}>${m.name}</li>`).join('');
+  }
 }
+
+function applyLedMode(idx){
+  const indicator = document.getElementById('ledIndicator');
+  const modeName = document.getElementById('ledModeName');
+  const modesListEl = document.getElementById('ledModesList');
+
+  if(!indicator || !modeName || !ledState.modes.length) return;
+
+  const mode = ledState.modes[idx] || {name:'—'};
+  indicator.className = 'led-indicator';
+
+  switch(idx){
+    case 0: indicator.classList.add('led-low'); break;
+    case 1: indicator.classList.add('led-med'); break;
+    case 2: indicator.classList.add('led-high'); break;
+    case 3: indicator.classList.add('led-high','blink-slow'); break;
+    case 4: indicator.classList.add('led-high','blink-med'); break;
+    case 5: indicator.classList.add('led-high','blink-fast'); break;
+    default: indicator.classList.add('led-low'); break;
+  }
+  modeName.textContent = mode.name;
+
+  if(modesListEl){
+    modesListEl.querySelectorAll('li').forEach((li, i)=>{
+      li.style.fontWeight = (i === idx) ? '800' : '400';
+      li.style.opacity = (i === idx) ? '1' : '0.7';
+    });
+  }
+}
+
+/* Flag alternates every 5 seconds */
+(function(){
+  const flagImage = document.getElementById('flagImage');
+  if(!flagImage) return;
+  const flags = [
+    {src:'https://flagcdn.com/w80/ci.png', alt:"Drapeau Côte d'Ivoire"},
+    {src:'https://flagcdn.com/w80/sn.png', alt:'Drapeau Sénégal'}
+  ];
+  let currentFlag = 0;
+
+  setInterval(()=>{
+    currentFlag = (currentFlag + 1) % flags.length;
+    flagImage.style.opacity = '0.25';
+    flagImage.style.transform = 'scale(0.96)';
+    setTimeout(()=>{
+      flagImage.src = flags[currentFlag].src;
+      flagImage.alt = flags[currentFlag].alt;
+      flagImage.style.opacity = '1';
+      flagImage.style.transform = 'scale(1)';
+    }, 180);
+  }, 5000);
+})();
 
 /* Electric band + orbs */
 (function(){
@@ -1846,102 +1964,6 @@ if(productImageBox){
   window.addEventListener('resize', ()=>{ t0 = performance.now(); });
 })();
 
-/* LED controls */
-function initLedControls(){
-  const btn = document.getElementById('ledButton');
-  const indicator = document.getElementById('ledIndicator');
-  const modeName = document.getElementById('ledModeName');
-  const modesListEl = document.getElementById('ledModesList');
-  if(!btn || !indicator || !modeName || !ledState.modes.length) return;
-
-  ledState.index = 0;
-  applyLedMode(ledState.index);
-
-  const newBtn = btn.cloneNode(true);
-  btn.parentNode.replaceChild(newBtn, btn);
-
-  newBtn.addEventListener('click', ()=>{
-    ledState.clickCount += 1;
-    if(ledState.clickTimer) clearTimeout(ledState.clickTimer);
-    ledState.clickTimer = setTimeout(()=>{
-      ledState.clickCount = 0;
-      ledState.clickTimer = null;
-    }, 600);
-
-    if(ledState.clickCount >= 2){
-      ledState.clickCount = 0;
-      if(ledState.clickTimer){
-        clearTimeout(ledState.clickTimer);
-        ledState.clickTimer = null;
-      }
-      ledState.index = (ledState.index + 1) % ledState.modes.length;
-      applyLedMode(ledState.index);
-    }
-  });
-
-  newBtn.addEventListener('dblclick', (e)=>{
-    e.preventDefault();
-    ledState.index = (ledState.index + 1) % ledState.modes.length;
-    applyLedMode(ledState.index);
-  });
-
-  if(modesListEl){
-    modesListEl.innerHTML = ledState.modes.map((m, idx)=>`<li${idx===ledState.index ? ' style="font-weight:800"' : ''}>${m.name}</li>`).join('');
-  }
-}
-
-function applyLedMode(idx){
-  const indicator = document.getElementById('ledIndicator');
-  const modeName = document.getElementById('ledModeName');
-  const modesListEl = document.getElementById('ledModesList');
-
-  if(!indicator || !modeName || !ledState.modes.length) return;
-
-  const mode = ledState.modes[idx] || {name:'—'};
-  indicator.className = 'led-indicator';
-
-  switch(idx){
-    case 0: indicator.classList.add('led-low'); break;
-    case 1: indicator.classList.add('led-med'); break;
-    case 2: indicator.classList.add('led-high'); break;
-    case 3: indicator.classList.add('led-high','blink-slow'); break;
-    case 4: indicator.classList.add('led-high','blink-med'); break;
-    case 5: indicator.classList.add('led-high','blink-fast'); break;
-    default: indicator.classList.add('led-low'); break;
-  }
-  modeName.textContent = mode.name;
-
-  if(modesListEl){
-    modesListEl.querySelectorAll('li').forEach((li, i)=>{
-      li.style.fontWeight = (i === idx) ? '800' : '400';
-      li.style.opacity = (i === idx) ? '1' : '0.7';
-    });
-  }
-}
-
-/* Flag alternates every 5 seconds */
-(function(){
-  const flagImage = document.getElementById('flagImage');
-  if(!flagImage) return;
-  const flags = [
-    {src:'https://flagcdn.com/w80/ci.png', alt:"Drapeau Côte d'Ivoire"},
-    {src:'https://flagcdn.com/w80/sn.png', alt:'Drapeau Sénégal'}
-  ];
-  let currentFlag = 0;
-
-  setInterval(()=>{
-    currentFlag = (currentFlag + 1) % flags.length;
-    flagImage.style.opacity = '0.25';
-    flagImage.style.transform = 'scale(0.96)';
-    setTimeout(()=>{
-      flagImage.src = flags[currentFlag].src;
-      flagImage.alt = flags[currentFlag].alt;
-      flagImage.style.opacity = '1';
-      flagImage.style.transform = 'scale(1)';
-    }, 180);
-  }, 5000);
-})();
-
 document.addEventListener('DOMContentLoaded', ()=>{
   preloadImages(allImageUrls());
   document.getElementById('year').textContent = new Date().getFullYear();
@@ -1955,7 +1977,14 @@ document.addEventListener('DOMContentLoaded', ()=>{
     });
   });
 
-  updateHero(0);
+  if(window.matchMedia('(max-width:640px)').matches){
+    updateHero(0);
+    productCard.style.display = 'none';
+    productCard.setAttribute('aria-hidden','true');
+  } else {
+    selectModel(0);
+  }
+
   refreshContactAction();
   detailsPanel.style.display = 'block';
   detailsPanel.setAttribute('aria-hidden','false');
@@ -1964,7 +1993,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
 window.addEventListener('resize', ()=>{
   refreshContactAction();
   if(productCard && window.matchMedia('(max-width:640px)').matches){
-    productCard.style.display = 'none';
+    if(!productCard.classList.contains('show-on-mobile')){
+      productCard.style.display = 'none';
+    }
   }
 });
 </script>
