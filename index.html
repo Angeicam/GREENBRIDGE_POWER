@@ -72,9 +72,7 @@ body{
   position:relative;
   -webkit-overflow-scrolling:touch;
 }
-body.no-scroll{
-  overflow:hidden;
-}
+body.no-scroll{overflow:hidden}
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
 button{font-family:inherit}
@@ -704,25 +702,25 @@ main.container{
   align-items:center;
   justify-content:center;
   z-index:5000;
-  padding:10px
+  padding:14px;
 }
 .modal{
-  width:min(290px,84vw);
+  width:min(760px,96vw);
   background:#fff;
-  border-radius:16px;
-  padding:34px 10px 10px;
+  border-radius:18px;
+  padding:18px;
   overflow:auto;
   box-shadow:0 20px 45px rgba(0,0,0,0.42);
-  max-height:58vh;
+  max-height:calc(100vh - 28px);
   position:relative;
 }
-.modal h2{font-size:15px;margin-top:0;margin-right:28px}
+.modal h2{font-size:18px;margin-top:0;margin-right:28px;color:#08110a}
 .modal .close{
   position:absolute;
   right:8px;
   top:8px;
-  width:32px;
-  height:32px;
+  width:34px;
+  height:34px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -735,6 +733,32 @@ main.container{
   color:#0b2418;
   z-index:2;
 }
+.modal-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  align-items:start;
+}
+.modal-media{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.modal-media img{
+  width:100%;
+  border-radius:12px;
+  object-fit:cover;
+}
+.modal-body{
+  color:#23403a;
+  line-height:1.5;
+}
+.modal-body ul{
+  margin-top:8px;
+  margin-bottom:0;
+  padding-left:20px;
+}
+.modal-body li{margin-bottom:6px}
 .whatsapp-choice{
   display:grid;
   grid-template-columns:1fr;
@@ -853,6 +877,22 @@ footer{
   line-height:1.6;
 }
 
+.led-indicator{
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  background:#999;
+  box-shadow:0 0 10px rgba(0,0,0,0.2);
+  flex:0 0 auto;
+}
+.led-low{background:#8bc34a}
+.led-med{background:#ffeb3b}
+.led-high{background:#ff5722}
+.blink-slow{animation:blink 1.5s infinite}
+.blink-med{animation:blink 1s infinite}
+.blink-fast{animation:blink 0.4s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+
 @media (max-width:1100px){
   .models{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
 }
@@ -891,7 +931,7 @@ footer{
   .card-content{padding:16px 12px 18px}
 }
 @media (max-width:640px){
-  .company-tagline{font-size:12px; letter-spacing:4px}
+  .company-tagline{font-size:12px;letter-spacing:4px}
   .logo-text img{height:46px}
   .featured-hero{height:220px}
 
@@ -905,12 +945,12 @@ footer{
     width:calc(100% - 16px);
     margin:0;
     padding:16px;
-    border-radius:12px;
+    border-radius:16px;
     box-shadow:0 18px 40px rgba(6,42,32,0.20);
     background:var(--card-bg-overlay);
     flex-direction:column;
     overflow:auto;
-    max-height:calc(100vh - (var(--topbar-h) + var(--header-h) + 32px));
+    max-height:calc(100vh - (var(--topbar-h) + var(--header-h) + 24px));
   }
   .product-card.show-on-mobile{
     display:flex !important;
@@ -920,12 +960,29 @@ footer{
     display:flex;
   }
 
-  .modal{
-    width:min(92vw,290px);
-    max-height:50vh;
-    padding:34px 10px 10px;
+  .product-side{
+    order:-1;
+    width:100%;
+    margin-bottom:4px;
   }
-  .modal h2{font-size:15px}
+  .product-image{height:260px}
+  .product-info{width:100%;min-width:0;padding-right:0}
+
+  .modal-overlay{
+    align-items:flex-start;
+    padding:10px;
+  }
+  .modal{
+    width:min(96vw,760px);
+    max-height:calc(100vh - 20px);
+    padding:16px;
+    border-radius:16px;
+  }
+  .modal-grid{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+  .modal h2{font-size:17px}
 }
 @media (max-width:480px){
   .hero-content{
@@ -948,6 +1005,7 @@ footer{
     padding:12px 28px;
     font-size:15px;
   }
+  .product-image{height:230px}
 }
 
 @keyframes slideIn{
@@ -1592,43 +1650,49 @@ function openModal(html){
   modalContent.innerHTML = html;
   modalOverlay.style.display = 'flex';
   modalOverlay.setAttribute('aria-hidden','false');
+  document.body.classList.add('no-scroll');
 }
 function closeModal(){
   modalOverlay.style.display = 'none';
   modalOverlay.setAttribute('aria-hidden','true');
+  document.body.classList.remove('no-scroll');
 }
 function openTechModal(i){
   const m = models[i] || models[0];
   const html = `
     <h2 style="margin-top:0">${m.title}</h2>
-    ${m.details}
-    <div style="margin-top:12px;font-weight:800">Caractéristiques rapides</div>
-    <ul>${(m.specs || []).map(s=>`<li>${s}</li>`).join('')}</ul>
+    <div class="modal-body">
+      ${m.details}
+      <div style="margin-top:12px;font-weight:800">Caractéristiques rapides</div>
+      <ul>${(m.specs || []).map(s=>`<li>${s}</li>`).join('')}</ul>
+    </div>
   `;
   openModal(html);
 }
 function openPackModal(){
   const html = `
-    <div style="width:100%;margin-bottom:12px">
-      <img src="Future_pack_2.1.png" alt="Pack vue 2" style="width:100%;height:auto;border-radius:8px;object-fit:cover" loading="lazy">
-    </div>
     <h2 style="margin-top:0">Pack modulaire 2.5 kWh — GreenBridge</h2>
-    <p style="color:#23403a;line-height:1.45">
-      Prévu pour une sortie commerciale le <strong>31/05/2026</strong>, le pack <strong>2.5 kWh</strong> a été conçu pour le Sénégal et l'Afrique de l'Ouest.
-      Basé sur des cellules <strong>LiFePO₄ prismatiques</strong>, il est modulaire, réparable localement et adapté au stockage médical, PME, agriculture et élevage.
-    </p>
-    <ul style="color:#23403a;line-height:1.45">
-      <li>Recharge par prise secteur et par panneau solaire (double entrée).</li>
-      <li>Alimente réfrigérateurs médicaux, pompes, éclairage et appareils essentiels.</li>
-      <li>Déploiement simple hors réseau, maintenance locale facilitée.</li>
-      <li>Optimisé pour les usages agricoles et petites industries en Afrique de l'Ouest.</li>
-    </ul>
-    <div style="width:100%;margin-top:12px">
-      <img src="Future_Pack_3.png" alt="Pack vue 3" style="width:100%;height:auto;border-radius:8px;object-fit:cover" loading="lazy">
-    </div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;">
-      <span style="background:linear-gradient(90deg,#ffd54a,#ffb300);padding:10px 14px;border-radius:999px;font-weight:900;color:#08110a">Disponible 31/05/2026</span>
-      <button onclick="closeModal()" style="padding:10px 14px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);background:#fff;cursor:pointer">Fermer</button>
+    <div class="modal-grid">
+      <div class="modal-media">
+        <img src="Future_pack_2.1.png" alt="Pack vue 2" loading="lazy">
+        <img src="Future_Pack_3.png" alt="Pack vue 3" loading="lazy">
+      </div>
+      <div class="modal-body">
+        <p style="margin-top:0">
+          Prévu pour une sortie commerciale le <strong>31/05/2026</strong>, le pack <strong>2.5 kWh</strong> a été conçu pour le Sénégal et l'Afrique de l'Ouest.
+          Basé sur des cellules <strong>LiFePO₄ prismatiques</strong>, il est modulaire, réparable localement et adapté au stockage médical, PME, agriculture et élevage.
+        </p>
+        <ul>
+          <li>Recharge par prise secteur et par panneau solaire (double entrée).</li>
+          <li>Alimente réfrigérateurs médicaux, pompes, éclairage et appareils essentiels.</li>
+          <li>Déploiement simple hors réseau, maintenance locale facilitée.</li>
+          <li>Optimisé pour les usages agricoles et petites industries en Afrique de l'Ouest.</li>
+        </ul>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;">
+          <span style="background:linear-gradient(90deg,#ffd54a,#ffb300);padding:10px 14px;border-radius:999px;font-weight:900;color:#08110a">Disponible 31/05/2026</span>
+          <button onclick="closeModal()" style="padding:10px 14px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);background:#fff;cursor:pointer">Fermer</button>
+        </div>
+      </div>
     </div>
   `;
   openModal(html);
