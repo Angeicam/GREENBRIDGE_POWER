@@ -3,98 +3,489 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-<title>GREENBRIDGE — Powerbanks & Solutions Énergétiques</title>
-<meta name="description" content="GREENBRIDGE — Powerbanks assemblées au Sénégal . Cellules testées, garanties pour premiers clients.">
+<title>GREENBRIDGE TECHNOLOGIES — Powerbanks & Solutions Énergétiques</title>
+<meta name="description" content="GREENBRIDGE TECHNOLOGIES — Solutions énergétiques, powerbanks, chargeurs et stabilisateur WiFi.">
+<meta name="theme-color" content="#0a4d2e">
+
+<link rel="icon" type="image/png" href="green bridge domo.png">
+<link rel="apple-touch-icon" href="green bridge domo.png">
+
+<link rel="preload" as="image" href="Energie_blanche.png">
+<link rel="preload" as="image" href="green bridge domo.png">
+<link rel="preload" as="image" href="Pwkb_Mini_3.png">
+<link rel="preload" as="image" href="pwkb_123.png">
+<link rel="preload" as="image" href="pwkb_6.png">
+<link rel="preload" as="image" href="pwkb_wireless_1.png">
+<link rel="preload" as="image" href="Nos_produits_1.png">
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
 <style>
 :root{
-  --topbar-h:44px;
-  --header-h:66px;
+  --topbar-h:40px;
+  --header-h:72px;
   --maxw:1100px;
+
   --brand-green:#04462e;
   --green-dark:#061f14;
   --green-mid:#073217;
-  --gold:#d4af37;
-  --text:#02110a;
-  --muted:#23403a;
-  --bg-main:#f6fbfe;
+  --green-mid-2:#0b4d26;
+
+  --accent:#7cb342;
+  --accent-2:#a8e6a1;
+  --bg:#0a4d2e;
+
+  --gold-base:#d4af37;
+  --gold-hover:#e6c95a;
+
+  --muted-text-color:#e6f7ea;
+  --electric-yellow:#ffd600;
+  --whatsapp-green:#25D366;
+
   --card-bg-desktop: rgba(255,255,255,0.12);
   --card-bg-overlay: rgba(255,255,255,0.98);
   --card-border: rgba(6,42,32,0.06);
-  --electric-yellow:#ffd600;
-  --shadow: 0 12px 36px rgba(6,42,32,0.06);
-  --whatsapp-green: #25D366;
 }
 
-/* Reset/base */
 *{box-sizing:border-box}
-html,body{height:100%;margin:0;padding:0;font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial;color:var(--text);-webkit-font-smoothing:antialiased;}
-html{background-color:var(--bg-main);min-height:100%}
-body{background:transparent;min-height:100%}
+html, body{
+  margin:0;
+  padding:0;
+  font-family:'Poppins',Arial,sans-serif;
+  background:var(--bg);
+  color:#fff;
+  scroll-behavior:smooth;
+  overflow-x:hidden;
+  overflow-y:auto;
+  min-height:100%;
+  width:100%;
+}
+body{
+  min-height:100vh;
+  min-height:100dvh;
+  width:100%;
+  background:var(--bg);
+  overscroll-behavior-y:auto;
+  position:relative;
+  -webkit-overflow-scrolling:touch;
+}
 a{color:inherit;text-decoration:none}
-img{display:block;max-width:100%;height:auto}
+img{max-width:100%;display:block}
+button{font-family:inherit}
 
-/* fixed background visible on mobile & desktop */
-.page-bg{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:url('Energie_blanche.png');background-size:cover;background-position:center center;background-repeat:no-repeat}
+.page-bg{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  width:100vw;
+  height:100vh;
+  height:100dvh;
+  object-fit:cover;
+  object-position:center center;
+  transform:translateZ(0);
+  backface-visibility:hidden;
+  will-change:transform;
+  background:var(--bg);
+}
+.page-bg-overlay{
+  position:fixed;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  background:linear-gradient(180deg, rgba(10,77,46,0.06), rgba(10,77,46,0.02));
+}
 
-/* subtle overlay */
-.bg-overlay{position:fixed;inset:0;z-index:8;pointer-events:none;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.015));}
+/* Topbar */
+.topbar{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  height:var(--topbar-h);
+  background:var(--green-dark);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:0 5vw;
+  z-index:1500;
+  font-size:12px;
+  overflow:hidden;
+}
+.promo-wrap{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  min-width:0;
+}
+.promo-text{
+  display:inline-flex;
+  align-items:center;
+  gap:0;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:0.9px;
+  text-transform:uppercase;
+  color:#fff;
+  -webkit-text-stroke:0.35px rgba(255,255,255,0.18);
+  text-shadow:0 2px 6px rgba(0,0,0,0.35);
+  white-space:nowrap;
+}
+.right{
+  flex:0 0 auto;
+  display:flex;
+  align-items:center;
+}
+.flag-slider{
+  width:34px;
+  height:22px;
+  overflow:hidden;
+  border-radius:6px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.30);
+  background:#fff;
+  border:1px solid rgba(255,255,255,0.10);
+}
+.flag-slider img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:opacity .35s ease, transform .35s ease;
+}
 
-/* Topbar & Header */
-.topbar{position:fixed;top:0;left:0;right:0;height:var(--topbar-h);background:var(--green-dark);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;z-index:1600;font-size:13px}
-.topbar .left{font-weight:600}
-.topbar .right{color:#fff;font-weight:700;text-decoration:none; text-transform:none;}
-
-/* Header: logo on the left, company name larger */
-.header{position:fixed;top:var(--topbar-h);left:0;right:0;height:var(--header-h);background:linear-gradient(90deg,var(--green-mid),#0b4d26);display:flex;align-items:center;justify-content:flex-start;padding:0 5vw;z-index:1595;box-shadow:0 4px 12px rgba(0,0,0,.20)}
-.logo-text{display:flex;align-items:center;gap:12px}
-.logo-text img{height:48px;display:block}
+/* Header */
+header{
+  position:fixed;
+  top:var(--topbar-h);
+  left:0;
+  right:0;
+  height:var(--header-h);
+  background:linear-gradient(90deg,var(--green-mid),var(--green-mid-2));
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  padding:0 5vw;
+  z-index:1490;
+  box-shadow:0 4px 12px rgba(0,0,0,.25);
+}
+.logo-text{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  flex:0 0 auto;
+}
+.logo-text img{
+  height:56px;
+  display:block;
+  flex:0 0 auto;
+}
+.brand-stack{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  line-height:1;
+  text-align:center;
+  min-width:0;
+  margin:0;
+  padding:0;
+  position:relative;
+  top:1px;
+}
 .company-name{
-  font-size:36px; /* agrandi comme demandé */
+  font-size:34px;
   font-weight:800;
   letter-spacing:1px;
-  padding:6px 10px;
+  padding:0;
+  margin:0;
   border-radius:8px;
-  color:var(--brand-green);
-  -webkit-text-stroke:0.95px var(--gold);
-  text-shadow:0 3px 6px rgba(0,0,0,0.45);
+  color:#04462e;
+  -webkit-text-stroke:0.95px var(--gold-base);
+  text-shadow:0 3px 6px rgba(0,0,0,0.6);
+  position:relative;
+  top:2px;
+  white-space:nowrap;
+  line-height:1;
+  text-align:center;
+  width:max-content;
+  display:block;
+}
+.company-tagline{
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:5px;
+  text-transform:uppercase;
+  color:#dfffe6;
+  padding:0;
+  margin:2px 0 0 0;
+  text-shadow:0 2px 6px rgba(0,0,0,0.45);
+  -webkit-text-stroke:0.4px rgba(212,175,55,0.55);
+  white-space:nowrap;
+  line-height:1;
+  text-align:center;
+  width:max-content;
+  display:block;
 }
 
-/* electric band (top lightning across page) */
-.electric-band{position:fixed;top:calc(var(--topbar-h)+var(--header-h)-6px);left:0;right:0;height:14px;z-index:99990;pointer-events:none;overflow:visible;transform:translateZ(0)}
-.electric-band .container{position:relative;width:100%;height:100%}
-.lightning-svg{width:100vw;height:100%;display:block;pointer-events:none;opacity:0;mix-blend-mode:screen;transition:opacity .22s}
+/* Electric band */
+.electric-band{
+  position:fixed;
+  top:calc(var(--topbar-h) + var(--header-h) - 6px);
+  left:0;
+  right:0;
+  height:14px;
+  z-index:1600;
+  pointer-events:none;
+  overflow:visible;
+  transform:translateZ(0);
+}
+.electric-band .container{
+  position:absolute;
+  left:0;
+  top:50%;
+  transform:translateY(-50%);
+  width:100%;
+  padding:0;
+  height:100%;
+  pointer-events:none;
+  box-sizing:border-box;
+}
+.lightning-svg{
+  width:100%;
+  height:100%;
+  display:block;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .22s ease;
+  mix-blend-mode:screen;
+}
 .electric-band.connected .lightning-svg{opacity:1}
-.orbs{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
-.orb{position:absolute;width:12px;height:12px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #fff8b0, var(--electric-yellow));box-shadow:0 0 18px rgba(255,214,0,0.98), 0 0 40px rgba(255,214,0,0.22);transform:translate(-50%,-50%);opacity:1;}
+.lightning-svg path.zap{
+  stroke:var(--electric-yellow);
+  stroke-width:2.2;
+  fill:none;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  opacity:0.98;
+}
+.orbs{
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  overflow:visible;
+}
+.orb{
+  position:absolute;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, #fff8b0, var(--electric-yellow));
+  box-shadow:0 0 12px rgba(255,214,0,0.95), 0 0 30px rgba(255,214,0,0.22);
+  transform:translate(-50%,-50%);
+  opacity:0;
+  transition:opacity .18s linear;
+}
+.electric-band.connected .orb{opacity:1}
+@keyframes buzz{
+  0%{transform:translate(-50%,-50%) translateX(-2px)}
+  50%{transform:translate(-50%,-50%) translateX(2px)}
+  100%{transform:translate(-50%,-50%) translateX(-2px)}
+}
+.orb.buzz{animation:buzz 0.9s linear infinite}
+.glowline{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  height:3px;
+  width:0;
+  background:linear-gradient(90deg, rgba(255,238,170,0), rgba(255,214,0,0.98), rgba(255,238,170,0));
+  border-radius:8px;
+  box-shadow:0 6px 20px rgba(255,214,0,0.12);
+  opacity:0;
+  transition:opacity .22s ease;
+}
+.electric-band.connected .glowline{
+  width:100%;
+  opacity:1;
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%{transform:translate(-50%,-50%) scaleX(.6); opacity:.6}
+  50%{transform:translate(-50%,-50%) scaleX(1); opacity:1}
+  100%{transform:translate(-50%,-50%) scaleX(.6); opacity:.6}
+}
 
-/* layout */
-.container{max-width:var(--maxw);margin:0 auto;padding:18px 14px 160px;position:relative;z-index:40}
+.container{
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding:18px 14px 160px;
+  position:relative;
+  z-index:40
+}
+main.container{
+  min-height:calc(100vh - 160px);
+}
 
 /* Models section */
-.models-wrapper{margin-top:24px;padding:18px 12px 36px;width:100%;max-width:100vw;position:relative;background:transparent;z-index:60}
-.models-header{display:flex;align-items:center;justify-content:center;margin-bottom:12px}
-.models-title{font-weight:800;font-size:22px;color:var(--brand-green);letter-spacing:0.4px;background:rgba(255,255,255,0.6);padding:8px 14px;border-radius:10px;box-shadow:0 8px 20px rgba(6,42,32,0.06)}
-.models{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;align-items:stretch;max-width:var(--maxw);margin:0 auto;padding:6px 14px;box-sizing:border-box}
+.models-wrapper{
+  margin-top:24px;
+  padding:18px 12px 12px;
+  width:100%;
+  max-width:100vw;
+  position:relative;
+  z-index:60
+}
+.models-header{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:12px
+}
+.models-title{
+  font-weight:800;
+  font-size:22px;
+  color:var(--brand-green);
+  letter-spacing:0.4px;
+  background:rgba(255,255,255,0.6);
+  padding:8px 14px;
+  border-radius:10px;
+  box-shadow:0 8px 20px rgba(6,42,32,0.06)
+}
+.models{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
+  align-items:stretch;
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding:6px 14px;
+  box-sizing:border-box
+}
+.models .model{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:12px;
+  padding:14px;
+  border-radius:12px;
+  background:var(--card-bg-desktop);
+  border:1px solid var(--card-border);
+  box-shadow:0 8px 20px rgba(6,42,32,0.04);
+  cursor:pointer;
+  min-height:240px;
+  backdrop-filter:blur(4px) saturate(110%);
+  color:#02110a
+}
+.models .thumb{
+  position:relative;
+  flex:0 0 56%;
+  height:0;
+  padding-bottom:56%;
+  overflow:hidden;
+  border-radius:10px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.10))
+}
+.models .thumb img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  border-radius:8px
+}
+.model .meta h4{
+  margin:0;
+  font-size:18px;
+  color:#02110a;
+  font-weight:900
+}
+.model .meta p{
+  margin:10px 0 0;
+  font-size:14px;
+  color:rgba(2,17,10,0.95);
+  line-height:1.25;
+  font-weight:600
+}
+.model .meta p small{
+  display:block;
+  color:rgba(2,17,10,0.88);
+  font-weight:500;
+  margin-top:4px
+}
+.btn-small{
+  background:transparent;
+  border:1px solid rgba(6,42,32,0.06);
+  padding:8px 10px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:700;
+  color:#08110a;
+}
 
-/* model cards */
-.models .model{display:flex;flex-direction:column;justify-content:space-between;gap:12px;padding:14px;border-radius:12px;background:var(--card-bg-desktop);border:1px solid var(--card-border);box-shadow:0 8px 20px rgba(6,42,32,0.04);cursor:pointer;min-height:240px;backdrop-filter:blur(4px) saturate(110%);color:var(--text)}
-.models .thumb{position:relative;flex:0 0 56%;height:0;padding-bottom:56%;overflow:hidden;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.10))}
-.models .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;border-radius:8px}
-/* model text */
-.model .meta h4{margin:0;font-size:18px;color:var(--text);font-weight:900}
-.model .meta p{margin:10px 0 0;font-size:14px;color:rgba(2,17,10,0.95);line-height:1.25;font-weight:600}
-.model .meta p small{display:block;color:rgba(2,17,10,0.88);font-weight:500;margin-top:4px}
-
-/* product card (detail) */
-.product-card{width:min(980px,94%);margin:22px auto 28px;background:var(--card-bg-desktop);border:1px solid var(--card-border);border-radius:14px;padding:18px;box-shadow:var(--shadow);color:var(--text);display:flex;gap:18px;align-items:flex-start;position:relative;overflow:hidden;backdrop-filter:blur(3px) saturate(105%)}
+/* Product card */
+.product-card{
+  display:none;
+  width:min(980px,94%);
+  margin:22px auto 28px;
+  background:var(--card-bg-desktop);
+  border:1px solid var(--card-border);
+  border-radius:14px;
+  padding:18px;
+  box-shadow:0 12px 36px rgba(6,42,32,0.06);
+  color:#02110a;
+  gap:18px;
+  align-items:flex-start;
+  position:relative;
+  overflow:hidden;
+  backdrop-filter:blur(3px) saturate(105%);
+}
 .product-card > *{position:relative;z-index:2}
-.product-card .close-mobile{display:none;position:absolute;right:12px;top:10px;background:transparent;border:0;font-size:22px;color:var(--muted);cursor:pointer;z-index:5}
-.product-info{flex:1;min-width:260px;padding-right:6px}
-.top-label{display:inline-block;padding:7px 10px;border-radius:999px;background:rgba(6,120,60,0.06);color:var(--brand-green);font-weight:800;margin-bottom:8px;font-size:13px}
-.product-title{font-size:20px;font-weight:900;margin:6px 0 6px;color:var(--text);line-height:1.08}
-/* warranty badge */
+.product-card .close-mobile{
+  display:none;
+  position:absolute;
+  right:12px;
+  top:10px;
+  background:#fff;
+  border:1px solid rgba(6,42,32,0.10);
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  font-size:20px;
+  line-height:1;
+  color:#0b2418;
+  cursor:pointer;
+  z-index:8;
+  box-shadow:0 8px 18px rgba(0,0,0,0.12);
+}
+.product-info{
+  flex:1;
+  min-width:260px;
+  padding-right:6px
+}
+.top-label{
+  display:inline-block;
+  padding:7px 10px;
+  border-radius:999px;
+  background:rgba(6,120,60,0.06);
+  color:var(--brand-green);
+  font-weight:800;
+  margin-bottom:8px;
+  font-size:13px
+}
+.product-title{
+  font-size:20px;
+  font-weight:900;
+  margin:6px 0 6px;
+  color:#02110a;
+  line-height:1.08
+}
 .warranty-badge{
   display:inline-block;
   margin-left:8px;
@@ -106,69 +497,286 @@ img{display:block;max-width:100%;height:auto}
   font-weight:900;
   font-size:13px;
   box-shadow:0 10px 30px rgba(255,180,0,0.18);
-  border:1px solid rgba(0,0,0,0.06);
+  border:1px solid rgba(0,0,0,0.06)
 }
-/* product subtitle */
-.product-sub{font-size:13px;color:rgba(2,17,10,0.95);margin-bottom:10px;line-height:1.35}
-.features{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
-.feature-pill{background:rgba(255,255,255,0.92);padding:7px 10px;border-radius:999px;border:1px solid rgba(6,42,32,0.04);color:var(--brand-green);font-weight:800;font-size:13px}
-/* specs */
+.product-sub{
+  font-size:13px;
+  color:rgba(2,17,10,0.95);
+  margin-bottom:10px;
+  line-height:1.35
+}
+.features{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:6px
+}
+.feature-pill{
+  background:rgba(255,255,255,0.92);
+  padding:7px 10px;
+  border-radius:999px;
+  border:1px solid rgba(6,42,32,0.04);
+  color:var(--brand-green);
+  font-weight:800;
+  font-size:13px
+}
 .specs-block{margin-top:12px}
-.specs-title{font-weight:800;margin-bottom:8px;font-size:15px}
-.spec-list{display:flex;flex-direction:column;gap:8px;color:var(--text);font-size:15px}
-.spec-list > div{background:rgba(255,255,255,0.96);padding:10px 12px;border-radius:10px;border:1px solid rgba(6,42,32,0.04);box-shadow:0 6px 14px rgba(6,42,32,0.03)}
+.specs-title{
+  font-weight:800;
+  margin-bottom:8px;
+  font-size:15px
+}
+.spec-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  color:#02110a;
+  font-size:15px
+}
+.spec-list > div{
+  background:rgba(255,255,255,0.96);
+  padding:10px 12px;
+  border-radius:10px;
+  border:1px solid rgba(6,42,32,0.04);
+  box-shadow:0 6px 14px rgba(6,42,32,0.03)
+}
+.product-side{
+  width:340px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  align-items:stretch
+}
+.product-image{
+  width:100%;
+  height:220px;
+  border-radius:12px;
+  overflow:hidden;
+  background:linear-gradient(180deg,#fbfeff,#f3f9fc);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid rgba(6,42,32,0.04)
+}
+.product-image img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center;
+  display:block;
+  cursor:pointer;
+  transition:transform .35s;
+  border-radius:8px
+}
+.cta-group{
+  display:flex;
+  flex-direction:column;
+  gap:10px
+}
+.btn-primary{
+  background:linear-gradient(90deg,var(--brand-green),var(--green-mid));
+  color:#fff;
+  border:0;
+  padding:12px 14px;
+  border-radius:12px;
+  font-weight:900;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px
+}
+.btn-secondary{
+  background:#fff;
+  border:1px solid rgba(6,42,32,0.06);
+  padding:10px 12px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:800
+}
+.details-panel{
+  display:none;
+  margin-top:12px;
+  width:100%;
+  background:rgba(255,255,255,0.98);
+  border-radius:10px;
+  padding:12px;
+  color:#02110a;
+  box-shadow:0 8px 24px rgba(6,42,32,0.06);
+  border:1px solid rgba(6,42,32,0.04);
+  line-height:1.45
+}
 
-/* product side */
-.product-side{width:340px;display:flex;flex-direction:column;gap:12px;align-items:stretch}
-.product-image{width:100%;height:220px;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#fbfeff,#f3f9fc);display:flex;align-items:center;justify-content:center;border:1px solid rgba(6,42,32,0.04)}
-.product-image img{width:100%;height:100%;object-fit:contain;object-position:center;display:block;cursor:pointer;transition:transform .35s;border-radius:8px}
-
-/* CTA */
-.cta-group{display:flex;flex-direction:column;gap:10px}
-.btn-primary{background:linear-gradient(90deg,var(--brand-green),var(--green-mid));color:#fff;border:0;padding:12px 14px;border-radius:12px;font-weight:900;cursor:pointer}
-.btn-secondary{background:#fff;border:1px solid rgba(6,42,32,0.06);padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:800}
-.btn-small{background:transparent;border:1px solid rgba(6,42,32,0.06);padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:700}
-
-/* details panel */
-.details-panel{display:none;margin-top:12px;width:100%;background:rgba(255,255,255,0.98);border-radius:10px;padding:12px;color:var(--text);box-shadow:0 8px 24px rgba(6,42,32,0.06);border:1px solid rgba(6,42,32,0.04);line-height:1.45}
-
-/* PRO MODE UI */
-.pro-panel{display:none;margin-top:12px;background:rgba(255,255,255,0.98);border-radius:10px;padding:12px;color:var(--text);box-shadow:0 8px 24px rgba(6,42,32,0.06);border:1px solid rgba(6,42,32,0.04)}
-.pro-controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.led-sim{display:flex;gap:10px;align-items:center}
-
-/* LED visual */
-.led-indicator{width:36px;height:36px;border-radius:50%;background:#2b2b2b;box-shadow:0 6px 18px rgba(0,0,0,0.3);transition:all .25s;display:inline-block;vertical-align:middle}
-.led-low{background:rgba(255,236,179,0.14);box-shadow:0 0 8px rgba(255,230,120,0.08), 0 6px 18px rgba(0,0,0,0.15)}
-.led-med{background:rgba(255,236,179,0.28);box-shadow:0 0 14px rgba(255,230,120,0.22), 0 8px 26px rgba(0,0,0,0.12)}
-.led-high{background:rgba(255,236,179,0.6);box-shadow:0 0 22px rgba(255,230,120,0.35), 0 10px 30px rgba(0,0,0,0.08)}
-@keyframes blink-slow { 0%{opacity:1} 50%{opacity:0.15} 100%{opacity:1} }
-@keyframes blink-med { 0%{opacity:1} 50%{opacity:0.05} 100%{opacity:1} }
-@keyframes blink-fast { 0%{opacity:1} 50%{opacity:0.02} 100%{opacity:1} }
-.blink-slow{animation:blink-slow 1.2s linear infinite}
-.blink-med{animation:blink-med 0.6s linear infinite}
-.blink-fast{animation:blink-fast 0.25s linear infinite}
-
-/* featured + others */
-.futures-title{display:flex;align-items:center;justify-content:center;margin-top:24px;margin-bottom:10px}
+/* Featured */
+.futures-title{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-top:24px;
+  margin-bottom:10px
+}
 .futures-title .models-title{padding:8px 14px}
-.featured{margin-top:10px;border-radius:12px;overflow:hidden;border:1px solid rgba(212,175,55,0.12);background:rgba(255,255,255,0.94);box-shadow:var(--shadow)}
-.featured-hero{position:relative;height:320px;overflow:hidden;background:#000}
-.featured-hero .slide{position:absolute;inset:0;opacity:0;transition:opacity 700ms ease, transform 700ms;transform:scale(1.03)}
-.featured-hero .slide.active{opacity:1;transform:scale(1);z-index:2}
-.featured-hero img{width:100%;height:100%;object-fit:cover;object-position:center center;display:block}
-.featured-copy{padding:14px 18px;text-align:center}
-.featured-copy h3{margin:0;color:var(--brand-green);font-weight:800;letter-spacing:0.3px;font-size:18px}
-.featured-copy p{color:rgba(2,17,10,0.95);margin-top:10px;line-height:1.45}
-.featured-copy ul{color:rgba(2,17,10,0.95);line-height:1.45}
-.availability-badge{display:inline-block;margin-top:12px;padding:10px 18px;border-radius:999px;background: linear-gradient(90deg,#ffd54a,#ffb300);color:#08110a;font-weight:900;font-size:16px;box-shadow:0 10px 30px rgba(255,180,0,0.18);border:1px solid rgba(0,0,0,0.06)}
+.featured{
+  margin-top:10px;
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid rgba(212,175,55,0.12);
+  background:rgba(255,255,255,0.94);
+  box-shadow:0 12px 36px rgba(6,42,32,0.06)
+}
+.featured-hero{
+  position:relative;
+  height:320px;
+  overflow:hidden;
+  background:#000
+}
+.featured-hero .slide{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  transition:opacity 700ms ease, transform 700ms;
+  transform:scale(1.03)
+}
+.featured-hero .slide.active{
+  opacity:1;
+  transform:scale(1);
+  z-index:2
+}
+.featured-hero img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center center;
+  display:block
+}
+.featured-copy{
+  padding:14px 18px;
+  text-align:center
+}
+.featured-copy h3{
+  margin:0;
+  color:var(--brand-green);
+  font-weight:800;
+  letter-spacing:0.3px;
+  font-size:18px
+}
+.featured-copy p{
+  color:rgba(2,17,10,0.95);
+  margin-top:10px;
+  line-height:1.45
+}
+.availability-badge{
+  display:inline-block;
+  margin-top:12px;
+  padding:10px 18px;
+  border-radius:999px;
+  background:linear-gradient(90deg,#ffd54a,#ffb300);
+  color:#08110a;
+  font-weight:900;
+  font-size:16px;
+  box-shadow:0 10px 30px rgba(255,180,0,0.18);
+  border:1px solid rgba(0,0,0,0.06)
+}
 
-/* modal */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.56);display:none;align-items:center;justify-content:center;z-index:5000;padding:20px}
-.modal{width:100%;max-width:920px;background:#fff;border-radius:12px;padding:18px;overflow:auto;box-shadow:0 24px 60px rgba(0,0,0,0.45);max-height:86vh;position:relative}
-.modal .close{position:absolute;right:16px;top:12px;background:transparent;border:0;font-size:18px;cursor:pointer}
+/* Modal */
+.modal-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.56);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:5000;
+  padding:10px
+}
+.modal{
+  width:min(290px,84vw);
+  background:#fff;
+  border-radius:16px;
+  padding:34px 10px 10px;
+  overflow:auto;
+  box-shadow:0 20px 45px rgba(0,0,0,0.42);
+  max-height:58vh;
+  position:relative;
+}
+.modal h2{font-size:15px;margin-top:0;margin-right:28px}
+.modal .close{
+  position:absolute;
+  right:8px;
+  top:8px;
+  width:32px;
+  height:32px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
+  border:1px solid rgba(6,42,32,0.12);
+  border-radius:50%;
+  font-size:16px;
+  cursor:pointer;
+  box-shadow:0 6px 14px rgba(0,0,0,0.10);
+  color:#0b2418;
+  z-index:2;
+}
+.whatsapp-choice{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
+  margin-top:12px;
+}
+.whatsapp-card{
+  border:1px solid rgba(6,42,32,0.08);
+  background:linear-gradient(180deg, #ffffff 0%, #f7fbf9 100%);
+  border-radius:12px;
+  padding:10px;
+  cursor:pointer;
+  text-align:left;
+  box-shadow:0 8px 18px rgba(6,42,32,0.06);
+}
+.whatsapp-card .top{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.whatsapp-card .flag{
+  width:36px;
+  height:26px;
+  border-radius:6px;
+  overflow:hidden;
+  border:1px solid rgba(0,0,0,0.08);
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
+  flex:0 0 auto;
+}
+.whatsapp-card .flag img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.whatsapp-card h4{
+  margin:0;
+  font-size:14px;
+  color:#082014;
+}
+.whatsapp-card p{
+  margin:5px 0 0;
+  color:#315348;
+  font-size:12px;
+  line-height:1.35;
+}
+.whatsapp-card .go{
+  margin-top:9px;
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:7px 10px;
+  border-radius:999px;
+  background:linear-gradient(90deg, var(--brand-green), var(--green-mid));
+  color:#fff;
+  font-weight:800;
+  font-size:12px;
+}
 
-/* WhatsApp FAB */
+/* Contact FAB */
 .fab{
   width:58px;
   height:58px;
@@ -182,97 +790,207 @@ img{display:block;max-width:100%;height:auto}
   z-index:4000;
   box-shadow:0 10px 30px rgba(2,50,26,0.25);
   background:var(--whatsapp-green);
-  border: 3px solid rgba(255,255,255,0.06);
+  border:3px solid rgba(255,255,255,0.06);
+  cursor:pointer;
 }
-.fab a{display:flex;align-items:center;justify-content:center;width:100%;height:100%;color:#fff;font-size:22px}
-.fab:focus, .fab a:focus{outline:3px solid rgba(255,255,255,0.12);outline-offset:2px}
+.fab button{
+  width:100%;
+  height:100%;
+  border:0;
+  background:transparent;
+  color:#fff;
+  font-size:22px;
+  cursor:pointer;
+  border-radius:50%;
+}
+.fab:focus, .fab button:focus{
+  outline:3px solid rgba(255,255,255,0.12);
+  outline-offset:2px
+}
 
-/* footer */
-footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:center;margin-top:28px;position:relative;z-index:50}
-.footer-company{display:block;margin:0 auto 8px;font-size:18px;font-weight:800;color:var(--brand-green);-webkit-text-stroke:0.7px var(--gold);text-shadow:0 3px 6px rgba(0,0,0,0.6);padding:6px 10px;border-radius:6px}
+/* Footer */
+footer{
+  background:var(--green-dark);
+  color:#fff;
+  padding:18px 5vw 40px;
+  text-align:center;
+  margin-top:28px;
+  position:relative;
+  z-index:50
+}
+.footer-company{
+  display:block;
+  margin:0 auto 8px;
+  font-size:18px;
+  font-weight:800;
+  color:#04462e;
+  -webkit-text-stroke:0.7px var(--gold-base);
+  text-shadow:0 3px 6px rgba(0,0,0,0.6);
+  padding:6px 10px;
+  border-radius:6px;
+  width:max-content
+}
+.footer-contact{
+  margin-top:6px;
+  color:#e6f7ea;
+  line-height:1.6;
+}
 
-/* responsive */
+@media (max-width:1100px){
+  .models{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+}
 @media (max-width:900px){
-  .product-card{flex-direction:column;padding:14px}
-  .product-side{order:-1;width:100%}
   .featured-hero{height:280px}
+  .product-card{width:min(980px,94%)}
+}
+@media (max-width:820px){
+  .models{grid-template-columns:1fr;gap:20px}
+  .card{min-height:auto;text-align:center}
+  .card .image-wrap{
+    height:220px;
+    display:flex;
+    justify-content:center;
+    align-items:center
+  }
+  .card-content{
+    padding:18px;
+    text-align:center;
+    align-items:center
+  }
+  .card .btn-card{
+    margin:12px auto 0;
+    font-size:15px;
+    padding:10px 20px
+  }
+  .company-name{font-size:30px}
+  .logo-text img{height:50px}
+  .fab{width:50px;height:50px}
+  .fab button{font-size:20px}
+}
+@media (max-width:768px){
+  .company-name{font-size:26px}
+  .featured-hero{height:240px}
+  .card .image-wrap{height:200px}
+  .card-content{padding:16px 12px 18px}
 }
 @media (max-width:640px){
-  .company-name{font-size:30px}
-  .models{grid-template-columns:1fr}
+  .company-tagline{font-size:12px; letter-spacing:4px}
+  .logo-text img{height:46px}
   .featured-hero{height:220px}
-  /* overlay behavior on mobile */
+
   .product-card{
-    display:none !important;
+    display:none;
     position:fixed;
     left:8px;
     right:8px;
-    top: calc(var(--topbar-h) + var(--header-h) + 8px);
+    top:calc(var(--topbar-h) + var(--header-h) + 8px);
     z-index:2200;
-    width: calc(100% - 16px);
+    width:calc(100% - 16px);
     margin:0;
     padding:16px;
     border-radius:12px;
     box-shadow:0 18px 40px rgba(6,42,32,0.20);
-    background: var(--card-bg-overlay);
+    background:var(--card-bg-overlay);
     flex-direction:column;
     overflow:auto;
-    max-height: calc(100vh - (var(--topbar-h) + var(--header-h) + 32px));
+    max-height:calc(100vh - (var(--topbar-h) + var(--header-h) + 32px));
   }
-  .product-card.show-on-mobile{ display:flex !important; animation: slideIn 220ms ease; }
-  .product-card .close-mobile{ display:block; }
-  .fab{ right:12px; bottom:14px; width:50px; height:50px; font-size:20px }
+  .product-card.show-on-mobile{
+    display:flex !important;
+    animation:slideIn 220ms ease;
+  }
+  .product-card .close-mobile{
+    display:flex;
+  }
+
+  .modal{
+    width:min(92vw,290px);
+    max-height:50vh;
+    padding:34px 10px 10px;
+  }
+  .modal h2{font-size:15px}
 }
-@media (max-width:420px){ .featured-hero{height:200px} }
-@keyframes slideIn { from { transform: translateY(-8px); opacity:0 } to { transform: translateY(0); opacity:1 } }
+@media (max-width:480px){
+  .hero-content{
+    max-width:92vw;
+    padding:0 12px;
+  }
+  .hero-content h1{
+    font-size:28px;
+    font-weight:700;
+    margin:0 0 8px;
+    white-space:nowrap;
+    overflow-x:hidden;
+    text-overflow:ellipsis;
+  }
+  .hero-content p{
+    font-size:16px;
+    line-height:1.5;
+  }
+  .btn-primary{
+    padding:12px 28px;
+    font-size:15px;
+  }
+}
+
+@keyframes slideIn{
+  from{transform:translateY(-8px);opacity:0}
+  to{transform:translateY(0);opacity:1}
+}
 </style>
 </head>
 <body>
-<div class="page-bg" aria-hidden="true"></div>
-<div class="bg-overlay" aria-hidden="true"></div>
 
-<!-- Topbar -->
+<img class="page-bg" src="Energie_blanche.png" alt="" aria-hidden="true">
+<div class="page-bg-overlay" aria-hidden="true"></div>
+
 <div class="topbar" role="banner">
-  <div class="left">Assemblés au Sénégal </div>
-  <div class="right" aria-hidden="true"></div>
-</div>
-
-<!-- Header : logo à gauche, nom agrandi -->
-<header class="header" role="banner" aria-label="En-tête">
-  <div class="logo-text" aria-hidden="false">
-    <img src="green bridge domo.png" alt="Logo GREENBRIDGE" />
-    <div class="company-name">GREENBRIDGE</div>
+  <div class="promo-wrap" aria-hidden="true">
+    <div class="promo-text"><span>Assemblé en Afrique de l'Ouest</span></div>
   </div>
-</header>
-
-<!-- Electric band (subtle lightning across top) -->
-<div class="electric-band connected" id="electricBand" aria-hidden="true">
-  <div class="container">
-    <svg class="lightning-svg" viewBox="0 0 2000 40" preserveAspectRatio="none" aria-hidden="true">
-      <path class="zap" id="zap1" d="M10,22 C260,4 520,36 840,20 C1120,8 1440,34 1760,18 C1880,6 1960,28 1990,22" stroke-opacity="0.18" stroke="url(#g)"/>
-      <path class="zap" id="zap2" d="M10,24 C280,36 600,6 860,22 C1140,36 1460,6 1800,22 C1880,36 1960,10 1990,22" stroke-opacity="0.12" stroke="url(#g)"/>
-      <path class="zap" id="zapBright" d="M20,22 C300,6 600,34 880,16 C1240,0 1520,32 1860,14 C1960,2 1980,30 1990,22" stroke-opacity="1"/>
-    </svg>
-
-    <div class="orbs" id="topOrbs">
-      <div class="orb" id="topOrbA" aria-hidden="true"></div>
-      <div class="orb" id="topOrbB" aria-hidden="true"></div>
-      <div class="orb" id="topOrbC" aria-hidden="true"></div>
+  <div class="right" aria-hidden="true">
+    <div class="flag-slider">
+      <img id="flagImage" src="https://flagcdn.com/w80/ci.png" alt="Drapeau Côte d'Ivoire">
     </div>
   </div>
 </div>
 
-<div style="height: calc(var(--topbar-h) + var(--header-h) + 8px);" aria-hidden="true"></div>
+<header role="banner" aria-label="En-tête">
+  <div class="logo-text">
+    <img src="green bridge domo.png" alt="Logo GreenBridge" loading="eager" fetchpriority="high">
+    <div class="brand-stack">
+      <div class="company-name">GREENBRIDGE</div>
+      <div class="company-tagline">TECHNOLOGIES</div>
+    </div>
+  </div>
+</header>
+
+<div class="electric-band connected" id="electricBand" aria-hidden="true">
+  <div class="container">
+    <svg class="lightning-svg" viewBox="0 0 2000 40" preserveAspectRatio="none" aria-hidden="true">
+      <path class="zap" d="M10,22 C260,4 520,36 840,20 C1120,8 1440,34 1760,18 C1880,6 1960,28 1990,22" stroke-opacity="0.18"/>
+      <path class="zap" d="M10,24 C280,36 600,6 860,22 C1140,36 1460,6 1800,22 C1880,36 1960,10 1990,22" stroke-opacity="0.12"/>
+      <path class="zap" id="zapBright" d="M20,22 C300,6 600,34 880,16 C1240,0 1520,32 1860,14 C1960,2 1980,30 1990,22" stroke-opacity="1" stroke-dasharray="520" stroke-dashoffset="520"/>
+    </svg>
+    <div class="orbs">
+      <div class="orb" id="orbA"></div>
+      <div class="orb" id="orbB"></div>
+      <div class="orb" id="orbC"></div>
+    </div>
+    <div class="glowline" id="glowline"></div>
+  </div>
+</div>
+
+<div style="height:calc(var(--topbar-h) + var(--header-h) + 8px);" aria-hidden="true"></div>
 
 <main class="container" role="main">
 
-  <!-- Models list -->
   <section class="models-wrapper" id="models" role="region" aria-label="Nos modèles">
     <div class="models-header"><div class="models-title">Nos modèles</div></div>
 
     <div class="models" role="list">
-      <div class="model" role="button" onclick="selectModel(0)" tabindex="0" aria-label="GreenMini 10k">
-        <div class="thumb"><img src="Pwkb_Mini_3.png" alt="GreenMini"></div>
+      <div class="model" role="button" onclick="selectModel(0)" tabindex="0" aria-label="GreenMini">
+        <div class="thumb"><img src="Pwkb_Mini_3.png" alt="GreenMini" loading="eager" fetchpriority="high"></div>
         <div class="meta">
           <h4>GreenMini</h4>
           <p>GreenMini ≈ 9 000 mAh<br><small>Ultra-compact, idéal pour sac &amp; poche.</small></p>
@@ -280,8 +998,8 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
         <div class="actions"><button class="btn-small" onclick="openTechModal(0);event.stopPropagation()">Infos</button></div>
       </div>
 
-      <div class="model" role="button" onclick="selectModel(1)" tabindex="0" aria-label="GreenCore 9k">
-        <div class="thumb"><img src="pwkb_123.png" alt="GreenCore"></div>
+      <div class="model" role="button" onclick="selectModel(1)" tabindex="0" aria-label="GreenCore">
+        <div class="thumb"><img src="pwkb_123.png" alt="GreenCore" loading="eager"></div>
         <div class="meta">
           <h4>GreenCore</h4>
           <p>GreenCore ≈ 9 000 mAh<br><small>Modulaire • Type-C charge rapide</small></p>
@@ -289,8 +1007,8 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
         <div class="actions"><button class="btn-small" onclick="openTechModal(1);event.stopPropagation()">Infos</button></div>
       </div>
 
-      <div class="model" role="button" onclick="selectModel(2)" tabindex="0" aria-label="GreenPro 12k">
-        <div class="thumb"><img src="pwkb_6.png" alt="GreenPro"></div>
+      <div class="model" role="button" onclick="selectModel(2)" tabindex="0" aria-label="GreenPro">
+        <div class="thumb"><img src="pwkb_6.png" alt="GreenPro" loading="lazy"></div>
         <div class="meta">
           <h4>GreenPro</h4>
           <p>GreenPro ≈ 12 000 mAh<br><small>Charge rapide USB-C • Pack haute qualité</small></p>
@@ -298,21 +1016,37 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
         <div class="actions"><button class="btn-small" onclick="openTechModal(2);event.stopPropagation()">Infos</button></div>
       </div>
 
-      <!-- Modèle mis à jour : GreenWireless -->
-      <div class="model" role="button" onclick="selectModel(3)" tabindex="0" aria-label="GreenWireless 20k">
-        <div class="thumb"><img src="pwkb_wireless_1.png" alt="GreenWireless"></div>
+      <div class="model" role="button" onclick="selectModel(3)" tabindex="0" aria-label="GreenWireless">
+        <div class="thumb"><img src="pwkb_wireless_1.png" alt="GreenWireless" loading="lazy"></div>
         <div class="meta">
           <h4>GreenWireless</h4>
           <p>GreenWireless — 20 000 mAh<br><small>Boîtier amovible • Charge rapide PD / QC3.0 • Sans-fil</small></p>
         </div>
         <div class="actions"><button class="btn-small" onclick="openTechModal(3);event.stopPropagation()">Infos</button></div>
       </div>
+
+      <div class="model" role="button" onclick="selectModel(4)" tabindex="0" aria-label="Chargeur ordinateur portable">
+        <div class="thumb"><img src="chargeur_pc.png" alt="Chargeur ordinateur portable" loading="lazy"></div>
+        <div class="meta">
+          <h4>Chargeur PC Portable</h4>
+          <p>65W à 100W<br><small>Charge rapide universelle pour ordinateurs portables.</small></p>
+        </div>
+        <div class="actions"><button class="btn-small" onclick="openTechModal(4);event.stopPropagation()">Infos</button></div>
+      </div>
+
+      <div class="model" role="button" onclick="selectModel(5)" tabindex="0" aria-label="Stabilisateur WiFi">
+        <div class="thumb"><img src="wifi_stabilizer.png" alt="Stabilisateur WiFi" loading="lazy"></div>
+        <div class="meta">
+          <h4>Stabilisateur WiFi</h4>
+          <p>Anti-coupure courant<br><small>Maintient modem et routeur actifs pendant les pannes.</small></p>
+        </div>
+        <div class="actions"><button class="btn-small" onclick="openTechModal(5);event.stopPropagation()">Infos</button></div>
+      </div>
     </div>
   </section>
 
-  <!-- Product card -->
   <section class="product-card" role="region" aria-label="Produit principal" aria-hidden="true">
-    <button class="close-mobile" aria-label="Fermer la fiche mobile" title="Fermer" onclick="closeOverlay()">×</button>
+    <button class="close-mobile" aria-label="Fermer" title="Fermer" onclick="closeOverlay()">×</button>
 
     <div class="product-info">
       <div class="top-label">Batterie externe haute performance</div>
@@ -334,40 +1068,32 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
       </div>
 
       <div id="detailsPanel" class="details-panel" aria-hidden="true"></div>
-
-      <!-- Pro Mode -->
-      <div style="margin-top:12px">
-        <button id="proToggle" class="btn-small" aria-pressed="false">Mode Pro</button>
-      </div>
-
-      <div id="proPanel" class="pro-panel" aria-hidden="true">
-        <!-- Content filled by JS -->
-      </div>
-
     </div>
 
     <div class="product-side">
       <div class="product-image" id="productImageBox" title="Cliquer pour changer d'image" role="button" tabindex="0">
-        <img id="heroMainImage" src="Pwkb_Mini_3.png" alt="GreenMini image">
+        <img id="heroMainImage" src="Pwkb_Mini_3.png" alt="GreenMini image" loading="eager" fetchpriority="high">
       </div>
 
       <div class="cta-group" aria-label="Actions produit">
-        <!-- orderBtnTop href sera mis à jour dynamiquement par JS pour inclure le numéro et le message -->
-        <a id="orderBtnTop" class="btn-primary" href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Commander</a>
-        <button id="infoBtnHero" class="btn-secondary" onclick="openTechModal(currentModel)"><i class="fa-solid fa-circle-info"></i> Infos techniques</button>
-        <button id="detailsToggle" class="btn-small"><i class="fa-solid fa-list"></i> Afficher détails</button>
+        <button id="orderBtnTop" class="btn-primary" type="button">
+          <i class="fa-brands fa-whatsapp"></i> Commander
+        </button>
+        <button id="infoBtnHero" class="btn-secondary" type="button" onclick="openTechModal(currentModel)">
+          <i class="fa-solid fa-circle-info"></i> Infos techniques
+        </button>
+        <button id="detailsToggle" class="btn-small" type="button"><i class="fa-solid fa-list"></i> Afficher détails</button>
       </div>
     </div>
   </section>
 
-  <!-- Featured -->
   <div class="futures-title" id="futures">
     <div class="models-title">Projets à venir</div>
   </div>
 
   <section class="featured" aria-label="Pack 2.5 kWh — Solution modulaire">
     <div class="featured-hero" id="featuredHero" aria-hidden="false">
-      <div class="slide active" data-index="0"><img src="Future_Pack_1.png" alt="Pack 2.5 kWh vue 1"></div>
+      <div class="slide active" data-index="0"><img src="Future_Pack_1.png" alt="Pack 2.5 kWh vue 1" loading="lazy"></div>
     </div>
 
     <div class="featured-copy">
@@ -379,20 +1105,19 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
       </div>
 
       <div style="margin-top:12px">
-        <button class="btn-secondary" onclick="openPackModal()">Infos pack</button>
+        <button class="btn-secondary" type="button" onclick="openPackModal()">Infos pack</button>
       </div>
     </div>
   </section>
 
 </main>
 
-<!-- WhatsApp FAB (visible, green) -->
-<!-- href par défaut vers le numéro, JS mettra le message pré-rempli -->
 <div id="fab" class="fab" role="button" aria-label="Commander via WhatsApp">
-  <a id="fabLink" href="https://wa.me/221774015004" target="_blank" rel="noopener noreferrer" aria-label="Commander via WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+  <button id="fabButton" type="button" aria-label="Commander via WhatsApp">
+    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+  </button>
 </div>
 
-<!-- Modal -->
 <div id="modalOverlay" class="modal-overlay" role="dialog" aria-hidden="true">
   <div class="modal" role="document" aria-modal="true">
     <button class="close" aria-label="Fermer" onclick="closeModal()">✕</button>
@@ -401,14 +1126,13 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
 </div>
 
 <footer>
-  <div class="footer-company">GREENBRIDGE</div>
-  <div style="color:#e6f7ea">© <span id="year"></span> GREENBRIDGE — Assemblé au Sénégal</div>
+  <div class="footer-company">GREENBRIDGE TECHNOLOGIES</div>
+  <div style="color:#e6f7ea">© <span id="year"></span> GREENBRIDGE TECHNOLOGIES — Assemblé par des africains</div>
 </footer>
 
 <script>
-/* ===========================
-   Données modèles (complètes)
-   =========================== */
+const CONTACT_EMAIL = 'contact@greenbridge.com';
+
 const models = [
   {
     id:'greenmini',
@@ -551,30 +1275,78 @@ const models = [
         </strong>
       </div>
     `
+  },
+  {
+    id:'laptopcharger',
+    title:'Chargeur PC Portable',
+    subtitle:'Charge rapide universelle',
+    images:['chargeur_pc.png'],
+    specs:[
+      'Compatible PC portables USB-C / DC',
+      'Puissance : 65W à 100W',
+      'Protection surtension et surchauffe',
+      'Idéal pour bureau, domicile et déplacement'
+    ],
+    details: `
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
+        <strong>Chargeur pour ordinateur portable</strong><br>
+        Conçu pour les besoins du quotidien, avec une puissance stable et une compatibilité large.
+      </p>
+      <div style="margin-top:8px">
+        <ul>
+          <li>Compatible avec de nombreux modèles d’ordinateurs portables.</li>
+          <li>Sortie stable pour une meilleure protection de l’appareil.</li>
+          <li>Format pratique pour bureau et voyage.</li>
+        </ul>
+      </div>
+    `
+  },
+  {
+    id:'wifiups',
+    title:'Stabilisateur WiFi',
+    subtitle:'Internet même sans courant',
+    images:['wifi_stabilizer.png'],
+    specs:[
+      'Backup routeur et modem',
+      'Sorties 5V / 9V / 12V',
+      'Protection surtension',
+      'Maintien du WiFi en cas de coupure'
+    ],
+    details: `
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
+        <strong>Stabilisateur WiFi anti-coupure</strong><br>
+        Permet de garder le modem et le routeur actifs pendant les coupures de courant.
+      </p>
+      <div style="margin-top:8px">
+        <ul>
+          <li>Utile pour télétravail, commerce et maison.</li>
+          <li>Réduit les interruptions internet pendant les pannes.</li>
+          <li>Compact et simple à installer.</li>
+        </ul>
+      </div>
+    `
   }
 ];
 
-/* ===========================
-   DOM / UI logic
-   =========================== */
-const productCard = document.querySelector('.product-card');
 const heroImg = document.getElementById('heroMainImage');
 const specListEl = document.getElementById('specList');
 const modalOverlay = document.getElementById('modalOverlay');
 const modalContent = document.getElementById('modalContent');
-const fabLink = document.getElementById('fabLink');
+const fabButton = document.getElementById('fabButton');
 const orderBtnTop = document.getElementById('orderBtnTop');
-
-// === Configure your WhatsApp number here ===
-// Use international format without '+' for wa.me
-const WHATSAPP_NUMBER = '221774015004';
+const detailsPanel = document.getElementById('detailsPanel');
+const productCard = document.querySelector('.product-card');
 
 let currentModel = 0;
 let currentImage = 0;
 let heroTimer = null;
 const SLIDE_INTERVAL_MS = 5000;
 
-/* LED simulation state (for pro mode) */
+const whatsappNumbers = {
+  senegal: '221774015004',
+  coteivoire: '22507070707'
+};
+
 let ledState = {
   modes: [],
   index: 0,
@@ -582,18 +1354,38 @@ let ledState = {
   clickTimer: null
 };
 
-/* Render specs list */
+function preloadImages(urls){
+  urls.forEach(src=>{
+    const img = new Image();
+    img.src = src;
+  });
+}
+
+function allImageUrls(){
+  const list = [
+    'Energie_blanche.png',
+    'green bridge domo.png',
+    'Nos_produits_1.png',
+    'Future_Pack_1.png',
+    'Future_pack_2.1.png',
+    'Future_Pack_3.png'
+  ];
+  models.forEach(m=>{
+    if(Array.isArray(m.images)) list.push(...m.images);
+  });
+  return [...new Set(list)];
+}
+
 function renderSpecs(index){
   const m = models[index] || models[0];
   specListEl.innerHTML = '';
-  (m.specs||[]).forEach(s=>{
+  (m.specs || []).forEach(s=>{
     const d = document.createElement('div');
     d.textContent = s;
     specListEl.appendChild(d);
   });
 }
 
-/* Build Pro Panel HTML (including LED simulator for GreenCore) */
 function buildProPanelHTML(model){
   if(!model) return '';
   let html = `
@@ -618,13 +1410,13 @@ function buildProPanelHTML(model){
 
       <div style="margin-top:10px">
         <strong>Lampe de nuit LED — activation :</strong>
-        <div style="margin-top:6px">Appuyez <strong>2 fois</strong> sur le bouton simulé ci-dessous pour activer / changer le mode (double-appui).</div>
+        <div style="margin-top:6px">Appuyez <strong>2 fois</strong> sur le bouton simulé ci-dessous pour changer le mode.</div>
 
         <div class="pro-controls" style="margin-top:10px">
           <div class="led-sim" aria-hidden="false">
             <div id="ledIndicator" class="led-indicator" role="img" aria-label="LED status"></div>
             <div style="display:flex;flex-direction:column">
-              <button id="ledButton" class="btn-small" aria-pressed="false">Bouton (appuyez 2 fois)</button>
+              <button id="ledButton" class="btn-small" aria-pressed="false" type="button">Bouton (appuyez 2 fois)</button>
               <small style="color:#23403a;margin-top:6px">Mode actuel : <span id="ledModeName">—</span></small>
             </div>
           </div>
@@ -638,16 +1430,15 @@ function buildProPanelHTML(model){
         </div>
       </div>
     `;
-  } else if (model.id === 'greenwireless') {
-    // special pro panel for GreenWireless
+  } else if(model.id === 'greenwireless') {
     html += `
       <div style="margin-top:8px">
         <strong>GreenWireless — Détails techniques</strong>
         <ul>
-          <li>Supporte 5×18650 (têtes plates) dans boîtier amovible — maintenance locale facilitée.</li>
+          <li>Supporte 5×18650 (têtes plates) dans boîtier amovible.</li>
           <li>PD (12V) &amp; QC3.0 pour charge rapide filaire.</li>
-          <li>Charge sans fil intégrée (wireless fast charge) — compatible smartphones récents.</li>
-          <li>Écran LCD pour affichage de pourcentage et état de charge.</li>
+          <li>Charge sans fil intégrée compatible smartphones récents.</li>
+          <li>Écran LCD pour affichage du pourcentage.</li>
           <li>Design modulable : boîtier détachable, connexion protégée anti-inversion.</li>
         </ul>
       </div>
@@ -659,17 +1450,16 @@ function buildProPanelHTML(model){
   return html;
 }
 
-/* Update product panel */
 function updateHero(index){
   const m = models[index] || models[0];
   document.getElementById('heroTitle').textContent = m.title;
   document.getElementById('heroSubtitle').textContent = m.subtitle || '';
   heroImg.src = (m.images && m.images[0]) ? m.images[0] : heroImg.src;
   heroImg.alt = m.title;
-  document.getElementById('detailsPanel').innerHTML = `<strong style="font-weight:800">${m.title}</strong><div style="margin-top:8px">${m.details}</div>`;
+
+  detailsPanel.innerHTML = `<strong style="font-weight:800">${m.title}</strong><div style="margin-top:8px">${m.details}</div>`;
   renderSpecs(index);
 
-  // Warranty badge visibility (from model.warranty)
   const wb = document.getElementById('warrantyBadge');
   if(wb){
     if(m.warranty){
@@ -682,27 +1472,21 @@ function updateHero(index){
     }
   }
 
-  // Set WhatsApp link for ordering (pre-fill message)
-  // Format wa.me: https://wa.me/<number>?text=<urlencoded message>
-  // number should be international without + (already in WHATSAPP_NUMBER)
   const prefillMessage = `Bonjour, je souhaite commander / obtenir le prix de la batterie externe : ${m.title} (ref: ${m.id})`;
-  const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=` + encodeURIComponent(prefillMessage);
+  const waUrl = `https://wa.me/${whatsappNumbers.senegal}?text=` + encodeURIComponent(prefillMessage);
 
-  // Update floating FAB and order button
-  if(fabLink){
-    fabLink.href = waUrl;
+  if(fabButton){
+    fabButton.setAttribute('data-wa', waUrl);
   }
   if(orderBtnTop){
-    orderBtnTop.href = waUrl;
+    orderBtnTop.setAttribute('data-wa', waUrl);
   }
 
-  // prepare pro panel content (hidden by default)
   const proPanel = document.getElementById('proPanel');
   proPanel.innerHTML = buildProPanelHTML(m);
   proPanel.style.display = 'none';
   proPanel.setAttribute('aria-hidden','true');
 
-  // configure LED state when greencore selected
   if(m.id === 'greencore'){
     ledState.modes = m.ledModes.slice();
     ledState.index = 0;
@@ -715,9 +1499,10 @@ function updateHero(index){
       ledState.clickCount = 0;
     }
   }
+
+  refreshContactAction();
 }
 
-/* Slideshow for product images */
 function startHeroSlideshow(){
   stopHeroSlideshow();
   heroTimer = setInterval(()=>{
@@ -727,45 +1512,206 @@ function startHeroSlideshow(){
     heroImg.src = m.images[currentImage];
   }, SLIDE_INTERVAL_MS);
 }
-function stopHeroSlideshow(){ if(heroTimer){ clearInterval(heroTimer); heroTimer = null; } }
+function stopHeroSlideshow(){
+  if(heroTimer){
+    clearInterval(heroTimer);
+    heroTimer = null;
+  }
+}
 
-/* Select model behavior: desktop inline, mobile overlay */
 function selectModel(i){
   currentModel = i;
   updateHero(i);
 
   if(window.matchMedia('(max-width:640px)').matches){
     productCard.classList.add('show-on-mobile');
+    productCard.style.display = 'flex';
     productCard.setAttribute('aria-hidden','false');
-    document.getElementById('detailsPanel').style.display = 'none';
-    document.getElementById('detailsPanel').setAttribute('aria-hidden','true');
-    setTimeout(()=>{ const p = productCard.querySelector('.btn-primary'); if(p) p.focus(); }, 120);
+    detailsPanel.style.display = 'block';
+    detailsPanel.setAttribute('aria-hidden','false');
+    setTimeout(()=>{
+      const p = productCard.querySelector('.btn-primary');
+      if(p) p.focus();
+    }, 120);
   } else {
     productCard.classList.remove('show-on-mobile');
     productCard.style.display = 'flex';
     productCard.setAttribute('aria-hidden','false');
-    document.getElementById('detailsPanel').style.display = 'none';
-    document.getElementById('detailsPanel').setAttribute('aria-hidden','true');
+    detailsPanel.style.display = 'block';
+    detailsPanel.setAttribute('aria-hidden','false');
     productCard.scrollIntoView({behavior:'smooth', block:'center'});
   }
+
   currentImage = 0;
   startHeroSlideshow();
 }
 
-/* Close mobile overlay */
-function closeOverlay(){
-  productCard.classList.remove('show-on-mobile');
-  productCard.setAttribute('aria-hidden','true');
-  document.getElementById('detailsPanel').style.display = 'none';
-  document.getElementById('detailsPanel').setAttribute('aria-hidden','true');
-  const first = document.querySelector('.models .model');
-  if(first) first.focus();
+function openModal(html){
+  modalContent.innerHTML = html;
+  modalOverlay.style.display = 'flex';
+  modalOverlay.setAttribute('aria-hidden','false');
+}
+function closeModal(){
+  modalOverlay.style.display = 'none';
+  modalOverlay.setAttribute('aria-hidden','true');
+}
+function openTechModal(i){
+  const m = models[i] || models[0];
+  const html = `
+    <h2 style="margin-top:0">${m.title}</h2>
+    ${m.details}
+    <div style="margin-top:12px;font-weight:800">Caractéristiques rapides</div>
+    <ul>${(m.specs || []).map(s=>`<li>${s}</li>`).join('')}</ul>
+  `;
+  openModal(html);
+}
+function openPackModal(){
+  const html = `
+    <div style="width:100%;margin-bottom:12px">
+      <img src="Future_pack_2.1.png" alt="Pack vue 2" style="width:100%;height:auto;border-radius:8px;object-fit:cover" loading="lazy">
+    </div>
+    <h2 style="margin-top:0">Pack modulaire 2.5 kWh — GreenBridge</h2>
+    <p style="color:#23403a;line-height:1.45">
+      Prévu pour une sortie commerciale le <strong>31/05/2026</strong>, le pack <strong>2.5 kWh</strong> a été conçu pour le Sénégal et l'Afrique de l'Ouest.
+      Basé sur des cellules <strong>LiFePO₄ prismatiques</strong>, il est modulaire, réparable localement et adapté au stockage médical, PME, agriculture et élevage.
+    </p>
+    <ul style="color:#23403a;line-height:1.45">
+      <li>Recharge par prise secteur et par panneau solaire (double entrée).</li>
+      <li>Alimente réfrigérateurs médicaux, pompes, éclairage et appareils essentiels.</li>
+      <li>Déploiement simple hors réseau, maintenance locale facilitée.</li>
+      <li>Optimisé pour les usages agricoles et petites industries en Afrique de l'Ouest.</li>
+    </ul>
+    <div style="width:100%;margin-top:12px">
+      <img src="Future_Pack_3.png" alt="Pack vue 3" style="width:100%;height:auto;border-radius:8px;object-fit:cover" loading="lazy">
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;">
+      <span style="background:linear-gradient(90deg,#ffd54a,#ffb300);padding:10px 14px;border-radius:999px;font-weight:900;color:#08110a">Disponible 31/05/2026</span>
+      <button onclick="closeModal()" style="padding:10px 14px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);background:#fff;cursor:pointer">Fermer</button>
+    </div>
+  `;
+  openModal(html);
 }
 
-/* Product image click cycles images */
-const productImageEl = document.querySelector('.product-image');
-if(productImageEl){
-  productImageEl.addEventListener('click', ()=>{
+function openCountryModal(){
+  const html = `
+    <h2 style="margin:0 36px 6px 0;font-size:18px;color:#08110a">Commander via WhatsApp</h2>
+    <p style="margin:0;color:#315348;line-height:1.45;font-size:13px">
+      Choisis le pays de commande. Le message sera pré-rempli avec le bon numéro.
+    </p>
+    <div class="whatsapp-choice">
+      <button class="whatsapp-card" type="button" onclick="sendWhatsApp('coteivoire')">
+        <div class="top">
+          <div class="flag"><img src="https://flagcdn.com/w80/ci.png" alt="Drapeau Côte d'Ivoire"></div>
+          <div>
+            <h4>Côte d'Ivoire</h4>
+            <p>Commander pour la Côte d'Ivoire via WhatsApp.</p>
+          </div>
+        </div>
+        <div class="go"><i class="fa-brands fa-whatsapp"></i> Continuer</div>
+      </button>
+
+      <button class="whatsapp-card" type="button" onclick="sendWhatsApp('senegal')">
+        <div class="top">
+          <div class="flag"><img src="https://flagcdn.com/w80/sn.png" alt="Drapeau Sénégal"></div>
+          <div>
+            <h4>Sénégal</h4>
+            <p>Commander pour le Sénégal via WhatsApp.</p>
+          </div>
+        </div>
+        <div class="go"><i class="fa-brands fa-whatsapp"></i> Continuer</div>
+      </button>
+    </div>
+    <div style="margin-top:12px;text-align:right">
+      <button type="button" class="btn-secondary" onclick="closeModal()">Fermer</button>
+    </div>
+  `;
+  openModal(html);
+}
+function sendWhatsApp(country){
+  const number = whatsappNumbers[country] || whatsappNumbers.senegal;
+  const countryLabel = country === 'coteivoire' ? "la Côte d'Ivoire" : 'le Sénégal';
+  const message = `Bonjour, je souhaite commander un produit GreenBridge pour ${countryLabel}. Merci de me communiquer les modèles disponibles et les prix.`;
+  const url = `https://wa.me/${number}?text=` + encodeURIComponent(message);
+  closeModal();
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
+
+function buildMailtoUrl(modelIndex){
+  const m = models[modelIndex] || models[0];
+  const subject = `Commande GreenBridge — ${m.title}`;
+  const body = [
+    `Bonjour,`,
+    ``,
+    `Je souhaite obtenir des informations et/ou commander : ${m.title}`,
+    `Référence : ${m.id}`,
+    ``,
+    `Merci de me répondre avec les prix et la disponibilité.`,
+    ``,
+    `Cordialement,`
+  ].join('\n');
+  return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+function refreshContactAction(){
+  const isDesktop = window.matchMedia('(min-width:769px)').matches;
+  if(isDesktop){
+    if(orderBtnTop){
+      orderBtnTop.innerHTML = '<i class="fa-solid fa-envelope"></i> Envoyer un mail';
+      orderBtnTop.onclick = ()=>{ window.location.href = buildMailtoUrl(currentModel); };
+    }
+    if(fabButton){
+      fabButton.innerHTML = '<i class="fa-solid fa-envelope" aria-hidden="true"></i>';
+      fabButton.onclick = ()=>{ window.location.href = buildMailtoUrl(currentModel); };
+      fabButton.setAttribute('aria-label','Envoyer un mail');
+    }
+  } else {
+    if(orderBtnTop){
+      orderBtnTop.innerHTML = '<i class="fa-brands fa-whatsapp"></i> Commander';
+      orderBtnTop.onclick = openCountryModal;
+    }
+    if(fabButton){
+      fabButton.innerHTML = '<i class="fa-brands fa-whatsapp" aria-hidden="true"></i>';
+      fabButton.onclick = openCountryModal;
+      fabButton.setAttribute('aria-label','Commander via WhatsApp');
+    }
+  }
+}
+
+modalOverlay.addEventListener('click', ev=>{ if(ev.target === modalOverlay) closeModal(); });
+
+document.getElementById('detailsToggle').addEventListener('click', ()=>{
+  const vis = detailsPanel.style.display === 'block';
+  if(vis){
+    detailsPanel.style.display='none';
+    detailsPanel.setAttribute('aria-hidden','true');
+  } else {
+    detailsPanel.style.display='block';
+    detailsPanel.setAttribute('aria-hidden','false');
+  }
+});
+
+const proToggleBtn = document.getElementById('proToggle');
+if(proToggleBtn){
+  proToggleBtn.addEventListener('click', ()=>{
+    const proPanel = document.getElementById('proPanel');
+    const isShown = proPanel.style.display === 'block';
+    if(isShown){
+      proPanel.style.display = 'none';
+      proPanel.setAttribute('aria-hidden','true');
+      proToggleBtn.setAttribute('aria-pressed','false');
+      proToggleBtn.textContent = 'Mode Pro';
+    } else {
+      proPanel.style.display = 'block';
+      proPanel.setAttribute('aria-hidden','false');
+      proToggleBtn.setAttribute('aria-pressed','true');
+      proToggleBtn.textContent = 'Mode Pro (actif)';
+    }
+  });
+}
+
+const productImageBox = document.getElementById('productImageBox');
+if(productImageBox){
+  productImageBox.addEventListener('click', ()=>{
     const m = models[currentModel] || models[0];
     if(!m.images || m.images.length===0) return;
     currentImage = (currentImage + 1) % m.images.length;
@@ -776,113 +1722,38 @@ if(productImageEl){
   });
 }
 
-/* Details toggle */
-document.getElementById('detailsToggle').addEventListener('click', ()=>{
-  const panel = document.getElementById('detailsPanel');
-  const vis = panel.style.display === 'block';
-  if(vis){
-    panel.style.display='none';
-    panel.setAttribute('aria-hidden','true');
-  } else {
-    panel.style.display='block';
-    panel.setAttribute('aria-hidden','false');
-    if(window.matchMedia('(max-width:640px)').matches) productCard.scrollIntoView({behavior:'smooth', block:'center'});
-    else panel.scrollIntoView({behavior:'smooth', block:'nearest'});
-  }
-});
-
-/* Mode Pro toggle */
-const proToggleBtn = document.getElementById('proToggle');
-proToggleBtn.addEventListener('click', ()=>{
-  const proPanel = document.getElementById('proPanel');
-  const isShown = proPanel.style.display === 'block';
-  if(isShown){
-    proPanel.style.display = 'none';
-    proPanel.setAttribute('aria-hidden','true');
-    proToggleBtn.setAttribute('aria-pressed','false');
-    proToggleBtn.textContent = 'Mode Pro';
-  } else {
-    proPanel.style.display = 'block';
-    proPanel.setAttribute('aria-hidden','false');
-    proToggleBtn.setAttribute('aria-pressed','true');
-    proToggleBtn.textContent = 'Mode Pro (actif)';
-    if(window.matchMedia('(max-width:640px)').matches) productCard.scrollIntoView({behavior:'smooth', block:'center'});
-  }
-});
-
-/* Modal helpers */
-function openModal(html){
-  modalContent.innerHTML = html;
-  modalOverlay.style.display = 'flex';
-  modalOverlay.setAttribute('aria-hidden','false');
-}
-function closeModal(){
-  modalOverlay.style.display = 'none';
-  modalOverlay.setAttribute('aria-hidden','true');
-}
-
-/* Tech modal for models */
-function openTechModal(i){
-  const m = models[i] || models[0];
-  let html = `
-    <h2 style="margin-top:0">${m.title}</h2>
-    ${m.details}
-    <div style="margin-top:12px;font-weight:800">Caractéristiques rapides</div>
-    <ul>${(m.specs||[]).map(s=>`<li>${s}</li>`).join('')}</ul>
-  `;
-  openModal(html);
-}
-
-/* Pack modal */
-function openPackModal(){
-  const html = `
-    <div style="width:100%;margin-bottom:12px"><img src="Future_pack_2.1.png" alt="Pack vue 2" style="width:100%;height:auto;border-radius:8px;object-fit:cover"></div>
-
-    <h2 style="margin-top:0">Pack modulaire 2.5 kWh — GreenBridge</h2>
-    <p style="color:#23403a;line-height:1.45">
-      Prévu pour une sortie commerciale le <strong>31/05/2026</strong>, le pack <strong>2.5 kWh</strong> a été conçu pour le Sénégal.
-      Basé sur des cellules <strong>LiFePO₄ prismatiques</strong>, il est modulaire, réparable localement et adapté au stockage médical, PME, agriculture et élevage.
-    </p>
-    <ul style="color:#23403a;line-height:1.45">
-      <li>Recharge par prise secteur et par panneau solaire (double entrée).</li>
-      <li>Alimente réfrigérateurs médicaux, pompes, éclairage et appareils essentiels.</li>
-      <li>Déploiement simple hors réseau, maintenance locale facilitée.</li>
-      <li>Optimisé pour les usages agricoles et petites industries en Afrique de l'Ouest.</li>
-    </ul>
-
-    <div style="width:100%;margin-top:12px"><img src="Future_Pack_3.png" alt="Pack vue 3" style="width:100%;height:auto;border-radius:8px;object-fit:cover"></div>
-
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;">
-      <span style="background:linear-gradient(90deg,#ffd54a,#ffb300);padding:10px 14px;border-radius:999px;font-weight:900;color:#08110a">Disponible 31/05/2026</span>
-      <button onclick="closeModal()" style="padding:10px 14px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);background:#fff;cursor:pointer">Fermer</button>
-    </div>
-  `;
-  openModal(html);
-}
-
-/* close modal when clicking backdrop */
-modalOverlay.addEventListener('click', (ev)=> { if(ev.target === modalOverlay) closeModal(); });
-
-/* Electric orbs animation (across top) */
+/* Electric band + orbs */
 (function(){
-  const container = document.querySelector('.electric-band .container');
-  if(!container) return;
-  const a = document.getElementById('topOrbA');
-  const b = document.getElementById('topOrbB');
-  const c = document.getElementById('topOrbC');
-  const orbs = [a,b,c];
+  const electricBand = document.getElementById('electricBand');
+  if(!electricBand) return;
+  const orbA = document.getElementById('orbA');
+  const orbB = document.getElementById('orbB');
+  const orbC = document.getElementById('orbC');
+  const orbs = [orbA, orbB, orbC];
   const params = [
-    {rxRatio:0.5, ry:8, speed:0.06, phase:0},
-    {rxRatio:0.33, ry:6, speed:0.08, phase:Math.PI/2},
-    {rxRatio:0.42, ry:10, speed:0.05, phase:Math.PI}
+    {rxRatio:0.50, ry:8, speed:0.22, phase:0},
+    {rxRatio:0.33, ry:6, speed:0.36, phase:Math.PI/2},
+    {rxRatio:0.42, ry:10, speed:0.18, phase:Math.PI}
   ];
-  orbs.forEach((o,i)=>{ if(o){ o.style.opacity='1'; }});
+
+  orbs.forEach((o,i)=>{
+    if(o){
+      o.classList.add('buzz');
+      o.style.animationDelay = (i*120) + 'ms';
+    }
+  });
+
   let t0 = performance.now();
   function tick(now){
-    const time = (now - t0)/1000;
-    const rect = container.getBoundingClientRect();
-    const cx = rect.width/2;
-    const cy = rect.height/2;
+    const time = (now - t0) / 1000;
+    const cont = electricBand.querySelector('.container');
+    if(!cont){
+      requestAnimationFrame(tick);
+      return;
+    }
+    const rect = cont.getBoundingClientRect();
+    const cx = rect.width / 2;
+    const cy = rect.height / 2;
     for(let i=0;i<orbs.length;i++){
       const orb = orbs[i];
       if(!orb) continue;
@@ -899,53 +1770,135 @@ modalOverlay.addEventListener('click', (ev)=> { if(ev.target === modalOverlay) c
     requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
+
+  function sparkSVG(){
+    const zapBright = document.getElementById('zapBright');
+    if(!zapBright) return;
+    try{
+      const len = zapBright.getTotalLength ? zapBright.getTotalLength() : 520;
+      zapBright.style.transition = 'none';
+      zapBright.setAttribute('stroke-dasharray', String(len));
+      zapBright.setAttribute('stroke-dashoffset', String(len));
+      setTimeout(()=>{
+        zapBright.style.transition = 'stroke-dashoffset 380ms ease-out, opacity 160ms';
+        zapBright.setAttribute('stroke-dashoffset','0');
+        setTimeout(()=>{
+          zapBright.setAttribute('stroke-dashoffset', String(len));
+        }, 320);
+      }, 60);
+    }catch(e){
+      zapBright.setAttribute('stroke-dasharray','520');
+      zapBright.setAttribute('stroke-dashoffset','520');
+      setTimeout(()=>{
+        zapBright.style.transition = 'stroke-dashoffset 360ms ease-out';
+        zapBright.setAttribute('stroke-dashoffset','0');
+      }, 80);
+    }
+  }
+
+  function spawnSparks(){
+    const cont = electricBand.querySelector('.container');
+    if(!cont) return;
+    for(let i=0;i<10;i++){
+      const s = document.createElement('div');
+      s.style.position = 'absolute';
+      s.style.left = (3 + Math.random()*94) + '%';
+      s.style.top = (20 + Math.random()*50) + '%';
+      s.style.width = '2px';
+      s.style.height = (8 + Math.random()*22) + 'px';
+      s.style.borderRadius = '2px';
+      s.style.background = 'linear-gradient(180deg, rgba(255,246,180,1), rgba(255,214,0,0.95))';
+      s.style.filter = 'blur(6px)';
+      s.style.opacity = '0';
+      s.style.transform = 'translateY(6px)';
+      s.style.pointerEvents = 'none';
+      s.style.zIndex = '1';
+      cont.appendChild(s);
+      setTimeout(()=>{
+        s.style.transition = 'all 260ms ease-out';
+        s.style.opacity='1';
+        s.style.transform='translateY(-6px)';
+      }, 20 + i*25);
+      setTimeout(()=>{
+        s.style.transition = 'all 420ms ease-in';
+        s.style.opacity='0';
+        s.style.transform='translateY(-20px)';
+      }, 280 + i*40);
+      setTimeout(()=>{
+        if(s.parentNode) s.parentNode.removeChild(s);
+      }, 760 + i*40);
+    }
+  }
+
+  function activate(){
+    electricBand.classList.add('connected');
+    spawnSparks();
+    sparkSVG();
+    setInterval(()=>{
+      spawnSparks();
+      if(Math.random() > 0.45) sparkSVG();
+    }, 900 + Math.random()*900);
+  }
+
+  const title = document.querySelector('.company-name');
+  if(title){
+    title.addEventListener('click', ()=>{
+      const on = electricBand.classList.toggle('connected');
+      if(on){
+        spawnSparks();
+        sparkSVG();
+      }
+    });
+  }
+
+  activate();
+  window.addEventListener('resize', ()=>{ t0 = performance.now(); });
 })();
 
-/* LED controls initialization: attach listener for double-press simulation and update visual */
+/* LED controls */
 function initLedControls(){
   const btn = document.getElementById('ledButton');
   const indicator = document.getElementById('ledIndicator');
   const modeName = document.getElementById('ledModeName');
   const modesListEl = document.getElementById('ledModesList');
   if(!btn || !indicator || !modeName || !ledState.modes.length) return;
-  // set initial mode
+
   ledState.index = 0;
   applyLedMode(ledState.index);
-  // remove previous listeners by cloning node
+
   const newBtn = btn.cloneNode(true);
   btn.parentNode.replaceChild(newBtn, btn);
-  newBtn.addEventListener('click', ()=> {
-    // count clicks to detect "2 presses" inside 600ms
+
+  newBtn.addEventListener('click', ()=>{
     ledState.clickCount += 1;
     if(ledState.clickTimer) clearTimeout(ledState.clickTimer);
-    ledState.clickTimer = setTimeout(()=> {
-      // single click only -> reset (we expect double)
+    ledState.clickTimer = setTimeout(()=>{
       ledState.clickCount = 0;
       ledState.clickTimer = null;
     }, 600);
 
     if(ledState.clickCount >= 2){
-      // double-press detected
       ledState.clickCount = 0;
-      if(ledState.clickTimer){ clearTimeout(ledState.clickTimer); ledState.clickTimer = null; }
-      // advance mode index
+      if(ledState.clickTimer){
+        clearTimeout(ledState.clickTimer);
+        ledState.clickTimer = null;
+      }
       ledState.index = (ledState.index + 1) % ledState.modes.length;
       applyLedMode(ledState.index);
     }
   });
-  // also support double-click event for convenience
-  newBtn.addEventListener('dblclick', (e) => {
+
+  newBtn.addEventListener('dblclick', (e)=>{
     e.preventDefault();
     ledState.index = (ledState.index + 1) % ledState.modes.length;
     applyLedMode(ledState.index);
   });
-  // render modes list visually (guard)
+
   if(modesListEl){
     modesListEl.innerHTML = ledState.modes.map((m, idx)=>`<li${idx===ledState.index ? ' style="font-weight:800"' : ''}>${m.name}</li>`).join('');
   }
 }
 
-/* Apply LED mode visuals */
 function applyLedMode(idx){
   const indicator = document.getElementById('ledIndicator');
   const modeName = document.getElementById('ledModeName');
@@ -954,7 +1907,6 @@ function applyLedMode(idx){
   if(!indicator || !modeName || !ledState.modes.length) return;
 
   const mode = ledState.modes[idx] || {name:'—'};
-  // reset classes
   indicator.className = 'led-indicator';
 
   switch(idx){
@@ -968,41 +1920,60 @@ function applyLedMode(idx){
   }
   modeName.textContent = mode.name;
 
-  // highlight current mode in the list (if present)
   if(modesListEl){
-    modesListEl.querySelectorAll('li').forEach((li, i)=> {
+    modesListEl.querySelectorAll('li').forEach((li, i)=>{
       li.style.fontWeight = (i === idx) ? '800' : '400';
       li.style.opacity = (i === idx) ? '1' : '0.7';
     });
   }
 }
 
-/* Init: show first model on desktop */
+/* Flag alternates every 5 seconds */
+(function(){
+  const flagImage = document.getElementById('flagImage');
+  if(!flagImage) return;
+  const flags = [
+    {src:'https://flagcdn.com/w80/ci.png', alt:"Drapeau Côte d'Ivoire"},
+    {src:'https://flagcdn.com/w80/sn.png', alt:'Drapeau Sénégal'}
+  ];
+  let currentFlag = 0;
+
+  setInterval(()=>{
+    currentFlag = (currentFlag + 1) % flags.length;
+    flagImage.style.opacity = '0.25';
+    flagImage.style.transform = 'scale(0.96)';
+    setTimeout(()=>{
+      flagImage.src = flags[currentFlag].src;
+      flagImage.alt = flags[currentFlag].alt;
+      flagImage.style.opacity = '1';
+      flagImage.style.transform = 'scale(1)';
+    }, 180);
+  }, 5000);
+})();
+
 document.addEventListener('DOMContentLoaded', ()=>{
-  if(window.matchMedia('(max-width:640px)').matches){
-    updateHero(0);
-    productCard.classList.remove('show-on-mobile');
-    productCard.setAttribute('aria-hidden','true');
-  } else {
-    selectModel(0);
-  }
+  preloadImages(allImageUrls());
   document.getElementById('year').textContent = new Date().getFullYear();
-  document.querySelectorAll('.models .model').forEach((el, idx)=> {
-    el.addEventListener('keydown', (e)=> { if(e.key==='Enter'||e.key===' ') { e.preventDefault(); selectModel(idx); }});
+
+  document.querySelectorAll('.models .model').forEach((el, idx)=>{
+    el.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        selectModel(idx);
+      }
+    });
   });
+
+  updateHero(0);
+  refreshContactAction();
+  detailsPanel.style.display = 'block';
+  detailsPanel.setAttribute('aria-hidden','false');
 });
 
-/* adapt overlay on resize */
 window.addEventListener('resize', ()=>{
-  if(!window.matchMedia('(max-width:640px)').matches){
-    productCard.classList.remove('show-on-mobile');
-    productCard.style.display = 'flex';
-    productCard.setAttribute('aria-hidden','false');
-  } else {
-    if(!productCard.classList.contains('show-on-mobile')){
-      productCard.style.display = 'none';
-      productCard.setAttribute('aria-hidden','true');
-    }
+  refreshContactAction();
+  if(productCard && window.matchMedia('(max-width:640px)').matches){
+    productCard.style.display = 'none';
   }
 });
 </script>
