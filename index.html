@@ -1519,31 +1519,22 @@ function stopHeroSlideshow(){
   }
 }
 
+/* === FIX PRINCIPAL : ouverture de la fiche au clic sur les cards === */
 function selectModel(i){
   currentModel = i;
   updateHero(i);
 
-  if(window.matchMedia('(max-width:640px)').matches){
-    productCard.classList.add('show-on-mobile');
-    productCard.style.display = 'flex';
-    productCard.setAttribute('aria-hidden','false');
-    detailsPanel.style.display = 'block';
-    detailsPanel.setAttribute('aria-hidden','false');
-    setTimeout(()=>{
-      const p = productCard.querySelector('.btn-primary');
-      if(p) p.focus();
-    }, 120);
-  } else {
-    productCard.classList.remove('show-on-mobile');
-    productCard.style.display = 'flex';
-    productCard.setAttribute('aria-hidden','false');
-    detailsPanel.style.display = 'block';
-    detailsPanel.setAttribute('aria-hidden','false');
-    productCard.scrollIntoView({behavior:'smooth', block:'center'});
-  }
+  productCard.classList.remove('show-on-mobile');
+  productCard.style.display = 'flex';
+  productCard.setAttribute('aria-hidden','false');
+
+  detailsPanel.style.display = 'block';
+  detailsPanel.setAttribute('aria-hidden','false');
 
   currentImage = 0;
   startHeroSlideshow();
+
+  productCard.scrollIntoView({behavior:'smooth', block:'center'});
 }
 
 function openModal(html){
