@@ -670,41 +670,33 @@ main.container{
   align-items:center;
   justify-content:center;
   z-index:5000;
-  padding:10px
+  padding:20px
 }
 .modal{
-  width:min(290px,84vw);
+  width:min(920px,94vw);
   background:#fff;
-  border-radius:16px;
-  padding:10px;
+  border-radius:12px;
+  padding:18px;
   overflow:auto;
-  box-shadow:0 20px 45px rgba(0,0,0,0.42);
-  max-height:58vh;
+  box-shadow:0 24px 60px rgba(0,0,0,0.45);
+  max-height:86vh;
   position:relative
 }
 .modal h2{font-size:15px;margin-top:0;margin-right:28px}
 .modal .close{
   position:absolute;
-  right:8px;
-  top:8px;
-  width:30px;
-  height:30px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#fff;
-  border:1px solid rgba(6,42,32,0.12);
-  border-radius:50%;
-  font-size:15px;
-  cursor:pointer;
-  box-shadow:0 6px 14px rgba(0,0,0,0.10);
-  color:#0b2418;
+  right:16px;
+  top:12px;
+  background:transparent;
+  border:0;
+  font-size:18px;
+  cursor:pointer
 }
 .whatsapp-choice{
   display:grid;
   grid-template-columns:1fr;
   gap:10px;
-  margin-top:12px;
+  margin-top:12px
 }
 .whatsapp-card{
   border:1px solid rgba(6,42,32,0.08);
@@ -713,12 +705,12 @@ main.container{
   padding:10px;
   cursor:pointer;
   text-align:left;
-  box-shadow:0 8px 18px rgba(6,42,32,0.06);
+  box-shadow:0 8px 18px rgba(6,42,32,0.06)
 }
 .whatsapp-card .top{
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:10px
 }
 .whatsapp-card .flag{
   width:36px;
@@ -727,23 +719,23 @@ main.container{
   overflow:hidden;
   border:1px solid rgba(0,0,0,0.08);
   box-shadow:0 4px 10px rgba(0,0,0,0.08);
-  flex:0 0 auto;
+  flex:0 0 auto
 }
 .whatsapp-card .flag img{
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:cover
 }
 .whatsapp-card h4{
   margin:0;
   font-size:14px;
-  color:#082014;
+  color:#082014
 }
 .whatsapp-card p{
   margin:5px 0 0;
   color:#315348;
   font-size:12px;
-  line-height:1.35;
+  line-height:1.35
 }
 .whatsapp-card .go{
   margin-top:9px;
@@ -755,7 +747,7 @@ main.container{
   background:linear-gradient(90deg, var(--brand-green), var(--green-mid));
   color:#fff;
   font-weight:800;
-  font-size:12px;
+  font-size:12px
 }
 
 /* Contact FAB */
@@ -773,7 +765,7 @@ main.container{
   box-shadow:0 10px 30px rgba(2,50,26,0.25);
   background:var(--whatsapp-green);
   border:3px solid rgba(255,255,255,0.06);
-  cursor:pointer;
+  cursor:pointer
 }
 .fab button{
   width:100%;
@@ -848,26 +840,18 @@ footer{
   .logo-text img{height:50px}
   .fab{width:50px;height:50px}
   .fab button{font-size:20px}
-  .modal{width:min(88vw,300px);max-height:54vh}
 }
 @media (max-width:768px){
   .company-name{font-size:26px}
   .featured-hero{height:240px}
   .card .image-wrap{height:200px}
   .card-content{padding:16px 12px 18px}
-  .modal{width:min(90vw,295px);max-height:52vh}
 }
 @media (max-width:640px){
   .company-tagline{font-size:12px; letter-spacing:4px}
   .logo-text img{height:46px}
   .featured-hero{height:220px}
   .product-card{display:none !important;}
-  .modal{
-    width:min(92vw,290px);
-    max-height:50vh;
-    padding:10px;
-  }
-  .modal h2{font-size:15px}
 }
 @media (max-width:480px){
   .hero-content{
@@ -926,7 +910,7 @@ footer{
       <path class="zap" d="M10,24 C280,36 600,6 860,22 C1140,36 1460,6 1800,22 C1880,36 1960,10 1990,22" stroke-opacity="0.12"/>
       <path class="zap" id="zapBright" d="M20,22 C300,6 600,34 880,16 C1240,0 1520,32 1860,14 C1960,2 1980,30 1990,22" stroke-opacity="1" stroke-dasharray="520" stroke-dashoffset="520"/>
     </svg>
-    <div class="orbs">
+    <div class="orbs" id="orbs">
       <div class="orb" id="orbA"></div>
       <div class="orb" id="orbB"></div>
       <div class="orb" id="orbC"></div>
@@ -935,7 +919,7 @@ footer{
   </div>
 </div>
 
-<div style="height:calc(var(--topbar-h) + var(--header-h) + 8px);" aria-hidden="true"></div>
+<div style="height: calc(var(--topbar-h) + var(--header-h) + 8px);" aria-hidden="true"></div>
 
 <main class="container" role="main">
 
@@ -943,7 +927,7 @@ footer{
     <div class="models-header"><div class="models-title">Nos modèles</div></div>
 
     <div class="models" role="list">
-      <div class="model" role="button" onclick="selectModel(0)" tabindex="0" aria-label="GreenMini">
+      <div class="model" role="button" onclick="selectModel(0)" tabindex="0" aria-label="GreenMini 10k">
         <div class="thumb"><img src="Pwkb_Mini_3.png" alt="GreenMini" loading="eager" fetchpriority="high"></div>
         <div class="meta">
           <h4>GreenMini</h4>
@@ -952,7 +936,7 @@ footer{
         <div class="actions"><button class="btn-small" onclick="openTechModal(0);event.stopPropagation()">Infos</button></div>
       </div>
 
-      <div class="model" role="button" onclick="selectModel(1)" tabindex="0" aria-label="GreenCore">
+      <div class="model" role="button" onclick="selectModel(1)" tabindex="0" aria-label="GreenCore 9k">
         <div class="thumb"><img src="pwkb_123.png" alt="GreenCore" loading="eager"></div>
         <div class="meta">
           <h4>GreenCore</h4>
@@ -980,7 +964,7 @@ footer{
       </div>
 
       <div class="model" role="button" onclick="selectModel(4)" tabindex="0" aria-label="Chargeur ordinateur portable">
-        <div class="thumb"><img src="Chargeur_ordi_1.png" alt="Chargeur ordinateur portable" loading="lazy"></div>
+        <div class="thumb"><img src="chargeur_pc.png" alt="Chargeur ordinateur portable" loading="lazy"></div>
         <div class="meta">
           <h4>Chargeur PC Portable</h4>
           <p>65W à 100W<br><small>Charge rapide universelle pour ordinateurs portables.</small></p>
@@ -1064,8 +1048,8 @@ footer{
 
 </main>
 
-<div id="fab" class="fab" role="button" aria-label="Contacter">
-  <button id="fabButton" type="button" aria-label="Contacter">
+<div id="fab" class="fab" role="button" aria-label="Commander via WhatsApp">
+  <button id="fabButton" type="button" aria-label="Commander via WhatsApp">
     <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
   </button>
 </div>
@@ -1095,16 +1079,16 @@ const models = [
       'Cellules : Samsung (3 cellules) • testées à >100% capacité',
       'Capacité nominale : 10 000 mAh (≈9 200 mAh usable)',
       'Puissance pack approximative : ~32 W',
-      'Écran digital : affichage % batterie',
-      'Ports : 1× USB-C (in/out) + 2× USB-A',
+      'Écran digital : affichage % batterie (ex : 12%, 13%, ...)',
+      'Ports : 1× USB-C (in/out) + 2× USB-A (Q3 & autre)',
       'Garantie spéciale : 3 ans pour les 100 premiers clients'
     ],
-    warranty:'Garantie 3 ans — 100 premiers clients',
-    details:`
+    warranty: 'Garantie 3 ans — 100 premiers clients',
+    details: `
       <p style="margin-top:0;color:#23403a;line-height:1.45">
         <strong>GreenMini — 10 000 mAh</strong><br>
         Technologie : <strong>Samsung, 3 cellules</strong> (cellules testées et sélectionnées).
-        Puissance moyenne du pack : <strong>~32 W</strong>. Écran digital intégré pour visualiser l'autonomie.
+        Puissance moyenne du pack : <strong>~32 W</strong>. Écran digital intégré (indicateur précis en %) pour visualiser l'autonomie en temps réel.
       </p>
       <div style="margin-top:8px">
         <strong>Entrées (Input)</strong>
@@ -1115,9 +1099,9 @@ const models = [
         </ul>
         <strong>Sorties (Output)</strong>
         <ul>
-          <li>USB-C (in/out)</li>
-          <li>USB-A (Q3)</li>
-          <li>USB-A secondaire</li>
+          <li>USB-C (in/out) : 5V — 4.5A ; 9V — 2.5A ; 12V — 1.85A (selon negotiation)</li>
+          <li>USB-A (Q3) : 5V — 2.1A</li>
+          <li>USB-A secondaire : 5V — 1A</li>
         </ul>
       </div>
     `
@@ -1136,16 +1120,16 @@ const models = [
       'Lampe de nuit LED intégrée — activation : appuyez 2 fois sur le bouton',
       'Garantie spéciale : 3 ans pour les 100 premiers clients'
     ],
-    warranty:'Garantie 3 ans — 100 premiers clients',
-    ledModes:[
-      {id:0, name:'Veille — faible intensité'},
-      {id:1, name:'Veille — intensité moyenne'},
-      {id:2, name:'Veille — intensité haute'},
-      {id:3, name:'Clignotement lent'},
-      {id:4, name:'Clignotement secours — moyen'},
-      {id:5, name:'Clignotement secours — rapide'}
+    warranty: 'Garantie 3 ans — 100 premiers clients',
+    ledModes: [
+      { id:0, name:'Veille — faible intensité' },
+      { id:1, name:'Veille — intensité moyenne' },
+      { id:2, name:'Veille — intensité haute' },
+      { id:3, name:'Clignotement lent' },
+      { id:4, name:'Clignotement secours — moyen' },
+      { id:5, name:'Clignotement secours — rapide' }
     ],
-    details:`
+    details: `
       <p style="margin-top:0;color:#23403a;line-height:1.45">
         <strong>GreenCore — ≈ 9 000 mAh</strong><br>
         Technologie : <strong>Samsung</strong>, cellules testées et triées. Charge rapide via USB-C (Quick Charge).
@@ -1170,10 +1154,10 @@ const models = [
       'Cellules : pack de haute qualité, triées pour durabilité',
       'Conçu pour multi-appareils et charge simultanée'
     ],
-    details:`
+    details: `
       <p style="margin-top:0;color:#23403a;line-height:1.45">
         <strong>GreenPro — ≈ 12 000 mAh</strong><br>
-        Pack constitué de cellules de haute qualité, sélectionnées pour stabilité et longévité. Charge rapide via USB-C.
+        Pack constitué de cellules de haute qualité, sélectionnées pour stabilité et longévité. Charge rapide via USB-C, conçu pour alimenter plusieurs appareils simultanément.
       </p>
     `
   },
@@ -1183,92 +1167,65 @@ const models = [
     subtitle:'Boîtier amovible • PD / QC3.0 • Sans-fil • DIY',
     images:['pwkb_wireless_1.png','pwkb_wireless_2.png','pwkb_wireless_3.png'],
     specs:[
-      'Cellules : Samsung ou LG — 18650 hautes performances',
-      'Capacité nominale : 20 000 mAh (utilisable ≈ 15 000 mAh)',
-      'Sorties : USB-C PD (12V), USB-A QC3.0',
-      'Charge rapide sans fil intégrée',
-      'Boîtier de batterie amovible — kit DIY sans soudure',
-      'Écran LCD digital : affichage % batterie',
-      'Protections : anti-surcharge, anti-court-circuit, inversion de polarité',
+      'Cellules : Samsung ou LG — 18650 hautes performances (configuration supportant jusqu\'à 5×18650)',
+      'Capacité nominale : 20 000 mAh (capacité réelle utilisable ≈ 15 000 mAh)',
+      'Sorties : USB-C PD (12V), USB-A QC3.0, port micro, port Apple (adaptateur selon SKU)',
+      'Charge rapide sans fil intégrée (Wireless Fast Charge)',
+      'Boîtier de batterie amovible — kit DIY sans soudure (boîte de rangement / pack amovible)',
+      'Écran LCD digital : affichage % batterie et états de charge',
+      'Protections : anti-surcharge, anti-court-circuit, protection inversion de polarité, gestion thermique',
       'Garantie spéciale : 2 ans pour les 50 premiers clients'
     ],
-    warranty:'Garantie 2 ans — 50 premiers clients',
-    details:`
+    warranty: 'Garantie 2 ans — 50 premiers clients',
+    details: `
       <p style="margin-top:0;color:#23403a;line-height:1.45">
         <strong>GreenWireless — Boîtier amovible &amp; haute performance</strong><br>
-        Assemblé avec cellules <strong>Samsung</strong> ou <strong>LG</strong> de type <strong>18650</strong>.
+        Assemblé avec cellules <strong>Samsung</strong> ou <strong>LG</strong> de type <strong>18650</strong> (haut rendement). Conçu pour offrir une grande capacité et une maintenance locale facile via un boîtier amovible.
       </p>
+
       <div style="margin-top:8px">
         <strong>Caractéristiques principales</strong>
         <ul>
-          <li>Affichage LCD de la charge restante.</li>
-          <li>Charge rapide filaire + chargeur sans fil intégré.</li>
-          <li>Connexion protégée anti-inversion.</li>
-          <li>Capacité réelle : ≈ <strong>15 000 mAh utilisable</strong>.</li>
+          <li>Fonction : affichage numérique (LCD) de la puissance restante, boîtier détachable sans soudure.</li>
+          <li>Prise en charge : peut accueillir et charger jusqu'à <strong>5 × 18650 (têtes plates)</strong> via le boîtier de batterie.</li>
+          <li>Système : protection anti-retour de connexion, protections électroniques complète (surcharge, court-circuit, inversion).</li>
+          <li>Charge rapide : USB-C PD (12V) et USB-A QC3.0 — charge rapide filaire + chargeur sans fil intégré (version wireless).</li>
+          <li>Mode DIY : kit d'alimentation mobile auto-configuré, montage simple sans soudure — adapté au bricolage et à la réparation locale.</li>
+          <li>Interfaces : Micro USB, port Apple (adaptateur), Type-C in/out, bornes USB-A QC3.0.</li>
+          <li>Usage : idéal pour utilisateurs ayant de gros besoins de charge ; convient pour terrain et usage urbain.</li>
+          <li>Capacité réelle : ≈ <strong>15 000 mAh utilisable</strong> (dépend des cellules et du câblage interne).</li>
         </ul>
       </div>
-    `
-  },
-  {
-    id:'laptopcharger',
-    title:'Chargeur PC Portable',
-    subtitle:'Charge rapide universelle',
-    images:['Chargeur_ordi_1.png'],
-    specs:[
-      'Compatible PC portables USB-C / DC',
-      'Puissance : 65W à 100W',
-      'Protection surtension et surchauffe',
-      'Idéal pour bureau, domicile et déplacement'
-    ],
-    details:`
-      <p style="margin-top:0;color:#23403a;line-height:1.45">
-        <strong>Chargeur pour ordinateur portable</strong><br>
-        Conçu pour les besoins du quotidien, avec une puissance stable et une compatibilité large.
-      </p>
+
       <div style="margin-top:8px">
+        <strong>Exemples d'utilisation</strong>
         <ul>
-          <li>Compatible avec de nombreux modèles d’ordinateurs portables.</li>
-          <li>Sortie stable pour une meilleure protection de l’appareil.</li>
-          <li>Format pratique pour bureau et voyage.</li>
+          <li>Alimentation d'appareils 5V/9V/12V via PD/QC pour smartphone, routeur, petits appareils 12V.</li>
+          <li>Démontage/remplacement facile des cellules pour maintenance ou upgrade local.</li>
         </ul>
       </div>
-    `
-  },
-  {
-    id:'wifiups',
-    title:'Stabilisateur WiFi',
-    subtitle:'Internet même sans courant',
-    images:['wifi_stabilizer.png'],
-    specs:[
-      'Backup routeur et modem',
-      'Sorties 5V / 9V / 12V',
-      'Protection surtension',
-      'Maintien du WiFi en cas de coupure'
-    ],
-    details:`
-      <p style="margin-top:0;color:#23403a;line-height:1.45">
-        <strong>Stabilisateur WiFi anti-coupure</strong><br>
-        Permet de garder le modem et le routeur actifs pendant les coupures de courant.
-      </p>
-      <div style="margin-top:8px">
-        <ul>
-          <li>Utile pour télétravail, commerce et maison.</li>
-          <li>Réduit les interruptions internet pendant les pannes.</li>
-          <li>Compact et simple à installer.</li>
-        </ul>
+
+      <div style="margin-top:10px">
+        <strong style="color:#08110a;background:linear-gradient(90deg,#ffd54a,#ffb300);padding:6px 10px;border-radius:8px;display:inline-block">
+          Offre : <span style="font-weight:900">Garantie 2 ans — réservée aux 50 premiers clients</span>
+        </strong>
       </div>
     `
   }
 ];
 
+/* ===========================
+   DOM / UI logic
+   =========================== */
+const productCard = document.querySelector('.product-card');
 const heroImg = document.getElementById('heroMainImage');
 const specListEl = document.getElementById('specList');
 const modalOverlay = document.getElementById('modalOverlay');
 const modalContent = document.getElementById('modalContent');
+const fabLink = document.getElementById('fab');
 const fabButton = document.getElementById('fabButton');
 const orderBtnTop = document.getElementById('orderBtnTop');
 const detailsPanel = document.getElementById('detailsPanel');
-const productCard = document.querySelector('.product-card');
 
 let currentModel = 0;
 let currentImage = 0;
@@ -1405,17 +1362,20 @@ function updateHero(index){
     }
   }
 
-  const proPanel = document.getElementById('proPanel');
-  if(proPanel){
-    proPanel.innerHTML = buildProPanelHTML(m);
-    proPanel.style.display = 'none';
-    proPanel.setAttribute('aria-hidden','true');
-    const proToggle = document.getElementById('proToggle');
-    if(proToggle){
-      proToggle.setAttribute('aria-pressed','false');
-      proToggle.textContent = 'Mode Pro';
-    }
+  const prefillMessage = `Bonjour, je souhaite commander / obtenir le prix de la batterie externe : ${m.title} (ref: ${m.id})`;
+  const waUrl = `https://wa.me/${whatsappNumbers.senegal}?text=` + encodeURIComponent(prefillMessage);
+
+  if(fabLink && window.matchMedia('(max-width:768px)').matches){
+    fabLink.href = '#';
   }
+  if(orderBtnTop){
+    orderBtnTop.setAttribute('data-wa', waUrl);
+  }
+
+  const proPanel = document.getElementById('proPanel');
+  proPanel.innerHTML = buildProPanelHTML(m);
+  proPanel.style.display = 'none';
+  proPanel.setAttribute('aria-hidden','true');
 
   if(m.id === 'greencore'){
     ledState.modes = m.ledModes.slice();
@@ -1452,13 +1412,16 @@ function stopHeroSlideshow(){
 function selectModel(i){
   currentModel = i;
   updateHero(i);
+
+  productCard.classList.remove('show-on-mobile');
   productCard.style.display = 'flex';
   productCard.setAttribute('aria-hidden','false');
   detailsPanel.style.display = 'block';
   detailsPanel.setAttribute('aria-hidden','false');
+
   currentImage = 0;
   startHeroSlideshow();
-  productCard.scrollIntoView({behavior:'smooth', block:'start'});
+  productCard.scrollIntoView({behavior:'smooth', block:'center'});
 }
 
 function openModal(html){
@@ -1514,23 +1477,23 @@ function openCountryModal(){
       Choisis le pays de commande. Le message sera pré-rempli avec le bon numéro.
     </p>
     <div class="whatsapp-choice">
-      <button class="whatsapp-card" type="button" onclick="sendWhatsApp('senegal')">
-        <div class="top">
-          <div class="flag"><img src="https://flagcdn.com/w80/sn.png" alt="Drapeau Sénégal"></div>
-          <div>
-            <h4>Sénégal</h4>
-            <p>Commander pour le Sénégal via WhatsApp.</p>
-          </div>
-        </div>
-        <div class="go"><i class="fa-brands fa-whatsapp"></i> Continuer</div>
-      </button>
-
       <button class="whatsapp-card" type="button" onclick="sendWhatsApp('coteivoire')">
         <div class="top">
           <div class="flag"><img src="https://flagcdn.com/w80/ci.png" alt="Drapeau Côte d'Ivoire"></div>
           <div>
             <h4>Côte d'Ivoire</h4>
             <p>Commander pour la Côte d'Ivoire via WhatsApp.</p>
+          </div>
+        </div>
+        <div class="go"><i class="fa-brands fa-whatsapp"></i> Continuer</div>
+      </button>
+
+      <button class="whatsapp-card" type="button" onclick="sendWhatsApp('senegal')">
+        <div class="top">
+          <div class="flag"><img src="https://flagcdn.com/w80/sn.png" alt="Drapeau Sénégal"></div>
+          <div>
+            <h4>Sénégal</h4>
+            <p>Commander pour le Sénégal via WhatsApp.</p>
           </div>
         </div>
         <div class="go"><i class="fa-brands fa-whatsapp"></i> Continuer</div>
