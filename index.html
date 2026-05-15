@@ -447,6 +447,23 @@ main.container{
   backdrop-filter:blur(3px) saturate(105%);
 }
 .product-card > *{position:relative;z-index:2}
+.product-card .close-mobile{
+  display:none;
+  position:absolute;
+  right:12px;
+  top:10px;
+  background:#fff;
+  border:1px solid rgba(6,42,32,0.10);
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  font-size:20px;
+  line-height:1;
+  color:#0b2418;
+  cursor:pointer;
+  z-index:8;
+  box-shadow:0 8px 18px rgba(0,0,0,0.12);
+}
 .product-info{
   flex:1;
   min-width:260px;
@@ -670,33 +687,42 @@ main.container{
   align-items:center;
   justify-content:center;
   z-index:5000;
-  padding:20px
+  padding:10px
 }
 .modal{
-  width:min(920px,94vw);
+  width:min(290px,84vw);
   background:#fff;
-  border-radius:12px;
-  padding:18px;
+  border-radius:16px;
+  padding:34px 10px 10px;
   overflow:auto;
-  box-shadow:0 24px 60px rgba(0,0,0,0.45);
-  max-height:86vh;
-  position:relative
+  box-shadow:0 20px 45px rgba(0,0,0,0.42);
+  max-height:58vh;
+  position:relative;
 }
 .modal h2{font-size:15px;margin-top:0;margin-right:28px}
 .modal .close{
   position:absolute;
-  right:16px;
-  top:12px;
-  background:transparent;
-  border:0;
-  font-size:18px;
-  cursor:pointer
+  right:8px;
+  top:8px;
+  width:32px;
+  height:32px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
+  border:1px solid rgba(6,42,32,0.12);
+  border-radius:50%;
+  font-size:16px;
+  cursor:pointer;
+  box-shadow:0 6px 14px rgba(0,0,0,0.10);
+  color:#0b2418;
+  z-index:2;
 }
 .whatsapp-choice{
   display:grid;
   grid-template-columns:1fr;
   gap:10px;
-  margin-top:12px
+  margin-top:12px;
 }
 .whatsapp-card{
   border:1px solid rgba(6,42,32,0.08);
@@ -705,12 +731,12 @@ main.container{
   padding:10px;
   cursor:pointer;
   text-align:left;
-  box-shadow:0 8px 18px rgba(6,42,32,0.06)
+  box-shadow:0 8px 18px rgba(6,42,32,0.06);
 }
 .whatsapp-card .top{
   display:flex;
   align-items:center;
-  gap:10px
+  gap:10px;
 }
 .whatsapp-card .flag{
   width:36px;
@@ -719,23 +745,23 @@ main.container{
   overflow:hidden;
   border:1px solid rgba(0,0,0,0.08);
   box-shadow:0 4px 10px rgba(0,0,0,0.08);
-  flex:0 0 auto
+  flex:0 0 auto;
 }
 .whatsapp-card .flag img{
   width:100%;
   height:100%;
-  object-fit:cover
+  object-fit:cover;
 }
 .whatsapp-card h4{
   margin:0;
   font-size:14px;
-  color:#082014
+  color:#082014;
 }
 .whatsapp-card p{
   margin:5px 0 0;
   color:#315348;
   font-size:12px;
-  line-height:1.35
+  line-height:1.35;
 }
 .whatsapp-card .go{
   margin-top:9px;
@@ -747,7 +773,7 @@ main.container{
   background:linear-gradient(90deg, var(--brand-green), var(--green-mid));
   color:#fff;
   font-weight:800;
-  font-size:12px
+  font-size:12px;
 }
 
 /* Contact FAB */
@@ -765,7 +791,7 @@ main.container{
   box-shadow:0 10px 30px rgba(2,50,26,0.25);
   background:var(--whatsapp-green);
   border:3px solid rgba(255,255,255,0.06);
-  cursor:pointer
+  cursor:pointer;
 }
 .fab button{
   width:100%;
@@ -807,7 +833,7 @@ footer{
 .footer-contact{
   margin-top:6px;
   color:#e6f7ea;
-  line-height:1.6
+  line-height:1.6;
 }
 
 @media (max-width:1100px){
@@ -851,7 +877,38 @@ footer{
   .company-tagline{font-size:12px; letter-spacing:4px}
   .logo-text img{height:46px}
   .featured-hero{height:220px}
-  .product-card{display:none !important;}
+
+  .product-card{
+    display:none;
+    position:fixed;
+    left:8px;
+    right:8px;
+    top:calc(var(--topbar-h) + var(--header-h) + 8px);
+    z-index:2200;
+    width:calc(100% - 16px);
+    margin:0;
+    padding:16px;
+    border-radius:12px;
+    box-shadow:0 18px 40px rgba(6,42,32,0.20);
+    background:var(--card-bg-overlay);
+    flex-direction:column;
+    overflow:auto;
+    max-height:calc(100vh - (var(--topbar-h) + var(--header-h) + 32px));
+  }
+  .product-card.show-on-mobile{
+    display:flex !important;
+    animation:slideIn 220ms ease;
+  }
+  .product-card .close-mobile{
+    display:flex;
+  }
+
+  .modal{
+    width:min(92vw,290px);
+    max-height:50vh;
+    padding:34px 10px 10px;
+  }
+  .modal h2{font-size:15px}
 }
 @media (max-width:480px){
   .hero-content{
@@ -874,6 +931,11 @@ footer{
     padding:12px 28px;
     font-size:15px;
   }
+}
+
+@keyframes slideIn{
+  from{transform:translateY(-8px);opacity:0}
+  to{transform:translateY(0);opacity:1}
 }
 </style>
 </head>
@@ -910,7 +972,7 @@ footer{
       <path class="zap" d="M10,24 C280,36 600,6 860,22 C1140,36 1460,6 1800,22 C1880,36 1960,10 1990,22" stroke-opacity="0.12"/>
       <path class="zap" id="zapBright" d="M20,22 C300,6 600,34 880,16 C1240,0 1520,32 1860,14 C1960,2 1980,30 1990,22" stroke-opacity="1" stroke-dasharray="520" stroke-dashoffset="520"/>
     </svg>
-    <div class="orbs" id="orbs">
+    <div class="orbs">
       <div class="orb" id="orbA"></div>
       <div class="orb" id="orbB"></div>
       <div class="orb" id="orbC"></div>
@@ -919,7 +981,7 @@ footer{
   </div>
 </div>
 
-<div style="height: calc(var(--topbar-h) + var(--header-h) + 8px);" aria-hidden="true"></div>
+<div style="height:calc(var(--topbar-h) + var(--header-h) + 8px);" aria-hidden="true"></div>
 
 <main class="container" role="main">
 
@@ -927,7 +989,7 @@ footer{
     <div class="models-header"><div class="models-title">Nos modèles</div></div>
 
     <div class="models" role="list">
-      <div class="model" role="button" onclick="selectModel(0)" tabindex="0" aria-label="GreenMini 10k">
+      <div class="model" role="button" onclick="selectModel(0)" tabindex="0" aria-label="GreenMini">
         <div class="thumb"><img src="Pwkb_Mini_3.png" alt="GreenMini" loading="eager" fetchpriority="high"></div>
         <div class="meta">
           <h4>GreenMini</h4>
@@ -936,7 +998,7 @@ footer{
         <div class="actions"><button class="btn-small" onclick="openTechModal(0);event.stopPropagation()">Infos</button></div>
       </div>
 
-      <div class="model" role="button" onclick="selectModel(1)" tabindex="0" aria-label="GreenCore 9k">
+      <div class="model" role="button" onclick="selectModel(1)" tabindex="0" aria-label="GreenCore">
         <div class="thumb"><img src="pwkb_123.png" alt="GreenCore" loading="eager"></div>
         <div class="meta">
           <h4>GreenCore</h4>
@@ -984,6 +1046,8 @@ footer{
   </section>
 
   <section class="product-card" role="region" aria-label="Produit principal" aria-hidden="true">
+    <button class="close-mobile" aria-label="Fermer" title="Fermer" onclick="closeOverlay()">×</button>
+
     <div class="product-info">
       <div class="top-label">Batterie externe haute performance</div>
       <div>
@@ -1117,7 +1181,7 @@ const models = [
       'Puissance pack approximative : ~32 W',
       'Type-C charge rapide (Quick Charge / QC compatible)',
       'Pas de Power Delivery (PD) — tests mesurés : 4.66 V → 1.52 A',
-      'Lampe de nuit LED intégrée — activation : appuyez 2 fois sur le bouton',
+      'Lampe de nuit LED intégrée — activation : appuyez 2 fois sur le bouton (Mode Pro)',
       'Garantie spéciale : 3 ans pour les 100 premiers clients'
     ],
     warranty: 'Garantie 3 ans — 100 premiers clients',
@@ -1132,7 +1196,7 @@ const models = [
     details: `
       <p style="margin-top:0;color:#23403a;line-height:1.45">
         <strong>GreenCore — ≈ 9 000 mAh</strong><br>
-        Technologie : <strong>Samsung</strong>, cellules testées et triées. Charge rapide via USB-C (Quick Charge).
+        Technologie : <strong>Samsung</strong>, cellules testées et triées. Charge rapide via USB-C (Quick Charge). Puissance pack : ~32 W.
       </p>
       <div style="margin-top:8px">
         <strong>Charge / Mesures</strong>
@@ -1211,21 +1275,67 @@ const models = [
         </strong>
       </div>
     `
+  },
+  {
+    id:'laptopcharger',
+    title:'Chargeur PC Portable',
+    subtitle:'Charge rapide universelle',
+    images:['chargeur_pc.png'],
+    specs:[
+      'Compatible PC portables USB-C / DC',
+      'Puissance : 65W à 100W',
+      'Protection surtension et surchauffe',
+      'Idéal pour bureau, domicile et déplacement'
+    ],
+    details: `
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
+        <strong>Chargeur pour ordinateur portable</strong><br>
+        Conçu pour les besoins du quotidien, avec une puissance stable et une compatibilité large.
+      </p>
+      <div style="margin-top:8px">
+        <ul>
+          <li>Compatible avec de nombreux modèles d’ordinateurs portables.</li>
+          <li>Sortie stable pour une meilleure protection de l’appareil.</li>
+          <li>Format pratique pour bureau et voyage.</li>
+        </ul>
+      </div>
+    `
+  },
+  {
+    id:'wifiups',
+    title:'Stabilisateur WiFi',
+    subtitle:'Internet même sans courant',
+    images:['wifi_stabilizer.png'],
+    specs:[
+      'Backup routeur et modem',
+      'Sorties 5V / 9V / 12V',
+      'Protection surtension',
+      'Maintien du WiFi en cas de coupure'
+    ],
+    details: `
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
+        <strong>Stabilisateur WiFi anti-coupure</strong><br>
+        Permet de garder le modem et le routeur actifs pendant les coupures de courant.
+      </p>
+      <div style="margin-top:8px">
+        <ul>
+          <li>Utile pour télétravail, commerce et maison.</li>
+          <li>Réduit les interruptions internet pendant les pannes.</li>
+          <li>Compact et simple à installer.</li>
+        </ul>
+      </div>
+    `
   }
 ];
 
-/* ===========================
-   DOM / UI logic
-   =========================== */
-const productCard = document.querySelector('.product-card');
 const heroImg = document.getElementById('heroMainImage');
 const specListEl = document.getElementById('specList');
 const modalOverlay = document.getElementById('modalOverlay');
 const modalContent = document.getElementById('modalContent');
-const fabLink = document.getElementById('fab');
 const fabButton = document.getElementById('fabButton');
 const orderBtnTop = document.getElementById('orderBtnTop');
 const detailsPanel = document.getElementById('detailsPanel');
+const productCard = document.querySelector('.product-card');
 
 let currentModel = 0;
 let currentImage = 0;
@@ -1365,8 +1475,8 @@ function updateHero(index){
   const prefillMessage = `Bonjour, je souhaite commander / obtenir le prix de la batterie externe : ${m.title} (ref: ${m.id})`;
   const waUrl = `https://wa.me/${whatsappNumbers.senegal}?text=` + encodeURIComponent(prefillMessage);
 
-  if(fabLink && window.matchMedia('(max-width:768px)').matches){
-    fabLink.href = '#';
+  if(fabButton){
+    fabButton.setAttribute('data-wa', waUrl);
   }
   if(orderBtnTop){
     orderBtnTop.setAttribute('data-wa', waUrl);
@@ -1413,15 +1523,27 @@ function selectModel(i){
   currentModel = i;
   updateHero(i);
 
-  productCard.classList.remove('show-on-mobile');
-  productCard.style.display = 'flex';
-  productCard.setAttribute('aria-hidden','false');
-  detailsPanel.style.display = 'block';
-  detailsPanel.setAttribute('aria-hidden','false');
+  if(window.matchMedia('(max-width:640px)').matches){
+    productCard.classList.add('show-on-mobile');
+    productCard.style.display = 'flex';
+    productCard.setAttribute('aria-hidden','false');
+    detailsPanel.style.display = 'block';
+    detailsPanel.setAttribute('aria-hidden','false');
+    setTimeout(()=>{
+      const p = productCard.querySelector('.btn-primary');
+      if(p) p.focus();
+    }, 120);
+  } else {
+    productCard.classList.remove('show-on-mobile');
+    productCard.style.display = 'flex';
+    productCard.setAttribute('aria-hidden','false');
+    detailsPanel.style.display = 'block';
+    detailsPanel.setAttribute('aria-hidden','false');
+    productCard.scrollIntoView({behavior:'smooth', block:'center'});
+  }
 
   currentImage = 0;
   startHeroSlideshow();
-  productCard.scrollIntoView({behavior:'smooth', block:'center'});
 }
 
 function openModal(html){
