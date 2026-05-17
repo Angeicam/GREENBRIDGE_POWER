@@ -130,11 +130,7 @@ button{font-family:inherit}
   text-shadow:0 2px 6px rgba(0,0,0,0.35);
   white-space:nowrap;
 }
-.right{
-  flex:0 0 auto;
-  display:flex;
-  align-items:center;
-}
+.right{flex:0 0 auto;display:flex;align-items:center}
 .flag-group{
   display:flex;
   align-items:center;
@@ -143,11 +139,11 @@ button{font-family:inherit}
 .flag-item{
   display:flex;
   align-items:center;
-  gap:6px;
-  padding:3px 6px;
-  border-radius:8px;
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(255,255,255,0.08);
+  gap:0;
+  padding:0;
+  border-radius:6px;
+  background:transparent;
+  border:0;
 }
 .flag-item img{
   width:28px;
@@ -155,13 +151,6 @@ button{font-family:inherit}
   object-fit:cover;
   border-radius:4px;
   box-shadow:0 4px 12px rgba(0,0,0,0.28);
-}
-.flag-item span{
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:0.5px;
-  text-transform:uppercase;
-  color:#fff;
 }
 
 header{
@@ -634,11 +623,9 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
     <div class="flag-group">
       <div class="flag-item">
         <img src="https://flagcdn.com/w80/ci.png" alt="Drapeau Côte d'Ivoire">
-        <span>CI</span>
       </div>
       <div class="flag-item">
         <img src="https://flagcdn.com/w80/sn.png" alt="Drapeau Sénégal">
-        <span>SN</span>
       </div>
     </div>
   </div>
@@ -1382,6 +1369,11 @@ function applyLedMode(idx){
 }
 
 (function(){
+  const flagImage = document.getElementById('flagImage');
+  if(!flagImage) return;
+})();
+
+(function(){
   const electricBand = document.getElementById('electricBand');
   if(!electricBand) return;
   const orbA = document.getElementById('orbA');
@@ -1412,15 +1404,25 @@ function applyLedMode(idx){
     const rect = cont.getBoundingClientRect();
     const cx = rect.width / 2;
     const cy = rect.height / 2;
+
+    const isDesktop = window.matchMedia('(min-width:641px)').matches;
+
     for(let i=0;i<orbs.length;i++){
       const orb = orbs[i];
       if(!orb) continue;
       const p = params[i];
-      const rx = Math.max(Math.min(rect.width * p.rxRatio, 4000), 120);
-      const ry = p.ry;
-      const angle = (time * p.speed * Math.PI * 2) + p.phase;
-      const x = cx + Math.cos(angle) * rx;
-      const y = cy + Math.sin(angle) * ry;
+
+      let x = cx;
+      let y = cy;
+
+      if(!isDesktop){
+        const rx = Math.max(Math.min(rect.width * p.rxRatio, 4000), 120);
+        const ry = p.ry;
+        const angle = (time * p.speed * Math.PI * 2) + p.phase;
+        x = cx + Math.cos(angle) * rx;
+        y = cy + Math.sin(angle) * ry;
+      }
+
       orb.style.left = x + 'px';
       orb.style.top = y + 'px';
       orb.style.transform = 'translate(-50%,-50%)';
