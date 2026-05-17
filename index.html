@@ -1405,24 +1405,15 @@ function applyLedMode(idx){
     const cx = rect.width / 2;
     const cy = rect.height / 2;
 
-    const isDesktop = window.matchMedia('(min-width:641px)').matches;
-
     for(let i=0;i<orbs.length;i++){
       const orb = orbs[i];
       if(!orb) continue;
       const p = params[i];
-
-      let x = cx;
-      let y = cy;
-
-      if(!isDesktop){
-        const rx = Math.max(Math.min(rect.width * p.rxRatio, 4000), 120);
-        const ry = p.ry;
-        const angle = (time * p.speed * Math.PI * 2) + p.phase;
-        x = cx + Math.cos(angle) * rx;
-        y = cy + Math.sin(angle) * ry;
-      }
-
+      const rx = Math.max(Math.min(rect.width * p.rxRatio, 4000), 120);
+      const ry = p.ry;
+      const angle = (time * p.speed * Math.PI * 2) + p.phase;
+      const x = cx + Math.cos(angle) * rx;
+      const y = cy + Math.sin(angle) * ry;
       orb.style.left = x + 'px';
       orb.style.top = y + 'px';
       orb.style.transform = 'translate(-50%,-50%)';
