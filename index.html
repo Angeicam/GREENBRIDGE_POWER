@@ -130,17 +130,39 @@ button{font-family:inherit}
   text-shadow:0 2px 6px rgba(0,0,0,0.35);
   white-space:nowrap;
 }
-.right{flex:0 0 auto;display:flex;align-items:center}
-.flag-slider{
-  width:34px;
-  height:22px;
-  overflow:hidden;
-  border-radius:6px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.30);
-  background:#fff;
-  border:1px solid rgba(255,255,255,0.10);
+.right{
+  flex:0 0 auto;
+  display:flex;
+  align-items:center;
 }
-.flag-slider img{width:100%;height:100%;object-fit:cover;transition:opacity .35s ease, transform .35s ease}
+.flag-group{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.flag-item{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:3px 6px;
+  border-radius:8px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+}
+.flag-item img{
+  width:28px;
+  height:19px;
+  object-fit:cover;
+  border-radius:4px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.28);
+}
+.flag-item span{
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:0.5px;
+  text-transform:uppercase;
+  color:#fff;
+}
 
 header{
   position:fixed;
@@ -353,90 +375,6 @@ main.container{min-height:calc(100vh - 160px)}
 .model .meta p small{display:block;color:rgba(2,17,10,0.88);font-weight:500;margin-top:4px}
 .btn-small{background:transparent;border:1px solid rgba(6,42,32,0.06);padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:700;color:#08110a}
 
-.product-card{
-  display:none;
-  width:min(980px,94%);
-  margin:22px auto 28px;
-  background:var(--card-bg-desktop);
-  border:1px solid var(--card-border);
-  border-radius:14px;
-  padding:18px;
-  box-shadow:0 12px 36px rgba(6,42,32,0.06);
-  color:#02110a;
-  gap:18px;
-  align-items:flex-start;
-  position:relative;
-  overflow:hidden;
-  backdrop-filter:blur(3px) saturate(105%);
-}
-.product-card > *{position:relative;z-index:2}
-.product-card .close-mobile{
-  display:none;
-  position:absolute;
-  right:12px;
-  top:10px;
-  background:#fff;
-  border:1px solid rgba(6,42,32,0.10);
-  width:32px;
-  height:32px;
-  border-radius:50%;
-  font-size:20px;
-  line-height:1;
-  color:#0b2418;
-  cursor:pointer;
-  z-index:8;
-  box-shadow:0 8px 18px rgba(0,0,0,0.12);
-}
-.product-info{flex:1;min-width:260px;padding-right:6px}
-.top-label{display:inline-block;padding:7px 10px;border-radius:999px;background:rgba(6,120,60,0.06);color:var(--brand-green);font-weight:800;margin-bottom:8px;font-size:13px}
-.product-title{font-size:20px;font-weight:900;margin:6px 0 6px;color:#02110a;line-height:1.08}
-.warranty-badge{
-  display:inline-block;
-  margin-left:8px;
-  vertical-align:middle;
-  padding:8px 12px;
-  border-radius:999px;
-  background:linear-gradient(90deg,#ffd54a,#ffb300);
-  color:#08110a;
-  font-weight:900;
-  font-size:13px;
-  box-shadow:0 10px 30px rgba(255,180,0,0.18);
-  border:1px solid rgba(0,0,0,0.06)
-}
-.product-sub{font-size:13px;color:rgba(2,17,10,0.95);margin-bottom:10px;line-height:1.35}
-.features{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
-.feature-pill{background:rgba(255,255,255,0.92);padding:7px 10px;border-radius:999px;border:1px solid rgba(6,42,32,0.04);color:var(--brand-green);font-weight:800;font-size:13px}
-.specs-block{margin-top:12px}
-.specs-title{font-weight:800;margin-bottom:8px;font-size:15px}
-.spec-list{display:flex;flex-direction:column;gap:8px;color:#02110a;font-size:15px}
-.spec-list > div{background:rgba(255,255,255,0.96);padding:10px 12px;border-radius:10px;border:1px solid rgba(6,42,32,0.04);box-shadow:0 6px 14px rgba(6,42,32,0.03)}
-.product-side{width:340px;display:flex;flex-direction:column;gap:12px;align-items:stretch}
-.product-image{
-  width:100%;
-  height:220px;
-  border-radius:12px;
-  overflow:hidden;
-  background:linear-gradient(180deg,#fbfeff,#f3f9fc);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border:1px solid rgba(6,42,32,0.04)
-}
-.product-image img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  object-position:center;
-  display:block;
-  cursor:pointer;
-  transition:transform .35s;
-  border-radius:8px
-}
-.cta-group{display:flex;flex-direction:column;gap:10px}
-.btn-primary{background:linear-gradient(90deg,var(--brand-green),var(--green-mid));color:#fff;border:0;padding:12px 14px;border-radius:12px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
-.btn-secondary{background:#fff;border:1px solid rgba(6,42,32,0.06);padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:800}
-.details-panel{display:none;margin-top:12px;width:100%;background:rgba(255,255,255,0.98);border-radius:10px;padding:12px;color:#02110a;box-shadow:0 8px 24px rgba(6,42,32,0.06);border:1px solid rgba(6,42,32,0.04);line-height:1.45}
-
 .futures-title{display:flex;align-items:center;justify-content:center;margin-top:24px;margin-bottom:10px}
 .futures-title .models-title{padding:8px 14px}
 .featured{margin-top:10px;border-radius:12px;overflow:hidden;border:1px solid rgba(212,175,55,0.12);background:rgba(255,255,255,0.94);box-shadow:0 12px 36px rgba(6,42,32,0.06)}
@@ -488,22 +426,6 @@ main.container{min-height:calc(100vh - 160px)}
   color:#0b2418;
   z-index:20;
   flex:0 0 auto;
-}
-.modal-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
-  align-items:start;
-}
-.modal-media{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
-.modal-media img{
-  width:100%;
-  border-radius:12px;
-  object-fit:cover;
 }
 .modal-body{color:#23403a;line-height:1.5}
 .modal-body ul{margin-top:8px;margin-bottom:0;padding-left:20px}
@@ -643,27 +565,9 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
 }
 @media (max-width:900px){
   .featured-hero{height:280px}
-  .product-card{width:min(980px,94%)}
 }
 @media (max-width:820px){
   .models{grid-template-columns:1fr;gap:20px}
-  .card{min-height:auto;text-align:center}
-  .card .image-wrap{
-    height:220px;
-    display:flex;
-    justify-content:center;
-    align-items:center
-  }
-  .card-content{
-    padding:18px;
-    text-align:center;
-    align-items:center
-  }
-  .card .btn-card{
-    margin:12px auto 0;
-    font-size:15px;
-    padding:10px 20px
-  }
   .company-name{font-size:30px}
   .logo-text img{height:50px}
   .fab{width:50px;height:50px}
@@ -672,59 +576,16 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
 @media (max-width:768px){
   .company-name{font-size:26px}
   .featured-hero{height:240px}
-  .card .image-wrap{height:200px}
-  .card-content{padding:16px 12px 18px}
 }
 @media (max-width:640px){
   .company-tagline{font-size:12px;letter-spacing:4px}
   .logo-text img{height:46px}
   .featured-hero{height:220px}
-
-  .product-card{
-    display:none;
-    position:fixed;
-    left:8px;
-    right:8px;
-    top:calc(var(--topbar-h) + var(--header-h) + 8px);
-    z-index:2200;
-    width:calc(100% - 16px);
-    margin:0;
-    padding:16px;
-    border-radius:16px;
-    box-shadow:0 18px 40px rgba(6,42,32,0.20);
-    background:var(--card-bg-overlay);
-    flex-direction:column;
-    overflow:auto;
-    max-height:calc(100vh - (var(--topbar-h) + var(--header-h) + 24px));
-  }
-  .product-card.show-on-mobile{display:flex !important;animation:slideIn 220ms ease}
-  .product-card .close-mobile{display:flex}
-
-  .product-side{
-    order:-1;
-    width:100%;
-    margin-bottom:4px;
-  }
-  .product-image{height:260px}
-  .product-info{width:100%;min-width:0;padding-right:0}
-
-  .modal-overlay{
-    align-items:center;
-    padding:10px;
-  }
   .modal{
     width:min(96vw,760px);
     max-height:calc(100vh - 20px);
     padding:16px;
     border-radius:16px;
-  }
-  .modal .close{
-    position:sticky;
-    top:0;
-    margin-left:auto;
-    display:flex;
-    z-index:20;
-    background:#fff;
   }
   .modal-carousel-stage{
     height:240px;
@@ -733,10 +594,6 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
     width:36px;
     height:36px;
     font-size:15px;
-  }
-  .modal-grid{
-    grid-template-columns:1fr;
-    gap:12px;
   }
   .modal h2{font-size:17px}
 }
@@ -761,12 +618,6 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
     padding:12px 28px;
     font-size:15px;
   }
-  .product-image{height:230px}
-}
-
-@keyframes slideIn{
-  from{transform:translateY(-8px);opacity:0}
-  to{transform:translateY(0);opacity:1}
 }
 </style>
 </head>
@@ -780,8 +631,15 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
     <div class="promo-text"><span>Assemblé en Afrique de l'Ouest</span></div>
   </div>
   <div class="right" aria-hidden="true">
-    <div class="flag-slider">
-      <img id="flagImage" src="https://flagcdn.com/w80/ci.png" alt="Drapeau Côte d'Ivoire">
+    <div class="flag-group">
+      <div class="flag-item">
+        <img src="https://flagcdn.com/w80/ci.png" alt="Drapeau Côte d'Ivoire">
+        <span>CI</span>
+      </div>
+      <div class="flag-item">
+        <img src="https://flagcdn.com/w80/sn.png" alt="Drapeau Sénégal">
+        <span>SN</span>
+      </div>
     </div>
   </div>
 </div>
@@ -876,48 +734,6 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
     </div>
   </section>
 
-  <section class="product-card" role="region" aria-label="Produit principal" aria-hidden="true">
-    <button class="close-mobile" aria-label="Fermer" title="Fermer" onclick="closeOverlay()">×</button>
-
-    <div class="product-info">
-      <div class="top-label">Batterie externe haute performance</div>
-      <div>
-        <span class="product-title" id="heroTitle">GreenMini — 10 000 mAh</span>
-        <span id="warrantyBadge" class="warranty-badge" style="display:none">Garantie 3 ans — 100 premiers clients</span>
-      </div>
-      <div class="product-sub" id="heroSubtitle">Ultra-compact</div>
-
-      <div class="features" aria-hidden="false" style="margin-top:8px">
-        <div class="feature-pill">Durabilité</div>
-        <div class="feature-pill">Solidité</div>
-        <div class="feature-pill">Technique</div>
-      </div>
-
-      <div class="specs-block">
-        <div class="specs-title">Technique — Spécifications</div>
-        <div class="spec-list" id="specList"></div>
-      </div>
-
-      <div id="detailsPanel" class="details-panel" aria-hidden="true"></div>
-    </div>
-
-    <div class="product-side">
-      <div class="product-image" id="productImageBox" title="Cliquer pour changer d'image" role="button" tabindex="0">
-        <img id="heroMainImage" src="Pwkb_Mini_3.png" alt="GreenMini image" loading="eager" fetchpriority="high">
-      </div>
-
-      <div class="cta-group" aria-label="Actions produit">
-        <button id="orderBtnTop" class="btn-primary" type="button">
-          <i class="fa-brands fa-whatsapp"></i> Commander
-        </button>
-        <button id="infoBtnHero" class="btn-secondary" type="button" onclick="openTechModal(currentModel)">
-          <i class="fa-solid fa-circle-info"></i> Infos techniques
-        </button>
-        <button id="detailsToggle" class="btn-small" type="button"><i class="fa-solid fa-list"></i> Afficher détails</button>
-      </div>
-    </div>
-  </section>
-
   <div class="futures-title" id="futures">
     <div class="models-title">Projets à venir</div>
   </div>
@@ -936,7 +752,7 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
       </div>
 
       <div style="margin-top:12px">
-        <button class="btn-secondary" type="button" onclick="openPackModal()">Infos pack</button>
+        <button class="btn-small" type="button" onclick="openPackModal()">Infos pack</button>
       </div>
     </div>
   </section>
@@ -1159,26 +975,12 @@ const models = [
   }
 ];
 
-const heroImg = document.getElementById('heroMainImage');
-const specListEl = document.getElementById('specList');
 const modalOverlay = document.getElementById('modalOverlay');
 const modalContent = document.getElementById('modalContent');
 const fabButton = document.getElementById('fabButton');
-const orderBtnTop = document.getElementById('orderBtnTop');
-const detailsPanel = document.getElementById('detailsPanel');
-const productCard = document.querySelector('.product-card');
 const modelCards = Array.from(document.querySelectorAll('.models .model'));
 
 let currentModel = 0;
-let currentImage = 0;
-let heroTimer = null;
-const SLIDE_INTERVAL_MS = 5000;
-
-const whatsappNumbers = {
-  senegal: '221774015004',
-  coteivoire: '22507070707'
-};
-
 let ledState = {
   modes: [],
   index: 0,
@@ -1215,16 +1017,6 @@ function allImageUrls(){
 function syncActiveModelCard(index){
   modelCards.forEach((card, idx)=>{
     card.classList.toggle('active', idx === index);
-  });
-}
-
-function renderSpecs(index){
-  const m = models[index] || models[0];
-  specListEl.innerHTML = '';
-  (m.specs || []).forEach(s=>{
-    const d = document.createElement('div');
-    d.textContent = s;
-    specListEl.appendChild(d);
   });
 }
 
@@ -1290,120 +1082,6 @@ function buildProPanelHTML(model){
   }
 
   return html;
-}
-
-function updateHero(index){
-  const m = models[index] || models[0];
-  document.getElementById('heroTitle').textContent = m.title;
-  document.getElementById('heroSubtitle').textContent = m.subtitle || '';
-  heroImg.src = (m.images && m.images[0]) ? m.images[0] : heroImg.src;
-  heroImg.alt = m.title;
-
-  detailsPanel.innerHTML = `<strong style="font-weight:800">${m.title}</strong><div style="margin-top:8px">${m.details}</div>`;
-  renderSpecs(index);
-
-  const wb = document.getElementById('warrantyBadge');
-  if(wb){
-    if(m.warranty){
-      wb.style.display = 'inline-block';
-      wb.setAttribute('aria-hidden','false');
-      wb.textContent = m.warranty;
-    } else {
-      wb.style.display = 'none';
-      wb.setAttribute('aria-hidden','true');
-    }
-  }
-
-  const prefillMessage = `Bonjour, je souhaite commander / obtenir le prix de la batterie externe : ${m.title} (ref: ${m.id})`;
-  const waUrl = `https://wa.me/${whatsappNumbers.senegal}?text=` + encodeURIComponent(prefillMessage);
-
-  if(fabButton){
-    fabButton.setAttribute('data-wa', waUrl);
-  }
-  if(orderBtnTop){
-    orderBtnTop.setAttribute('data-wa', waUrl);
-  }
-
-  const proPanel = document.getElementById('proPanel');
-  if(proPanel){
-    proPanel.innerHTML = buildProPanelHTML(m);
-    proPanel.style.display = 'none';
-    proPanel.setAttribute('aria-hidden','true');
-  }
-
-  if(m.id === 'greencore'){
-    ledState.modes = m.ledModes.slice();
-    ledState.index = 0;
-    setTimeout(initLedControls, 60);
-  } else {
-    ledState.modes = [];
-    if(ledState.clickTimer){
-      clearTimeout(ledState.clickTimer);
-      ledState.clickTimer = null;
-      ledState.clickCount = 0;
-    }
-  }
-
-  refreshContactAction();
-}
-
-function startHeroSlideshow(){
-  stopHeroSlideshow();
-  heroTimer = setInterval(()=>{
-    const m = models[currentModel] || models[0];
-    if(!m.images || m.images.length===0) return;
-    currentImage = (currentImage + 1) % m.images.length;
-    heroImg.src = m.images[currentImage];
-  }, SLIDE_INTERVAL_MS);
-}
-function stopHeroSlideshow(){
-  if(heroTimer){
-    clearInterval(heroTimer);
-    heroTimer = null;
-  }
-}
-
-function selectModel(i){
-  currentModel = i;
-  syncActiveModelCard(i);
-  updateHero(i);
-
-  const isMobile = window.matchMedia('(max-width:640px)').matches;
-
-  if(isMobile){
-    productCard.classList.add('show-on-mobile');
-    productCard.style.display = 'flex';
-    productCard.setAttribute('aria-hidden','false');
-    document.body.classList.add('no-scroll');
-    detailsPanel.style.display = 'block';
-    detailsPanel.setAttribute('aria-hidden','false');
-    setTimeout(()=>{
-      const p = productCard.querySelector('.btn-primary');
-      if(p) p.focus();
-    }, 120);
-  } else {
-    document.body.classList.remove('no-scroll');
-    productCard.classList.remove('show-on-mobile');
-    productCard.style.display = 'flex';
-    productCard.setAttribute('aria-hidden','false');
-    detailsPanel.style.display = 'block';
-    detailsPanel.setAttribute('aria-hidden','false');
-    productCard.scrollIntoView({behavior:'smooth', block:'center'});
-  }
-
-  currentImage = 0;
-  startHeroSlideshow();
-}
-
-function closeOverlay(){
-  productCard.classList.remove('show-on-mobile');
-  productCard.style.display = 'none';
-  productCard.setAttribute('aria-hidden','true');
-  detailsPanel.style.display = 'none';
-  detailsPanel.setAttribute('aria-hidden','true');
-  document.body.classList.remove('no-scroll');
-  const first = document.querySelector('.models .model');
-  if(first) first.focus();
 }
 
 function stopModalCarousel(){
@@ -1585,12 +1263,17 @@ function openCountryModal(){
       </button>
     </div>
     <div style="margin-top:12px;text-align:right">
-      <button type="button" class="btn-secondary" onclick="closeModal()">Fermer</button>
+      <button type="button" class="btn-small" onclick="closeModal()">Fermer</button>
     </div>
   `;
   openModal(html);
 }
+
 function sendWhatsApp(country){
+  const whatsappNumbers = {
+    senegal: '221774015004',
+    coteivoire: '22507070707'
+  };
   const number = whatsappNumbers[country] || whatsappNumbers.senegal;
   const countryLabel = country === 'coteivoire' ? "la Côte d'Ivoire" : 'le Sénégal';
   const message = `Bonjour, je souhaite commander un produit GreenBridge pour ${countryLabel}. Merci de me communiquer les modèles disponibles et les prix.`;
@@ -1599,59 +1282,13 @@ function sendWhatsApp(country){
   window.open(url, '_blank', 'noopener,noreferrer');
 }
 
-function buildMailtoUrl(modelIndex){
-  const m = models[modelIndex] || models[0];
-  const subject = `Commande GreenBridge — ${m.title}`;
-  const body = [
-    `Bonjour,`,
-    ``,
-    `Je souhaite obtenir des informations et/ou commander : ${m.title}`,
-    `Référence : ${m.id}`,
-    ``,
-    `Merci de me répondre avec les prix et la disponibilité.`,
-    ``,
-    `Cordialement,`
-  ].join('\n');
-  return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-}
-
-function refreshContactAction(){
-  const isDesktop = window.matchMedia('(min-width:769px)').matches;
-  if(isDesktop){
-    if(orderBtnTop){
-      orderBtnTop.innerHTML = '<i class="fa-solid fa-envelope"></i> Envoyer un mail';
-      orderBtnTop.onclick = ()=>{ window.location.href = buildMailtoUrl(currentModel); };
-    }
-    if(fabButton){
-      fabButton.innerHTML = '<i class="fa-solid fa-envelope" aria-hidden="true"></i>';
-      fabButton.onclick = ()=>{ window.location.href = buildMailtoUrl(currentModel); };
-      fabButton.setAttribute('aria-label','Envoyer un mail');
-    }
-  } else {
-    if(orderBtnTop){
-      orderBtnTop.innerHTML = '<i class="fa-brands fa-whatsapp"></i> Commander';
-      orderBtnTop.onclick = openCountryModal;
-    }
-    if(fabButton){
-      fabButton.innerHTML = '<i class="fa-brands fa-whatsapp" aria-hidden="true"></i>';
-      fabButton.onclick = openCountryModal;
-      fabButton.setAttribute('aria-label','Commander via WhatsApp');
-    }
-  }
+function selectModel(i){
+  currentModel = i;
+  syncActiveModelCard(i);
+  openTechModal(i);
 }
 
 modalOverlay.addEventListener('click', ev=>{ if(ev.target === modalOverlay) closeModal(); });
-
-document.getElementById('detailsToggle').addEventListener('click', ()=>{
-  const vis = detailsPanel.style.display === 'block';
-  if(vis){
-    detailsPanel.style.display='none';
-    detailsPanel.setAttribute('aria-hidden','true');
-  } else {
-    detailsPanel.style.display='block';
-    detailsPanel.setAttribute('aria-hidden','false');
-  }
-});
 
 const proToggleBtn = document.getElementById('proToggle');
 if(proToggleBtn){
@@ -1743,28 +1380,6 @@ function applyLedMode(idx){
     });
   }
 }
-
-(function(){
-  const flagImage = document.getElementById('flagImage');
-  if(!flagImage) return;
-  const flags = [
-    {src:'https://flagcdn.com/w80/ci.png', alt:"Drapeau Côte d'Ivoire"},
-    {src:'https://flagcdn.com/w80/sn.png', alt:'Drapeau Sénégal'}
-  ];
-  let currentFlag = 0;
-
-  setInterval(()=>{
-    currentFlag = (currentFlag + 1) % flags.length;
-    flagImage.style.opacity = '0.25';
-    flagImage.style.transform = 'scale(0.96)';
-    setTimeout(()=>{
-      flagImage.src = flags[currentFlag].src;
-      flagImage.alt = flags[currentFlag].alt;
-      flagImage.style.opacity = '1';
-      flagImage.style.transform = 'scale(1)';
-    }, 180);
-  }, 5000);
-})();
 
 (function(){
   const electricBand = document.getElementById('electricBand');
@@ -1911,63 +1526,28 @@ document.addEventListener('DOMContentLoaded', ()=>{
     });
   });
 
-  if(window.matchMedia('(max-width:640px)').matches){
-    updateHero(0);
-    syncActiveModelCard(0);
-    productCard.style.display = 'none';
-    productCard.setAttribute('aria-hidden','true');
-    document.body.classList.remove('no-scroll');
-  } else {
-    selectModel(0);
-  }
+  syncActiveModelCard(0);
 
-  refreshContactAction();
-  detailsPanel.style.display = 'block';
-  detailsPanel.setAttribute('aria-hidden','false');
-});
-
-window.addEventListener('resize', ()=>{
-  refreshContactAction();
-  const isMobile = window.matchMedia('(max-width:640px)').matches;
-
-  if(isMobile){
-    if(!productCard.classList.contains('show-on-mobile')){
-      productCard.style.display = 'none';
-      document.body.classList.remove('no-scroll');
-    }
-  } else {
-    document.body.classList.remove('no-scroll');
-    if(productCard.style.display === 'none' && currentModel !== null){
-      productCard.style.display = 'flex';
-    }
-  }
+  document.querySelectorAll('.models .model').forEach((el, idx)=>{
+    el.addEventListener('click', ()=>{
+      currentModel = idx;
+      syncActiveModelCard(idx);
+    }, true);
+  });
 });
 
 document.addEventListener('keydown', (e)=>{
   if(e.key === 'Escape'){
     if(modalOverlay.style.display === 'flex') closeModal();
-    if(productCard.classList.contains('show-on-mobile')) closeOverlay();
   }
 });
 
-const productImageBox = document.getElementById('productImageBox');
-if(productImageBox){
-  productImageBox.addEventListener('click', ()=>{
-    const m = models[currentModel] || models[0];
-    if(!m.images || m.images.length===0) return;
-    currentImage = (currentImage + 1) % m.images.length;
-    heroImg.style.transform = 'scale(0.98)';
-    setTimeout(()=> heroImg.style.transform = 'scale(1)', 120);
-    heroImg.src = m.images[currentImage];
-    startHeroSlideshow();
-  });
-
-  productImageBox.addEventListener('keydown', (e)=>{
-    if(e.key === 'Enter' || e.key === ' '){
-      e.preventDefault();
-      productImageBox.click();
-    }
-  });
+const fab = document.getElementById('fab');
+if(fabButton){
+  fabButton.addEventListener('click', openCountryModal);
+}
+if(fab){
+  fab.addEventListener('click', openCountryModal);
 }
 </script>
 </body>
