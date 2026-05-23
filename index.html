@@ -14,6 +14,9 @@
 <link rel="preload" as="image" href="green bridge domo.png">
 <link rel="preload" as="image" href="Pwkb_Mini_3.png">
 <link rel="preload" as="image" href="pwkb_123.png">
+<link rel="preload" as="image" href="Greenplus_1.png">
+<link rel="preload" as="image" href="Greenplus_2.png">
+<link rel="preload" as="image" href="Greenplus_3.png">
 <link rel="preload" as="image" href="pwkb_6.png">
 <link rel="preload" as="image" href="pwkb_wireless_1.png">
 <link rel="preload" as="image" href="Nos_produits_1.png">
@@ -691,49 +694,58 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
         <div class="actions"><button class="btn-small" onclick="openTechModal(1);event.stopPropagation()">Infos</button></div>
       </div>
 
-      <div class="model" role="button" onclick="selectModel(2)" tabindex="0" aria-label="GreenPro">
+      <div class="model" role="button" onclick="selectModel(2)" tabindex="0" aria-label="GreenPlus">
+        <div class="thumb"><img src="Greenplus_1.png" alt="GreenPlus" loading="lazy"></div>
+        <div class="meta">
+          <h4>GreenPlus</h4>
+          <p>GreenPlus ≈ 9 000 mAh<br><small>Micro USB • bonne autonomie • garantie 2 ans</small></p>
+        </div>
+        <div class="actions"><button class="btn-small" onclick="openTechModal(2);event.stopPropagation()">Infos</button></div>
+      </div>
+
+      <div class="model" role="button" onclick="selectModel(3)" tabindex="0" aria-label="GreenPro">
         <div class="thumb"><img src="pwkb_6.png" alt="GreenPro" loading="lazy"></div>
         <div class="meta">
           <h4>GreenPro</h4>
           <p>GreenPro ≈ 12 000 mAh<br><small>Charge rapide USB-C • Pack haute qualité</small></p>
         </div>
-        <div class="actions"><button class="btn-small" onclick="openTechModal(2);event.stopPropagation()">Infos</button></div>
+        <div class="actions"><button class="btn-small" onclick="openTechModal(3);event.stopPropagation()">Infos</button></div>
       </div>
 
-      <div class="model" role="button" onclick="selectModel(3)" tabindex="0" aria-label="GreenWire">
+      <div class="model" role="button" onclick="selectModel(4)" tabindex="0" aria-label="GreenWire">
         <div class="thumb"><img src="Greenwire_1.png" alt="GreenWire" loading="lazy"></div>
         <div class="meta">
           <h4>GreenWire</h4>
           <p>GreenWire ≈ 20 000 mAh<br><small>Batterie testée en réel • cellules hautes performances</small></p>
         </div>
-        <div class="actions"><button class="btn-small" onclick="openTechModal(3);event.stopPropagation()">Infos</button></div>
+        <div class="actions"><button class="btn-small" onclick="openTechModal(4);event.stopPropagation()">Infos</button></div>
       </div>
 
-      <div class="model" role="button" onclick="selectModel(4)" tabindex="0" aria-label="GreenWireless">
+      <div class="model" role="button" onclick="selectModel(5)" tabindex="0" aria-label="GreenWireless">
         <div class="thumb"><img src="pwkb_wireless_1.png" alt="GreenWireless" loading="lazy"></div>
         <div class="meta">
           <h4>GreenWireless</h4>
           <p>GreenWireless — 20 000 mAh<br><small>Boîtier amovible • Charge rapide PD / QC3.0 • Sans-fil</small></p>
         </div>
-        <div class="actions"><button class="btn-small" onclick="openTechModal(4);event.stopPropagation()">Infos</button></div>
+        <div class="actions"><button class="btn-small" onclick="openTechModal(5);event.stopPropagation()">Infos</button></div>
       </div>
 
-      <div class="model" role="button" onclick="selectModel(5)" tabindex="0" aria-label="Chargeur ordinateur portable">
+      <div class="model" role="button" onclick="selectModel(6)" tabindex="0" aria-label="Chargeur ordinateur portable">
         <div class="thumb"><img src="Chargeur_ordi_1.png" alt="Chargeur ordinateur portable" loading="lazy"></div>
         <div class="meta">
           <h4>Chargeur PC Portable</h4>
           <p>65W à 100W<br><small>Charge rapide universelle pour ordinateurs portables.</small></p>
         </div>
-        <div class="actions"><button class="btn-small" onclick="openTechModal(5);event.stopPropagation()">Infos</button></div>
+        <div class="actions"><button class="btn-small" onclick="openTechModal(6);event.stopPropagation()">Infos</button></div>
       </div>
 
-      <div class="model" role="button" onclick="selectModel(6)" tabindex="0" aria-label="Stabilisateur WiFi">
+      <div class="model" role="button" onclick="selectModel(7)" tabindex="0" aria-label="Stabilisateur WiFi">
         <div class="thumb"><img src="wifi_2.png" alt="Stabilisateur WiFi" loading="lazy"></div>
         <div class="meta">
           <h4>Stabilisateur WiFi</h4>
           <p>Anti-coupure courant<br><small>Maintient modem et routeur actifs pendant les pannes.</small></p>
         </div>
-        <div class="actions"><button class="btn-small" onclick="openTechModal(6);event.stopPropagation()">Infos</button></div>
+        <div class="actions"><button class="btn-small" onclick="openTechModal(7);event.stopPropagation()">Infos</button></div>
       </div>
     </div>
   </section>
@@ -784,8 +796,9 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
   </div>
   <div style="color:#e6f7ea">© <span id="year"></span> GREENBRIDGE TECHNOLOGIES — Assemblé par des africains</div>
 </footer>
+
 <script>
-const CONTACT_EMAIL = 'contact@greenbridge.com';
+  const CONTACT_EMAIL = 'contact@greenbridge.com';
 
 const models = [
   {
@@ -861,7 +874,40 @@ const models = [
       </div>
     `
   },
-    {
+  {
+    id:'greenplus',
+    title:'GreenPlus — ≈ 9 000 mAh',
+    subtitle:'Micro USB • bonne autonomie',
+    images:['Greenplus_1.png','Greenplus_2.png','Greenplus_3.png'],
+    specs:[
+      'Capacité nominale : ≈ 9 000 mAh',
+      'Cellules : Samsung, LG ou cellules chinoises premium',
+      'Cellules testées et assemblées avec contrôle qualité',
+      'Recharge : Micro USB',
+      'Pas de charge rapide',
+      'Bonne autonomie pour un usage quotidien',
+      'Garantie : 2 ans'
+    ],
+    warranty: 'Garantie 2 ans',
+    details: `
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
+        <strong>GreenPlus — ≈ 9 000 mAh</strong><br>
+        Power bank testé et assemblé avec des cellules <strong>Samsung</strong>, <strong>LG</strong> ou des cellules chinoises premium selon disponibilité et sélection qualité. 
+        Il offre une <strong>bonne autonomie</strong>, sans charge rapide, avec une recharge <strong>Micro USB</strong>.
+      </p>
+      <div style="margin-top:8px">
+        <strong>Caractéristiques principales</strong>
+        <ul>
+          <li>Capacité pratique : environ 9 000 mAh.</li>
+          <li>Recharge par Micro USB.</li>
+          <li>Pas de charge rapide : conception simple et fiable.</li>
+          <li>Autonomie adaptée à une utilisation quotidienne.</li>
+          <li>Garantie 2 ans.</li>
+        </ul>
+      </div>
+    `
+  },
+  {
     id:'greenpro',
     title:'GreenPro — ≈ 12 000 mAh',
     subtitle:'Multi-appareils • Charge rapide USB-C',
