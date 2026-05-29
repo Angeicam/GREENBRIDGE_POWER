@@ -397,6 +397,23 @@ main.container{min-height:calc(100vh - 160px)}
 .featured-copy p{color:rgba(2,17,10,0.95);margin-top:10px;line-height:1.45}
 .availability-badge{display:inline-block;margin-top:12px;padding:10px 18px;border-radius:999px;background:linear-gradient(90deg,#ffd54a,#ffb300);color:#08110a;font-weight:900;font-size:16px;box-shadow:0 10px 30px rgba(255,180,0,0.18);border:1px solid rgba(0,0,0,0.06)}
 
+.survey-section{margin-top:24px;display:flex;justify-content:center}
+.survey-card{width:100%;max-width:900px;background:linear-gradient(180deg, rgba(255,255,255,0.96), rgba(245,250,247,0.92));border:1px solid rgba(6,42,32,0.08);border-radius:18px;box-shadow:0 14px 38px rgba(6,42,32,0.08);padding:22px 20px;color:#08110a}
+.survey-kicker{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:linear-gradient(90deg,#eaf7ef,#f7fbf9);color:#0b4d26;font-weight:800;font-size:12px;letter-spacing:0.4px;text-transform:uppercase;border:1px solid rgba(6,42,32,0.06)}
+.survey-card h3{margin:12px 0 8px;font-size:22px;color:#04462e;font-weight:800;line-height:1.25}
+.survey-card p{margin:0;color:#315348;line-height:1.5}
+.survey-action{margin-top:14px;display:flex;justify-content:flex-start}
+.survey-form{display:grid;gap:14px;margin-top:12px}
+.survey-question{background:#fff;border:1px solid rgba(6,42,32,0.08);border-radius:14px;padding:14px;box-shadow:0 8px 18px rgba(6,42,32,0.04)}
+.survey-label{font-weight:800;color:#082014;margin-bottom:10px;line-height:1.35}
+.survey-scale{display:flex;gap:8px;flex-wrap:wrap}
+.survey-pill{display:inline-flex;align-items:center;justify-content:center;min-width:42px;height:42px;border-radius:999px;border:1px solid rgba(6,42,32,0.12);background:linear-gradient(180deg,#ffffff,#f5faf7);cursor:pointer;transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease}
+.survey-pill:hover{transform:translateY(-1px);box-shadow:0 8px 16px rgba(6,42,32,0.08);border-color:rgba(4,70,46,0.25)}
+.survey-pill input{display:none}
+.survey-pill span{font-weight:800;color:#0b2418}
+.survey-comment{width:100%;min-height:110px;resize:vertical;border-radius:12px;border:1px solid rgba(6,42,32,0.12);padding:12px 14px;font-family:inherit;font-size:14px;outline:none;background:#fff;color:#08110a}
+.survey-comment:focus{border-color:rgba(4,70,46,0.35);box-shadow:0 0 0 4px rgba(4,70,46,0.08)}
+
 .modal-overlay{
   position:fixed;
   inset:0;
@@ -606,6 +623,13 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
     font-size:15px;
   }
   .modal h2{font-size:17px}
+  .survey-card{
+    padding:18px 16px;
+    border-radius:16px;
+  }
+  .survey-card h3{
+    font-size:19px;
+  }
 }
 @media (max-width:480px){
   .hero-content{
@@ -769,6 +793,19 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
 
       <div style="margin-top:12px">
         <button class="btn-small" type="button" onclick="openPackModal()">Infos pack</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="survey-section" aria-label="Enquête de satisfaction">
+    <div class="survey-card">
+      <div class="survey-kicker">Enquête de satisfaction</div>
+      <h3>Votre avis nous aide à améliorer GreenBridge Technologies</h3>
+      <p>
+        Prenez quelques secondes pour partager votre retour. Cette enquête courte nous permet d’améliorer la qualité, le design et l’expérience client.
+      </p>
+      <div class="survey-action">
+        <button type="button" class="btn-small" onclick="openSurveyModal()">Répondre à l’enquête</button>
       </div>
     </div>
   </section>
@@ -1247,6 +1284,56 @@ function openPackModal(){
   `;
   openModal(html);
   startModalCarousel(packImages);
+}
+  function openSurveyModal(){
+  const html = `
+    <h2 style="margin-top:0;color:#08110a">Enquête de satisfaction — GreenBridge Technologies</h2>
+    <p style="margin-top:0;color:#315348;line-height:1.45">
+      Merci de prendre un instant pour partager votre avis. Vos réponses restent simples, claires et nous aident à améliorer notre offre.
+    </p>
+
+    <div class="survey-form">
+      <div class="survey-question">
+        <div class="survey-label">1. Comment évaluez-vous globalement GreenBridge ?</div>
+        <div class="survey-scale">
+          <label class="survey-pill"><input type="radio" name="q1" value="1"><span>1</span></label>
+          <label class="survey-pill"><input type="radio" name="q1" value="2"><span>2</span></label>
+          <label class="survey-pill"><input type="radio" name="q1" value="3"><span>3</span></label>
+          <label class="survey-pill"><input type="radio" name="q1" value="4"><span>4</span></label>
+          <label class="survey-pill"><input type="radio" name="q1" value="5"><span>5</span></label>
+        </div>
+      </div>
+
+      <div class="survey-question">
+        <div class="survey-label">2. Que pensez-vous de la qualité perçue de nos produits ?</div>
+        <div class="survey-scale">
+          <label class="survey-pill"><input type="radio" name="q2" value="Faible"><span>Faible</span></label>
+          <label class="survey-pill"><input type="radio" name="q2" value="Bonne"><span>Bonne</span></label>
+          <label class="survey-pill"><input type="radio" name="q2" value="Très bonne"><span>Très bonne</span></label>
+          <label class="survey-pill"><input type="radio" name="q2" value="Excellente"><span>Excellente</span></label>
+        </div>
+      </div>
+
+      <div class="survey-question">
+        <div class="survey-label">3. Le design et la présentation vous semblent-ils professionnels ?</div>
+        <div class="survey-scale">
+          <label class="survey-pill"><input type="radio" name="q3" value="Oui"><span>Oui</span></label>
+          <label class="survey-pill"><input type="radio" name="q3" value="Moyennement"><span>Moyennement</span></label>
+          <label class="survey-pill"><input type="radio" name="q3" value="Non"><span>Non</span></label>
+        </div>
+      </div>
+
+      <div class="survey-question">
+        <div class="survey-label">4. Avez-vous un commentaire ou une suggestion ?</div>
+        <textarea class="survey-comment" id="surveyComment" placeholder="Écrivez votre retour ici..."></textarea>
+      </div>
+
+      <div style="display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-top:4px">
+        <button type="button" class="btn-small" onclick="closeModal()">Fermer</button>
+      </div>
+    </div>
+  `;
+  openModal(html);
 }
 
 function openCountryModal(){
