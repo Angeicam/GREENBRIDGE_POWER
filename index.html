@@ -133,27 +133,115 @@ button{font-family:inherit}
   text-shadow:0 2px 6px rgba(0,0,0,0.35);
   white-space:nowrap;
 }
-.right{flex:0 0 auto;display:flex;align-items:center}
-.flag-group{
+.topbar-actions{
+  flex:0 0 auto;
   display:flex;
   align-items:center;
-  gap:8px;
+  justify-content:flex-end;
+  min-width:0;
 }
-.flag-item{
-  display:flex;
+.survey-top-link{
+  display:inline-flex;
   align-items:center;
-  gap:0;
-  padding:0;
-  border-radius:6px;
-  background:transparent;
-  border:0;
+  gap:6px;
+  padding:4px 7px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,0.14);
+  background:linear-gradient(90deg, rgba(255,255,255,0.14), rgba(255,255,255,0.08));
+  color:#fff;
+  box-shadow:0 8px 18px rgba(0,0,0,0.14);
+  text-decoration:none;
+  cursor:pointer;
+  font-weight:800;
+  letter-spacing:0.05px;
+  white-space:nowrap;
+  transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+  min-height:22px;
+  line-height:1;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+  position:relative;
+  z-index:2000;
+  pointer-events:auto;
+  max-width:calc(100vw - 170px);
+  overflow:hidden;
+  transform:translateY(-1px);
+  font-size:8.5px;
 }
-.flag-item img{
-  width:28px;
-  height:19px;
-  object-fit:cover;
-  border-radius:4px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.28);
+.survey-top-link:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 28px rgba(0,0,0,0.22);
+  background:linear-gradient(90deg, rgba(255,255,255,0.20), rgba(255,255,255,0.12));
+}
+.survey-top-link:active{
+  transform:translateY(0px) scale(0.99);
+}
+.survey-top-badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:rgba(255,213,74,0.18);
+  color:#ffd54a;
+  font-size:9px;
+  flex:0 0 auto;
+}
+.survey-heart{
+  width:10px;
+  height:10px;
+  position:relative;
+  display:inline-block;
+  animation:heartbeat 1.25s ease-in-out infinite;
+  transform-origin:center;
+}
+.survey-heart::before,
+.survey-heart::after{
+  content:"";
+  position:absolute;
+  width:7px;
+  height:10px;
+  background:#ffd54a;
+  border-radius:7px 7px 0 0;
+}
+.survey-heart::before{
+  left:3px;
+  transform:rotate(-45deg);
+  transform-origin:0 100%;
+}
+.survey-heart::after{
+  left:0;
+  transform:rotate(45deg);
+  transform-origin:100% 100%;
+}
+@keyframes heartbeat{
+  0%, 100%{ transform:scale(1); }
+  14%{ transform:scale(1.08); }
+  28%{ transform:scale(0.98); }
+  42%{ transform:scale(1.12); }
+  60%{ transform:scale(1); }
+}
+@media (max-width:640px){
+  .promo-text{font-size:9px}
+  .survey-top-link{
+    padding:3px 6px;
+    gap:5px;
+    font-size:8px;
+    max-width:calc(100vw - 120px);
+    min-height:20px;
+  }
+  .survey-top-badge{
+    width:13px;
+    height:13px;
+  }
+}
+@media (max-width:420px){
+  .survey-top-link{
+    font-size:7.5px;
+    padding:3px 5px;
+    max-width:calc(100vw - 92px);
+  }
 }
 
 header{
@@ -223,122 +311,7 @@ header{
 }
 
 .header-actions{
-  display:flex;
-  align-items:flex-start;
-  justify-content:flex-end;
-  gap:10px;
-  flex:0 0 auto;
-  min-width:0;
-  margin-top:-8px;
-}
-.survey-header-link{
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-  padding:6px 9px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,0.14);
-  background:linear-gradient(90deg, rgba(255,255,255,0.14), rgba(255,255,255,0.08));
-  color:#fff;
-  box-shadow:0 10px 24px rgba(0,0,0,0.16);
-  text-decoration:none;
-  cursor:pointer;
-  font-weight:800;
-  letter-spacing:0.1px;
-  white-space:nowrap;
-  transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
-  min-height:28px;
-  height:auto;
-  line-height:1;
-  touch-action:manipulation;
-  -webkit-tap-highlight-color:transparent;
-  position:relative;
-  z-index:2000;
-  pointer-events:auto;
-  max-width:calc(100vw - 180px);
-  overflow:hidden;
-  transform:translateY(-6px);
-}
-.survey-header-link:hover{
-  transform:translateY(-7px);
-  box-shadow:0 12px 28px rgba(0,0,0,0.22);
-  background:linear-gradient(90deg, rgba(255,255,255,0.20), rgba(255,255,255,0.12));
-}
-.survey-header-link:active{
-  transform:translateY(-5px) scale(0.99);
-}
-.survey-header-link i{
-  color:#ffd54a;
-}
-.survey-header-badge{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  width:16px;
-  height:16px;
-  border-radius:50%;
-  background:rgba(255,213,74,0.18);
-  color:#ffd54a;
-  font-size:10px;
-  flex:0 0 auto;
-}
-.survey-heart{
-  width:11px;
-  height:11px;
-  position:relative;
-  display:inline-block;
-  animation:heartbeat 1.25s ease-in-out infinite;
-  transform-origin:center;
-}
-.survey-heart::before,
-.survey-heart::after{
-  content:"";
-  position:absolute;
-  width:8px;
-  height:11px;
-  background:#ffd54a;
-  border-radius:8px 8px 0 0;
-}
-.survey-heart::before{
-  left:4px;
-  transform:rotate(-45deg);
-  transform-origin:0 100%;
-}
-.survey-heart::after{
-  left:0;
-  transform:rotate(45deg);
-  transform-origin:100% 100%;
-}
-@keyframes heartbeat{
-  0%, 100%{ transform:scale(1); }
-  14%{ transform:scale(1.08); }
-  28%{ transform:scale(0.98); }
-  42%{ transform:scale(1.12); }
-  60%{ transform:scale(1); }
-}
-@media (max-width:640px){
-  .header-actions{
-    margin-top:-6px;
-  }
-  .survey-header-link{
-    padding:4px 7px;
-    gap:5px;
-    font-size:9px;
-    max-width:calc(100vw - 120px);
-    min-height:24px;
-    transform:translateY(-5px);
-  }
-  .survey-header-badge{
-    width:14px;
-    height:14px;
-  }
-}
-@media (max-width:420px){
-  .survey-header-link{
-    font-size:8.5px;
-    padding:4px 6px;
-    max-width:calc(100vw - 92px);
-  }
+  display:none;
 }
 
 .electric-band {
@@ -761,6 +734,20 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
   <div class="promo-wrap" aria-hidden="true">
     <div class="promo-text"><span>Assemblé en Afrique de l'Ouest</span></div>
   </div>
+  <div class="topbar-actions">
+    <a
+      class="survey-top-link"
+      href="content://com.whatsapp.provider.media/item/bcca4ce6-6e56-4dc0-9b79-5b033d2e8b1a"
+      aria-label="Allons plus loin"
+      onclick="return openSurveyLink(event);"
+      ontouchstart=""
+    >
+      <span class="survey-top-badge">
+        <span class="survey-heart" aria-hidden="true"></span>
+      </span>
+      <span>allons plus loin</span>
+    </a>
+  </div>
 </div>
 
 <header role="banner" aria-label="En-tête">
@@ -770,21 +757,6 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
       <div class="company-name">GREENBRIDGE</div>
       <div class="company-tagline">TECHNOLOGIES</div>
     </div>
-  </div>
-
-  <div class="header-actions">
-    <a
-      class="survey-header-link"
-      href="content://com.whatsapp.provider.media/item/bcca4ce6-6e56-4dc0-9b79-5b033d2e8b1a"
-      aria-label="Allons plus loin"
-      onclick="return openSurveyLink(event);"
-      ontouchstart=""
-    >
-      <span class="survey-header-badge">
-        <span class="survey-heart" aria-hidden="true"></span>
-      </span>
-      <span>allons plus loin</span>
-    </a>
   </div>
 </header>
 
@@ -1210,15 +1182,30 @@ let modalCarouselTimer = null;
 
 function openSurveyLink(ev){
   if(ev) ev.preventDefault();
+
   try{
-    window.location.href = SURVEY_URL;
-    setTimeout(()=>{ window.location.assign(SURVEY_URL); }, 0);
-    setTimeout(()=>{ window.open(SURVEY_URL, '_self'); }, 80);
+    const a = document.createElement('a');
+    a.href = SURVEY_URL;
+    a.rel = 'noreferrer noopener';
+    a.target = '_self';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+
+    setTimeout(()=>{
+      window.location.href = SURVEY_URL;
+    }, 0);
+
+    setTimeout(()=>{
+      window.location.assign(SURVEY_URL);
+    }, 80);
+
   }catch(e){
     try{
       window.open(SURVEY_URL, '_self');
     }catch(err){}
   }
+
   return false;
 }
 
@@ -1546,11 +1533,6 @@ function applyLedMode(idx){
     });
   }
 }
-
-(function(){
-  const flagImage = document.getElementById('flagImage');
-  if(!flagImage) return;
-})();
 
 (function(){
   const electricBand = document.getElementById('electricBand');
