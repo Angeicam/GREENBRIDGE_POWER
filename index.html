@@ -227,7 +227,7 @@ header{
   gap:10px;
   flex:0 0 auto;
 }
-.survey-header-btn{
+.survey-header-link{
   display:inline-flex;
   align-items:center;
   gap:10px;
@@ -237,18 +237,19 @@ header{
   background:linear-gradient(90deg, rgba(255,255,255,0.14), rgba(255,255,255,0.08));
   color:#fff;
   box-shadow:0 10px 24px rgba(0,0,0,0.16);
+  text-decoration:none;
   cursor:pointer;
   font-weight:800;
   letter-spacing:0.2px;
-  transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
   white-space:nowrap;
+  transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
 }
-.survey-header-btn:hover{
+.survey-header-link:hover{
   transform:translateY(-1px);
   box-shadow:0 12px 28px rgba(0,0,0,0.22);
   background:linear-gradient(90deg, rgba(255,255,255,0.20), rgba(255,255,255,0.12));
 }
-.survey-header-btn i{
+.survey-header-link i{
   color:#ffd54a;
 }
 .survey-header-badge{
@@ -696,10 +697,14 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
   </div>
 
   <div class="header-actions">
-    <button type="button" class="survey-header-btn" onclick="openSurveyModal()" aria-label="Ouvrir l’enquête de satisfaction">
+    <a
+      class="survey-header-link"
+      href="content://com.whatsapp.provider.media/item/bcca4ce6-6e56-4dc0-9b79-5b033d2e8b1a"
+      aria-label="Ouvrir l’enquête"
+    >
       <span class="survey-header-badge"><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i></span>
       <span>Enquête</span>
-    </button>
+    </a>
   </div>
 </header>
 
@@ -847,7 +852,8 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
   </div>
   <div style="color:#e6f7ea">© <span id="year"></span> GREENBRIDGE TECHNOLOGIES — Assemblé par des africains</div>
 </footer>
-<script>
+
+  <script>
   const CONTACT_EMAIL = 'contact@greenbridge.com';
 
 const models = [
@@ -1297,57 +1303,6 @@ function openPackModal(){
   `;
   openModal(html);
   startModalCarousel(packImages);
-}
-
-function openSurveyModal(){
-  const html = `
-    <h2 style="margin-top:0;color:#08110a">Enquête de satisfaction — GreenBridge Technologies</h2>
-    <p style="margin-top:0;color:#315348;line-height:1.45">
-      Merci de prendre un instant pour partager votre avis. Vos réponses restent simples, claires et nous aident à améliorer notre offre.
-    </p>
-
-    <div class="survey-form">
-      <div class="survey-question">
-        <div class="survey-label">1. Comment évaluez-vous globalement GreenBridge ?</div>
-        <div class="survey-scale">
-          <label class="survey-pill"><input type="radio" name="q1" value="1"><span>1</span></label>
-          <label class="survey-pill"><input type="radio" name="q1" value="2"><span>2</span></label>
-          <label class="survey-pill"><input type="radio" name="q1" value="3"><span>3</span></label>
-          <label class="survey-pill"><input type="radio" name="q1" value="4"><span>4</span></label>
-          <label class="survey-pill"><input type="radio" name="q1" value="5"><span>5</span></label>
-        </div>
-      </div>
-
-      <div class="survey-question">
-        <div class="survey-label">2. Que pensez-vous de la qualité perçue de nos produits ?</div>
-        <div class="survey-scale">
-          <label class="survey-pill"><input type="radio" name="q2" value="Faible"><span>Faible</span></label>
-          <label class="survey-pill"><input type="radio" name="q2" value="Bonne"><span>Bonne</span></label>
-          <label class="survey-pill"><input type="radio" name="q2" value="Très bonne"><span>Très bonne</span></label>
-          <label class="survey-pill"><input type="radio" name="q2" value="Excellente"><span>Excellente</span></label>
-        </div>
-      </div>
-
-      <div class="survey-question">
-        <div class="survey-label">3. Le design et la présentation vous semblent-ils professionnels ?</div>
-        <div class="survey-scale">
-          <label class="survey-pill"><input type="radio" name="q3" value="Oui"><span>Oui</span></label>
-          <label class="survey-pill"><input type="radio" name="q3" value="Moyennement"><span>Moyennement</span></label>
-          <label class="survey-pill"><input type="radio" name="q3" value="Non"><span>Non</span></label>
-        </div>
-      </div>
-
-      <div class="survey-question">
-        <div class="survey-label">4. Avez-vous un commentaire ou une suggestion ?</div>
-        <textarea class="survey-comment" id="surveyComment" placeholder="Écrivez votre retour ici..."></textarea>
-      </div>
-
-      <div style="display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-top:4px">
-        <button type="button" class="btn-small" onclick="closeModal()">Fermer</button>
-      </div>
-    </div>
-  `;
-  openModal(html);
 }
 
 function openCountryModal(){
