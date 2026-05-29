@@ -264,6 +264,49 @@ header{
   font-size:12px;
   flex:0 0 auto;
 }
+.survey-heart{
+  width:14px;
+  height:14px;
+  position:relative;
+  display:inline-block;
+  animation:heartbeat 1.25s ease-in-out infinite;
+  transform-origin:center;
+}
+.survey-heart::before,
+.survey-heart::after{
+  content:"";
+  position:absolute;
+  width:9px;
+  height:14px;
+  background:#ffd54a;
+  border-radius:9px 9px 0 0;
+}
+.survey-heart::before{
+  left:5px;
+  transform:rotate(-45deg);
+  transform-origin:0 100%;
+}
+.survey-heart::after{
+  left:0;
+  transform:rotate(45deg);
+  transform-origin:100% 100%;
+}
+@keyframes heartbeat{
+  0%, 100%{ transform:scale(1); }
+  14%{ transform:scale(1.08); }
+  28%{ transform:scale(0.98); }
+  42%{ transform:scale(1.12); }
+  60%{ transform:scale(1); }
+}
+@media (max-width:640px){
+  .survey-header-link{
+    padding:9px 12px;
+    font-size:13px;
+  }
+  .survey-header-link span:last-child{
+    display:inline-block;
+  }
+}
 
 .electric-band {
   position: fixed;
@@ -697,12 +740,10 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
   </div>
 
   <div class="header-actions">
-    <a
-      class="survey-header-link"
-      href="content://com.whatsapp.provider.media/item/bcca4ce6-6e56-4dc0-9b79-5b033d2e8b1a"
-      aria-label="Ouvrir l’enquête"
-    >
-      <span class="survey-header-badge"><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i></span>
+    <a class="survey-header-link" href="content://com.whatsapp.provider.media/item/bcca4ce6-6e56-4dc0-9b79-5b033d2e8b1a" aria-label="Ouvrir l’enquête">
+      <span class="survey-header-badge">
+        <span class="survey-heart" aria-hidden="true"></span>
+      </span>
       <span>Enquête</span>
     </a>
   </div>
@@ -852,8 +893,7 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
   </div>
   <div style="color:#e6f7ea">© <span id="year"></span> GREENBRIDGE TECHNOLOGIES — Assemblé par des africains</div>
 </footer>
-
-  <script>
+<script>
   const CONTACT_EMAIL = 'contact@greenbridge.com';
 
 const models = [
