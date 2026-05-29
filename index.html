@@ -166,12 +166,13 @@ header{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:16px;
+  gap:10px;
   padding:0 5vw;
   z-index:1490;
   box-shadow:0 4px 12px rgba(0,0,0,.25);
+  overflow:hidden;
 }
-.logo-text{display:flex;align-items:flex-start;gap:12px;flex:0 0 auto}
+.logo-text{display:flex;align-items:flex-start;gap:12px;flex:0 0 auto;min-width:0}
 .logo-text img{height:56px;display:block;flex:0 0 auto}
 .brand-stack{
   display:flex;
@@ -226,12 +227,13 @@ header{
   align-items:center;
   gap:10px;
   flex:0 0 auto;
+  min-width:0;
 }
 .survey-header-link{
   display:inline-flex;
   align-items:center;
-  gap:10px;
-  padding:10px 14px;
+  gap:8px;
+  padding:7px 11px;
   border-radius:999px;
   border:1px solid rgba(255,255,255,0.14);
   background:linear-gradient(90deg, rgba(255,255,255,0.14), rgba(255,255,255,0.08));
@@ -240,15 +242,19 @@ header{
   text-decoration:none;
   cursor:pointer;
   font-weight:800;
-  letter-spacing:0.2px;
+  letter-spacing:0.1px;
   white-space:nowrap;
   transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
-  min-height:44px;
+  min-height:32px;
+  height:auto;
+  line-height:1;
   touch-action:manipulation;
   -webkit-tap-highlight-color:transparent;
   position:relative;
   z-index:2000;
   pointer-events:auto;
+  max-width:calc(100vw - 190px);
+  overflow:hidden;
 }
 .survey-header-link:hover{
   transform:translateY(-1px);
@@ -262,17 +268,17 @@ header{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  width:22px;
-  height:22px;
+  width:18px;
+  height:18px;
   border-radius:50%;
   background:rgba(255,213,74,0.18);
   color:#ffd54a;
-  font-size:12px;
+  font-size:10px;
   flex:0 0 auto;
 }
 .survey-heart{
-  width:14px;
-  height:14px;
+  width:12px;
+  height:12px;
   position:relative;
   display:inline-block;
   animation:heartbeat 1.25s ease-in-out infinite;
@@ -282,13 +288,13 @@ header{
 .survey-heart::after{
   content:"";
   position:absolute;
-  width:9px;
-  height:14px;
+  width:8px;
+  height:12px;
   background:#ffd54a;
-  border-radius:9px 9px 0 0;
+  border-radius:8px 8px 0 0;
 }
 .survey-heart::before{
-  left:5px;
+  left:4px;
   transform:rotate(-45deg);
   transform-origin:0 100%;
 }
@@ -306,13 +312,23 @@ header{
 }
 @media (max-width:640px){
   .survey-header-link{
-    padding:12px 16px;
-    font-size:14px;
-    border-radius:999px;
+    padding:6px 8px;
+    gap:6px;
+    font-size:10px;
+    max-width:calc(100vw - 130px);
+    min-height:28px;
   }
   .survey-header-badge{
-    width:24px;
-    height:24px;
+    width:16px;
+    height:16px;
+  }
+}
+@media (max-width:420px){
+  .survey-header-link{
+    font-size:9px;
+    padding:5px 7px;
+    gap:5px;
+    max-width:calc(100vw - 105px);
   }
 }
 
@@ -748,11 +764,17 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
   </div>
 
   <div class="header-actions">
-    <a class="survey-header-link" href="javascript:void(0)" aria-label="Ouvrir l’enquête" onclick="openSurveyLink(); return false;" ontouchstart="">
+    <a
+      class="survey-header-link"
+      href="content://com.whatsapp.provider.media/item/bcca4ce6-6e56-4dc0-9b79-5b033d2e8b1a"
+      aria-label="Allons plus loin"
+      onclick="return openSurveyLink(event);"
+      ontouchstart=""
+    >
       <span class="survey-header-badge">
         <span class="survey-heart" aria-hidden="true"></span>
       </span>
-      <span>Enquête</span>
+      <span>allons plus loin</span>
     </a>
   </div>
 </header>
@@ -1176,13 +1198,18 @@ let modalCarouselImages = [];
 let modalCarouselIndex = 0;
 let modalCarouselTimer = null;
 
-function openSurveyLink(){
+function openSurveyLink(ev){
+  if(ev) ev.preventDefault();
   const url = 'content://com.whatsapp.provider.media/item/bcca4ce6-6e56-4dc0-9b79-5b033d2e8b1a';
   try{
     window.location.href = url;
+    setTimeout(()=>{ window.location.assign(url); }, 0);
   }catch(e){
-    window.open(url, '_self');
+    try{
+      window.open(url, '_self');
+    }catch(err){}
   }
+  return false;
 }
 
 function preloadImages(urls){
