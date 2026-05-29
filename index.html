@@ -224,16 +224,18 @@ header{
 
 .header-actions{
   display:flex;
-  align-items:center;
+  align-items:flex-start;
+  justify-content:flex-end;
   gap:10px;
   flex:0 0 auto;
   min-width:0;
+  margin-top:-8px;
 }
 .survey-header-link{
   display:inline-flex;
   align-items:center;
-  gap:8px;
-  padding:7px 11px;
+  gap:7px;
+  padding:6px 9px;
   border-radius:999px;
   border:1px solid rgba(255,255,255,0.14);
   background:linear-gradient(90deg, rgba(255,255,255,0.14), rgba(255,255,255,0.08));
@@ -245,7 +247,7 @@ header{
   letter-spacing:0.1px;
   white-space:nowrap;
   transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
-  min-height:32px;
+  min-height:28px;
   height:auto;
   line-height:1;
   touch-action:manipulation;
@@ -253,13 +255,17 @@ header{
   position:relative;
   z-index:2000;
   pointer-events:auto;
-  max-width:calc(100vw - 190px);
+  max-width:calc(100vw - 180px);
   overflow:hidden;
+  transform:translateY(-6px);
 }
 .survey-header-link:hover{
-  transform:translateY(-1px);
+  transform:translateY(-7px);
   box-shadow:0 12px 28px rgba(0,0,0,0.22);
   background:linear-gradient(90deg, rgba(255,255,255,0.20), rgba(255,255,255,0.12));
+}
+.survey-header-link:active{
+  transform:translateY(-5px) scale(0.99);
 }
 .survey-header-link i{
   color:#ffd54a;
@@ -268,8 +274,8 @@ header{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  width:18px;
-  height:18px;
+  width:16px;
+  height:16px;
   border-radius:50%;
   background:rgba(255,213,74,0.18);
   color:#ffd54a;
@@ -277,8 +283,8 @@ header{
   flex:0 0 auto;
 }
 .survey-heart{
-  width:12px;
-  height:12px;
+  width:11px;
+  height:11px;
   position:relative;
   display:inline-block;
   animation:heartbeat 1.25s ease-in-out infinite;
@@ -289,7 +295,7 @@ header{
   content:"";
   position:absolute;
   width:8px;
-  height:12px;
+  height:11px;
   background:#ffd54a;
   border-radius:8px 8px 0 0;
 }
@@ -311,24 +317,27 @@ header{
   60%{ transform:scale(1); }
 }
 @media (max-width:640px){
+  .header-actions{
+    margin-top:-6px;
+  }
   .survey-header-link{
-    padding:6px 8px;
-    gap:6px;
-    font-size:10px;
-    max-width:calc(100vw - 130px);
-    min-height:28px;
+    padding:4px 7px;
+    gap:5px;
+    font-size:9px;
+    max-width:calc(100vw - 120px);
+    min-height:24px;
+    transform:translateY(-5px);
   }
   .survey-header-badge{
-    width:16px;
-    height:16px;
+    width:14px;
+    height:14px;
   }
 }
 @media (max-width:420px){
   .survey-header-link{
-    font-size:9px;
-    padding:5px 7px;
-    gap:5px;
-    max-width:calc(100vw - 105px);
+    font-size:8.5px;
+    padding:4px 6px;
+    max-width:calc(100vw - 92px);
   }
 }
 
@@ -925,6 +934,7 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
 </footer>
 <script>
 const CONTACT_EMAIL = 'contact@greenbridge.com';
+const SURVEY_URL = 'content://com.whatsapp.provider.media/item/bcca4ce6-6e56-4dc0-9b79-5b033d2e8b1a';
 
 const models = [
   {
@@ -1200,13 +1210,13 @@ let modalCarouselTimer = null;
 
 function openSurveyLink(ev){
   if(ev) ev.preventDefault();
-  const url = 'content://com.whatsapp.provider.media/item/bcca4ce6-6e56-4dc0-9b79-5b033d2e8b1a';
   try{
-    window.location.href = url;
-    setTimeout(()=>{ window.location.assign(url); }, 0);
+    window.location.href = SURVEY_URL;
+    setTimeout(()=>{ window.location.assign(SURVEY_URL); }, 0);
+    setTimeout(()=>{ window.open(SURVEY_URL, '_self'); }, 80);
   }catch(e){
     try{
-      window.open(url, '_self');
+      window.open(SURVEY_URL, '_self');
     }catch(err){}
   }
   return false;
