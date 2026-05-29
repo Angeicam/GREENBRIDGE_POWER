@@ -310,9 +310,7 @@ header{
   display:block;
 }
 
-.header-actions{
-  display:none;
-}
+.header-actions{display:none;}
 
 .electric-band {
   position: fixed;
@@ -906,7 +904,7 @@ footer{background:var(--green-dark);color:#fff;padding:18px 5vw 40px;text-align:
 </footer>
 <script>
 const CONTACT_EMAIL = 'contact@greenbridge.com';
-const SURVEY_URL = 'content://com.whatsapp.provider.media/item/bcca4ce6-6e56-4dc0-9b79-5b033d2e8b1a';
+const SURVEY_URL = 'https://enquete-powerbank-ci-sn.netlify.app/';
 
 const models = [
   {
@@ -1182,30 +1180,17 @@ let modalCarouselTimer = null;
 
 function openSurveyLink(ev){
   if(ev) ev.preventDefault();
-
   try{
     const a = document.createElement('a');
     a.href = SURVEY_URL;
-    a.rel = 'noreferrer noopener';
-    a.target = '_self';
+    a.rel = 'noopener noreferrer';
+    a.target = '_blank';
     document.body.appendChild(a);
     a.click();
     a.remove();
-
-    setTimeout(()=>{
-      window.location.href = SURVEY_URL;
-    }, 0);
-
-    setTimeout(()=>{
-      window.location.assign(SURVEY_URL);
-    }, 80);
-
   }catch(e){
-    try{
-      window.open(SURVEY_URL, '_self');
-    }catch(err){}
+    window.open(SURVEY_URL, '_blank', 'noopener,noreferrer');
   }
-
   return false;
 }
 
