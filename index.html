@@ -176,7 +176,9 @@
     box-shadow:0 12px 28px rgba(0,0,0,0.22);
     background:linear-gradient(90deg, rgba(255,255,255,0.20), rgba(255,255,255,0.12));
   }
-  .survey-top-link:active{transform:translateY(0px) scale(0.99)}
+  .survey-top-link:active{
+    transform:translateY(0px) scale(0.99);
+  }
   .survey-top-badge{
     display:inline-flex;
     align-items:center;
@@ -232,7 +234,10 @@
       max-width:calc(100vw - 120px);
       min-height:20px;
     }
-    .survey-top-badge{width:13px;height:13px}
+    .survey-top-badge{
+      width:13px;
+      height:13px;
+    }
   }
   @media (max-width:420px){
     .survey-top-link{
@@ -321,10 +326,12 @@
   .worldcup-ad{
     display:flex;
     align-items:center;
-    gap:10px;
-    max-width:360px;
-    padding:8px 12px;
-    border-radius:14px;
+    justify-content:space-between;
+    gap:12px;
+    width:min(100%, 470px);
+    min-width:0;
+    padding:10px 14px;
+    border-radius:16px;
     background:linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,213,74,0.10));
     border:1px solid rgba(255,255,255,0.18);
     box-shadow:0 10px 24px rgba(0,0,0,0.18);
@@ -355,6 +362,7 @@
     flex-direction:column;
     line-height:1.1;
     min-width:0;
+    flex:1 1 auto;
   }
   .worldcup-ad-copy .ad-kicker{
     font-size:10px;
@@ -378,9 +386,10 @@
     display:flex;
     align-items:center;
     gap:5px;
-    margin-top:3px;
-    flex-wrap:wrap;
-    max-width:170px;
+    flex:0 0 auto;
+    flex-wrap:nowrap;
+    max-width:none;
+    margin-top:0;
   }
   .flag-pill{
     width:20px;
@@ -401,53 +410,53 @@
     object-fit:cover;
   }
 
-  .electric-band{
-    position:fixed;
-    top:calc(var(--topbar-h) + var(--header-h) - 6px);
-    left:0;
-    right:0;
-    height:14px;
-    z-index:1900;
-    pointer-events:none;
-    overflow:visible;
-    transform:translateZ(0);
+  .electric-band {
+    position: fixed;
+    top: calc(var(--topbar-h) + var(--header-h) - 6px);
+    left: 0;
+    right: 0;
+    height: 14px;
+    z-index: 1900;
+    pointer-events: none;
+    overflow: visible;
+    transform: translateZ(0);
   }
-  .electric-band .container{
-    position:absolute;
-    left:0;
-    top:50%;
-    transform:translateY(-50%);
-    width:100vw;
-    max-width:none;
-    padding:0;
-    height:100%;
-    pointer-events:none;
-    box-sizing:border-box;
+  .electric-band .container {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100vw;
+    max-width: none;
+    padding: 0;
+    height: 100%;
+    pointer-events: none;
+    box-sizing: border-box;
   }
-  .lightning-svg{
-    width:100vw;
-    height:100%;
-    display:block;
-    pointer-events:none;
-    mix-blend-mode:screen;
+  .lightning-svg {
+    width: 100vw;
+    height: 100%;
+    display: block;
+    pointer-events: none;
+    mix-blend-mode: screen;
   }
-  .lightning-svg path.zap{
-    stroke:var(--electric-yellow);
-    stroke-width:2.0;
-    fill:none;
-    stroke-linecap:round;
-    stroke-linejoin:round;
-    opacity:0.9;
+  .lightning-svg path.zap {
+    stroke: var(--electric-yellow);
+    stroke-width: 2.0;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0.9;
   }
-  .lightning-svg path.bright{
-    stroke:var(--electric-yellow);
-    stroke-width:2.6;
-    fill:none;
-    stroke-linecap:round;
-    stroke-linejoin:round;
-    opacity:1;
-    stroke-dasharray:520;
-    stroke-dashoffset:520;
+  .lightning-svg path.bright {
+    stroke: var(--electric-yellow);
+    stroke-width: 2.6;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 1;
+    stroke-dasharray: 520;
+    stroke-dashoffset: 520;
   }
 
   .orbs{
@@ -470,13 +479,13 @@
     opacity:0;
     transition:opacity .18s linear;
   }
-  .electric-band.active .orb{opacity:1}
+  .electric-band.active .orb{opacity:1;}
   @keyframes buzz-slow{
-    0%{ transform:translate(-50%,-50%) translateX(-1.5px); }
-    50%{ transform:translate(-50%,-50%) translateX(1.5px); }
-    100%{ transform:translate(-50%,-50%) translateX(-1.5px); }
+    0%{ transform: translate(-50%,-50%) translateX(-1.5px);}
+    50%{ transform: translate(-50%,-50%) translateX(1.5px);}
+    100%{ transform: translate(-50%,-50%) translateX(-1.5px);}
   }
-  .orb.buzz{animation:buzz-slow 1.8s linear infinite}
+  .orb.buzz{ animation:buzz-slow 1.8s linear infinite; }
 
   .glowline{
     position:absolute;
@@ -763,8 +772,15 @@
     .logo-text img{height:50px}
     .fab{width:50px;height:50px}
     .fab button{font-size:20px}
-    .worldcup-ad{max-width:250px;padding:7px 10px}
+    .worldcup-ad{
+      width:min(100%, 320px);
+      padding:8px 10px;
+      gap:8px;
+    }
+    .worldcup-ad-copy strong{font-size:12px}
     .worldcup-ad-copy small{display:none}
+    .flags-row{gap:4px}
+    .flag-pill{width:18px;height:18px}
   }
   @media (max-width:768px){
     .company-name{font-size:26px}
@@ -780,20 +796,39 @@
       padding:16px;
       border-radius:16px;
     }
-    .modal-carousel-stage{height:240px}
-    .carousel-btn{width:36px;height:36px;font-size:15px}
+    .modal-carousel-stage{
+      height:240px;
+    }
+    .carousel-btn{
+      width:36px;
+      height:36px;
+      font-size:15px;
+    }
     .modal h2{font-size:17px}
     .worldcup-ad{
-      max-width:calc(100vw - 180px);
-      gap:8px;
+      width:min(100%, 270px);
+      padding:7px 9px;
+      gap:7px;
     }
     .worldcup-ad-visual{
       width:42px;
       height:42px;
     }
-    .worldcup-ad-copy strong{font-size:12px}
-    .company-name{font-size:22px}
-    .company-tagline{font-size:11px}
+    .worldcup-ad-copy .ad-kicker{
+      font-size:9px;
+    }
+    .worldcup-ad-copy strong{
+      font-size:11px;
+    }
+    .flags-row{
+      display:none;
+    }
+    .company-name{
+      font-size:22px;
+    }
+    .company-tagline{
+      font-size:11px;
+    }
   }
   @media (max-width:480px){
     .hero-content{
@@ -820,6 +855,13 @@
       font-size:7.5px;
       padding:3px 5px;
       max-width:calc(100vw - 92px);
+    }
+    .worldcup-ad{
+      width:min(100%, 235px);
+      padding:6px 8px;
+    }
+    .worldcup-ad-copy strong{
+      font-size:10px;
     }
   }
   </style>
@@ -1461,7 +1503,7 @@ function sendWhatsApp(country){
   const number = whatsappNumbers[country] || whatsappNumbers.senegal;
   const countryLabel = country === 'coteivoire' ? "la Côte d'Ivoire" : 'le Sénégal';
   const message = `Bonjour, je souhaite commander un produit GreenBridge pour ${countryLabel}. Merci de me communiquer les modèles disponibles et les prix.`;
-  const url = `https://wa.me/${number}?text=` + encodeURIComponent(message);
+  const url = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
   closeModal();
   window.open(url, '_blank', 'noopener,noreferrer');
 }
