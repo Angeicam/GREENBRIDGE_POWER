@@ -437,9 +437,9 @@
   .lightning-svg {
     width: 100vw;
     height: 100%;
-    display: block;
-    pointer-events: none;
-    mix-blend-mode: screen;
+    display:block;
+    pointer-events:none;
+    mix-blend-mode:screen;
   }
   .lightning-svg path.zap {
     stroke: var(--electric-yellow);
@@ -780,7 +780,7 @@
     }
     .worldcup-ad-copy strong{font-size:12px}
     .worldcup-ad-copy small{
-      font-size:10px;
+      font-size:9px;
       display:block;
     }
     .flags-row{gap:4px}
@@ -825,11 +825,17 @@
       font-size:11px;
     }
     .worldcup-ad-copy small{
-      font-size:9px;
+      font-size:8px;
       display:block;
     }
     .flags-row{
-      display:none;
+      display:flex;
+      gap:3px;
+      max-width:120px;
+    }
+    .flag-pill{
+      width:16px;
+      height:16px;
     }
     .company-name{
       font-size:22px;
@@ -872,8 +878,16 @@
       font-size:10px;
     }
     .worldcup-ad-copy small{
-      font-size:8px;
+      font-size:7px;
       display:block;
+    }
+    .flags-row{
+      gap:2px;
+      max-width:96px;
+    }
+    .flag-pill{
+      width:14px;
+      height:14px;
     }
   }
   </style>
