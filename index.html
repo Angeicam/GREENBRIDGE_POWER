@@ -1,6 +1,14 @@
 <!doctype html>
 <html lang="fr">
 <head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6M3D6J9B24"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6M3D6J9B24');
+  </script>
+
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
   <title>GREENBRIDGE TECHNOLOGIES — Powerbanks & Solutions Énergétiques</title>
@@ -36,17 +44,12 @@
       --green-mid-2:#0b4d26;
       --brand-green:#04462e;
       --gold:#d4af37;
-      --gold-2:#e7ca5d;
       --text:#effaf1;
-      --muted:#d9efe0;
       --card:rgba(255,255,255,.10);
-      --card-2:rgba(255,255,255,.92);
-      --line:rgba(255,255,255,.16);
       --shadow:0 14px 30px rgba(0,0,0,.16);
-      --radius:18px;
       --maxw:1180px;
       --topbar-h:34px;
-      --header-pad-y:10px;
+      --header-pad-y:8px;
     }
 
     *{box-sizing:border-box}
@@ -84,10 +87,7 @@
         radial-gradient(circle at top, rgba(255,255,255,.08), transparent 55%);
     }
 
-    .shell{
-      position:relative;
-      z-index:2;
-    }
+    .shell{position:relative;z-index:2}
 
     .topbar{
       position:sticky;
@@ -102,7 +102,6 @@
       background:linear-gradient(90deg,var(--green-dark),#072016);
       border-bottom:1px solid rgba(255,255,255,.08);
     }
-
     .topbar .note{
       font-size:10px;
       font-weight:800;
@@ -113,7 +112,6 @@
       overflow:hidden;
       text-overflow:ellipsis;
     }
-
     .survey-link{
       display:inline-flex;
       align-items:center;
@@ -137,16 +135,15 @@
       box-shadow:0 6px 18px rgba(0,0,0,.18);
       border-bottom:1px solid rgba(255,255,255,.08);
     }
-
     .header-inner{
       max-width:var(--maxw);
       margin:0 auto;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:14px;
+      gap:12px;
+      flex-wrap:nowrap;
     }
-
     .brand{
       display:flex;
       align-items:center;
@@ -155,21 +152,20 @@
       flex:0 0 auto;
     }
     .brand img{
-      width:52px;
-      height:52px;
+      width:48px;
+      height:48px;
       object-fit:contain;
       flex:0 0 auto;
     }
     .brand-text{
       display:flex;
       flex-direction:column;
-      justify-content:center;
       line-height:1;
       min-width:0;
     }
     .brand-name{
       margin:0;
-      font-size:30px;
+      font-size:28px;
       font-weight:900;
       letter-spacing:1px;
       color:#05472f;
@@ -178,8 +174,8 @@
       white-space:nowrap;
     }
     .brand-sub{
-      margin-top:3px;
-      font-size:13px;
+      margin-top:2px;
+      font-size:12px;
       font-weight:800;
       letter-spacing:4px;
       color:#e7f7ea;
@@ -188,55 +184,48 @@
     }
 
     .worldcup{
-      display:grid;
-      grid-template-columns:auto 1fr;
-      grid-template-areas:
-        "ball copy"
-        "flags flags";
+      display:flex;
       align-items:center;
-      gap:6px 10px;
+      gap:8px;
       min-width:0;
-      max-width:560px;
-      padding:8px 10px;
-      border-radius:16px;
+      max-width:calc(100vw - 260px);
+      padding:7px 10px;
+      border-radius:14px;
       background:
         linear-gradient(135deg, rgba(0,0,0,.22), rgba(255,213,74,.08)),
         rgba(255,255,255,.06);
       border:1px solid rgba(255,255,255,.14);
       box-shadow:var(--shadow);
       backdrop-filter:blur(8px);
+      overflow:hidden;
     }
-
     .ball{
-      grid-area:ball;
-      width:50px;
-      height:50px;
+      width:38px;
+      height:38px;
       border-radius:50%;
       overflow:hidden;
-      box-shadow:0 0 0 2px rgba(255,255,255,.14), 0 10px 20px rgba(0,0,0,.18);
+      box-shadow:0 0 0 2px rgba(255,255,255,.14), 0 8px 16px rgba(0,0,0,.16);
       flex:0 0 auto;
     }
     .ball svg{display:block;width:100%;height:100%}
-
     .worldcup-copy{
-      grid-area:copy;
       min-width:0;
       display:flex;
       flex-direction:column;
-      gap:2px;
-      line-height:1.05;
+      gap:1px;
+      line-height:1.02;
       text-shadow:0 2px 6px rgba(0,0,0,.4);
     }
     .kicker{
-      font-size:9px;
+      font-size:8px;
       font-weight:900;
-      letter-spacing:1px;
+      letter-spacing:.9px;
       color:#ffd54a;
       text-transform:uppercase;
       white-space:nowrap;
     }
     .headline{
-      font-size:12px;
+      font-size:10px;
       font-weight:900;
       color:#fff;
       white-space:nowrap;
@@ -244,147 +233,239 @@
       text-overflow:ellipsis;
     }
     .subline{
-      font-size:10px;
+      font-size:8px;
       color:#f4fbf4;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
     }
-
     .flags{
-      grid-area:flags;
-      display:grid;
-      grid-template-columns:repeat(10, 1fr);
-      gap:4px;
-      width:100%;
-      min-width:0;
+      display:flex;
+      align-items:center;
+      gap:3px;
+      flex:0 0 auto;
+      margin-left:2px;
+      max-width:160px;
+      overflow:hidden;
     }
     .flag{
-      aspect-ratio:1/1;
+      width:14px;
+      height:14px;
       border-radius:50%;
       overflow:hidden;
       border:1px solid rgba(255,255,255,.24);
       background:#fff;
-      box-shadow:0 3px 8px rgba(0,0,0,.14);
+      box-shadow:0 2px 6px rgba(0,0,0,.14);
+      flex:0 0 auto;
     }
-    .flag img{
-      width:100%;
+    .flag img{width:100%;height:100%;object-fit:cover}
+
+    .electric-band{
+      position:fixed;
+      top:calc(var(--topbar-h) + 72px - 6px);
+      left:0;
+      right:0;
+      height:14px;
+      z-index:1900;
+      pointer-events:none;
+      overflow:visible;
+      transform:translateZ(0);
+    }
+    .electric-band .container{
+      position:absolute;
+      left:0;
+      top:50%;
+      transform:translateY(-50%);
+      width:100vw;
+      max-width:none;
+      padding:0;
       height:100%;
-      object-fit:cover;
+      pointer-events:none;
+      box-sizing:border-box;
+    }
+    .lightning-svg{
+      width:100vw;
+      height:100%;
+      display:block;
+      pointer-events:none;
+      mix-blend-mode:screen;
+    }
+    .lightning-svg path.zap{
+      stroke:#ffd600;
+      stroke-width:2;
+      fill:none;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+      opacity:.9;
+    }
+    .lightning-svg path.bright{
+      stroke:#ffd600;
+      stroke-width:2.6;
+      fill:none;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+      opacity:1;
+      stroke-dasharray:520;
+      stroke-dashoffset:520;
+    }
+    .orbs{
+      position:absolute;
+      left:0;
+      top:0;
+      width:100vw;
+      height:100%;
+      pointer-events:none;
+      overflow:visible;
+    }
+    .orb{
+      position:absolute;
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:radial-gradient(circle at 30% 30%, #fff8b0, #ffd600);
+      box-shadow:0 0 12px rgba(255,214,0,.95),0 0 30px rgba(255,214,0,.16);
+      transform:translate(-50%,-50%);
+      opacity:0;
+      transition:opacity .18s linear;
+    }
+    .electric-band.active .orb{opacity:1;}
+    @keyframes buzz-slow{
+      0%{transform:translate(-50%,-50%) translateX(-1.5px)}
+      50%{transform:translate(-50%,-50%) translateX(1.5px)}
+      100%{transform:translate(-50%,-50%) translateX(-1.5px)}
+    }
+    .orb.buzz{animation:buzz-slow 1.8s linear infinite;}
+    .glowline{
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%);
+      height:3px;
+      width:0;
+      background:linear-gradient(90deg, rgba(255,238,170,0), #ffd600, rgba(255,238,170,0));
+      border-radius:8px;
+      box-shadow:0 6px 18px rgba(255,214,0,.12);
+      opacity:0;
+      transition:opacity .22s ease;
+    }
+    .electric-band.active .glowline{
+      width:100vw;
+      opacity:1;
+      animation:pulse 3s ease-in-out infinite;
+    }
+    @keyframes pulse{
+      0%{transform:translate(-50%,-50%) scaleX(.7);opacity:.6}
+      50%{transform:translate(-50%,-50%) scaleX(1);opacity:1}
+      100%{transform:translate(-50%,-50%) scaleX(.7);opacity:.6}
     }
 
-    main{
+    .container{
       max-width:var(--maxw);
       margin:0 auto;
-      padding:18px 4vw 56px;
+      padding:18px 14px 160px;
       position:relative;
-      z-index:2;
+      z-index:40;
     }
+    main.container{min-height:calc(100vh - 160px)}
 
-    .section-title{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 14px;
-      border-radius:999px;
-      background:rgba(255,255,255,.62);
+    .models-wrapper{
+      margin-top:24px;
+      padding:18px 12px 12px;
+      width:100%;
+      max-width:100vw;
+      position:relative;
+      z-index:60;
+    }
+    .models-header{display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+    .models-title{
+      font-weight:800;
+      font-size:22px;
       color:var(--brand-green);
-      font-weight:900;
-      letter-spacing:.3px;
-      box-shadow:0 8px 20px rgba(0,0,0,.08);
-      margin:6px 0 16px;
+      letter-spacing:.4px;
+      background:rgba(255,255,255,.6);
+      padding:8px 14px;
+      border-radius:10px;
+      box-shadow:0 8px 20px rgba(6,42,32,.06)
     }
-
-    .grid{
+    .models{
       display:grid;
-      grid-template-columns:repeat(4, minmax(0,1fr));
-      gap:14px;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:18px;
+      align-items:stretch;
+      max-width:var(--maxw);
+      margin:0 auto;
+      padding:6px 14px;
+      box-sizing:border-box;
     }
-
-    .card{
-      background:var(--card);
-      border:1px solid rgba(255,255,255,.10);
-      border-radius:18px;
-      padding:12px;
-      box-shadow:0 10px 24px rgba(0,0,0,.08);
-      backdrop-filter:blur(4px);
+    .models .model{
       display:flex;
       flex-direction:column;
-      gap:10px;
+      justify-content:space-between;
+      gap:12px;
+      padding:14px;
+      border-radius:12px;
+      background:var(--card);
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:0 8px 20px rgba(6,42,32,.04);
       cursor:pointer;
-      transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
-      min-width:0;
+      min-height:240px;
+      backdrop-filter:blur(4px) saturate(110%);
+      color:#02110a;
+      user-select:none;
+      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
     }
-    .card:hover{
+    .models .model.active{
       transform:translateY(-2px);
-      background:rgba(255,255,255,.14);
-      box-shadow:0 16px 34px rgba(0,0,0,.12);
+      background:rgba(255,255,255,.22);
+      border-color:rgba(124,179,66,.35);
+      box-shadow:0 14px 30px rgba(6,42,32,.12);
     }
-
-    .thumb{
-      width:100%;
-      aspect-ratio:1.25/1;
+    .models .thumb{
+      position:relative;
+      flex:0 0 56%;
+      height:0;
+      padding-bottom:56%;
       overflow:hidden;
-      border-radius:14px;
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.10));
+      border-radius:10px;
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.10));
     }
-    .thumb img{
+    .models .thumb img{
+      position:absolute;
+      inset:0;
       width:100%;
       height:100%;
       object-fit:cover;
       object-position:center;
+      border-radius:8px;
     }
-
-    .card h3{
-      margin:0;
-      font-size:17px;
-      font-weight:900;
-      color:#08150e;
-      line-height:1.1;
-    }
-    .card p{
-      margin:0;
-      color:#102017;
-      font-size:13px;
-      line-height:1.28;
-      font-weight:600;
-    }
-    .card p small{
-      display:block;
-      margin-top:4px;
-      font-weight:500;
-      color:#173126;
-    }
-    .actions{
-      display:flex;
-      justify-content:flex-start;
-      gap:8px;
-      margin-top:auto;
-    }
-    .btn{
-      border:0;
-      padding:9px 11px;
-      border-radius:10px;
-      background:linear-gradient(90deg,var(--brand-green),var(--green-mid));
-      color:#fff;
-      font-weight:800;
-      font-size:12px;
+    .model .meta h4{margin:0;font-size:18px;color:#02110a;font-weight:900}
+    .model .meta p{margin:10px 0 0;font-size:14px;color:rgba(2,17,10,.95);line-height:1.25;font-weight:600}
+    .model .meta p small{display:block;color:rgba(2,17,10,.88);font-weight:500;margin-top:4px}
+    .btn-small{
+      background:transparent;
+      border:1px solid rgba(6,42,32,.06);
+      padding:8px 10px;
+      border-radius:8px;
       cursor:pointer;
-      box-shadow:0 8px 16px rgba(0,0,0,.10);
-    }
-    .btn.secondary{
-      background:#fff;
-      color:#09150f;
-      border:1px solid rgba(0,0,0,.06);
+      font-weight:700;
+      color:#08110a;
     }
 
-    .featured{
+    .futures-title{
+      display:flex;
+      align-items:center;
+      justify-content:center;
       margin-top:24px;
-      background:rgba(255,255,255,.94);
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:18px;
+      margin-bottom:10px;
+    }
+    .futures-title .models-title{padding:8px 14px}
+    .featured{
+      margin-top:10px;
+      border-radius:12px;
       overflow:hidden;
-      box-shadow:0 16px 36px rgba(0,0,0,.10);
+      border:1px solid rgba(212,175,55,.12);
+      background:rgba(255,255,255,.94);
+      box-shadow:0 12px 36px rgba(6,42,32,.06);
     }
     .featured-hero{
       position:relative;
@@ -392,142 +473,111 @@
       overflow:hidden;
       background:#000;
     }
-    .slide{
+    .featured-hero .slide{
       position:absolute;
       inset:0;
       opacity:0;
-      transform:scale(1.02);
-      transition:opacity .55s ease, transform .55s ease;
+      transition:opacity 700ms ease, transform 700ms;
+      transform:scale(1.03);
     }
-    .slide.active{
+    .featured-hero .slide.active{
       opacity:1;
       transform:scale(1);
       z-index:2;
     }
-    .slide img{
+    .featured-hero img{
       width:100%;
       height:100%;
       object-fit:cover;
-      object-position:center;
+      object-position:center center;
+      display:block;
     }
-    .featured-copy{
-      padding:14px 16px 18px;
-      text-align:center;
-      color:#123023;
-    }
-    .featured-copy h3{
-      margin:0;
-      font-size:18px;
-      font-weight:900;
-      color:var(--brand-green);
-    }
-    .featured-copy p{
-      margin:8px auto 0;
-      max-width:680px;
-      line-height:1.45;
-      font-size:14px;
-    }
-
-    .badge{
-      display:inline-flex;
+    .featured-copy{padding:14px 18px;text-align:center}
+    .featured-copy h3{margin:0;color:var(--brand-green);font-weight:800;letter-spacing:.3px;font-size:18px}
+    .featured-copy p{color:rgba(2,17,10,.95);margin-top:10px;line-height:1.45}
+    .availability-badge{
+      display:inline-block;
       margin-top:12px;
-      padding:10px 14px;
+      padding:10px 18px;
       border-radius:999px;
       background:linear-gradient(90deg,#ffd54a,#ffb300);
       color:#08110a;
-      font-size:13px;
       font-weight:900;
-      box-shadow:0 10px 22px rgba(0,0,0,.10);
-    }
-
-    .fab{
-      position:fixed;
-      right:16px;
-      bottom:16px;
-      width:56px;
-      height:56px;
-      border-radius:50%;
-      background:var(--whatsapp-green);
-      box-shadow:0 14px 30px rgba(0,0,0,.22);
-      z-index:60;
-      border:0;
-      color:#fff;
-      cursor:pointer;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:22px;
+      font-size:16px;
+      box-shadow:0 10px 30px rgba(255,180,0,.18);
+      border:1px solid rgba(0,0,0,.06);
     }
 
     .modal-overlay{
       position:fixed;
       inset:0;
-      background:rgba(0,0,0,.58);
+      background:rgba(0,0,0,.56);
       display:none;
       align-items:center;
       justify-content:center;
-      z-index:100;
+      z-index:5000;
       padding:14px;
     }
     .modal{
-      width:min(820px, 96vw);
-      max-height:calc(100vh - 28px);
-      overflow:auto;
+      width:min(760px,96vw);
       background:#fff;
       border-radius:18px;
-      box-shadow:0 24px 48px rgba(0,0,0,.34);
-      padding:16px;
-      color:#123023;
+      padding:18px;
+      overflow:auto;
+      box-shadow:0 20px 45px rgba(0,0,0,.42);
+      max-height:calc(100vh - 28px);
+      position:relative;
     }
-    .modal-head{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:10px;
-    }
-    .modal-head h2{
-      margin:0;
-      color:#08150e;
-      font-size:18px;
-      line-height:1.2;
-    }
-    .close{
-      border:1px solid rgba(0,0,0,.08);
-      background:#fff;
-      border-radius:50%;
+    .modal h2{font-size:18px;margin-top:0;margin-right:28px;color:#08110a}
+    .modal .close{
+      position:sticky;
+      top:0;
+      margin-left:auto;
       width:34px;
       height:34px;
-      cursor:pointer;
-      font-size:16px;
       display:flex;
       align-items:center;
       justify-content:center;
+      background:#fff;
+      border:1px solid rgba(6,42,32,.12);
+      border-radius:50%;
+      font-size:16px;
+      cursor:pointer;
+      box-shadow:0 6px 14px rgba(0,0,0,.10);
+      color:#0b2418;
+      z-index:20;
       flex:0 0 auto;
     }
+    .modal-body{color:#23403a;line-height:1.5}
+    .modal-body ul{margin-top:8px;margin-bottom:0;padding-left:20px}
+    .modal-body li{margin-bottom:6px}
 
-    .carousel{
+    .modal-carousel{
       position:relative;
-      border-radius:16px;
+      width:100%;
+      border-radius:14px;
       overflow:hidden;
-      background:#f6faf8;
-      border:1px solid rgba(0,0,0,.05);
+      background:linear-gradient(180deg,#fbfeff,#f3f9fc);
+      border:1px solid rgba(6,42,32,.06);
+      box-shadow:0 10px 24px rgba(6,42,32,.05);
       margin:10px 0 14px;
     }
-    .carousel-stage{
+    .modal-carousel-stage{
+      position:relative;
       width:100%;
-      height:290px;
+      height:320px;
       overflow:hidden;
+      background:#f8fbfa;
     }
-    .carousel-stage img{
+    .modal-carousel-stage img{
       width:100%;
       height:100%;
       object-fit:contain;
       object-position:center;
       display:block;
-      transition:opacity .25s ease, transform .25s ease;
+      transition:opacity .35s ease, transform .35s ease;
     }
-    .carousel-controls{
+    .modal-carousel-controls{
       position:absolute;
       inset:0;
       display:flex;
@@ -536,151 +586,213 @@
       padding:0 8px;
       pointer-events:none;
     }
-    .arrow{
+    .carousel-btn{
       pointer-events:auto;
-      width:38px;
-      height:38px;
-      border-radius:50%;
+      width:40px;
+      height:40px;
       border:0;
-      background:rgba(255,255,255,.94);
-      box-shadow:0 8px 18px rgba(0,0,0,.12);
-      cursor:pointer;
+      border-radius:50%;
+      background:rgba(255,255,255,.92);
+      color:#0b2418;
       display:flex;
       align-items:center;
       justify-content:center;
-      color:#0d2418;
-      font-size:15px;
+      box-shadow:0 8px 18px rgba(0,0,0,.12);
+      cursor:pointer;
+      font-size:16px;
     }
-    .dots{
+    .carousel-btn:active{transform:scale(.96)}
+    .carousel-dots{
       display:flex;
-      justify-content:center;
       gap:6px;
+      justify-content:center;
+      align-items:center;
       padding:10px 0 2px;
       flex-wrap:wrap;
     }
-    .dot{
-      width:8px;
-      height:8px;
+    .carousel-dot{
+      width:9px;
+      height:9px;
       border-radius:50%;
       border:0;
-      background:rgba(4,70,46,.25);
+      background:rgba(4,70,46,.28);
       cursor:pointer;
       padding:0;
     }
-    .dot.active{
+    .carousel-dot.active{
       background:var(--brand-green);
-      transform:scale(1.18);
+      transform:scale(1.15);
     }
 
-    .modal p{line-height:1.5}
-    .modal ul{margin:8px 0 0;padding-left:18px}
-    .modal li{margin:0 0 6px}
-
-    .whatsapp-choice{
-      display:grid;
-      gap:10px;
-      margin-top:10px;
-    }
-    .choice{
-      border:1px solid rgba(0,0,0,.07);
-      border-radius:14px;
-      background:linear-gradient(180deg,#fff,#f7fbf8);
+    .whatsapp-choice{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
+    .whatsapp-card{
+      border:1px solid rgba(6,42,32,.08);
+      background:linear-gradient(180deg,#ffffff 0%,#f7fbf9 100%);
+      border-radius:12px;
       padding:10px;
-      box-shadow:0 8px 16px rgba(0,0,0,.06);
-      text-align:left;
       cursor:pointer;
+      text-align:left;
+      box-shadow:0 8px 18px rgba(6,42,32,.06);
     }
-    .choice-top{
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
-    .choice-flag{
-      width:34px;
-      height:24px;
+    .whatsapp-card .top{display:flex;align-items:center;gap:10px}
+    .whatsapp-card .flag{
+      width:36px;
+      height:26px;
       border-radius:6px;
       overflow:hidden;
-      flex:0 0 auto;
       border:1px solid rgba(0,0,0,.08);
+      box-shadow:0 4px 10px rgba(0,0,0,.08);
+      flex:0 0 auto;
     }
-    .choice-flag img{width:100%;height:100%;object-fit:cover}
-    .choice h4{margin:0;font-size:14px;color:#08150e}
-    .choice p{margin:4px 0 0;font-size:12px;color:#355247}
+    .whatsapp-card .flag img{width:100%;height:100%;object-fit:cover}
+    .whatsapp-card h4{margin:0;font-size:14px;color:#082014}
+    .whatsapp-card p{margin:5px 0 0;color:#315348;font-size:12px;line-height:1.35}
+    .whatsapp-card .go{
+      margin-top:9px;
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      padding:7px 10px;
+      border-radius:999px;
+      background:linear-gradient(90deg,var(--brand-green),var(--green-mid));
+      color:#fff;
+      font-weight:800;
+      font-size:12px;
+    }
 
-    .footer{
-      margin-top:28px;
-      padding:20px 4vw 36px;
-      text-align:center;
-      color:#e6f7ea;
-      background:linear-gradient(180deg, rgba(6,31,20,.92), rgba(6,31,20,1));
+    .fab{
+      width:58px;
+      height:58px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:fixed;
+      right:14px;
+      bottom:18px;
+      z-index:4000;
+      box-shadow:0 10px 30px rgba(2,50,26,.25);
+      background:var(--whatsapp-green);
+      border:3px solid rgba(255,255,255,.06);
+      cursor:pointer;
     }
-    .footer strong{
-      display:inline-block;
+    .fab button{
+      width:100%;
+      height:100%;
+      border:0;
+      background:transparent;
+      color:#fff;
+      font-size:22px;
+      cursor:pointer;
+      border-radius:50%;
+    }
+    .fab:focus,.fab button:focus{outline:3px solid rgba(255,255,255,.12);outline-offset:2px}
+
+    footer{
+      background:var(--green-dark);
+      color:#fff;
+      padding:18px 5vw 40px;
+      text-align:center;
+      margin-top:28px;
+      position:relative;
+      z-index:50;
+    }
+    .footer-company{
+      display:block;
+      margin:0 auto 8px;
+      font-size:18px;
+      font-weight:800;
       color:#04462e;
       -webkit-text-stroke:0.7px var(--gold);
-      text-shadow:0 3px 6px rgba(0,0,0,.55);
-      margin-bottom:8px;
-      font-size:18px;
+      text-shadow:0 3px 6px rgba(0,0,0,.6);
+      padding:6px 10px;
+      border-radius:6px;
+      width:max-content;
     }
+    .footer-contact{margin-top:6px;color:#e6f7ea;line-height:1.6}
 
-    @media (max-width: 1100px){
-      .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .led-indicator{width:18px;height:18px;border-radius:50%;background:#999;box-shadow:0 0 10px rgba(0,0,0,.2);flex:0 0 auto}
+    .led-low{background:#8bc34a}
+    .led-med{background:#ffeb3b}
+    .led-high{background:#ff5722}
+    .blink-slow{animation:blink 1.5s infinite}
+    .blink-med{animation:blink 1s infinite}
+    .blink-fast{animation:blink .4s infinite}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+
+    @media (max-width:1100px){
+      .models{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
     }
-    @media (max-width: 900px){
-      .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-      .featured-hero{height:250px}
+    @media (max-width:900px){
+      .featured-hero{height:280px}
       .worldcup{max-width:100%}
     }
-    @media (max-width: 720px){
-      .header-inner{
-        align-items:flex-start;
-        flex-direction:column;
-      }
-      .brand{
-        width:100%;
-      }
+    @media (max-width:820px){
+      .models{grid-template-columns:1fr;gap:20px}
+      .brand-name{font-size:24px}
       .brand img{width:44px;height:44px}
-      .brand-name{font-size:22px}
-      .brand-sub{font-size:11px;letter-spacing:3px}
-      .worldcup{
-        width:100%;
-        max-width:100%;
-        grid-template-columns:auto 1fr;
-        gap:6px 8px;
-        padding:8px 9px;
-      }
-      .ball{width:42px;height:42px}
-      .headline{font-size:11px}
-      .subline{font-size:9px}
-      .flags{
-        grid-template-columns:repeat(5,1fr);
-        gap:4px;
-      }
-      .grid{grid-template-columns:1fr}
-      .featured-hero{height:220px}
-      .card h3{font-size:16px}
-      .card p{font-size:12px}
-      main{padding-top:14px}
+      .fab{width:50px;height:50px}
+      .fab button{font-size:20px}
+      .worldcup{max-width:calc(100vw - 200px)}
     }
-    @media (max-width: 480px){
+    @media (max-width:768px){
+      .brand-name{font-size:22px}
+      .featured-hero{height:240px}
+    }
+    @media (max-width:640px){
+      header{padding:6px 3vw}
+      .header-inner{gap:8px}
+      .brand{gap:8px}
+      .brand img{width:38px;height:38px}
+      .brand-name{font-size:18px;letter-spacing:.6px}
+      .brand-sub{font-size:9px;letter-spacing:2px}
+      .worldcup{
+        padding:5px 7px;
+        gap:6px;
+        max-width:calc(100vw - 145px);
+      }
+      .ball{width:28px;height:28px}
+      .kicker{font-size:7px}
+      .headline{font-size:9px}
+      .subline{font-size:7px}
+      .flags{gap:2px;max-width:74px}
+      .flag{width:9px;height:9px}
+      .featured-hero{height:220px}
+      .modal{
+        width:min(96vw,760px);
+        max-height:calc(100vh - 20px);
+        padding:16px;
+        border-radius:16px;
+      }
+      .modal-carousel-stage{height:240px}
+      .carousel-btn{
+        width:36px;
+        height:36px;
+        font-size:15px;
+      }
+      .modal h2{font-size:17px}
+    }
+    @media (max-width:480px){
       .topbar{padding:0 3vw}
       .topbar .note{font-size:9px}
       .survey-link{font-size:9px;padding:3px 7px}
-      header{padding:8px 3vw 10px}
-      .brand-name{font-size:20px}
-      .brand-sub{font-size:10px;letter-spacing:2px}
-      .worldcup{padding:8px}
-      .kicker{font-size:8px}
-      .headline{font-size:10px}
-      .subline{font-size:8px}
-      .flags{
-        grid-template-columns:repeat(5,1fr);
+      header{padding:6px 3vw 8px}
+      .brand-name{font-size:16px}
+      .brand-sub{font-size:8px;letter-spacing:1.5px}
+      .worldcup{
+        max-width:calc(100vw - 120px);
+        padding:4px 6px;
+        gap:5px;
       }
-      .flag{aspect-ratio:1/1}
+      .ball{width:26px;height:26px}
+      .kicker{font-size:6px}
+      .headline{font-size:8px}
+      .subline{font-size:6px}
+      .flags{max-width:70px}
+      .flag{width:8px;height:8px}
       .featured-hero{height:195px}
       .modal{padding:14px}
       .carousel-stage{height:230px}
-      .modal-head h2{font-size:17px}
       .fab{width:50px;height:50px;font-size:20px}
     }
   </style>
@@ -723,15 +835,12 @@
                 <stop offset="100%" stop-color="#d4af37"/>
               </linearGradient>
             </defs>
-
             <circle cx="50" cy="50" r="48" fill="url(#gbBallGlow)"/>
             <circle cx="50" cy="50" r="38" fill="none" stroke="url(#gbBallGold)" stroke-width="2.5"/>
-
             <path d="M50 24 L61 31 L58 44 L50 50 L42 44 L39 31 Z" fill="#111"/>
             <path d="M26 50 L39 31 L42 44 L50 50 L42 57 L29 56 Z" fill="#111"/>
             <path d="M74 50 L61 31 L58 44 L50 50 L58 57 L71 56 Z" fill="#111"/>
             <path d="M50 76 L42 57 L29 56 L37 71 L50 67 L63 71 L71 56 L58 57 Z" fill="#111"/>
-
             <path d="M18 34 C29 17 43 10 50 10 C57 10 71 17 82 34" fill="none" stroke="url(#gbBallGold)" stroke-width="4" stroke-linecap="round"/>
             <path d="M14 54 C25 49 34 47 50 47 C66 47 75 49 86 54" fill="none" stroke="#ffffff" stroke-opacity="0.28" stroke-width="2.2" stroke-linecap="round"/>
             <path d="M18 66 C29 83 43 90 50 90 C57 90 71 83 82 66" fill="none" stroke="url(#gbBallGold)" stroke-width="4" stroke-linecap="round"/>
@@ -760,424 +869,865 @@
     </div>
   </header>
 
-  <main>
-    <div class="section-title">Nos modèles</div>
-    <section class="grid" id="products">
-      <article class="card" role="button" tabindex="0" onclick="openProduct(0)">
-        <div class="thumb"><img src="Pwkb_Mini_3.png" alt="GreenMini"></div>
-        <h3>GreenMini</h3>
-        <p>10 000 mAh<small>Compact. Écran digital. Quotidien.</small></p>
-        <div class="actions"><button class="btn" type="button" onclick="openProduct(0);event.stopPropagation()">Infos</button></div>
-      </article>
+  <main class="container" role="main">
+    <section class="models-wrapper" id="models" role="region" aria-label="Nos modèles">
+      <div class="models-header"><div class="models-title">Nos modèles</div></div>
 
-      <article class="card" role="button" tabindex="0" onclick="openProduct(1)">
-        <div class="thumb"><img src="pwkb_123.png" alt="GreenCore"></div>
-        <h3>GreenCore</h3>
-        <p>≈ 9 000 mAh<small>Type-C rapide. Simple. Fiable.</small></p>
-        <div class="actions"><button class="btn" type="button" onclick="openProduct(1);event.stopPropagation()">Infos</button></div>
-      </article>
+      <div class="models" role="list">
+        <div class="model" role="button" onclick="selectModel(0)" tabindex="0" aria-label="GreenMini">
+          <div class="thumb"><img src="Pwkb_Mini_3.png" alt="GreenMini" loading="eager" fetchpriority="high"></div>
+          <div class="meta">
+            <h4>GreenMini</h4>
+            <p>GreenMini ≈ 9 000 mAh<br><small>Compact. Écran digital. Quotidien.</small></p>
+          </div>
+          <div class="actions"><button class="btn-small" onclick="openTechModal(0);event.stopPropagation()">Infos</button></div>
+        </div>
 
-      <article class="card" role="button" tabindex="0" onclick="openProduct(2)">
-        <div class="thumb"><img src="Greenplus_1.png" alt="GreenPlus"></div>
-        <h3>GreenPlus</h3>
-        <p>≈ 9 000 mAh<small>Bonne autonomie. Micro USB.</small></p>
-        <div class="actions"><button class="btn" type="button" onclick="openProduct(2);event.stopPropagation()">Infos</button></div>
-      </article>
+        <div class="model" role="button" onclick="selectModel(1)" tabindex="0" aria-label="GreenCore">
+          <div class="thumb"><img src="pwkb_123.png" alt="GreenCore" loading="eager"></div>
+          <div class="meta">
+            <h4>GreenCore</h4>
+            <p>GreenCore ≈ 9 000 mAh<br><small>Type-C rapide. Simple. Fiable.</small></p>
+          </div>
+          <div class="actions"><button class="btn-small" onclick="openTechModal(1);event.stopPropagation()">Infos</button></div>
+        </div>
 
-      <article class="card" role="button" tabindex="0" onclick="openProduct(3)">
-        <div class="thumb"><img src="pwkb_6.png" alt="GreenPro"></div>
-        <h3>GreenPro</h3>
-        <p>≈ 12 000 mAh<small>Charge rapide. Multi-appareils.</small></p>
-        <div class="actions"><button class="btn" type="button" onclick="openProduct(3);event.stopPropagation()">Infos</button></div>
-      </article>
+        <div class="model" role="button" onclick="selectModel(2)" tabindex="0" aria-label="GreenPlus">
+          <div class="thumb"><img src="Greenplus_1.png" alt="GreenPlus" loading="lazy"></div>
+          <div class="meta">
+            <h4>GreenPlus</h4>
+            <p>GreenPlus ≈ 9 000 mAh<br><small>Bonne autonomie. Micro USB.</small></p>
+          </div>
+          <div class="actions"><button class="btn-small" onclick="openTechModal(2);event.stopPropagation()">Infos</button></div>
+        </div>
 
-      <article class="card" role="button" tabindex="0" onclick="openProduct(4)">
-        <div class="thumb"><img src="Greenwire_1.png" alt="GreenWire"></div>
-        <h3>GreenWire</h3>
-        <p>≈ 20 000 mAh<small>Grande autonomie. Testé en réel.</small></p>
-        <div class="actions"><button class="btn" type="button" onclick="openProduct(4);event.stopPropagation()">Infos</button></div>
-      </article>
+        <div class="model" role="button" onclick="selectModel(3)" tabindex="0" aria-label="GreenPro">
+          <div class="thumb"><img src="pwkb_6.png" alt="GreenPro" loading="lazy"></div>
+          <div class="meta">
+            <h4>GreenPro</h4>
+            <p>GreenPro ≈ 12 000 mAh<br><small>Charge rapide. Multi-appareils.</small></p>
+          </div>
+          <div class="actions"><button class="btn-small" onclick="openTechModal(3);event.stopPropagation()">Infos</button></div>
+        </div>
 
-      <article class="card" role="button" tabindex="0" onclick="openProduct(5)">
-        <div class="thumb"><img src="pwkb_wireless_1.png" alt="GreenWireless"></div>
-        <h3>GreenWireless</h3>
-        <p>20 000 mAh<small>Sans-fil. PD / QC3.0.</small></p>
-        <div class="actions"><button class="btn" type="button" onclick="openProduct(5);event.stopPropagation()">Infos</button></div>
-      </article>
+        <div class="model" role="button" onclick="selectModel(4)" tabindex="0" aria-label="GreenWire">
+          <div class="thumb"><img src="Greenwire_1.png" alt="GreenWire" loading="lazy"></div>
+          <div class="meta">
+            <h4>GreenWire</h4>
+            <p>GreenWire ≈ 20 000 mAh<br><small>Grande autonomie. Testé en réel.</small></p>
+          </div>
+          <div class="actions"><button class="btn-small" onclick="openTechModal(4);event.stopPropagation()">Infos</button></div>
+        </div>
 
-      <article class="card" role="button" tabindex="0" onclick="openProduct(6)">
-        <div class="thumb"><img src="Chargeur_ordi_1.png" alt="Chargeur PC Portable"></div>
-        <h3>Chargeur PC</h3>
-        <p>65W à 100W<small>Stable. Rapide. Universel.</small></p>
-        <div class="actions"><button class="btn" type="button" onclick="openProduct(6);event.stopPropagation()">Infos</button></div>
-      </article>
+        <div class="model" role="button" onclick="selectModel(5)" tabindex="0" aria-label="GreenWireless">
+          <div class="thumb"><img src="pwkb_wireless_1.png" alt="GreenWireless" loading="lazy"></div>
+          <div class="meta">
+            <h4>GreenWireless</h4>
+            <p>GreenWireless — 20 000 mAh<br><small>Sans-fil. PD / QC3.0.</small></p>
+          </div>
+          <div class="actions"><button class="btn-small" onclick="openTechModal(5);event.stopPropagation()">Infos</button></div>
+        </div>
 
-      <article class="card" role="button" tabindex="0" onclick="openProduct(7)">
-        <div class="thumb"><img src="wifi_2.png" alt="Stabilisateur WiFi"></div>
-        <h3>Stabilisateur WiFi</h3>
-        <p>Anti-coupure<small>Reste connecté pendant les pannes.</small></p>
-        <div class="actions"><button class="btn" type="button" onclick="openProduct(7);event.stopPropagation()">Infos</button></div>
-      </article>
-    </section>
+        <div class="model" role="button" onclick="selectModel(6)" tabindex="0" aria-label="Chargeur ordinateur portable">
+          <div class="thumb"><img src="Chargeur_ordi_1.png" alt="Chargeur PC Portable" loading="lazy"></div>
+          <div class="meta">
+            <h4>Chargeur PC</h4>
+            <p>65W à 100W<br><small>Stable. Rapide. Universel.</small></p>
+          </div>
+          <div class="actions"><button class="btn-small" onclick="openTechModal(6);event.stopPropagation()">Infos</button></div>
+        </div>
 
-    <div class="section-title" style="margin-top:24px">Projets à venir</div>
-    <section class="featured">
-      <div class="featured-hero">
-        <div class="slide active">
-          <img src="Future_Pack_1.png" alt="Pack 2.5 kWh">
+        <div class="model" role="button" onclick="selectModel(7)" tabindex="0" aria-label="Stabilisateur WiFi">
+          <div class="thumb"><img src="wifi_2.png" alt="Stabilisateur WiFi" loading="lazy"></div>
+          <div class="meta">
+            <h4>Stabilisateur WiFi</h4>
+            <p>Anti-coupure<br><small>Reste connecté pendant les pannes.</small></p>
+          </div>
+          <div class="actions"><button class="btn-small" onclick="openTechModal(7);event.stopPropagation()">Infos</button></div>
         </div>
       </div>
+    </section>
+
+    <div class="futures-title" id="futures">
+      <div class="models-title">Projets à venir</div>
+    </div>
+
+    <section class="featured" aria-label="Pack 2.5 kWh — Solution modulaire">
+      <div class="featured-hero" id="featuredHero" aria-hidden="false">
+        <div class="slide active" data-index="0"><img src="Future_Pack_1.png" alt="Pack 2.5 kWh vue 1" loading="lazy"></div>
+      </div>
+
       <div class="featured-copy">
-        <h3>Pack 2.5 kWh</h3>
-        <p>Solution modulaire pour stockage médical et PME. Conçue pour le terrain, la maintenance locale et l'autonomie.</p>
-        <div class="badge">Disponible 31/05/2026</div>
+        <h3>Batterie 2.5 kWh — Assemblée &amp; pensée pour l'Afrique</h3>
+        <p>Pack 2.5 kWh modulaire, conçu pour stockage médical &amp; usages PME.</p>
+
         <div style="margin-top:12px">
-          <button class="btn" type="button" onclick="openPackModal()">Infos pack</button>
+          <span class="availability-badge" id="availabilityBadge">Disponible 05/2026</span>
+        </div>
+
+        <div style="margin-top:12px">
+          <button class="btn-small" type="button" onclick="openPackModal()">Infos pack</button>
         </div>
       </div>
     </section>
   </main>
 
-  <button class="fab" id="fab" type="button" aria-label="Commander via WhatsApp">
-    <i class="fa-brands fa-whatsapp"></i>
-  </button>
+  <div id="fab" class="fab" role="button" aria-label="Commander via WhatsApp">
+    <button id="fabButton" type="button" aria-label="Commander via WhatsApp">
+      <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+    </button>
+  </div>
 
-  <div class="modal-overlay" id="modalOverlay" role="dialog" aria-hidden="true">
+  <div id="modalOverlay" class="modal-overlay" role="dialog" aria-hidden="true">
     <div class="modal" role="document" aria-modal="true">
-      <div class="modal-head">
-        <h2 id="modalTitle">Titre</h2>
-        <button class="close" type="button" onclick="closeModal()">✕</button>
-      </div>
+      <button class="close" aria-label="Fermer" onclick="closeModal()">✕</button>
       <div id="modalContent"></div>
     </div>
   </div>
 
-  <footer class="footer">
-    <strong>GREENBRIDGE TECHNOLOGIES</strong><br>
-    © <span id="year"></span> — Assemblé par des africains
+  <footer>
+    <div class="footer-company">GREENBRIDGE TECHNOLOGIES</div>
+    <div style="display:flex;justify-content:center;align-items:center;gap:10px;margin:10px 0 8px;flex-wrap:wrap">
+      <img src="https://flagcdn.com/w80/ci.png" alt="Drapeau Côte d'Ivoire" style="width:32px;height:22px;object-fit:cover;border-radius:4px;box-shadow:0 4px 12px rgba(0,0,0,0.28)">
+      <img src="https://flagcdn.com/w80/sn.png" alt="Drapeau Sénégal" style="width:32px;height:22px;object-fit:cover;border-radius:4px;box-shadow:0 4px 12px rgba(0,0,0,0.28)">
+    </div>
+    <div style="color:#e6f7ea">© <span id="year"></span> GREENBRIDGE TECHNOLOGIES — Assemblé par des africains</div>
   </footer>
 </div>
 <script>
+const CONTACT_EMAIL = 'contact@greenbridge.com';
 const SURVEY_URL = 'https://enquete-powerbank-ci-sn.netlify.app/';
 
-const products = [
+const models = [
   {
-    title: 'GreenMini — 10 000 mAh',
-    subtitle: 'Compact',
-    images: ['Pwkb_Mini_3.png', 'Pwkb_mini_213.png', 'PWBK_mini_4.png'],
+    id:'greenmini',
+    title:'GreenMini — 10 000 mAh',
+    subtitle:'Ultra-compact',
+    images:['Pwkb_Mini_3.png','Pwkb_mini_213.png','PWBK_mini_4.png'],
+    specs:[
+      'Cellules : Samsung (3 cellules) • testées à >100% capacité',
+      'Capacité nominale : 10 000 mAh (≈9 200 mAh usable)',
+      'Puissance pack approximative : ~32 W',
+      'Écran digital : affichage % batterie',
+      'Ports : 1× USB-C (in/out) + 2× USB-A',
+      'Garantie spéciale : 3 ans'
+    ],
+    warranty: 'Garantie 3 ans — 100 premiers clients',
     details: `
-      <p><strong>GreenMini — 10 000 mAh</strong><br>Compact. Écran digital. Usage quotidien.</p>
-      <ul>
-        <li>3 cellules Samsung</li>
-        <li>USB-C in/out</li>
-        <li>2 USB-A</li>
-        <li>Garantie 3 ans</li>
-      </ul>
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
+        <strong>GreenMini — 10 000 mAh</strong><br>
+        Compact. Écran digital. Usage quotidien.
+      </p>
+      <div style="margin-top:8px">
+        <strong>Entrées</strong>
+        <ul>
+          <li>5V — 4.5A</li>
+          <li>9V — 2.5A</li>
+          <li>12V — 1.85A max</li>
+        </ul>
+        <strong>Sorties</strong>
+        <ul>
+          <li>USB-C : 5V — 4.5A ; 9V — 2.5A ; 12V — 1.85A</li>
+          <li>USB-A Q3 : 5V — 2.1A</li>
+          <li>USB-A secondaire : 5V — 1A</li>
+        </ul>
+      </div>
     `
   },
   {
-    title: 'GreenCore — ≈ 9 000 mAh',
-    subtitle: 'Type-C rapide',
-    images: ['pwkb_123.png', 'Pwbk_21.png', 'pwkb_4.1.png'],
+    id:'greencore',
+    title:'GreenCore — ≈ 9 000 mAh',
+    subtitle:'Modulaire • Type-C charge rapide',
+    images:['pwkb_123.png','Pwbk_21.png','pwkb_4.1.png'],
+    specs:[
+      'Cellules : Samsung — sélectionnées & testées',
+      'Capacité nominale : ≈ 9 000 mAh',
+      'Puissance pack approximative : ~32 W',
+      'Type-C charge rapide (QC compatible)',
+      'Pas de Power Delivery (PD)',
+      'Lampe LED intégrée',
+      'Garantie spéciale : 3 ans'
+    ],
+    warranty: 'Garantie 3 ans — 100 premiers clients',
+    ledModes: [
+      { id:0, name:'Veille — faible intensité' },
+      { id:1, name:'Veille — intensité moyenne' },
+      { id:2, name:'Veille — intensité haute' },
+      { id:3, name:'Clignotement lent' },
+      { id:4, name:'Clignotement secours — moyen' },
+      { id:5, name:'Clignotement secours — rapide' }
+    ],
     details: `
-      <p><strong>GreenCore — ≈ 9 000 mAh</strong><br>Type-C rapide. Simple. Fiable.</p>
-      <ul>
-        <li>Quick Charge</li>
-        <li>Pas de Power Delivery</li>
-        <li>Lampe LED</li>
-        <li>Garantie 3 ans</li>
-      </ul>
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
+        <strong>GreenCore — ≈ 9 000 mAh</strong><br>
+        Technologie Samsung. Charge rapide. Simple et fiable.
+      </p>
+      <div style="margin-top:8px">
+        <strong>Charge / Mesures</strong>
+        <ul>
+          <li>Charge Type-C rapide (QC)</li>
+          <li>Power Delivery (PD) : Non</li>
+          <li>Mesure : 4.66 V / 1.52 A</li>
+        </ul>
+      </div>
     `
   },
   {
-    title: 'GreenPlus — ≈ 9 000 mAh',
-    subtitle: 'Bonne autonomie',
-    images: ['Greenplus_1.png', 'Greenplus_2.png', 'Greenplus_3.png'],
+    id:'greenplus',
+    title:'GreenPlus — ≈ 9 000 mAh',
+    subtitle:'Micro USB • bonne autonomie',
+    images:['Greenplus_1.png','Greenplus_2.png','Greenplus_3.png'],
+    specs:[
+      'Capacité nominale : ≈ 9 000 mAh',
+      'Cellules : Samsung, LG ou premium',
+      'Recharge : Micro USB',
+      'Pas de charge rapide',
+      'Autonomie quotidienne',
+      'Garantie : 2 ans'
+    ],
+    warranty: 'Garantie 2 ans',
     details: `
-      <p><strong>GreenPlus — ≈ 9 000 mAh</strong><br>Bonne autonomie. Usage simple.</p>
-      <ul>
-        <li>Recharge Micro USB</li>
-        <li>Pas de charge rapide</li>
-        <li>Cellules Samsung / LG</li>
-        <li>Garantie 2 ans</li>
-      </ul>
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
+        <strong>GreenPlus — ≈ 9 000 mAh</strong><br>
+        Bonne autonomie. Usage simple.
+      </p>
+      <div style="margin-top:8px">
+        <strong>Caractéristiques principales</strong>
+        <ul>
+          <li>Recharge Micro USB.</li>
+          <li>Pas de charge rapide.</li>
+          <li>Autonomie adaptée à une utilisation quotidienne.</li>
+          <li>Garantie 2 ans.</li>
+        </ul>
+      </div>
     `
   },
   {
-    title: 'GreenPro — ≈ 12 000 mAh',
-    subtitle: 'Multi-appareils',
-    images: ['pwkb_6.png', 'pwbk_9.png', 'pwkb_10.png'],
+    id:'greenpro',
+    title:'GreenPro — ≈ 12 000 mAh',
+    subtitle:'Multi-appareils • Charge rapide USB-C',
+    images:['pwkb_6.png','pwbk_9.png','pwkb_10.png'],
+    specs:[
+      'Capacité nominale : ≈ 12 000 mAh',
+      'Charge rapide : USB-C',
+      'Cellules : pack de haute qualité',
+      'Conçu pour multi-appareils'
+    ],
     details: `
-      <p><strong>GreenPro — ≈ 12 000 mAh</strong><br>Plus de puissance. Plus de confort.</p>
-      <ul>
-        <li>USB-C</li>
-        <li>Charge rapide</li>
-        <li>Multi-appareils</li>
-      </ul>
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
+        <strong>GreenPro — ≈ 12 000 mAh</strong><br>
+        Pack de haute qualité, sélectionné pour la stabilité.
+      </p>
     `
   },
   {
-    title: 'GreenWire — ≈ 20 000 mAh',
-    subtitle: 'Grande autonomie',
-    images: ['Greenwire_1.png', 'Greenwire_2.png'],
+    id:'greenwire',
+    title:'GreenWire — ≈ 20 000 mAh',
+    subtitle:'Batterie testée en réel',
+    images:['Greenwire_1.png','Greenwire_2.png'],
+    specs:[
+      'Capacité réelle testée : environ 20 000 mAh',
+      'Cellules hautes performances : Samsung, Panasonic, LG',
+      'Pack optimisé pour l’autonomie et la stabilité',
+      'Batterie pensée pour un usage quotidien intensif'
+    ],
     details: `
-      <p><strong>GreenWire — ≈ 20 000 mAh</strong><br>Grande autonomie. Testé en réel.</p>
-      <ul>
-        <li>Cellules hautes performances</li>
-        <li>Usage intensif</li>
-        <li>Très robuste</li>
-      </ul>
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
+        <strong>GreenWire — batterie testée en réel</strong><br>
+        Grande autonomie. Cellules hautes performances.
+      </p>
+      <div style="margin-top:8px">
+        <strong>Caractéristiques rapides</strong>
+        <ul>
+          <li>Capacité réelle testée : environ 20 000 mAh.</li>
+          <li>Cellules : Samsung, Panasonic, LG ou équivalent.</li>
+          <li>Conçu pour la stabilité et la durée de vie.</li>
+        </ul>
+      </div>
     `
   },
   {
-    title: 'GreenWireless — 20 000 mAh',
-    subtitle: 'Sans-fil',
-    images: ['pwkb_wireless_1.png', 'pwkb_wireless_2.png', 'pwkb_wireless_3.png'],
+    id:'greenwireless',
+    title:'GreenWireless — 20 000 mAh',
+    subtitle:'Boîtier amovible • PD / QC3.0 • Sans-fil',
+    images:['pwkb_wireless_1.png','pwkb_wireless_2.png','pwkb_wireless_3.png'],
+    specs:[
+      'Cellules : Samsung ou LG',
+      'Capacité nominale : 20 000 mAh',
+      'USB-C PD + USB-A QC3.0',
+      'Charge rapide sans fil',
+      'Boîtier amovible',
+      'Garantie : 2 ans'
+    ],
+    warranty: 'Garantie 2 ans — 50 premiers clients',
     details: `
-      <p><strong>GreenWireless — 20 000 mAh</strong><br>Sans-fil. Amovible. Pratique.</p>
-      <ul>
-        <li>PD / QC3.0</li>
-        <li>Sans-fil intégré</li>
-        <li>Boîtier amovible</li>
-        <li>Garantie 2 ans</li>
-      </ul>
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
+        <strong>GreenWireless — Boîtier amovible</strong><br>
+        Sans-fil. Amovible. Pratique.
+      </p>
+      <div style="margin-top:8px">
+        <strong>Caractéristiques principales</strong>
+        <ul>
+          <li>Affichage LCD de la puissance restante.</li>
+          <li>Kit DIY sans soudure.</li>
+          <li>Protections électroniques complètes.</li>
+          <li>Capacité réelle utilisable ≈ 15 000 mAh.</li>
+        </ul>
+      </div>
     `
   },
   {
-    title: 'Chargeur PC Portable',
-    subtitle: 'Charge rapide',
-    images: ['Chargeur_ordi_1.png'],
+    id:'laptopcharger',
+    title:'Chargeur PC Portable',
+    subtitle:'Charge rapide universelle',
+    images:['Chargeur_ordi_1.png'],
+    specs:[
+      'Compatible PC portables USB-C / DC',
+      'Puissance : 65W à 100W',
+      'Protection surtension et surchauffe',
+      'Idéal pour bureau et déplacement'
+    ],
     details: `
-      <p><strong>Chargeur PC Portable</strong><br>Rapide et stable.</p>
-      <ul>
-        <li>65W à 100W</li>
-        <li>USB-C / DC</li>
-        <li>Protection surtension</li>
-      </ul>
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
+        <strong>Chargeur pour ordinateur portable</strong><br>
+        Rapide et stable.
+      </p>
     `
   },
   {
-    title: 'Stabilisateur WiFi',
-    subtitle: 'Internet même sans courant',
-    images: ['wifi_2.png'],
+    id:'wifiups',
+    title:'Stabilisateur WiFi',
+    subtitle:'Internet même sans courant',
+    images:['wifi_2.png'],
+    specs:[
+      'Backup routeur et modem',
+      'Sorties 5V / 9V / 12V',
+      'Protection surtension',
+      'Maintien du WiFi en cas de coupure'
+    ],
     details: `
-      <p><strong>Stabilisateur WiFi</strong><br>Reste connecté.</p>
-      <ul>
-        <li>Backup routeur / modem</li>
-        <li>Sorties 5V / 9V / 12V</li>
-        <li>Anti-coupure</li>
-      </ul>
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
+        <strong>Stabilisateur WiFi anti-coupure</strong><br>
+        Reste connecté.
+      </p>
     `
   }
 ];
 
 const modalOverlay = document.getElementById('modalOverlay');
 const modalContent = document.getElementById('modalContent');
-const modalTitle = document.getElementById('modalTitle');
-const fab = document.getElementById('fab');
+const fabButton = document.getElementById('fabButton');
+const modelCards = Array.from(document.querySelectorAll('.models .model'));
 
-let currentCarousel = [];
-let carouselIndex = 0;
-let carouselTimer = null;
+let currentModel = 0;
+let ledState = { modes: [], index: 0, clickCount: 0, clickTimer: null };
+let modalCarouselImages = [];
+let modalCarouselIndex = 0;
+let modalCarouselTimer = null;
 
 function openSurveyLink(ev){
   if(ev) ev.preventDefault();
-  window.open(SURVEY_URL, '_blank', 'noopener,noreferrer');
+  try{
+    const a = document.createElement('a');
+    a.href = SURVEY_URL;
+    a.rel = 'noopener noreferrer';
+    a.target = '_blank';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }catch(e){
+    window.open(SURVEY_URL, '_blank', 'noopener,noreferrer');
+  }
   return false;
 }
 
-function openModal(title, content){
-  modalTitle.textContent = title;
-  modalContent.innerHTML = content;
-  modalOverlay.style.display = 'flex';
-  modalOverlay.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
+function preloadImages(urls){
+  urls.forEach(src=>{
+    const img = new Image();
+    img.src = src;
+  });
 }
 
-function closeModal(){
-  modalOverlay.style.display = 'none';
-  modalOverlay.setAttribute('aria-hidden', 'true');
-  document.body.style.overflow = '';
-  stopCarousel();
+function allImageUrls(){
+  const list = [
+    'Energie_blanche.png',
+    'green bridge domo.png',
+    'Future_Pack_1.png',
+    'Future_pack_2.1.png',
+    'Future_Pack_3.png'
+  ];
+  models.forEach(m=>{
+    if(Array.isArray(m.images)) list.push(...m.images);
+  });
+  return [...new Set(list)];
 }
 
-function renderCarousel(){
-  const image = document.getElementById('carouselImage');
-  const dots = document.getElementById('carouselDots');
-  if(!image || !currentCarousel.length) return;
+function syncActiveModelCard(index){
+  modelCards.forEach((card, idx)=>card.classList.toggle('active', idx === index));
+}
 
-  const item = currentCarousel[carouselIndex];
-  image.style.opacity = '0.15';
-  image.style.transform = 'scale(1.01)';
+function stopModalCarousel(){
+  if(modalCarouselTimer){
+    clearInterval(modalCarouselTimer);
+    modalCarouselTimer = null;
+  }
+  modalCarouselImages = [];
+  modalCarouselIndex = 0;
+}
+
+function updateModalCarousel(){
+  const img = document.getElementById('modalCarouselImage');
+  const dots = document.getElementById('modalCarouselDots');
+  if(!img || modalCarouselImages.length === 0) return;
+
+  const idx = ((modalCarouselIndex % modalCarouselImages.length) + modalCarouselImages.length) % modalCarouselImages.length;
+  const current = modalCarouselImages[idx];
+
+  img.style.opacity = '0.2';
+  img.style.transform = 'scale(1.02)';
   setTimeout(()=>{
-    image.src = item.src;
-    image.alt = item.alt;
-    image.onload = () => {
-      image.style.opacity = '1';
-      image.style.transform = 'scale(1)';
+    img.src = current.src;
+    img.alt = current.alt;
+    img.onload = () => {
+      img.style.opacity = '1';
+      img.style.transform = 'scale(1)';
     };
-    image.style.opacity = '1';
-    image.style.transform = 'scale(1)';
-  }, 50);
+    img.style.opacity = '1';
+    img.style.transform = 'scale(1)';
+  }, 60);
 
   if(dots){
-    dots.innerHTML = currentCarousel.map((_, i)=>`
-      <button class="dot${i === carouselIndex ? ' active' : ''}" type="button" aria-label="Image ${i+1}" onclick="goCarousel(${i})"></button>
+    dots.innerHTML = modalCarouselImages.map((_, i)=>`
+      <button class="carousel-dot${i===idx ? ' active' : ''}" type="button" aria-label="Image ${i+1}" onclick="goModalCarousel(${i})"></button>
     `).join('');
   }
 }
 
-function startCarousel(images, alt){
-  stopCarousel();
-  currentCarousel = images.map(src => ({ src, alt }));
-  carouselIndex = 0;
-  renderCarousel();
-  if(currentCarousel.length > 1){
-    carouselTimer = setInterval(() => {
-      carouselIndex = (carouselIndex + 1) % currentCarousel.length;
-      renderCarousel();
-    }, 2800);
+function goModalCarousel(index){
+  if(!modalCarouselImages.length) return;
+  modalCarouselIndex = (index + modalCarouselImages.length) % modalCarouselImages.length;
+  updateModalCarousel();
+}
+
+function nextModalCarousel(){
+  if(!modalCarouselImages.length) return;
+  modalCarouselIndex = (modalCarouselIndex + 1) % modalCarouselImages.length;
+  updateModalCarousel();
+}
+
+function prevModalCarousel(){
+  if(!modalCarouselImages.length) return;
+  modalCarouselIndex = (modalCarouselIndex - 1 + modalCarouselImages.length) % modalCarouselImages.length;
+  updateModalCarousel();
+}
+
+function startModalCarousel(images){
+  stopModalCarousel();
+  modalCarouselImages = images || [];
+  modalCarouselIndex = 0;
+  updateModalCarousel();
+  if(modalCarouselImages.length > 1){
+    modalCarouselTimer = setInterval(()=>nextModalCarousel(), 3000);
   }
 }
 
-function stopCarousel(){
-  if(carouselTimer){
-    clearInterval(carouselTimer);
-    carouselTimer = null;
-  }
-  currentCarousel = [];
-  carouselIndex = 0;
+function openModal(html){
+  modalContent.innerHTML = html;
+  modalOverlay.style.display = 'flex';
+  modalOverlay.setAttribute('aria-hidden','false');
+  document.body.classList.add('no-scroll');
 }
 
-function goCarousel(index){
-  if(!currentCarousel.length) return;
-  carouselIndex = (index + currentCarousel.length) % currentCarousel.length;
-  renderCarousel();
+function closeModal(){
+  modalOverlay.style.display = 'none';
+  modalOverlay.setAttribute('aria-hidden','true');
+  document.body.classList.remove('no-scroll');
+  stopModalCarousel();
 }
 
-function nextCarousel(){
-  if(!currentCarousel.length) return;
-  carouselIndex = (carouselIndex + 1) % currentCarousel.length;
-  renderCarousel();
-}
-
-function prevCarousel(){
-  if(!currentCarousel.length) return;
-  carouselIndex = (carouselIndex - 1 + currentCarousel.length) % currentCarousel.length;
-  renderCarousel();
-}
-
-function buildProductModal(product){
-  const carousel = product.images.length ? `
-    <div class="carousel">
-      <div class="carousel-stage">
-        <img id="carouselImage" src="${product.images[0]}" alt="${product.title}">
+function openTechModal(i){
+  const m = models[i] || models[0];
+  const images = (m.images || []).map(src => ({ src, alt: m.title }));
+  const carouselHtml = images.length ? `
+    <div class="modal-carousel">
+      <div class="modal-carousel-stage">
+        <img id="modalCarouselImage" src="${images[0].src}" alt="${images[0].alt}" loading="eager">
+        <div class="modal-carousel-controls">
+          <button class="carousel-btn" type="button" aria-label="Image précédente" onclick="prevModalCarousel()"><i class="fa-solid fa-chevron-left"></i></button>
+          <button class="carousel-btn" type="button" aria-label="Image suivante" onclick="nextModalCarousel()"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
       </div>
-      <div class="carousel-controls">
-        <button class="arrow" type="button" aria-label="Image précédente" onclick="prevCarousel()"><i class="fa-solid fa-chevron-left"></i></button>
-        <button class="arrow" type="button" aria-label="Image suivante" onclick="nextCarousel()"><i class="fa-solid fa-chevron-right"></i></button>
-      </div>
-      <div class="dots" id="carouselDots"></div>
+      <div class="carousel-dots" id="modalCarouselDots"></div>
     </div>
   ` : '';
 
-  return `
-    ${carousel}
-    <div>${product.details}</div>
+  const html = `
+    <h2 style="margin-top:0">${m.title}</h2>
+    ${carouselHtml}
+    <div class="modal-body">
+      ${m.details}
+      <div style="margin-top:12px;font-weight:800">Caractéristiques rapides</div>
+      <ul>${(m.specs || []).map(s=>`<li>${s}</li>`).join('')}</ul>
+    </div>
   `;
-}
-
-function openProduct(index){
-  const product = products[index];
-  if(!product) return;
-  openModal(product.title, buildProductModal(product));
-  startCarousel(product.images, product.title);
+  openModal(html);
+  startModalCarousel(images);
 }
 
 function openPackModal(){
-  openModal('Pack 2.5 kWh', `
-    <div class="carousel">
-      <div class="carousel-stage">
-        <img id="carouselImage" src="Future_Pack_1.png" alt="Pack 2.5 kWh">
+  const packImages = [
+    {src:'Future_Pack_1.png', alt:'Pack vue 1'},
+    {src:'Future_pack_2.1.png', alt:'Pack vue 2'},
+    {src:'Future_Pack_3.png', alt:'Pack vue 3'}
+  ];
+  const html = `
+    <h2 style="margin-top:0">Pack modulaire 2.5 kWh — GreenBridge</h2>
+    <div class="modal-carousel">
+      <div class="modal-carousel-stage">
+        <img id="modalCarouselImage" src="${packImages[0].src}" alt="${packImages[0].alt}" loading="eager">
+        <div class="modal-carousel-controls">
+          <button class="carousel-btn" type="button" aria-label="Image précédente" onclick="prevModalCarousel()"><i class="fa-solid fa-chevron-left"></i></button>
+          <button class="carousel-btn" type="button" aria-label="Image suivante" onclick="nextModalCarousel()"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
       </div>
-      <div class="carousel-controls">
-        <button class="arrow" type="button" aria-label="Image précédente" onclick="prevCarousel()"><i class="fa-solid fa-chevron-left"></i></button>
-        <button class="arrow" type="button" aria-label="Image suivante" onclick="nextCarousel()"><i class="fa-solid fa-chevron-right"></i></button>
+      <div class="carousel-dots" id="modalCarouselDots"></div>
+    </div>
+    <div class="modal-body">
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
+        Prévu pour une sortie commerciale le <strong>31/05/2026</strong>, le pack <strong>2.5 kWh</strong> a été conçu pour le Sénégal et l'Afrique de l'Ouest.
+        Basé sur des cellules <strong>LiFePO₄ prismatiques</strong>, il est modulaire, réparable localement et adapté au stockage médical, PME, agriculture et élevage.
+      </p>
+      <ul style="color:#23403a;line-height:1.45">
+        <li>Recharge par prise secteur et par panneau solaire.</li>
+        <li>Alimente réfrigérateurs médicaux, pompes, éclairage et appareils essentiels.</li>
+        <li>Déploiement simple hors réseau.</li>
+        <li>Optimisé pour les usages agricoles et petites industries.</li>
+      </ul>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;">
+        <span style="background:linear-gradient(90deg,#ffd54a,#ffb300);padding:10px 14px;border-radius:999px;font-weight:900;color:#08110a">Disponible 31/05/2026</span>
+        <button onclick="closeModal()" style="padding:10px 14px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);background:#fff;cursor:pointer">Fermer</button>
       </div>
-      <div class="dots" id="carouselDots"></div>
     </div>
-    <p><strong>Pack 2.5 kWh</strong><br>Solution modulaire pour stockage médical et PME.</p>
-    <ul>
-      <li>Recharge secteur et solaire</li>
-      <li>Usage terrain</li>
-      <li>Maintenance locale</li>
-    </ul>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;">
-      <span class="badge" style="margin-top:0">Disponible 31/05/2026</span>
-      <button class="btn secondary" type="button" onclick="closeModal()">Fermer</button>
-    </div>
-  `);
-  startCarousel(['Future_Pack_1.png', 'Future_pack_2.1.png', 'Future_Pack_3.png'], 'Pack 2.5 kWh');
+  `;
+  openModal(html);
+  startModalCarousel(packImages);
 }
 
-function openWhatsAppPicker(){
-  openModal('Commander', `
-    <p style="margin-top:0">Choisis le pays. Le message est prêt.</p>
+function openCountryModal(){
+  const html = `
+    <h2 style="margin:0 36px 6px 0;font-size:18px;color:#08110a">Commander via WhatsApp</h2>
+    <p style="margin:0;color:#315348;line-height:1.45;font-size:13px">Choisis le pays. Le message est prêt.</p>
     <div class="whatsapp-choice">
-      <button class="choice" type="button" onclick="sendWhatsApp('coteivoire')">
-        <div class="choice-top">
-          <div class="choice-flag"><img src="https://flagcdn.com/w80/ci.png" alt="Côte d'Ivoire"></div>
+      <button class="whatsapp-card" type="button" onclick="sendWhatsApp('coteivoire')">
+        <div class="top">
+          <div class="flag"><img src="https://flagcdn.com/w80/ci.png" alt="Drapeau Côte d'Ivoire"></div>
           <div>
             <h4>Côte d'Ivoire</h4>
             <p>Commander pour la Côte d'Ivoire.</p>
           </div>
         </div>
+        <div class="go"><i class="fa-brands fa-whatsapp"></i> Continuer</div>
       </button>
 
-      <button class="choice" type="button" onclick="sendWhatsApp('senegal')">
-        <div class="choice-top">
-          <div class="choice-flag"><img src="https://flagcdn.com/w80/sn.png" alt="Sénégal"></div>
+      <button class="whatsapp-card" type="button" onclick="sendWhatsApp('senegal')">
+        <div class="top">
+          <div class="flag"><img src="https://flagcdn.com/w80/sn.png" alt="Drapeau Sénégal"></div>
           <div>
             <h4>Sénégal</h4>
             <p>Commander pour le Sénégal.</p>
           </div>
         </div>
+        <div class="go"><i class="fa-brands fa-whatsapp"></i> Continuer</div>
       </button>
     </div>
-  `);
+    <div style="margin-top:12px;text-align:right">
+      <button type="button" class="btn-small" onclick="closeModal()">Fermer</button>
+    </div>
+  `;
+  openModal(html);
 }
 
 function sendWhatsApp(country){
-  const numbers = {
+  const whatsappNumbers = {
     senegal: '221774015004',
     coteivoire: '22507070707'
   };
-  const number = numbers[country] || numbers.senegal;
+  const number = whatsappNumbers[country] || whatsappNumbers.senegal;
   const countryLabel = country === 'coteivoire' ? "la Côte d'Ivoire" : 'le Sénégal';
   const message = `Bonjour, je souhaite commander un produit GreenBridge pour ${countryLabel}. Merci de me communiquer les modèles disponibles et les prix.`;
+  const url = `https://wa.me/${number}?text=` + encodeURIComponent(message);
   closeModal();
-  window.open(`https://wa.me/${number}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+  window.open(url, '_blank', 'noopener,noreferrer');
 }
 
-modalOverlay.addEventListener('click', (e) => {
-  if(e.target === modalOverlay) closeModal();
-});
+function selectModel(i){
+  currentModel = i;
+  syncActiveModelCard(i);
+  openTechModal(i);
+}
 
-document.addEventListener('keydown', (e) => {
-  if(e.key === 'Escape') closeModal();
-});
+modalOverlay.addEventListener('click', ev=>{ if(ev.target === modalOverlay) closeModal(); });
 
-document.querySelectorAll('.card').forEach((card, i) => {
-  card.addEventListener('keydown', (e) => {
-    if(e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      openProduct(i);
+const proToggleBtn = document.getElementById('proToggle');
+if(proToggleBtn){
+  proToggleBtn.addEventListener('click', ()=>{
+    const proPanel = document.getElementById('proPanel');
+    const isShown = proPanel.style.display === 'block';
+    if(isShown){
+      proPanel.style.display = 'none';
+      proPanel.setAttribute('aria-hidden','true');
+      proToggleBtn.setAttribute('aria-pressed','false');
+      proToggleBtn.textContent = 'Mode Pro';
+    } else {
+      proPanel.style.display = 'block';
+      proPanel.setAttribute('aria-hidden','false');
+      proToggleBtn.setAttribute('aria-pressed','true');
+      proToggleBtn.textContent = 'Mode Pro (actif)';
     }
+  });
+}
+
+function initLedControls(){
+  const btn = document.getElementById('ledButton');
+  const indicator = document.getElementById('ledIndicator');
+  const modeName = document.getElementById('ledModeName');
+  const modesListEl = document.getElementById('ledModesList');
+  if(!btn || !indicator || !modeName || !ledState.modes.length) return;
+
+  ledState.index = 0;
+  applyLedMode(ledState.index);
+
+  const newBtn = btn.cloneNode(true);
+  btn.parentNode.replaceChild(newBtn, btn);
+
+  newBtn.addEventListener('click', ()=>{
+    ledState.clickCount += 1;
+    if(ledState.clickTimer) clearTimeout(ledState.clickTimer);
+    ledState.clickTimer = setTimeout(()=>{
+      ledState.clickCount = 0;
+      ledState.clickTimer = null;
+    }, 600);
+
+    if(ledState.clickCount >= 2){
+      ledState.clickCount = 0;
+      if(ledState.clickTimer){
+        clearTimeout(ledState.clickTimer);
+        ledState.clickTimer = null;
+      }
+      ledState.index = (ledState.index + 1) % ledState.modes.length;
+      applyLedMode(ledState.index);
+    }
+  });
+
+  newBtn.addEventListener('dblclick', (e)=>{
+    e.preventDefault();
+    ledState.index = (ledState.index + 1) % ledState.modes.length;
+    applyLedMode(ledState.index);
+  });
+
+  if(modesListEl){
+    modesListEl.innerHTML = ledState.modes.map((m, idx)=>`<li${idx===ledState.index ? ' style="font-weight:800"' : ''}>${m.name}</li>`).join('');
+  }
+}
+
+function applyLedMode(idx){
+  const indicator = document.getElementById('ledIndicator');
+  const modeName = document.getElementById('ledModeName');
+  const modesListEl = document.getElementById('ledModesList');
+
+  if(!indicator || !modeName || !ledState.modes.length) return;
+
+  const mode = ledState.modes[idx] || {name:'—'};
+  indicator.className = 'led-indicator';
+
+  switch(idx){
+    case 0: indicator.classList.add('led-low'); break;
+    case 1: indicator.classList.add('led-med'); break;
+    case 2: indicator.classList.add('led-high'); break;
+    case 3: indicator.classList.add('led-high','blink-slow'); break;
+    case 4: indicator.classList.add('led-high','blink-med'); break;
+    case 5: indicator.classList.add('led-high','blink-fast'); break;
+    default: indicator.classList.add('led-low'); break;
+  }
+  modeName.textContent = mode.name;
+
+  if(modesListEl){
+    modesListEl.querySelectorAll('li').forEach((li, i)=>{
+      li.style.fontWeight = (i === idx) ? '800' : '400';
+      li.style.opacity = (i === idx) ? '1' : '0.7';
+    });
+  }
+}
+
+(function(){
+  const electricBand = document.getElementById('electricBand');
+  if(!electricBand) return;
+  const orbA = document.getElementById('orbA');
+  const orbB = document.getElementById('orbB');
+  const orbC = document.getElementById('orbC');
+  const orbs = [orbA, orbB, orbC];
+  const params = [
+    {rxRatio:0.50, ry:8, speed:0.22, phase:0},
+    {rxRatio:0.33, ry:6, speed:0.36, phase:Math.PI/2},
+    {rxRatio:0.42, ry:10, speed:0.18, phase:Math.PI}
+  ];
+
+  orbs.forEach((o,i)=>{
+    if(o){
+      o.classList.add('buzz');
+      o.style.animationDelay = (i*120) + 'ms';
+    }
+  });
+
+  let t0 = performance.now();
+  function tick(now){
+    const time = (now - t0) / 1000;
+    const cont = electricBand.querySelector('.container');
+    if(!cont){
+      requestAnimationFrame(tick);
+      return;
+    }
+    const rect = cont.getBoundingClientRect();
+    const cx = rect.width / 2;
+    const cy = rect.height / 2;
+
+    for(let i=0;i<orbs.length;i++){
+      const orb = orbs[i];
+      if(!orb) continue;
+      const p = params[i];
+      const rx = Math.max(Math.min(rect.width * p.rxRatio, 4000), 120);
+      const ry = p.ry;
+      const angle = (time * p.speed * Math.PI * 2) + p.phase;
+      const x = cx + Math.cos(angle) * rx;
+      const y = cy + Math.sin(angle) * ry;
+      orb.style.left = x + 'px';
+      orb.style.top = y + 'px';
+      orb.style.transform = 'translate(-50%,-50%)';
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  function sparkSVG(){
+    const zapBright = document.getElementById('zapBright');
+    if(!zapBright) return;
+    try{
+      const len = zapBright.getTotalLength ? zapBright.getTotalLength() : 520;
+      zapBright.style.transition = 'none';
+      zapBright.setAttribute('stroke-dasharray', String(len));
+      zapBright.setAttribute('stroke-dashoffset', String(len));
+      setTimeout(()=>{
+        zapBright.style.transition = 'stroke-dashoffset 380ms ease-out, opacity 160ms';
+        zapBright.setAttribute('stroke-dashoffset','0');
+        setTimeout(()=>{
+          zapBright.setAttribute('stroke-dashoffset', String(len));
+        }, 320);
+      }, 60);
+    }catch(e){
+      zapBright.setAttribute('stroke-dasharray','520');
+      zapBright.setAttribute('stroke-dashoffset','520');
+      setTimeout(()=>{
+        zapBright.style.transition = 'stroke-dashoffset 360ms ease-out';
+        zapBright.setAttribute('stroke-dashoffset','0');
+      }, 80);
+    }
+  }
+
+  function spawnSparks(){
+    const cont = electricBand.querySelector('.container');
+    if(!cont) return;
+    for(let i=0;i<10;i++){
+      const s = document.createElement('div');
+      s.style.position = 'absolute';
+      s.style.left = (3 + Math.random()*94) + '%';
+      s.style.top = (20 + Math.random()*50) + '%';
+      s.style.width = '2px';
+      s.style.height = (8 + Math.random()*22) + 'px';
+      s.style.borderRadius = '2px';
+      s.style.background = 'linear-gradient(180deg, rgba(255,246,180,1), rgba(255,214,0,0.95))';
+      s.style.filter = 'blur(6px)';
+      s.style.opacity = '0';
+      s.style.transform = 'translateY(6px)';
+      s.style.pointerEvents = 'none';
+      s.style.zIndex = '1';
+      cont.appendChild(s);
+      setTimeout(()=>{
+        s.style.transition = 'all 260ms ease-out';
+        s.style.opacity='1';
+        s.style.transform='translateY(-6px)';
+      }, 20 + i*25);
+      setTimeout(()=>{
+        s.style.transition = 'all 420ms ease-in';
+        s.style.opacity='0';
+        s.style.transform='translateY(-20px)';
+      }, 280 + i*40);
+      setTimeout(()=>{
+        if(s.parentNode) s.parentNode.removeChild(s);
+      }, 760 + i*40);
+    }
+  }
+
+  function activate(){
+    electricBand.classList.add('active');
+    spawnSparks();
+    sparkSVG();
+    setInterval(()=>{
+      spawnSparks();
+      if(Math.random() > 0.45) sparkSVG();
+    }, 900 + Math.random()*900);
+  }
+
+  const title = document.querySelector('.brand-name');
+  if(title){
+    title.addEventListener('click', ()=>{
+      const on = electricBand.classList.toggle('active');
+      if(on){
+        spawnSparks();
+        sparkSVG();
+      }
+    });
+  }
+
+  activate();
+  window.addEventListener('resize', ()=>{ t0 = performance.now(); });
+})();
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  preloadImages(allImageUrls());
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  document.querySelectorAll('.models .model').forEach((el, idx)=>{
+    el.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        selectModel(idx);
+      }
+    });
+  });
+
+  syncActiveModelCard(0);
+
+  document.querySelectorAll('.models .model').forEach((el, idx)=>{
+    el.addEventListener('click', ()=>{
+      currentModel = idx;
+      syncActiveModelCard(idx);
+    }, true);
   });
 });
 
-document.getElementById('year').textContent = new Date().getFullYear();
-fab.addEventListener('click', openWhatsAppPicker);
+document.addEventListener('keydown', (e)=>{
+  if(e.key === 'Escape' && modalOverlay.style.display === 'flex'){
+    closeModal();
+  }
+});
+
+const fab = document.getElementById('fab');
+if(fabButton){
+  fabButton.addEventListener('click', openCountryModal);
+}
+if(fab){
+  fab.addEventListener('click', openCountryModal);
+}
 </script>
 </body>
 </html>
