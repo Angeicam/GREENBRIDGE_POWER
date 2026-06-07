@@ -326,10 +326,12 @@
   .worldcup-ad{
     display:flex;
     align-items:center;
-    gap:10px;
-    max-width:360px;
-    padding:8px 12px;
-    border-radius:14px;
+    justify-content:space-between;
+    gap:12px;
+    width:min(100%, 470px);
+    min-width:0;
+    padding:10px 14px;
+    border-radius:16px;
     background:linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,213,74,0.10));
     border:1px solid rgba(255,255,255,0.18);
     box-shadow:0 10px 24px rgba(0,0,0,0.18);
@@ -360,6 +362,7 @@
     flex-direction:column;
     line-height:1.1;
     min-width:0;
+    flex:1 1 auto;
   }
   .worldcup-ad-copy .ad-kicker{
     font-size:10px;
@@ -377,15 +380,17 @@
     font-size:11px;
     color:#e6f7ea;
     white-space:nowrap;
+    display:block;
   }
 
   .flags-row{
     display:flex;
     align-items:center;
     gap:5px;
-    margin-top:3px;
-    flex-wrap:wrap;
-    max-width:170px;
+    flex:0 0 auto;
+    flex-wrap:nowrap;
+    max-width:none;
+    margin-top:0;
   }
   .flag-pill{
     width:20px;
@@ -432,9 +437,9 @@
   .lightning-svg {
     width: 100vw;
     height: 100%;
-    display: block;
-    pointer-events: none;
-    mix-blend-mode: screen;
+    display:block;
+    pointer-events:none;
+    mix-blend-mode:screen;
   }
   .lightning-svg path.zap {
     stroke: var(--electric-yellow);
@@ -768,8 +773,18 @@
     .logo-text img{height:50px}
     .fab{width:50px;height:50px}
     .fab button{font-size:20px}
-    .worldcup-ad{max-width:250px;padding:7px 10px}
-    .worldcup-ad-copy small{display:none}
+    .worldcup-ad{
+      width:min(100%, 320px);
+      padding:8px 10px;
+      gap:8px;
+    }
+    .worldcup-ad-copy strong{font-size:12px}
+    .worldcup-ad-copy small{
+      font-size:9px;
+      display:block;
+    }
+    .flags-row{gap:4px}
+    .flag-pill{width:18px;height:18px}
   }
   @media (max-width:768px){
     .company-name{font-size:26px}
@@ -795,15 +810,50 @@
     }
     .modal h2{font-size:17px}
     .worldcup-ad{
-      max-width:calc(100vw - 180px);
-      gap:8px;
+      display:grid;
+      grid-template-columns:42px 1fr;
+      grid-template-areas:
+        "visual copy"
+        "flags flags";
+      column-gap:8px;
+      row-gap:6px;
+      width:min(100%, 290px);
+      padding:7px 9px;
+      align-items:center;
     }
     .worldcup-ad-visual{
+      grid-area:visual;
       width:42px;
       height:42px;
     }
+    .worldcup-ad-copy{
+      grid-area:copy;
+      min-width:0;
+    }
+    .worldcup-ad-copy .ad-kicker{
+      font-size:9px;
+    }
     .worldcup-ad-copy strong{
-      font-size:12px;
+      font-size:11px;
+    }
+    .worldcup-ad-copy small{
+      font-size:8px;
+      display:block;
+    }
+    .flags-row{
+      grid-area:flags;
+      justify-content:center;
+      flex-wrap:nowrap;
+      width:100%;
+      max-width:none;
+      gap:3px;
+      margin-top:0;
+      overflow:hidden;
+    }
+    .flag-pill{
+      width:15px;
+      height:15px;
+      flex:0 0 auto;
     }
     .company-name{
       font-size:22px;
@@ -838,6 +888,25 @@
       padding:3px 5px;
       max-width:calc(100vw - 92px);
     }
+    .worldcup-ad{
+      width:min(100%, 260px);
+      padding:6px 8px;
+    }
+    .worldcup-ad-copy strong{
+      font-size:10px;
+    }
+    .worldcup-ad-copy small{
+      font-size:7px;
+      display:block;
+    }
+    .flags-row{
+      gap:2px;
+      max-width:none;
+    }
+    .flag-pill{
+      width:13px;
+      height:13px;
+    }
   }
   </style>
 </head>
@@ -871,7 +940,7 @@
 
   <a class="worldcup-ad" href="#" onclick="return false;" aria-label="Support Afrique Coupe du Monde">
     <div class="worldcup-ad-visual" aria-hidden="true">
-      <svg viewBox="0 0 100 100">
+      <svg viewBox="0 0 100 100" role="img" aria-hidden="true">
         <defs>
           <radialGradient id="gbBallGlow" cx="35%" cy="30%" r="70%">
             <stop offset="0%" stop-color="#f7ffd8"/>
