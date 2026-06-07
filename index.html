@@ -380,6 +380,7 @@
     font-size:11px;
     color:#e6f7ea;
     white-space:nowrap;
+    display:block;
   }
 
   .flags-row{
@@ -778,7 +779,10 @@
       gap:8px;
     }
     .worldcup-ad-copy strong{font-size:12px}
-    .worldcup-ad-copy small{display:none}
+    .worldcup-ad-copy small{
+      font-size:10px;
+      display:block;
+    }
     .flags-row{gap:4px}
     .flag-pill{width:18px;height:18px}
   }
@@ -819,6 +823,10 @@
     }
     .worldcup-ad-copy strong{
       font-size:11px;
+    }
+    .worldcup-ad-copy small{
+      font-size:9px;
+      display:block;
     }
     .flags-row{
       display:none;
@@ -862,6 +870,10 @@
     }
     .worldcup-ad-copy strong{
       font-size:10px;
+    }
+    .worldcup-ad-copy small{
+      font-size:8px;
+      display:block;
     }
   }
   </style>
@@ -1503,7 +1515,7 @@ function sendWhatsApp(country){
   const number = whatsappNumbers[country] || whatsappNumbers.senegal;
   const countryLabel = country === 'coteivoire' ? "la Côte d'Ivoire" : 'le Sénégal';
   const message = `Bonjour, je souhaite commander un produit GreenBridge pour ${countryLabel}. Merci de me communiquer les modèles disponibles et les prix.`;
-  const url = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+  const url = `https://wa.me/${number}?text=` + encodeURIComponent(message);
   closeModal();
   window.open(url, '_blank', 'noopener,noreferrer');
 }
