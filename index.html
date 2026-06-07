@@ -1697,3 +1697,545 @@ modalOverlay.addEventListener('click', ev=>{ if(ev.target === modalOverlay) clos
 </script>
 </body>
 </html>
+
+<script>
+const CONTACT_EMAIL = 'contact@greenbridge.com';
+const SURVEY_URL = 'https://enquete-powerbank-ci-sn.netlify.app/';
+
+const models = [
+  {
+    id:'greenmini',
+    title:'GreenMini — 10 000 mAh',
+    subtitle:'Ultra-compact',
+    images:['Pwkb_Mini_3.png','Pwkb_mini_213.png','PWBK_mini_4.png'],
+    specs:[
+      'Cellules : Samsung (3 cellules)',
+      'Capacité nominale : 10 000 mAh',
+      'Puissance pack : ~32 W',
+      'Écran digital %',
+      'Ports : USB-C + USB-A',
+      'Garantie : 3 ans'
+    ],
+    warranty: 'Garantie 3 ans — 100 premiers clients',
+    details: `
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
+        <strong>GreenMini — 10 000 mAh</strong><br>
+        Compact. Écran digital. Pensé pour le quotidien.
+      </p>
+    `
+  },
+  {
+    id:'greencore',
+    title:'GreenCore — ≈ 9 000 mAh',
+    subtitle:'Modulaire • Type-C charge rapide',
+    images:['pwkb_123.png','Pwbk_21.png','pwkb_4.1.png'],
+    specs:[
+      'Cellules : Samsung',
+      'Capacité nominale : ≈ 9 000 mAh',
+      'Puissance pack : ~32 W',
+      'Type-C charge rapide',
+      'PD : Non',
+      'Garantie : 3 ans'
+    ],
+    warranty: 'Garantie 3 ans — 100 premiers clients',
+    ledModes: [
+      { id:0, name:'Veille — faible intensité' },
+      { id:1, name:'Veille — intensité moyenne' },
+      { id:2, name:'Veille — intensité haute' },
+      { id:3, name:'Clignotement lent' },
+      { id:4, name:'Clignotement secours — moyen' },
+      { id:5, name:'Clignotement secours — rapide' }
+    ],
+    details: `
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
+        <strong>GreenCore — ≈ 9 000 mAh</strong><br>
+        Type-C rapide. Simple. Fiable.
+      </p>
+    `
+  },
+  {
+    id:'greenplus',
+    title:'GreenPlus — ≈ 9 000 mAh',
+    subtitle:'Micro USB • bonne autonomie',
+    images:['Greenplus_1.png','Greenplus_2.png','Greenplus_3.png'],
+    specs:[
+      'Capacité : ≈ 9 000 mAh',
+      'Cellules : Samsung / LG',
+      'Recharge : Micro USB',
+      'Pas de charge rapide',
+      'Autonomie quotidienne',
+      'Garantie : 2 ans'
+    ],
+    warranty: 'Garantie 2 ans',
+    details: `
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
+        <strong>GreenPlus — ≈ 9 000 mAh</strong><br>
+        Bonne autonomie. Usage simple.
+      </p>
+    `
+  },
+  {
+    id:'greenpro',
+    title:'GreenPro — ≈ 12 000 mAh',
+    subtitle:'Multi-appareils • Charge rapide USB-C',
+    images:['pwkb_6.png','pwbk_9.png','pwkb_10.png'],
+    specs:[
+      'Capacité : ≈ 12 000 mAh',
+      'USB-C charge rapide',
+      'Pack haute qualité',
+      'Multi-appareils'
+    ],
+    details: `
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
+        <strong>GreenPro — ≈ 12 000 mAh</strong><br>
+        Plus de puissance. Plus de confort.
+      </p>
+    `
+  },
+  {
+    id:'greenwire',
+    title:'GreenWire — ≈ 20 000 mAh',
+    subtitle:'Batterie testée en réel',
+    images:['Greenwire_1.png','Greenwire_2.png'],
+    specs:[
+      'Capacité réelle : ~20 000 mAh',
+      'Cellules hautes performances',
+      'Autonomie et stabilité',
+      'Usage intensif'
+    ],
+    details: `
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
+        <strong>GreenWire — batterie testée</strong><br>
+        Grande autonomie.
+      </p>
+    `
+  },
+  {
+    id:'greenwireless',
+    title:'GreenWireless — 20 000 mAh',
+    subtitle:'Boîtier amovible • PD / QC3.0 • Sans-fil',
+    images:['pwkb_wireless_1.png','pwkb_wireless_2.png','pwkb_wireless_3.png'],
+    specs:[
+      'Cellules : Samsung ou LG',
+      'Capacité nominale : 20 000 mAh',
+      'USB-C PD + USB-A QC3.0',
+      'Sans-fil intégré',
+      'Boîtier amovible',
+      'Garantie : 2 ans'
+    ],
+    warranty: 'Garantie 2 ans — 50 premiers clients',
+    details: `
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
+        <strong>GreenWireless — 20 000 mAh</strong><br>
+        Sans-fil. Amovible. Pratique.
+      </p>
+    `
+  },
+  {
+    id:'laptopcharger',
+    title:'Chargeur PC Portable',
+    subtitle:'Charge rapide universelle',
+    images:['Chargeur_ordi_1.png'],
+    specs:[
+      'USB-C / DC',
+      'Puissance : 65W à 100W',
+      'Protection surtension',
+      'Bureau et déplacement'
+    ],
+    details: `
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
+        <strong>Chargeur PC Portable</strong><br>
+        Rapide et stable.
+      </p>
+    `
+  },
+  {
+    id:'wifiups',
+    title:'Stabilisateur WiFi',
+    subtitle:'Internet même sans courant',
+    images:['wifi_2.png'],
+    specs:[
+      'Backup routeur et modem',
+      'Sorties 5V / 9V / 12V',
+      'Protection surtension',
+      'Maintien du WiFi'
+    ],
+    details: `
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
+        <strong>Stabilisateur WiFi</strong><br>
+        Reste connecté.
+      </p>
+    `
+  }
+];
+
+const modalOverlay = document.getElementById('modalOverlay');
+const modalContent = document.getElementById('modalContent');
+const fabButton = document.getElementById('fabButton');
+const modelCards = Array.from(document.querySelectorAll('.models .model'));
+
+let currentModel = 0;
+let ledState = { modes: [], index: 0, clickCount: 0, clickTimer: null };
+let modalCarouselImages = [];
+let modalCarouselIndex = 0;
+let modalCarouselTimer = null;
+
+function openSurveyLink(ev){
+  if(ev) ev.preventDefault();
+  try{
+    const a = document.createElement('a');
+    a.href = SURVEY_URL;
+    a.rel = 'noopener noreferrer';
+    a.target = '_blank';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }catch(e){
+    window.open(SURVEY_URL, '_blank', 'noopener,noreferrer');
+  }
+  return false;
+}
+
+function preloadImages(urls){
+  urls.forEach(src=>{
+    const img = new Image();
+    img.src = src;
+  });
+}
+
+function allImageUrls(){
+  const list = [
+    'Energie_blanche.png',
+    'green bridge domo.png',
+    'Nos_produits_1.png',
+    'Future_Pack_1.png',
+    'Future_pack_2.1.png',
+    'Future_Pack_3.png'
+  ];
+  models.forEach(m=>{
+    if(Array.isArray(m.images)) list.push(...m.images);
+  });
+  return [...new Set(list)];
+}
+
+function syncActiveModelCard(index){
+  modelCards.forEach((card, idx)=>{
+    card.classList.toggle('active', idx === index);
+  });
+}
+
+function stopModalCarousel(){
+  if(modalCarouselTimer){
+    clearInterval(modalCarouselTimer);
+    modalCarouselTimer = null;
+  }
+  modalCarouselImages = [];
+  modalCarouselIndex = 0;
+}
+
+function updateModalCarousel(){
+  const img = document.getElementById('modalCarouselImage');
+  const dots = document.getElementById('modalCarouselDots');
+  if(!img || modalCarouselImages.length === 0) return;
+
+  const idx = ((modalCarouselIndex % modalCarouselImages.length) + modalCarouselImages.length) % modalCarouselImages.length;
+  const current = modalCarouselImages[idx];
+
+  img.style.opacity = '0.2';
+  img.style.transform = 'scale(1.02)';
+  setTimeout(()=>{
+    img.src = current.src;
+    img.alt = current.alt;
+    img.onload = () => {
+      img.style.opacity = '1';
+      img.style.transform = 'scale(1)';
+    };
+    img.style.opacity = '1';
+    img.style.transform = 'scale(1)';
+  }, 60);
+
+  if(dots){
+    dots.innerHTML = modalCarouselImages.map((_, i)=>`
+      <button class="carousel-dot${i===idx ? ' active' : ''}" type="button" aria-label="Image ${i+1}" onclick="goModalCarousel(${i})"></button>
+    `).join('');
+  }
+}
+
+function goModalCarousel(index){
+  if(!modalCarouselImages.length) return;
+  modalCarouselIndex = (index + modalCarouselImages.length) % modalCarouselImages.length;
+  updateModalCarousel();
+}
+
+function nextModalCarousel(){
+  if(!modalCarouselImages.length) return;
+  modalCarouselIndex = (modalCarouselIndex + 1) % modalCarouselImages.length;
+  updateModalCarousel();
+}
+
+function prevModalCarousel(){
+  if(!modalCarouselImages.length) return;
+  modalCarouselIndex = (modalCarouselIndex - 1 + modalCarouselImages.length) % modalCarouselImages.length;
+  updateModalCarousel();
+}
+
+function startModalCarousel(images){
+  stopModalCarousel();
+  modalCarouselImages = images || [];
+  modalCarouselIndex = 0;
+  updateModalCarousel();
+  if(modalCarouselImages.length > 1){
+    modalCarouselTimer = setInterval(()=>{ nextModalCarousel(); }, 3000);
+  }
+}
+
+function openModal(html){
+  modalContent.innerHTML = html;
+  modalOverlay.style.display = 'flex';
+  modalOverlay.setAttribute('aria-hidden','false');
+  document.body.classList.add('no-scroll');
+}
+
+function closeModal(){
+  modalOverlay.style.display = 'none';
+  modalOverlay.setAttribute('aria-hidden','true');
+  document.body.classList.remove('no-scroll');
+  stopModalCarousel();
+}
+
+function openTechModal(i){
+  const m = models[i] || models[0];
+  const images = (m.images || []).map(src => ({ src, alt: m.title }));
+  const carouselHtml = images.length ? `
+    <div class="modal-carousel">
+      <div class="modal-carousel-stage">
+        <img id="modalCarouselImage" src="${images[0].src}" alt="${images[0].alt}" loading="eager">
+        <div class="modal-carousel-controls">
+          <button class="carousel-btn" type="button" aria-label="Image précédente" onclick="prevModalCarousel()"><i class="fa-solid fa-chevron-left"></i></button>
+          <button class="carousel-btn" type="button" aria-label="Image suivante" onclick="nextModalCarousel()"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </div>
+      <div class="carousel-dots" id="modalCarouselDots"></div>
+    </div>
+  ` : '';
+
+  const html = `
+    <h2 style="margin-top:0">${m.title}</h2>
+    ${carouselHtml}
+    <div class="modal-body">
+      ${m.details}
+      <div style="margin-top:12px;font-weight:800">Caractéristiques rapides</div>
+      <ul>${(m.specs || []).map(s=>`<li>${s}</li>`).join('')}</ul>
+    </div>
+  `;
+  openModal(html);
+  startModalCarousel(images);
+}
+
+function openPackModal(){
+  const packImages = [
+    {src:'Future_Pack_1.png', alt:'Pack vue 1'},
+    {src:'Future_pack_2.1.png', alt:'Pack vue 2'},
+    {src:'Future_Pack_3.png', alt:'Pack vue 3'}
+  ];
+  const html = `
+    <h2 style="margin-top:0">Pack modulaire 2.5 kWh — GreenBridge</h2>
+    <div class="modal-carousel">
+      <div class="modal-carousel-stage">
+        <img id="modalCarouselImage" src="${packImages[0].src}" alt="${packImages[0].alt}" loading="eager">
+        <div class="modal-carousel-controls">
+          <button class="carousel-btn" type="button" aria-label="Image précédente" onclick="prevModalCarousel()"><i class="fa-solid fa-chevron-left"></i></button>
+          <button class="carousel-btn" type="button" aria-label="Image suivante" onclick="nextModalCarousel()"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </div>
+      <div class="carousel-dots" id="modalCarouselDots"></div>
+    </div>
+    <div class="modal-body">
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
+        Prévu pour une sortie commerciale le <strong>31/05/2026</strong>, le pack <strong>2.5 kWh</strong> a été conçu pour le Sénégal et l'Afrique de l'Ouest.
+        Basé sur des cellules <strong>LiFePO₄ prismatiques</strong>, il est modulaire, réparable localement et adapté au stockage médical, PME, agriculture et élevage.
+      </p>
+      <ul style="color:#23403a;line-height:1.45">
+        <li>Recharge par prise secteur et par panneau solaire.</li>
+        <li>Alimente réfrigérateurs médicaux, pompes, éclairage et appareils essentiels.</li>
+        <li>Déploiement simple hors réseau.</li>
+        <li>Optimisé pour les usages agricoles et petites industries.</li>
+      </ul>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;">
+        <span style="background:linear-gradient(90deg,#ffd54a,#ffb300);padding:10px 14px;border-radius:999px;font-weight:900;color:#08110a">Disponible 31/05/2026</span>
+        <button onclick="closeModal()" style="padding:10px 14px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);background:#fff;cursor:pointer">Fermer</button>
+      </div>
+    </div>
+  `;
+  openModal(html);
+  startModalCarousel(packImages);
+}
+
+function openCountryModal(){
+  const html = `
+    <h2 style="margin:0 36px 6px 0;font-size:18px;color:#08110a">Commander via WhatsApp</h2>
+    <p style="margin:0;color:#315348;line-height:1.45;font-size:13px">Choisis le pays. Le message est prêt.</p>
+    <div class="whatsapp-choice">
+      <button class="whatsapp-card" type="button" onclick="sendWhatsApp('coteivoire')">
+        <div class="top">
+          <div class="flag"><img src="https://flagcdn.com/w80/ci.png" alt="Drapeau Côte d'Ivoire"></div>
+          <div>
+            <h4>Côte d'Ivoire</h4>
+            <p>Commander pour la Côte d'Ivoire.</p>
+          </div>
+        </div>
+        <div class="go"><i class="fa-brands fa-whatsapp"></i> Continuer</div>
+      </button>
+
+      <button class="whatsapp-card" type="button" onclick="sendWhatsApp('senegal')">
+        <div class="top">
+          <div class="flag"><img src="https://flagcdn.com/w80/sn.png" alt="Drapeau Sénégal"></div>
+          <div>
+            <h4>Sénégal</h4>
+            <p>Commander pour le Sénégal.</p>
+          </div>
+        </div>
+        <div class="go"><i class="fa-brands fa-whatsapp"></i> Continuer</div>
+      </button>
+    </div>
+    <div style="margin-top:12px;text-align:right">
+      <button type="button" class="btn-small" onclick="closeModal()">Fermer</button>
+    </div>
+  `;
+  openModal(html);
+}
+
+function sendWhatsApp(country){
+  const whatsappNumbers = {
+    senegal: '221774015004',
+    coteivoire: '22507070707'
+  };
+  const number = whatsappNumbers[country] || whatsappNumbers.senegal;
+  const countryLabel = country === 'coteivoire' ? "la Côte d'Ivoire" : 'le Sénégal';
+  const message = `Bonjour, je souhaite commander un produit GreenBridge pour ${countryLabel}. Merci de me communiquer les modèles disponibles et les prix.`;
+  const url = `https://wa.me/${number}?text=` + encodeURIComponent(message);
+  closeModal();
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
+
+function selectModel(i){
+  currentModel = i;
+  syncActiveModelCard(i);
+  openTechModal(i);
+}
+
+modalOverlay.addEventListener('click', ev=>{ if(ev.target === modalOverlay) closeModal(); });
+
+(function(){
+  const electricBand = document.getElementById('electricBand');
+  if(!electricBand) return;
+  const orbA = document.getElementById('orbA');
+  const orbB = document.getElementById('orbB');
+  const orbC = document.getElementById('orbC');
+  const orbs = [orbA, orbB, orbC];
+  const params = [
+    {rxRatio:0.50, ry:8, speed:0.22, phase:0},
+    {rxRatio:0.33, ry:6, speed:0.36, phase:Math.PI/2},
+    {rxRatio:0.42, ry:10, speed:0.18, phase:Math.PI}
+  ];
+
+  orbs.forEach((o,i)=>{
+    if(o){
+      o.classList.add('buzz');
+      o.style.animationDelay = (i*120) + 'ms';
+    }
+  });
+
+  let t0 = performance.now();
+  function tick(now){
+    const time = (now - t0) / 1000;
+    const cont = electricBand.querySelector('.container');
+    if(!cont){
+      requestAnimationFrame(tick);
+      return;
+    }
+    const rect = cont.getBoundingClientRect();
+    const cx = rect.width / 2;
+    const cy = rect.height / 2;
+
+    for(let i=0;i<orbs.length;i++){
+      const orb = orbs[i];
+      if(!orb) continue;
+      const p = params[i];
+      const rx = Math.max(Math.min(rect.width * p.rxRatio, 4000), 120);
+      const ry = p.ry;
+      const angle = (time * p.speed * Math.PI * 2) + p.phase;
+      const x = cx + Math.cos(angle) * rx;
+      const y = cy + Math.sin(angle) * ry;
+      orb.style.left = x + 'px';
+      orb.style.top = y + 'px';
+      orb.style.transform = 'translate(-50%,-50%)';
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  function sparkSVG(){
+    const zapBright = document.getElementById('zapBright');
+    if(!zapBright) return;
+    try{
+      const len = zapBright.getTotalLength ? zapBright.getTotalLength() : 520;
+      zapBright.style.transition = 'none';
+      zapBright.setAttribute('stroke-dasharray', String(len));
+      zapBright.setAttribute('stroke-dashoffset', String(len));
+      setTimeout(()=>{
+        zapBright.style.transition = 'stroke-dashoffset 380ms ease-out, opacity 160ms';
+        zapBright.setAttribute('stroke-dashoffset','0');
+        setTimeout(()=>{
+          zapBright.setAttribute('stroke-dashoffset', String(len));
+        }, 320);
+      }, 60);
+    }catch(e){
+      zapBright.setAttribute('stroke-dasharray','520');
+      zapBright.setAttribute('stroke-dashoffset','520');
+      setTimeout(()=>{
+        zapBright.style.transition = 'stroke-dashoffset 360ms ease-out';
+        zapBright.setAttribute('stroke-dashoffset','0');
+      }, 80);
+    }
+  }
+
+  function spawnSparks(){
+    const cont = electricBand.querySelector('.container');
+    if(!cont) return;
+    for(let i=0;i<10;i++){
+      const s = document.createElement('div');
+      s.style.position = 'absolute';
+      s.style.left = (3 + Math.random()*94) + '%';
+      s.style.top = (20 + Math.random()*50) + '%';
+      s.style.width = '2px';
+      s.style.height = (8 + Math.random()*22) + 'px';
+      s.style.borderRadius = '2px';
+      s.style.background = 'linear-gradient(180deg, rgba(255,246,180,1), rgba(255,214,0,0.95))';
+      s.style.filter = 'blur(6px)';
+      s.style.opacity = '0';
+      s.style.transform = 'translateY(6px)';
+      s.style.pointerEvents = 'none';
+      s.style.zIndex = '1';
+      cont.appendChild(s);
+      setTimeout(()=>{
+        s.style.transition = 'all 260ms ease-out';
+        s.style.opacity = '0.8';
+        s.style.transform = 'translateY(0px)';
+        setTimeout(()=>{
+          s.style.opacity = '0';
+          s.style.transform = 'translateY(-8px)';
+          setTimeout(()=>{ if(s.parentNode) s.parentNode.removeChild(s); }, 320);
+        }, 180 + Math.random()*120);
+      }, i*28);
+    }
+  }
+
+  setInterval(()=>{
+    sparkSVG();
+    spawnSparks();
+  }, 2400);
+})();
+</script>
+</body>
+</html>
