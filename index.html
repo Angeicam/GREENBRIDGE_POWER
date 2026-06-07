@@ -774,7 +774,7 @@
     .fab{width:50px;height:50px}
     .fab button{font-size:20px}
     .worldcup-ad{
-      width:min(100%, 340px);
+      width:min(100%, 350px);
       padding:8px 10px;
       gap:8px;
     }
@@ -811,48 +811,55 @@
     .modal h2{font-size:17px}
 
     .worldcup-ad{
-      display:grid;
-      grid-template-columns:42px 1fr;
-      grid-template-areas:
-        "visual copy"
-        "flags flags";
-      column-gap:8px;
-      row-gap:6px;
-      width:min(100%, 340px);
-      padding:8px 10px;
+      display:flex;
       align-items:center;
+      justify-content:space-between;
+      gap:6px;
+      width:min(100%, 360px);
+      padding:7px 8px;
+      min-width:0;
+      flex-wrap:nowrap;
     }
     .worldcup-ad-visual{
-      grid-area:visual;
-      width:42px;
-      height:42px;
+      width:40px;
+      height:40px;
+      flex:0 0 auto;
     }
     .worldcup-ad-copy{
-      grid-area:copy;
       min-width:0;
+      flex:1 1 auto;
+      overflow:hidden;
     }
     .worldcup-ad-copy .ad-kicker{
-      font-size:9px;
+      font-size:8px;
+      line-height:1;
     }
     .worldcup-ad-copy strong{
-      font-size:10px;
+      font-size:9px;
+      line-height:1.05;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:clip;
     }
     .worldcup-ad-copy small{
-      font-size:8px;
+      font-size:7px;
+      line-height:1.05;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:clip;
       display:block;
     }
     .flags-row{
-      grid-area:flags;
-      justify-content:center;
-      width:100%;
-      max-width:none;
-      gap:3px;
+      gap:2px;
+      flex:0 0 auto;
+      flex-wrap:nowrap;
+      overflow:hidden;
+      max-width:150px;
       margin-top:0;
-      flex-wrap:wrap;
     }
     .flag-pill{
-      width:15px;
-      height:15px;
+      width:13px;
+      height:13px;
       flex:0 0 auto;
     }
 
@@ -890,23 +897,23 @@
       max-width:calc(100vw - 92px);
     }
     .worldcup-ad{
-      width:min(100%, 360px);
-      padding:7px 10px;
+      width:min(100%, 355px);
+      padding:7px 8px;
+      gap:6px;
     }
     .worldcup-ad-copy strong{
-      font-size:9px;
+      font-size:8.5px;
     }
     .worldcup-ad-copy small{
-      font-size:7px;
-      display:block;
+      font-size:6.5px;
     }
     .flags-row{
-      gap:2px;
-      max-width:none;
+      gap:1px;
+      max-width:145px;
     }
     .flag-pill{
-      width:14px;
-      height:14px;
+      width:12px;
+      height:12px;
     }
   }
   </style>
