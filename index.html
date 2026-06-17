@@ -1,6 +1,14 @@
 <!doctype html>
 <html lang="fr">
 <head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6M3D6J9B24"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6M3D6J9B24');
+  </script>
+
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
   <title>GREENBRIDGE TECHNOLOGIES — Powerbanks & Solutions Énergétiques</title>
@@ -36,6 +44,7 @@
       --green-mid-2:#0b4d26;
       --brand-green:#04462e;
       --gold:#d4af37;
+      --gold-2:#e7ca5d;
       --text:#effaf1;
       --card:rgba(255,255,255,.10);
       --shadow:0 14px 30px rgba(0,0,0,.16);
@@ -79,7 +88,10 @@
         radial-gradient(circle at top, rgba(255,255,255,.08), transparent 55%);
     }
 
-    .shell{position:relative;z-index:2}
+    .shell{
+      position:relative;
+      z-index:2;
+    }
 
     .topbar{
       position:sticky;
@@ -94,6 +106,7 @@
       background:linear-gradient(90deg,var(--green-dark),#072016);
       border-bottom:1px solid rgba(255,255,255,.08);
     }
+
     .topbar .note{
       font-size:10px;
       font-weight:800;
@@ -104,6 +117,7 @@
       overflow:hidden;
       text-overflow:ellipsis;
     }
+
     .survey-link{
       display:inline-flex;
       align-items:center;
@@ -128,6 +142,7 @@
       border-bottom:1px solid rgba(255,255,255,.08);
       overflow:hidden;
     }
+
     .header-inner{
       max-width:var(--maxw);
       margin:0 auto;
@@ -137,6 +152,7 @@
       gap:12px;
       flex-wrap:nowrap;
     }
+
     .brand{
       display:flex;
       align-items:center;
@@ -634,8 +650,8 @@
       height:26px;
       border-radius:6px;
       overflow:hidden;
-      border:1px solid rgba(0,0,0,0.08);
-      box-shadow:0 4px 10px rgba(0,0,0,0.08);
+      border:1px solid rgba(0,0,0,.08);
+      box-shadow:0 4px 10px rgba(0,0,0,.08);
       flex:0 0 auto;
     }
     .whatsapp-card .flag img{width:100%;height:100%;object-fit:cover}
@@ -956,9 +972,11 @@
     </section>
   </main>
 
-  <button class="fab" id="fab" type="button" aria-label="Commander via WhatsApp" onclick="openCountryModal()">
-    <i class="fa-brands fa-whatsapp"></i>
-  </button>
+  <div id="fab" class="fab" role="button" aria-label="Commander via WhatsApp">
+    <button id="fabButton" type="button" aria-label="Commander via WhatsApp" onclick="openCountryModal();return false;">
+      <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+    </button>
+  </div>
 
   <div id="modalOverlay" class="modal-overlay" role="dialog" aria-hidden="true">
     <div class="modal" role="document" aria-modal="true">
@@ -994,6 +1012,7 @@ const models = [
       'Ports : 1× USB-C (in/out) + 2× USB-A',
       'Garantie spéciale : 3 ans'
     ],
+    warranty: 'Garantie 3 ans — 100 premiers clients',
     details: `
       <p style="margin-top:0;color:#23403a;line-height:1.45">
         <strong>GreenMini — 10 000 mAh</strong><br>
@@ -1029,6 +1048,7 @@ const models = [
       'Lampe LED intégrée',
       'Garantie spéciale : 3 ans'
     ],
+    warranty: 'Garantie 3 ans — 100 premiers clients',
     ledModes: [
       { id:0, name:'Veille — faible intensité' },
       { id:1, name:'Veille — intensité moyenne' },
@@ -1065,6 +1085,7 @@ const models = [
       'Autonomie quotidienne',
       'Garantie : 2 ans'
     ],
+    warranty: 'Garantie 2 ans',
     details: `
       <p style="margin-top:0;color:#23403a;line-height:1.45">
         <strong>GreenPlus — ≈ 9 000 mAh</strong><br>
@@ -1138,6 +1159,7 @@ const models = [
       'Boîtier amovible',
       'Garantie : 2 ans'
     ],
+    warranty: 'Garantie 2 ans — 50 premiers clients',
     details: `
       <p style="margin-top:0;color:#23403a;line-height:1.45">
         <strong>GreenWireless — Boîtier amovible</strong><br>
