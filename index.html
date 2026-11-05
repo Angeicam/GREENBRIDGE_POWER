@@ -85,7 +85,7 @@
   img{max-width:100%;display:block}
   button{font-family:inherit}
 
-  /* FOND D'ORIGINE CONSERVÉ */
+  /* FOND D'ORIGINE */
   .page-bg{
     position:fixed;
     inset:0;
@@ -250,7 +250,7 @@
     }
   }
 
-  /* BANDE D'OUVERTURE ENTRE TOPBAR ET LOGO */
+  /* Bande d'ouverture : pleine largeur entre la barre supérieure et le logo */
   .opening-strip{
     position:fixed;
     top:var(--topbar-h);
@@ -644,7 +644,7 @@
   .model .meta p small{display:block;color:rgba(2,17,10,0.88);font-weight:500;margin-top:4px}
   .btn-small{background:transparent;border:1px solid rgba(6,42,32,0.06);padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:700;color:#08110a}
 
-  /* CARTES NOUVEAUTÉS */
+  /* CARTES NOUVEAUTÉS ET EMPLACEMENTS PHOTOS */
   .new-products-section{
     margin:18px 0 28px;
     padding:18px 12px 16px;
@@ -690,21 +690,55 @@
     font-weight:900;
     letter-spacing:.8px;
   }
-  .new-product-icon{
-    width:58px;
-    height:58px;
+  .new-product-photo-placeholder{
+    width:100%;
+    aspect-ratio:16 / 9;
+    min-height:112px;
+    max-height:150px;
     display:flex;
+    flex-direction:column;
     align-items:center;
     justify-content:center;
-    border-radius:16px;
-    background:linear-gradient(145deg,#e7f7e9,#c4ebc8);
-    color:#087a40;
-    font-size:28px;
-    box-shadow:inset 0 0 0 1px rgba(4,70,46,.08);
+    gap:8px;
     flex:0 0 auto;
+    border:1.5px dashed rgba(4,70,46,.34);
+    border-radius:12px;
+    background:linear-gradient(145deg,#f4faf5,#e7f2e9);
+    color:#456c56;
+    overflow:hidden;
   }
+  .new-product-photo-placeholder i{font-size:31px;color:#6a9b79}
+  .new-product-photo-placeholder span{font-size:10px;font-weight:800;letter-spacing:.35px}
   .new-product-card h3{margin:0;color:#06462e;font-size:16px;font-weight:900;line-height:1.25;overflow-wrap:anywhere}
   .new-product-card p{margin:0;color:#355346;font-size:12px;line-height:1.5;overflow-wrap:anywhere}
+  .new-modal-photo-gallery{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:10px;
+    margin:12px 0 16px;
+  }
+  .new-modal-photo-slot{min-width:0;display:flex;flex-direction:column;gap:6px}
+  .new-modal-photo-frame{
+    width:100%;
+    aspect-ratio:4 / 3;
+    min-height:90px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    padding:8px;
+    border:1.5px dashed rgba(4,70,46,.34);
+    border-radius:11px;
+    background:linear-gradient(145deg,#f4faf5,#e7f2e9);
+    color:#456c56;
+    text-align:center;
+    overflow:hidden;
+  }
+  .new-modal-photo-frame i{font-size:25px;color:#6a9b79}
+  .new-modal-photo-frame span{font-size:10px;font-weight:800}
+  .new-modal-photo-caption{font-size:10px;color:#61786a;text-align:center}
+  .new-modal-photo-img{width:100%;height:100%;object-fit:contain;display:block}
   .new-product-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin-top:auto;width:100%}
   .new-product-actions button{border:0;border-radius:8px;padding:9px 11px;font-family:inherit;font-size:11px;font-weight:800;cursor:pointer;max-width:100%}
   .new-info-btn{background:#e7f4e9;color:#06462e}
@@ -720,7 +754,9 @@
     .new-product-card{width:100%;min-height:0;padding:16px 14px;gap:9px}
     .new-product-card h3{font-size:16px}
     .new-product-card p{font-size:13px;line-height:1.5;max-width:34rem}
-    .new-product-icon{width:52px;height:52px;font-size:25px}
+    .new-product-photo-placeholder{min-height:130px;max-height:180px}
+    .new-modal-photo-gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+    .new-modal-photo-frame{min-height:82px}
     .new-product-actions{gap:8px}
     .new-product-actions button{font-size:12px;padding:9px 12px}
   }
@@ -1015,7 +1051,6 @@
 </head>
 <body>
 
-<!-- ARRIÈRE-PLAN ORIGINAL : NE PAS RENOMMER CE FICHIER -->
 <img class="page-bg" src="Energie_blanche.png" alt="" aria-hidden="true">
 <div class="page-bg-overlay" aria-hidden="true"></div>
 
@@ -1095,49 +1130,67 @@
   <section class="new-products-section" id="nouveautes" aria-label="Nouveautés GreenBridge">
     <div class="new-products-heading"><div class="models-title">Nouveautés GreenBridge</div></div>
     <div class="new-products-grid">
+
       <article class="new-product-card">
         <span class="new-product-badge">NOUVEAUTÉ</span>
-        <div class="new-product-icon" aria-hidden="true"><i class="fa-solid fa-battery-full"></i></div>
+        <!-- PHOTO CARTE BATTERIE : remplace ce bloc par une balise img quand ta photo sera prête. -->
+        <div class="new-product-photo-placeholder" aria-label="Photo de la batterie à ajouter">
+          <i class="fa-regular fa-image" aria-hidden="true"></i>
+          <span>PHOTO DU PRODUIT À AJOUTER</span>
+        </div>
         <h3>Batterie LiFePO₄</h3>
         <p>Capacité énergétique : <strong>1 200 Wh</strong><br>Conçue et assemblée par GreenBridge Technologies.</p>
         <div class="new-product-actions">
-          <button class="new-info-btn" type="button" onclick="openNewProductModal('Batterie LiFePO₄ 1 200 Wh','Solution de stockage énergétique GreenBridge. Capacité annoncée : 1 200 Wh.')">En savoir plus</button>
+          <button class="new-info-btn" type="button" onclick="openNewProductModal('lifepo4','Batterie LiFePO₄ 1 200 Wh','Solution de stockage énergétique GreenBridge. Capacité annoncée : 1 200 Wh.')">En savoir plus</button>
           <button class="new-order-btn" type="button" onclick="openProductWhatsApp('Batterie LiFePO₄ 1 200 Wh')"><i class="fa-brands fa-whatsapp"></i> Contact</button>
         </div>
       </article>
 
       <article class="new-product-card">
         <span class="new-product-badge">NOUVEAUTÉ</span>
-        <div class="new-product-icon" aria-hidden="true"><i class="fa-solid fa-bolt"></i></div>
+        <!-- PHOTO CARTE GREENBRIDGE V1 : remplace ce bloc par une balise img quand ta photo sera prête. -->
+        <div class="new-product-photo-placeholder" aria-label="Photo du GreenBridge V1 à ajouter">
+          <i class="fa-regular fa-image" aria-hidden="true"></i>
+          <span>PHOTO DU PRODUIT À AJOUTER</span>
+        </div>
         <h3>GreenBridge V1</h3>
         <p>Powerbank <strong>6 000 mAh</strong><br>Conçu et assemblé par GreenBridge Technologies.</p>
         <div class="new-product-actions">
-          <button class="new-info-btn" type="button" onclick="openNewProductModal('GreenBridge V1 — 6 000 mAh','Powerbank GreenBridge de 6 000 mAh, conçu et assemblé par GreenBridge Technologies.')">En savoir plus</button>
+          <button class="new-info-btn" type="button" onclick="openNewProductModal('v1','GreenBridge V1 — 6 000 mAh','Powerbank GreenBridge de 6 000 mAh, conçu et assemblé par GreenBridge Technologies.')">En savoir plus</button>
           <button class="new-order-btn" type="button" onclick="openProductWhatsApp('GreenBridge V1 — 6 000 mAh')"><i class="fa-brands fa-whatsapp"></i> Contact</button>
         </div>
       </article>
 
       <article class="new-product-card">
         <span class="new-product-badge">NOUVEAUTÉ</span>
-        <div class="new-product-icon" aria-hidden="true"><i class="fa-solid fa-charging-station"></i></div>
+        <!-- PHOTO CARTE GREENBRIDGE V2 : remplace ce bloc par une balise img quand ta photo sera prête. -->
+        <div class="new-product-photo-placeholder" aria-label="Photo du GreenBridge V2 à ajouter">
+          <i class="fa-regular fa-image" aria-hidden="true"></i>
+          <span>PHOTO DU PRODUIT À AJOUTER</span>
+        </div>
         <h3>GreenBridge V2</h3>
         <p>Powerbank <strong>10 000 mAh</strong><br>Conçu et assemblé par GreenBridge Technologies.</p>
         <div class="new-product-actions">
-          <button class="new-info-btn" type="button" onclick="openNewProductModal('GreenBridge V2 — 10 000 mAh','Powerbank GreenBridge de 10 000 mAh, conçu et assemblé par GreenBridge Technologies.')">En savoir plus</button>
+          <button class="new-info-btn" type="button" onclick="openNewProductModal('v2','GreenBridge V2 — 10 000 mAh','Powerbank GreenBridge de 10 000 mAh, conçu et assemblé par GreenBridge Technologies.')">En savoir plus</button>
           <button class="new-order-btn" type="button" onclick="openProductWhatsApp('GreenBridge V2 — 10 000 mAh')"><i class="fa-brands fa-whatsapp"></i> Contact</button>
         </div>
       </article>
 
       <article class="new-product-card">
         <span class="new-product-badge">NOUVEAUTÉ</span>
-        <div class="new-product-icon" aria-hidden="true"><i class="fa-solid fa-battery-three-quarters"></i></div>
+        <!-- PHOTO CARTE GREENBRIDGE V3 : remplace ce bloc par une balise img quand ta photo sera prête. -->
+        <div class="new-product-photo-placeholder" aria-label="Photo du GreenBridge V3 à ajouter">
+          <i class="fa-regular fa-image" aria-hidden="true"></i>
+          <span>PHOTO DU PRODUIT À AJOUTER</span>
+        </div>
         <h3>GreenBridge V3</h3>
         <p>Powerbank <strong>12 000 mAh</strong><br>Conçu et assemblé par GreenBridge Technologies.</p>
         <div class="new-product-actions">
-          <button class="new-info-btn" type="button" onclick="openNewProductModal('GreenBridge V3 — 12 000 mAh','Powerbank GreenBridge de 12 000 mAh, conçu et assemblé par GreenBridge Technologies.')">En savoir plus</button>
+          <button class="new-info-btn" type="button" onclick="openNewProductModal('v3','GreenBridge V3 — 12 000 mAh','Powerbank GreenBridge de 12 000 mAh, conçu et assemblé par GreenBridge Technologies.')">En savoir plus</button>
           <button class="new-order-btn" type="button" onclick="openProductWhatsApp('GreenBridge V3 — 12 000 mAh')"><i class="fa-brands fa-whatsapp"></i> Contact</button>
         </div>
       </article>
+
     </div>
   </section>
 
@@ -1642,17 +1695,55 @@ function openPackModal(){
 
 let pendingOrderProduct = '';
 
-function openNewProductModal(title, description){
-  const safeTitle = String(title || 'Nouveauté GreenBridge');
-  const safeDescription = String(description || 'Produit GreenBridge.');
+/* Trois emplacements photo prévus dans chaque fenêtre d'informations.
+   Les blocs seront remplacés par les vraies photos lorsque tu les ajouteras. */
+const newProductPhotoSlots = {
+  lifepo4: 3,
+  v1: 3,
+  v2: 3,
+  v3: 3
+};
+
+function buildNewProductPhotoGallery(productKey){
+  const count = newProductPhotoSlots[productKey] || 3;
+  return `
+    <div class="new-modal-photo-gallery" aria-label="Galerie photos du produit">
+      ${Array.from({length:count}, (_, index) => `
+        <div class="new-modal-photo-slot">
+          <!-- EMPLACEMENT PHOTO ${index + 1} : remplacer le div ci-dessous par
+               <img class="new-modal-photo-img" src="NOM-DE-LA-PHOTO.png" alt="Photo ${index + 1} du produit">
+               lorsque tu auras ajouté l'image dans ton dépôt GitHub. -->
+          <div class="new-modal-photo-frame">
+            <i class="fa-regular fa-image" aria-hidden="true"></i>
+            <span>Photo ${index + 1} à ajouter</span>
+          </div>
+          <span class="new-modal-photo-caption">Emplacement photo ${index + 1}</span>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function escapeHTML(value){
+  return String(value ?? '').replace(/[&<>"']/g, char => ({
+    '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+  }[char]));
+}
+
+function openNewProductModal(productKey, title, description){
+  const safeTitle = escapeHTML(title || 'Nouveauté GreenBridge');
+  const safeDescription = escapeHTML(description || 'Produit GreenBridge.');
+  const photoGallery = buildNewProductPhotoGallery(productKey);
+  const productForOrder = String(title || 'Nouveauté GreenBridge').replace(/\\/g,'\\\\').replace(/'/g,"\\'");
   const html = `
     <h2 style="margin-top:0">${safeTitle}</h2>
+    ${photoGallery}
     <div class="modal-body">
       <p>${safeDescription}</p>
       <p><strong>Marque :</strong> GreenBridge Technologies</p>
       <p>Produit conçu et assemblé par GreenBridge Technologies.</p>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
-        <button type="button" style="border:0;border-radius:9px;padding:10px 14px;color:#fff;background:#25D366;font-weight:800;cursor:pointer" onclick="closeModal();openProductWhatsApp('${safeTitle.replace(/'/g, "\\'")}')"><i class="fa-brands fa-whatsapp"></i> Demander sur WhatsApp</button>
+        <button type="button" style="border:0;border-radius:9px;padding:10px 14px;color:#fff;background:#25D366;font-weight:800;cursor:pointer" onclick="closeModal();openProductWhatsApp('${productForOrder}')"><i class="fa-brands fa-whatsapp"></i> Demander sur WhatsApp</button>
         <button type="button" class="btn-small" onclick="closeModal()">Fermer</button>
       </div>
     </div>
