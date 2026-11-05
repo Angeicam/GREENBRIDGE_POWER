@@ -2,103 +2,77 @@
 <!doctype html>
 <html lang="fr">
 <head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 
-  <!-- GOOGLE ANALYTICS -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6M3D6J9B24"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-6M3D6J9B24');
-  </script>
+<title>GREENBRIDGE TECHNOLOGIES — Solutions énergétiques</title>
+<meta name="description" content="Découvrez les produits GreenBridge, nos powerbanks et solutions de stockage LiFePO4. Grande ouverture de notre bureau à Abidjan Abatta le 1er janvier 2027.">
+<meta name="theme-color" content="#061f14">
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" type="image/png" href="green bridge domo.png">
+<link rel="apple-touch-icon" href="green bridge domo.png">
 
-  <title>GREENBRIDGE TECHNOLOGIES — Powerbanks & Solutions Énergétiques</title>
+<link rel="preload" as="image" href="background-tout.png">
+<link rel="preload" as="image" href="green bridge domo.png">
 
-  <meta name="description" content="GREENBRIDGE TECHNOLOGIES — Powerbanks, chargeurs et solutions énergétiques. Grande ouverture de notre bureau physique à Abidjan Abatta le 1er janvier 2027.">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-  <meta name="theme-color" content="#0a4d2e">
-
-  <link rel="icon" type="image/png" href="green bridge domo.png">
-  <link rel="apple-touch-icon" href="green bridge domo.png">
-
-  <link rel="preload" as="image" href="Energie_blanche.png">
-  <link rel="preload" as="image" href="background-tout.png">
-  <link rel="preload" as="image" href="green bridge domo.png">
-  <link rel="preload" as="image" href="Pwkb_Mini_3.png">
-  <link rel="preload" as="image" href="pwkb_123.png">
-  <link rel="preload" as="image" href="Greenplus_1.png">
-  <link rel="preload" as="image" href="Greenplus_2.png">
-  <link rel="preload" as="image" href="Greenplus_3.png">
-  <link rel="preload" as="image" href="pwkb_6.png">
-  <link rel="preload" as="image" href="pwkb_wireless_1.png">
-  <link rel="preload" as="image" href="Nos_produits_1.png">
-  <link rel="preload" as="image" href="Chargeur_ordi_1.png">
-  <link rel="preload" as="image" href="wifi_2.png">
-
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6M3D6J9B24"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-6M3D6J9B24');
+</script>
 
 <style>
 
 /* =========================================
-   VARIABLES GÉNÉRALES
+   1. IDENTITÉ VISUELLE
 ========================================= */
 
 :root {
   --topbar-h: 40px;
-  --header-h: 82px;
-  --maxw: 1100px;
+  --header-h: 98px;
+  --maxw: 1150px;
 
   --brand-green: #04462e;
   --green-dark: #061f14;
   --green-mid: #073217;
   --green-mid-2: #0b4d26;
 
+  --gold: #d4af37;
+  --gold-light: #f5df9a;
+
   --accent: #7cb342;
-  --accent-2: #a8e6a1;
+  --accent-light: #a8e6a1;
 
   --bg: #0a4d2e;
-
-  --gold-base: #d4af37;
-  --gold-hover: #e6c95a;
-  --gold-light: #ffe59a;
-
-  --electric-yellow: #ffd600;
   --whatsapp-green: #25D366;
 
-  --card-bg-desktop: rgba(255,255,255,0.12);
-  --card-bg-overlay: rgba(255,255,255,0.98);
-  --card-border: rgba(6,42,32,0.06);
+  --card-bg: rgba(255,255,255,0.94);
 }
 
 * {
   box-sizing: border-box;
 }
 
-html,
-body {
+html, body {
   margin: 0;
   padding: 0;
-  font-family: 'Poppins',Arial,sans-serif;
+  width: 100%;
+  min-height: 100%;
+  font-family: 'Poppins', Arial, sans-serif;
   background: var(--bg);
-  color: #fff;
+  color: white;
   scroll-behavior: smooth;
   overflow-x: hidden;
-  overflow-y: auto;
-  min-height: 100%;
-  width: 100%;
 }
 
 body {
   min-height: 100vh;
   min-height: 100dvh;
-  width: 100%;
-  background: var(--bg);
-  overscroll-behavior-y: auto;
   position: relative;
   -webkit-overflow-scrolling: touch;
 }
@@ -122,22 +96,19 @@ button {
 }
 
 /* =========================================
-   ARRIÈRE-PLAN
+   2. ARRIÈRE-PLAN
 ========================================= */
 
 .page-bg {
   position: fixed;
   inset: 0;
-  z-index: 0;
-  pointer-events: none;
   width: 100vw;
   height: 100vh;
   height: 100dvh;
   object-fit: cover;
-  object-position: center center;
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  will-change: transform;
+  object-position: center;
+  z-index: 0;
+  pointer-events: none;
   background: var(--bg);
 }
 
@@ -148,13 +119,13 @@ button {
   pointer-events: none;
   background: linear-gradient(
     180deg,
-    rgba(10,77,46,0.06),
-    rgba(10,77,46,0.02)
+    rgba(10,77,46,.07),
+    rgba(10,77,46,.02)
   );
 }
 
 /* =========================================
-   BARRE SUPÉRIEURE
+   3. BARRE SUPÉRIEURE
 ========================================= */
 
 .topbar {
@@ -167,121 +138,48 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
   padding: 0 5vw;
+  gap: 10px;
   z-index: 1500;
-  font-size: 12px;
-  overflow: hidden;
 }
 
 .promo-wrap {
   flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
   min-width: 0;
 }
 
 .promo-text {
-  display: inline-flex;
-  align-items: center;
   font-size: 10px;
   font-weight: 800;
-  letter-spacing: 0.9px;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  color: #fff;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.35);
   white-space: nowrap;
-}
-
-.topbar-actions {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  min-width: 0;
 }
 
 .survey-top-link {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 4px 8px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.14);
-  background: linear-gradient(
-    90deg,
-    rgba(255,255,255,0.14),
-    rgba(255,255,255,0.08)
-  );
-  color: #fff;
-  box-shadow: 0 8px 18px rgba(0,0,0,0.14);
-  text-decoration: none;
-  cursor: pointer;
-  font-weight: 800;
-  white-space: nowrap;
-  transition: transform .18s ease, box-shadow .18s ease;
+  gap: 7px;
+  padding: 5px 10px;
+  border-radius: 30px;
+  border: 1px solid rgba(255,255,255,.2);
+  background: rgba(255,255,255,.09);
+  color: white;
   font-size: 9px;
+  font-weight: 800;
+  transition: background .2s;
 }
 
 .survey-top-link:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.22);
+  background: rgba(255,255,255,.2);
 }
 
 .survey-top-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: rgba(255,213,74,0.18);
-  color: #ffd54a;
-  font-size: 9px;
-  flex: 0 0 auto;
-}
-
-.survey-heart {
-  width: 10px;
-  height: 10px;
-  position: relative;
-  display: inline-block;
-  animation: heartbeat 1.25s ease-in-out infinite;
-}
-
-.survey-heart::before,
-.survey-heart::after {
-  content: "";
-  position: absolute;
-  width: 7px;
-  height: 10px;
-  background: #ffd54a;
-  border-radius: 7px 7px 0 0;
-}
-
-.survey-heart::before {
-  left: 3px;
-  transform: rotate(-45deg);
-  transform-origin: 0 100%;
-}
-
-.survey-heart::after {
-  left: 0;
-  transform: rotate(45deg);
-  transform-origin: 100% 100%;
-}
-
-@keyframes heartbeat {
-  0%,100% { transform: scale(1); }
-  14% { transform: scale(1.08); }
-  28% { transform: scale(.98); }
-  42% { transform: scale(1.12); }
-  60% { transform: scale(1); }
+  color: var(--gold-light);
 }
 
 /* =========================================
-   EN-TÊTE ET LOGO
+   4. EN-TÊTE ET LOGO
 ========================================= */
 
 header {
@@ -291,17 +189,17 @@ header {
   right: 0;
   height: var(--header-h);
   background: linear-gradient(
-    90deg,
-    var(--green-mid),
-    var(--green-mid-2)
+    100deg,
+    #062b1a,
+    #0b4d26
   );
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 16px;
   padding: 0 5vw;
   z-index: 1490;
-  box-shadow: 0 4px 12px rgba(0,0,0,.25);
+  box-shadow: 0 5px 18px rgba(0,0,0,.22);
   overflow: hidden;
 }
 
@@ -314,9 +212,8 @@ header {
 }
 
 .logo-text img {
-  height: 55px;
-  display: block;
-  flex: 0 0 auto;
+  height: 54px;
+  width: auto;
   object-fit: contain;
 }
 
@@ -324,10 +221,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   line-height: 1;
-  text-align: center;
-  min-width: 0;
   white-space: nowrap;
 }
 
@@ -335,59 +229,49 @@ header {
   font-size: 31px;
   font-weight: 900;
   letter-spacing: 1px;
-  color: #04462e;
-  -webkit-text-stroke: .95px var(--gold-base);
-  text-shadow: 0 3px 6px rgba(0,0,0,.6);
-  white-space: nowrap;
+  color: #06432d;
+  -webkit-text-stroke: .9px var(--gold);
+  text-shadow: 0 3px 7px rgba(0,0,0,.6);
 }
 
 .company-tagline {
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 5px;
-  text-transform: uppercase;
-  color: #dfffe6;
-  margin-top: 4px;
-  text-shadow: 0 2px 6px rgba(0,0,0,.45);
+  color: #e6f7ea;
+  margin-top: 5px;
 }
 
 /* =========================================
-   BANDEAU COMMERCIAL GRANDE OUVERTURE
+   5. GRANDE OUVERTURE — NOUVEAU DESIGN
 ========================================= */
 
 .opening-banner {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 13px;
 
-  width: min(510px, 48vw);
+  width: min(530px, 53vw);
+  flex: 0 1 530px;
   min-width: 0;
-  flex: 0 1 510px;
 
-  padding: 10px 13px;
-  border-radius: 15px;
+  padding: 11px 15px;
 
-  background:
-    radial-gradient(
-      circle at 100% 0%,
-      rgba(212,175,55,.16),
-      transparent 50%
-    ),
-    linear-gradient(
-      120deg,
-      #06462e,
-      #041e14
-    );
+  background: linear-gradient(
+    120deg,
+    #fffdf6,
+    #f2e8cf
+  );
 
-  border: 1px solid rgba(212,175,55,.75);
+  border: 1px solid #d4af37;
+  border-radius: 13px;
 
   box-shadow:
-    0 8px 25px rgba(0,0,0,.25),
-    inset 0 0 20px rgba(212,175,55,.08);
+    0 8px 23px rgba(0,0,0,.23),
+    inset 0 0 10px rgba(212,175,55,.12);
 
   overflow: hidden;
-  isolation: isolate;
 }
 
 .opening-banner::before {
@@ -396,36 +280,13 @@ header {
   top: 0;
   bottom: 0;
   left: 0;
-  width: 4px;
+  width: 5px;
   background: linear-gradient(
     180deg,
-    #fff0a8,
-    #d4af37,
-    #927017
+    #f9e6a6,
+    #c49a28,
+    #947018
   );
-}
-
-.opening-banner::after {
-  content: "";
-  position: absolute;
-  top: -80%;
-  left: -40%;
-  width: 35%;
-  height: 260%;
-  transform: rotate(25deg);
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255,255,255,.10),
-    transparent
-  );
-  animation: openingShine 7s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes openingShine {
-  0%,65% { left: -40%; }
-  90%,100% { left: 120%; }
 }
 
 .opening-icon {
@@ -435,15 +296,15 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 12px;
-  color: #143a24;
+  border-radius: 11px;
+  color: #fff5d5;
   font-size: 22px;
   background: linear-gradient(
     145deg,
-    #fff0a9,
-    #d4af37
+    #0b633e,
+    #06361f
   );
-  box-shadow: 0 4px 14px rgba(212,175,55,.28);
+  box-shadow: 0 4px 12px rgba(4,70,46,.2);
 }
 
 .opening-content {
@@ -456,34 +317,33 @@ header {
 }
 
 .opening-kicker {
-  color: #ffe59a;
+  color: #99731d;
   font-size: 9px;
   font-weight: 900;
-  letter-spacing: 1.3px;
+  letter-spacing: 1.1px;
   text-transform: uppercase;
 }
 
 .opening-title {
-  color: #fff;
+  color: #073217;
   font-size: 13px;
   font-weight: 900;
-  letter-spacing: .25px;
+  letter-spacing: .15px;
   text-transform: uppercase;
 }
 
 .opening-description {
-  color: #e6f7ea;
+  color: #385344;
   font-size: 9px;
   font-weight: 500;
-  line-height: 1.35;
 }
 
 .opening-details {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 3px;
+  gap: 9px;
+  margin-top: 4px;
 }
 
 .opening-date,
@@ -496,35 +356,34 @@ header {
 }
 
 .opening-date {
-  color: #ffe59a;
+  color: #8a6411;
 }
 
 .opening-location {
-  color: #fff;
+  color: #07502e;
 }
 
 .opening-date i,
 .opening-location i {
-  color: var(--gold-base);
+  color: #b48a24;
 }
 
 .opening-seal {
+  width: 49px;
+  height: 49px;
+  flex: 0 0 49px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
-  flex: 0 0 48px;
-  border: 1px solid rgba(212,175,55,.65);
+  align-items: center;
+  border: 1px solid #d4af37;
   border-radius: 50%;
-  color: #ffe59a;
-  text-align: center;
-  background: rgba(212,175,55,.09);
+  background: rgba(212,175,55,.10);
+  color: #947018;
 }
 
 .opening-seal i {
-  font-size: 14px;
+  font-size: 15px;
   margin-bottom: 3px;
 }
 
@@ -532,11 +391,10 @@ header {
   font-size: 6px;
   font-weight: 900;
   letter-spacing: .5px;
-  line-height: 1.1;
 }
 
 /* =========================================
-   BANDE ÉLECTRIQUE
+   6. BANDE ÉLECTRIQUE
 ========================================= */
 
 .electric-band {
@@ -548,57 +406,44 @@ header {
   z-index: 1900;
   pointer-events: none;
   overflow: visible;
-  transform: translateZ(0);
 }
 
-.electric-band .container {
+.electric-band .electric-container {
   position: absolute;
-  left: 0;
   top: 50%;
-  transform: translateY(-50%);
+  left: 0;
   width: 100vw;
-  max-width: none;
-  padding: 0;
   height: 100%;
-  pointer-events: none;
+  transform: translateY(-50%);
 }
 
 .lightning-svg {
-  width: 100vw;
+  width: 100%;
   height: 100%;
   display: block;
-  pointer-events: none;
   mix-blend-mode: screen;
 }
 
 .lightning-svg path.zap {
-  stroke: var(--electric-yellow);
+  stroke: var(--gold-light);
   stroke-width: 2;
   fill: none;
   stroke-linecap: round;
-  stroke-linejoin: round;
-  opacity: .9;
+  opacity: .5;
 }
 
 .lightning-svg path.bright {
   stroke: var(--electric-yellow);
-  stroke-width: 2.6;
+  stroke-width: 2.5;
   fill: none;
   stroke-linecap: round;
-  stroke-linejoin: round;
-  opacity: 1;
   stroke-dasharray: 520;
   stroke-dashoffset: 520;
 }
 
 .orbs {
   position: absolute;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100%;
-  pointer-events: none;
-  overflow: visible;
+  inset: 0;
 }
 
 .orb {
@@ -606,94 +451,60 @@ header {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: radial-gradient(
-    circle at 30% 30%,
-    #fff8b0,
-    var(--electric-yellow)
-  );
-  box-shadow:
-    0 0 12px rgba(255,214,0,.95),
-    0 0 30px rgba(255,214,0,.16);
+  background: var(--electric-yellow);
+  box-shadow: 0 0 12px rgba(255,214,0,.9);
   transform: translate(-50%,-50%);
   opacity: 0;
-  transition: opacity .18s linear;
 }
 
 .electric-band.active .orb {
   opacity: 1;
 }
 
-@keyframes buzz-slow {
-  0% { transform: translate(-50%,-50%) translateX(-1.5px); }
-  50% { transform: translate(-50%,-50%) translateX(1.5px); }
-  100% { transform: translate(-50%,-50%) translateX(-1.5px); }
-}
-
-.orb.buzz {
-  animation: buzz-slow 1.8s linear infinite;
-}
-
 .glowline {
   position: absolute;
-  left: 50%;
   top: 50%;
-  transform: translate(-50%,-50%);
-  height: 3px;
+  left: 50%;
   width: 0;
+  height: 3px;
+  transform: translate(-50%,-50%);
   background: linear-gradient(
     90deg,
-    rgba(255,238,170,0),
+    transparent,
     var(--electric-yellow),
-    rgba(255,238,170,0)
+    transparent
   );
-  border-radius: 8px;
-  box-shadow: 0 6px 18px rgba(255,214,0,.12);
-  opacity: 0;
-  transition: opacity .22s ease;
 }
 
 .electric-band.active .glowline {
   width: 100vw;
-  opacity: 1;
-  animation: pulse 3s ease-in-out infinite;
+  animation: electricPulse 3s ease-in-out infinite;
 }
 
-@keyframes pulse {
-  0% { transform: translate(-50%,-50%) scaleX(.7); opacity: .6; }
-  50% { transform: translate(-50%,-50%) scaleX(1); opacity: 1; }
-  100% { transform: translate(-50%,-50%) scaleX(.7); opacity: .6; }
+@keyframes electricPulse {
+  0%,100% { opacity: .5; }
+  50% { opacity: 1; }
 }
 
 /* =========================================
-   CONTENU PRINCIPAL
+   7. STRUCTURE GÉNÉRALE
 ========================================= */
 
 .container {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 18px 14px 160px;
+  padding: 20px 14px 100px;
   position: relative;
   z-index: 40;
 }
 
-main.container {
-  min-height: calc(100vh - 160px);
-}
-
-.models-wrapper {
-  margin-top: 24px;
-  padding: 18px 12px 12px;
-  width: 100%;
-  max-width: 100vw;
-  position: relative;
-  z-index: 60;
-}
-
-.models-header {
+.section-heading {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 12px;
+  text-align: center;
+  margin: 20px 0;
+  gap: 7px;
 }
 
 .models-title {
@@ -701,10 +512,30 @@ main.container {
   font-size: 22px;
   color: var(--brand-green);
   letter-spacing: .4px;
-  background: rgba(255,255,255,.6);
-  padding: 8px 14px;
+  background: rgba(255,255,255,.88);
+  padding: 8px 16px;
   border-radius: 10px;
-  box-shadow: 0 8px 20px rgba(6,42,32,.06);
+  box-shadow: 0 8px 20px rgba(6,42,32,.08);
+}
+
+.section-subtitle {
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* =========================================
+   8. GRILLE DES PRODUITS EXISTANTS
+========================================= */
+
+.models-wrapper {
+  margin-top: 24px;
+  padding: 15px 12px 12px;
+  width: 100%;
+  position: relative;
+  z-index: 60;
 }
 
 .models {
@@ -717,57 +548,50 @@ main.container {
   padding: 6px 14px;
 }
 
-.models .model {
+.model {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 12px;
   padding: 14px;
-  border-radius: 12px;
-  background: var(--card-bg-desktop);
-  border: 1px solid var(--card-border);
-  box-shadow: 0 8px 20px rgba(6,42,32,.04);
+  border-radius: 13px;
+  background: var(--card-bg);
+  border: 1px solid rgba(255,255,255,.2);
+  box-shadow: 0 8px 20px rgba(6,42,32,.06);
   cursor: pointer;
-  min-height: 240px;
-  backdrop-filter: blur(4px) saturate(110%);
+  min-height: 250px;
+  backdrop-filter: blur(5px);
   color: #02110a;
-  user-select: none;
-  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+  transition: transform .2s, box-shadow .2s, background .2s;
 }
 
-.models .model.active {
-  transform: translateY(-2px);
-  background: rgba(255,255,255,.22);
-  border-color: rgba(124,179,66,.35);
-  box-shadow: 0 14px 30px rgba(6,42,32,.12);
+.model:hover {
+  transform: translateY(-4px);
+  background: rgba(255,255,255,.98);
+  box-shadow: 0 14px 30px rgba(0,0,0,.15);
 }
 
-.models .model:focus-visible {
-  outline: 3px solid rgba(212,175,55,.38);
+.model:focus-visible {
+  outline: 3px solid var(--gold);
   outline-offset: 3px;
 }
 
-.models .thumb {
+.model .thumb {
   position: relative;
-  flex: 0 0 56%;
-  height: 0;
+  width: 100%;
   padding-bottom: 56%;
   overflow: hidden;
   border-radius: 10px;
-  background: linear-gradient(
-    180deg,
-    rgba(255,255,255,.06),
-    rgba(255,255,255,.10)
-  );
+  background: rgba(255,255,255,.1);
 }
 
-.models .thumb img {
+.model .thumb img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
   border-radius: 8px;
 }
 
@@ -779,52 +603,324 @@ main.container {
 }
 
 .model .meta p {
-  margin: 10px 0 0;
-  font-size: 14px;
-  color: rgba(2,17,10,.95);
-  line-height: 1.25;
+  margin: 9px 0 0;
+  font-size: 13px;
+  color: #183c2b;
+  line-height: 1.4;
   font-weight: 600;
 }
 
 .model .meta p small {
   display: block;
-  color: rgba(2,17,10,.88);
   font-weight: 500;
   margin-top: 4px;
 }
 
+.model-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
 .btn-small {
   background: transparent;
-  border: 1px solid rgba(6,42,32,.06);
-  padding: 8px 10px;
+  border: 1px solid rgba(6,42,32,.17);
+  padding: 8px 12px;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 700;
   color: #08110a;
+  transition: background .2s;
+}
+
+.btn-small:hover {
+  background: rgba(4,70,46,.09);
+}
+
+/* RUPTURE DE STOCK */
+
+.stock-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #a51d24;
+  color: #fff;
+  padding: 7px 10px;
+  border-radius: 7px;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+}
+
+.model-stock-label {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 5;
+  box-shadow: 0 3px 10px rgba(0,0,0,.2);
 }
 
 /* =========================================
-   PROJETS À VENIR
+   9. SECTION NOUVEAUTÉS
+========================================= */
+
+.new-products-section {
+  margin-top: 40px;
+  padding: 25px 12px 30px;
+  border-radius: 18px;
+  background: linear-gradient(
+    180deg,
+    rgba(3,40,23,.4),
+    rgba(4,70,46,.10)
+  );
+  border: 1px solid rgba(212,175,55,.22);
+}
+
+.new-intro {
+  text-align: center;
+  max-width: 770px;
+  margin: 0 auto 25px;
+}
+
+.new-eyebrow {
+  color: #ffe59a;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.new-main-title {
+  margin: 8px 0;
+  font-size: clamp(22px,3.6vw,31px);
+  line-height: 1.2;
+  font-weight: 900;
+  color: #fff;
+}
+
+.new-main-title span {
+  color: #f4d574;
+}
+
+.new-intro p {
+  color: #e1f3e6;
+  font-size: 12px;
+  line-height: 1.7;
+  margin: 8px 0 0;
+}
+
+.internal-manufacturing {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 13px;
+  padding: 8px 13px;
+  border-radius: 30px;
+  background: rgba(212,175,55,.12);
+  border: 1px solid rgba(212,175,55,.4);
+  color: #ffe8a5;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+/* =========================================
+   10. LES QUATRE NOUVEAUTÉS
+========================================= */
+
+.new-products-grid {
+  display: grid;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: 15px;
+  align-items: stretch;
+}
+
+.new-product-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 12px;
+  border-radius: 15px;
+  background: #fffdf8;
+  color: #092b1b;
+  border: 1px solid rgba(212,175,55,.65);
+  box-shadow: 0 10px 26px rgba(0,0,0,.17);
+  transition: transform .2s, box-shadow .2s;
+  overflow: hidden;
+}
+
+.new-product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 32px rgba(0,0,0,.24);
+}
+
+.new-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 9px;
+  border-radius: 6px;
+  background: #d4af37;
+  color: #132d1d;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .7px;
+  box-shadow: 0 3px 10px rgba(0,0,0,.12);
+}
+
+.new-art {
+  position: relative;
+  height: 150px;
+  border-radius: 11px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  background: linear-gradient(140deg,#e5efdf,#c7ddc5);
+  color: #07502e;
+}
+
+.new-art::before {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border: 1px solid rgba(4,70,46,.13);
+  border-radius: 50%;
+  left: -65px;
+  bottom: -115px;
+}
+
+.new-art::after {
+  content: "";
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  border: 1px solid rgba(4,70,46,.13);
+  border-radius: 50%;
+  right: -50px;
+  top: -70px;
+}
+
+.new-art i {
+  position: relative;
+  z-index: 2;
+  font-size: 58px;
+  filter: drop-shadow(0 5px 5px rgba(0,0,0,.15));
+}
+
+.new-art-battery {
+  background: linear-gradient(140deg,#dcebd8,#9fbeaa);
+  color: #06462e;
+}
+
+.new-art-v1 {
+  background: linear-gradient(140deg,#e8eddc,#b9d1a5);
+  color: #16432b;
+}
+
+.new-art-v2 {
+  background: linear-gradient(140deg,#e7e4d6,#cfb878);
+  color: #674b13;
+}
+
+.new-art-v3 {
+  background: linear-gradient(140deg,#d9e5e4,#9dbcb9);
+  color: #123c40;
+}
+
+.new-product-type {
+  color: #9a781f;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.new-product-name {
+  margin: 5px 0 2px;
+  font-size: 16px;
+  line-height: 1.25;
+  font-weight: 900;
+  color: #073217;
+}
+
+.new-product-capacity {
+  color: #0b633e;
+  font-size: 19px;
+  font-weight: 900;
+  margin: 5px 0 9px;
+}
+
+.new-product-description {
+  font-size: 11px;
+  color: #42594a;
+  line-height: 1.55;
+  min-height: 49px;
+}
+
+.product-origin {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 9px 0;
+  margin-top: 9px;
+  border-top: 1px solid #e5e8df;
+  color: #28513a;
+  font-size: 9px;
+  line-height: 1.4;
+  font-weight: 800;
+}
+
+.product-origin i {
+  color: #b18a27;
+  margin-top: 1px;
+}
+
+.new-product-button {
+  margin-top: auto;
+  width: 100%;
+  padding: 10px 8px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(100deg,#07502e,#0b7042);
+  color: white;
+  font-weight: 800;
+  font-size: 10px;
+  cursor: pointer;
+  transition: background .2s, transform .2s;
+}
+
+.new-product-button:hover {
+  background: linear-gradient(100deg,#093a23,#12633c);
+  transform: translateY(-1px);
+}
+
+/* =========================================
+   11. PROJETS À VENIR
 ========================================= */
 
 .futures-title {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 24px;
+  margin-top: 30px;
   margin-bottom: 10px;
-}
-
-.futures-title .models-title {
-  padding: 8px 14px;
 }
 
 .featured {
   margin-top: 10px;
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid rgba(212,175,55,.12);
-  background: rgba(255,255,255,.94);
+  border: 1px solid rgba(212,175,55,.2);
+  background: rgba(255,255,255,.96);
   box-shadow: 0 12px 36px rgba(6,42,32,.06);
 }
 
@@ -839,7 +935,7 @@ main.container {
   position: absolute;
   inset: 0;
   opacity: 0;
-  transition: opacity 700ms ease,transform 700ms;
+  transition: opacity .7s,transform .7s;
   transform: scale(1.03);
 }
 
@@ -853,12 +949,10 @@ main.container {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center center;
-  display: block;
 }
 
 .featured-copy {
-  padding: 14px 18px;
+  padding: 15px 18px;
   text-align: center;
 }
 
@@ -866,37 +960,32 @@ main.container {
   margin: 0;
   color: var(--brand-green);
   font-weight: 800;
-  letter-spacing: .3px;
   font-size: 18px;
 }
 
 .featured-copy p {
-  color: rgba(2,17,10,.95);
-  margin-top: 10px;
-  line-height: 1.45;
+  color: #23403a;
+  line-height: 1.5;
 }
 
 .availability-badge {
   display: inline-block;
-  margin-top: 12px;
   padding: 10px 18px;
   border-radius: 999px;
   background: linear-gradient(90deg,#ffd54a,#ffb300);
   color: #08110a;
   font-weight: 900;
-  font-size: 16px;
-  box-shadow: 0 10px 30px rgba(255,180,0,.18);
-  border: 1px solid rgba(0,0,0,.06);
+  font-size: 15px;
 }
 
 /* =========================================
-   MODALE
+   12. FENÊTRES MODALES
 ========================================= */
 
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,.56);
+  background: rgba(0,0,0,.65);
   display: none;
   align-items: center;
   justify-content: center;
@@ -936,20 +1025,16 @@ main.container {
   border-radius: 50%;
   font-size: 16px;
   cursor: pointer;
-  box-shadow: 0 6px 14px rgba(0,0,0,.10);
   color: #0b2418;
   z-index: 20;
-  flex: 0 0 auto;
 }
 
 .modal-body {
   color: #23403a;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .modal-body ul {
-  margin-top: 8px;
-  margin-bottom: 0;
   padding-left: 20px;
 }
 
@@ -958,7 +1043,7 @@ main.container {
 }
 
 /* =========================================
-   CARROUSEL
+   13. CARROUSEL
 ========================================= */
 
 .modal-carousel {
@@ -968,7 +1053,6 @@ main.container {
   overflow: hidden;
   background: linear-gradient(180deg,#fbfeff,#f3f9fc);
   border: 1px solid rgba(6,42,32,.06);
-  box-shadow: 0 10px 24px rgba(6,42,32,.05);
   margin: 10px 0 14px;
 }
 
@@ -984,9 +1068,7 @@ main.container {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  object-position: center;
-  display: block;
-  transition: opacity .35s ease,transform .35s ease;
+  transition: opacity .35s, transform .35s;
 }
 
 .modal-carousel-controls {
@@ -1005,18 +1087,13 @@ main.container {
   height: 40px;
   border: 0;
   border-radius: 50%;
-  background: rgba(255,255,255,.92);
+  background: rgba(255,255,255,.95);
   color: #0b2418;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 8px 18px rgba(0,0,0,.12);
   cursor: pointer;
-  font-size: 16px;
-}
-
-.carousel-btn:active {
-  transform: scale(.96);
 }
 
 .carousel-dots {
@@ -1024,8 +1101,7 @@ main.container {
   gap: 6px;
   justify-content: center;
   align-items: center;
-  padding: 10px 0 2px;
-  flex-wrap: wrap;
+  padding: 10px 0;
 }
 
 .carousel-dot {
@@ -1044,7 +1120,7 @@ main.container {
 }
 
 /* =========================================
-   CHOIX WHATSAPP
+   14. WHATSAPP
 ========================================= */
 
 .whatsapp-choice {
@@ -1057,9 +1133,9 @@ main.container {
 .whatsapp-card {
   width: 100%;
   border: 1px solid rgba(6,42,32,.08);
-  background: linear-gradient(180deg,#fff 0%,#f7fbf9 100%);
+  background: linear-gradient(180deg,#fff,#f7fbf9);
   border-radius: 12px;
-  padding: 10px;
+  padding: 11px;
   cursor: pointer;
   text-align: left;
   box-shadow: 0 8px 18px rgba(6,42,32,.06);
@@ -1076,8 +1152,6 @@ main.container {
   height: 26px;
   border-radius: 6px;
   overflow: hidden;
-  border: 1px solid rgba(0,0,0,.08);
-  box-shadow: 0 4px 10px rgba(0,0,0,.08);
   flex: 0 0 auto;
 }
 
@@ -1097,7 +1171,6 @@ main.container {
   margin: 5px 0 0;
   color: #315348;
   font-size: 12px;
-  line-height: 1.35;
 }
 
 .whatsapp-card .go {
@@ -1105,21 +1178,13 @@ main.container {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  padding: 7px 10px;
+  padding: 7px 11px;
   border-radius: 999px;
-  background: linear-gradient(
-    90deg,
-    var(--brand-green),
-    var(--green-mid)
-  );
-  color: #fff;
+  background: var(--brand-green);
+  color: white;
   font-weight: 800;
   font-size: 12px;
 }
-
-/* =========================================
-   BOUTON WHATSAPP FLOTTANT
-========================================= */
 
 .fab {
   width: 58px;
@@ -1134,8 +1199,13 @@ main.container {
   z-index: 4000;
   box-shadow: 0 10px 30px rgba(2,50,26,.25);
   background: var(--whatsapp-green);
-  border: 3px solid rgba(255,255,255,.06);
+  border: 3px solid rgba(255,255,255,.12);
   cursor: pointer;
+  transition: transform .2s;
+}
+
+.fab:hover {
+  transform: scale(1.07);
 }
 
 .fab button {
@@ -1143,26 +1213,20 @@ main.container {
   height: 100%;
   border: 0;
   background: transparent;
-  color: #fff;
-  font-size: 22px;
+  color: white;
+  font-size: 25px;
   cursor: pointer;
   border-radius: 50%;
 }
 
-.fab:focus,
-.fab button:focus {
-  outline: 3px solid rgba(255,255,255,.12);
-  outline-offset: 2px;
-}
-
 /* =========================================
-   PIED DE PAGE
+   15. PIED DE PAGE
 ========================================= */
 
 footer {
   background: var(--green-dark);
-  color: #fff;
-  padding: 18px 5vw 40px;
+  color: white;
+  padding: 20px 5vw 40px;
   text-align: center;
   margin-top: 28px;
   position: relative;
@@ -1173,101 +1237,73 @@ footer {
   display: block;
   margin: 0 auto 8px;
   font-size: 18px;
-  font-weight: 800;
+  font-weight: 900;
   color: #04462e;
-  -webkit-text-stroke: .7px var(--gold-base);
+  -webkit-text-stroke: .7px var(--gold);
   text-shadow: 0 3px 6px rgba(0,0,0,.6);
   padding: 6px 10px;
-  border-radius: 6px;
-  width: max-content;
-}
-
-.footer-contact {
-  margin-top: 6px;
-  color: #e6f7ea;
-  line-height: 1.6;
 }
 
 /* =========================================
-   RESPONSIVE
+   16. RESPONSIVE TABLETTES
 ========================================= */
 
-@media (max-width:1100px) {
-  .models {
-    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-  }
-}
-
-@media (max-width:900px) {
-  .featured-hero {
-    height: 280px;
+@media(max-width:1050px) {
+  .new-products-grid {
+    grid-template-columns: repeat(2,minmax(0,1fr));
   }
 
   .opening-banner {
-    width: 440px;
-    flex-basis: 440px;
+    width: 480px;
+    flex-basis: 480px;
   }
 }
 
-@media (max-width:820px) {
+@media(max-width:820px) {
+  :root {
+    --header-h: 92px;
+  }
+
   .models {
-    grid-template-columns: 1fr;
-    gap: 20px;
+    grid-template-columns: repeat(2,minmax(0,1fr));
   }
 
   .company-name {
-    font-size: 25px;
+    font-size: 24px;
+  }
+
+  .company-tagline {
+    font-size: 9px;
+    letter-spacing: 3px;
   }
 
   .logo-text img {
-    height: 45px;
-  }
-
-  .fab {
-    width: 50px;
-    height: 50px;
-  }
-
-  .fab button {
-    font-size: 20px;
+    height: 43px;
   }
 
   .opening-banner {
-    width: 350px;
-    flex-basis: 350px;
-    padding: 7px 9px;
-  }
-
-  .opening-icon {
-    width: 38px;
-    height: 38px;
-    flex-basis: 38px;
-    font-size: 18px;
-  }
-
-  .opening-title {
-    font-size: 10px;
+    width: 400px;
+    flex-basis: 400px;
+    padding: 8px 10px;
   }
 
   .opening-seal {
     display: none;
   }
-}
-
-@media (max-width:768px) {
-  .company-name {
-    font-size: 22px;
-  }
 
   .featured-hero {
-    height: 240px;
+    height: 280px;
   }
 }
 
-@media (max-width:640px) {
+/* =========================================
+   17. RESPONSIVE MOBILES
+========================================= */
+
+@media(max-width:640px) {
   :root {
     --topbar-h: 36px;
-    --header-h: 82px;
+    --header-h: 88px;
   }
 
   .topbar {
@@ -1276,11 +1312,12 @@ footer {
 
   .promo-text {
     font-size: 8px;
+    letter-spacing: .5px;
   }
 
   .survey-top-link {
     font-size: 7px;
-    padding: 3px 6px;
+    padding: 4px 6px;
   }
 
   header {
@@ -1288,25 +1325,29 @@ footer {
     gap: 6px;
   }
 
-  .company-name {
-    font-size: 19px;
-  }
-
-  .company-tagline {
-    font-size: 8px;
-    letter-spacing: 2.5px;
+  .logo-text {
+    gap: 5px;
   }
 
   .logo-text img {
-    height: 36px;
+    height: 35px;
+  }
+
+  .company-name {
+    font-size: 18px;
+  }
+
+  .company-tagline {
+    font-size: 7px;
+    letter-spacing: 2px;
   }
 
   .opening-banner {
     width: 205px;
     flex: 0 1 205px;
-    padding: 6px;
+    padding: 7px;
     gap: 6px;
-    border-radius: 11px;
+    border-radius: 10px;
   }
 
   .opening-icon {
@@ -1317,8 +1358,8 @@ footer {
   }
 
   .opening-kicker {
-    font-size: 6px;
-    letter-spacing: .5px;
+    font-size: 5.8px;
+    letter-spacing: .4px;
   }
 
   .opening-title {
@@ -1335,16 +1376,28 @@ footer {
 
   .opening-date,
   .opening-location {
-    font-size: 6.5px;
-  }
-
-  .opening-date i,
-  .opening-location i {
-    font-size: 7px;
+    font-size: 6.3px;
   }
 
   .opening-seal {
     display: none;
+  }
+
+  .models {
+    grid-template-columns: 1fr;
+  }
+
+  .new-products-section {
+    padding: 18px 9px 22px;
+  }
+
+  .new-products-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .new-art {
+    height: 175px;
   }
 
   .featured-hero {
@@ -1352,53 +1405,57 @@ footer {
   }
 
   .modal {
-    width: min(96vw,760px);
+    width: 96vw;
     max-height: calc(100vh - 20px);
-    padding: 16px;
-    border-radius: 16px;
+    padding: 15px;
+    border-radius: 15px;
   }
 
   .modal-carousel-stage {
     height: 240px;
   }
 
-  .carousel-btn {
-    width: 36px;
-    height: 36px;
-    font-size: 15px;
+  .fab {
+    width: 51px;
+    height: 51px;
   }
 
-  .modal h2 {
-    font-size: 17px;
+  .fab button {
+    font-size: 22px;
   }
 }
 
-@media (max-width:420px) {
-  .company-name {
-    font-size: 16px;
-  }
-
-  .company-tagline {
-    font-size: 7px;
-    letter-spacing: 2px;
+@media(max-width:390px) {
+  header {
+    gap: 4px;
+    padding: 0 2vw;
   }
 
   .logo-text img {
-    height: 31px;
+    height: 30px;
+  }
+
+  .company-name {
+    font-size: 15px;
+  }
+
+  .company-tagline {
+    font-size: 6px;
+    letter-spacing: 1.8px;
   }
 
   .opening-banner {
-    width: 174px;
-    flex-basis: 174px;
-    padding: 5px;
+    width: 175px;
+    flex-basis: 175px;
     gap: 5px;
+    padding: 5px;
   }
 
   .opening-icon {
-    width: 26px;
-    height: 26px;
-    flex-basis: 26px;
-    font-size: 12px;
+    width: 25px;
+    height: 25px;
+    flex-basis: 25px;
+    font-size: 11px;
   }
 
   .opening-kicker {
@@ -1406,20 +1463,20 @@ footer {
   }
 
   .opening-title {
-    font-size: 6.5px;
+    font-size: 6.4px;
   }
 
   .opening-description {
-    font-size: 5.5px;
+    font-size: 5.4px;
   }
 
   .opening-date,
   .opening-location {
-    font-size: 5.8px;
+    font-size: 5.6px;
   }
 }
 
-@media (prefers-reduced-motion:reduce) {
+@media(prefers-reduced-motion:reduce) {
   *,
   *::before,
   *::after {
@@ -1436,12 +1493,14 @@ footer {
 <body>
 
 <!-- =========================================
-     FOND DU SITE
+     ARRIÈRE-PLAN
 ========================================= -->
 
 <img class="page-bg" src="background-tout.png" alt="" aria-hidden="true">
+<div class="page-bg-overlay" aria-hidden="true">
 
-<div class="page-bg-overlay" aria-hidden="true"></div>
+
+</div>
 
 
 <!-- =========================================
@@ -1451,9 +1510,11 @@ footer {
 <div class="topbar" role="banner">
 
   <div class="promo-wrap" aria-hidden="true">
+
     <div class="promo-text">
-      <span>Assemblé en Afrique de l'Ouest</span>
+      ASSEMBLÉ EN AFRIQUE DE L'OUEST
     </div>
+
   </div>
 
   <div class="topbar-actions">
@@ -1463,14 +1524,14 @@ footer {
       href="https://enquete-powerbank-ci-sn.netlify.app/"
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Questionnaire"
+      aria-label="Questionnaire GreenBridge"
     >
 
       <span class="survey-top-badge">
-        <span class="survey-heart" aria-hidden="true"></span>
+        <i class="fa-solid fa-heart"></i>
       </span>
 
-      <span>Questionnaire</span>
+      QUESTIONNAIRE
 
     </a>
 
@@ -1480,19 +1541,14 @@ footer {
 
 
 <!-- =========================================
-     EN-TÊTE GREENBRIDGE
+     EN-TÊTE : GRANDE OUVERTURE
 ========================================= -->
 
-<header role="banner" aria-label="En-tête">
+<header role="banner" aria-label="En-tête GreenBridge">
 
   <div class="logo-text">
 
-    <img
-      src="green bridge domo.png"
-      alt="Logo GreenBridge"
-      loading="eager"
-      fetchpriority="high"
-    >
+    <img src="green bridge domo.png" alt="Logo GreenBridge" loading="eager">
 
     <div class="brand-stack">
 
@@ -1509,12 +1565,9 @@ footer {
   </div>
 
 
-  <!-- GRANDE OUVERTURE DU BUREAU PHYSIQUE -->
+  <!-- ANNONCE OFFICIELLE -->
 
-  <div
-    class="opening-banner"
-    aria-label="Grande ouverture du bureau GreenBridge le 1er janvier 2027 à Abidjan Abatta"
-  >
+  <div class="opening-banner">
 
     <div class="opening-icon">
       <i class="fa-solid fa-building"></i>
@@ -1523,15 +1576,15 @@ footer {
     <div class="opening-content">
 
       <span class="opening-kicker">
-        ÉVÉNEMENT • GRANDE OUVERTURE
+        GRANDE OUVERTURE OFFICIELLE
       </span>
 
       <strong class="opening-title">
-        GREENBRIDGE VOUS ACCUEILLE !
+        GREENBRIDGE OUVRE SES PORTES
       </strong>
 
       <span class="opening-description">
-        Notre bureau physique ouvre officiellement ses portes.
+        Découvrez notre nouveau bureau physique et nos solutions énergétiques.
       </span>
 
       <div class="opening-details">
@@ -1551,13 +1604,8 @@ footer {
     </div>
 
     <div class="opening-seal">
-
       <i class="fa-solid fa-star"></i>
-
-      <span>
-        BIENVENUE
-      </span>
-
+      <span>BIENVENUE</span>
     </div>
 
   </div>
@@ -1573,42 +1621,23 @@ footer {
 
   <div class="container">
 
-    <svg
-      class="lightning-svg"
-      viewBox="0 0 2000 40"
-      preserveAspectRatio="none"
-      aria-hidden="true"
-    >
+    <svg class="lightning-svg" viewBox="0 0 2000 40" preserveAspectRatio="none">
 
-      <path
-        class="zap"
-        d="M10,22 C260,4 520,36 840,20 C1120,8 1440,34 1760,18 C1880,6 1960,28 1990,22"
-        stroke-opacity="0.18"
-      />
+      <path class="zap"
+        d="M10,22 C260,4 520,36 840,20 C1120,8 1440,34 1760,18 C1880,6 1960,28 1990,22"/>
 
-      <path
-        class="zap"
-        d="M10,24 C280,36 600,6 860,22 C1140,36 1460,6 1800,22 C1880,36 1960,10 1990,22"
-        stroke-opacity="0.12"
-      />
+      <path class="zap"
+        d="M10,24 C280,36 600,6 860,22 C1140,36 1460,6 1800,22 C1880,36 1960,10 1990,22"/>
 
-      <path
-        class="zap bright"
-        id="zapBright"
-        d="M20,22 C300,6 600,34 880,16 C1240,0 1520,32 1860,14 C1960,2 1980,30 1990,22"
-        stroke-opacity="1"
-        stroke-dasharray="520"
-        stroke-dashoffset="520"
-      />
+      <path class="bright" id="zapBright"
+        d="M20,22 C300,6 600,34 880,16 C1240,0 1520,32 1860,14 C1960,2 1980,30 1990,22"/>
 
     </svg>
 
     <div class="orbs">
-
       <div class="orb" id="orbA"></div>
       <div class="orb" id="orbB"></div>
       <div class="orb" id="orbC"></div>
-
     </div>
 
     <div class="glowline" id="glowline"></div>
@@ -1618,396 +1647,81 @@ footer {
 </div>
 
 
-<div
-  style="height:calc(var(--topbar-h) + var(--header-h) + 8px);"
-  aria-hidden="true"
-></div>
+<div style="height:calc(var(--topbar-h) + var(--header-h) + 8px);" aria-hidden="true"></div>
 
 
 <!-- =========================================
      CONTENU PRINCIPAL
 ========================================= -->
 
-<main class="container" role="main">
+<main class="container">
 
 
-  <!-- NOS MODÈLES -->
+  <!-- =======================================
+       NOS PRODUITS
+  ======================================== -->
 
-  <section
-    class="models-wrapper"
-    id="models"
-    role="region"
-    aria-label="Nos modèles"
-  >
+  <section class="models-wrapper" id="models">
 
-    <div class="models-header">
+    <div class="section-heading">
+
       <div class="models-title">
-        Nos modèles
+        Nos produits
       </div>
+
     </div>
 
-
-    <div class="models" role="list">
-
-
-      <!-- GREENMINI -->
-
-      <div
-        class="model"
-        role="button"
-        onclick="selectModel(0)"
-        tabindex="0"
-        aria-label="GreenMini"
-      >
-
-        <div class="thumb">
-          <img
-            src="Pwkb_Mini_3.png"
-            alt="GreenMini"
-            loading="eager"
-            fetchpriority="high"
-          >
-        </div>
-
-        <div class="meta">
-
-          <h4>GreenMini</h4>
-
-          <p>
-            GreenMini ≈ 9 000 mAh
-            <br>
-            <small>Compact.</small>
-          </p>
-
-        </div>
-
-        <div class="actions">
-
-          <button
-            class="btn-small"
-            onclick="openTechModal(0);event.stopPropagation()"
-          >
-            Infos
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <!-- GREENCORE -->
-
-      <div
-        class="model"
-        role="button"
-        onclick="selectModel(1)"
-        tabindex="0"
-        aria-label="GreenCore"
-      >
-
-        <div class="thumb">
-          <img
-            src="pwkb_123.png"
-            alt="GreenCore"
-            loading="eager"
-          >
-        </div>
-
-        <div class="meta">
-
-          <h4>GreenCore</h4>
-
-          <p>
-            GreenCore ≈ 9 000 mAh
-            <br>
-            <small>Type-C rapide.</small>
-          </p>
-
-        </div>
-
-        <div class="actions">
-
-          <button
-            class="btn-small"
-            onclick="openTechModal(1);event.stopPropagation()"
-          >
-            Infos
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <!-- GREENPLUS -->
-
-      <div
-        class="model"
-        role="button"
-        onclick="selectModel(2)"
-        tabindex="0"
-        aria-label="GreenPlus"
-      >
-
-        <div class="thumb">
-          <img
-            src="Greenplus_1.png"
-            alt="GreenPlus"
-            loading="lazy"
-          >
-        </div>
-
-        <div class="meta">
-
-          <h4>GreenPlus</h4>
-
-          <p>
-            GreenPlus ≈ 9 000 mAh
-            <br>
-            <small>Bonne autonomie.</small>
-          </p>
-
-        </div>
-
-        <div class="actions">
-
-          <button
-            class="btn-small"
-            onclick="openTechModal(2);event.stopPropagation()"
-          >
-            Infos
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <!-- GREENPRO -->
-
-      <div
-        class="model"
-        role="button"
-        onclick="selectModel(3)"
-        tabindex="0"
-        aria-label="GreenPro"
-      >
-
-        <div class="thumb">
-          <img
-            src="pwkb_6.png"
-            alt="GreenPro"
-            loading="lazy"
-          >
-        </div>
-
-        <div class="meta">
-
-          <h4>GreenPro</h4>
-
-          <p>
-            GreenPro ≈ 12 000 mAh
-            <br>
-            <small>Multi-appareils.</small>
-          </p>
-
-        </div>
-
-        <div class="actions">
-
-          <button
-            class="btn-small"
-            onclick="openTechModal(3);event.stopPropagation()"
-          >
-            Infos
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <!-- GREENWIRE -->
-
-      <div
-        class="model"
-        role="button"
-        onclick="selectModel(4)"
-        tabindex="0"
-        aria-label="GreenWire"
-      >
-
-        <div class="thumb">
-          <img
-            src="Greenwire_1.png"
-            alt="GreenWire"
-            loading="lazy"
-          >
-        </div>
-
-        <div class="meta">
-
-          <h4>GreenWire</h4>
-
-          <p>
-            GreenWire ≈ 20 000 mAh
-            <br>
-            <small>Très robuste.</small>
-          </p>
-
-        </div>
-
-        <div class="actions">
-
-          <button
-            class="btn-small"
-            onclick="openTechModal(4);event.stopPropagation()"
-          >
-            Infos
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <!-- GREENWIRELESS -->
-
-      <div
-        class="model"
-        role="button"
-        onclick="selectModel(5)"
-        tabindex="0"
-        aria-label="GreenWireless"
-      >
-
-        <div class="thumb">
-          <img
-            src="pwkb_wireless_1.png"
-            alt="GreenWireless"
-            loading="lazy"
-          >
-        </div>
-
-        <div class="meta">
-
-          <h4>GreenWireless</h4>
-
-          <p>
-            GreenWireless — 20 000 mAh
-            <br>
-            <small>Sans-fil.</small>
-          </p>
-
-        </div>
-
-        <div class="actions">
-
-          <button
-            class="btn-small"
-            onclick="openTechModal(5);event.stopPropagation()"
-          >
-            Infos
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <!-- CHARGEUR PC -->
-
-      <div
-        class="model"
-        role="button"
-        onclick="selectModel(6)"
-        tabindex="0"
-        aria-label="Chargeur ordinateur portable"
-      >
-
-        <div class="thumb">
-          <img
-            src="Chargeur_ordi_1.png"
-            alt="Chargeur ordinateur portable"
-            loading="lazy"
-          >
-        </div>
-
-        <div class="meta">
-
-          <h4>Chargeur PC Portable</h4>
-
-          <p>
-            65W à 100W
-            <br>
-            <small>Charge rapide.</small>
-          </p>
-
-        </div>
-
-        <div class="actions">
-
-          <button
-            class="btn-small"
-            onclick="openTechModal(6);event.stopPropagation()"
-          >
-            Infos
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <!-- STABILISATEUR WIFI -->
-
-      <div
-        class="model"
-        role="button"
-        onclick="selectModel(7)"
-        tabindex="0"
-        aria-label="Stabilisateur WiFi"
-      >
-
-        <div class="thumb">
-          <img
-            src="wifi_2.png"
-            alt="Stabilisateur WiFi"
-            loading="lazy"
-          >
-        </div>
-
-        <div class="meta">
-
-          <h4>Stabilisateur WiFi</h4>
-
-          <p>
-            Anti-coupure courant
-            <br>
-            <small>Reste connecté.</small>
-          </p>
-
-        </div>
-
-        <div class="actions">
-
-          <button
-            class="btn-small"
-            onclick="openTechModal(7);event.stopPropagation()"
-          >
-            Infos
-          </button>
-
-        </div>
-
-      </div>
-
+    <div class="models" id="modelsGrid">
+      <!-- Généré automatiquement par JavaScript -->
     </div>
 
   </section>
 
 
-  <!-- PROJETS À VENIR -->
+
+  <!-- =======================================
+       NOUVEAUTÉS GREENBRIDGE
+  ======================================== -->
+
+  <section class="new-products-section" id="nouveautes">
+
+    <div class="new-intro">
+
+      <span class="new-eyebrow">
+        COLLECTION EXCLUSIVE • GREENBRIDGE
+      </span>
+
+      <h2 class="new-main-title">
+        Nos <span>nouveautés</span> arrivent
+      </h2>
+
+      <p>
+        Découvrez quatre nouvelles créations développées par GreenBridge.
+        Des produits de notre marque, conçus et assemblés en interne,
+        avec une ambition : proposer des solutions énergétiques adaptées
+        aux besoins du quotidien.
+      </p>
+
+      <div class="internal-manufacturing">
+        <i class="fa-solid fa-industry"></i>
+        CONCEPTION ET ASSEMBLAGE EN INTERNE
+        <span>•</span>
+        MARQUE GREENBRIDGE
+      </div>
+
+    </div>
+
+    <div class="new-products-grid" id="newProductsGrid">
+      <!-- Les quatre nouveautés sont générées en JavaScript -->
+    </div>
+
+  </section>
+
+
+
+  <!-- =======================================
+       PROJETS À VENIR
+  ======================================== -->
 
   <div class="futures-title" id="futures">
 
@@ -2018,16 +1732,9 @@ footer {
   </div>
 
 
-  <section
-    class="featured"
-    aria-label="Pack 2.5 kWh — Solution modulaire"
-  >
+  <section class="featured" aria-label="Pack 2.5 kWh — Solution modulaire">
 
-    <div
-      class="featured-hero"
-      id="featuredHero"
-      aria-hidden="false"
-    >
+    <div class="featured-hero" id="featuredHero">
 
       <div class="slide active" data-index="0">
 
@@ -2041,7 +1748,6 @@ footer {
 
     </div>
 
-
     <div class="featured-copy">
 
       <h3>
@@ -2054,10 +1760,7 @@ footer {
 
       <div style="margin-top:12px">
 
-        <span
-          class="availability-badge"
-          id="availabilityBadge"
-        >
+        <span class="availability-badge">
           Disponible 05/2026
         </span>
 
@@ -2083,26 +1786,14 @@ footer {
 
 
 <!-- =========================================
-     BOUTON WHATSAPP FLOTTANT
+     WHATSAPP FLOTTANT
 ========================================= -->
 
-<div
-  id="fab"
-  class="fab"
-  role="button"
-  aria-label="Commander via WhatsApp"
->
+<div id="fab" class="fab" role="button" aria-label="Commander via WhatsApp">
 
-  <button
-    id="fabButton"
-    type="button"
-    aria-label="Commander via WhatsApp"
-  >
+  <button id="fabButton" type="button" aria-label="Commander via WhatsApp">
 
-    <i
-      class="fa-brands fa-whatsapp"
-      aria-hidden="true"
-    ></i>
+    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
 
   </button>
 
@@ -2113,24 +1804,11 @@ footer {
      FENÊTRE MODALE
 ========================================= -->
 
-<div
-  id="modalOverlay"
-  class="modal-overlay"
-  role="dialog"
-  aria-hidden="true"
->
+<div id="modalOverlay" class="modal-overlay" role="dialog" aria-hidden="true">
 
-  <div
-    class="modal"
-    role="document"
-    aria-modal="true"
-  >
+  <div class="modal" role="document" aria-modal="true">
 
-    <button
-      class="close"
-      aria-label="Fermer"
-      onclick="closeModal()"
-    >
+    <button class="close" aria-label="Fermer" onclick="closeModal()">
       ✕
     </button>
 
@@ -2163,25 +1841,13 @@ footer {
     <img
       src="https://flagcdn.com/w80/ci.png"
       alt="Drapeau Côte d'Ivoire"
-      style="
-        width:32px;
-        height:22px;
-        object-fit:cover;
-        border-radius:4px;
-        box-shadow:0 4px 12px rgba(0,0,0,.28);
-      "
+      style="width:32px;height:22px;object-fit:cover;border-radius:4px;"
     >
 
     <img
       src="https://flagcdn.com/w80/sn.png"
       alt="Drapeau Sénégal"
-      style="
-        width:32px;
-        height:22px;
-        object-fit:cover;
-        border-radius:4px;
-        box-shadow:0 4px 12px rgba(0,0,0,.28);
-      "
+      style="width:32px;height:22px;object-fit:cover;border-radius:4px;"
     >
 
   </div>
@@ -2196,7 +1862,7 @@ footer {
 
 
 <!-- =========================================
-     JAVASCRIPT COMPLET
+     JAVASCRIPT
 ========================================= -->
 
 <script>
@@ -2205,46 +1871,39 @@ footer {
    CONFIGURATION
 ========================================= */
 
-const CONTACT_EMAIL = 'contact@greenbridge.com';
-
 const SURVEY_URL =
   'https://enquete-powerbank-ci-sn.netlify.app/';
 
-
 /*
-  IMPORTANT :
   Vérifier les numéros avant publication.
-  Format international sans + ni espaces.
+  Format : indicatif du pays + numéro complet.
+  Pas de signe + ni d'espaces.
 */
 
 const whatsappNumbers = {
-
-  senegal: '221774015004',
-
-  coteivoire: '22507070707'
-
+  coteivoire: '22507070707',
+  senegal: '221774015004'
 };
+
+let selectedWhatsAppProduct = '';
 
 
 /* =========================================
-   DONNÉES DES PRODUITS
+   PRODUITS EXISTANTS
 ========================================= */
 
 const models = [
 
   {
     id:'greenmini',
-
     title:'GreenMini — 10 000 mAh',
-
+    shortTitle:'GreenMini',
     subtitle:'Ultra-compact',
-
     images:[
       'Pwkb_Mini_3.png',
       'Pwkb_mini_213.png',
       'PWBK_mini_4.png'
     ],
-
     specs:[
       'Cellules : Samsung (3 cellules)',
       'Capacité nominale : 10 000 mAh',
@@ -2253,11 +1912,8 @@ const models = [
       'Ports : USB-C + USB-A',
       'Garantie : 3 ans'
     ],
-
-    warranty:'Garantie 3 ans — 100 premiers clients',
-
     details:`
-      <p style="margin-top:0;color:#23403a;line-height:1.45">
+      <p>
         <strong>GreenMini — 10 000 mAh</strong><br>
         Compact. Écran digital. Pensé pour le quotidien.
       </p>
@@ -2266,17 +1922,14 @@ const models = [
 
   {
     id:'greencore',
-
     title:'GreenCore — ≈ 9 000 mAh',
-
+    shortTitle:'GreenCore',
     subtitle:'Modulaire • Type-C charge rapide',
-
     images:[
       'pwkb_123.png',
       'Pwbk_21.png',
       'pwkb_4.1.png'
     ],
-
     specs:[
       'Cellules : Samsung',
       'Capacité nominale : ≈ 9 000 mAh',
@@ -2285,20 +1938,8 @@ const models = [
       'PD : Non',
       'Garantie : 3 ans'
     ],
-
-    warranty:'Garantie 3 ans — 100 premiers clients',
-
-    ledModes:[
-      {id:0,name:'Veille — faible intensité'},
-      {id:1,name:'Veille — intensité moyenne'},
-      {id:2,name:'Veille — intensité haute'},
-      {id:3,name:'Clignotement lent'},
-      {id:4,name:'Clignotement secours — moyen'},
-      {id:5,name:'Clignotement secours — rapide'}
-    ],
-
     details:`
-      <p style="margin-top:0;color:#23403a;line-height:1.45">
+      <p>
         <strong>GreenCore — ≈ 9 000 mAh</strong><br>
         Type-C rapide. Simple. Fiable.
       </p>
@@ -2307,17 +1948,14 @@ const models = [
 
   {
     id:'greenplus',
-
     title:'GreenPlus — ≈ 9 000 mAh',
-
+    shortTitle:'GreenPlus',
     subtitle:'Micro USB • bonne autonomie',
-
     images:[
       'Greenplus_1.png',
       'Greenplus_2.png',
       'Greenplus_3.png'
     ],
-
     specs:[
       'Capacité : ≈ 9 000 mAh',
       'Cellules : Samsung / LG',
@@ -2326,11 +1964,8 @@ const models = [
       'Autonomie quotidienne',
       'Garantie : 2 ans'
     ],
-
-    warranty:'Garantie 2 ans',
-
     details:`
-      <p style="margin-top:0;color:#23403a;line-height:1.45">
+      <p>
         <strong>GreenPlus — ≈ 9 000 mAh</strong><br>
         Bonne autonomie. Usage simple.
       </p>
@@ -2339,26 +1974,22 @@ const models = [
 
   {
     id:'greenpro',
-
     title:'GreenPro — ≈ 12 000 mAh',
-
+    shortTitle:'GreenPro',
     subtitle:'Multi-appareils • Charge rapide USB-C',
-
     images:[
       'pwkb_6.png',
       'pwbk_9.png',
       'pwkb_10.png'
     ],
-
     specs:[
       'Capacité : ≈ 12 000 mAh',
       'USB-C charge rapide',
       'Pack haute qualité',
       'Multi-appareils'
     ],
-
     details:`
-      <p style="margin-top:0;color:#23403a;line-height:1.45">
+      <p>
         <strong>GreenPro — ≈ 12 000 mAh</strong><br>
         Plus de puissance. Plus de confort.
       </p>
@@ -2367,25 +1998,21 @@ const models = [
 
   {
     id:'greenwire',
-
     title:'GreenWire — ≈ 20 000 mAh',
-
+    shortTitle:'GreenWire',
     subtitle:'Batterie testée en réel',
-
     images:[
       'Greenwire_1.png',
       'Greenwire_2.png'
     ],
-
     specs:[
       'Capacité réelle : ~20 000 mAh',
       'Cellules hautes performances',
       'Autonomie et stabilité',
       'Usage intensif'
     ],
-
     details:`
-      <p style="margin-top:0;color:#23403a;line-height:1.45">
+      <p>
         <strong>GreenWire — batterie testée</strong><br>
         Grande autonomie.
       </p>
@@ -2394,17 +2021,14 @@ const models = [
 
   {
     id:'greenwireless',
-
     title:'GreenWireless — 20 000 mAh',
-
+    shortTitle:'GreenWireless',
     subtitle:'Boîtier amovible • PD / QC3.0 • Sans-fil',
-
     images:[
       'pwkb_wireless_1.png',
       'pwkb_wireless_2.png',
       'pwkb_wireless_3.png'
     ],
-
     specs:[
       'Cellules : Samsung ou LG',
       'Capacité nominale : 20 000 mAh',
@@ -2413,11 +2037,9 @@ const models = [
       'Boîtier amovible',
       'Garantie : 2 ans'
     ],
-
-    warranty:'Garantie 2 ans — 50 premiers clients',
-
+    outOfStock:true,
     details:`
-      <p style="margin-top:0;color:#23403a;line-height:1.45">
+      <p>
         <strong>GreenWireless — 20 000 mAh</strong><br>
         Sans-fil. Amovible. Pratique.
       </p>
@@ -2426,24 +2048,20 @@ const models = [
 
   {
     id:'laptopcharger',
-
     title:'Chargeur PC Portable',
-
+    shortTitle:'Chargeur PC',
     subtitle:'Charge rapide universelle',
-
     images:[
       'Chargeur_ordi_1.png'
     ],
-
     specs:[
       'USB-C / DC',
       'Puissance : 65W à 100W',
       'Protection surtension',
       'Bureau et déplacement'
     ],
-
     details:`
-      <p style="margin-top:0;color:#23403a;line-height:1.45">
+      <p>
         <strong>Chargeur PC Portable</strong><br>
         Rapide et stable.
       </p>
@@ -2452,28 +2070,101 @@ const models = [
 
   {
     id:'wifiups',
-
     title:'Stabilisateur WiFi',
-
+    shortTitle:'Stabilisateur WiFi',
     subtitle:'Internet même sans courant',
-
     images:[
       'wifi_2.png'
     ],
-
     specs:[
       'Backup routeur et modem',
       'Sorties 5V / 9V / 12V',
       'Protection surtension',
       'Maintien du WiFi'
     ],
-
     details:`
-      <p style="margin-top:0;color:#23403a;line-height:1.45">
+      <p>
         <strong>Stabilisateur WiFi</strong><br>
         Reste connecté.
       </p>
     `
+  }
+
+];
+
+
+/* =========================================
+   QUATRE NOUVEAUTÉS GREENBRIDGE
+========================================= */
+
+const newProducts = [
+
+  {
+    id:'lifepo4-1200wh',
+    name:'Batterie LiFePO₄',
+    category:'STOCKAGE ÉNERGÉTIQUE',
+    capacity:'1 200 Wh',
+    icon:'fa-battery-full',
+    art:'new-art-battery',
+    description:'Solution de stockage énergétique rechargeable conçue pour les besoins d’autonomie et de secours électrique.',
+    details:[
+      'Technologie : LiFePO₄',
+      'Capacité énergétique : 1 200 Wh',
+      'Produit de la marque GreenBridge',
+      'Conception et assemblage en interne'
+    ],
+    internal:true
+  },
+
+  {
+    id:'greenbridge-v1',
+    name:'GreenBridge V1',
+    category:'POWERBANK',
+    capacity:'6 000 mAh',
+    icon:'fa-bolt',
+    art:'new-art-v1',
+    description:'Un format compact conçu pour accompagner les besoins de recharge au quotidien.',
+    details:[
+      'Modèle : GreenBridge V1',
+      'Capacité nominale : 6 000 mAh',
+      'Marque : GreenBridge',
+      'Conception et assemblage en interne'
+    ],
+    internal:true
+  },
+
+  {
+    id:'greenbridge-v2',
+    name:'GreenBridge V2',
+    category:'POWERBANK',
+    capacity:'10 000 mAh',
+    icon:'fa-battery-three-quarters',
+    art:'new-art-v2',
+    description:'Une capacité supérieure pour accompagner vos appareils tout au long de la journée.',
+    details:[
+      'Modèle : GreenBridge V2',
+      'Capacité nominale : 10 000 mAh',
+      'Marque : GreenBridge',
+      'Conception et assemblage en interne'
+    ],
+    internal:true
+  },
+
+  {
+    id:'greenbridge-v3',
+    name:'GreenBridge V3',
+    category:'POWERBANK',
+    capacity:'12 000 mAh',
+    icon:'fa-battery-full',
+    art:'new-art-v3',
+    description:'Un modèle à plus grande capacité pour les utilisateurs qui recherchent davantage d’autonomie.',
+    details:[
+      'Modèle : GreenBridge V3',
+      'Capacité nominale : 12 000 mAh',
+      'Marque : GreenBridge',
+      'Conception et assemblage en interne'
+    ],
+    internal:true
   }
 
 ];
@@ -2492,140 +2183,170 @@ const modalContent =
 const fabButton =
   document.getElementById('fabButton');
 
-const modelCards =
-  Array.from(
-    document.querySelectorAll('.models .model')
-  );
+const modelsGrid =
+  document.getElementById('modelsGrid');
 
-
-/* =========================================
-   VARIABLES DU CARROUSEL
-========================================= */
-
-let currentModel = 0;
-
-let ledState = {
-  modes:[],
-  index:0,
-  clickCount:0,
-  clickTimer:null
-};
+const newProductsGrid =
+  document.getElementById('newProductsGrid');
 
 let modalCarouselImages = [];
-
 let modalCarouselIndex = 0;
-
 let modalCarouselTimer = null;
 
 
 /* =========================================
-   OUVERTURE DU QUESTIONNAIRE
+   GÉNÉRATION DES CARTES EXISTANTES
 ========================================= */
 
-function openSurveyLink(ev) {
+function renderModels() {
 
-  if (ev) {
-    ev.preventDefault();
-  }
+  modelsGrid.innerHTML = models.map((model,index) => `
 
-  window.open(
-    SURVEY_URL,
-    '_blank',
-    'noopener,noreferrer'
-  );
+    <div
+      class="model"
+      role="button"
+      tabindex="0"
+      onclick="selectModel(${index})"
+      onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectModel(${index});}"
+      aria-label="Découvrir ${model.shortTitle}"
+    >
 
-  return false;
-}
+      ${model.outOfStock ? `
+        <span class="stock-badge model-stock-label">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          Rupture de stock
+        </span>
+      ` : ''}
 
+      <div class="thumb">
+        <img
+          src="${model.images[0]}"
+          alt="${model.shortTitle}"
+          loading="lazy"
+        >
+      </div>
 
-/* =========================================
-   PRÉCHARGEMENT DES IMAGES
-========================================= */
+      <div class="meta">
 
-function preloadImages(urls) {
+        <h4>${model.shortTitle}</h4>
 
-  urls.forEach(src => {
+        <p>
+          ${model.title}
+          <br>
+          <small>${model.subtitle}</small>
+        </p>
 
-    const img = new Image();
+      </div>
 
-    img.src = src;
+      <div class="model-actions">
 
-  });
+        ${model.outOfStock ? `
+          <span style="font-size:10px;color:#a51d24;font-weight:900;">
+            INDISPONIBLE
+          </span>
+        ` : `
+          <span style="font-size:10px;color:#315348;font-weight:700;">
+            Découvrir le produit
+          </span>
+        `}
 
-}
+        <button
+          class="btn-small"
+          type="button"
+          onclick="event.stopPropagation();openTechModal(${index})"
+        >
+          Infos
+        </button>
 
+      </div>
 
-function allImageUrls() {
+    </div>
 
-  const list = [
-
-    'Energie_blanche.png',
-    'background-tout.png',
-    'green bridge domo.png',
-    'Nos_produits_1.png',
-    'Future_Pack_1.png',
-    'Future_pack_2.1.png',
-    'Future_Pack_3.png'
-
-  ];
-
-  models.forEach(model => {
-
-    if (Array.isArray(model.images)) {
-
-      list.push(...model.images);
-
-    }
-
-  });
-
-  return [...new Set(list)];
-
-}
-
-
-/* =========================================
-   SÉLECTION DES PRODUITS
-========================================= */
-
-function syncActiveModelCard(index) {
-
-  modelCards.forEach((card, idx) => {
-
-    card.classList.toggle(
-      'active',
-      idx === index
-    );
-
-  });
+  `).join('');
 
 }
 
 
 /* =========================================
-   ARRÊT DU CARROUSEL
+   GÉNÉRATION DES QUATRE NOUVEAUTÉS
+========================================= */
+
+function renderNewProducts() {
+
+  newProductsGrid.innerHTML =
+    newProducts.map((product,index) => `
+
+      <article class="new-product-card">
+
+        <span class="new-badge">
+          <i class="fa-solid fa-star"></i>
+          NOUVEAUTÉ
+        </span>
+
+        <div class="new-art ${product.art}">
+
+          <i class="fa-solid ${product.icon}"></i>
+
+        </div>
+
+        <div class="new-product-type">
+          ${product.category}
+        </div>
+
+        <h3 class="new-product-name">
+          ${product.name}
+        </h3>
+
+        <div class="new-product-capacity">
+          ${product.capacity}
+        </div>
+
+        <div class="new-product-description">
+          ${product.description}
+        </div>
+
+        <div class="product-origin">
+          <i class="fa-solid fa-circle-check"></i>
+
+          <span>
+            CONÇU ET ASSEMBLÉ EN INTERNE
+            <br>
+            MARQUE GREENBRIDGE
+          </span>
+        </div>
+
+        <button
+          type="button"
+          class="new-product-button"
+          onclick="openNewProductModal(${index})"
+        >
+          DÉCOUVRIR CE PRODUIT
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+
+      </article>
+
+    `).join('');
+
+}
+
+
+/* =========================================
+   CARROUSEL
 ========================================= */
 
 function stopModalCarousel() {
 
   if (modalCarouselTimer) {
-
     clearInterval(modalCarouselTimer);
-
     modalCarouselTimer = null;
-
   }
 
   modalCarouselImages = [];
-
   modalCarouselIndex = 0;
 
 }
 
-
-/* =========================================
-   MISE À JOUR DU CARROUSEL
-========================================= */
 
 function updateModalCarousel() {
 
@@ -2636,52 +2357,44 @@ function updateModalCarousel() {
     document.getElementById('modalCarouselDots');
 
   if (!img || modalCarouselImages.length === 0) {
-
     return;
-
   }
 
   const idx =
     ((modalCarouselIndex % modalCarouselImages.length)
-    + modalCarouselImages.length)
-    % modalCarouselImages.length;
+      + modalCarouselImages.length)
+      % modalCarouselImages.length;
 
   const current =
     modalCarouselImages[idx];
 
   img.style.opacity = '0.2';
 
-  img.style.transform = 'scale(1.02)';
-
   setTimeout(() => {
 
-    img.src = current.src;
-
-    img.alt = current.alt;
-
     img.onload = () => {
-
       img.style.opacity = '1';
-
       img.style.transform = 'scale(1)';
-
     };
 
-    img.style.opacity = '1';
+    img.src = current.src;
+    img.alt = current.alt;
 
-    img.style.transform = 'scale(1)';
+    if (img.complete) {
+      img.style.opacity = '1';
+      img.style.transform = 'scale(1)';
+    }
 
-  }, 60);
-
+  },60);
 
   if (dots) {
 
-    dots.innerHTML = modalCarouselImages.map((_, i) => `
+    dots.innerHTML = modalCarouselImages.map((_,i) => `
 
       <button
         class="carousel-dot${i === idx ? ' active' : ''}"
         type="button"
-        aria-label="Image ${i + 1}"
+        aria-label="Image ${i+1}"
         onclick="goModalCarousel(${i})">
       </button>
 
@@ -2692,17 +2405,9 @@ function updateModalCarousel() {
 }
 
 
-/* =========================================
-   NAVIGATION CARROUSEL
-========================================= */
-
 function goModalCarousel(index) {
 
-  if (!modalCarouselImages.length) {
-
-    return;
-
-  }
+  if (!modalCarouselImages.length) return;
 
   modalCarouselIndex =
     (index + modalCarouselImages.length)
@@ -2715,11 +2420,7 @@ function goModalCarousel(index) {
 
 function nextModalCarousel() {
 
-  if (!modalCarouselImages.length) {
-
-    return;
-
-  }
+  if (!modalCarouselImages.length) return;
 
   modalCarouselIndex =
     (modalCarouselIndex + 1)
@@ -2732,11 +2433,7 @@ function nextModalCarousel() {
 
 function prevModalCarousel() {
 
-  if (!modalCarouselImages.length) {
-
-    return;
-
-  }
+  if (!modalCarouselImages.length) return;
 
   modalCarouselIndex =
     (modalCarouselIndex - 1 + modalCarouselImages.length)
@@ -2747,16 +2444,11 @@ function prevModalCarousel() {
 }
 
 
-/* =========================================
-   DÉMARRAGE DU CARROUSEL
-========================================= */
-
 function startModalCarousel(images) {
 
   stopModalCarousel();
 
   modalCarouselImages = images || [];
-
   modalCarouselIndex = 0;
 
   updateModalCarousel();
@@ -2764,10 +2456,8 @@ function startModalCarousel(images) {
   if (modalCarouselImages.length > 1) {
 
     modalCarouselTimer = setInterval(() => {
-
       nextModalCarousel();
-
-    }, 3000);
+    },3000);
 
   }
 
@@ -2775,7 +2465,7 @@ function startModalCarousel(images) {
 
 
 /* =========================================
-   OUVERTURE ET FERMETURE MODALE
+   GESTION DES FENÊTRES
 ========================================= */
 
 function openModal(html) {
@@ -2784,10 +2474,7 @@ function openModal(html) {
 
   modalOverlay.style.display = 'flex';
 
-  modalOverlay.setAttribute(
-    'aria-hidden',
-    'false'
-  );
+  modalOverlay.setAttribute('aria-hidden','false');
 
   document.body.classList.add('no-scroll');
 
@@ -2798,10 +2485,7 @@ function closeModal() {
 
   modalOverlay.style.display = 'none';
 
-  modalOverlay.setAttribute(
-    'aria-hidden',
-    'true'
-  );
+  modalOverlay.setAttribute('aria-hidden','true');
 
   document.body.classList.remove('no-scroll');
 
@@ -2811,20 +2495,19 @@ function closeModal() {
 
 
 /* =========================================
-   FICHE TECHNIQUE DES PRODUITS
+   FICHE DES PRODUITS EXISTANTS
 ========================================= */
 
-function openTechModal(i) {
+function openTechModal(index) {
 
   const model =
-    models[i] || models[0];
+    models[index] || models[0];
 
   const images =
-    (model.images || []).map(src => ({
-      src:src,
+    model.images.map(src => ({
+      src,
       alt:model.title
     }));
-
 
   const carouselHtml = images.length ? `
 
@@ -2845,41 +2528,43 @@ function openTechModal(i) {
             class="carousel-btn"
             type="button"
             aria-label="Image précédente"
-            onclick="prevModalCarousel()">
-
+            onclick="prevModalCarousel()"
+          >
             <i class="fa-solid fa-chevron-left"></i>
-
           </button>
 
           <button
             class="carousel-btn"
             type="button"
             aria-label="Image suivante"
-            onclick="nextModalCarousel()">
-
+            onclick="nextModalCarousel()"
+          >
             <i class="fa-solid fa-chevron-right"></i>
-
           </button>
 
         </div>
 
       </div>
 
-      <div
-        class="carousel-dots"
-        id="modalCarouselDots">
-      </div>
+      <div id="modalCarouselDots" class="carousel-dots"></div>
 
     </div>
 
   ` : '';
 
-
   const html = `
 
-    <h2 style="margin-top:0">
-      ${model.title}
-    </h2>
+    <h2>${model.title}</h2>
+
+    ${model.outOfStock ? `
+      <div class="stock-badge" style="margin-bottom:12px;">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        RUPTURE DE STOCK
+      </div>
+      <p style="color:#a51d24;font-size:12px;font-weight:700;">
+        Ce produit est actuellement indisponible.
+      </p>
+    ` : ''}
 
     ${carouselHtml}
 
@@ -2887,22 +2572,141 @@ function openTechModal(i) {
 
       ${model.details}
 
-      <div style="margin-top:12px;font-weight:800">
+      <div style="margin-top:12px;font-weight:800;">
         Caractéristiques rapides
       </div>
 
       <ul>
-        ${(model.specs || []).map(spec => `<li>${spec}</li>`).join('')}
+        ${(model.specs || []).map(s => `<li>${s}</li>`).join('')}
       </ul>
 
     </div>
 
   `;
 
-
   openModal(html);
 
   startModalCarousel(images);
+
+}
+
+
+/* =========================================
+   FICHE DES NOUVEAUTÉS
+========================================= */
+
+function openNewProductModal(index) {
+
+  const product =
+    newProducts[index];
+
+  if (!product) return;
+
+  const html = `
+
+    <div style="
+      margin-bottom:10px;
+      color:#9a781f;
+      font-size:10px;
+      letter-spacing:1px;
+      font-weight:900;
+    ">
+      <i class="fa-solid fa-star"></i>
+      NOUVEAUTÉ GREENBRIDGE
+    </div>
+
+    <h2>
+      ${product.name}
+    </h2>
+
+    <div style="
+      background:linear-gradient(135deg,#e6efdf,#cbdcc4);
+      border-radius:13px;
+      padding:25px;
+      text-align:center;
+      margin:12px 0;
+      color:#07502e;
+    ">
+
+      <i class="fa-solid ${product.icon}" style="font-size:52px;"></i>
+
+      <div style="
+        font-size:22px;
+        font-weight:900;
+        margin-top:10px;
+      ">
+        ${product.capacity}
+      </div>
+
+      <div style="
+        font-size:10px;
+        font-weight:800;
+        letter-spacing:1px;
+        margin-top:5px;
+      ">
+        ${product.category}
+      </div>
+
+    </div>
+
+    <div class="modal-body">
+
+      <p>
+        ${product.description}
+      </p>
+
+      <h4 style="color:#073217;">
+        Caractéristiques et informations
+      </h4>
+
+      <ul>
+        ${product.details.map(item => `<li>${item}</li>`).join('')}
+      </ul>
+
+      <div style="
+        background:#eef5e9;
+        padding:12px;
+        border-radius:10px;
+        color:#07502e;
+        font-weight:800;
+        font-size:12px;
+        margin-top:12px;
+      ">
+
+        <i class="fa-solid fa-circle-check"></i>
+
+        Produit de la marque GreenBridge,
+        conçu et assemblé en interne.
+
+      </div>
+
+      <button
+        type="button"
+        onclick="openCountryModalForProduct(${index})"
+        style="
+          width:100%;
+          margin-top:15px;
+          padding:13px;
+          border:none;
+          border-radius:9px;
+          background:#07502e;
+          color:white;
+          font-weight:900;
+          font-size:12px;
+          cursor:pointer;
+        "
+      >
+
+        <i class="fa-brands fa-whatsapp"></i>
+        DEMANDER DES INFORMATIONS
+
+      </button>
+
+    </div>
+
+  `;
+
+  openModal(html);
 
 }
 
@@ -2915,27 +2719,15 @@ function openPackModal() {
 
   const packImages = [
 
-    {
-      src:'Future_Pack_1.png',
-      alt:'Pack vue 1'
-    },
-
-    {
-      src:'Future_pack_2.1.png',
-      alt:'Pack vue 2'
-    },
-
-    {
-      src:'Future_Pack_3.png',
-      alt:'Pack vue 3'
-    }
+    {src:'Future_Pack_1.png',alt:'Pack vue 1'},
+    {src:'Future_pack_2.1.png',alt:'Pack vue 2'},
+    {src:'Future_Pack_3.png',alt:'Pack vue 3'}
 
   ];
 
-
   const html = `
 
-    <h2 style="margin-top:0">
+    <h2>
       Pack modulaire 2.5 kWh — GreenBridge
     </h2>
 
@@ -2947,115 +2739,53 @@ function openPackModal() {
           id="modalCarouselImage"
           src="${packImages[0].src}"
           alt="${packImages[0].alt}"
-          loading="eager"
         >
 
         <div class="modal-carousel-controls">
 
-          <button
-            class="carousel-btn"
-            type="button"
-            aria-label="Image précédente"
-            onclick="prevModalCarousel()">
-
+          <button class="carousel-btn" onclick="prevModalCarousel()" type="button">
             <i class="fa-solid fa-chevron-left"></i>
-
           </button>
 
-          <button
-            class="carousel-btn"
-            type="button"
-            aria-label="Image suivante"
-            onclick="nextModalCarousel()">
-
+          <button class="carousel-btn" onclick="nextModalCarousel()" type="button">
             <i class="fa-solid fa-chevron-right"></i>
-
           </button>
 
         </div>
 
       </div>
 
-      <div
-        class="carousel-dots"
-        id="modalCarouselDots">
-      </div>
+      <div id="modalCarouselDots" class="carousel-dots"></div>
 
     </div>
 
     <div class="modal-body">
 
-      <p style="margin-top:0;color:#23403a;line-height:1.45">
-
-        Prévu pour une sortie commerciale le
-        <strong>31/05/2026</strong>, le pack
-        <strong>2.5 kWh</strong> a été conçu pour le Sénégal
-        et l'Afrique de l'Ouest.
-
-        Basé sur des cellules
-        <strong>LiFePO₄ prismatiques</strong>,
-        il est modulaire, réparable localement et adapté
-        au stockage médical, PME, agriculture et élevage.
-
+      <p>
+        Le pack modulaire 2.5 kWh a été conçu pour le Sénégal
+        et l'Afrique de l'Ouest. Basé sur des cellules
+        LiFePO₄ prismatiques, il est pensé pour le stockage
+        médical, les PME, l'agriculture et l'élevage.
       </p>
 
-      <ul style="color:#23403a;line-height:1.45">
-
-        <li>
-          Recharge par prise secteur et par panneau solaire.
-        </li>
-
-        <li>
-          Alimente réfrigérateurs médicaux, pompes,
-          éclairage et appareils essentiels.
-        </li>
-
-        <li>
-          Déploiement simple hors réseau.
-        </li>
-
-        <li>
-          Optimisé pour les usages agricoles et petites industries.
-        </li>
-
+      <ul>
+        <li>Recharge par secteur et panneau solaire.</li>
+        <li>Alimentation des appareils essentiels.</li>
+        <li>Déploiement hors réseau.</li>
+        <li>Solution adaptée aux usages professionnels.</li>
       </ul>
 
-      <div style="
-        display:flex;
-        gap:8px;
-        flex-wrap:wrap;
-        margin-top:14px;
-      ">
-
-        <span style="
-          background:linear-gradient(90deg,#ffd54a,#ffb300);
-          padding:10px 14px;
-          border-radius:999px;
-          font-weight:900;
-          color:#08110a;
-        ">
-          Disponible 31/05/2026
-        </span>
-
-        <button
-          onclick="closeModal()"
-          style="
-            padding:10px 14px;
-            border-radius:10px;
-            border:1px solid rgba(0,0,0,.06);
-            background:#fff;
-            cursor:pointer;
-          "
-        >
-          Fermer
-        </button>
-
-      </div>
+      <button
+        class="btn-small"
+        type="button"
+        onclick="closeModal()"
+      >
+        Fermer
+      </button>
 
     </div>
 
   `;
-
 
   openModal(html);
 
@@ -3065,35 +2795,43 @@ function openPackModal() {
 
 
 /* =========================================
-   WHATSAPP : CHOIX DU PAYS
+   WHATSAPP — CHOIX DU PAYS
 ========================================= */
 
-function openCountryModal() {
+function openCountryModal(productLabel = '') {
+
+  selectedWhatsAppProduct = productLabel;
 
   const html = `
 
-    <h2 style="
-      margin:0 36px 6px 0;
-      font-size:18px;
-      color:#08110a;
-    ">
-      Commander via WhatsApp
+    <h2 style="margin:0 35px 7px 0;">
+      Contacter GreenBridge
     </h2>
 
     <p style="
-      margin:0;
       color:#315348;
-      line-height:1.45;
       font-size:13px;
+      line-height:1.5;
+      margin:0;
     ">
-      Choisissez votre pays pour contacter notre équipe
-      commerciale GreenBridge.
+      Sélectionnez votre pays pour échanger avec notre équipe commerciale.
     </p>
 
+    ${productLabel ? `
+      <div style="
+        margin-top:10px;
+        padding:9px 11px;
+        border-radius:8px;
+        background:#eef5e9;
+        color:#07502e;
+        font-size:12px;
+        font-weight:800;
+      ">
+        Produit : ${productLabel}
+      </div>
+    ` : ''}
+
     <div class="whatsapp-choice">
-
-
-      <!-- CÔTE D'IVOIRE -->
 
       <button
         class="whatsapp-card"
@@ -3104,38 +2842,22 @@ function openCountryModal() {
         <div class="top">
 
           <div class="flag">
-
-            <img
-              src="https://flagcdn.com/w80/ci.png"
-              alt="Drapeau Côte d'Ivoire"
-            >
-
+            <img src="https://flagcdn.com/w80/ci.png" alt="Côte d'Ivoire">
           </div>
 
           <div>
-
             <h4>Côte d'Ivoire</h4>
-
-            <p>
-              Commander pour la Côte d'Ivoire.
-            </p>
-
+            <p>Service commercial GreenBridge CI.</p>
           </div>
 
         </div>
 
         <div class="go">
-
           <i class="fa-brands fa-whatsapp"></i>
-
-          Continuer
-
+          Continuer sur WhatsApp
         </div>
 
       </button>
-
-
-      <!-- SÉNÉGAL -->
 
       <button
         class="whatsapp-card"
@@ -3146,43 +2868,30 @@ function openCountryModal() {
         <div class="top">
 
           <div class="flag">
-
-            <img
-              src="https://flagcdn.com/w80/sn.png"
-              alt="Drapeau Sénégal"
-            >
-
+            <img src="https://flagcdn.com/w80/sn.png" alt="Sénégal">
           </div>
 
           <div>
-
             <h4>Sénégal</h4>
-
-            <p>
-              Commander pour le Sénégal.
-            </p>
-
+            <p>Service commercial GreenBridge Sénégal.</p>
           </div>
 
         </div>
 
         <div class="go">
-
           <i class="fa-brands fa-whatsapp"></i>
-
-          Continuer
-
+          Continuer sur WhatsApp
         </div>
 
       </button>
 
     </div>
 
-    <div style="margin-top:12px;text-align:right">
+    <div style="margin-top:12px;text-align:right;">
 
       <button
-        type="button"
         class="btn-small"
+        type="button"
         onclick="closeModal()"
       >
         Fermer
@@ -3192,14 +2901,32 @@ function openCountryModal() {
 
   `;
 
-
   openModal(html);
 
 }
 
 
 /* =========================================
-   WHATSAPP : ENVOI DU MESSAGE
+   WHATSAPP — PRODUIT SÉLECTIONNÉ
+========================================= */
+
+function openCountryModalForProduct(index) {
+
+  const product =
+    newProducts[index];
+
+  if (!product) return;
+
+  const label =
+    product.name + ' — ' + product.capacity;
+
+  openCountryModal(label);
+
+}
+
+
+/* =========================================
+   WHATSAPP — ENVOI
 ========================================= */
 
 function sendWhatsApp(country) {
@@ -3207,54 +2934,43 @@ function sendWhatsApp(country) {
   const number =
     whatsappNumbers[country];
 
-
   if (!number) {
 
-    alert(
-      "Le numéro WhatsApp de ce pays n'est pas configuré."
-    );
+    alert('Numéro WhatsApp non configuré.');
 
     return;
 
   }
 
-
   const countryLabel =
     country === 'coteivoire'
       ? "la Côte d'Ivoire"
-      : "le Sénégal";
+      : 'le Sénégal';
 
+  const productLine =
+    selectedWhatsAppProduct
+      ? `Je souhaite obtenir des informations sur : ${selectedWhatsAppProduct}.`
+      : 'Je souhaite obtenir des informations sur vos produits GreenBridge.';
 
   const message =
 
-    `Bonjour GreenBridge Technologies,
+`Bonjour GreenBridge Technologies,
 
-Je souhaite commander un produit GreenBridge pour ${countryLabel}.
+Je vous contacte depuis ${countryLabel}.
 
-Merci de me communiquer les modèles disponibles, les caractéristiques et les prix.
+${productLine}
+
+Merci de me communiquer les informations commerciales et les disponibilités.
 
 Cordialement.`;
 
-
   const url =
-
     'https://wa.me/' +
     number +
     '?text=' +
     encodeURIComponent(message);
 
-
-  /*
-    L'ouverture se fait directement après le clic
-    pour éviter le blocage des fenêtres par le navigateur.
-  */
-
-  window.open(
-    url,
-    '_blank',
-    'noopener,noreferrer'
-  );
-
+  window.open(url,'_blank','noopener,noreferrer');
 
   closeModal();
 
@@ -3262,12 +2978,34 @@ Cordialement.`;
 
 
 /* =========================================
-   CORRECTION DU BOUTON WHATSAPP PRINCIPAL
+   SÉLECTION D'UN PRODUIT EXISTANT
+========================================= */
+
+function selectModel(index) {
+
+  models.forEach((model,i) => {
+
+    const card =
+      modelsGrid.children[i];
+
+    if (card) {
+      card.classList.toggle('active',i === index);
+    }
+
+  });
+
+  openTechModal(index);
+
+}
+
+
+/* =========================================
+   ACTIVATION WHATSAPP FLOTTANT
 ========================================= */
 
 if (fabButton) {
 
-  fabButton.addEventListener('click', function(event) {
+  fabButton.addEventListener('click',function(event) {
 
     event.preventDefault();
 
@@ -3279,26 +3017,21 @@ if (fabButton) {
 
 
 /* =========================================
-   FERMETURE DE LA MODALE
+   FERMETURE MODALE
 ========================================= */
 
-modalOverlay.addEventListener('click', function(event) {
+modalOverlay.addEventListener('click',function(event) {
 
   if (event.target === modalOverlay) {
-
     closeModal();
-
   }
 
 });
 
-
-document.addEventListener('keydown', function(event) {
+document.addEventListener('keydown',function(event) {
 
   if (event.key === 'Escape') {
-
     closeModal();
-
   }
 
 });
@@ -3313,8 +3046,50 @@ document.getElementById('year').textContent =
 
 
 /* =========================================
+   INITIALISATION DES CARTES
+========================================= */
+
+renderModels();
+
+renderNewProducts();
+
+
+/* =========================================
    PRÉCHARGEMENT DES IMAGES
 ========================================= */
+
+function preloadImages(urls) {
+
+  urls.forEach(src => {
+
+    const image = new Image();
+
+    image.src = src;
+
+  });
+
+}
+
+function allImageUrls() {
+
+  const list = [
+    'Energie_blanche.png',
+    'background-tout.png',
+    'green bridge domo.png',
+    'Future_Pack_1.png',
+    'Future_pack_2.1.png',
+    'Future_Pack_3.png'
+  ];
+
+  models.forEach(model => {
+    if (Array.isArray(model.images)) {
+      list.push(...model.images);
+    }
+  });
+
+  return [...new Set(list)];
+
+}
 
 preloadImages(allImageUrls());
 
@@ -3330,303 +3105,201 @@ preloadImages(allImageUrls());
 
   if (!electricBand) return;
 
-
-  const orbA =
-    document.getElementById('orbA');
-
-  const orbB =
-    document.getElementById('orbB');
-
-  const orbC =
-    document.getElementById('orbC');
-
-
   const orbs = [
-    orbA,
-    orbB,
-    orbC
+    document.getElementById('orbA'),
+    document.getElementById('orbB'),
+    document.getElementById('orbC')
   ];
-
 
   const params = [
 
-    {
-      rxRatio:0.50,
-      ry:8,
-      speed:0.22,
-      phase:0
-    },
-
-    {
-      rxRatio:0.33,
-      ry:6,
-      speed:0.36,
-      phase:Math.PI/2
-    },
-
-    {
-      rxRatio:0.42,
-      ry:10,
-      speed:0.18,
-      phase:Math.PI
-    }
+    {rxRatio:.50,ry:8,speed:.22,phase:0},
+    {rxRatio:.33,ry:6,speed:.36,phase:Math.PI/2},
+    {rxRatio:.42,ry:10,speed:.18,phase:Math.PI}
 
   ];
-
 
   orbs.forEach((orb,index) => {
 
     if (orb) {
-
       orb.classList.add('buzz');
-
-      orb.style.animationDelay =
-        (index * 120) + 'ms';
-
+      orb.style.animationDelay = (index * 120) + 'ms';
     }
 
   });
 
-
   let t0 = performance.now();
-
 
   function tick(now) {
 
     const time =
       (now - t0) / 1000;
 
-    const cont =
+    const container =
       electricBand.querySelector('.container');
 
+    if (container) {
 
-    if (!cont) {
+      const rect =
+        container.getBoundingClientRect();
 
-      requestAnimationFrame(tick);
+      const cx =
+        rect.width / 2;
 
-      return;
+      const cy =
+        rect.height / 2;
 
-    }
+      for (let i=0;i<orbs.length;i++) {
 
+        const orb =
+          orbs[i];
 
-    const rect =
-      cont.getBoundingClientRect();
+        if (!orb) continue;
 
-    const cx =
-      rect.width / 2;
+        const p =
+          params[i];
 
-    const cy =
-      rect.height / 2;
+        const rx = Math.max(
+          Math.min(rect.width * p.rxRatio,4000),
+          120
+        );
 
+        const angle =
+          time * p.speed * Math.PI * 2 + p.phase;
 
-    for (let i = 0; i < orbs.length; i++) {
+        const x =
+          cx + Math.cos(angle) * rx;
 
-      const orb = orbs[i];
+        const y =
+          cy + Math.sin(angle) * p.ry;
 
-      if (!orb) continue;
+        orb.style.left =
+          x + 'px';
 
-      const p =
-        params[i];
+        orb.style.top =
+          y + 'px';
 
-      const rx = Math.max(
-        Math.min(rect.width * p.rxRatio,4000),
-        120
-      );
-
-      const ry =
-        p.ry;
-
-      const angle =
-        (time * p.speed * Math.PI * 2) + p.phase;
-
-      const x =
-        cx + Math.cos(angle) * rx;
-
-      const y =
-        cy + Math.sin(angle) * ry;
-
-
-      orb.style.left =
-        x + 'px';
-
-      orb.style.top =
-        y + 'px';
-
-      orb.style.transform =
-        'translate(-50%,-50%)';
+      }
 
     }
-
 
     requestAnimationFrame(tick);
 
   }
 
-
   requestAnimationFrame(tick);
 
 
-  /* ÉCLAIR PRINCIPAL */
-
   function sparkSVG() {
 
-    const zapBright =
+    const zap =
       document.getElementById('zapBright');
 
-    if (!zapBright) return;
-
+    if (!zap) return;
 
     try {
 
-      const len =
-        zapBright.getTotalLength();
+      const length =
+        zap.getTotalLength();
 
-      zapBright.style.transition = 'none';
+      zap.style.transition = 'none';
 
-      zapBright.setAttribute(
+      zap.setAttribute(
         'stroke-dasharray',
-        String(len)
+        String(length)
       );
 
-      zapBright.setAttribute(
+      zap.setAttribute(
         'stroke-dashoffset',
-        String(len)
+        String(length)
       );
-
 
       setTimeout(() => {
 
-        zapBright.style.transition =
-          'stroke-dashoffset 380ms ease-out, opacity 160ms';
+        zap.style.transition =
+          'stroke-dashoffset 380ms ease-out';
 
-        zapBright.setAttribute(
+        zap.setAttribute(
           'stroke-dashoffset',
           '0'
         );
 
-
         setTimeout(() => {
 
-          zapBright.setAttribute(
+          zap.setAttribute(
             'stroke-dashoffset',
-            String(len)
+            String(length)
           );
 
         },320);
 
       },60);
 
-
     } catch(error) {
-
-      zapBright.setAttribute(
-        'stroke-dasharray',
-        '520'
-      );
-
-      zapBright.setAttribute(
-        'stroke-dashoffset',
-        '520'
-      );
-
+      console.warn('Animation électrique indisponible.');
     }
 
   }
 
 
-  /* PETITES ÉTINCELLES */
-
   function spawnSparks() {
 
-    const cont =
+    const container =
       electricBand.querySelector('.container');
 
-    if (!cont) return;
+    if (!container) return;
 
-
-    for (let i = 0; i < 10; i++) {
+    for (let i=0;i<10;i++) {
 
       const spark =
         document.createElement('div');
 
       spark.style.position = 'absolute';
-
-      spark.style.left =
-        (3 + Math.random() * 94) + '%';
-
-      spark.style.top =
-        (20 + Math.random() * 50) + '%';
-
+      spark.style.left = (3 + Math.random()*94) + '%';
+      spark.style.top = (20 + Math.random()*50) + '%';
       spark.style.width = '2px';
-
-      spark.style.height =
-        (8 + Math.random() * 22) + 'px';
-
+      spark.style.height = (8 + Math.random()*22) + 'px';
       spark.style.borderRadius = '2px';
 
       spark.style.background =
         'linear-gradient(180deg,rgba(255,246,180,1),rgba(255,214,0,.95))';
 
       spark.style.filter = 'blur(6px)';
-
       spark.style.opacity = '0';
-
       spark.style.transform = 'translateY(6px)';
-
       spark.style.pointerEvents = 'none';
 
-      spark.style.zIndex = '1';
-
-
-      cont.appendChild(spark);
-
+      container.appendChild(spark);
 
       setTimeout(() => {
 
-        spark.style.transition =
-          'all 260ms ease-out';
-
+        spark.style.transition = 'all 260ms ease-out';
         spark.style.opacity = '.8';
-
-        spark.style.transform =
-          'translateY(0px)';
-
+        spark.style.transform = 'translateY(0)';
 
         setTimeout(() => {
 
           spark.style.opacity = '0';
-
-          spark.style.transform =
-            'translateY(-8px)';
-
+          spark.style.transform = 'translateY(-8px)';
 
           setTimeout(() => {
-
             if (spark.parentNode) {
-
-              spark.parentNode.removeChild(spark);
-
+              spark.remove();
             }
-
           },320);
 
-        },180 + Math.random() * 120);
+        },200);
 
-      },i * 28);
+      },i*28);
 
     }
 
   }
 
-
   setInterval(() => {
-
     sparkSVG();
-
     spawnSparks();
-
   },2400);
-
 
 })();
 
