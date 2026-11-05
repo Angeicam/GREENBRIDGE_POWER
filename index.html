@@ -2,39 +2,42 @@
 <!doctype html>
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 
-<title>GREENBRIDGE TECHNOLOGIES — Solutions énergétiques</title>
-<meta name="description" content="Découvrez les produits GreenBridge, nos powerbanks et solutions de stockage LiFePO4. Grande ouverture de notre bureau à Abidjan Abatta le 1er janvier 2027.">
-<meta name="theme-color" content="#061f14">
+  <title>GREENBRIDGE TECHNOLOGIES — Powerbanks & Solutions Énergétiques</title>
+  <meta name="description" content="GREENBRIDGE TECHNOLOGIES — Powerbanks, batteries LiFePO4 et solutions énergétiques conçues et assemblées en interne. Bureau à Abatta, Abidjan.">
+  <meta name="theme-color" content="#0a4d2e">
 
-<link rel="icon" type="image/png" href="green bridge domo.png">
-<link rel="apple-touch-icon" href="green bridge domo.png">
+  <link rel="icon" type="image/png" href="green bridge domo.png">
+  <link rel="apple-touch-icon" href="green bridge domo.png">
 
-<link rel="preload" as="image" href="background-tout.png">
-<link rel="preload" as="image" href="green bridge domo.png">
+  <link rel="preload" as="image" href="Energie_blanche.png">
+  <link rel="preload" as="image" href="background-tout.png">
+  <link rel="preload" as="image" href="green bridge domo.png">
+  <link rel="preload" as="image" href="Pwkb_Mini_3.png">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6M3D6J9B24"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-6M3D6J9B24');
-</script>
+  <!-- GOOGLE ANALYTICS -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6M3D6J9B24"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6M3D6J9B24');
+  </script>
 
 <style>
 
-/* =========================================
-   1. IDENTITÉ VISUELLE
-========================================= */
+/* =====================================================
+   1. IDENTITÉ VISUELLE GREENBRIDGE
+===================================================== */
 
 :root {
   --topbar-h: 40px;
-  --header-h: 98px;
+  --header-h: 90px;
   --maxw: 1150px;
 
   --brand-green: #04462e;
@@ -42,32 +45,38 @@ gtag('config', 'G-6M3D6J9B24');
   --green-mid: #073217;
   --green-mid-2: #0b4d26;
 
-  --gold: #d4af37;
-  --gold-light: #f5df9a;
-
   --accent: #7cb342;
-  --accent-light: #a8e6a1;
+  --accent-2: #a8e6a1;
 
   --bg: #0a4d2e;
+
+  --gold-base: #d4af37;
+  --gold-hover: #e6c95a;
+  --gold-light: #ffe9a9;
+
+  --electric-yellow: #ffd600;
   --whatsapp-green: #25D366;
 
-  --card-bg: rgba(255,255,255,0.94);
+  --card-bg-desktop: rgba(255,255,255,0.12);
+  --card-border: rgba(6,42,32,0.06);
 }
 
 * {
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   width: 100%;
   min-height: 100%;
   font-family: 'Poppins', Arial, sans-serif;
   background: var(--bg);
-  color: white;
+  color: #fff;
   scroll-behavior: smooth;
   overflow-x: hidden;
+  overflow-y: auto;
 }
 
 body {
@@ -75,6 +84,7 @@ body {
   min-height: 100dvh;
   position: relative;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: auto;
 }
 
 body.no-scroll {
@@ -95,20 +105,23 @@ button {
   font-family: inherit;
 }
 
-/* =========================================
+/* =====================================================
    2. ARRIÈRE-PLAN
-========================================= */
+===================================================== */
 
 .page-bg {
   position: fixed;
   inset: 0;
+  z-index: 0;
+  pointer-events: none;
   width: 100vw;
   height: 100vh;
   height: 100dvh;
   object-fit: cover;
-  object-position: center;
-  z-index: 0;
-  pointer-events: none;
+  object-position: center center;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
   background: var(--bg);
 }
 
@@ -119,14 +132,14 @@ button {
   pointer-events: none;
   background: linear-gradient(
     180deg,
-    rgba(10,77,46,.07),
-    rgba(10,77,46,.02)
+    rgba(10,77,46,0.06),
+    rgba(10,77,46,0.02)
   );
 }
 
-/* =========================================
+/* =====================================================
    3. BARRE SUPÉRIEURE
-========================================= */
+===================================================== */
 
 .topbar {
   position: fixed;
@@ -138,49 +151,82 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 5vw;
   gap: 10px;
+  padding: 0 5vw;
   z-index: 1500;
+  font-size: 12px;
+  overflow: hidden;
 }
 
 .promo-wrap {
   flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   min-width: 0;
 }
 
 .promo-text {
+  display: inline-flex;
+  align-items: center;
   font-size: 10px;
   font-weight: 800;
-  letter-spacing: 1px;
+  letter-spacing: .9px;
   text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0,0,0,.35);
   white-space: nowrap;
+}
+
+.topbar-actions {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
 }
 
 .survey-top-link {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  padding: 5px 10px;
-  border-radius: 30px;
-  border: 1px solid rgba(255,255,255,.2);
-  background: rgba(255,255,255,.09);
-  color: white;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,.14),
+    rgba(255,255,255,.08)
+  );
+  color: #fff;
   font-size: 9px;
   font-weight: 800;
-  transition: background .2s;
+  cursor: pointer;
+  transition: transform .18s ease, background .18s ease;
+  white-space: nowrap;
 }
 
 .survey-top-link:hover {
+  transform: translateY(-2px);
   background: rgba(255,255,255,.2);
 }
 
 .survey-top-badge {
-  color: var(--gold-light);
+  color: #ffd54a;
 }
 
-/* =========================================
-   4. EN-TÊTE ET LOGO
-========================================= */
+@media(max-width:640px) {
+  .promo-text {
+    font-size: 8px;
+  }
+
+  .survey-top-link {
+    font-size: 7px;
+    padding: 4px 6px;
+  }
+}
+
+/* =====================================================
+   4. EN-TÊTE ET LOGO ORIGINAL
+===================================================== */
 
 header {
   position: fixed;
@@ -189,17 +235,17 @@ header {
   right: 0;
   height: var(--header-h);
   background: linear-gradient(
-    100deg,
-    #062b1a,
-    #0b4d26
+    90deg,
+    var(--green-mid),
+    var(--green-mid-2)
   );
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 12px;
   padding: 0 5vw;
   z-index: 1490;
-  box-shadow: 0 5px 18px rgba(0,0,0,.22);
+  box-shadow: 0 4px 12px rgba(0,0,0,.25);
   overflow: hidden;
 }
 
@@ -212,8 +258,9 @@ header {
 }
 
 .logo-text img {
-  height: 54px;
-  width: auto;
+  height: 55px;
+  display: block;
+  flex: 0 0 auto;
   object-fit: contain;
 }
 
@@ -221,7 +268,10 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   line-height: 1;
+  text-align: center;
+  min-width: 0;
   white-space: nowrap;
 }
 
@@ -229,173 +279,162 @@ header {
   font-size: 31px;
   font-weight: 900;
   letter-spacing: 1px;
-  color: #06432d;
-  -webkit-text-stroke: .9px var(--gold);
-  text-shadow: 0 3px 7px rgba(0,0,0,.6);
+  color: #04462e;
+  -webkit-text-stroke: .95px var(--gold-base);
+  text-shadow: 0 3px 6px rgba(0,0,0,.6);
+  white-space: nowrap;
 }
 
 .company-tagline {
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 5px;
-  color: #e6f7ea;
-  margin-top: 5px;
+  text-transform: uppercase;
+  color: #dfffe6;
+  margin-top: 4px;
+  text-shadow: 0 2px 6px rgba(0,0,0,.45);
 }
 
-/* =========================================
-   5. GRANDE OUVERTURE — NOUVEAU DESIGN
-========================================= */
+/* =====================================================
+   5. BANDEAU PROFESSIONNEL D'OUVERTURE
+===================================================== */
 
-.opening-banner {
+.opening-ad {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 13px;
+  gap: 12px;
 
-  width: min(530px, 53vw);
-  flex: 0 1 530px;
+  width: min(490px, 51vw);
+  flex: 0 1 490px;
   min-width: 0;
 
-  padding: 11px 15px;
+  padding: 9px 13px;
 
   background: linear-gradient(
-    120deg,
-    #fffdf6,
-    #f2e8cf
+    115deg,
+    #fffdf7 0%,
+    #f4eddc 100%
   );
 
-  border: 1px solid #d4af37;
-  border-radius: 13px;
+  border: 1px solid var(--gold-base);
+  border-radius: 12px;
 
   box-shadow:
-    0 8px 23px rgba(0,0,0,.23),
-    inset 0 0 10px rgba(212,175,55,.12);
+    0 5px 18px rgba(0,0,0,.18),
+    inset 0 0 12px rgba(212,175,55,.07);
 
   overflow: hidden;
 }
 
-.opening-banner::before {
+.opening-ad::before {
   content: "";
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
-  width: 5px;
+  width: 4px;
   background: linear-gradient(
     180deg,
-    #f9e6a6,
-    #c49a28,
-    #947018
+    #e8d28a,
+    #b48a24,
+    #e8d28a
   );
 }
 
-.opening-icon {
-  width: 49px;
-  height: 49px;
-  flex: 0 0 49px;
+.opening-ad-icon {
+  width: 45px;
+  height: 45px;
+  flex: 0 0 45px;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 11px;
-  color: #fff5d5;
-  font-size: 22px;
+
   background: linear-gradient(
     145deg,
     #0b633e,
-    #06361f
+    #06351f
   );
-  box-shadow: 0 4px 12px rgba(4,70,46,.2);
+
+  color: #f5df9a;
+  border-radius: 10px;
+  font-size: 20px;
+
+  box-shadow: 0 4px 12px rgba(4,70,46,.18);
 }
 
-.opening-content {
+.opening-ad-content {
   display: flex;
   flex-direction: column;
   gap: 3px;
-  min-width: 0;
   flex: 1;
+  min-width: 0;
   line-height: 1.2;
 }
 
-.opening-kicker {
-  color: #99731d;
-  font-size: 9px;
+.opening-ad-kicker {
+  color: #98751e;
+  font-size: 8px;
   font-weight: 900;
-  letter-spacing: 1.1px;
+  letter-spacing: 1.3px;
   text-transform: uppercase;
 }
 
-.opening-title {
+.opening-ad-title {
   color: #073217;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 900;
   letter-spacing: .15px;
-  text-transform: uppercase;
 }
 
-.opening-description {
-  color: #385344;
-  font-size: 9px;
-  font-weight: 500;
-}
-
-.opening-details {
+.opening-ad-details {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 9px;
-  margin-top: 4px;
+  gap: 7px;
+  margin-top: 3px;
 }
 
-.opening-date,
-.opening-location {
+.opening-ad-date {
   display: inline-flex;
   align-items: center;
   gap: 5px;
+  padding: 4px 7px;
+  border-radius: 5px;
+  background: #e6d5a6;
+  color: #624a13;
+  font-size: 9px;
   font-weight: 900;
-  font-size: 10px;
+  white-space: nowrap;
 }
 
-.opening-date {
-  color: #8a6411;
-}
-
-.opening-location {
-  color: #07502e;
-}
-
-.opening-date i,
-.opening-location i {
-  color: #b48a24;
-}
-
-.opening-seal {
-  width: 49px;
-  height: 49px;
-  flex: 0 0 49px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.opening-ad-location {
+  display: inline-flex;
   align-items: center;
-  border: 1px solid #d4af37;
-  border-radius: 50%;
-  background: rgba(212,175,55,.10);
-  color: #947018;
+  gap: 5px;
+  color: #07502e;
+  font-size: 8px;
+  font-weight: 800;
+  line-height: 1.35;
 }
 
-.opening-seal i {
-  font-size: 15px;
-  margin-bottom: 3px;
+.opening-ad-location i {
+  color: #a27b20;
+  font-size: 11px;
+  flex: 0 0 auto;
 }
 
-.opening-seal span {
-  font-size: 6px;
-  font-weight: 900;
-  letter-spacing: .5px;
+.opening-ad-separator {
+  width: 1px;
+  height: 13px;
+  background: rgba(146,112,24,.35);
 }
 
-/* =========================================
-   6. BANDE ÉLECTRIQUE
-========================================= */
+/* =====================================================
+   6. BANDE ÉLECTRIQUE ORIGINALE
+   TROIS BOULES D'ÉNERGIE CONSERVÉES
+===================================================== */
 
 .electric-band {
   position: fixed;
@@ -406,44 +445,58 @@ header {
   z-index: 1900;
   pointer-events: none;
   overflow: visible;
+  transform: translateZ(0);
 }
 
-.electric-band .electric-container {
+.electric-band .container {
   position: absolute;
-  top: 50%;
   left: 0;
-  width: 100vw;
-  height: 100%;
+  top: 50%;
   transform: translateY(-50%);
+  width: 100vw;
+  max-width: none;
+  padding: 0;
+  height: 100%;
+  pointer-events: none;
+  box-sizing: border-box;
 }
 
 .lightning-svg {
-  width: 100%;
+  width: 100vw;
   height: 100%;
   display: block;
+  pointer-events: none;
   mix-blend-mode: screen;
 }
 
 .lightning-svg path.zap {
-  stroke: var(--gold-light);
-  stroke-width: 2;
+  stroke: var(--electric-yellow);
+  stroke-width: 2.0;
   fill: none;
   stroke-linecap: round;
-  opacity: .5;
+  stroke-linejoin: round;
+  opacity: .9;
 }
 
 .lightning-svg path.bright {
   stroke: var(--electric-yellow);
-  stroke-width: 2.5;
+  stroke-width: 2.6;
   fill: none;
   stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 1;
   stroke-dasharray: 520;
   stroke-dashoffset: 520;
 }
 
 .orbs {
   position: absolute;
-  inset: 0;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
 }
 
 .orb {
@@ -451,51 +504,93 @@ header {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--electric-yellow);
-  box-shadow: 0 0 12px rgba(255,214,0,.9);
+  background: radial-gradient(
+    circle at 30% 30%,
+    #fff8b0,
+    var(--electric-yellow)
+  );
+  box-shadow:
+    0 0 12px rgba(255,214,0,.95),
+    0 0 30px rgba(255,214,0,.16);
   transform: translate(-50%,-50%);
   opacity: 0;
+  transition: opacity .18s linear;
 }
 
 .electric-band.active .orb {
   opacity: 1;
 }
 
+@keyframes buzz-slow {
+  0% {
+    transform: translate(-50%,-50%) translateX(-1.5px);
+  }
+  50% {
+    transform: translate(-50%,-50%) translateX(1.5px);
+  }
+  100% {
+    transform: translate(-50%,-50%) translateX(-1.5px);
+  }
+}
+
+.orb.buzz {
+  animation: buzz-slow 1.8s linear infinite;
+}
+
 .glowline {
   position: absolute;
-  top: 50%;
   left: 50%;
-  width: 0;
-  height: 3px;
+  top: 50%;
   transform: translate(-50%,-50%);
+  height: 3px;
+  width: 0;
   background: linear-gradient(
     90deg,
-    transparent,
+    rgba(255,238,170,0),
     var(--electric-yellow),
-    transparent
+    rgba(255,238,170,0)
   );
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(255,214,0,.12);
+  opacity: 0;
+  transition: opacity .22s ease;
 }
 
 .electric-band.active .glowline {
   width: 100vw;
-  animation: electricPulse 3s ease-in-out infinite;
+  opacity: 1;
+  animation: pulse 3s ease-in-out infinite;
 }
 
-@keyframes electricPulse {
-  0%,100% { opacity: .5; }
-  50% { opacity: 1; }
+@keyframes pulse {
+  0% {
+    transform: translate(-50%,-50%) scaleX(.7);
+    opacity: .6;
+  }
+  50% {
+    transform: translate(-50%,-50%) scaleX(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%,-50%) scaleX(.7);
+    opacity: .6;
+  }
 }
 
-/* =========================================
-   7. STRUCTURE GÉNÉRALE
-========================================= */
+/* =====================================================
+   7. STRUCTURE PRINCIPALE
+===================================================== */
 
 .container {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 20px 14px 100px;
+  padding: 18px 14px 160px;
   position: relative;
   z-index: 40;
+}
+
+main.container {
+  min-height: calc(100vh - 160px);
 }
 
 .section-heading {
@@ -503,8 +598,8 @@ header {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin: 20px 0;
   gap: 7px;
+  margin: 15px 0 20px;
 }
 
 .models-title {
@@ -512,27 +607,19 @@ header {
   font-size: 22px;
   color: var(--brand-green);
   letter-spacing: .4px;
-  background: rgba(255,255,255,.88);
+  background: rgba(255,255,255,.85);
   padding: 8px 16px;
   border-radius: 10px;
-  box-shadow: 0 8px 20px rgba(6,42,32,.08);
+  box-shadow: 0 8px 20px rgba(6,42,32,.06);
 }
 
-.section-subtitle {
-  color: #ffffff;
-  font-size: 12px;
-  font-weight: 500;
-  text-align: center;
-  line-height: 1.5;
-}
-
-/* =========================================
-   8. GRILLE DES PRODUITS EXISTANTS
-========================================= */
+/* =====================================================
+   8. CARTES DES PRODUITS EXISTANTS
+===================================================== */
 
 .models-wrapper {
   margin-top: 24px;
-  padding: 15px 12px 12px;
+  padding: 18px 12px 12px;
   width: 100%;
   position: relative;
   z-index: 60;
@@ -548,7 +635,7 @@ header {
   padding: 6px 14px;
 }
 
-.model {
+.models .model {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -556,42 +643,59 @@ header {
   gap: 12px;
   padding: 14px;
   border-radius: 13px;
-  background: var(--card-bg);
-  border: 1px solid rgba(255,255,255,.2);
-  box-shadow: 0 8px 20px rgba(6,42,32,.06);
+  background: var(--card-bg-desktop);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 8px 20px rgba(6,42,32,.04);
   cursor: pointer;
-  min-height: 250px;
-  backdrop-filter: blur(5px);
+  min-height: 240px;
+  backdrop-filter: blur(4px) saturate(110%);
   color: #02110a;
-  transition: transform .2s, box-shadow .2s, background .2s;
+  user-select: none;
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    border-color .18s ease,
+    background .18s ease;
 }
 
-.model:hover {
-  transform: translateY(-4px);
-  background: rgba(255,255,255,.98);
-  box-shadow: 0 14px 30px rgba(0,0,0,.15);
+.models .model:hover {
+  transform: translateY(-3px);
+  background: rgba(255,255,255,.94);
+  box-shadow: 0 14px 30px rgba(6,42,32,.14);
 }
 
-.model:focus-visible {
-  outline: 3px solid var(--gold);
+.models .model.active {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,.95);
+  border-color: var(--gold-base);
+}
+
+.models .model:focus-visible {
+  outline: 3px solid rgba(212,175,55,.38);
   outline-offset: 3px;
 }
 
-.model .thumb {
+.models .thumb {
   position: relative;
   width: 100%;
+  height: 0;
   padding-bottom: 56%;
   overflow: hidden;
   border-radius: 10px;
-  background: rgba(255,255,255,.1);
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,.06),
+    rgba(255,255,255,.10)
+  );
 }
 
-.model .thumb img {
+.models .thumb img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   border-radius: 8px;
 }
 
@@ -603,30 +707,37 @@ header {
 }
 
 .model .meta p {
-  margin: 9px 0 0;
-  font-size: 13px;
-  color: #183c2b;
+  margin: 10px 0 0;
+  font-size: 14px;
+  color: rgba(2,17,10,.95);
   line-height: 1.4;
   font-weight: 600;
 }
 
 .model .meta p small {
   display: block;
+  color: rgba(2,17,10,.88);
   font-weight: 500;
   margin-top: 4px;
 }
 
 .model-actions {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   gap: 8px;
+}
+
+.model-status {
+  color: #315348;
+  font-weight: 800;
+  font-size: 9px;
 }
 
 .btn-small {
   background: transparent;
-  border: 1px solid rgba(6,42,32,.17);
-  padding: 8px 12px;
+  border: 1px solid rgba(6,42,32,.12);
+  padding: 8px 10px;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 700;
@@ -635,23 +746,25 @@ header {
 }
 
 .btn-small:hover {
-  background: rgba(4,70,46,.09);
+  background: rgba(4,70,46,.08);
 }
 
-/* RUPTURE DE STOCK */
+/* RUPTURE DE STOCK GREENWIRELESS */
 
 .stock-badge {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
-  background: #a51d24;
-  color: #fff;
   padding: 7px 10px;
-  border-radius: 7px;
+  background: #a51e27;
+  color: #fff;
+  border-radius: 6px;
   font-size: 9px;
   font-weight: 900;
   letter-spacing: .6px;
   text-transform: uppercase;
+  box-shadow: 0 3px 9px rgba(0,0,0,.15);
 }
 
 .model-stock-label {
@@ -659,33 +772,33 @@ header {
   top: 10px;
   right: 10px;
   z-index: 5;
-  box-shadow: 0 3px 10px rgba(0,0,0,.2);
 }
 
-/* =========================================
-   9. SECTION NOUVEAUTÉS
-========================================= */
+/* =====================================================
+   9. SECTION DES NOUVEAUTÉS
+===================================================== */
 
 .new-products-section {
-  margin-top: 40px;
-  padding: 25px 12px 30px;
+  margin-top: 35px;
+  padding: 28px 15px 30px;
   border-radius: 18px;
   background: linear-gradient(
     180deg,
-    rgba(3,40,23,.4),
-    rgba(4,70,46,.10)
+    rgba(3,37,22,.72),
+    rgba(4,70,46,.25)
   );
-  border: 1px solid rgba(212,175,55,.22);
+  border: 1px solid rgba(212,175,55,.35);
+  box-shadow: 0 12px 32px rgba(0,0,0,.12);
 }
 
 .new-intro {
   text-align: center;
-  max-width: 770px;
+  max-width: 780px;
   margin: 0 auto 25px;
 }
 
 .new-eyebrow {
-  color: #ffe59a;
+  color: #f5df9a;
   font-size: 10px;
   font-weight: 900;
   letter-spacing: 2px;
@@ -694,40 +807,44 @@ header {
 
 .new-main-title {
   margin: 8px 0;
-  font-size: clamp(22px,3.6vw,31px);
-  line-height: 1.2;
+  color: white;
+  font-size: clamp(23px,3.6vw,32px);
   font-weight: 900;
-  color: #fff;
+  line-height: 1.2;
 }
 
 .new-main-title span {
-  color: #f4d574;
+  color: #f5d77d;
 }
 
 .new-intro p {
-  color: #e1f3e6;
+  max-width: 720px;
+  margin: 10px auto 0;
+  color: #e5f3e8;
   font-size: 12px;
-  line-height: 1.7;
-  margin: 8px 0 0;
+  line-height: 1.8;
 }
 
 .internal-manufacturing {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 7px;
-  margin-top: 13px;
-  padding: 8px 13px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+  padding: 9px 13px;
   border-radius: 30px;
   background: rgba(212,175,55,.12);
-  border: 1px solid rgba(212,175,55,.4);
-  color: #ffe8a5;
-  font-size: 10px;
-  font-weight: 800;
+  border: 1px solid rgba(212,175,55,.5);
+  color: #ffe9a9;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .35px;
 }
 
-/* =========================================
-   10. LES QUATRE NOUVEAUTÉS
-========================================= */
+/* =====================================================
+   10. LES QUATRE CARTES NOUVEAUTÉS
+===================================================== */
 
 .new-products-grid {
   display: grid;
@@ -745,15 +862,15 @@ header {
   border-radius: 15px;
   background: #fffdf8;
   color: #092b1b;
-  border: 1px solid rgba(212,175,55,.65);
-  box-shadow: 0 10px 26px rgba(0,0,0,.17);
+  border: 1px solid rgba(212,175,55,.55);
+  box-shadow: 0 10px 26px rgba(0,0,0,.16);
   transition: transform .2s, box-shadow .2s;
   overflow: hidden;
 }
 
 .new-product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 16px 32px rgba(0,0,0,.24);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(0,0,0,.22);
 }
 
 .new-badge {
@@ -766,8 +883,8 @@ header {
   gap: 5px;
   padding: 6px 9px;
   border-radius: 6px;
-  background: #d4af37;
-  color: #132d1d;
+  background: var(--gold-base);
+  color: #17331f;
   font-size: 9px;
   font-weight: 900;
   letter-spacing: .7px;
@@ -813,31 +930,31 @@ header {
   position: relative;
   z-index: 2;
   font-size: 58px;
-  filter: drop-shadow(0 5px 5px rgba(0,0,0,.15));
+  filter: drop-shadow(0 5px 5px rgba(0,0,0,.12));
 }
 
 .new-art-battery {
-  background: linear-gradient(140deg,#dcebd8,#9fbeaa);
+  background: linear-gradient(140deg,#e3eddc,#b5ceb3);
   color: #06462e;
 }
 
 .new-art-v1 {
-  background: linear-gradient(140deg,#e8eddc,#b9d1a5);
+  background: linear-gradient(140deg,#e8eddc,#c5d9b9);
   color: #16432b;
 }
 
 .new-art-v2 {
-  background: linear-gradient(140deg,#e7e4d6,#cfb878);
+  background: linear-gradient(140deg,#f1ecda,#d6c38b);
   color: #674b13;
 }
 
 .new-art-v3 {
-  background: linear-gradient(140deg,#d9e5e4,#9dbcb9);
+  background: linear-gradient(140deg,#d9e5e4,#a9c7c4);
   color: #123c40;
 }
 
 .new-product-type {
-  color: #9a781f;
+  color: #98751e;
   font-size: 9px;
   font-weight: 900;
   letter-spacing: 1px;
@@ -847,7 +964,7 @@ header {
 .new-product-name {
   margin: 5px 0 2px;
   font-size: 16px;
-  line-height: 1.25;
+  line-height: 1.3;
   font-weight: 900;
   color: #073217;
 }
@@ -860,10 +977,10 @@ header {
 }
 
 .new-product-description {
-  font-size: 11px;
+  font-size: 10px;
   color: #42594a;
-  line-height: 1.55;
-  min-height: 49px;
+  line-height: 1.6;
+  min-height: 54px;
 }
 
 .product-origin {
@@ -875,7 +992,7 @@ header {
   border-top: 1px solid #e5e8df;
   color: #28513a;
   font-size: 9px;
-  line-height: 1.4;
+  line-height: 1.45;
   font-weight: 800;
 }
 
@@ -887,8 +1004,8 @@ header {
 .new-product-button {
   margin-top: auto;
   width: 100%;
-  padding: 10px 8px;
-  border: none;
+  padding: 11px 8px;
+  border: 0;
   border-radius: 8px;
   background: linear-gradient(100deg,#07502e,#0b7042);
   color: white;
@@ -903,9 +1020,9 @@ header {
   transform: translateY(-1px);
 }
 
-/* =========================================
+/* =====================================================
    11. PROJETS À VENIR
-========================================= */
+===================================================== */
 
 .futures-title {
   display: flex;
@@ -935,7 +1052,7 @@ header {
   position: absolute;
   inset: 0;
   opacity: 0;
-  transition: opacity .7s,transform .7s;
+  transition: opacity 700ms ease,transform 700ms;
   transform: scale(1.03);
 }
 
@@ -949,6 +1066,8 @@ header {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
+  display: block;
 }
 
 .featured-copy {
@@ -964,12 +1083,14 @@ header {
 }
 
 .featured-copy p {
-  color: #23403a;
+  color: rgba(2,17,10,.95);
+  margin-top: 10px;
   line-height: 1.5;
 }
 
 .availability-badge {
   display: inline-block;
+  margin-top: 12px;
   padding: 10px 18px;
   border-radius: 999px;
   background: linear-gradient(90deg,#ffd54a,#ffb300);
@@ -978,14 +1099,14 @@ header {
   font-size: 15px;
 }
 
-/* =========================================
-   12. FENÊTRES MODALES
-========================================= */
+/* =====================================================
+   12. MODALES
+===================================================== */
 
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,.65);
+  background: rgba(0,0,0,.62);
   display: none;
   align-items: center;
   justify-content: center;
@@ -1025,6 +1146,7 @@ header {
   border-radius: 50%;
   font-size: 16px;
   cursor: pointer;
+  box-shadow: 0 6px 14px rgba(0,0,0,.10);
   color: #0b2418;
   z-index: 20;
 }
@@ -1035,6 +1157,7 @@ header {
 }
 
 .modal-body ul {
+  margin-top: 8px;
   padding-left: 20px;
 }
 
@@ -1042,9 +1165,9 @@ header {
   margin-bottom: 6px;
 }
 
-/* =========================================
-   13. CARROUSEL
-========================================= */
+/* =====================================================
+   13. CARROUSEL DES IMAGES
+===================================================== */
 
 .modal-carousel {
   position: relative;
@@ -1053,6 +1176,7 @@ header {
   overflow: hidden;
   background: linear-gradient(180deg,#fbfeff,#f3f9fc);
   border: 1px solid rgba(6,42,32,.06);
+  box-shadow: 0 10px 24px rgba(6,42,32,.05);
   margin: 10px 0 14px;
 }
 
@@ -1068,7 +1192,9 @@ header {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transition: opacity .35s, transform .35s;
+  object-position: center;
+  display: block;
+  transition: opacity .35s ease,transform .35s ease;
 }
 
 .modal-carousel-controls {
@@ -1087,13 +1213,14 @@ header {
   height: 40px;
   border: 0;
   border-radius: 50%;
-  background: rgba(255,255,255,.95);
+  background: rgba(255,255,255,.94);
   color: #0b2418;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 8px 18px rgba(0,0,0,.12);
   cursor: pointer;
+  font-size: 16px;
 }
 
 .carousel-dots {
@@ -1101,7 +1228,8 @@ header {
   gap: 6px;
   justify-content: center;
   align-items: center;
-  padding: 10px 0;
+  padding: 10px 0 2px;
+  flex-wrap: wrap;
 }
 
 .carousel-dot {
@@ -1119,9 +1247,9 @@ header {
   transform: scale(1.15);
 }
 
-/* =========================================
-   14. WHATSAPP
-========================================= */
+/* =====================================================
+   14. CHOIX DU PAYS WHATSAPP
+===================================================== */
 
 .whatsapp-choice {
   display: grid;
@@ -1152,6 +1280,7 @@ header {
   height: 26px;
   border-radius: 6px;
   overflow: hidden;
+  border: 1px solid rgba(0,0,0,.08);
   flex: 0 0 auto;
 }
 
@@ -1171,6 +1300,7 @@ header {
   margin: 5px 0 0;
   color: #315348;
   font-size: 12px;
+  line-height: 1.4;
 }
 
 .whatsapp-card .go {
@@ -1178,13 +1308,17 @@ header {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  padding: 7px 11px;
+  padding: 7px 10px;
   border-radius: 999px;
-  background: var(--brand-green);
-  color: white;
+  background: linear-gradient(90deg,var(--brand-green),var(--green-mid));
+  color: #fff;
   font-weight: 800;
   font-size: 12px;
 }
+
+/* =====================================================
+   15. BOUTON WHATSAPP FLOTTANT
+===================================================== */
 
 .fab {
   width: 58px;
@@ -1213,20 +1347,20 @@ header {
   height: 100%;
   border: 0;
   background: transparent;
-  color: white;
+  color: #fff;
   font-size: 25px;
   cursor: pointer;
   border-radius: 50%;
 }
 
-/* =========================================
-   15. PIED DE PAGE
-========================================= */
+/* =====================================================
+   16. PIED DE PAGE
+===================================================== */
 
 footer {
   background: var(--green-dark);
-  color: white;
-  padding: 20px 5vw 40px;
+  color: #fff;
+  padding: 18px 5vw 40px;
   text-align: center;
   margin-top: 28px;
   position: relative;
@@ -1237,31 +1371,31 @@ footer {
   display: block;
   margin: 0 auto 8px;
   font-size: 18px;
-  font-weight: 900;
+  font-weight: 800;
   color: #04462e;
-  -webkit-text-stroke: .7px var(--gold);
+  -webkit-text-stroke: .7px var(--gold-base);
   text-shadow: 0 3px 6px rgba(0,0,0,.6);
   padding: 6px 10px;
 }
 
-/* =========================================
-   16. RESPONSIVE TABLETTES
-========================================= */
+/* =====================================================
+   17. RESPONSIVE
+===================================================== */
 
 @media(max-width:1050px) {
   .new-products-grid {
     grid-template-columns: repeat(2,minmax(0,1fr));
   }
 
-  .opening-banner {
-    width: 480px;
-    flex-basis: 480px;
+  .opening-ad {
+    width: 450px;
+    flex-basis: 450px;
   }
 }
 
 @media(max-width:820px) {
   :root {
-    --header-h: 92px;
+    --header-h: 88px;
   }
 
   .models {
@@ -1269,7 +1403,7 @@ footer {
   }
 
   .company-name {
-    font-size: 24px;
+    font-size: 23px;
   }
 
   .company-tagline {
@@ -1281,14 +1415,18 @@ footer {
     height: 43px;
   }
 
-  .opening-banner {
-    width: 400px;
-    flex-basis: 400px;
-    padding: 8px 10px;
+  .opening-ad {
+    width: 390px;
+    flex-basis: 390px;
+    padding: 7px 9px;
+    gap: 8px;
   }
 
-  .opening-seal {
-    display: none;
+  .opening-ad-icon {
+    width: 36px;
+    height: 36px;
+    flex-basis: 36px;
+    font-size: 16px;
   }
 
   .featured-hero {
@@ -1296,14 +1434,10 @@ footer {
   }
 }
 
-/* =========================================
-   17. RESPONSIVE MOBILES
-========================================= */
-
 @media(max-width:640px) {
   :root {
     --topbar-h: 36px;
-    --header-h: 88px;
+    --header-h: 84px;
   }
 
   .topbar {
@@ -1312,12 +1446,11 @@ footer {
 
   .promo-text {
     font-size: 8px;
-    letter-spacing: .5px;
   }
 
   .survey-top-link {
     font-size: 7px;
-    padding: 4px 6px;
+    padding: 3px 6px;
   }
 
   header {
@@ -1342,45 +1475,49 @@ footer {
     letter-spacing: 2px;
   }
 
-  .opening-banner {
-    width: 205px;
+  .opening-ad {
+    width: min(205px,calc(100vw - 190px));
     flex: 0 1 205px;
-    padding: 7px;
+    padding: 6px;
     gap: 6px;
-    border-radius: 10px;
+    border-radius: 9px;
   }
 
-  .opening-icon {
-    width: 30px;
-    height: 30px;
-    flex-basis: 30px;
-    font-size: 14px;
+  .opening-ad-icon {
+    width: 28px;
+    height: 28px;
+    flex-basis: 28px;
+    font-size: 12px;
+    border-radius: 7px;
   }
 
-  .opening-kicker {
+  .opening-ad-kicker {
     font-size: 5.8px;
     letter-spacing: .4px;
   }
 
-  .opening-title {
-    font-size: 7.5px;
+  .opening-ad-title {
+    font-size: 7px;
+    line-height: 1.25;
   }
 
-  .opening-description {
-    font-size: 6px;
+  .opening-ad-details {
+    gap: 4px;
+    margin-top: 2px;
   }
 
-  .opening-details {
-    gap: 5px;
-  }
-
-  .opening-date,
-  .opening-location {
+  .opening-ad-date {
     font-size: 6.3px;
+    padding: 3px 4px;
   }
 
-  .opening-seal {
-    display: none;
+  .opening-ad-location {
+    font-size: 5.8px;
+    gap: 3px;
+  }
+
+  .opening-ad-location i {
+    font-size: 7px;
   }
 
   .models {
@@ -1388,12 +1525,11 @@ footer {
   }
 
   .new-products-section {
-    padding: 18px 9px 22px;
+    padding: 20px 10px;
   }
 
   .new-products-grid {
     grid-template-columns: 1fr;
-    gap: 15px;
   }
 
   .new-art {
@@ -1405,10 +1541,10 @@ footer {
   }
 
   .modal {
-    width: 96vw;
+    width: min(96vw,760px);
     max-height: calc(100vh - 20px);
-    padding: 15px;
-    border-radius: 15px;
+    padding: 16px;
+    border-radius: 16px;
   }
 
   .modal-carousel-stage {
@@ -1416,8 +1552,8 @@ footer {
   }
 
   .fab {
-    width: 51px;
-    height: 51px;
+    width: 50px;
+    height: 50px;
   }
 
   .fab button {
@@ -1425,10 +1561,10 @@ footer {
   }
 }
 
-@media(max-width:390px) {
+@media(max-width:420px) {
   header {
-    gap: 4px;
     padding: 0 2vw;
+    gap: 4px;
   }
 
   .logo-text img {
@@ -1437,42 +1573,42 @@ footer {
 
   .company-name {
     font-size: 15px;
+    letter-spacing: .4px;
   }
 
   .company-tagline {
     font-size: 6px;
-    letter-spacing: 1.8px;
+    letter-spacing: 1.7px;
   }
 
-  .opening-banner {
-    width: 175px;
-    flex-basis: 175px;
-    gap: 5px;
+  .opening-ad {
+    width: min(174px,calc(100vw - 170px));
+    flex-basis: 174px;
     padding: 5px;
+    gap: 5px;
   }
 
-  .opening-icon {
-    width: 25px;
-    height: 25px;
-    flex-basis: 25px;
-    font-size: 11px;
+  .opening-ad-icon {
+    width: 24px;
+    height: 24px;
+    flex-basis: 24px;
+    font-size: 10px;
   }
 
-  .opening-kicker {
+  .opening-ad-kicker {
     font-size: 5px;
   }
 
-  .opening-title {
-    font-size: 6.4px;
+  .opening-ad-title {
+    font-size: 6px;
   }
 
-  .opening-description {
-    font-size: 5.4px;
+  .opening-ad-date {
+    font-size: 5.5px;
   }
 
-  .opening-date,
-  .opening-location {
-    font-size: 5.6px;
+  .opening-ad-location {
+    font-size: 5px;
   }
 }
 
@@ -1492,29 +1628,24 @@ footer {
 
 <body>
 
-<!-- =========================================
-     ARRIÈRE-PLAN
-========================================= -->
+<!-- ==================================================
+     ARRIÈRE-PLAN ORIGINAL
+================================================== -->
 
 <img class="page-bg" src="background-tout.png" alt="" aria-hidden="true">
-<div class="page-bg-overlay" aria-hidden="true">
+<div class="page-bg-overlay" aria-hidden="true"></div>
 
 
-</div>
-
-
-<!-- =========================================
+<!-- ==================================================
      BARRE SUPÉRIEURE
-========================================= -->
+================================================== -->
 
 <div class="topbar" role="banner">
 
   <div class="promo-wrap" aria-hidden="true">
-
     <div class="promo-text">
-      ASSEMBLÉ EN AFRIQUE DE L'OUEST
+      <span>Assemblé en Afrique de l'Ouest</span>
     </div>
-
   </div>
 
   <div class="topbar-actions">
@@ -1524,15 +1655,12 @@ footer {
       href="https://enquete-powerbank-ci-sn.netlify.app/"
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Questionnaire GreenBridge"
+      aria-label="Questionnaire"
     >
-
       <span class="survey-top-badge">
         <i class="fa-solid fa-heart"></i>
       </span>
-
-      QUESTIONNAIRE
-
+      <span>Questionnaire</span>
     </a>
 
   </div>
@@ -1540,72 +1668,64 @@ footer {
 </div>
 
 
-<!-- =========================================
-     EN-TÊTE : GRANDE OUVERTURE
-========================================= -->
+<!-- ==================================================
+     EN-TÊTE GREENBRIDGE
+================================================== -->
 
-<header role="banner" aria-label="En-tête GreenBridge">
+<header role="banner" aria-label="En-tête">
 
   <div class="logo-text">
 
-    <img src="green bridge domo.png" alt="Logo GreenBridge" loading="eager">
+    <img
+      src="green bridge domo.png"
+      alt="Logo GreenBridge"
+      loading="eager"
+      fetchpriority="high"
+    >
 
     <div class="brand-stack">
 
-      <div class="company-name">
-        GREENBRIDGE
-      </div>
+      <div class="company-name">GREENBRIDGE</div>
 
-      <div class="company-tagline">
-        TECHNOLOGIES
-      </div>
+      <div class="company-tagline">TECHNOLOGIES</div>
 
     </div>
 
   </div>
 
 
-  <!-- ANNONCE OFFICIELLE -->
+  <!-- OUVERTURE DU BUREAU PHYSIQUE -->
 
-  <div class="opening-banner">
+  <div class="opening-ad">
 
-    <div class="opening-icon">
+    <div class="opening-ad-icon">
       <i class="fa-solid fa-building"></i>
     </div>
 
-    <div class="opening-content">
+    <div class="opening-ad-content">
 
-      <span class="opening-kicker">
-        GRANDE OUVERTURE OFFICIELLE
+      <span class="opening-ad-kicker">
+        GREENBRIDGE TECHNOLOGIES
       </span>
 
-      <strong class="opening-title">
-        GREENBRIDGE OUVRE SES PORTES
+      <strong class="opening-ad-title">
+        OUVERTURE DU BUREAU PHYSIQUE
       </strong>
 
-      <span class="opening-description">
-        Découvrez notre nouveau bureau physique et nos solutions énergétiques.
-      </span>
+      <div class="opening-ad-details">
 
-      <div class="opening-details">
-
-        <span class="opening-date">
+        <span class="opening-ad-date">
           <i class="fa-solid fa-calendar-check"></i>
           1er JANVIER 2027
         </span>
 
-        <span class="opening-location">
+        <span class="opening-ad-location">
           <i class="fa-solid fa-location-dot"></i>
-          ABIDJAN • ABATTA
+          En face de China Mart, Abatta – Abidjan
         </span>
 
       </div>
 
-    </div>
-
-    <div class="opening-seal">
-      <i class="fa-solid fa-star"></i>
-      <span>BIENVENUE</span>
     </div>
 
   </div>
@@ -1613,31 +1733,52 @@ footer {
 </header>
 
 
-<!-- =========================================
-     BANDE ÉLECTRIQUE
-========================================= -->
+<!-- ==================================================
+     TROIS BOULES D'ÉNERGIE ET ÉCLAIRS ORIGINAUX
+================================================== -->
 
 <div class="electric-band active" id="electricBand" aria-hidden="true">
 
   <div class="container">
 
-    <svg class="lightning-svg" viewBox="0 0 2000 40" preserveAspectRatio="none">
+    <svg
+      class="lightning-svg"
+      viewBox="0 0 2000 40"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
 
-      <path class="zap"
-        d="M10,22 C260,4 520,36 840,20 C1120,8 1440,34 1760,18 C1880,6 1960,28 1990,22"/>
+      <path
+        class="zap"
+        d="M10,22 C260,4 520,36 840,20 C1120,8 1440,34 1760,18 C1880,6 1960,28 1990,22"
+        stroke-opacity="0.18"
+      />
 
-      <path class="zap"
-        d="M10,24 C280,36 600,6 860,22 C1140,36 1460,6 1800,22 C1880,36 1960,10 1990,22"/>
+      <path
+        class="zap"
+        d="M10,24 C280,36 600,6 860,22 C1140,36 1460,6 1800,22 C1880,36 1960,10 1990,22"
+        stroke-opacity="0.12"
+      />
 
-      <path class="bright" id="zapBright"
-        d="M20,22 C300,6 600,34 880,16 C1240,0 1520,32 1860,14 C1960,2 1980,30 1990,22"/>
+      <path
+        class="zap bright"
+        id="zapBright"
+        d="M20,22 C300,6 600,34 880,16 C1240,0 1520,32 1860,14 C1960,2 1980,30 1990,22"
+        stroke-opacity="1"
+        stroke-dasharray="520"
+        stroke-dashoffset="520"
+      />
 
     </svg>
 
     <div class="orbs">
+
       <div class="orb" id="orbA"></div>
+
       <div class="orb" id="orbB"></div>
+
       <div class="orb" id="orbC"></div>
+
     </div>
 
     <div class="glowline" id="glowline"></div>
@@ -1647,81 +1788,98 @@ footer {
 </div>
 
 
-<div style="height:calc(var(--topbar-h) + var(--header-h) + 8px);" aria-hidden="true"></div>
+<div
+  style="height:calc(var(--topbar-h) + var(--header-h) + 8px);"
+  aria-hidden="true"
+></div>
 
 
-<!-- =========================================
+<!-- ==================================================
      CONTENU PRINCIPAL
-========================================= -->
+================================================== -->
 
 <main class="container">
 
 
-  <!-- =======================================
-       NOS PRODUITS
-  ======================================== -->
-
-  <section class="models-wrapper" id="models">
-
-    <div class="section-heading">
-
-      <div class="models-title">
-        Nos produits
-      </div>
-
-    </div>
-
-    <div class="models" id="modelsGrid">
-      <!-- Généré automatiquement par JavaScript -->
-    </div>
-
-  </section>
-
-
-
-  <!-- =======================================
-       NOUVEAUTÉS GREENBRIDGE
-  ======================================== -->
+  <!-- ================================================
+       LES NOUVEAUTÉS GREENBRIDGE
+  ================================================= -->
 
   <section class="new-products-section" id="nouveautes">
 
     <div class="new-intro">
 
       <span class="new-eyebrow">
-        COLLECTION EXCLUSIVE • GREENBRIDGE
+        COLLECTION EXCLUSIVE • MARQUE GREENBRIDGE
       </span>
 
-      <h2 class="new-main-title">
-        Nos <span>nouveautés</span> arrivent
-      </h2>
+      <h1 class="new-main-title">
+        Découvrez nos <span>nouveautés</span>
+      </h1>
 
       <p>
-        Découvrez quatre nouvelles créations développées par GreenBridge.
-        Des produits de notre marque, conçus et assemblés en interne,
-        avec une ambition : proposer des solutions énergétiques adaptées
-        aux besoins du quotidien.
+        Quatre nouvelles créations viennent enrichir l'univers
+        GreenBridge. Des produits développés pour répondre aux
+        besoins énergétiques du quotidien, conçus et assemblés
+        en interne par GreenBridge Technologies.
       </p>
 
       <div class="internal-manufacturing">
+
         <i class="fa-solid fa-industry"></i>
+
         CONCEPTION ET ASSEMBLAGE EN INTERNE
+
         <span>•</span>
-        MARQUE GREENBRIDGE
+
+        PRODUITS DE LA MARQUE GREENBRIDGE
+
       </div>
 
     </div>
 
-    <div class="new-products-grid" id="newProductsGrid">
-      <!-- Les quatre nouveautés sont générées en JavaScript -->
-    </div>
+
+    <!-- LES QUATRE CARTES SONT GÉNÉRÉES ICI -->
+
+    <div
+      class="new-products-grid"
+      id="newProductsGrid"
+    ></div>
 
   </section>
 
 
+  <!-- ================================================
+       NOS AUTRES MODÈLES
+  ================================================= -->
 
-  <!-- =======================================
+  <section
+    class="models-wrapper"
+    id="models"
+    role="region"
+    aria-label="Nos autres modèles"
+  >
+
+    <div class="section-heading">
+
+      <div class="models-title">
+        Nos autres produits
+      </div>
+
+    </div>
+
+    <div
+      class="models"
+      id="modelsGrid"
+      role="list"
+    ></div>
+
+  </section>
+
+
+  <!-- ================================================
        PROJETS À VENIR
-  ======================================== -->
+  ================================================= -->
 
   <div class="futures-title" id="futures">
 
@@ -1731,8 +1889,10 @@ footer {
 
   </div>
 
-
-  <section class="featured" aria-label="Pack 2.5 kWh — Solution modulaire">
+  <section
+    class="featured"
+    aria-label="Pack 2.5 kWh — Solution modulaire"
+  >
 
     <div class="featured-hero" id="featuredHero">
 
@@ -1760,7 +1920,10 @@ footer {
 
       <div style="margin-top:12px">
 
-        <span class="availability-badge">
+        <span
+          class="availability-badge"
+          id="availabilityBadge"
+        >
           Disponible 05/2026
         </span>
 
@@ -1785,13 +1948,17 @@ footer {
 </main>
 
 
-<!-- =========================================
-     WHATSAPP FLOTTANT
-========================================= -->
+<!-- ==================================================
+     BOUTON WHATSAPP FLOTTANT
+================================================== -->
 
 <div id="fab" class="fab" role="button" aria-label="Commander via WhatsApp">
 
-  <button id="fabButton" type="button" aria-label="Commander via WhatsApp">
+  <button
+    id="fabButton"
+    type="button"
+    aria-label="Commander via WhatsApp"
+  >
 
     <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
 
@@ -1800,15 +1967,28 @@ footer {
 </div>
 
 
-<!-- =========================================
+<!-- ==================================================
      FENÊTRE MODALE
-========================================= -->
+================================================== -->
 
-<div id="modalOverlay" class="modal-overlay" role="dialog" aria-hidden="true">
+<div
+  id="modalOverlay"
+  class="modal-overlay"
+  role="dialog"
+  aria-hidden="true"
+>
 
-  <div class="modal" role="document" aria-modal="true">
+  <div
+    class="modal"
+    role="document"
+    aria-modal="true"
+  >
 
-    <button class="close" aria-label="Fermer" onclick="closeModal()">
+    <button
+      class="close"
+      aria-label="Fermer"
+      onclick="closeModal()"
+    >
       ✕
     </button>
 
@@ -1819,9 +1999,9 @@ footer {
 </div>
 
 
-<!-- =========================================
+<!-- ==================================================
      PIED DE PAGE
-========================================= -->
+================================================== -->
 
 <footer>
 
@@ -1841,13 +2021,25 @@ footer {
     <img
       src="https://flagcdn.com/w80/ci.png"
       alt="Drapeau Côte d'Ivoire"
-      style="width:32px;height:22px;object-fit:cover;border-radius:4px;"
+      style="
+        width:32px;
+        height:22px;
+        object-fit:cover;
+        border-radius:4px;
+        box-shadow:0 4px 12px rgba(0,0,0,.28);
+      "
     >
 
     <img
       src="https://flagcdn.com/w80/sn.png"
       alt="Drapeau Sénégal"
-      style="width:32px;height:22px;object-fit:cover;border-radius:4px;"
+      style="
+        width:32px;
+        height:22px;
+        object-fit:cover;
+        border-radius:4px;
+        box-shadow:0 4px 12px rgba(0,0,0,.28);
+      "
     >
 
   </div>
@@ -1861,35 +2053,42 @@ footer {
 </footer>
 
 
-<!-- =========================================
-     JAVASCRIPT
-========================================= -->
+<!-- ==================================================
+     JAVASCRIPT COMPLET
+================================================== -->
 
 <script>
 
 /* =========================================
-   CONFIGURATION
+   1. CONFIGURATION
 ========================================= */
+
+const CONTACT_EMAIL = 'contact@greenbridge.com';
 
 const SURVEY_URL =
   'https://enquete-powerbank-ci-sn.netlify.app/';
 
 /*
-  Vérifier les numéros avant publication.
-  Format : indicatif du pays + numéro complet.
-  Pas de signe + ni d'espaces.
+  Remplacer le numéro ivoirien par le numéro complet.
+  Format international sans + et sans espaces.
 */
 
 const whatsappNumbers = {
-  coteivoire: '22507070707',
-  senegal: '221774015004'
+  senegal: '221774015004',
+  coteivoire: '22507070707'
 };
 
 let selectedWhatsAppProduct = '';
 
+let currentModel = 0;
+
+let modalCarouselImages = [];
+let modalCarouselIndex = 0;
+let modalCarouselTimer = null;
+
 
 /* =========================================
-   PRODUITS EXISTANTS
+   2. DONNÉES DES PRODUITS EXISTANTS
 ========================================= */
 
 const models = [
@@ -1913,7 +2112,7 @@ const models = [
       'Garantie : 3 ans'
     ],
     details:`
-      <p>
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
         <strong>GreenMini — 10 000 mAh</strong><br>
         Compact. Écran digital. Pensé pour le quotidien.
       </p>
@@ -1939,7 +2138,7 @@ const models = [
       'Garantie : 3 ans'
     ],
     details:`
-      <p>
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
         <strong>GreenCore — ≈ 9 000 mAh</strong><br>
         Type-C rapide. Simple. Fiable.
       </p>
@@ -1965,7 +2164,7 @@ const models = [
       'Garantie : 2 ans'
     ],
     details:`
-      <p>
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
         <strong>GreenPlus — ≈ 9 000 mAh</strong><br>
         Bonne autonomie. Usage simple.
       </p>
@@ -1989,7 +2188,7 @@ const models = [
       'Multi-appareils'
     ],
     details:`
-      <p>
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
         <strong>GreenPro — ≈ 12 000 mAh</strong><br>
         Plus de puissance. Plus de confort.
       </p>
@@ -2012,7 +2211,7 @@ const models = [
       'Usage intensif'
     ],
     details:`
-      <p>
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
         <strong>GreenWire — batterie testée</strong><br>
         Grande autonomie.
       </p>
@@ -2039,7 +2238,7 @@ const models = [
     ],
     outOfStock:true,
     details:`
-      <p>
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
         <strong>GreenWireless — 20 000 mAh</strong><br>
         Sans-fil. Amovible. Pratique.
       </p>
@@ -2049,7 +2248,7 @@ const models = [
   {
     id:'laptopcharger',
     title:'Chargeur PC Portable',
-    shortTitle:'Chargeur PC',
+    shortTitle:'Chargeur PC Portable',
     subtitle:'Charge rapide universelle',
     images:[
       'Chargeur_ordi_1.png'
@@ -2061,7 +2260,7 @@ const models = [
       'Bureau et déplacement'
     ],
     details:`
-      <p>
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
         <strong>Chargeur PC Portable</strong><br>
         Rapide et stable.
       </p>
@@ -2083,7 +2282,7 @@ const models = [
       'Maintien du WiFi'
     ],
     details:`
-      <p>
+      <p style="margin-top:0;color:#23403a;line-height:1.45">
         <strong>Stabilisateur WiFi</strong><br>
         Reste connecté.
       </p>
@@ -2094,7 +2293,7 @@ const models = [
 
 
 /* =========================================
-   QUATRE NOUVEAUTÉS GREENBRIDGE
+   3. QUATRE NOUVEAUTÉS GREENBRIDGE
 ========================================= */
 
 const newProducts = [
@@ -2106,14 +2305,16 @@ const newProducts = [
     capacity:'1 200 Wh',
     icon:'fa-battery-full',
     art:'new-art-battery',
-    description:'Solution de stockage énergétique rechargeable conçue pour les besoins d’autonomie et de secours électrique.',
+
+    description:
+      'Une solution de stockage énergétique développée pour répondre aux besoins d’autonomie et de secours électrique.',
+
     details:[
       'Technologie : LiFePO₄',
       'Capacité énergétique : 1 200 Wh',
       'Produit de la marque GreenBridge',
       'Conception et assemblage en interne'
-    ],
-    internal:true
+    ]
   },
 
   {
@@ -2123,14 +2324,16 @@ const newProducts = [
     capacity:'6 000 mAh',
     icon:'fa-bolt',
     art:'new-art-v1',
-    description:'Un format compact conçu pour accompagner les besoins de recharge au quotidien.',
+
+    description:
+      'Un powerbank compact, conçu pour accompagner les besoins de recharge au quotidien.',
+
     details:[
       'Modèle : GreenBridge V1',
       'Capacité nominale : 6 000 mAh',
-      'Marque : GreenBridge',
+      'Produit de la marque GreenBridge',
       'Conception et assemblage en interne'
-    ],
-    internal:true
+    ]
   },
 
   {
@@ -2140,14 +2343,16 @@ const newProducts = [
     capacity:'10 000 mAh',
     icon:'fa-battery-three-quarters',
     art:'new-art-v2',
-    description:'Une capacité supérieure pour accompagner vos appareils tout au long de la journée.',
+
+    description:
+      'Un powerbank pensé pour offrir davantage de capacité et accompagner les utilisateurs tout au long de la journée.',
+
     details:[
       'Modèle : GreenBridge V2',
       'Capacité nominale : 10 000 mAh',
-      'Marque : GreenBridge',
+      'Produit de la marque GreenBridge',
       'Conception et assemblage en interne'
-    ],
-    internal:true
+    ]
   },
 
   {
@@ -2157,21 +2362,23 @@ const newProducts = [
     capacity:'12 000 mAh',
     icon:'fa-battery-full',
     art:'new-art-v3',
-    description:'Un modèle à plus grande capacité pour les utilisateurs qui recherchent davantage d’autonomie.',
+
+    description:
+      'Un powerbank de capacité supérieure, conçu pour les utilisateurs qui recherchent davantage d’autonomie.',
+
     details:[
       'Modèle : GreenBridge V3',
       'Capacité nominale : 12 000 mAh',
-      'Marque : GreenBridge',
+      'Produit de la marque GreenBridge',
       'Conception et assemblage en interne'
-    ],
-    internal:true
+    ]
   }
 
 ];
 
 
 /* =========================================
-   ÉLÉMENTS HTML
+   4. ÉLÉMENTS HTML
 ========================================= */
 
 const modalOverlay =
@@ -2189,13 +2396,54 @@ const modelsGrid =
 const newProductsGrid =
   document.getElementById('newProductsGrid');
 
-let modalCarouselImages = [];
-let modalCarouselIndex = 0;
-let modalCarouselTimer = null;
+
+/* =========================================
+   5. PRÉCHARGEMENT DES IMAGES
+========================================= */
+
+function preloadImages(urls) {
+
+  urls.forEach(src => {
+
+    const img = new Image();
+
+    img.src = src;
+
+  });
+
+}
+
+function allImageUrls() {
+
+  const list = [
+
+    'Energie_blanche.png',
+    'background-tout.png',
+    'green bridge domo.png',
+    'Nos_produits_1.png',
+    'Future_Pack_1.png',
+    'Future_pack_2.1.png',
+    'Future_Pack_3.png'
+
+  ];
+
+  models.forEach(model => {
+
+    if (Array.isArray(model.images)) {
+
+      list.push(...model.images);
+
+    }
+
+  });
+
+  return [...new Set(list)];
+
+}
 
 
 /* =========================================
-   GÉNÉRATION DES CARTES EXISTANTES
+   6. AFFICHAGE DES PRODUITS EXISTANTS
 ========================================= */
 
 function renderModels() {
@@ -2212,18 +2460,22 @@ function renderModels() {
     >
 
       ${model.outOfStock ? `
+
         <span class="stock-badge model-stock-label">
           <i class="fa-solid fa-circle-exclamation"></i>
-          Rupture de stock
+          RUPTURE DE STOCK
         </span>
+
       ` : ''}
 
       <div class="thumb">
+
         <img
           src="${model.images[0]}"
           alt="${model.shortTitle}"
           loading="lazy"
         >
+
       </div>
 
       <div class="meta">
@@ -2241,13 +2493,17 @@ function renderModels() {
       <div class="model-actions">
 
         ${model.outOfStock ? `
-          <span style="font-size:10px;color:#a51d24;font-weight:900;">
+
+          <span class="model-status" style="color:#a51e27;">
             INDISPONIBLE
           </span>
+
         ` : `
-          <span style="font-size:10px;color:#315348;font-weight:700;">
+
+          <span class="model-status">
             Découvrir le produit
           </span>
+
         `}
 
         <button
@@ -2268,85 +2524,89 @@ function renderModels() {
 
 
 /* =========================================
-   GÉNÉRATION DES QUATRE NOUVEAUTÉS
+   7. AFFICHAGE DES QUATRE NOUVEAUTÉS
 ========================================= */
 
 function renderNewProducts() {
 
-  newProductsGrid.innerHTML =
-    newProducts.map((product,index) => `
+  newProductsGrid.innerHTML = newProducts.map((product,index) => `
 
-      <article class="new-product-card">
+    <article class="new-product-card">
 
-        <span class="new-badge">
-          <i class="fa-solid fa-star"></i>
-          NOUVEAUTÉ
+      <span class="new-badge">
+        <i class="fa-solid fa-star"></i>
+        NOUVEAUTÉ
+      </span>
+
+      <div class="new-art ${product.art}">
+
+        <i class="fa-solid ${product.icon}"></i>
+
+      </div>
+
+      <div class="new-product-type">
+        ${product.category}
+      </div>
+
+      <h3 class="new-product-name">
+        ${product.name}
+      </h3>
+
+      <div class="new-product-capacity">
+        ${product.capacity}
+      </div>
+
+      <div class="new-product-description">
+        ${product.description}
+      </div>
+
+      <div class="product-origin">
+
+        <i class="fa-solid fa-circle-check"></i>
+
+        <span>
+          CONÇU ET ASSEMBLÉ EN INTERNE
+          <br>
+          MARQUE GREENBRIDGE
         </span>
 
-        <div class="new-art ${product.art}">
+      </div>
 
-          <i class="fa-solid ${product.icon}"></i>
+      <button
+        type="button"
+        class="new-product-button"
+        onclick="openNewProductModal(${index})"
+      >
+        DÉCOUVRIR CE PRODUIT
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
 
-        </div>
+    </article>
 
-        <div class="new-product-type">
-          ${product.category}
-        </div>
-
-        <h3 class="new-product-name">
-          ${product.name}
-        </h3>
-
-        <div class="new-product-capacity">
-          ${product.capacity}
-        </div>
-
-        <div class="new-product-description">
-          ${product.description}
-        </div>
-
-        <div class="product-origin">
-          <i class="fa-solid fa-circle-check"></i>
-
-          <span>
-            CONÇU ET ASSEMBLÉ EN INTERNE
-            <br>
-            MARQUE GREENBRIDGE
-          </span>
-        </div>
-
-        <button
-          type="button"
-          class="new-product-button"
-          onclick="openNewProductModal(${index})"
-        >
-          DÉCOUVRIR CE PRODUIT
-          <i class="fa-solid fa-arrow-right"></i>
-        </button>
-
-      </article>
-
-    `).join('');
+  `).join('');
 
 }
 
 
 /* =========================================
-   CARROUSEL
+   8. CARROUSEL DES PHOTOS
 ========================================= */
 
 function stopModalCarousel() {
 
   if (modalCarouselTimer) {
+
     clearInterval(modalCarouselTimer);
+
     modalCarouselTimer = null;
+
   }
 
   modalCarouselImages = [];
+
   modalCarouselIndex = 0;
 
 }
-
 
 function updateModalCarousel() {
 
@@ -2369,20 +2629,25 @@ function updateModalCarousel() {
     modalCarouselImages[idx];
 
   img.style.opacity = '0.2';
+  img.style.transform = 'scale(1.02)';
 
   setTimeout(() => {
 
     img.onload = () => {
+
       img.style.opacity = '1';
       img.style.transform = 'scale(1)';
+
     };
 
     img.src = current.src;
     img.alt = current.alt;
 
     if (img.complete) {
+
       img.style.opacity = '1';
       img.style.transform = 'scale(1)';
+
     }
 
   },60);
@@ -2404,7 +2669,6 @@ function updateModalCarousel() {
 
 }
 
-
 function goModalCarousel(index) {
 
   if (!modalCarouselImages.length) return;
@@ -2416,7 +2680,6 @@ function goModalCarousel(index) {
   updateModalCarousel();
 
 }
-
 
 function nextModalCarousel() {
 
@@ -2430,7 +2693,6 @@ function nextModalCarousel() {
 
 }
 
-
 function prevModalCarousel() {
 
   if (!modalCarouselImages.length) return;
@@ -2442,7 +2704,6 @@ function prevModalCarousel() {
   updateModalCarousel();
 
 }
-
 
 function startModalCarousel(images) {
 
@@ -2456,7 +2717,9 @@ function startModalCarousel(images) {
   if (modalCarouselImages.length > 1) {
 
     modalCarouselTimer = setInterval(() => {
+
       nextModalCarousel();
+
     },3000);
 
   }
@@ -2465,7 +2728,7 @@ function startModalCarousel(images) {
 
 
 /* =========================================
-   GESTION DES FENÊTRES
+   9. OUVERTURE ET FERMETURE DES MODALES
 ========================================= */
 
 function openModal(html) {
@@ -2479,7 +2742,6 @@ function openModal(html) {
   document.body.classList.add('no-scroll');
 
 }
-
 
 function closeModal() {
 
@@ -2495,7 +2757,7 @@ function closeModal() {
 
 
 /* =========================================
-   FICHE DES PRODUITS EXISTANTS
+   10. FICHES TECHNIQUES DES PRODUITS
 ========================================= */
 
 function openTechModal(index) {
@@ -2505,7 +2767,7 @@ function openTechModal(index) {
 
   const images =
     model.images.map(src => ({
-      src,
+      src:src,
       alt:model.title
     }));
 
@@ -2546,25 +2808,35 @@ function openTechModal(index) {
 
       </div>
 
-      <div id="modalCarouselDots" class="carousel-dots"></div>
+      <div
+        class="carousel-dots"
+        id="modalCarouselDots"
+      ></div>
 
     </div>
 
   ` : '';
 
+  const stockHtml = model.outOfStock ? `
+
+    <div class="stock-badge" style="margin-bottom:12px;">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      RUPTURE DE STOCK
+    </div>
+
+    <p style="color:#a51e27;font-size:12px;font-weight:700;">
+      Ce produit est actuellement indisponible.
+    </p>
+
+  ` : '';
+
   const html = `
 
-    <h2>${model.title}</h2>
+    <h2 style="margin-top:0">
+      ${model.title}
+    </h2>
 
-    ${model.outOfStock ? `
-      <div class="stock-badge" style="margin-bottom:12px;">
-        <i class="fa-solid fa-circle-exclamation"></i>
-        RUPTURE DE STOCK
-      </div>
-      <p style="color:#a51d24;font-size:12px;font-weight:700;">
-        Ce produit est actuellement indisponible.
-      </p>
-    ` : ''}
+    ${stockHtml}
 
     ${carouselHtml}
 
@@ -2572,12 +2844,12 @@ function openTechModal(index) {
 
       ${model.details}
 
-      <div style="margin-top:12px;font-weight:800;">
+      <div style="margin-top:12px;font-weight:800">
         Caractéristiques rapides
       </div>
 
       <ul>
-        ${(model.specs || []).map(s => `<li>${s}</li>`).join('')}
+        ${(model.specs || []).map(spec => `<li>${spec}</li>`).join('')}
       </ul>
 
     </div>
@@ -2592,7 +2864,7 @@ function openTechModal(index) {
 
 
 /* =========================================
-   FICHE DES NOUVEAUTÉS
+   11. FICHES DES NOUVEAUTÉS GREENBRIDGE
 ========================================= */
 
 function openNewProductModal(index) {
@@ -2605,11 +2877,11 @@ function openNewProductModal(index) {
   const html = `
 
     <div style="
-      margin-bottom:10px;
-      color:#9a781f;
+      color:#98751e;
       font-size:10px;
-      letter-spacing:1px;
       font-weight:900;
+      letter-spacing:1px;
+      margin-bottom:8px;
     ">
       <i class="fa-solid fa-star"></i>
       NOUVEAUTÉ GREENBRIDGE
@@ -2631,7 +2903,7 @@ function openNewProductModal(index) {
       <i class="fa-solid ${product.icon}" style="font-size:52px;"></i>
 
       <div style="
-        font-size:22px;
+        font-size:23px;
         font-weight:900;
         margin-top:10px;
       ">
@@ -2656,7 +2928,7 @@ function openNewProductModal(index) {
       </p>
 
       <h4 style="color:#073217;">
-        Caractéristiques et informations
+        Informations sur le produit
       </h4>
 
       <ul>
@@ -2668,8 +2940,8 @@ function openNewProductModal(index) {
         padding:12px;
         border-radius:10px;
         color:#07502e;
-        font-weight:800;
         font-size:12px;
+        font-weight:800;
         margin-top:12px;
       ">
 
@@ -2687,10 +2959,10 @@ function openNewProductModal(index) {
           width:100%;
           margin-top:15px;
           padding:13px;
-          border:none;
+          border:0;
           border-radius:9px;
           background:#07502e;
-          color:white;
+          color:#fff;
           font-weight:900;
           font-size:12px;
           cursor:pointer;
@@ -2698,6 +2970,7 @@ function openNewProductModal(index) {
       >
 
         <i class="fa-brands fa-whatsapp"></i>
+
         DEMANDER DES INFORMATIONS
 
       </button>
@@ -2712,22 +2985,33 @@ function openNewProductModal(index) {
 
 
 /* =========================================
-   INFORMATIONS PACK 2.5 KWH
+   12. INFORMATIONS PACK 2.5 KWH
 ========================================= */
 
 function openPackModal() {
 
   const packImages = [
 
-    {src:'Future_Pack_1.png',alt:'Pack vue 1'},
-    {src:'Future_pack_2.1.png',alt:'Pack vue 2'},
-    {src:'Future_Pack_3.png',alt:'Pack vue 3'}
+    {
+      src:'Future_Pack_1.png',
+      alt:'Pack vue 1'
+    },
+
+    {
+      src:'Future_pack_2.1.png',
+      alt:'Pack vue 2'
+    },
+
+    {
+      src:'Future_Pack_3.png',
+      alt:'Pack vue 3'
+    }
 
   ];
 
   const html = `
 
-    <h2>
+    <h2 style="margin-top:0">
       Pack modulaire 2.5 kWh — GreenBridge
     </h2>
 
@@ -2739,15 +3023,24 @@ function openPackModal() {
           id="modalCarouselImage"
           src="${packImages[0].src}"
           alt="${packImages[0].alt}"
+          loading="eager"
         >
 
         <div class="modal-carousel-controls">
 
-          <button class="carousel-btn" onclick="prevModalCarousel()" type="button">
+          <button
+            class="carousel-btn"
+            type="button"
+            onclick="prevModalCarousel()"
+          >
             <i class="fa-solid fa-chevron-left"></i>
           </button>
 
-          <button class="carousel-btn" onclick="nextModalCarousel()" type="button">
+          <button
+            class="carousel-btn"
+            type="button"
+            onclick="nextModalCarousel()"
+          >
             <i class="fa-solid fa-chevron-right"></i>
           </button>
 
@@ -2755,7 +3048,10 @@ function openPackModal() {
 
       </div>
 
-      <div id="modalCarouselDots" class="carousel-dots"></div>
+      <div
+        class="carousel-dots"
+        id="modalCarouselDots"
+      ></div>
 
     </div>
 
@@ -2764,15 +3060,27 @@ function openPackModal() {
       <p>
         Le pack modulaire 2.5 kWh a été conçu pour le Sénégal
         et l'Afrique de l'Ouest. Basé sur des cellules
-        LiFePO₄ prismatiques, il est pensé pour le stockage
-        médical, les PME, l'agriculture et l'élevage.
+        LiFePO₄ prismatiques, il est modulaire, réparable localement
+        et adapté au stockage médical, aux PME, à l'agriculture
+        et à l'élevage.
       </p>
 
       <ul>
-        <li>Recharge par secteur et panneau solaire.</li>
-        <li>Alimentation des appareils essentiels.</li>
-        <li>Déploiement hors réseau.</li>
-        <li>Solution adaptée aux usages professionnels.</li>
+
+        <li>Recharge par prise secteur et par panneau solaire.</li>
+
+        <li>
+          Alimentation des appareils essentiels.
+        </li>
+
+        <li>
+          Déploiement simple hors réseau.
+        </li>
+
+        <li>
+          Adapté aux usages agricoles et professionnels.
+        </li>
+
       </ul>
 
       <button
@@ -2795,7 +3103,7 @@ function openPackModal() {
 
 
 /* =========================================
-   WHATSAPP — CHOIX DU PAYS
+   13. WHATSAPP : CHOIX DU PAYS
 ========================================= */
 
 function openCountryModal(productLabel = '') {
@@ -2804,31 +3112,40 @@ function openCountryModal(productLabel = '') {
 
   const html = `
 
-    <h2 style="margin:0 35px 7px 0;">
+    <h2 style="
+      margin:0 36px 7px 0;
+      font-size:18px;
+      color:#08110a;
+    ">
       Contacter GreenBridge
     </h2>
 
     <p style="
-      color:#315348;
-      font-size:13px;
-      line-height:1.5;
       margin:0;
+      color:#315348;
+      line-height:1.5;
+      font-size:13px;
     ">
-      Sélectionnez votre pays pour échanger avec notre équipe commerciale.
+      Choisissez votre pays pour échanger directement
+      avec notre équipe commerciale.
     </p>
 
     ${productLabel ? `
+
       <div style="
-        margin-top:10px;
-        padding:9px 11px;
+        margin-top:12px;
+        padding:10px 12px;
         border-radius:8px;
         background:#eef5e9;
         color:#07502e;
         font-size:12px;
         font-weight:800;
       ">
-        Produit : ${productLabel}
+
+        Produit sélectionné : ${productLabel}
+
       </div>
+
     ` : ''}
 
     <div class="whatsapp-choice">
@@ -2842,22 +3159,36 @@ function openCountryModal(productLabel = '') {
         <div class="top">
 
           <div class="flag">
-            <img src="https://flagcdn.com/w80/ci.png" alt="Côte d'Ivoire">
+
+            <img
+              src="https://flagcdn.com/w80/ci.png"
+              alt="Côte d'Ivoire"
+            >
+
           </div>
 
           <div>
+
             <h4>Côte d'Ivoire</h4>
-            <p>Service commercial GreenBridge CI.</p>
+
+            <p>
+              Service commercial GreenBridge CI.
+            </p>
+
           </div>
 
         </div>
 
         <div class="go">
+
           <i class="fa-brands fa-whatsapp"></i>
+
           Continuer sur WhatsApp
+
         </div>
 
       </button>
+
 
       <button
         class="whatsapp-card"
@@ -2868,30 +3199,43 @@ function openCountryModal(productLabel = '') {
         <div class="top">
 
           <div class="flag">
-            <img src="https://flagcdn.com/w80/sn.png" alt="Sénégal">
+
+            <img
+              src="https://flagcdn.com/w80/sn.png"
+              alt="Sénégal"
+            >
+
           </div>
 
           <div>
+
             <h4>Sénégal</h4>
-            <p>Service commercial GreenBridge Sénégal.</p>
+
+            <p>
+              Service commercial GreenBridge Sénégal.
+            </p>
+
           </div>
 
         </div>
 
         <div class="go">
+
           <i class="fa-brands fa-whatsapp"></i>
+
           Continuer sur WhatsApp
+
         </div>
 
       </button>
 
     </div>
 
-    <div style="margin-top:12px;text-align:right;">
+    <div style="margin-top:12px;text-align:right">
 
       <button
-        class="btn-small"
         type="button"
+        class="btn-small"
         onclick="closeModal()"
       >
         Fermer
@@ -2907,7 +3251,7 @@ function openCountryModal(productLabel = '') {
 
 
 /* =========================================
-   WHATSAPP — PRODUIT SÉLECTIONNÉ
+   14. WHATSAPP : PRODUIT SÉLECTIONNÉ
 ========================================= */
 
 function openCountryModalForProduct(index) {
@@ -2926,7 +3270,7 @@ function openCountryModalForProduct(index) {
 
 
 /* =========================================
-   WHATSAPP — ENVOI
+   15. WHATSAPP : ENVOI DU MESSAGE
 ========================================= */
 
 function sendWhatsApp(country) {
@@ -2936,7 +3280,7 @@ function sendWhatsApp(country) {
 
   if (!number) {
 
-    alert('Numéro WhatsApp non configuré.');
+    alert('Le numéro WhatsApp de ce pays n’est pas configuré.');
 
     return;
 
@@ -2970,7 +3314,11 @@ Cordialement.`;
     '?text=' +
     encodeURIComponent(message);
 
-  window.open(url,'_blank','noopener,noreferrer');
+  window.open(
+    url,
+    '_blank',
+    'noopener,noreferrer'
+  );
 
   closeModal();
 
@@ -2978,19 +3326,22 @@ Cordialement.`;
 
 
 /* =========================================
-   SÉLECTION D'UN PRODUIT EXISTANT
+   16. SÉLECTION D'UN PRODUIT
 ========================================= */
 
 function selectModel(index) {
 
-  models.forEach((model,i) => {
+  currentModel = index;
 
-    const card =
-      modelsGrid.children[i];
+  const cards =
+    modelsGrid.querySelectorAll('.model');
 
-    if (card) {
-      card.classList.toggle('active',i === index);
-    }
+  cards.forEach((card,i) => {
+
+    card.classList.toggle(
+      'active',
+      i === index
+    );
 
   });
 
@@ -3000,7 +3351,7 @@ function selectModel(index) {
 
 
 /* =========================================
-   ACTIVATION WHATSAPP FLOTTANT
+   17. CORRECTION DU BOUTON WHATSAPP FLOTTANT
 ========================================= */
 
 if (fabButton) {
@@ -3017,13 +3368,15 @@ if (fabButton) {
 
 
 /* =========================================
-   FERMETURE MODALE
+   18. FERMETURE DES MODALES
 ========================================= */
 
 modalOverlay.addEventListener('click',function(event) {
 
   if (event.target === modalOverlay) {
+
     closeModal();
+
   }
 
 });
@@ -3031,14 +3384,16 @@ modalOverlay.addEventListener('click',function(event) {
 document.addEventListener('keydown',function(event) {
 
   if (event.key === 'Escape') {
+
     closeModal();
+
   }
 
 });
 
 
 /* =========================================
-   ANNÉE AUTOMATIQUE
+   19. ANNÉE AUTOMATIQUE
 ========================================= */
 
 document.getElementById('year').textContent =
@@ -3046,7 +3401,7 @@ document.getElementById('year').textContent =
 
 
 /* =========================================
-   INITIALISATION DES CARTES
+   20. INITIALISATION DES CARTES
 ========================================= */
 
 renderModels();
@@ -3055,48 +3410,16 @@ renderNewProducts();
 
 
 /* =========================================
-   PRÉCHARGEMENT DES IMAGES
+   21. PRÉCHARGEMENT DES IMAGES
 ========================================= */
-
-function preloadImages(urls) {
-
-  urls.forEach(src => {
-
-    const image = new Image();
-
-    image.src = src;
-
-  });
-
-}
-
-function allImageUrls() {
-
-  const list = [
-    'Energie_blanche.png',
-    'background-tout.png',
-    'green bridge domo.png',
-    'Future_Pack_1.png',
-    'Future_pack_2.1.png',
-    'Future_Pack_3.png'
-  ];
-
-  models.forEach(model => {
-    if (Array.isArray(model.images)) {
-      list.push(...model.images);
-    }
-  });
-
-  return [...new Set(list)];
-
-}
 
 preloadImages(allImageUrls());
 
 
-/* =========================================
-   ANIMATION ÉLECTRIQUE
-========================================= */
+/* =====================================================
+   22. ANIMATION ÉLECTRIQUE ORIGINALE
+   LES TROIS BOULES D'ÉNERGIE SONT CONSERVÉES
+===================================================== */
 
 (function() {
 
@@ -3105,28 +3428,60 @@ preloadImages(allImageUrls());
 
   if (!electricBand) return;
 
+  const orbA =
+    document.getElementById('orbA');
+
+  const orbB =
+    document.getElementById('orbB');
+
+  const orbC =
+    document.getElementById('orbC');
+
   const orbs = [
-    document.getElementById('orbA'),
-    document.getElementById('orbB'),
-    document.getElementById('orbC')
+    orbA,
+    orbB,
+    orbC
   ];
 
   const params = [
 
-    {rxRatio:.50,ry:8,speed:.22,phase:0},
-    {rxRatio:.33,ry:6,speed:.36,phase:Math.PI/2},
-    {rxRatio:.42,ry:10,speed:.18,phase:Math.PI}
+    {
+      rxRatio:0.50,
+      ry:8,
+      speed:0.22,
+      phase:0
+    },
+
+    {
+      rxRatio:0.33,
+      ry:6,
+      speed:0.36,
+      phase:Math.PI/2
+    },
+
+    {
+      rxRatio:0.42,
+      ry:10,
+      speed:0.18,
+      phase:Math.PI
+    }
 
   ];
 
-  orbs.forEach((orb,index) => {
+
+  orbs.forEach((orb,i) => {
 
     if (orb) {
+
       orb.classList.add('buzz');
-      orb.style.animationDelay = (index * 120) + 'ms';
+
+      orb.style.animationDelay =
+        (i * 120) + 'ms';
+
     }
 
   });
+
 
   let t0 = performance.now();
 
@@ -3135,51 +3490,62 @@ preloadImages(allImageUrls());
     const time =
       (now - t0) / 1000;
 
-    const container =
+    const cont =
       electricBand.querySelector('.container');
 
-    if (container) {
+    if (!cont) {
 
-      const rect =
-        container.getBoundingClientRect();
+      requestAnimationFrame(tick);
 
-      const cx =
-        rect.width / 2;
+      return;
 
-      const cy =
-        rect.height / 2;
+    }
 
-      for (let i=0;i<orbs.length;i++) {
+    const rect =
+      cont.getBoundingClientRect();
 
-        const orb =
-          orbs[i];
+    const cx =
+      rect.width / 2;
 
-        if (!orb) continue;
+    const cy =
+      rect.height / 2;
 
-        const p =
-          params[i];
 
-        const rx = Math.max(
-          Math.min(rect.width * p.rxRatio,4000),
-          120
-        );
+    for (let i=0;i<orbs.length;i++) {
 
-        const angle =
-          time * p.speed * Math.PI * 2 + p.phase;
+      const orb =
+        orbs[i];
 
-        const x =
-          cx + Math.cos(angle) * rx;
+      if (!orb) continue;
 
-        const y =
-          cy + Math.sin(angle) * p.ry;
+      const p =
+        params[i];
 
-        orb.style.left =
-          x + 'px';
+      const rx = Math.max(
+        Math.min(rect.width * p.rxRatio,4000),
+        120
+      );
 
-        orb.style.top =
-          y + 'px';
+      const ry =
+        p.ry;
 
-      }
+      const angle =
+        (time * p.speed * Math.PI * 2) + p.phase;
+
+      const x =
+        cx + Math.cos(angle) * rx;
+
+      const y =
+        cy + Math.sin(angle) * ry;
+
+      orb.style.left =
+        x + 'px';
+
+      orb.style.top =
+        y + 'px';
+
+      orb.style.transform =
+        'translate(-50%,-50%)';
 
     }
 
@@ -3190,45 +3556,48 @@ preloadImages(allImageUrls());
   requestAnimationFrame(tick);
 
 
+  /* ANIMATION DE L'ÉCLAIR */
+
   function sparkSVG() {
 
-    const zap =
+    const zapBright =
       document.getElementById('zapBright');
 
-    if (!zap) return;
+    if (!zapBright) return;
 
     try {
 
-      const length =
-        zap.getTotalLength();
+      const len =
+        zapBright.getTotalLength();
 
-      zap.style.transition = 'none';
+      zapBright.style.transition =
+        'none';
 
-      zap.setAttribute(
+      zapBright.setAttribute(
         'stroke-dasharray',
-        String(length)
+        String(len)
       );
 
-      zap.setAttribute(
+      zapBright.setAttribute(
         'stroke-dashoffset',
-        String(length)
+        String(len)
       );
 
       setTimeout(() => {
 
-        zap.style.transition =
-          'stroke-dashoffset 380ms ease-out';
+        zapBright.style.transition =
+          'stroke-dashoffset 380ms ease-out, opacity 160ms';
 
-        zap.setAttribute(
+        zapBright.setAttribute(
           'stroke-dashoffset',
           '0'
         );
 
         setTimeout(() => {
 
-          zap.setAttribute(
+          zapBright.setAttribute(
             'stroke-dashoffset',
-            String(length)
+            String(len)
           );
 
         },320);
@@ -3236,69 +3605,118 @@ preloadImages(allImageUrls());
       },60);
 
     } catch(error) {
-      console.warn('Animation électrique indisponible.');
-    }
 
-  }
+      zapBright.setAttribute(
+        'stroke-dasharray',
+        '520'
+      );
 
-
-  function spawnSparks() {
-
-    const container =
-      electricBand.querySelector('.container');
-
-    if (!container) return;
-
-    for (let i=0;i<10;i++) {
-
-      const spark =
-        document.createElement('div');
-
-      spark.style.position = 'absolute';
-      spark.style.left = (3 + Math.random()*94) + '%';
-      spark.style.top = (20 + Math.random()*50) + '%';
-      spark.style.width = '2px';
-      spark.style.height = (8 + Math.random()*22) + 'px';
-      spark.style.borderRadius = '2px';
-
-      spark.style.background =
-        'linear-gradient(180deg,rgba(255,246,180,1),rgba(255,214,0,.95))';
-
-      spark.style.filter = 'blur(6px)';
-      spark.style.opacity = '0';
-      spark.style.transform = 'translateY(6px)';
-      spark.style.pointerEvents = 'none';
-
-      container.appendChild(spark);
+      zapBright.setAttribute(
+        'stroke-dashoffset',
+        '520'
+      );
 
       setTimeout(() => {
 
-        spark.style.transition = 'all 260ms ease-out';
-        spark.style.opacity = '.8';
-        spark.style.transform = 'translateY(0)';
+        zapBright.style.transition =
+          'stroke-dashoffset 360ms ease-out';
 
-        setTimeout(() => {
+        zapBright.setAttribute(
+          'stroke-dashoffset',
+          '0'
+        );
 
-          spark.style.opacity = '0';
-          spark.style.transform = 'translateY(-8px)';
-
-          setTimeout(() => {
-            if (spark.parentNode) {
-              spark.remove();
-            }
-          },320);
-
-        },200);
-
-      },i*28);
+      },80);
 
     }
 
   }
 
+
+  /* PETITES ÉTINCELLES */
+
+  function spawnSparks() {
+
+    const cont =
+      electricBand.querySelector('.container');
+
+    if (!cont) return;
+
+    for (let i=0;i<10;i++) {
+
+      const s =
+        document.createElement('div');
+
+      s.style.position = 'absolute';
+
+      s.style.left =
+        (3 + Math.random() * 94) + '%';
+
+      s.style.top =
+        (20 + Math.random() * 50) + '%';
+
+      s.style.width = '2px';
+
+      s.style.height =
+        (8 + Math.random() * 22) + 'px';
+
+      s.style.borderRadius = '2px';
+
+      s.style.background =
+        'linear-gradient(180deg,rgba(255,246,180,1),rgba(255,214,0,.95))';
+
+      s.style.filter = 'blur(6px)';
+
+      s.style.opacity = '0';
+
+      s.style.transform = 'translateY(6px)';
+
+      s.style.pointerEvents = 'none';
+
+      s.style.zIndex = '1';
+
+      cont.appendChild(s);
+
+      setTimeout(() => {
+
+        s.style.transition =
+          'all 260ms ease-out';
+
+        s.style.opacity = '0.8';
+
+        s.style.transform =
+          'translateY(0px)';
+
+        setTimeout(() => {
+
+          s.style.opacity = '0';
+
+          s.style.transform =
+            'translateY(-8px)';
+
+          setTimeout(() => {
+
+            if (s.parentNode) {
+              s.parentNode.removeChild(s);
+            }
+
+          },320);
+
+        },180 + Math.random() * 120);
+
+      },i * 28);
+
+    }
+
+  }
+
+
   setInterval(() => {
+
     sparkSVG();
+
     spawnSparks();
+
   },2400);
 
 })();
