@@ -85,6 +85,7 @@
   img{max-width:100%;display:block}
   button{font-family:inherit}
 
+  /* FOND D'ORIGINE CONSERVÉ */
   .page-bg{
     position:fixed;
     inset:0;
@@ -249,7 +250,7 @@
     }
   }
 
-  /* Bande d'ouverture : ligne indépendante, sur toute la largeur */
+  /* BANDE D'OUVERTURE ENTRE TOPBAR ET LOGO */
   .opening-strip{
     position:fixed;
     top:var(--topbar-h);
@@ -261,7 +262,7 @@
     display:flex;
     align-items:center;
     overflow:hidden;
-    background:linear-gradient(90deg,#087a40 0%,#0da653 48%,#087a40 100%);
+    background:linear-gradient(90deg,#087a40 0%,#12a85d 50%,#087a40 100%);
     border-top:1px solid #f4d35e;
     border-bottom:1px solid #f4d35e;
     box-shadow:0 4px 12px rgba(0,0,0,.24);
@@ -313,12 +314,7 @@
     text-shadow:0 2px 5px rgba(0,0,0,.35);
     text-transform:uppercase;
   }
-  .opening-strip-separator{
-    color:#ffe36b;
-    font-size:18px;
-    font-weight:900;
-    line-height:1;
-  }
+  .opening-strip-separator{color:#ffe36b;font-size:18px;font-weight:900;line-height:1}
   @keyframes openingFullScroll{
     from{transform:translateX(0)}
     to{transform:translateX(-33.333333%)}
@@ -333,7 +329,7 @@
     background:linear-gradient(90deg,var(--green-mid),var(--green-mid-2));
     display:flex;
     align-items:center;
-    justify-content:center;
+    justify-content:space-between;
     gap:10px;
     padding:0 5vw;
     z-index:1490;
@@ -648,22 +644,92 @@
   .model .meta p small{display:block;color:rgba(2,17,10,0.88);font-weight:500;margin-top:4px}
   .btn-small{background:transparent;border:1px solid rgba(6,42,32,0.06);padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:700;color:#08110a}
 
-
-  .new-products-section{margin:18px 0 28px;padding:18px 12px 16px;border-radius:16px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);box-shadow:0 12px 30px rgba(0,0,0,.10)}
+  /* CARTES NOUVEAUTÉS */
+  .new-products-section{
+    margin:18px 0 28px;
+    padding:18px 12px 16px;
+    border-radius:16px;
+    background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.18);
+    box-shadow:0 12px 30px rgba(0,0,0,.10);
+  }
   .new-products-heading{display:flex;justify-content:center;align-items:center;margin-bottom:14px}
-  .new-products-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;max-width:var(--maxw);margin:0 auto}
-  .new-product-card{position:relative;display:flex;flex-direction:column;align-items:center;gap:10px;min-height:220px;padding:18px 14px;border-radius:14px;background:rgba(255,255,255,.96);color:#10251a;text-align:center;box-shadow:0 10px 24px rgba(0,0,0,.12);border:1px solid rgba(212,175,55,.42)}
-  .new-product-badge{padding:5px 10px;border-radius:999px;background:linear-gradient(90deg,#ffe36b,#ffc928);color:#173b20;font-size:10px;font-weight:900;letter-spacing:.8px}
-  .new-product-icon{width:58px;height:58px;display:flex;align-items:center;justify-content:center;border-radius:16px;background:linear-gradient(145deg,#e7f7e9,#c4ebc8);color:#087a40;font-size:28px;box-shadow:inset 0 0 0 1px rgba(4,70,46,.08)}
-  .new-product-card h3{margin:0;color:#06462e;font-size:16px;font-weight:900;line-height:1.25}
-  .new-product-card p{margin:0;color:#355346;font-size:12px;line-height:1.45}
-  .new-product-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin-top:auto}
-  .new-product-actions button{border:0;border-radius:8px;padding:8px 10px;font-family:inherit;font-size:11px;font-weight:800;cursor:pointer}
+  .new-products-grid{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:14px;
+    max-width:var(--maxw);
+    margin:0 auto;
+  }
+  .new-product-card{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+    min-width:0;
+    min-height:235px;
+    padding:18px 14px;
+    border-radius:14px;
+    background:rgba(255,255,255,.96);
+    color:#10251a;
+    text-align:center;
+    box-shadow:0 10px 24px rgba(0,0,0,.12);
+    border:1px solid rgba(212,175,55,.42);
+    overflow:hidden;
+  }
+  .new-product-badge{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:5px 10px;
+    border-radius:999px;
+    background:linear-gradient(90deg,#ffe36b,#ffc928);
+    color:#173b20;
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:.8px;
+  }
+  .new-product-icon{
+    width:58px;
+    height:58px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:16px;
+    background:linear-gradient(145deg,#e7f7e9,#c4ebc8);
+    color:#087a40;
+    font-size:28px;
+    box-shadow:inset 0 0 0 1px rgba(4,70,46,.08);
+    flex:0 0 auto;
+  }
+  .new-product-card h3{margin:0;color:#06462e;font-size:16px;font-weight:900;line-height:1.25;overflow-wrap:anywhere}
+  .new-product-card p{margin:0;color:#355346;font-size:12px;line-height:1.5;overflow-wrap:anywhere}
+  .new-product-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin-top:auto;width:100%}
+  .new-product-actions button{border:0;border-radius:8px;padding:9px 11px;font-family:inherit;font-size:11px;font-weight:800;cursor:pointer;max-width:100%}
   .new-info-btn{background:#e7f4e9;color:#06462e}
   .new-order-btn{background:#25D366;color:#fff}
   .stock-badge{display:inline-flex;align-items:center;gap:5px;margin-top:7px;padding:5px 9px;border-radius:999px;background:#c62828;color:#fff;font-size:10px;font-weight:900;letter-spacing:.5px}
-  @media(max-width:900px){.new-products-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-  @media(max-width:480px){.new-products-section{padding:14px 8px}.new-products-grid{gap:9px}.new-product-card{padding:14px 9px;min-height:230px}.new-product-card h3{font-size:14px}.new-product-card p{font-size:11px}.new-product-icon{width:50px;height:50px;font-size:24px}}
+
+  @media(max-width:900px){
+    .new-products-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  }
+  @media(max-width:640px){
+    .new-products-section{margin:14px 0 22px;padding:14px 10px}
+    .new-products-grid{grid-template-columns:minmax(0,1fr);gap:12px;width:100%}
+    .new-product-card{width:100%;min-height:0;padding:16px 14px;gap:9px}
+    .new-product-card h3{font-size:16px}
+    .new-product-card p{font-size:13px;line-height:1.5;max-width:34rem}
+    .new-product-icon{width:52px;height:52px;font-size:25px}
+    .new-product-actions{gap:8px}
+    .new-product-actions button{font-size:12px;padding:9px 12px}
+  }
+  @media(max-width:380px){
+    .new-products-section{padding:12px 8px}
+    .new-product-card{padding:14px 10px}
+    .new-product-card h3{font-size:15px}
+    .new-product-card p{font-size:12px}
+  }
 
   .futures-title{display:flex;align-items:center;justify-content:center;margin-top:24px;margin-bottom:10px}
   .futures-title .models-title{padding:8px 14px}
@@ -949,6 +1015,7 @@
 </head>
 <body>
 
+<!-- ARRIÈRE-PLAN ORIGINAL : NE PAS RENOMMER CE FICHIER -->
 <img class="page-bg" src="Energie_blanche.png" alt="" aria-hidden="true">
 <div class="page-bg-overlay" aria-hidden="true"></div>
 
@@ -969,27 +1036,27 @@
 <div class="opening-strip" role="region" aria-label="Annonce de l'ouverture du bureau physique">
   <div class="opening-strip-track">
     <div class="opening-strip-group" aria-hidden="true">
-      <span class="opening-strip-title">Ouverture du bureau physique</span>
+      <span class="opening-strip-title">OUVERTURE DU BUREAU PHYSIQUE</span>
       <span class="opening-strip-separator">✦</span>
       <span class="opening-strip-date">1er JANVIER 2027</span>
       <span class="opening-strip-separator">✦</span>
-      <span class="opening-strip-location">En face de China Mart, Abatta – Abidjan</span>
+      <span class="opening-strip-location">EN FACE DE CHINA MART, ABATTA – ABIDJAN</span>
       <span class="opening-strip-separator">✦</span>
     </div>
     <div class="opening-strip-group" aria-hidden="true">
-      <span class="opening-strip-title">Ouverture du bureau physique</span>
+      <span class="opening-strip-title">OUVERTURE DU BUREAU PHYSIQUE</span>
       <span class="opening-strip-separator">✦</span>
       <span class="opening-strip-date">1er JANVIER 2027</span>
       <span class="opening-strip-separator">✦</span>
-      <span class="opening-strip-location">En face de China Mart, Abatta – Abidjan</span>
+      <span class="opening-strip-location">EN FACE DE CHINA MART, ABATTA – ABIDJAN</span>
       <span class="opening-strip-separator">✦</span>
     </div>
     <div class="opening-strip-group" aria-hidden="true">
-      <span class="opening-strip-title">Ouverture du bureau physique</span>
+      <span class="opening-strip-title">OUVERTURE DU BUREAU PHYSIQUE</span>
       <span class="opening-strip-separator">✦</span>
       <span class="opening-strip-date">1er JANVIER 2027</span>
       <span class="opening-strip-separator">✦</span>
-      <span class="opening-strip-location">En face de China Mart, Abatta – Abidjan</span>
+      <span class="opening-strip-location">EN FACE DE CHINA MART, ABATTA – ABIDJAN</span>
       <span class="opening-strip-separator">✦</span>
     </div>
   </div>
@@ -1038,6 +1105,7 @@
           <button class="new-order-btn" type="button" onclick="openProductWhatsApp('Batterie LiFePO₄ 1 200 Wh')"><i class="fa-brands fa-whatsapp"></i> Contact</button>
         </div>
       </article>
+
       <article class="new-product-card">
         <span class="new-product-badge">NOUVEAUTÉ</span>
         <div class="new-product-icon" aria-hidden="true"><i class="fa-solid fa-bolt"></i></div>
@@ -1048,6 +1116,7 @@
           <button class="new-order-btn" type="button" onclick="openProductWhatsApp('GreenBridge V1 — 6 000 mAh')"><i class="fa-brands fa-whatsapp"></i> Contact</button>
         </div>
       </article>
+
       <article class="new-product-card">
         <span class="new-product-badge">NOUVEAUTÉ</span>
         <div class="new-product-icon" aria-hidden="true"><i class="fa-solid fa-charging-station"></i></div>
@@ -1058,6 +1127,7 @@
           <button class="new-order-btn" type="button" onclick="openProductWhatsApp('GreenBridge V2 — 10 000 mAh')"><i class="fa-brands fa-whatsapp"></i> Contact</button>
         </div>
       </article>
+
       <article class="new-product-card">
         <span class="new-product-badge">NOUVEAUTÉ</span>
         <div class="new-product-icon" aria-hidden="true"><i class="fa-solid fa-battery-three-quarters"></i></div>
@@ -1518,12 +1588,10 @@ function openTechModal(i){
     </div>
   ` : '';
 
-  const stockNotice = m.id === 'greenwireless' ? '<p class="stock-badge" style="margin:0 0 10px"><i class="fa-solid fa-circle-exclamation"></i> RUPTURE DE STOCK</p>' : '';
   const html = `
     <h2 style="margin-top:0">${m.title}</h2>
     ${carouselHtml}
     <div class="modal-body">
-      ${stockNotice}
       ${m.details}
       <div style="margin-top:12px;font-weight:800">Caractéristiques rapides</div>
       <ul>${(m.specs || []).map(s=>`<li>${s}</li>`).join('')}</ul>
@@ -1575,14 +1643,16 @@ function openPackModal(){
 let pendingOrderProduct = '';
 
 function openNewProductModal(title, description){
+  const safeTitle = String(title || 'Nouveauté GreenBridge');
+  const safeDescription = String(description || 'Produit GreenBridge.');
   const html = `
-    <h2 style="margin-top:0">${title}</h2>
+    <h2 style="margin-top:0">${safeTitle}</h2>
     <div class="modal-body">
-      <p>${description}</p>
+      <p>${safeDescription}</p>
       <p><strong>Marque :</strong> GreenBridge Technologies</p>
       <p>Produit conçu et assemblé par GreenBridge Technologies.</p>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
-        <button type="button" class="new-order-btn" style="border:0;border-radius:9px;padding:10px 14px;color:#fff;background:#25D366;font-weight:800;cursor:pointer" onclick="closeModal();openProductWhatsApp('${title.replace(/'/g, "\\'")}')"><i class="fa-brands fa-whatsapp"></i> Demander sur WhatsApp</button>
+        <button type="button" style="border:0;border-radius:9px;padding:10px 14px;color:#fff;background:#25D366;font-weight:800;cursor:pointer" onclick="closeModal();openProductWhatsApp('${safeTitle.replace(/'/g, "\\'")}')"><i class="fa-brands fa-whatsapp"></i> Demander sur WhatsApp</button>
         <button type="button" class="btn-small" onclick="closeModal()">Fermer</button>
       </div>
     </div>
