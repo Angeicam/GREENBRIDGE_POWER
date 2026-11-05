@@ -648,6 +648,7 @@
     height:0;
     padding-bottom:56%;
     overflow:hidden;
+
     border-radius:10px;
     background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.10))
   }
@@ -703,30 +704,35 @@
     font-weight:900;
     letter-spacing:.8px;
   }
-  /* Zone photo sur chaque carte : emplacement prêt pour les futures images */
+  /* Zone photo sur les cartes : l'image remplit toute la surface réservée. */
   .new-product-photo-placeholder{
+    position:relative;
+    display:block;
     width:100%;
+    height:160px;
+    min-height:160px;
+    max-height:160px;
     aspect-ratio:16 / 9;
-    min-height:112px;
-    max-height:150px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
-    flex:0 0 auto;
+    flex:0 0 160px;
+    padding:0;
     border:1.5px dashed rgba(4,70,46,.34);
     border-radius:12px;
     background:linear-gradient(145deg,#f4faf5,#e7f2e9);
     color:#456c56;
     overflow:hidden;
   }
-  .new-product-photo-placeholder i{font-size:31px;color:#6a9b79}
-  .new-product-photo-placeholder span{font-size:10px;font-weight:800;letter-spacing:.35px}
+  .new-product-photo-placeholder i,
+  .new-product-photo-placeholder span{position:absolute;left:50%;transform:translateX(-50%)}
+  .new-product-photo-placeholder i{top:38%;font-size:31px;color:#6a9b79}
+  .new-product-photo-placeholder span{top:65%;font-size:10px;font-weight:800;letter-spacing:.35px;white-space:nowrap}
   .new-product-photo-placeholder img{
+    position:absolute;
+    inset:0;
     width:100%;
     height:100%;
-    object-fit:contain;
+    max-width:none;
+    object-fit:cover;
+    object-position:center;
     display:block;
     border-radius:10px;
   }
@@ -773,7 +779,7 @@
     .new-product-card{width:100%;min-height:0;padding:16px 14px;gap:9px}
     .new-product-card h3{font-size:16px}
     .new-product-card p{font-size:13px;line-height:1.5;max-width:34rem}
-    .new-product-photo-placeholder{min-height:130px;max-height:180px}
+    .new-product-photo-placeholder{height:170px;min-height:170px;max-height:170px;flex-basis:170px}
     .new-modal-photo-gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
     .new-modal-photo-frame{min-height:82px}
     .new-product-actions{gap:8px}
@@ -1343,6 +1349,7 @@ const models = [
     id:'greenmini',
     title:'GreenMini — 10 000 mAh',
     subtitle:'Ultra-compact',
+
     images:['Pwkb_Mini_3.png','Pwkb_mini_213.png','PWBK_mini_4.png'],
     specs:[
       'Cellules : Samsung (3 cellules)',
@@ -1516,6 +1523,21 @@ let modalCarouselImages = [];
 let modalCarouselIndex = 0;
 let modalCarouselTimer = null;
 
+/* Galeries défilantes des nouveautés GreenBridge.
+   Les noms ci-dessous doivent être identiques aux noms des fichiers dans GitHub. */
+const newProductGalleryImages = {
+  lifepo4: [
+    'pack_batterie_1200wh_2.png',
+    'pack_batterie_1200wh_3.png',
+    'pack_batterie_1200wh_4.png'
+  ],
+  v1: [
+    'pack_batterie_1200wh_5.png',
+    'pack_batterie_1200wh_6.png',
+    'pack_batterie_1200wh_7.png'
+  ]
+};
+
 function openSurveyLink(ev){
   if(ev) ev.preventDefault();
   try{
@@ -1551,6 +1573,7 @@ function allImageUrls(){
   models.forEach(m=>{
     if(Array.isArray(m.images)) list.push(...m.images);
   });
+  Object.values(newProductGalleryImages).forEach(images=>list.push(...images));
   return [...new Set(list)];
 }
 
@@ -1745,11 +1768,33 @@ function escapeHTML(value){
 function openNewProductModal(productKey, title, description){
   const safeTitle = escapeHTML(title || 'Nouveauté GreenBridge');
   const safeDescription = escapeHTML(description || 'Produit GreenBridge.');
-  const photoGallery = buildNewProductPhotoGallery(productKey);
+  const images = (newProductGalleryImages[productKey] || []).map((src, index) => ({
+    src,
+    alt: `${title || 'Produit GreenBridge'} — photo ${index + 1}`
+  }));
+
+  let galleryHtml = '';
+  if(images.length){
+    galleryHtml = `
+      <div class="modal-carousel" aria-label="Galerie photos ${safeTitle}">
+        <div class="modal-carousel-stage">
+          <img id="modalCarouselImage" src="${images[0].src}" alt="${images[0].alt}" loading="eager">
+          <div class="modal-carousel-controls">
+            <button class="carousel-btn" type="button" aria-label="Image précédente" onclick="prevModalCarousel()"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="carousel-btn" type="button" aria-label="Image suivante" onclick="nextModalCarousel()"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+        </div>
+        <div class="carousel-dots" id="modalCarouselDots"></div>
+      </div>
+    `;
+  }else{
+    galleryHtml = buildNewProductPhotoGallery(productKey);
+  }
+
   const productForOrder = String(title || 'Nouveauté GreenBridge').replace(/\\/g,'\\\\').replace(/'/g,"\\'");
   const html = `
     <h2 style="margin-top:0">${safeTitle}</h2>
-    ${photoGallery}
+    ${galleryHtml}
     <div class="modal-body">
       <p>${safeDescription}</p>
       <p><strong>Marque :</strong> GreenBridge Technologies</p>
@@ -1761,6 +1806,11 @@ function openNewProductModal(productKey, title, description){
     </div>
   `;
   openModal(html);
+  if(images.length){
+    startModalCarousel(images);
+  }else{
+    stopModalCarousel();
+  }
 }
 
 function openProductWhatsApp(productName){
