@@ -31,10 +31,10 @@
   <link rel="preload" as="image" href="Chargeur_ordi_1.png">
   <link rel="preload" as="image" href="wifi_2.png">
   <link rel="preload" as="image" href="Batterie%20GreenBridge%20violette%20en%20studio.png">
-  <link rel="preload" as="image" href="Greenonly.PNG">
-  <link rel="preload" as="image" href="Greenonly1.jpg">
-  <link rel="preload" as="image" href="Greenonly2.jpg">
-  <link rel="preload" as="image" href="Greenonly3.jpg">
+  <link rel="preload" as="image" href="greenonly.PNG">
+  <link rel="preload" as="image" href="greenonly1.jpg">
+  <link rel="preload" as="image" href="greenonly2.jpg">
+  <link rel="preload" as="image" href="greenonly3.jpg">
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -1280,7 +1280,7 @@
     <div class="models-header"><div class="models-title">Nos modèles</div></div>
 
     <div class="models" role="list">
-      <div class="model" role="button" onclick="selectModel(0)" tabindex="0" aria-label="Green Only 4 500 mAh"><div class="thumb"><img src="Greenonly.PNG" alt="Green Only — aperçu des quatre coloris" loading="lazy" onerror="showModelPhotoPlaceholder(this)"></div><div class="meta"><h4>Green Only</h4><p>4 500 mAh<br><small>Powerbank GreenBridge.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(0)">En savoir plus</button><a class="notice-mini-link" href="https://www.greenbridge-technologies.com/notices/notice-green-only-4500mah.pdf" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('Green Only — 4 500 mAh')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div></div>
+      <div class="model" role="button" onclick="selectModel(0)" tabindex="0" aria-label="Green Only 4 500 mAh"><div class="thumb"><img src="greenonly.PNG" alt="Green Only — aperçu des quatre coloris" loading="lazy" onerror="showModelPhotoPlaceholder(this)"></div><div class="meta"><h4>Green Only</h4><p>4 500 mAh<br><small>Powerbank GreenBridge.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(0)">En savoir plus</button><a class="notice-mini-link" href="https://www.greenbridge-technologies.com/notices/notice-green-only-4500mah.pdf" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('Green Only — 4 500 mAh')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div></div>
 
       <div class="model" role="button" onclick="selectModel(1)" tabindex="0" aria-label="GreenMini">
         <div class="thumb"><img src="Pwkb_Mini_3.png" alt="GreenMini" loading="eager" fetchpriority="high" onerror="showModelPhotoPlaceholder(this)"></div>
@@ -1431,12 +1431,12 @@ const SURVEY_URL = 'https://enquete-powerbank-ci-sn.netlify.app/';
 const models = [
 {
     id:'green-only',
-    cardImage:'Greenonly.PNG',
+    cardImage:'greenonly.PNG',
     notice:'notices/notice-green-only-4500mah.pdf',
     title:'Green Only — 4 500 mAh',
     subtitle:'Powerbank GreenBridge',
-    /* GreenOnly : trois vues PNG à placer à la racine du site. */
-    images:['Greenonly1.jpg','Greenonly2.jpg','Greenonly3.jpg'],
+    /* greenOnly : trois vues PNG à placer à la racine du site. */
+    images:['greenonly1.jpg','greenonly2.jpg','greenonly3.jpg'],
     specs:['Capacité annoncée : 4 500 mAh',
       'Powerbank conçue pour la gamme GreenBridge Technologies',
       'Puissance de sortie, ports, temps de charge et compatibilités à confirmer selon la version finale'],
@@ -1745,9 +1745,9 @@ function allImageUrls(){
   ];
   /* Fichiers PNG réservés pour les futures photos : ne pas les précharger tant qu'ils ne sont pas déposés sur GitHub. */
   const photosAvenir = new Set([
-    'Greenonly1.jpg',
-    'Greenonly3.jpg',
-    'GreenMini3.png',
+    'greenonly1.jpg',
+    'greenonly3.jpg',
+    'greenMini3.png',
     'GreenCore3.png',
     'Greenplus_4.png',
     'GreenEco2.png',
