@@ -1348,16 +1348,16 @@
         <div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(11)">En savoir plus</button><a class="notice-mini-link" href="https://www.greenbridge-technologies.com/notices/notice-chargeur-pc-portable.pdf" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('GreenLaptop+')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div>
       </div>
 
-      <div class="model" role="button" onclick="selectModel(12)" tabindex="0" aria-label="Green Wifi">
+      <div class="model" role="button" onclick="selectModel(12)" tabindex="0" aria-label="GreenLaptop 20 000 mAh"><div class="thumb new-model-placeholder"><i class="fa-regular fa-image" aria-hidden="true"></i><span>PHOTO À AJOUTER</span></div><div class="meta"><h4>GreenLaptop</h4><p>20 000 mAh<br><small>Powerbank GreenBridge pour ordinateur compatible — à confirmer.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(12)">En savoir plus</button><a class="notice-mini-link" href="https://www.greenbridge-technologies.com/notices/notice-green-laptop-20000mah.pdf" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('GreenLaptop — 20 000 mAh')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div></div>
+
+      <div class="model" role="button" onclick="selectModel(13)" tabindex="0" aria-label="Green Wifi">
         <div class="thumb"><img src="wifi_2.png" alt="Green Wifi" loading="lazy"></div>
         <div class="meta">
           <h4>Green Wifi</h4>
           <p>Anti-coupure courant<br><small>Reste connecté.</small></p>
         </div>
-        <div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(12)">En savoir plus</button><a class="notice-mini-link" href="https://www.greenbridge-technologies.com/notices/notice-stabilisateur-wifi.pdf" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('Green Wifi')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div>
+        <div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(13)">En savoir plus</button><a class="notice-mini-link" href="https://www.greenbridge-technologies.com/notices/notice-stabilisateur-wifi.pdf" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('Green Wifi')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div>
       </div>
-
-      <div class="model" role="button" onclick="selectModel(13)" tabindex="0" aria-label="GreenLaptop 20 000 mAh"><div class="thumb new-model-placeholder"><i class="fa-regular fa-image" aria-hidden="true"></i><span>PHOTO À AJOUTER</span></div><div class="meta"><h4>GreenLaptop</h4><p>20 000 mAh<br><small>Powerbank GreenBridge pour ordinateur compatible — à confirmer.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(13)">En savoir plus</button><a class="notice-mini-link" href="https://www.greenbridge-technologies.com/notices/notice-green-laptop-20000mah.pdf" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('GreenLaptop — 20 000 mAh')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div></div>
     </div>
   </section>
 
@@ -1623,6 +1623,17 @@ const models = [
     `
   },
 {
+    id:'green-laptop',
+    notice:'notices/notice-green-laptop-20000mah.pdf',
+    title:'GreenLaptop — 20 000 mAh',
+    subtitle:'Powerbank GreenBridge',
+    images:[],
+    specs:['Capacité annoncée : 20 000 mAh',
+      'Powerbank conçue pour la gamme GreenBridge Technologies',
+      'Puissance de sortie, ports, temps de charge et compatibilités à confirmer selon la version finale'],
+    details:`<p style="margin-top:0;color:#23403a;line-height:1.45"><strong>GreenLaptop — 20 000 mAh</strong><br>Powerbank de la gamme GreenBridge Technologies. La capacité indiquée est celle communiquée pour ce modèle. Les détails de puissance, ports, recharge et compatibilités seront précisés après validation technique du produit.</p>`
+  },
+{
     id:'green-wifi',
     notice:'notices/notice-stabilisateur-wifi.pdf',
     title:'Green Wifi',
@@ -1640,17 +1651,6 @@ const models = [
         Reste connecté.
       </p>
     `
-  },
-{
-    id:'green-laptop',
-    notice:'notices/notice-green-laptop-20000mah.pdf',
-    title:'GreenLaptop — 20 000 mAh',
-    subtitle:'Powerbank GreenBridge',
-    images:[],
-    specs:['Capacité annoncée : 20 000 mAh',
-      'Powerbank conçue pour la gamme GreenBridge Technologies',
-      'Puissance de sortie, ports, temps de charge et compatibilités à confirmer selon la version finale'],
-    details:`<p style="margin-top:0;color:#23403a;line-height:1.45"><strong>GreenLaptop — 20 000 mAh</strong><br>Powerbank de la gamme GreenBridge Technologies. La capacité indiquée est celle communiquée pour ce modèle. Les détails de puissance, ports, recharge et compatibilités seront précisés après validation technique du produit.</p>`
   }
 
 ];
