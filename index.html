@@ -659,7 +659,7 @@
   .btn-small{background:transparent;border:1px solid rgba(6,42,32,0.06);padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:700;color:#08110a}
   .notice-mini-link{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:8px 10px;border-radius:8px;background:#e7f4e9;color:#06462e;border:1px solid rgba(4,70,46,.12);font-size:11px;font-weight:800;text-decoration:none;white-space:nowrap}
   .notice-mini-link:hover{background:#d9efdd}
-  /* Actions des quatre nouvelles cartes dans « Nos modèles ».
+  /* Actions harmonisées des cartes dans « Nos modèles » : informations, notice et contact.
      La structure, les dimensions et la présentation générale des cartes sont conservées. */
   .model-new-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;margin-top:auto}
   .model-new-actions .new-info-btn,
@@ -1241,7 +1241,7 @@
           <h4>GreenMini</h4>
           <p>GreenMini ≈ 9 000 mAh<br><small>Compact.</small></p>
         </div>
-        <div class="actions"><button class="btn-small" onclick="openTechModal(0);event.stopPropagation()">Infos</button><a class="notice-mini-link" href="notices/notice-greenmini.pdf" download><i class="fa-regular fa-file-pdf"></i> PDF</a></div>
+        <div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(0)">En savoir plus</button><a class="notice-mini-link" href="notices/notice-greenmini.pdf" download onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('GreenMini')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div>
       </div>
 
       <div class="model" role="button" onclick="selectModel(1)" tabindex="0" aria-label="GreenCore">
@@ -1250,7 +1250,7 @@
           <h4>GreenCore</h4>
           <p>GreenCore ≈ 9 000 mAh<br><small>Type-C rapide.</small></p>
         </div>
-        <div class="actions"><button class="btn-small" onclick="openTechModal(1);event.stopPropagation()">Infos</button><a class="notice-mini-link" href="notices/notice-greencore.pdf" download><i class="fa-regular fa-file-pdf"></i> PDF</a></div>
+        <div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(1)">En savoir plus</button><a class="notice-mini-link" href="notices/notice-greencore.pdf" download onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('GreenCore')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div>
       </div>
 
       <div class="model" role="button" onclick="selectModel(2)" tabindex="0" aria-label="GreenPlus">
@@ -1259,7 +1259,7 @@
           <h4>GreenPlus</h4>
           <p>GreenPlus ≈ 9 000 mAh<br><small>Bonne autonomie.</small></p>
         </div>
-        <div class="actions"><button class="btn-small" onclick="openTechModal(2);event.stopPropagation()">Infos</button><a class="notice-mini-link" href="notices/notice-greenplus.pdf" download><i class="fa-regular fa-file-pdf"></i> PDF</a></div>
+        <div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(2)">En savoir plus</button><a class="notice-mini-link" href="notices/notice-greenplus.pdf" download onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('GreenPlus')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div>
       </div>
 
       <div class="model" role="button" onclick="selectModel(3)" tabindex="0" aria-label="GreenPro">
@@ -1268,7 +1268,7 @@
           <h4>GreenPro</h4>
           <p>GreenPro ≈ 12 000 mAh<br><small>Multi-appareils.</small></p>
         </div>
-        <div class="actions"><button class="btn-small" onclick="openTechModal(3);event.stopPropagation()">Infos</button><a class="notice-mini-link" href="notices/notice-greenpro.pdf" download><i class="fa-regular fa-file-pdf"></i> PDF</a></div>
+        <div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(3)">En savoir plus</button><a class="notice-mini-link" href="notices/notice-greenpro.pdf" download onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('GreenPro')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div>
       </div>
 
       <div class="model" role="button" onclick="selectModel(4)" tabindex="0" aria-label="GreenWire">
@@ -1277,7 +1277,7 @@
           <h4>GreenWire</h4>
           <p>GreenWire ≈ 20 000 mAh<br><small>Très robuste.</small></p>
         </div>
-        <div class="actions"><button class="btn-small" onclick="openTechModal(4);event.stopPropagation()">Infos</button><a class="notice-mini-link" href="notices/notice-greenwire.pdf" download><i class="fa-regular fa-file-pdf"></i> PDF</a></div>
+        <div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(4)">En savoir plus</button><a class="notice-mini-link" href="notices/notice-greenwire.pdf" download onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('GreenWire')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div>
       </div>
 
       <div class="model" role="button" onclick="selectModel(5)" tabindex="0" aria-label="GreenWireless">
@@ -1287,7 +1287,7 @@
           <p>GreenWireless — 20 000 mAh<br><small>Sans-fil.</small></p>
           <span class="stock-badge"><i class="fa-solid fa-circle-exclamation"></i> RUPTURE DE STOCK</span>
         </div>
-        <div class="actions"><button class="btn-small" onclick="openTechModal(5);event.stopPropagation()">Infos</button><a class="notice-mini-link" href="notices/notice-greenwireless.pdf" download><i class="fa-regular fa-file-pdf"></i> PDF</a></div>
+        <div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(5)">En savoir plus</button><a class="notice-mini-link" href="notices/notice-greenwireless.pdf" download onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('GreenWireless')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div>
       </div>
 
       <div class="model" role="button" onclick="selectModel(6)" tabindex="0" aria-label="Chargeur ordinateur portable">
@@ -1296,7 +1296,7 @@
           <h4>Chargeur PC Portable</h4>
           <p>65W à 100W<br><small>Charge rapide.</small></p>
         </div>
-        <div class="actions"><button class="btn-small" onclick="openTechModal(6);event.stopPropagation()">Infos</button><a class="notice-mini-link" href="notices/notice-chargeur-pc-portable.pdf" download><i class="fa-regular fa-file-pdf"></i> PDF</a></div>
+        <div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(6)">En savoir plus</button><a class="notice-mini-link" href="notices/notice-chargeur-pc-portable.pdf" download onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('Chargeur PC Portable')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div>
       </div>
 
       <div class="model" role="button" onclick="selectModel(7)" tabindex="0" aria-label="Stabilisateur WiFi">
@@ -1305,7 +1305,7 @@
           <h4>Stabilisateur WiFi</h4>
           <p>Anti-coupure courant<br><small>Reste connecté.</small></p>
         </div>
-        <div class="actions"><button class="btn-small" onclick="openTechModal(7);event.stopPropagation()">Infos</button><a class="notice-mini-link" href="notices/notice-stabilisateur-wifi.pdf" download><i class="fa-regular fa-file-pdf"></i> PDF</a></div>
+        <div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(7)">En savoir plus</button><a class="notice-mini-link" href="notices/notice-stabilisateur-wifi.pdf" download onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('Stabilisateur WiFi')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div>
       </div>
 
 
@@ -1359,6 +1359,110 @@
           <button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(11)">En savoir plus</button>
           <a class="notice-mini-link" href="notices/notice-greenbridge-v3-12000mah.pdf" download onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a>
           <button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('GreenBridge V3 — 12 000 mAh')"><i class="fa-brands fa-whatsapp"></i> Contact</button>
+        </div>
+      </div>
+
+      <div class="model" role="button" onclick="selectModel(12)" tabindex="0" aria-label="GreenBridge Pack M 12 V 200 Ah">
+        <div class="thumb new-model-placeholder"><i class="fa-regular fa-image" aria-hidden="true"></i><span>PHOTO À AJOUTER</span></div>
+        <div class="meta">
+          <h4>GreenBridge Pack M</h4>
+          <p>12 V · 200 Ah<br><small>Batterie LiFePO₄ — configuration envisagée.</small></p>
+        </div>
+        <div class="actions model-new-actions">
+          <button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(12)">En savoir plus</button>
+          <a class="notice-mini-link" href="notices/notice-greenbridge-pack-m-12v-200ah.pdf" download onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a>
+          <button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('GreenBridge Pack M — 12 V / 200 Ah')"><i class="fa-brands fa-whatsapp"></i> Contact</button>
+        </div>
+      </div>
+
+      <div class="model" role="button" onclick="selectModel(13)" tabindex="0" aria-label="GreenBridge Pack L 12 V 280 Ah">
+        <div class="thumb new-model-placeholder"><i class="fa-regular fa-image" aria-hidden="true"></i><span>PHOTO À AJOUTER</span></div>
+        <div class="meta">
+          <h4>GreenBridge Pack L</h4>
+          <p>12 V · 280 Ah<br><small>Stockage LiFePO₄ haute capacité.</small></p>
+        </div>
+        <div class="actions model-new-actions">
+          <button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(13)">En savoir plus</button>
+          <a class="notice-mini-link" href="notices/notice-greenbridge-pack-l-12v-280ah.pdf" download onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a>
+          <button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('GreenBridge Pack L — 12 V / 280 Ah')"><i class="fa-brands fa-whatsapp"></i> Contact</button>
+        </div>
+      </div>
+
+      <div class="model" role="button" onclick="selectModel(14)" tabindex="0" aria-label="GreenBridge Pack XL 24 V 280 Ah">
+        <div class="thumb new-model-placeholder"><i class="fa-regular fa-image" aria-hidden="true"></i><span>PHOTO À AJOUTER</span></div>
+        <div class="meta">
+          <h4>GreenBridge Pack XL</h4>
+          <p>24 V · 280 Ah<br><small>Pack LiFePO₄ — configuration à valider.</small></p>
+        </div>
+        <div class="actions model-new-actions">
+          <button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(14)">En savoir plus</button>
+          <a class="notice-mini-link" href="notices/notice-greenbridge-pack-xl-24v-280ah.pdf" download onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a>
+          <button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('GreenBridge Pack XL — 24 V / 280 Ah')"><i class="fa-brands fa-whatsapp"></i> Contact</button>
+        </div>
+      </div>
+
+      <div class="model" role="button" onclick="selectModel(15)" tabindex="0" aria-label="Mini UPS GreenBridge 40 W">
+        <div class="thumb new-model-placeholder"><i class="fa-regular fa-image" aria-hidden="true"></i><span>PHOTO À AJOUTER</span></div>
+        <div class="meta">
+          <h4>Mini-UPS GreenBridge</h4>
+          <p>40 W maximum<br><small>Alimentation de secours compacte.</small></p>
+        </div>
+        <div class="actions model-new-actions">
+          <button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(15)">En savoir plus</button>
+          <a class="notice-mini-link" href="notices/notice-mini-ups-greenbridge-40w.pdf" download onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a>
+          <button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('Mini-UPS GreenBridge — 40 W maximum')"><i class="fa-brands fa-whatsapp"></i> Contact</button>
+        </div>
+      </div>
+
+      <div class="model" role="button" onclick="selectModel(16)" tabindex="0" aria-label="GreenBridge TV Backup">
+        <div class="thumb new-model-placeholder"><i class="fa-regular fa-image" aria-hidden="true"></i><span>PHOTO À AJOUTER</span></div>
+        <div class="meta">
+          <h4>GreenBridge TV Backup</h4>
+          <p>250 à 300 W visés<br><small>Secours TV — projet en conception.</small></p>
+        </div>
+        <div class="actions model-new-actions">
+          <button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(16)">En savoir plus</button>
+          <a class="notice-mini-link" href="notices/notice-greenbridge-tv-backup-300w.pdf" download onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a>
+          <button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('GreenBridge TV Backup — 250 à 300 W visés')"><i class="fa-brands fa-whatsapp"></i> Contact</button>
+        </div>
+      </div>
+
+      <div class="model" role="button" onclick="selectModel(17)" tabindex="0" aria-label="GreenBridge FastCharge 22.5 W">
+        <div class="thumb new-model-placeholder"><i class="fa-regular fa-image" aria-hidden="true"></i><span>PHOTO À AJOUTER</span></div>
+        <div class="meta">
+          <h4>GreenBridge FastCharge</h4>
+          <p>22,5 W<br><small>Powerbank USB-C — capacité à définir.</small></p>
+        </div>
+        <div class="actions model-new-actions">
+          <button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(17)">En savoir plus</button>
+          <a class="notice-mini-link" href="notices/notice-greenbridge-fastcharge-225w.pdf" download onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a>
+          <button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('GreenBridge FastCharge — 22,5 W')"><i class="fa-brands fa-whatsapp"></i> Contact</button>
+        </div>
+      </div>
+
+      <div class="model" role="button" onclick="selectModel(18)" tabindex="0" aria-label="GreenBridge kit solaire hybride">
+        <div class="thumb new-model-placeholder"><i class="fa-regular fa-image" aria-hidden="true"></i><span>PHOTO À AJOUTER</span></div>
+        <div class="meta">
+          <h4>GreenBridge Kit Solaire</h4>
+          <p>Recharge solaire et secteur<br><small>Solution hybride — configuration à définir.</small></p>
+        </div>
+        <div class="actions model-new-actions">
+          <button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(18)">En savoir plus</button>
+          <a class="notice-mini-link" href="notices/notice-greenbridge-kit-solaire.pdf" download onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a>
+          <button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('GreenBridge Kit Solaire')"><i class="fa-brands fa-whatsapp"></i> Contact</button>
+        </div>
+      </div>
+
+      <div class="model" role="button" onclick="selectModel(19)" tabindex="0" aria-label="GreenBridge pack modulaire 2.5 kWh">
+        <div class="thumb"><img src="Future_Pack_1.png" alt="Projet GreenBridge pack modulaire 2.5 kWh" loading="lazy"></div>
+        <div class="meta">
+          <h4>Pack modulaire GreenBridge</h4>
+          <p>2,5 kWh<br><small>Projet en développement.</small></p>
+        </div>
+        <div class="actions model-new-actions">
+          <button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(19)">En savoir plus</button>
+          <a class="notice-mini-link" href="notices/notice-projet-pack-modulaire-25kwh.pdf" download onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a>
+          <button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('Pack modulaire GreenBridge — 2,5 kWh')"><i class="fa-brands fa-whatsapp"></i> Contact</button>
         </div>
       </div>
     </div>
@@ -1625,6 +1729,79 @@ const models = [
     specs:['Capacité annoncée : 12 000 mAh','Powerbank conçue et assemblée par GreenBridge Technologies'],
     details:`<p style="margin-top:0;color:#23403a;line-height:1.45"><strong>GreenBridge V3 — 12 000 mAh</strong><br>Powerbank conçue et assemblée par GreenBridge Technologies. Photo du produit à ajouter.</p>`
   }
+  ,{
+    id:'greenbridge-pack-m',
+    notice:'notices/notice-greenbridge-pack-m-12v-200ah.pdf',
+    title:'GreenBridge Pack M — 12 V / 200 Ah',
+    subtitle:'Batterie LiFePO₄ — configuration envisagée',
+    images:[],
+    specs:['Technologie envisagée : LiFePO₄','Configuration cible : 12 V / 200 Ah','Puissance de sortie visée : jusqu’à 2 000 W, à valider','Dimensions, BMS et protections à confirmer avant commercialisation'],
+    details:`<p style="margin-top:0;color:#23403a;line-height:1.45"><strong>GreenBridge Pack M</strong><br>Pack LiFePO₄ de la gamme de stockage GreenBridge. La configuration 12 V / 200 Ah et la puissance visée de 2 000 W sont des objectifs de conception à confirmer lors de la validation technique.</p>`
+  },
+  {
+    id:'greenbridge-pack-l',
+    notice:'notices/notice-greenbridge-pack-l-12v-280ah.pdf',
+    title:'GreenBridge Pack L — 12 V / 280 Ah',
+    subtitle:'Stockage LiFePO₄ haute capacité',
+    images:[],
+    specs:['Technologie envisagée : LiFePO₄','Configuration cible : 12 V / 280 Ah','Énergie indicative : environ 3,5 à 3,6 kWh','Puissance de sortie visée : jusqu’à 3 000 W, à valider','BMS, protections et dimensions à confirmer'],
+    details:`<p style="margin-top:0;color:#23403a;line-height:1.45"><strong>GreenBridge Pack L</strong><br>Pack de stockage haute capacité destiné aux applications de secours et d’autonomie. Les valeurs indiquées correspondent aux objectifs de conception et doivent être validées avant toute mise en vente.</p>`
+  },
+  {
+    id:'greenbridge-pack-xl',
+    notice:'notices/notice-greenbridge-pack-xl-24v-280ah.pdf',
+    title:'GreenBridge Pack XL — 24 V / 280 Ah',
+    subtitle:'Pack LiFePO₄ — configuration à valider',
+    images:[],
+    specs:['Technologie envisagée : LiFePO₄','Configuration cible : 24 V / 280 Ah','Puissance de sortie visée : 4 à 5 kW, à valider','Tension nominale exacte, énergie, BMS et protections à confirmer'],
+    details:`<p style="margin-top:0;color:#23403a;line-height:1.45"><strong>GreenBridge Pack XL</strong><br>Projet de pack LiFePO₄ 24 V destiné aux besoins de puissance plus élevés. Les performances et la configuration finale restent à confirmer par les essais et la validation électrique.</p>`
+  },
+  {
+    id:'mini-ups-greenbridge',
+    notice:'notices/notice-mini-ups-greenbridge-40w.pdf',
+    title:'Mini-UPS GreenBridge — 40 W maximum',
+    subtitle:'Alimentation de secours compacte',
+    images:[],
+    specs:['Puissance maximale prévue pour le boîtier : 40 W','Usage envisagé : alimentation de petits équipements électroniques','Tensions de sortie, autonomie et capacité à confirmer','Protection thermique et électronique à valider'],
+    details:`<p style="margin-top:0;color:#23403a;line-height:1.45"><strong>Mini-UPS GreenBridge</strong><br>Projet de mini alimentation sans coupure pour petits équipements électroniques. La limite de conception annoncée pour le boîtier est de 40 W maximum. Les tensions, l’autonomie et les protections seront précisées après validation de l’électronique.</p>`
+  },
+  {
+    id:'greenbridge-tv-backup',
+    notice:'notices/notice-greenbridge-tv-backup-300w.pdf',
+    title:'GreenBridge TV Backup — 250 à 300 W visés',
+    subtitle:'Solution de secours pour téléviseur',
+    images:[],
+    specs:['Usage envisagé : alimentation de secours d’un téléviseur','Puissance cible : 250 à 300 W','Onduleur sinusoïdal pur envisagé','Autonomie, batterie, protections et puissance finale à confirmer'],
+    details:`<p style="margin-top:0;color:#23403a;line-height:1.45"><strong>GreenBridge TV Backup</strong><br>Projet de solution de secours pour téléviseur. Une plage de 250 à 300 W est envisagée avec une sortie sinusoïdale pure. La configuration finale dépendra des essais et de la validation des composants.</p>`
+  },
+  {
+    id:'greenbridge-fastcharge',
+    notice:'notices/notice-greenbridge-fastcharge-225w.pdf',
+    title:'GreenBridge FastCharge — 22,5 W',
+    subtitle:'Powerbank USB-C charge rapide',
+    images:[],
+    specs:['Puissance de charge rapide annoncée : 22,5 W','Sortie USB-C prévue','Capacité de batterie, protocoles et ports définitifs à confirmer','Protection électrique à valider'],
+    details:`<p style="margin-top:0;color:#23403a;line-height:1.45"><strong>GreenBridge FastCharge</strong><br>Concept de powerbank avec sortie USB-C de charge rapide annoncée à 22,5 W. La capacité de batterie et les protocoles de charge compatibles restent à préciser selon la carte électronique retenue.</p>`
+  },
+  {
+    id:'greenbridge-kit-solaire',
+    notice:'notices/notice-greenbridge-kit-solaire.pdf',
+    title:'GreenBridge Kit Solaire',
+    subtitle:'Recharge solaire et secteur',
+    images:[],
+    specs:['Recharge secteur et solaire envisagée','Solution de stockage autonome pour usages ciblés','Capacité, puissance, MPPT et compatibilités à définir','Configuration à valider selon le besoin du client'],
+    details:`<p style="margin-top:0;color:#23403a;line-height:1.45"><strong>GreenBridge Kit Solaire</strong><br>Solution envisagée combinant recharge secteur et recharge solaire. La capacité de stockage, la puissance disponible, le régulateur MPPT et les compatibilités seront définis selon la configuration retenue.</p>`
+  },
+  {
+    id:'greenbridge-pack-25kwh',
+    notice:'notices/notice-projet-pack-modulaire-25kwh.pdf',
+    title:'Pack modulaire GreenBridge — 2,5 kWh',
+    subtitle:'Stockage énergétique — projet en développement',
+    images:['Future_Pack_1.png','Future_pack_2.1.png','Future_Pack_3.png'],
+    specs:['Énergie cible annoncée : 2,5 kWh','Technologie envisagée : cellules LiFePO₄ prismatiques','Recharge secteur et panneaux solaires envisagée','Projet en développement : caractéristiques finales à confirmer'],
+    details:`<p style="margin-top:0;color:#23403a;line-height:1.45"><strong>Pack modulaire GreenBridge — 2,5 kWh</strong><br>Projet de stockage énergétique modulaire pour les usages essentiels, médicaux, agricoles et petites entreprises. Les caractéristiques finales seront publiées après validation du prototype.</p>`
+  }
+
 ];
 
 const modalOverlay = document.getElementById('modalOverlay');
