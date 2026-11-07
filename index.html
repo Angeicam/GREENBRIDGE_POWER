@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="fr">
 <head>
@@ -248,7 +247,6 @@
       padding:3px 5px;
       max-width:calc(100vw - 92px);
     }
-
   }
 
 
@@ -653,15 +651,29 @@
     background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.10))
   }
   .models .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;border-radius:8px}
+  .models .thumb.new-model-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#527363;font-size:12px;font-weight:800;text-align:center;background:linear-gradient(135deg,rgba(255,255,255,.8),rgba(220,239,225,.85));border:1px dashed rgba(10,77,46,.22);box-sizing:border-box}
+  .models .thumb.new-model-placeholder i{font-size:30px;color:#7cb342}
   .model .meta h4{margin:0;font-size:18px;color:#02110a;font-weight:900}
   .model .meta p{margin:10px 0 0;font-size:14px;color:rgba(2,17,10,0.95);line-height:1.25;font-weight:600}
   .model .meta p small{display:block;color:rgba(2,17,10,0.88);font-weight:500;margin-top:4px}
   .btn-small{background:transparent;border:1px solid rgba(6,42,32,0.06);padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:700;color:#08110a}
   .notice-mini-link{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:8px 10px;border-radius:8px;background:#e7f4e9;color:#06462e;border:1px solid rgba(4,70,46,.12);font-size:11px;font-weight:800;text-decoration:none;white-space:nowrap}
   .notice-mini-link:hover{background:#d9efdd}
+  button.notice-mini-link,button.notice-link-btn{font-family:inherit;cursor:pointer}
+  button.notice-mini-link{appearance:none}
+  .written-notice{color:#173b2b}
+  .written-notice-kicker{font-size:10px;font-weight:900;letter-spacing:1.2px;color:#6a8c73}
+  .written-notice-subtitle{margin:0 0 14px;color:#547160;font-size:13px;font-weight:700}
+  .written-notice .modal-body{line-height:1.55}
+  .written-notice .modal-body h3{margin:18px 0 7px;color:#07502f;font-size:15px}
+  .written-notice .modal-body ul{padding-left:21px}
+  .written-notice .modal-body li{margin:0 0 7px}
+  .written-notice-footnote{margin-top:18px;padding:10px 12px;border-left:3px solid #d4af37;background:rgba(212,175,55,.10);font-size:12px}
+  .written-notice-actions{display:flex;justify-content:flex-end;margin-top:14px}
   .notice-link-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 11px;border-radius:8px;background:#e7f4e9;color:#06462e;border:1px solid rgba(4,70,46,.12);font-size:11px;font-weight:800;text-decoration:none;cursor:pointer}
   .notice-link-btn:hover{background:#d9efdd}
   .new-product-actions .notice-link-btn{font-family:inherit;font-size:11px}
+
 
   .new-products-section{
     margin:18px 0 28px;
@@ -1157,8 +1169,8 @@
 
 <main class="container" role="main">
 
-  <section class="new-products-section" id="nouveautes" aria-label="Nouveautés GreenBridge">
-    <div class="new-products-heading"><div class="models-title">Nouveautés GreenBridge</div></div>
+  <section class="new-products-section" id="produits" aria-label="Nos produits">
+    <div class="new-products-heading"><div class="models-title">Nos produits</div></div>
     <div class="new-products-grid">
       <article class="new-product-card">
         <span class="new-product-badge">NOUVEAUTÉ</span>
@@ -1169,7 +1181,7 @@
         <p>Capacité énergétique : <strong>1 200 Wh</strong><br>Conçue et assemblée par GreenBridge Technologies.</p>
         <div class="new-product-actions">
           <button class="new-info-btn" type="button" onclick="openNewProductModal('lifepo4','Batterie LiFePO₄ 1 200 Wh','Solution de stockage énergétique GreenBridge. Capacité annoncée : 1 200 Wh.')">En savoir plus</button>
-          <a class="notice-link-btn" href="notices/notice-batterie-lifepo4-1200wh.pdf" download><i class="fa-regular fa-file-pdf"></i> Notice PDF</a>
+          <button class="notice-link-btn" type="button" onclick="openNoticeModal('new','lifepo4')"><i class="fa-regular fa-book-open"></i> Notice</button>
           <button class="new-order-btn" type="button" onclick="openProductWhatsApp('Batterie LiFePO₄ 1 200 Wh')"><i class="fa-brands fa-whatsapp"></i> Contact</button>
         </div>
       </article>
@@ -1183,7 +1195,7 @@
         <p>Powerbank <strong>6 000 mAh</strong><br>Conçu et assemblé par GreenBridge Technologies.</p>
         <div class="new-product-actions">
           <button class="new-info-btn" type="button" onclick="openNewProductModal('v1','GreenBridge V1 — 6 000 mAh','Powerbank GreenBridge de 6 000 mAh, conçu et assemblé par GreenBridge Technologies.')">En savoir plus</button>
-          <a class="notice-link-btn" href="notices/notice-greenbridge-v1-6000mah.pdf" download><i class="fa-regular fa-file-pdf"></i> Notice PDF</a>
+          <button class="notice-link-btn" type="button" onclick="openNoticeModal('new','v1')"><i class="fa-regular fa-book-open"></i> Notice</button>
           <button class="new-order-btn" type="button" onclick="openProductWhatsApp('GreenBridge V1 — 6 000 mAh')"><i class="fa-brands fa-whatsapp"></i> Contact</button>
         </div>
       </article>
@@ -1199,7 +1211,7 @@
         <p>Powerbank <strong>10 000 mAh</strong><br>Conçu et assemblé par GreenBridge Technologies.</p>
         <div class="new-product-actions">
           <button class="new-info-btn" type="button" onclick="openNewProductModal('v2','GreenBridge V2 — 10 000 mAh','Powerbank GreenBridge de 10 000 mAh, conçu et assemblé par GreenBridge Technologies.')">En savoir plus</button>
-          <a class="notice-link-btn" href="notices/notice-greenbridge-v2-10000mah.pdf" download><i class="fa-regular fa-file-pdf"></i> Notice PDF</a>
+          <button class="notice-link-btn" type="button" onclick="openNoticeModal('new','v2')"><i class="fa-regular fa-book-open"></i> Notice</button>
           <button class="new-order-btn" type="button" onclick="openProductWhatsApp('GreenBridge V2 — 10 000 mAh')"><i class="fa-brands fa-whatsapp"></i> Contact</button>
         </div>
       </article>
@@ -1215,7 +1227,7 @@
         <p>Powerbank <strong>12 000 mAh</strong><br>Conçu et assemblé par GreenBridge Technologies.</p>
         <div class="new-product-actions">
           <button class="new-info-btn" type="button" onclick="openNewProductModal('v3','GreenBridge V3 — 12 000 mAh','Powerbank GreenBridge de 12 000 mAh, conçu et assemblé par GreenBridge Technologies.')">En savoir plus</button>
-          <a class="notice-link-btn" href="notices/notice-greenbridge-v3-12000mah.pdf" download><i class="fa-regular fa-file-pdf"></i> Notice PDF</a>
+          <button class="notice-link-btn" type="button" onclick="openNoticeModal('new','v3')"><i class="fa-regular fa-book-open"></i> Notice</button>
           <button class="new-order-btn" type="button" onclick="openProductWhatsApp('GreenBridge V3 — 12 000 mAh')"><i class="fa-brands fa-whatsapp"></i> Contact</button>
         </div>
       </article>
@@ -1232,7 +1244,7 @@
           <h4>GreenMini</h4>
           <p>GreenMini ≈ 9 000 mAh<br><small>Compact.</small></p>
         </div>
-        <div class="actions"><button class="btn-small" onclick="openTechModal(0);event.stopPropagation()">Infos</button><a class="notice-mini-link" href="notices/notice-greenmini.pdf" download><i class="fa-regular fa-file-pdf"></i> PDF</a></div>
+        <div class="actions"><button class="btn-small" onclick="openTechModal(0);event.stopPropagation()">Infos</button><button class="notice-mini-link" type="button" onclick="event.stopPropagation();openNoticeModal('model',0)"><i class="fa-regular fa-book-open"></i> Notice</button></div>
       </div>
 
       <div class="model" role="button" onclick="selectModel(1)" tabindex="0" aria-label="GreenCore">
@@ -1241,7 +1253,7 @@
           <h4>GreenCore</h4>
           <p>GreenCore ≈ 9 000 mAh<br><small>Type-C rapide.</small></p>
         </div>
-        <div class="actions"><button class="btn-small" onclick="openTechModal(1);event.stopPropagation()">Infos</button><a class="notice-mini-link" href="notices/notice-greencore.pdf" download><i class="fa-regular fa-file-pdf"></i> PDF</a></div>
+        <div class="actions"><button class="btn-small" onclick="openTechModal(1);event.stopPropagation()">Infos</button><button class="notice-mini-link" type="button" onclick="event.stopPropagation();openNoticeModal('model',1)"><i class="fa-regular fa-book-open"></i> Notice</button></div>
       </div>
 
       <div class="model" role="button" onclick="selectModel(2)" tabindex="0" aria-label="GreenPlus">
@@ -1250,7 +1262,7 @@
           <h4>GreenPlus</h4>
           <p>GreenPlus ≈ 9 000 mAh<br><small>Bonne autonomie.</small></p>
         </div>
-        <div class="actions"><button class="btn-small" onclick="openTechModal(2);event.stopPropagation()">Infos</button><a class="notice-mini-link" href="notices/notice-greenplus.pdf" download><i class="fa-regular fa-file-pdf"></i> PDF</a></div>
+        <div class="actions"><button class="btn-small" onclick="openTechModal(2);event.stopPropagation()">Infos</button><button class="notice-mini-link" type="button" onclick="event.stopPropagation();openNoticeModal('model',2)"><i class="fa-regular fa-book-open"></i> Notice</button></div>
       </div>
 
       <div class="model" role="button" onclick="selectModel(3)" tabindex="0" aria-label="GreenPro">
@@ -1259,7 +1271,7 @@
           <h4>GreenPro</h4>
           <p>GreenPro ≈ 12 000 mAh<br><small>Multi-appareils.</small></p>
         </div>
-        <div class="actions"><button class="btn-small" onclick="openTechModal(3);event.stopPropagation()">Infos</button><a class="notice-mini-link" href="notices/notice-greenpro.pdf" download><i class="fa-regular fa-file-pdf"></i> PDF</a></div>
+        <div class="actions"><button class="btn-small" onclick="openTechModal(3);event.stopPropagation()">Infos</button><button class="notice-mini-link" type="button" onclick="event.stopPropagation();openNoticeModal('model',3)"><i class="fa-regular fa-book-open"></i> Notice</button></div>
       </div>
 
       <div class="model" role="button" onclick="selectModel(4)" tabindex="0" aria-label="GreenWire">
@@ -1268,7 +1280,7 @@
           <h4>GreenWire</h4>
           <p>GreenWire ≈ 20 000 mAh<br><small>Très robuste.</small></p>
         </div>
-        <div class="actions"><button class="btn-small" onclick="openTechModal(4);event.stopPropagation()">Infos</button><a class="notice-mini-link" href="notices/notice-greenwire.pdf" download><i class="fa-regular fa-file-pdf"></i> PDF</a></div>
+        <div class="actions"><button class="btn-small" onclick="openTechModal(4);event.stopPropagation()">Infos</button><button class="notice-mini-link" type="button" onclick="event.stopPropagation();openNoticeModal('model',4)"><i class="fa-regular fa-book-open"></i> Notice</button></div>
       </div>
 
       <div class="model" role="button" onclick="selectModel(5)" tabindex="0" aria-label="GreenWireless">
@@ -1278,7 +1290,7 @@
           <p>GreenWireless — 20 000 mAh<br><small>Sans-fil.</small></p>
           <span class="stock-badge"><i class="fa-solid fa-circle-exclamation"></i> RUPTURE DE STOCK</span>
         </div>
-        <div class="actions"><button class="btn-small" onclick="openTechModal(5);event.stopPropagation()">Infos</button><a class="notice-mini-link" href="notices/notice-greenwireless.pdf" download><i class="fa-regular fa-file-pdf"></i> PDF</a></div>
+        <div class="actions"><button class="btn-small" onclick="openTechModal(5);event.stopPropagation()">Infos</button><button class="notice-mini-link" type="button" onclick="event.stopPropagation();openNoticeModal('model',5)"><i class="fa-regular fa-book-open"></i> Notice</button></div>
       </div>
 
       <div class="model" role="button" onclick="selectModel(6)" tabindex="0" aria-label="Chargeur ordinateur portable">
@@ -1287,7 +1299,7 @@
           <h4>Chargeur PC Portable</h4>
           <p>65W à 100W<br><small>Charge rapide.</small></p>
         </div>
-        <div class="actions"><button class="btn-small" onclick="openTechModal(6);event.stopPropagation()">Infos</button><a class="notice-mini-link" href="notices/notice-chargeur-pc-portable.pdf" download><i class="fa-regular fa-file-pdf"></i> PDF</a></div>
+        <div class="actions"><button class="btn-small" onclick="openTechModal(6);event.stopPropagation()">Infos</button><button class="notice-mini-link" type="button" onclick="event.stopPropagation();openNoticeModal('model',6)"><i class="fa-regular fa-book-open"></i> Notice</button></div>
       </div>
 
       <div class="model" role="button" onclick="selectModel(7)" tabindex="0" aria-label="Stabilisateur WiFi">
@@ -1296,7 +1308,45 @@
           <h4>Stabilisateur WiFi</h4>
           <p>Anti-coupure courant<br><small>Reste connecté.</small></p>
         </div>
-        <div class="actions"><button class="btn-small" onclick="openTechModal(7);event.stopPropagation()">Infos</button><a class="notice-mini-link" href="notices/notice-stabilisateur-wifi.pdf" download><i class="fa-regular fa-file-pdf"></i> PDF</a></div>
+        <div class="actions"><button class="btn-small" onclick="openTechModal(7);event.stopPropagation()">Infos</button><button class="notice-mini-link" type="button" onclick="event.stopPropagation();openNoticeModal('model',7)"><i class="fa-regular fa-book-open"></i> Notice</button></div>
+      </div>
+
+
+      <!-- 4 nouvelles références GreenBridge : également présentes dans Nouveautés GreenBridge -->
+      <div class="model" role="button" onclick="selectModel(8)" tabindex="0" aria-label="Batterie LiFePO4 GreenBridge 1200 Wh">
+        <div class="thumb"><img src="pack_batterie_1200wh.png" alt="Batterie GreenBridge LiFePO4 1200 Wh" loading="lazy"></div>
+        <div class="meta">
+          <h4>Batterie LiFePO₄</h4>
+          <p>1 200 Wh<br><small>Stockage énergétique GreenBridge.</small></p>
+        </div>
+        <div class="actions"><button class="btn-small" onclick="openTechModal(8);event.stopPropagation()">Infos</button><button class="notice-mini-link" type="button" onclick="event.stopPropagation();openNoticeModal('model',8)"><i class="fa-regular fa-book-open"></i> Notice</button></div>
+      </div>
+
+      <div class="model" role="button" onclick="selectModel(9)" tabindex="0" aria-label="GreenBridge V1 6000 mAh">
+        <div class="thumb"><img src="pack_batterie_1200wh_5.png" alt="GreenBridge V1 6000 mAh" loading="lazy"></div>
+        <div class="meta">
+          <h4>GreenBridge V1</h4>
+          <p>6 000 mAh<br><small>Powerbank GreenBridge.</small></p>
+        </div>
+        <div class="actions"><button class="btn-small" onclick="openTechModal(9);event.stopPropagation()">Infos</button><button class="notice-mini-link" type="button" onclick="event.stopPropagation();openNoticeModal('model',9)"><i class="fa-regular fa-book-open"></i> Notice</button></div>
+      </div>
+
+      <div class="model" role="button" onclick="selectModel(10)" tabindex="0" aria-label="GreenBridge V2 10000 mAh">
+        <div class="thumb new-model-placeholder"><i class="fa-regular fa-image" aria-hidden="true"></i><span>PHOTO À AJOUTER</span></div>
+        <div class="meta">
+          <h4>GreenBridge V2</h4>
+          <p>10 000 mAh<br><small>Powerbank GreenBridge.</small></p>
+        </div>
+        <div class="actions"><button class="btn-small" onclick="openTechModal(10);event.stopPropagation()">Infos</button><button class="notice-mini-link" type="button" onclick="event.stopPropagation();openNoticeModal('model',10)"><i class="fa-regular fa-book-open"></i> Notice</button></div>
+      </div>
+
+      <div class="model" role="button" onclick="selectModel(11)" tabindex="0" aria-label="GreenBridge V3 12000 mAh">
+        <div class="thumb new-model-placeholder"><i class="fa-regular fa-image" aria-hidden="true"></i><span>PHOTO À AJOUTER</span></div>
+        <div class="meta">
+          <h4>GreenBridge V3</h4>
+          <p>12 000 mAh<br><small>Powerbank GreenBridge.</small></p>
+        </div>
+        <div class="actions"><button class="btn-small" onclick="openTechModal(11);event.stopPropagation()">Infos</button><button class="notice-mini-link" type="button" onclick="event.stopPropagation();openNoticeModal('model',11)"><i class="fa-regular fa-book-open"></i> Notice</button></div>
       </div>
     </div>
   </section>
@@ -1320,7 +1370,7 @@
 
       <div style="margin-top:12px">
         <button class="btn-small" type="button" onclick="openPackModal()">Infos pack</button>
-        <a class="notice-mini-link" href="notices/notice-projet-pack-modulaire-25kwh.pdf" download><i class="fa-regular fa-file-pdf"></i> Notice PDF</a>
+        <button class="notice-mini-link" type="button" onclick="openNoticeModal('pack')"><i class="fa-regular fa-book-open"></i> Notice</button>
       </div>
     </div>
   </section>
@@ -1356,7 +1406,6 @@ const SURVEY_URL = 'https://enquete-powerbank-ci-sn.netlify.app/';
 const models = [
   {
     id:'greenmini',
-    notice:'notices/notice-greenmini.pdf',
     title:'GreenMini — 10 000 mAh',
     subtitle:'Ultra-compact',
     images:['Pwkb_Mini_3.png','Pwkb_mini_213.png','PWBK_mini_4.png'],
@@ -1378,7 +1427,6 @@ const models = [
   },
   {
     id:'greencore',
-    notice:'notices/notice-greencore.pdf',
     title:'GreenCore — ≈ 9 000 mAh',
     subtitle:'Modulaire • Type-C charge rapide',
     images:['pwkb_123.png','Pwbk_21.png','pwkb_4.1.png'],
@@ -1408,7 +1456,6 @@ const models = [
   },
   {
     id:'greenplus',
-    notice:'notices/notice-greenplus.pdf',
     title:'GreenPlus — ≈ 9 000 mAh',
     subtitle:'Micro USB • bonne autonomie',
     images:['Greenplus_1.png','Greenplus_2.png','Greenplus_3.png'],
@@ -1430,7 +1477,6 @@ const models = [
   },
   {
     id:'greenpro',
-    notice:'notices/notice-greenpro.pdf',
     title:'GreenPro — ≈ 12 000 mAh',
     subtitle:'Multi-appareils • Charge rapide USB-C',
     images:['pwkb_6.png','pwbk_9.png','pwkb_10.png'],
@@ -1449,7 +1495,6 @@ const models = [
   },
   {
     id:'greenwire',
-    notice:'notices/notice-greenwire.pdf',
     title:'GreenWire — ≈ 20 000 mAh',
     subtitle:'Batterie testée en réel',
     images:['Greenwire_1.png','Greenwire_2.png'],
@@ -1468,7 +1513,6 @@ const models = [
   },
   {
     id:'greenwireless',
-    notice:'notices/notice-greenwireless.pdf',
     title:'GreenWireless — 20 000 mAh',
     subtitle:'Boîtier amovible • PD / QC3.0 • Sans-fil',
     images:['pwkb_wireless_1.png','pwkb_wireless_2.png','pwkb_wireless_3.png'],
@@ -1490,7 +1534,6 @@ const models = [
   },
   {
     id:'laptopcharger',
-    notice:'notices/notice-chargeur-pc-portable.pdf',
     title:'Chargeur PC Portable',
     subtitle:'Charge rapide universelle',
     images:['Chargeur_ordi_1.png'],
@@ -1509,7 +1552,6 @@ const models = [
   },
   {
     id:'wifiups',
-    notice:'notices/notice-stabilisateur-wifi.pdf',
     title:'Stabilisateur WiFi',
     subtitle:'Internet même sans courant',
     images:['wifi_2.png'],
@@ -1525,6 +1567,38 @@ const models = [
         Reste connecté.
       </p>
     `
+  },
+  {
+    id:'lifepo4-1200wh',
+    title:'Batterie LiFePO₄ — 1 200 Wh',
+    subtitle:'Stockage énergétique GreenBridge',
+    images:['pack_batterie_1200wh_2.png','pack_batterie_1200wh_3.png','pack_batterie_1200wh_4.png'],
+    specs:['Technologie : LiFePO₄','Énergie annoncée : 1 200 Wh','Conçue et assemblée par GreenBridge Technologies'],
+    details:`<p style="margin-top:0;color:#23403a;line-height:1.45"><strong>Batterie LiFePO₄ GreenBridge — 1 200 Wh</strong><br>Solution de stockage énergétique conçue et assemblée par GreenBridge Technologies.</p>`
+  },
+  {
+    id:'greenbridge-v1',
+    title:'GreenBridge V1 — 6 000 mAh',
+    subtitle:'Powerbank GreenBridge',
+    images:['pack_batterie_1200wh_5.png','pack_batterie_1200wh_6.png','pack_batterie_1200wh_7.png'],
+    specs:['Capacité annoncée : 6 000 mAh','Powerbank conçue et assemblée par GreenBridge Technologies'],
+    details:`<p style="margin-top:0;color:#23403a;line-height:1.45"><strong>GreenBridge V1 — 6 000 mAh</strong><br>Powerbank conçue et assemblée par GreenBridge Technologies.</p>`
+  },
+  {
+    id:'greenbridge-v2',
+    title:'GreenBridge V2 — 10 000 mAh',
+    subtitle:'Powerbank GreenBridge',
+    images:[],
+    specs:['Capacité annoncée : 10 000 mAh','Powerbank conçue et assemblée par GreenBridge Technologies'],
+    details:`<p style="margin-top:0;color:#23403a;line-height:1.45"><strong>GreenBridge V2 — 10 000 mAh</strong><br>Powerbank conçue et assemblée par GreenBridge Technologies. Photo du produit à ajouter.</p>`
+  },
+  {
+    id:'greenbridge-v3',
+    title:'GreenBridge V3 — 12 000 mAh',
+    subtitle:'Powerbank GreenBridge',
+    images:[],
+    specs:['Capacité annoncée : 12 000 mAh','Powerbank conçue et assemblée par GreenBridge Technologies'],
+    details:`<p style="margin-top:0;color:#23403a;line-height:1.45"><strong>GreenBridge V3 — 12 000 mAh</strong><br>Powerbank conçue et assemblée par GreenBridge Technologies. Photo du produit à ajouter.</p>`
   }
 ];
 
@@ -1678,6 +1752,111 @@ function closeModal(){
   stopModalCarousel();
 }
 
+function openNoticeModal(type, value){
+  stopModalCarousel();
+  let title = '';
+  let subtitle = '';
+  let details = '';
+  let specs = [];
+  let warranty = '';
+  let usageTitle = 'Conseils d’utilisation';
+  let usage = [
+    'Utiliser le produit conformément à sa fonction et aux caractéristiques indiquées sur son étiquette.',
+    'Employer un câble, un chargeur ou un équipement compatible avec le produit.',
+    'Débrancher le produit après utilisation lorsque cela est approprié et le conserver dans un endroit sec et ventilé.'
+  ];
+  let safety = [
+    'Ne pas démonter, percer, écraser, court-circuiter ou exposer le produit au feu.',
+    'Éviter l’eau, l’humidité excessive, les chocs et les températures élevées.',
+    'Cesser immédiatement l’utilisation en cas de gonflement, de fuite, d’odeur inhabituelle, de fumée ou d’échauffement anormal.',
+    'Tenir hors de portée des enfants. Ne pas jeter avec les déchets ménagers : suivre la filière locale de collecte des équipements et batteries.'
+  ];
+
+  if(type === 'model'){
+    const m = models[Number(value)];
+    if(!m) return;
+    title = m.title || 'Produit GreenBridge';
+    subtitle = m.subtitle || 'Produit GreenBridge Technologies';
+    details = m.details || '';
+    specs = m.specs || [];
+    warranty = m.warranty || '';
+    if(m.id === 'laptopcharger'){
+      usage = ['Vérifier la compatibilité de la tension, de la puissance et du connecteur avec l’ordinateur avant branchement.', 'Ne pas couvrir le chargeur pendant son fonctionnement.', 'Débrancher en cas de chauffe anormale ou de câble endommagé.'];
+      safety = ['Utiliser une prise en bon état et dans un environnement sec.', 'Ne pas ouvrir le boîtier ni tenter une réparation sous tension.', 'Ne pas utiliser un adaptateur ou un câble endommagé.'];
+    }else if(m.id === 'wifiups'){
+      usage = ['Vérifier la tension requise par le routeur ou le modem avant de choisir la sortie 5 V, 9 V ou 12 V.', 'Respecter la polarité et le type de connecteur de l’appareil alimenté.', 'Ne pas dépasser la capacité indiquée sur le produit.'];
+      safety = ['Ne pas inverser la polarité.', 'Ne pas exposer le stabilisateur à l’eau ou à une forte chaleur.', 'Débrancher en cas de câble ou de connecteur endommagé.'];
+    }
+  }else if(type === 'new'){
+    const key = String(value || '');
+    const newNotices = {
+      lifepo4: {
+        title:'Batterie LiFePO₄ GreenBridge — 1 200 Wh',
+        subtitle:'Notice d’information et de sécurité',
+        specs:['Technologie : LiFePO₄','Énergie annoncée : 1 200 Wh','Produit conçu et assemblé par GreenBridge Technologies'],
+        details:'<p>Cette batterie est destinée au stockage d’énergie pour alimenter des équipements compatibles. La capacité énergétique annoncée est de 1 200 Wh.</p>',
+        usage:['Avant raccordement, vérifier la tension nominale, la polarité et la compatibilité du chargeur, du régulateur solaire et de l’onduleur.','Faire effectuer le raccordement par une personne compétente, avec des câbles et des protections adaptés au courant prévu.','Respecter les limites de charge et de décharge indiquées sur l’étiquette et dans la documentation technique définitive.'],
+        safety:['Ne jamais court-circuiter les bornes positive et négative.','Ne pas ouvrir le boîtier, modifier le BMS ou intervenir sur les cellules.','Installer dans un emplacement sec, ventilé, stable et à l’abri du soleil direct et des sources de chaleur.','En cas de gonflement, d’odeur, de fumée ou d’échauffement anormal, couper l’installation si cela peut être fait sans danger et éloigner les personnes.']
+      },
+      v1: {
+        title:'GreenBridge V1 — 6 000 mAh',
+        subtitle:'Notice d’utilisation et de sécurité',
+        specs:['Capacité annoncée : 6 000 mAh','Powerbank conçue et assemblée par GreenBridge Technologies'],
+        details:'<p>Le GreenBridge V1 est une batterie externe destinée à recharger des appareils électroniques compatibles. La capacité annoncée est de 6 000 mAh.</p>',
+        usage:['Utiliser un câble en bon état et un appareil compatible.','Vérifier les indications portées sur le produit avant la recharge.','Recharger et stocker la powerbank dans un endroit sec et ventilé.'],
+        safety:safety
+      },
+      v2: {
+        title:'GreenBridge V2 — 10 000 mAh',
+        subtitle:'Notice d’utilisation et de sécurité',
+        specs:['Capacité annoncée : 10 000 mAh','Powerbank conçue et assemblée par GreenBridge Technologies'],
+        details:'<p>Le GreenBridge V2 est une batterie externe destinée à recharger des appareils électroniques compatibles. La capacité annoncée est de 10 000 mAh.</p><p>Les caractéristiques détaillées des ports et de la puissance de sortie seront précisées sur la fiche technique du produit final.</p>',
+        usage:['Utiliser un câble en bon état et un appareil compatible.','Vérifier les indications portées sur le produit avant la recharge.','Recharger et stocker la powerbank dans un endroit sec et ventilé.'],
+        safety:safety
+      },
+      v3: {
+        title:'GreenBridge V3 — 12 000 mAh',
+        subtitle:'Notice d’utilisation et de sécurité',
+        specs:['Capacité annoncée : 12 000 mAh','Powerbank conçue et assemblée par GreenBridge Technologies'],
+        details:'<p>Le GreenBridge V3 est une batterie externe destinée à recharger des appareils électroniques compatibles. La capacité annoncée est de 12 000 mAh.</p><p>Les caractéristiques détaillées des ports et de la puissance de sortie seront précisées sur la fiche technique du produit final.</p>',
+        usage:['Utiliser un câble en bon état et un appareil compatible.','Vérifier les indications portées sur le produit avant la recharge.','Recharger et stocker la powerbank dans un endroit sec et ventilé.'],
+        safety:safety
+      }
+    };
+    const n = newNotices[key];
+    if(!n) return;
+    title=n.title; subtitle=n.subtitle; specs=n.specs; details=n.details; usage=n.usage; safety=n.safety;
+  }else if(type === 'pack'){
+    title='Batterie modulaire GreenBridge — 2,5 kWh';
+    subtitle='Notice d’information — projet en développement';
+    details='<p>Ce pack modulaire de stockage est un projet en développement destiné à des usages professionnels, agricoles et à l’alimentation d’équipements essentiels. Il n’est pas présenté ici comme un produit final disponible à la vente.</p>';
+    specs=['Énergie visée : 2,5 kWh','Technologie envisagée : cellules prismatiques LiFePO₄','Recharge envisagée : secteur et solaire','Usages ciblés : stockage médical, PME, agriculture et élevage','Statut : projet en développement'];
+    usage=['Avant toute installation, attendre la fiche technique définitive et la validation de compatibilité des équipements.','Le dimensionnement des câbles, protections, chargeur et onduleur devra être réalisé selon les caractéristiques finales.'];
+    safety=['Ne pas utiliser les images ou informations de ce projet comme instructions de câblage.','Ne pas raccorder un prototype sans validation technique et protections adaptées.','Les caractéristiques et usages définitifs pourront évoluer pendant le développement.'];
+  }
+
+  const list = items => (items || []).map(item=>`<li>${escapeHTML(item)}</li>`).join('');
+  const html = `
+    <div class="written-notice">
+      <div class="written-notice-kicker">GREENBRIDGE TECHNOLOGIES · NOTICE ÉCRITE</div>
+      <h2 style="margin:5px 0 4px">${escapeHTML(title)}</h2>
+      <p class="written-notice-subtitle">${escapeHTML(subtitle)}</p>
+      <div class="modal-body">
+        ${details}
+        <h3>Caractéristiques connues</h3>
+        <ul>${list(specs)}</ul>
+        ${warranty ? `<p><strong>Garantie annoncée :</strong> ${escapeHTML(warranty)}</p>` : ''}
+        <h3>${escapeHTML(usageTitle)}</h3>
+        <ul>${list(usage)}</ul>
+        <h3>Précautions importantes</h3>
+        <ul>${list(safety)}</ul>
+        <p class="written-notice-footnote">Cette notice reprend les informations disponibles sur le produit. Les valeurs non précisées ne doivent pas être supposées : se référer à l’étiquette et à la fiche technique finale avant utilisation.</p>
+      </div>
+      <div class="written-notice-actions"><button type="button" class="btn-small" onclick="closeModal()">Fermer la notice</button></div>
+    </div>`;
+  openModal(html);
+}
+
 function openTechModal(i){
   const m = models[i] || models[0];
   const images = (m.images || []).map(src => ({ src, alt: m.title }));
@@ -1701,7 +1880,7 @@ function openTechModal(i){
       ${m.details}
       <div style="margin-top:12px;font-weight:800">Caractéristiques rapides</div>
       <ul>${(m.specs || []).map(s=>`<li>${s}</li>`).join('')}</ul>
-      <div style="margin-top:16px"><a class="notice-link-btn" href="${m.notice}" download><i class="fa-regular fa-file-pdf"></i> Télécharger la notice PDF</a></div>
+      <div style="margin-top:16px"><button class="notice-link-btn" type="button" onclick="openNoticeModal('model',${i})"><i class="fa-regular fa-book-open"></i> Lire la notice</button></div>
     </div>
   `;
   openModal(html);
@@ -1739,7 +1918,7 @@ function openPackModal(){
       </ul>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;">
         <span style="background:linear-gradient(90deg,#ffd54a,#ffb300);padding:10px 14px;border-radius:999px;font-weight:900;color:#08110a">Projet en développement</span>
-        <a class="notice-link-btn" href="notices/notice-projet-pack-modulaire-25kwh.pdf" download><i class="fa-regular fa-file-pdf"></i> Notice PDF</a>
+        <button class="notice-link-btn" type="button" onclick="openNoticeModal('pack')"><i class="fa-regular fa-book-open"></i> Notice</button>
         <button onclick="closeModal()" style="padding:10px 14px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);background:#fff;cursor:pointer">Fermer</button>
       </div>
     </div>
@@ -1818,7 +1997,7 @@ function openNewProductModal(productKey, title, description){
       <p><strong>Marque :</strong> GreenBridge Technologies</p>
       <p>Produit conçu et assemblé par GreenBridge Technologies.</p>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
-        <a class="notice-link-btn" href="notices/notice-${productKey === 'lifepo4' ? 'batterie-lifepo4-1200wh' : productKey === 'v1' ? 'greenbridge-v1-6000mah' : productKey === 'v2' ? 'greenbridge-v2-10000mah' : 'greenbridge-v3-12000mah'}.pdf" download><i class="fa-regular fa-file-pdf"></i> Télécharger la notice PDF</a>
+        <button class="notice-link-btn" type="button" onclick="openNoticeModal('new','${productKey}')"><i class="fa-regular fa-book-open"></i> Lire la notice</button>
         <button type="button" style="border:0;border-radius:9px;padding:10px 14px;color:#fff;background:#25D366;font-weight:800;cursor:pointer" onclick="closeModal();openProductWhatsApp('${productForOrder}')"><i class="fa-brands fa-whatsapp"></i> Demander sur WhatsApp</button>
         <button type="button" class="btn-small" onclick="closeModal()">Fermer</button>
       </div>
