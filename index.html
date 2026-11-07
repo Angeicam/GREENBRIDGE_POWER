@@ -31,6 +31,9 @@
   <link rel="preload" as="image" href="Chargeur_ordi_1.png">
   <link rel="preload" as="image" href="wifi_2.png">
   <link rel="preload" as="image" href="Batterie%20GreenBridge%20violette%20en%20studio.png">
+  <link rel="preload" as="image" href="Greenonly1.png">
+  <link rel="preload" as="image" href="Greenonly2.PNG">
+  <link rel="preload" as="image" href="Greenonly3.png">
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -923,6 +926,8 @@
     display:block;
     transition:opacity .35s ease, transform .35s ease;
   }
+  .modal-photo-fallback{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:linear-gradient(145deg,#f4faf5,#e7f2e9);color:#456c56;text-align:center;font-size:12px;font-weight:800}
+  .modal-photo-fallback i{font-size:30px;color:#7cb342}
   .modal-carousel-controls{
     position:absolute;
     inset:0;
@@ -1274,10 +1279,10 @@
     <div class="models-header"><div class="models-title">Nos modèles</div></div>
 
     <div class="models" role="list">
-      <div class="model" role="button" onclick="selectModel(0)" tabindex="0" aria-label="Green Only 4 500 mAh"><div class="thumb new-model-placeholder"><i class="fa-regular fa-image" aria-hidden="true"></i><span>PHOTO À AJOUTER</span></div><div class="meta"><h4>Green Only</h4><p>4 500 mAh<br><small>Powerbank GreenBridge.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(0)">En savoir plus</button><a class="notice-mini-link" href="https://www.greenbridge-technologies.com/notices/notice-green-only-4500mah.pdf" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('Green Only — 4 500 mAh')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div></div>
+      <div class="model" role="button" onclick="selectModel(0)" tabindex="0" aria-label="Green Only 4 500 mAh"><div class="thumb"><img src="Greenonly2.PNG" alt="Green Only — aperçu des coloris" loading="lazy" onerror="showModelPhotoPlaceholder(this)"></div><div class="meta"><h4>Green Only</h4><p>4 500 mAh<br><small>Powerbank GreenBridge.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(0)">En savoir plus</button><a class="notice-mini-link" href="https://www.greenbridge-technologies.com/notices/notice-green-only-4500mah.pdf" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('Green Only — 4 500 mAh')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div></div>
 
       <div class="model" role="button" onclick="selectModel(1)" tabindex="0" aria-label="GreenMini">
-        <div class="thumb"><img src="Pwkb_Mini_3.png" alt="GreenMini" loading="eager" fetchpriority="high"></div>
+        <div class="thumb"><img src="Pwkb_Mini_3.png" alt="GreenMini" loading="eager" fetchpriority="high" onerror="showModelPhotoPlaceholder(this)"></div>
         <div class="meta">
           <h4>GreenMini</h4>
           <p>GreenMini — 10 000 mAh<br><small>Compact.</small></p>
@@ -1286,7 +1291,7 @@
       </div>
 
       <div class="model" role="button" onclick="selectModel(2)" tabindex="0" aria-label="GreenCore">
-        <div class="thumb"><img src="pwkb_123.png" alt="GreenCore" loading="eager"></div>
+        <div class="thumb"><img src="pwkb_123.png" alt="GreenCore" loading="eager" onerror="showModelPhotoPlaceholder(this)"></div>
         <div class="meta">
           <h4>GreenCore</h4>
           <p>GreenCore — 10 000 mAh<br><small>Type-C rapide.</small></p>
@@ -1295,7 +1300,7 @@
       </div>
 
       <div class="model" role="button" onclick="selectModel(3)" tabindex="0" aria-label="GreenPlus">
-        <div class="thumb"><img src="Greenplus_1.png" alt="GreenPlus" loading="lazy"></div>
+        <div class="thumb"><img src="Greenplus_1.png" alt="GreenPlus" loading="lazy" onerror="showModelPhotoPlaceholder(this)"></div>
         <div class="meta">
           <h4>GreenPlus</h4>
           <p>GreenPlus — 10 000 mAh<br><small>Bonne autonomie.</small></p>
@@ -1303,12 +1308,12 @@
         <div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(3)">En savoir plus</button><a class="notice-mini-link" href="https://www.greenbridge-technologies.com/notices/notice-greenplus.pdf" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('GreenPlus')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div>
       </div>
 
-      <div class="model" role="button" onclick="selectModel(4)" tabindex="0" aria-label="Green Eco 10 000 mAh"><div class="thumb new-model-placeholder"><i class="fa-regular fa-image" aria-hidden="true"></i><span>PHOTO À AJOUTER</span></div><div class="meta"><h4>Green Eco</h4><p>10 000 mAh<br><small>Powerbank GreenBridge.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(4)">En savoir plus</button><a class="notice-mini-link" href="https://www.greenbridge-technologies.com/notices/notice-green-eco-10000mah.pdf" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('Green Eco — 10 000 mAh')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div></div>
+      <div class="model" role="button" onclick="selectModel(4)" tabindex="0" aria-label="Green Eco 10 000 mAh"><div class="thumb"><img src="GreenEco1.png" alt="Green Eco" loading="lazy" onerror="showModelPhotoPlaceholder(this)"></div><div class="meta"><h4>Green Eco</h4><p>10 000 mAh<br><small>Powerbank GreenBridge.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(4)">En savoir plus</button><a class="notice-mini-link" href="https://www.greenbridge-technologies.com/notices/notice-green-eco-10000mah.pdf" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('Green Eco — 10 000 mAh')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div></div>
 
-      <div class="model" role="button" onclick="selectModel(5)" tabindex="0" aria-label="Green Africa 10 000 mAh"><div class="thumb new-model-placeholder"><i class="fa-regular fa-image" aria-hidden="true"></i><span>PHOTO À AJOUTER</span></div><div class="meta"><h4>Green Africa</h4><p>10 000 mAh<br><small>Powerbank GreenBridge.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(5)">En savoir plus</button><a class="notice-mini-link" href="https://www.greenbridge-technologies.com/notices/notice-green-africa-10000mah.pdf" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('Green Africa — 10 000 mAh')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div></div>
+      <div class="model" role="button" onclick="selectModel(5)" tabindex="0" aria-label="Green Africa 10 000 mAh"><div class="thumb"><img src="GreenAfrica1.png" alt="Green Africa" loading="lazy" onerror="showModelPhotoPlaceholder(this)"></div><div class="meta"><h4>Green Africa</h4><p>10 000 mAh<br><small>Powerbank GreenBridge.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(5)">En savoir plus</button><a class="notice-mini-link" href="https://www.greenbridge-technologies.com/notices/notice-green-africa-10000mah.pdf" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('Green Africa — 10 000 mAh')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div></div>
 
       <div class="model" role="button" onclick="selectModel(6)" tabindex="0" aria-label="GreenPro">
-        <div class="thumb"><img src="pwkb_6.png" alt="GreenPro" loading="lazy"></div>
+        <div class="thumb"><img src="pwkb_6.png" alt="GreenPro" loading="lazy" onerror="showModelPhotoPlaceholder(this)"></div>
         <div class="meta">
           <h4>GreenPro</h4>
           <p>GreenPro ≈ 12 000 mAh<br><small>Multi-appareils.</small></p>
@@ -1316,10 +1321,10 @@
         <div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(6)">En savoir plus</button><a class="notice-mini-link" href="https://www.greenbridge-technologies.com/notices/notice-greenpro.pdf" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('GreenPro')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div>
       </div>
 
-      <div class="model" role="button" onclick="selectModel(7)" tabindex="0" aria-label="Green Reck 12 000 mAh"><div class="thumb new-model-placeholder"><i class="fa-regular fa-image" aria-hidden="true"></i><span>PHOTO À AJOUTER</span></div><div class="meta"><h4>Green Reck</h4><p>12 000 mAh<br><small>Powerbank GreenBridge.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(7)">En savoir plus</button><a class="notice-mini-link" href="https://www.greenbridge-technologies.com/notices/notice-green-reck-12000mah.pdf" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('Green Reck — 12 000 mAh')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div></div>
+      <div class="model" role="button" onclick="selectModel(7)" tabindex="0" aria-label="Green Reck 12 000 mAh"><div class="thumb"><img src="GreenReck1.png" alt="Green Reck" loading="lazy" onerror="showModelPhotoPlaceholder(this)"></div><div class="meta"><h4>Green Reck</h4><p>12 000 mAh<br><small>Powerbank GreenBridge.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(7)">En savoir plus</button><a class="notice-mini-link" href="https://www.greenbridge-technologies.com/notices/notice-green-reck-12000mah.pdf" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('Green Reck — 12 000 mAh')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div></div>
 
       <div class="model" role="button" onclick="selectModel(8)" tabindex="0" aria-label="GreenWire">
-        <div class="thumb"><img src="Greenwire_1.png" alt="GreenWire" loading="lazy"></div>
+        <div class="thumb"><img src="Greenwire_1.png" alt="GreenWire" loading="lazy" onerror="showModelPhotoPlaceholder(this)"></div>
         <div class="meta">
           <h4>GreenWire</h4>
           <p>GreenWire ≈ 20 000 mAh<br><small>Très robuste.</small></p>
@@ -1328,7 +1333,7 @@
       </div>
 
       <div class="model" role="button" onclick="selectModel(9)" tabindex="0" aria-label="GreenWireless">
-        <div class="thumb"><img src="pwkb_wireless_1.png" alt="GreenWireless" loading="lazy"></div>
+        <div class="thumb"><img src="pwkb_wireless_1.png" alt="GreenWireless" loading="lazy" onerror="showModelPhotoPlaceholder(this)"></div>
         <div class="meta">
           <h4>GreenWireless</h4>
           <p>GreenWireless — 20 000 mAh<br><small>Sans-fil.</small></p>
@@ -1337,10 +1342,10 @@
         <div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(9)">En savoir plus</button><a class="notice-mini-link" href="https://www.greenbridge-technologies.com/notices/notice-greenwireless.pdf" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('GreenWireless')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div>
       </div>
 
-      <div class="model" role="button" onclick="selectModel(10)" tabindex="0" aria-label="Green TECH 20 000 mAh"><div class="thumb new-model-placeholder"><i class="fa-regular fa-image" aria-hidden="true"></i><span>PHOTO À AJOUTER</span></div><div class="meta"><h4>Green TECH</h4><p>20 000 mAh<br><small>Powerbank GreenBridge.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(10)">En savoir plus</button><a class="notice-mini-link" href="https://www.greenbridge-technologies.com/notices/notice-green-tech-20000mah.pdf" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('Green TECH — 20 000 mAh')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div></div>
+      <div class="model" role="button" onclick="selectModel(10)" tabindex="0" aria-label="Green TECH 20 000 mAh"><div class="thumb"><img src="GreenTECH1.png" alt="Green TECH" loading="lazy" onerror="showModelPhotoPlaceholder(this)"></div><div class="meta"><h4>Green TECH</h4><p>20 000 mAh<br><small>Powerbank GreenBridge.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(10)">En savoir plus</button><a class="notice-mini-link" href="https://www.greenbridge-technologies.com/notices/notice-green-tech-20000mah.pdf" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('Green TECH — 20 000 mAh')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div></div>
 
       <div class="model" role="button" onclick="selectModel(11)" tabindex="0" aria-label="GreenLaptop+">
-        <div class="thumb"><img src="Chargeur_ordi_1.png" alt="GreenLaptop+" loading="lazy"></div>
+        <div class="thumb"><img src="Chargeur_ordi_1.png" alt="GreenLaptop+" loading="lazy" onerror="showModelPhotoPlaceholder(this)"></div>
         <div class="meta">
           <h4>GreenLaptop+</h4>
           <p>65W à 100W<br><small>Charge rapide pour ordinateur portable.</small></p>
@@ -1348,10 +1353,10 @@
         <div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(11)">En savoir plus</button><a class="notice-mini-link" href="https://www.greenbridge-technologies.com/notices/notice-chargeur-pc-portable.pdf" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('GreenLaptop+')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div>
       </div>
 
-      <div class="model" role="button" onclick="selectModel(12)" tabindex="0" aria-label="GreenLaptop 20 000 mAh"><div class="thumb new-model-placeholder"><i class="fa-regular fa-image" aria-hidden="true"></i><span>PHOTO À AJOUTER</span></div><div class="meta"><h4>GreenLaptop</h4><p>20 000 mAh<br><small>Powerbank GreenBridge pour ordinateur compatible — à confirmer.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(12)">En savoir plus</button><a class="notice-mini-link" href="https://www.greenbridge-technologies.com/notices/notice-green-laptop-20000mah.pdf" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('GreenLaptop — 20 000 mAh')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div></div>
+      <div class="model" role="button" onclick="selectModel(12)" tabindex="0" aria-label="GreenLaptop 20 000 mAh"><div class="thumb"><img src="GreenLaptop1.png" alt="GreenLaptop" loading="lazy" onerror="showModelPhotoPlaceholder(this)"></div><div class="meta"><h4>GreenLaptop</h4><p>20 000 mAh<br><small>Powerbank GreenBridge pour ordinateur compatible — à confirmer.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(12)">En savoir plus</button><a class="notice-mini-link" href="https://www.greenbridge-technologies.com/notices/notice-green-laptop-20000mah.pdf" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('GreenLaptop — 20 000 mAh')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div></div>
 
       <div class="model" role="button" onclick="selectModel(13)" tabindex="0" aria-label="Green Wifi">
-        <div class="thumb"><img src="wifi_2.png" alt="Green Wifi" loading="lazy"></div>
+        <div class="thumb"><img src="wifi_2.png" alt="Green Wifi" loading="lazy" onerror="showModelPhotoPlaceholder(this)"></div>
         <div class="meta">
           <h4>Green Wifi</h4>
           <p>Anti-coupure courant<br><small>Reste connecté.</small></p>
@@ -1410,6 +1415,14 @@
 </footer>
 
 <script>
+/* Emplacements photo PNG des modèles : les fichiers sont à placer à la racine du site. */
+function showModelPhotoPlaceholder(img){
+  if(!img || !img.parentElement) return;
+  const box = img.parentElement;
+  box.classList.add('new-model-placeholder');
+  box.innerHTML = '<i class="fa-regular fa-image" aria-hidden="true"></i><span>PHOTO À AJOUTER</span>';
+}
+
 const CONTACT_EMAIL = 'contact@greenbridge.com';
 const SURVEY_URL = 'https://enquete-powerbank-ci-sn.netlify.app/';
 
@@ -1419,7 +1432,8 @@ const models = [
     notice:'notices/notice-green-only-4500mah.pdf',
     title:'Green Only — 4 500 mAh',
     subtitle:'Powerbank GreenBridge',
-    images:[],
+    /* GreenOnly : trois vues PNG à placer à la racine du site. */
+    images:['Greenonly1.png','Greenonly2.PNG','Greenonly3.png'],
     specs:['Capacité annoncée : 4 500 mAh',
       'Powerbank conçue pour la gamme GreenBridge Technologies',
       'Puissance de sortie, ports, temps de charge et compatibilités à confirmer selon la version finale'],
@@ -1504,7 +1518,7 @@ const models = [
     notice:'notices/notice-green-eco-10000mah.pdf',
     title:'Green Eco — 10 000 mAh',
     subtitle:'Powerbank GreenBridge',
-    images:[],
+    images:['GreenEco1.png','GreenEco2.png','GreenEco3.png'],
     specs:['Capacité annoncée : 10 000 mAh',
       'Powerbank conçue pour la gamme GreenBridge Technologies',
       'Puissance de sortie, ports, temps de charge et compatibilités à confirmer selon la version finale'],
@@ -1515,7 +1529,7 @@ const models = [
     notice:'notices/notice-green-africa-10000mah.pdf',
     title:'Green Africa — 10 000 mAh',
     subtitle:'Powerbank GreenBridge',
-    images:[],
+    images:['GreenAfrica1.png','GreenAfrica2.png','GreenAfrica3.png'],
     specs:['Capacité annoncée : 10 000 mAh',
       'Powerbank conçue pour la gamme GreenBridge Technologies',
       'Puissance de sortie, ports, temps de charge et compatibilités à confirmer selon la version finale'],
@@ -1545,7 +1559,7 @@ const models = [
     notice:'notices/notice-green-reck-12000mah.pdf',
     title:'Green Reck — 12 000 mAh',
     subtitle:'Powerbank GreenBridge',
-    images:[],
+    images:['GreenReck1.png','GreenReck2.png','GreenReck3.png'],
     specs:['Capacité annoncée : 12 000 mAh',
       'Powerbank conçue pour la gamme GreenBridge Technologies',
       'Puissance de sortie, ports, temps de charge et compatibilités à confirmer selon la version finale'],
@@ -1556,7 +1570,7 @@ const models = [
     notice:'notices/notice-greenwire.pdf',
     title:'GreenWire — ≈ 20 000 mAh',
     subtitle:'Batterie testée en réel',
-    images:['Greenwire_1.png','Greenwire_2.png'],
+    images:['Greenwire_1.png','Greenwire_2.png','Greenwire_3.png'],
     specs:[
       'Capacité réelle : ~20 000 mAh',
       'Cellules hautes performances',
@@ -1597,7 +1611,7 @@ const models = [
     notice:'notices/notice-green-tech-20000mah.pdf',
     title:'Green TECH — 20 000 mAh',
     subtitle:'Powerbank GreenBridge',
-    images:[],
+    images:['GreenTECH1.png','GreenTECH2.png','GreenTECH3.png'],
     specs:['Capacité annoncée : 20 000 mAh',
       'Powerbank conçue pour la gamme GreenBridge Technologies',
       'Puissance de sortie, ports, temps de charge et compatibilités à confirmer selon la version finale'],
@@ -1608,7 +1622,7 @@ const models = [
     notice:'notices/notice-chargeur-pc-portable.pdf',
     title:'GreenLaptop+',
     subtitle:'Charge rapide universelle pour ordinateur portable',
-    images:['Chargeur_ordi_1.png'],
+    images:['Chargeur_ordi_1.png','Chargeur_ordi_2.png','Chargeur_ordi_3.png'],
     specs:[
       'USB-C / DC',
       'Puissance : 65W à 100W',
@@ -1627,7 +1641,7 @@ const models = [
     notice:'notices/notice-green-laptop-20000mah.pdf',
     title:'GreenLaptop — 20 000 mAh',
     subtitle:'Powerbank GreenBridge',
-    images:[],
+    images:['GreenLaptop1.png','GreenLaptop2.png','GreenLaptop3.png'],
     specs:['Capacité annoncée : 20 000 mAh',
       'Powerbank conçue pour la gamme GreenBridge Technologies',
       'Puissance de sortie, ports, temps de charge et compatibilités à confirmer selon la version finale'],
@@ -1638,7 +1652,7 @@ const models = [
     notice:'notices/notice-stabilisateur-wifi.pdf',
     title:'Green Wifi',
     subtitle:'Alimentation de secours pour routeur et modem',
-    images:['wifi_2.png'],
+    images:['wifi_2.png','GreenWifi2.png','GreenWifi3.png'],
     specs:[
       'Backup routeur et modem',
       'Sorties 5V / 9V / 12V',
@@ -1713,8 +1727,20 @@ function allImageUrls(){
     'Future_pack_2.1.png',
     'Future_Pack_3.png'
   ];
+  /* Fichiers PNG réservés pour les futures photos : ne pas les précharger tant qu'ils ne sont pas déposés sur GitHub. */
+  const photosAvenir = new Set([
+    'Greenonly1.png','Greenonly3.png',
+    'GreenEco1.png','GreenEco2.png','GreenEco3.png',
+    'GreenAfrica1.png','GreenAfrica2.png','GreenAfrica3.png',
+    'GreenReck1.png','GreenReck2.png','GreenReck3.png',
+    'Greenwire_3.png',
+    'GreenTECH1.png','GreenTECH2.png','GreenTECH3.png',
+    'Chargeur_ordi_2.png','Chargeur_ordi_3.png',
+    'GreenLaptop1.png','GreenLaptop2.png','GreenLaptop3.png',
+    'GreenWifi2.png','GreenWifi3.png'
+  ]);
   models.forEach(m=>{
-    if(Array.isArray(m.images)) list.push(...m.images);
+    if(Array.isArray(m.images)) list.push(...m.images.filter(src=>!photosAvenir.has(src)));
   });
   Object.values(newProductGalleryImages).forEach(images=>list.push(...images));
   return [...new Set(list)];
@@ -1743,18 +1769,27 @@ function updateModalCarousel(){
   const idx = ((modalCarouselIndex % modalCarouselImages.length) + modalCarouselImages.length) % modalCarouselImages.length;
   const current = modalCarouselImages[idx];
 
+  const fallback = document.getElementById('modalCarouselFallback');
+  const fallbackText = document.getElementById('modalCarouselFallbackText');
   img.style.opacity = '0.2';
   img.style.transform = 'scale(1.02)';
-  setTimeout(()=>{
-    img.src = current.src;
-    img.alt = current.alt;
-    img.onload = () => {
-      img.style.opacity = '1';
-      img.style.transform = 'scale(1)';
-    };
+  img.style.display = 'block';
+  if(fallback) fallback.style.display = 'none';
+  img.onload = () => {
+    img.style.display = 'block';
     img.style.opacity = '1';
     img.style.transform = 'scale(1)';
-  }, 60);
+    if(fallback) fallback.style.display = 'none';
+  };
+  img.onerror = () => {
+    img.style.display = 'none';
+    if(fallbackText) fallbackText.textContent = `Photo ${idx + 1} à ajouter`;
+    if(fallback) fallback.style.display = 'flex';
+  };
+  img.alt = current.alt;
+  img.src = current.src;
+  img.style.opacity = '1';
+  img.style.transform = 'scale(1)';
 
   if(dots){
     dots.innerHTML = modalCarouselImages.map((_, i)=>`
@@ -1811,7 +1846,8 @@ function openTechModal(i){
   const carouselHtml = images.length ? `
     <div class="modal-carousel">
       <div class="modal-carousel-stage">
-        <img id="modalCarouselImage" src="${images[0].src}" alt="${images[0].alt}" loading="eager">
+        <img id="modalCarouselImage" alt="${images[0].alt}" loading="eager">
+        <div class="modal-photo-fallback" id="modalCarouselFallback" style="display:none"><i class="fa-regular fa-image" aria-hidden="true"></i><span id="modalCarouselFallbackText">Photo à ajouter</span></div>
         <div class="modal-carousel-controls">
           <button class="carousel-btn" type="button" aria-label="Image précédente" onclick="prevModalCarousel()"><i class="fa-solid fa-chevron-left"></i></button>
           <button class="carousel-btn" type="button" aria-label="Image suivante" onclick="nextModalCarousel()"><i class="fa-solid fa-chevron-right"></i></button>
