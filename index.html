@@ -31,6 +31,7 @@
   <link rel="preload" as="image" href="Chargeur_ordi_1.png">
   <link rel="preload" as="image" href="wifi_2.png">
   <link rel="preload" as="image" href="Batterie%20GreenBridge%20violette%20en%20studio.png">
+  <link rel="preload" as="image" href="Greenonly.png">
   <link rel="preload" as="image" href="Greenonly1.png">
   <link rel="preload" as="image" href="Greenonly2.PNG">
   <link rel="preload" as="image" href="Greenonly3.png">
@@ -1216,7 +1217,7 @@
       <article class="new-product-card">
         <span class="new-product-badge">NOUVEAUTÉ</span>
         <div class="new-product-photo-placeholder" aria-label="Photo de la batterie LiFePO4 GreenBridge">
-          <img src="pack_batterie_1200wh.png" alt="Batterie GreenBridge violette LiFePO4 12 V 100 Ah, 1 200 Wh" loading="lazy">
+          <img src="pack_batterie_1200w_4.jpg" alt="Batterie GreenBridge violette LiFePO4 12 V 100 Ah, 1 200 Wh" loading="lazy">
         </div>
         <h3>Batterie LiFePO₄</h3>
         <p>Capacité énergétique : <strong>1 200 Wh</strong><br>Conçue et assemblée par GreenBridge Technologies.</p>
@@ -1279,7 +1280,7 @@
     <div class="models-header"><div class="models-title">Nos modèles</div></div>
 
     <div class="models" role="list">
-      <div class="model" role="button" onclick="selectModel(0)" tabindex="0" aria-label="Green Only 4 500 mAh"><div class="thumb"><img src="Greenonly2.PNG" alt="Green Only — aperçu des coloris" loading="lazy" onerror="showModelPhotoPlaceholder(this)"></div><div class="meta"><h4>Green Only</h4><p>4 500 mAh<br><small>Powerbank GreenBridge.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(0)">En savoir plus</button><a class="notice-mini-link" href="https://www.greenbridge-technologies.com/notices/notice-green-only-4500mah.pdf" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('Green Only — 4 500 mAh')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div></div>
+      <div class="model" role="button" onclick="selectModel(0)" tabindex="0" aria-label="Green Only 4 500 mAh"><div class="thumb"><img src="Greenonly.png" alt="Green Only — aperçu des quatre coloris" loading="lazy" onerror="showModelPhotoPlaceholder(this)"></div><div class="meta"><h4>Green Only</h4><p>4 500 mAh<br><small>Powerbank GreenBridge.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(0)">En savoir plus</button><a class="notice-mini-link" href="https://www.greenbridge-technologies.com/notices/notice-green-only-4500mah.pdf" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a><button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('Green Only — 4 500 mAh')"><i class="fa-brands fa-whatsapp"></i> Contact</button></div></div>
 
       <div class="model" role="button" onclick="selectModel(1)" tabindex="0" aria-label="GreenMini">
         <div class="thumb"><img src="Pwkb_Mini_3.png" alt="GreenMini" loading="eager" fetchpriority="high" onerror="showModelPhotoPlaceholder(this)"></div>
@@ -1426,14 +1427,16 @@ function showModelPhotoPlaceholder(img){
 const CONTACT_EMAIL = 'contact@greenbridge.com';
 const SURVEY_URL = 'https://enquete-powerbank-ci-sn.netlify.app/';
 
+/* Chaque modèle possède 4 emplacements distincts : cardImage pour la carte, puis 3 images dans la galerie En savoir plus. */
 const models = [
 {
     id:'green-only',
+    cardImage:'Greenonly.png',
     notice:'notices/notice-green-only-4500mah.pdf',
     title:'Green Only — 4 500 mAh',
     subtitle:'Powerbank GreenBridge',
     /* GreenOnly : trois vues PNG à placer à la racine du site. */
-    images:['Greenonly1.png','Greenonly2.PNG','Greenonly3.png','Greenonly.png'],
+    images:['Greenonly1.png','Greenonly2.PNG','Greenonly3.png'],
     specs:['Capacité annoncée : 4 500 mAh',
       'Powerbank conçue pour la gamme GreenBridge Technologies',
       'Puissance de sortie, ports, temps de charge et compatibilités à confirmer selon la version finale'],
@@ -1441,10 +1444,11 @@ const models = [
   },
 {
     id:'greenmini',
+    cardImage:'Pwkb_Mini_3.png',
     notice:'notices/notice-greenmini.pdf',
     title:'GreenMini — 10 000 mAh',
     subtitle:'Ultra-compact',
-    images:['Pwkb_Mini_3.png','Pwkb_mini_213.png','PWBK_mini_4.png'],
+    images:['Pwkb_mini_213.png','PWBK_mini_4.png','GreenMini3.png'],
     specs:[
       'Cellules : Samsung (3 cellules)',
       'Capacité nominale : 10 000 mAh',
@@ -1463,10 +1467,11 @@ const models = [
   },
 {
     id:'greencore',
+    cardImage:'pwkb_123.png',
     notice:'notices/notice-greencore.pdf',
     title:'GreenCore — 10 000 mAh',
     subtitle:'Modulaire • Type-C charge rapide',
-    images:['pwkb_123.png','Pwbk_21.png','pwkb_4.1.png'],
+    images:['Pwbk_21.png','pwkb_4.1.png','GreenCore3.png'],
     specs:[
       'Cellules : Samsung',
       'Capacité nominale : 10 000 mAh',
@@ -1493,10 +1498,11 @@ const models = [
   },
 {
     id:'greenplus',
+    cardImage:'Greenplus_1.png',
     notice:'notices/notice-greenplus.pdf',
     title:'GreenPlus — 10 000 mAh',
     subtitle:'Micro USB • bonne autonomie',
-    images:['Greenplus_1.png','Greenplus_2.png','Greenplus_3.png'],
+    images:['Greenplus_2.png','Greenplus_3.png','Greenplus_4.png'],
     specs:[
       'Capacité : 10 000 mAh',
       'Cellules : Samsung / LG',
@@ -1515,10 +1521,11 @@ const models = [
   },
 {
     id:'green-eco',
+    cardImage:'GreenEco1.png',
     notice:'notices/notice-green-eco-10000mah.pdf',
     title:'Green Eco — 10 000 mAh',
     subtitle:'Powerbank GreenBridge',
-    images:['GreenEco1.png','GreenEco2.png','GreenEco3.png'],
+    images:['GreenEco2.png','GreenEco3.png','GreenEco4.png'],
     specs:['Capacité annoncée : 10 000 mAh',
       'Powerbank conçue pour la gamme GreenBridge Technologies',
       'Puissance de sortie, ports, temps de charge et compatibilités à confirmer selon la version finale'],
@@ -1526,10 +1533,11 @@ const models = [
   },
 {
     id:'green-africa',
+    cardImage:'GreenAfrica1.png',
     notice:'notices/notice-green-africa-10000mah.pdf',
     title:'Green Africa — 10 000 mAh',
     subtitle:'Powerbank GreenBridge',
-    images:['GreenAfrica1.png','GreenAfrica2.png','GreenAfrica3.png'],
+    images:['GreenAfrica2.png','GreenAfrica3.png','GreenAfrica4.png'],
     specs:['Capacité annoncée : 10 000 mAh',
       'Powerbank conçue pour la gamme GreenBridge Technologies',
       'Puissance de sortie, ports, temps de charge et compatibilités à confirmer selon la version finale'],
@@ -1537,10 +1545,11 @@ const models = [
   },
 {
     id:'greenpro',
+    cardImage:'pwkb_6.png',
     notice:'notices/notice-greenpro.pdf',
     title:'GreenPro — ≈ 12 000 mAh',
     subtitle:'Multi-appareils • Charge rapide USB-C',
-    images:['pwkb_6.png','pwbk_9.png','pwkb_10.png'],
+    images:['pwbk_9.png','pwkb_10.png','GreenPro3.png'],
     specs:[
       'Capacité : ≈ 12 000 mAh',
       'USB-C charge rapide',
@@ -1556,10 +1565,11 @@ const models = [
   },
 {
     id:'green-reck',
+    cardImage:'GreenReck1.png',
     notice:'notices/notice-green-reck-12000mah.pdf',
     title:'Green Reck — 12 000 mAh',
     subtitle:'Powerbank GreenBridge',
-    images:['GreenReck1.png','GreenReck2.png','GreenReck3.png'],
+    images:['GreenReck2.png','GreenReck3.png','GreenReck4.png'],
     specs:['Capacité annoncée : 12 000 mAh',
       'Powerbank conçue pour la gamme GreenBridge Technologies',
       'Puissance de sortie, ports, temps de charge et compatibilités à confirmer selon la version finale'],
@@ -1567,10 +1577,11 @@ const models = [
   },
 {
     id:'greenwire',
+    cardImage:'Greenwire_1.png',
     notice:'notices/notice-greenwire.pdf',
     title:'GreenWire — ≈ 20 000 mAh',
     subtitle:'Batterie testée en réel',
-    images:['Greenwire_1.png','Greenwire_2.png','Greenwire_3.png'],
+    images:['Greenwire_2.png','Greenwire_3.png','Greenwire_4.png'],
     specs:[
       'Capacité réelle : ~20 000 mAh',
       'Cellules hautes performances',
@@ -1586,10 +1597,11 @@ const models = [
   },
 {
     id:'greenwireless',
+    cardImage:'pwkb_wireless_1.png',
     notice:'notices/notice-greenwireless.pdf',
     title:'GreenWireless — 20 000 mAh',
     subtitle:'Boîtier amovible • PD / QC3.0 • Sans-fil',
-    images:['pwkb_wireless_1.png','pwkb_wireless_2.png','pwkb_wireless_3.png'],
+    images:['pwkb_wireless_2.png','pwkb_wireless_3.png','pwkb_wireless_4.png'],
     specs:[
       'Cellules : Samsung ou LG',
       'Capacité nominale : 20 000 mAh',
@@ -1608,10 +1620,11 @@ const models = [
   },
 {
     id:'green-tech',
+    cardImage:'GreenTECH1.png',
     notice:'notices/notice-green-tech-20000mah.pdf',
     title:'Green TECH — 20 000 mAh',
     subtitle:'Powerbank GreenBridge',
-    images:['GreenTECH1.png','GreenTECH2.png','GreenTECH3.png'],
+    images:['GreenTECH2.png','GreenTECH3.png','GreenTECH4.png'],
     specs:['Capacité annoncée : 20 000 mAh',
       'Powerbank conçue pour la gamme GreenBridge Technologies',
       'Puissance de sortie, ports, temps de charge et compatibilités à confirmer selon la version finale'],
@@ -1619,10 +1632,11 @@ const models = [
   },
 {
     id:'greenlaptop-plus',
+    cardImage:'Chargeur_ordi_1.png',
     notice:'notices/notice-chargeur-pc-portable.pdf',
     title:'GreenLaptop+',
     subtitle:'Charge rapide universelle pour ordinateur portable',
-    images:['Chargeur_ordi_1.png','Chargeur_ordi_2.png','Chargeur_ordi_3.png'],
+    images:['Chargeur_ordi_2.png','Chargeur_ordi_3.png','Chargeur_ordi_4.png'],
     specs:[
       'USB-C / DC',
       'Puissance : 65W à 100W',
@@ -1638,10 +1652,11 @@ const models = [
   },
 {
     id:'green-laptop',
+    cardImage:'GreenLaptop1.png',
     notice:'notices/notice-green-laptop-20000mah.pdf',
     title:'GreenLaptop — 20 000 mAh',
     subtitle:'Powerbank GreenBridge',
-    images:['GreenLaptop1.png','GreenLaptop2.png','GreenLaptop3.png'],
+    images:['GreenLaptop2.png','GreenLaptop3.png','GreenLaptop4.png'],
     specs:['Capacité annoncée : 20 000 mAh',
       'Powerbank conçue pour la gamme GreenBridge Technologies',
       'Puissance de sortie, ports, temps de charge et compatibilités à confirmer selon la version finale'],
@@ -1649,10 +1664,11 @@ const models = [
   },
 {
     id:'green-wifi',
+    cardImage:'wifi_2.png',
     notice:'notices/notice-stabilisateur-wifi.pdf',
     title:'Green Wifi',
     subtitle:'Alimentation de secours pour routeur et modem',
-    images:['wifi_2.png','GreenWifi2.png','GreenWifi3.png'],
+    images:['GreenWifi2.png','GreenWifi3.png','GreenWifi4.png'],
     specs:[
       'Backup routeur et modem',
       'Sorties 5V / 9V / 12V',
@@ -1729,15 +1745,36 @@ function allImageUrls(){
   ];
   /* Fichiers PNG réservés pour les futures photos : ne pas les précharger tant qu'ils ne sont pas déposés sur GitHub. */
   const photosAvenir = new Set([
-    'Greenonly1.png','Greenonly3.png',
-    'GreenEco1.png','GreenEco2.png','GreenEco3.png',
-    'GreenAfrica1.png','GreenAfrica2.png','GreenAfrica3.png',
-    'GreenReck1.png','GreenReck2.png','GreenReck3.png',
+    'Greenonly1.png',
+    'Greenonly3.png',
+    'GreenMini3.png',
+    'GreenCore3.png',
+    'Greenplus_4.png',
+    'GreenEco2.png',
+    'GreenEco3.png',
+    'GreenEco4.png',
+    'GreenAfrica2.png',
+    'GreenAfrica3.png',
+    'GreenAfrica4.png',
+    'GreenPro3.png',
+    'GreenReck2.png',
+    'GreenReck3.png',
+    'GreenReck4.png',
     'Greenwire_3.png',
-    'GreenTECH1.png','GreenTECH2.png','GreenTECH3.png',
-    'Chargeur_ordi_2.png','Chargeur_ordi_3.png',
-    'GreenLaptop1.png','GreenLaptop2.png','GreenLaptop3.png',
-    'GreenWifi2.png','GreenWifi3.png'
+    'Greenwire_4.png',
+    'pwkb_wireless_4.png',
+    'GreenTECH2.png',
+    'GreenTECH3.png',
+    'GreenTECH4.png',
+    'Chargeur_ordi_2.png',
+    'Chargeur_ordi_3.png',
+    'Chargeur_ordi_4.png',
+    'GreenLaptop2.png',
+    'GreenLaptop3.png',
+    'GreenLaptop4.png',
+    'GreenWifi2.png',
+    'GreenWifi3.png',
+    'GreenWifi4.png',
   ]);
   models.forEach(m=>{
     if(Array.isArray(m.images)) list.push(...m.images.filter(src=>!photosAvenir.has(src)));
