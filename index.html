@@ -128,7 +128,7 @@
   .promo-text{
     display:inline-flex;
     align-items:center;
-    gap:0;
+    gap:10px;
     font-size:10px;
     font-weight:800;
     letter-spacing:0.9px;
@@ -137,6 +137,32 @@
     -webkit-text-stroke:0.35px rgba(255,255,255,0.18);
     text-shadow:0 2px 6px rgba(0,0,0,0.35);
     white-space:nowrap;
+  }
+  .maintenance-status{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:4px 10px;
+    border:1px solid rgba(255,255,255,.45);
+    border-radius:999px;
+    background:linear-gradient(90deg,#d4af37,#f2d36b);
+    color:#173b20;
+    font-size:9px;
+    line-height:1;
+    font-weight:900;
+    letter-spacing:.65px;
+    text-shadow:none;
+    -webkit-text-stroke:0;
+    box-shadow:0 2px 8px rgba(0,0,0,.22);
+  }
+  .maintenance-status::before{
+    content:"";
+    width:7px;
+    height:7px;
+    flex:0 0 7px;
+    border-radius:50%;
+    background:#b42318;
+    box-shadow:0 0 0 3px rgba(180,35,24,.14);
   }
   .topbar-actions{
     flex:0 0 auto;
@@ -228,7 +254,9 @@
     60%{ transform:scale(1); }
   }
   @media (max-width:640px){
-    .promo-text{font-size:9px}
+    .promo-text{font-size:9px;gap:0}
+    .promo-origin{display:none}
+    .maintenance-status{font-size:8px;padding:4px 8px;letter-spacing:.45px}
     .survey-top-link{
       padding:3px 6px;
       gap:5px;
@@ -1102,8 +1130,11 @@
 <div class="page-bg-overlay" aria-hidden="true"></div>
 
 <div class="topbar" role="banner">
-  <div class="promo-wrap" aria-hidden="true">
-    <div class="promo-text"><span>Assemblé en Afrique de l'Ouest</span></div>
+  <div class="promo-wrap">
+    <div class="promo-text">
+      <span class="promo-origin">Assemblé en Afrique de l'Ouest</span>
+      <span class="maintenance-status" role="status">SITE EN COURS DE MAINTENANCE</span>
+    </div>
   </div>
   <div class="topbar-actions">
     <a class="survey-top-link" href="https://enquete-powerbank-ci-sn.netlify.app/" aria-label="Questionnaire" onclick="return openSurveyLink(event);" ontouchstart="">
