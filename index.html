@@ -609,10 +609,11 @@
   }
   .models{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));
     gap:18px;
     align-items:stretch;
-    max-width:var(--maxw);
+    min-width:0;
+    max-width:100%;
     margin:0 auto;
     padding:6px 14px;
     box-sizing:border-box
@@ -621,6 +622,10 @@
     display:flex;
     flex-direction:column;
     justify-content:space-between;
+    min-width:0;
+    max-width:100%;
+    box-sizing:border-box;
+    overflow:hidden;
     gap:12px;
     padding:14px;
     border-radius:12px;
@@ -634,6 +639,8 @@
     user-select:none;
     transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
   }
+
+  .models .thumb,.models .meta,.models .model-new-actions{min-width:0;max-width:100%;box-sizing:border-box}
   .models .model.active{
     transform:translateY(-2px);
     background:rgba(255,255,255,0.22);
@@ -653,20 +660,21 @@
   .models .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;border-radius:8px}
   .models .thumb.new-model-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#527363;font-size:12px;font-weight:800;text-align:center;background:linear-gradient(135deg,rgba(255,255,255,.8),rgba(220,239,225,.85));border:1px dashed rgba(10,77,46,.22);box-sizing:border-box}
   .models .thumb.new-model-placeholder i{font-size:30px;color:#7cb342}
-  .model .meta h4{margin:0;font-size:18px;color:#02110a;font-weight:900}
-  .model .meta p{margin:10px 0 0;font-size:14px;color:rgba(2,17,10,0.95);line-height:1.25;font-weight:600}
-  .model .meta p small{display:block;color:rgba(2,17,10,0.88);font-weight:500;margin-top:4px}
+  .model .meta{min-width:0;max-width:100%;width:100%;box-sizing:border-box}
+  .model .meta h4{margin:0;font-size:18px;color:#02110a;font-weight:900;max-width:100%;overflow-wrap:anywhere;word-break:normal}
+  .model .meta p{margin:10px 0 0;font-size:14px;color:rgba(2,17,10,0.95);line-height:1.25;font-weight:600;max-width:100%;overflow-wrap:anywhere;word-break:normal}
+  .model .meta p small{display:block;color:rgba(2,17,10,0.88);font-weight:500;margin-top:4px;max-width:100%;overflow-wrap:anywhere;word-break:normal}
   .btn-small{background:transparent;border:1px solid rgba(6,42,32,0.06);padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:700;color:#08110a}
   .notice-mini-link{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:8px 10px;border-radius:8px;background:#e7f4e9;color:#06462e;border:1px solid rgba(4,70,46,.12);font-size:11px;font-weight:800;text-decoration:none;white-space:nowrap}
   .notice-mini-link:hover{background:#d9efdd}
   /* Actions harmonisées des cartes dans « Nos modèles » : informations, notice et contact.
      La structure, les dimensions et la présentation générale des cartes sont conservées. */
-  .model-new-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;margin-top:auto}
+  .model-new-actions{display:flex;flex-wrap:wrap;align-items:stretch;justify-content:center;gap:6px;margin-top:auto;width:100%;min-width:0;max-width:100%;box-sizing:border-box}
   .model-new-actions .new-info-btn,
-  .model-new-actions .new-order-btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:8px 9px;border:0;border-radius:8px;font-family:inherit;font-size:10px;line-height:1.15;font-weight:800;cursor:pointer;white-space:nowrap}
+  .model-new-actions .new-order-btn{display:inline-flex;flex:0 1 auto;min-width:0;max-width:100%;align-items:center;justify-content:center;gap:5px;padding:8px 9px;border:0;border-radius:8px;font-family:inherit;font-size:10px;line-height:1.15;font-weight:800;cursor:pointer;white-space:normal;overflow-wrap:anywhere;text-align:center;box-sizing:border-box}
   .model-new-actions .new-info-btn{background:#e7f4e9;color:#06462e}
   .model-new-actions .new-order-btn{background:#25D366;color:#fff}
-  .model-new-actions .notice-mini-link{padding:8px 9px;font-size:10px}
+  .model-new-actions .notice-mini-link{display:inline-flex;flex:0 1 auto;min-width:0;max-width:100%;padding:8px 9px;font-size:10px;white-space:normal;overflow-wrap:anywhere;text-align:center;box-sizing:border-box}
   .notice-link-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 11px;border-radius:8px;background:#e7f4e9;color:#06462e;border:1px solid rgba(4,70,46,.12);font-size:11px;font-weight:800;text-decoration:none;cursor:pointer}
   .notice-link-btn:hover{background:#d9efdd}
   .new-product-actions .notice-link-btn{font-family:inherit;font-size:11px}
@@ -1309,7 +1317,7 @@
       </div>
 
 
-      <!-- 4 nouvelles références GreenBridge ajoutées à Nos modèles -->
+      <!-- 8 références GreenBridge supplémentaires ajoutées à Nos modèles -->
       <div class="model" role="button" onclick="selectModel(8)" tabindex="0" aria-label="Batterie LiFePO4 GreenBridge 1200 Wh">
         <div class="thumb"><img src="pack_batterie_1200wh.png" alt="Batterie GreenBridge LiFePO4 1200 Wh" loading="lazy"></div>
         <div class="meta">
@@ -1414,57 +1422,7 @@
         </div>
       </div>
 
-      <div class="model" role="button" onclick="selectModel(16)" tabindex="0" aria-label="GreenBridge TV Backup">
-        <div class="thumb new-model-placeholder"><i class="fa-regular fa-image" aria-hidden="true"></i><span>PHOTO À AJOUTER</span></div>
-        <div class="meta">
-          <h4>GreenBridge TV Backup</h4>
-          <p>250 à 300 W visés<br><small>Secours TV — projet en conception.</small></p>
-        </div>
-        <div class="actions model-new-actions">
-          <button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(16)">En savoir plus</button>
-          <a class="notice-mini-link" href="https://www.greenbridge-technologies.com/notices/notice-greenbridge-tv-backup-300w.pdf" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a>
-          <button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('GreenBridge TV Backup — 250 à 300 W visés')"><i class="fa-brands fa-whatsapp"></i> Contact</button>
-        </div>
-      </div>
 
-      <div class="model" role="button" onclick="selectModel(17)" tabindex="0" aria-label="GreenBridge FastCharge 22.5 W">
-        <div class="thumb new-model-placeholder"><i class="fa-regular fa-image" aria-hidden="true"></i><span>PHOTO À AJOUTER</span></div>
-        <div class="meta">
-          <h4>GreenBridge FastCharge</h4>
-          <p>22,5 W<br><small>Powerbank USB-C — capacité à définir.</small></p>
-        </div>
-        <div class="actions model-new-actions">
-          <button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(17)">En savoir plus</button>
-          <a class="notice-mini-link" href="https://www.greenbridge-technologies.com/notices/notice-greenbridge-fastcharge-225w.pdf" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a>
-          <button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('GreenBridge FastCharge — 22,5 W')"><i class="fa-brands fa-whatsapp"></i> Contact</button>
-        </div>
-      </div>
-
-      <div class="model" role="button" onclick="selectModel(18)" tabindex="0" aria-label="GreenBridge kit solaire hybride">
-        <div class="thumb new-model-placeholder"><i class="fa-regular fa-image" aria-hidden="true"></i><span>PHOTO À AJOUTER</span></div>
-        <div class="meta">
-          <h4>GreenBridge Kit Solaire</h4>
-          <p>Recharge solaire et secteur<br><small>Solution hybride — configuration à définir.</small></p>
-        </div>
-        <div class="actions model-new-actions">
-          <button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(18)">En savoir plus</button>
-          <a class="notice-mini-link" href="https://www.greenbridge-technologies.com/notices/notice-greenbridge-kit-solaire.pdf" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a>
-          <button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('GreenBridge Kit Solaire')"><i class="fa-brands fa-whatsapp"></i> Contact</button>
-        </div>
-      </div>
-
-      <div class="model" role="button" onclick="selectModel(19)" tabindex="0" aria-label="GreenBridge pack modulaire 2.5 kWh">
-        <div class="thumb"><img src="Future_Pack_1.png" alt="Projet GreenBridge pack modulaire 2.5 kWh" loading="lazy"></div>
-        <div class="meta">
-          <h4>Pack modulaire GreenBridge</h4>
-          <p>2,5 kWh<br><small>Projet en développement.</small></p>
-        </div>
-        <div class="actions model-new-actions">
-          <button class="new-info-btn" type="button" onclick="event.stopPropagation();openTechModal(19)">En savoir plus</button>
-          <a class="notice-mini-link" href="https://www.greenbridge-technologies.com/notices/notice-projet-pack-modulaire-25kwh.pdf" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a>
-          <button class="new-order-btn" type="button" onclick="event.stopPropagation();openProductWhatsApp('Pack modulaire GreenBridge — 2,5 kWh')"><i class="fa-brands fa-whatsapp"></i> Contact</button>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -1764,43 +1722,8 @@ const models = [
     images:[],
     specs:['Puissance maximale prévue pour le boîtier : 40 W','Usage envisagé : alimentation de petits équipements électroniques','Tensions de sortie, autonomie et capacité à confirmer','Protection thermique et électronique à valider'],
     details:`<p style="margin-top:0;color:#23403a;line-height:1.45"><strong>Mini-UPS GreenBridge</strong><br>Projet de mini alimentation sans coupure pour petits équipements électroniques. La limite de conception annoncée pour le boîtier est de 40 W maximum. Les tensions, l’autonomie et les protections seront précisées après validation de l’électronique.</p>`
-  },
-  {
-    id:'greenbridge-tv-backup',
-    notice:'notices/notice-greenbridge-tv-backup-300w.pdf',
-    title:'GreenBridge TV Backup — 250 à 300 W visés',
-    subtitle:'Solution de secours pour téléviseur',
-    images:[],
-    specs:['Usage envisagé : alimentation de secours d’un téléviseur','Puissance cible : 250 à 300 W','Onduleur sinusoïdal pur envisagé','Autonomie, batterie, protections et puissance finale à confirmer'],
-    details:`<p style="margin-top:0;color:#23403a;line-height:1.45"><strong>GreenBridge TV Backup</strong><br>Projet de solution de secours pour téléviseur. Une plage de 250 à 300 W est envisagée avec une sortie sinusoïdale pure. La configuration finale dépendra des essais et de la validation des composants.</p>`
-  },
-  {
-    id:'greenbridge-fastcharge',
-    notice:'notices/notice-greenbridge-fastcharge-225w.pdf',
-    title:'GreenBridge FastCharge — 22,5 W',
-    subtitle:'Powerbank USB-C charge rapide',
-    images:[],
-    specs:['Puissance de charge rapide annoncée : 22,5 W','Sortie USB-C prévue','Capacité de batterie, protocoles et ports définitifs à confirmer','Protection électrique à valider'],
-    details:`<p style="margin-top:0;color:#23403a;line-height:1.45"><strong>GreenBridge FastCharge</strong><br>Concept de powerbank avec sortie USB-C de charge rapide annoncée à 22,5 W. La capacité de batterie et les protocoles de charge compatibles restent à préciser selon la carte électronique retenue.</p>`
-  },
-  {
-    id:'greenbridge-kit-solaire',
-    notice:'notices/notice-greenbridge-kit-solaire.pdf',
-    title:'GreenBridge Kit Solaire',
-    subtitle:'Recharge solaire et secteur',
-    images:[],
-    specs:['Recharge secteur et solaire envisagée','Solution de stockage autonome pour usages ciblés','Capacité, puissance, MPPT et compatibilités à définir','Configuration à valider selon le besoin du client'],
-    details:`<p style="margin-top:0;color:#23403a;line-height:1.45"><strong>GreenBridge Kit Solaire</strong><br>Solution envisagée combinant recharge secteur et recharge solaire. La capacité de stockage, la puissance disponible, le régulateur MPPT et les compatibilités seront définis selon la configuration retenue.</p>`
-  },
-  {
-    id:'greenbridge-pack-25kwh',
-    notice:'notices/notice-projet-pack-modulaire-25kwh.pdf',
-    title:'Pack modulaire GreenBridge — 2,5 kWh',
-    subtitle:'Stockage énergétique — projet en développement',
-    images:['Future_Pack_1.png','Future_pack_2.1.png','Future_Pack_3.png'],
-    specs:['Énergie cible annoncée : 2,5 kWh','Technologie envisagée : cellules LiFePO₄ prismatiques','Recharge secteur et panneaux solaires envisagée','Projet en développement : caractéristiques finales à confirmer'],
-    details:`<p style="margin-top:0;color:#23403a;line-height:1.45"><strong>Pack modulaire GreenBridge — 2,5 kWh</strong><br>Projet de stockage énergétique modulaire pour les usages essentiels, médicaux, agricoles et petites entreprises. Les caractéristiques finales seront publiées après validation du prototype.</p>`
   }
+
 
 ];
 
