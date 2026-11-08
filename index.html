@@ -820,6 +820,14 @@
   .new-modal-photo-caption{font-size:10px;color:#61786a;text-align:center}
   .new-modal-photo-img{width:100%;height:100%;object-fit:contain;display:block}
   .new-product-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin-top:auto;width:100%}
+  .new-product-tech-block{margin:14px 0 4px;padding:14px;border:1px solid rgba(4,70,46,.12);border-radius:12px;background:#f7faf7;color:#163b2b}
+  .new-product-tech-block h3{margin:0 0 10px;color:#06462e;font-size:14px;font-weight:900}
+  .new-product-tech-block dl{margin:0;display:grid;gap:6px}
+  .new-product-tech-row{display:grid;grid-template-columns:minmax(115px,.8fr) minmax(0,1.2fr);gap:10px;padding:8px 10px;border-radius:7px;background:#fff}
+  .new-product-tech-row dt{font-size:11px;color:#587065;font-weight:700}
+  .new-product-tech-row dd{margin:0;font-size:11px;color:#183a2c;font-weight:800}
+  .new-product-tech-note{margin:10px 0 0;font-size:10px;line-height:1.4;color:#607368}
+  @media(max-width:480px){.new-product-tech-row{grid-template-columns:1fr;gap:3px}}
   .new-product-actions button{border:0;border-radius:8px;padding:9px 11px;font-family:inherit;font-size:11px;font-weight:800;cursor:pointer;max-width:100%}
   .new-info-btn{background:#e7f4e9;color:#06462e}
   .new-order-btn{background:#25D366;color:#fff}
@@ -1217,14 +1225,14 @@
       <article class="new-product-card">
         <span class="new-product-badge">NOUVEAUTÉ</span>
         <div class="new-product-photo-placeholder" aria-label="Photo de la batterie LiFePO4 GreenBridge">
-          <img src="pack_batterie_1200wh.png" alt="Batterie GreenBridge violette LiFePO4 12 V 100 Ah, 1 200 Wh" loading="lazy">
+          <img src="pack_batterie_1200wh.png" alt="Batterie GreenBridge LiFePO4, cellules Grade A, 104 Ah" loading="lazy">
         </div>
         <h3>Batterie LiFePO₄</h3>
-        <p>Capacité énergétique : <strong>1 200 Wh</strong><br>Conçue et assemblée par GreenBridge Technologies.</p>
+        <p>Capacité nominale : <strong>104 Ah</strong><br>Cellules LiFePO₄ de Grade A — conçue et assemblée par GreenBridge Technologies.</p>
         <div class="new-product-actions">
-          <button class="new-info-btn" type="button" onclick="openNewProductModal('lifepo4','Batterie LiFePO₄ 1 200 Wh','Solution de stockage énergétique GreenBridge. Capacité annoncée : 1 200 Wh.')">En savoir plus</button>
-          <a class="notice-link-btn" href="notices/notice-batterie-lifepo4-1200wh.pdf" download><i class="fa-regular fa-file-pdf"></i> Notice PDF</a>
-          <button class="new-order-btn" type="button" onclick="openProductWhatsApp('Batterie LiFePO₄ 1 200 Wh')"><i class="fa-brands fa-whatsapp"></i> Contact</button>
+          <button class="new-info-btn" type="button" onclick="openNewProductModal('lifepo4','Batterie LiFePO₄ — 104 Ah','Batterie de stockage GreenBridge équipée de cellules LiFePO₄ de Grade A.')">En savoir plus</button>
+          <a class="notice-link-btn" href="notices/notice-batterie-lifepo4-104ah.pdf" download="notice-batterie-lifepo4-104ah.pdf" type="application/pdf" aria-label="Notice PDF — Batterie LiFePO₄ 104 Ah"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a>
+          <button class="new-order-btn" type="button" onclick="openProductWhatsApp('Batterie LiFePO₄ — 104 Ah')"><i class="fa-brands fa-whatsapp"></i> Contact</button>
         </div>
       </article>
 
@@ -1237,7 +1245,7 @@
         <p>Powerbank <strong>6 000 mAh</strong><br>Conçu et assemblé par GreenBridge Technologies.</p>
         <div class="new-product-actions">
           <button class="new-info-btn" type="button" onclick="openNewProductModal('v1','GreenBridge V1 — 6 000 mAh','Powerbank GreenBridge de 6 000 mAh, conçu et assemblé par GreenBridge Technologies.')">En savoir plus</button>
-          <a class="notice-link-btn" href="notices/notice-greenbridge-v1-6000mah.pdf" download><i class="fa-regular fa-file-pdf"></i> Notice PDF</a>
+          <a class="notice-link-btn" href="notices/notice-greenbridge-v1-6000mah.pdf" download="notice-greenbridge-v1-6000mah.pdf" type="application/pdf" aria-label="Notice PDF — GreenBridge V1"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a>
           <button class="new-order-btn" type="button" onclick="openProductWhatsApp('GreenBridge V1 — 6 000 mAh')"><i class="fa-brands fa-whatsapp"></i> Contact</button>
         </div>
       </article>
@@ -1251,7 +1259,7 @@
         <p>Powerbank <strong>10 000 mAh</strong><br>Conçu et assemblé par GreenBridge Technologies.</p>
         <div class="new-product-actions">
           <button class="new-info-btn" type="button" onclick="openNewProductModal('v2','GreenBridge V2 — 10 000 mAh','Powerbank GreenBridge de 10 000 mAh, conçu et assemblé par GreenBridge Technologies.')">En savoir plus</button>
-          <a class="notice-link-btn" href="notices/notice-greenbridge-v2-10000mah.pdf" download><i class="fa-regular fa-file-pdf"></i> Notice PDF</a>
+          <a class="notice-link-btn" href="notices/notice-greenbridge-v2-10000mah.pdf" download="notice-greenbridge-v2-10000mah.pdf" type="application/pdf" aria-label="Notice PDF — GreenBridge V2"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a>
           <button class="new-order-btn" type="button" onclick="openProductWhatsApp('GreenBridge V2 — 10 000 mAh')"><i class="fa-brands fa-whatsapp"></i> Contact</button>
         </div>
       </article>
@@ -1265,7 +1273,7 @@
         <p>Powerbank <strong>12 000 mAh</strong><br>Conçu et assemblé par GreenBridge Technologies.</p>
         <div class="new-product-actions">
           <button class="new-info-btn" type="button" onclick="openNewProductModal('v3','GreenBridge V3 — 12 000 mAh','Powerbank GreenBridge de 12 000 mAh, conçu et assemblé par GreenBridge Technologies.')">En savoir plus</button>
-          <a class="notice-link-btn" href="notices/notice-greenbridge-v3-12000mah.pdf" download><i class="fa-regular fa-file-pdf"></i> Notice PDF</a>
+          <a class="notice-link-btn" href="notices/notice-greenbridge-v3-12000mah.pdf" download="notice-greenbridge-v3-12000mah.pdf" type="application/pdf" aria-label="Notice PDF — GreenBridge V3"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a>
           <button class="new-order-btn" type="button" onclick="openProductWhatsApp('GreenBridge V3 — 12 000 mAh')"><i class="fa-brands fa-whatsapp"></i> Contact</button>
         </div>
       </article>
@@ -1947,6 +1955,72 @@ function openPackModal(){
 
 let pendingOrderProduct = '';
 
+// Notices PDF : ces noms correspondent exactement aux fichiers du dossier /notices.
+const NEW_PRODUCT_NOTICE_FILES = {
+  lifepo4: 'notice-batterie-lifepo4-104ah.pdf',
+  v1: 'notice-greenbridge-v1-6000mah.pdf',
+  v2: 'notice-greenbridge-v2-10000mah.pdf',
+  v3: 'notice-greenbridge-v3-12000mah.pdf'
+};
+
+// Caractéristiques communiquées par GreenBridge. Les champs non confirmés ne sont pas inventés.
+const NEW_PRODUCT_TECHNICAL_SPECS = {
+  lifepo4: [
+    ['Technologie', 'Lithium Fer Phosphate (LiFePO₄)'],
+    ['Qualité des cellules', 'Grade A'],
+    ['Capacité nominale', '104 Ah'],
+    ['Courant de décharge annoncé', '100 A'],
+    ['Fusible de protection', 'Valeur communiquée : 125 Ah — unité à confirmer'],
+    ['Garantie annoncée', '3 ans']
+  ],
+  v1: [
+    ['Capacité nominale', '6 000 mAh'],
+    ['Technologie', 'Lithium-ion'],
+    ['Configuration', '2 cellules de haute qualité'],
+    ['USB-C', 'Entrée et sortie'],
+    ['Micro-USB', 'Entrée de recharge'],
+    ['Puissance annoncée', 'Jusqu’à 22,5 W']
+  ],
+  v2: [
+    ['Capacité nominale', '10 000 mAh'],
+    ['Technologie', 'Lithium-ion'],
+    ['Configuration', '2 cellules de haute qualité'],
+    ['USB-C', 'Entrée et sortie'],
+    ['Micro-USB', 'Entrée de recharge'],
+    ['Puissance annoncée', 'Jusqu’à 22,5 W']
+  ],
+  v3: [
+    ['Capacité nominale', '12 000 mAh'],
+    ['Technologie', 'Lithium-ion'],
+    ['Configuration', '2 cellules de haute qualité'],
+    ['USB-C', 'Entrée et sortie'],
+    ['Micro-USB', 'Entrée de recharge'],
+    ['Puissance annoncée', 'Jusqu’à 22,5 W']
+  ]
+};
+
+function buildNewProductTechnicalHtml(productKey){
+  const specs = NEW_PRODUCT_TECHNICAL_SPECS[productKey] || [];
+  if(!specs.length) return '';
+  const technicalNote = productKey === 'lifepo4'
+    ? 'La valeur du fusible a été communiquée comme « 125 Ah » ; le calibre et l’unité doivent être vérifiés sur le composant avant diffusion définitive.'
+    : 'Les tensions, courants détaillés et protocoles de charge compatibles ne sont pas précisés dans les informations actuellement communiquées.';
+  return `
+    <section class=\"new-product-tech-block\" aria-label=\"Caractéristiques techniques\">
+      <h3>Caractéristiques techniques</h3>
+      <dl>
+        ${specs.map(([label, value]) => `
+          <div class=\"new-product-tech-row\">
+            <dt>${escapeHTML(label)}</dt>
+            <dd>${escapeHTML(value)}</dd>
+          </div>
+        `).join('')}
+      </dl>
+      <p class=\"new-product-tech-note\">${escapeHTML(technicalNote)}</p>
+    </section>
+  `;
+}
+
 // Trois emplacements photo prévus dans chaque fenêtre d'informations.
 const newProductPhotoSlots = {
   lifepo4: 3,
@@ -1986,6 +2060,11 @@ function openNewProductModal(productKey, title, description){
     src,
     alt: `${title || 'Produit GreenBridge'} — photo ${index + 1}`
   }));
+  const technicalHtml = buildNewProductTechnicalHtml(productKey);
+  const noticeFile = NEW_PRODUCT_NOTICE_FILES[productKey] || '';
+  const noticeHtml = noticeFile
+    ? `<a class="notice-link-btn" href="notices/${noticeFile}" download="${noticeFile}" type="application/pdf"><i class="fa-regular fa-file-pdf"></i> Télécharger la notice PDF</a>`
+    : '';
 
   let galleryHtml = '';
   if(images.length){
@@ -2013,8 +2092,9 @@ function openNewProductModal(productKey, title, description){
       <p>${safeDescription}</p>
       <p><strong>Marque :</strong> GreenBridge Technologies</p>
       <p>Produit conçu et assemblé par GreenBridge Technologies.</p>
+      ${technicalHtml}
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
-        <a class="notice-link-btn" href="notices/notice-${productKey === 'lifepo4' ? 'batterie-lifepo4-1200wh' : productKey === 'v1' ? 'greenbridge-v1-6000mah' : productKey === 'v2' ? 'greenbridge-v2-10000mah' : 'greenbridge-v3-12000mah'}.pdf" download><i class="fa-regular fa-file-pdf"></i> Télécharger la notice PDF</a>
+        ${noticeHtml}
         <button type="button" style="border:0;border-radius:9px;padding:10px 14px;color:#fff;background:#25D366;font-weight:800;cursor:pointer" onclick="closeModal();openProductWhatsApp('${productForOrder}')"><i class="fa-brands fa-whatsapp"></i> Demander sur WhatsApp</button>
         <button type="button" class="btn-small" onclick="closeModal()">Fermer</button>
       </div>
