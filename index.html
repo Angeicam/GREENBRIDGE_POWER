@@ -1733,21 +1733,21 @@ const MODEL_NOTICE_GUIDES = {
   },
   'greenwire': {
     capacity:'Environ 20 000 mAh', power:'15 W ou 22,5 W selon version', inputPorts:[],
-    inputNote:'Le type exact d’entrée de recharge n’est pas précisé dans les caractéristiques communiquées. Repérer le marquage IN / INPUT sur le boîtier avant de brancher.',
+    inputNote:'Connectique d’entrée non renseignée dans les données disponibles.',
     variants:[
       {name:'Version 15 W', power:'15 W', outputs:['2 × USB-A (ports noirs)'], detail:'Recharge des appareils par les deux sorties USB-A.'},
-      {name:'Version 22,5 W', power:'22,5 W', outputs:['2 × USB-A (ports orange)', 'Zone de recharge sans fil'], detail:'La version 22,5 W identifiée par les ports orange intègre la recharge sans fil et deux sorties USB-A.'}
+      {name:'Version 22,5 W', power:'22,5 W', outputs:['1 × USB-C', '2 × USB-A (ports orange)', 'Recharge sans fil'], detail:'La version 22,5 W identifiée par les ports orange comprend une sortie USB-C, deux sorties USB-A et la recharge sans fil.'}
     ],
     steps:[
       {title:'Identifier la version', text:'Ports noirs : version 15 W avec deux sorties USB-A. Ports orange : version 22,5 W avec deux sorties USB-A et recharge sans fil.'},
       {title:'Recharger la powerbank', text:'Le type d’entrée n’étant pas confirmé ici, vérifier le marquage IN / INPUT directement sur le boîtier. Ne brancher l’adaptateur que sur cette entrée.'},
-      {title:'Recharger par câble ou sans fil', text:'Pour une recharge filaire, utiliser l’une des deux sorties USB-A et un câble compatible. Pour la version 22,5 W, poser un téléphone compatible au centre de la zone de recharge sans fil.'}
+      {title:'Recharger par câble ou sans fil', text:'Version 15 W : utiliser une sortie USB-A. Version 22,5 W : utiliser la sortie USB-C ou l’une des deux sorties USB-A. Pour le sans-fil, poser un téléphone compatible au centre de la zone prévue.'}
     ],
     notes:['Capacité indiquée sur la carte produit : environ 20 000 mAh ; à confirmer sur l’étiquette.','Ports noirs : 15 W. Ports orange : 22,5 W.','Le type d’entrée de recharge doit être confirmé sur le boîtier. Câble fourni.']
   },
   'greenwireless': {
     capacity:'20 000 mAh', power:'Selon le mode de sortie et l’appareil', inputPorts:[],
-    inputNote:'Le type d’entrée de recharge doit être vérifié sur le boîtier ou l’étiquette du produit.',
+    inputNote:'Connectique d’entrée à confirmer sur la fiche technique du modèle.',
     outputPorts:['USB-C PD', 'USB-A QC 3.0', 'Recharge sans fil'],
     steps:[
       {title:'Recharger la batterie', text:'Repérer l’entrée marquée IN / INPUT sur le boîtier. La connectique d’entrée n’étant pas confirmée dans les données de cette fiche, suivre le marquage du produit.'},
@@ -1759,7 +1759,7 @@ const MODEL_NOTICE_GUIDES = {
   },
   'green-tech': {
     capacity:'20 000 mAh', power:'22,5 W', inputPorts:[],
-    inputNote:'Le type exact d’entrée de recharge n’est pas précisé dans les caractéristiques communiquées. Vérifier le marquage IN / INPUT sur le boîtier.',
+    inputNote:'Connectique d’entrée non renseignée dans les données disponibles.',
     outputPorts:['USB-C (charge rapide)', '2 × USB-A'],
     steps:[
       {title:'Recharger la powerbank', text:'Identifier l’entrée IN / INPUT sur le boîtier avant de connecter un adaptateur compatible. La sortie USB-C mentionnée dans cette fiche est destinée à la charge des appareils.'},
@@ -1770,7 +1770,7 @@ const MODEL_NOTICE_GUIDES = {
   },
   'greenlaptop-plus': {
     capacity:'36 000 mAh', power:'65 à 100 W', inputPorts:[], outputPorts:[],
-    inputNote:'Les connecteurs d’entrée et de sortie dépendent de la version et des câbles fournis. Vérifier la référence et les marquages du chargeur avant raccordement.',
+    inputNote:'Connecteurs et embouts variables selon la version commercialisée.',
     steps:[
       {title:'Vérifier la compatibilité de l’ordinateur', text:'Contrôler la puissance requise par le PC portable et la compatibilité du connecteur ou de l’embout. La puissance annoncée de cette gamme varie de 65 W à 100 W.'},
       {title:'Choisir le câble adapté', text:'Utiliser exclusivement le câble et l’embout correspondant à l’ordinateur. Ne jamais forcer un connecteur qui ne s’insère pas correctement.'},
@@ -1780,7 +1780,7 @@ const MODEL_NOTICE_GUIDES = {
   },
   'green-laptop': {
     capacity:'20 000 mAh', power:'100 W', inputPorts:[], outputPorts:[],
-    inputNote:'Les connecteurs exacts ne sont pas précisés dans les caractéristiques communiquées. Vérifier le marquage du produit et le câble fourni.',
+    inputNote:'Connecteurs et câble à confirmer selon la version du produit.',
     steps:[
       {title:'Vérifier l’appareil à alimenter', text:'Confirmer que l’ordinateur portable accepte une alimentation de 100 W via le connecteur correspondant. Pour un téléphone, vérifier la compatibilité avec la charge rapide.'},
       {title:'Brancher le câble approprié', text:'Choisir le câble ou l’embout adapté au téléphone ou à l’ordinateur. Ne pas forcer un connecteur et ne pas utiliser un câble détérioré.'},
@@ -1790,7 +1790,7 @@ const MODEL_NOTICE_GUIDES = {
   },
   'green-wifi': {
     capacity:'12 000 mAh', power:'Mini-UPS Wi-Fi', inputPorts:[], outputPorts:['DC 5 V', 'DC 9 V', 'DC 12 V'],
-    inputNote:'Le connecteur d’entrée secteur ou de recharge dépend de la version. Suivre les repères indiqués sur le boîtier.',
+    inputNote:'Connecteur d’entrée secteur à confirmer selon la version commercialisée.',
     steps:[
       {title:'Vérifier la tension du routeur', text:'Lire la tension d’alimentation inscrite sur l’étiquette du routeur ou du modem (par exemple 5 V, 9 V ou 12 V). Ne jamais choisir une tension au hasard.'},
       {title:'Sélectionner la sortie correspondante', text:'Relier le routeur à la sortie du GreenWifi correspondant exactement à sa tension nominale. Vérifier aussi que le connecteur et sa polarité sont adaptés.'},
@@ -1871,12 +1871,12 @@ function pdfPill(text,x,y,w,fill=[0.91,0.96,0.92],ink=[0.03,0.27,0.16]){
   s+=pdfText(text,x+8,y+6,8,'F2',ink);
   return s;
 }
-function pdfPageFooter(pageNo){
+function pdfPageFooter(pageNo,totalPages=2){
   let s=pdfFill(0,0,595.28,48,[0.02,0.25,0.15]);
   s+=pdfFill(0,48,595.28,2,[0.83,0.69,0.22]);
   s+=pdfText('GREENBRIDGE TECHNOLOGIES  |  ASSEMBLÉ EN AFRIQUE DE L’OUEST',38,28,7.3,'F2',[1,1,1]);
-  s+=pdfText('Notice informative - vérifier les marquages IN/OUT et la compatibilité avant branchement.',38,14,6.6,'F1',[0.90,0.95,0.91]);
-  s+=pdfText(`${pageNo} / 2`,535,28,8,'F2',[1,1,1]);
+  s+=pdfText('Documentation technique GreenBridge - schema de principe et mode d’emploi.',38,14,6.6,'F1',[0.90,0.95,0.91]);
+  s+=pdfText(`${pageNo} / ${totalPages}`,535,28,8,'F2',[1,1,1]);
   return s;
 }
 function pdfPhotoBox(imageData,x,y,w,h){
@@ -1907,7 +1907,7 @@ function pdfPortCard(title,items,x,y,w,h,emptyNote){
   });
   return s;
 }
-function makeNoticePageOne(product,guide,imageData){
+function makeNoticePageOne(product,guide,imageData,totalPages=2){
   const W=595.28;
   let s=pdfFill(0,0,W,841.89,[1,1,1]);
   s+=pdfFill(0,760,W,82,[0.02,0.25,0.15]);
@@ -1977,71 +1977,138 @@ function makeNoticePageOne(product,guide,imageData){
       ny-=10;
     });
   }
-  s+=pdfPageFooter(1);
+  s+=pdfPageFooter(1,totalPages);
   return s;
 }
-function makeNoticePageTwo(product,guide){
+function pdfLine(x1,y1,x2,y2,color=[0.10,0.35,0.22],width=1){
+  return `q ${width} w ${color[0]} ${color[1]} ${color[2]} RG ${x1} ${y1} m ${x2} ${y2} l S Q\n`;
+}
+function pdfArrow(x1,y1,x2,y2,color=[0.10,0.35,0.22],width=1.4){
+  const angle=Math.atan2(y2-y1,x2-x1), head=5;
+  const a1=angle+Math.PI*0.82, a2=angle-Math.PI*0.82;
+  const hx1=x2+head*Math.cos(a1), hy1=y2+head*Math.sin(a1);
+  const hx2=x2+head*Math.cos(a2), hy2=y2+head*Math.sin(a2);
+  let s=pdfLine(x1,y1,x2,y2,color,width);
+  s+=pdfLine(x2,y2,hx1,hy1,color,width);
+  s+=pdfLine(x2,y2,hx2,hy2,color,width);
+  return s;
+}
+function pdfDiagramNode(x,y,w,h,title,detail,fill=[0.93,0.965,0.94]){
+  let s=pdfFill(x,y,w,h,fill);
+  s+=pdfStroke(x,y,w,h,[0.70,0.80,0.72],0.8);
+  const titleLines=wrapPdfText(title,Math.max(14,Math.floor(w/5.2))).slice(0,2);
+  const detailLines=wrapPdfText(detail||'',Math.max(18,Math.floor(w/4.7))).slice(0,2);
+  let ty=y+h-12;
+  titleLines.forEach(line=>{s+=pdfText(line,x+6,ty,6.8,'F2',[0.02,0.25,0.15]);ty-=8;});
+  detailLines.forEach(line=>{s+=pdfText(line,x+6,ty-1,5.7,'F1',[0.22,0.30,0.24]);ty-=7;});
+  return s;
+}
+function pdfPowerbankConnectionDiagram(guide,product){
+  const x=38,y=88,w=519,h=164;
+  let s=pdfFill(x,y,w,h,[0.985,0.991,0.985]);
+  s+=pdfStroke(x,y,w,h,[0.79,0.86,0.80],0.8);
+  const isUps=(guide.outputPorts||[]).some(v=>/DC 5|DC 9|DC 12/i.test(v));
+  const isLaptop=/laptop|ordinateur|chargeur pc/i.test(String(product&&product.title||''));
+  const diagramTitle=isUps?'SCHEMA DE PRINCIPE - MINI-UPS WI-FI':(isLaptop?'SCHEMA DE PRINCIPE - CHARGEUR PORTABLE':'SCHEMA DE PRINCIPE - POWERBANK');
+  s+=pdfText(diagramTitle,50,234,8.5,'F2',[0.02,0.25,0.15]);
+  s+=pdfText(isUps?'A. ALIMENTER LE MINI-UPS':(isLaptop?'A. RECHARGER LE CHARGEUR PORTABLE':'A. RECHARGER LA POWERBANK'),50,214,6.8,'F2',[0.35,0.43,0.37]);
+  const input=(guide.inputPorts&&guide.inputPorts.length)?guide.inputPorts.join(' / '):(guide.inputNote?'Connectique selon version':'Entrée indiquée sur le produit');
+  const sourceTitle=isUps?'ADAPTATEUR SECTEUR':(isLaptop?'SOURCE / ADAPTATEUR':'ADAPTATEUR SECTEUR USB');
+  const sourceDetail=isUps?'Alimentation compatible':(isLaptop?'Selon le kit fourni':'Sortie USB compatible');
+  const inputTitle=isUps?'ENTREE DU MINI-UPS':(isLaptop?'ENTREE DU CHARGEUR':'ENTREE IN / INPUT');
+  s+=pdfDiagramNode(50,173,155,34,sourceTitle,sourceDetail);
+  s+=pdfDiagramNode(390,173,155,34,inputTitle,input,[0.91,0.96,0.92]);
+  s+=pdfArrow(214,190,382,190,[0.10,0.40,0.24],1.6);
+  s+=pdfText('Câble de recharge adapté',255,199,5.8,'F1',[0.31,0.39,0.33]);
+  s+=pdfText(isUps?'B. MAINTENIR L’ALIMENTATION DU ROUTEUR':(isLaptop?'B. ALIMENTER UN ORDINATEUR COMPATIBLE':'B. RECHARGER UN APPAREIL'),50,151,6.8,'F2',[0.35,0.43,0.37]);
+  let outputs=(guide.outputPorts&&guide.outputPorts.length)?guide.outputPorts.join(' / '):'';
+  if(guide.variants&&guide.variants.length){
+    outputs=guide.variants.map(v=>`${v.name}: ${(v.outputs||[]).join(' + ')}`).join(' | ');
+  }
+  if(guide.outputNote) outputs=guide.outputNote;
+  if(!outputs) outputs='Sortie / câble selon la version du produit';
+  const outputTitle=isUps?'GREENWIFI - SORTIES DC':(isLaptop?'GREENLAPTOP - SORTIE':'POWERBANK - SORTIE OUT');
+  if(isUps) outputs=(guide.outputPorts||[]).join(' / ');
+  if(isLaptop&&!outputs) outputs='Embout / connecteur selon version';
+  s+=pdfDiagramNode(50,105,180,36,outputTitle,outputs,[0.91,0.96,0.92]);
+  let destination=isUps?'Routeur / modem / caméra compatible':'Téléphone ou appareil compatible';
+  if(isLaptop) destination='Ordinateur portable compatible';
+  if((guide.outputPorts||[]).some(v=>/sans.?fil/i.test(v)) || /sans.?fil/i.test(outputs)) destination='Téléphone compatible (zone sans fil ou câble)';
+  if(/ordinateur/i.test(String(guide.power||'')) || /ordinateur/i.test(String(guide.notes||''))) destination='Ordinateur compatible / appareil';
+  s+=pdfDiagramNode(390,105,155,36,isUps?'ROUTEUR / MODEM':(isLaptop?'ORDINATEUR PORTABLE':'APPAREIL ALIMENTE'),destination);
+  s+=pdfArrow(239,123,382,123,[0.10,0.40,0.24],1.6);
+  s+=pdfText('Câble adapté ou recharge sans fil selon modèle',245,132,5.6,'F1',[0.31,0.39,0.33]);
+  s+=pdfText('Le dessin explique le sens de l’énergie ; il ne représente pas la position physique des connecteurs.',50,94,5.7,'F1',[0.40,0.46,0.41]);
+  return s;
+}
+function pdfLiFePO4SystemDiagram(){
+  const x=38,y=74,w=519,h=184;
+  let s=pdfFill(x,y,w,h,[0.985,0.991,0.985]);
+  s+=pdfStroke(x,y,w,h,[0.79,0.86,0.80],0.8);
+  s+=pdfText('SCHEMA DE PRINCIPE - SYSTEME BATTERIE LiFePO4',50,240,8.2,'F2',[0.02,0.25,0.15]);
+  s+=pdfText('CIRCUIT DE CHARGE',50,220,6.6,'F2',[0.35,0.43,0.37]);
+  s+=pdfDiagramNode(50,178,112,34,'CHARGEUR / MPPT','Profil LiFePO4 compatible');
+  s+=pdfDiagramNode(242,178,112,34,'PACK LiFePO4','BMS intégré / polarité');
+  s+=pdfArrow(168,195,235,195,[0.10,0.40,0.24],1.5);
+  s+=pdfText('Courant de charge',176,205,5.5,'F1',[0.31,0.39,0.33]);
+  s+=pdfText('CIRCUIT DE DECHARGE',50,158,6.6,'F2',[0.35,0.43,0.37]);
+  s+=pdfDiagramNode(50,112,112,36,'BATTERIE (+ / -)','Sortie DC du pack',[0.91,0.96,0.92]);
+  s+=pdfDiagramNode(196,112,112,36,'FUSIBLE + SECTIONNEUR','Protection DC dimensionnée');
+  s+=pdfDiagramNode(390,112,145,36,'ONDULEUR / CHARGES','Entrée DC compatible');
+  s+=pdfArrow(168,130,188,130,[0.10,0.40,0.24],1.5);
+  s+=pdfArrow(314,130,382,130,[0.10,0.40,0.24],1.5);
+  s+=pdfText('Retour negatif (-) vers la borne negative du pack, selon le schema d’installation valide.',50,96,6.1,'F1',[0.20,0.28,0.22]);
+  s+=pdfText('Sections de câble, protections, couple de serrage et réglages : à dimensionner selon le pack et la notice constructeur.',50,84,5.7,'F1',[0.35,0.40,0.36]);
+  return s;
+}
+function makeNoticePageTwo(product,guide,totalPages=2){
   const W=595.28;
+  const isLiFePO4=String(product.id||'').toLowerCase().includes('lifepo4');
   let s=pdfFill(0,0,W,841.89,[1,1,1]);
   s+=pdfFill(0,760,W,82,[0.02,0.25,0.15]);
   s+=pdfFill(0,755,W,5,[0.83,0.69,0.22]);
   s+=pdfText('GREENBRIDGE TECHNOLOGIES',38,812,18,'F2',[1,1,1]);
-  s+=pdfText('MODE D’EMPLOI • BRANCHEMENTS • SÉCURITÉ',38,790,8.5,'F2',[1,0.88,0.47]);
+  s+=pdfText('MODE D’EMPLOI • SCHEMA DE RACCORDEMENT • SECURITE',38,790,8.2,'F2',[1,0.88,0.47]);
   s+=pdfText(product.title || 'Produit GreenBridge',38,728,17,'F2',[0.02,0.25,0.15]);
-  s+=pdfParagraph('Suivre les étapes ci-dessous et respecter les indications IN / INPUT (entrée) et OUT / OUTPUT (sortie) inscrites sur le produit.',38,706,105,8.5,12,[0.29,0.36,0.31],'F1',2).cmd;
+  s+=pdfParagraph('Suivre les étapes ci-dessous. Les schémas représentent le principe fonctionnel et non la disposition physique exacte des ports ou bornes.',38,706,105,8.1,11,[0.29,0.36,0.31],'F1',2).cmd;
 
   const steps=(guide.steps && guide.steps.length) ? guide.steps : [
-    {title:'Identifier les connecteurs',text:'Lire les marquages présents sur le produit et utiliser uniquement un câble compatible.'},
-    {title:'Effectuer le branchement',text:'Relier les appareils selon les entrées et sorties répertoriées sur la première page.'},
-    {title:'Contrôler le fonctionnement',text:'Vérifier l’indication de charge et débrancher sans tirer sur le câble.'}
+    {title:'Identifier les connecteurs',text:'Repérer les entrées et sorties indiquées dans le tableau technique de la première page.'},
+    {title:'Effectuer le branchement',text:'Utiliser un câble et une alimentation compatibles avec les caractéristiques du produit.'},
+    {title:'Contrôler le fonctionnement',text:'Vérifier l’indication de charge ou d’alimentation, puis débrancher en tenant la fiche.'}
   ];
   let y=664;
-  steps.slice(0,5).forEach((step,index)=>{
-    const lines=wrapPdfText(step.text,98).slice(0,3);
-    const boxH=62+Math.max(0,lines.length-2)*10;
+  steps.slice(0,4).forEach((step,index)=>{
+    const lines=wrapPdfText(step.text,103).slice(0,3);
+    const boxH=54+Math.max(0,lines.length-1)*9;
     s+=pdfFill(38,y-boxH+7,519,boxH,[0.965,0.977,0.965]);
     s+=pdfStroke(38,y-boxH+7,519,boxH,[0.83,0.88,0.83],0.6);
-    s+=pdfFill(48,y-22,22,22,[0.02,0.25,0.15]);
-    s+=pdfText(String(index+1),55,y-15,9,'F2',[1,1,1]);
-    s+=pdfText(step.title,80,y-10,9,'F2',[0.02,0.25,0.15]);
-    lines.forEach((line,i)=>{s+=pdfText(line,80,y-26-i*12,7.8,'F1',[0.20,0.27,0.22]);});
-    y-=boxH+8;
+    s+=pdfFill(48,y-20,20,20,[0.02,0.25,0.15]);
+    s+=pdfText(String(index+1),55,y-13,8.5,'F2',[1,1,1]);
+    s+=pdfText(step.title,78,y-9,8.5,'F2',[0.02,0.25,0.15]);
+    lines.forEach((line,i)=>{s+=pdfText(line,78,y-24-i*10,7.2,'F1',[0.20,0.27,0.22]);});
+    y-=boxH+7;
   });
 
-  if(y>170){
-    s+=pdfSectionTitle('Conseils et précautions',38,y-3);
-    let py=y-24;
+  if(y>270){
+    s+=pdfSectionTitle('Conseils d’utilisation',38,y-1);
+    let py=y-20;
     const precautions=[
-      'Utiliser un adaptateur, un câble et un appareil compatibles avec les caractéristiques du modèle.',
-      'Ne pas exposer le produit à l’eau, à une forte chaleur ou à un choc. Garder les connecteurs propres et secs.',
-      'Ne jamais forcer une fiche, court-circuiter les ports, ouvrir le boîtier ou utiliser un câble endommagé.',
-      'Débrancher les appareils en tenant la fiche et non en tirant sur le câble.'
+      'Employer un câble et un adaptateur secteur compatibles avec le produit et l’appareil connecté.',
+      'Garder le boîtier et les connecteurs propres et secs ; éviter l’eau, les chocs et les fortes températures.',
+      'Ne pas forcer les fiches, court-circuiter les ports, ouvrir le boîtier ou utiliser un câble abîmé.'
     ];
     if(guide.extraPrecautions) precautions.unshift(...guide.extraPrecautions);
-    precautions.slice(0,5).forEach(item=>{
-      const lines=wrapPdfText(item,105).slice(0,2);
-      s+=pdfText('•',42,py,8,'F2',[0.83,0.69,0.22]);
-      lines.forEach((line,i)=>{s+=pdfText(line,54,py-i*10,7.2,'F1',[0.22,0.29,0.24]);});
-      py-=Math.max(13,lines.length*10+2);
+    precautions.slice(0,3).forEach(item=>{
+      const lines=wrapPdfText(item,108).slice(0,2);
+      s+=pdfText('•',42,py,7.5,'F2',[0.83,0.69,0.22]);
+      lines.forEach((line,i)=>{s+=pdfText(line,54,py-i*9,6.8,'F1',[0.22,0.29,0.24]);});
+      py-=Math.max(12,lines.length*9+2);
     });
-    y=py-8;
   }
 
-  if(guide.specialBox){
-    const boxY=Math.max(70,Math.min(155,y-58));
-    s+=pdfFill(38,boxY,519,48,[1,0.97,0.88]);
-    s+=pdfStroke(38,boxY,519,48,[0.88,0.75,0.35],0.7);
-    s+=pdfText('POINT DE VIGILANCE',49,boxY+33,7.5,'F2',[0.35,0.25,0.06]);
-    s+=pdfParagraph(guide.specialBox,49,boxY+19,112,6.8,9,[0.30,0.26,0.17],'F1',3).cmd;
-  }else{
-    const caution=guide.inputNote || 'Vérifier les inscriptions sur le boîtier avant de brancher le produit.';
-    const boxY=Math.max(70,Math.min(155,y-58));
-    s+=pdfFill(38,boxY,519,48,[1,0.97,0.88]);
-    s+=pdfStroke(38,boxY,519,48,[0.88,0.75,0.35],0.7);
-    s+=pdfText('POINT DE VIGILANCE',49,boxY+33,7.5,'F2',[0.35,0.25,0.06]);
-    s+=pdfParagraph(caution,49,boxY+19,112,6.8,9,[0.30,0.26,0.17],'F1',3).cmd;
-  }
-  s+=pdfPageFooter(2);
+  s+=isLiFePO4 ? pdfLiFePO4SystemDiagram() : pdfPowerbankConnectionDiagram(guide,product);
+  s+=pdfPageFooter(2,totalPages);
   return s;
 }
 
@@ -2120,28 +2187,130 @@ async function getNoticePhoto(candidateSources){
   }
   return null;
 }
+function pdfPolyline(points,color=[0.10,0.40,0.24],width=1.8,dash=''){
+  if(!points||points.length<2) return '';
+  let s=`q ${width} w ${color[0]} ${color[1]} ${color[2]} RG `;
+  if(dash) s+=`${dash} 0 d `;
+  s+=`${points[0][0].toFixed(2)} ${points[0][1].toFixed(2)} m `;
+  for(let i=1;i<points.length;i++) s+=`${points[i][0].toFixed(2)} ${points[i][1].toFixed(2)} l `;
+  s+='S [] 0 d Q\n';
+  return s;
+}
+function pdfGraphPanel(x,y,w,h,title,subtitle){
+  let s=pdfFill(x,y,w,h,[0.985,0.991,0.985]);
+  s+=pdfStroke(x,y,w,h,[0.79,0.86,0.80],0.8);
+  s+=pdfText(title.toUpperCase(),x+13,y+h-20,8.1,'F2',[0.02,0.25,0.15]);
+  if(subtitle) s+=pdfParagraph(subtitle,x+13,y+h-34,112,6.2,8,[0.36,0.42,0.37],'F1',2).cmd;
+  return s;
+}
+function makeLiFePO4AppendixPage(product,guide){
+  const W=595.28,H=841.89;
+  let s=pdfFill(0,0,W,H,[1,1,1]);
+  s+=pdfFill(0,760,W,82,[0.02,0.25,0.15]);
+  s+=pdfFill(0,755,W,5,[0.83,0.69,0.22]);
+  s+=pdfText('GREENBRIDGE TECHNOLOGIES',38,812,18,'F2',[1,1,1]);
+  s+=pdfText('ANNEXE TECHNIQUE • PROFILS ELECTRIQUES',38,790,8.3,'F2',[1,0.88,0.47]);
+  s+=pdfText('Batterie LiFePO4 - 104 Ah',38,728,17,'F2',[0.02,0.25,0.15]);
+  s+=pdfParagraph('Repères de lecture pour comprendre le comportement d’un pack LiFePO4. Les graphiques ci-dessous sont des profils pédagogiques indicatifs, et non des résultats de laboratoire du produit livré.',38,706,105,7.8,11,[0.29,0.36,0.31],'F1',3).cmd;
+
+  const cards=[
+    {x:38,w:122,label:'CAPACITE',value:'104 Ah'},
+    {x:170,w:122,label:'TENSION PROJET',value:'12,8 V nominal*'},
+    {x:302,w:122,label:'DECHARGE ANNONCEE',value:'100 A'},
+    {x:434,w:123,label:'ENERGIE THEORIQUE*',value:'≈ 1,33 kWh'}
+  ];
+  cards.forEach(c=>{
+    s+=pdfFill(c.x,635,c.w,43,[0.93,0.965,0.94]);
+    s+=pdfStroke(c.x,635,c.w,43,[0.83,0.88,0.83],0.6);
+    s+=pdfText(c.label,c.x+7,662,5.7,'F2',[0.35,0.43,0.37]);
+    s+=pdfText(c.value,c.x+7,645,8.2,'F2',[0.02,0.25,0.15]);
+  });
+  s+=pdfText('*Tension de projet 4S / 12,8 V ; énergie calculée à titre théorique (12,8 V × 104 Ah). Confirmer la configuration sur l’étiquette du pack.',40,620,5.7,'F1',[0.38,0.44,0.39]);
+
+  // Graphique 1 : courbe tension / état de charge indicative pour une architecture LiFePO4 4S.
+  s+=pdfGraphPanel(38,376,519,225,'PROFIL INDICATIF DE TENSION A VIDE EN FONCTION DU SOC','Profil schématique 4S : plateau de tension sur une grande partie de la capacité, puis baisse plus marquée lorsque le SOC devient faible.');
+  const gx=91,gy=421,gw=430,gh=112;
+  const yMin=10.5,yMax=14.0;
+  for(let i=0;i<=5;i++){
+    const yy=gy+i*gh/5;
+    s+=pdfLine(gx,yy,gx+gw,yy,[0.88,0.91,0.88],0.45);
+    const v=(yMin+i*(yMax-yMin)/5).toFixed(1);
+    s+=pdfText(v,gx-28,yy-2,5.8,'F1',[0.34,0.40,0.35]);
+  }
+  for(let i=0;i<=5;i++){
+    const xx=gx+i*gw/5;
+    s+=pdfLine(xx,gy,xx,gy+gh,[0.91,0.93,0.91],0.4);
+    s+=pdfText(String(i*20),xx-4,gy-12,5.8,'F1',[0.34,0.40,0.35]);
+  }
+  s+=pdfLine(gx,gy,gx,gy+gh,[0.28,0.38,0.30],0.9);
+  s+=pdfLine(gx,gy,gx+gw,gy,[0.28,0.38,0.30],0.9);
+  s+=pdfText('Tension (V)',gx-6,gy+gh+12,5.9,'F2',[0.25,0.33,0.27]);
+  s+=pdfText('Etat de charge - SOC (%)',gx+155,gy-27,6.1,'F2',[0.25,0.33,0.27]);
+  const discharge=[[0,10.7],[5,12.0],[10,12.65],[20,12.95],[30,13.05],[40,13.10],[50,13.14],[60,13.17],[70,13.20],[80,13.22],[90,13.25],[100,13.30]];
+  const dp=discharge.map(([soc,v])=>[gx+soc/100*gw,gy+(v-yMin)/(yMax-yMin)*gh]);
+  s+=pdfPolyline(dp,[0.05,0.43,0.25],2.1);
+  s+=pdfText('Courbe indicative - valeurs réelles dépendantes du courant, de la température, du BMS et du repos de la batterie.',52,388,5.7,'F1',[0.38,0.44,0.39]);
+
+  // Graphique 2 : principe de charge CC/CV en valeurs relatives uniquement.
+  s+=pdfGraphPanel(38,118,519,239,'CYCLE DE CHARGE CC / CV - SCHEMA DE PRINCIPE','Phase CC : courant presque constant et tension qui monte. Phase CV : tension régulée et courant qui diminue progressivement.');
+  const cx=91,cy=170,cw=430,ch=115;
+  for(let i=0;i<=4;i++){
+    const yy=cy+i*ch/4;
+    s+=pdfLine(cx,yy,cx+cw,yy,[0.88,0.91,0.88],0.45);
+    s+=pdfText(`${i*25}%`,cx-26,yy-2,5.6,'F1',[0.34,0.40,0.35]);
+  }
+  for(let i=0;i<=5;i++){
+    const xx=cx+i*cw/5;
+    s+=pdfLine(xx,cy,xx,cy+ch,[0.91,0.93,0.91],0.4);
+    s+=pdfText(`${i*20}`,xx-4,cy-12,5.6,'F1',[0.34,0.40,0.35]);
+  }
+  s+=pdfLine(cx,cy,cx,cy+ch,[0.28,0.38,0.30],0.9);
+  s+=pdfLine(cx,cy,cx+cw,cy,[0.28,0.38,0.30],0.9);
+  s+=pdfText('Grandeur relative (%)',cx-7,cy+ch+12,5.8,'F2',[0.25,0.33,0.27]);
+  s+=pdfText('Progression de la charge (temps relatif)',cx+125,cy-26,5.8,'F2',[0.25,0.33,0.27]);
+  const voltage=[[0,18],[10,42],[20,60],[35,78],[50,88],[65,94],[75,96],[100,96]];
+  const current=[[0,82],[20,82],[40,82],[60,82],[70,76],[78,60],[86,40],[94,23],[100,14]];
+  const vp=voltage.map(([t,v])=>[cx+t/100*cw,cy+v/100*ch]);
+  const ip=current.map(([t,v])=>[cx+t/100*cw,cy+v/100*ch]);
+  s+=pdfPolyline(vp,[0.05,0.43,0.25],2.0);
+  s+=pdfPolyline(ip,[0.82,0.57,0.10],1.8,'4 3');
+  s+=pdfLine(365,145,389,145,[0.05,0.43,0.25],2);
+  s+=pdfText('Tension relative',394,143,5.8,'F1',[0.25,0.33,0.27]);
+  s+=pdfLine(470,145,492,145,[0.82,0.57,0.10],1.8);
+  s+=pdfText('Courant',496,143,5.8,'F1',[0.25,0.33,0.27]);
+  s+=pdfText('Le profil de charge réel, les seuils de tension et le courant maximal doivent provenir de la fiche du BMS et du chargeur retenus.',52,129,5.6,'F1',[0.38,0.44,0.39]);
+  s+=pdfPageFooter(3,3);
+  return s;
+}
+
 function makeProfessionalNoticePdf(product,guide,imageData){
-  const page1=makeNoticePageOne(product,guide,imageData);
-  const page2=makeNoticePageTwo(product,guide);
-  const imageObj=imageData ? 7 : null;
-  const page1Content=imageData ? 8 : 7;
-  const page2Content=imageData ? 9 : 8;
-  const imageResource=imageData ? `/XObject << /Im1 ${imageObj} 0 R >>` : '';
+  const isLiFePO4=String(product.id||'').toLowerCase().includes('lifepo4');
+  const totalPages=isLiFePO4?3:2;
+  const page1=makeNoticePageOne(product,guide,imageData,totalPages);
+  const page2=makeNoticePageTwo(product,guide,totalPages);
+  const page3=isLiFePO4?makeLiFePO4AppendixPage(product,guide):'';
+  const imageResource=imageData?'/XObject << /Im1 7 0 R >>':'';
+  const kids=isLiFePO4?'[3 0 R 4 0 R 10 0 R]':'[3 0 R 4 0 R]';
   const objects=[
     {id:1,body:'<< /Type /Catalog /Pages 2 0 R >>'},
-    {id:2,body:'<< /Type /Pages /Kids [3 0 R 4 0 R] /Count 2 >>'},
-    {id:3,body:`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 5 0 R /F2 6 0 R >> ${imageResource} >> /Contents ${page1Content} 0 R >>`},
-    {id:4,body:`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> /Contents ${page2Content} 0 R >>`},
+    {id:2,body:`<< /Type /Pages /Kids ${kids} /Count ${totalPages} >>`},
+    {id:3,body:`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 5 0 R /F2 6 0 R >> ${imageResource} >> /Contents 8 0 R >>`},
+    {id:4,body:'<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> /Contents 9 0 R >>'},
     {id:5,body:'<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>'},
     {id:6,body:'<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>'}
   ];
   if(imageData){
     objects.push({id:7,body:`<< /Type /XObject /Subtype /Image /Width ${imageData.width} /Height ${imageData.height} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${imageData.binary.length} >>\nstream\n${imageData.binary}\nendstream`});
   }
-  objects.push({id:page1Content,body:`<< /Length ${page1.length} >>\nstream\n${page1}endstream`});
-  objects.push({id:page2Content,body:`<< /Length ${page2.length} >>\nstream\n${page2}endstream`});
+  objects.push({id:8,body:`<< /Length ${page1.length} >>\nstream\n${page1}endstream`});
+  objects.push({id:9,body:`<< /Length ${page2.length} >>\nstream\n${page2}endstream`});
+  if(isLiFePO4){
+    objects.push({id:10,body:'<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> /Contents 11 0 R >>'});
+    objects.push({id:11,body:`<< /Length ${page3.length} >>\nstream\n${page3}endstream`});
+  }
   return buildPdfBinary(objects);
 }
+
 async function downloadProfessionalNotice(product,guide,candidateImages){
   try{
     const image=await getNoticePhoto(candidateImages);
@@ -2779,8 +2948,8 @@ if(fab){
     battery104:{
       id:'batterie-lifepo4-104ah', title:'Batterie LiFePO4 GreenBridge - 104 Ah',
       subtitle:'Stockage d’énergie • Cellules LiFePO4 Grade A',
-      capacity:'104 Ah', power:'Décharge annoncée : 100 A',
-      specs:['Capacité nominale : 104 Ah','Technologie : LiFePO4','Cellules : Grade A','Courant de décharge annoncé : 100 A','Garantie annoncée : 3 ans'],
+      capacity:'104 Ah', power:'12,8 V nominal (configuration projet 4S) • Décharge annoncée : 100 A',
+      specs:['Capacité nominale : 104 Ah','Technologie : LiFePO4','Cellules : Grade A','Configuration projet : 4S / 12,8 V nominal (à confirmer sur l’étiquette)','Énergie nominale théorique : environ 1,33 kWh','Courant de décharge annoncé : 100 A','Garantie annoncée : 3 ans'],
       entryNote:'Tension nominale, courant de charge, bornes et connectique doivent être confirmés sur l’étiquette technique du pack.',
       outputPorts:['Bornes de sortie DC + / − (forme des bornes à vérifier)'],
       steps:[
@@ -2790,7 +2959,7 @@ if(fab){
         {title:'Choisir un chargeur compatible',text:'Employer uniquement un chargeur conçu pour la tension et la chimie LiFePO4 du pack, avec paramètres conformes à la fiche technique de la batterie.'}
       ],
       extraPrecautions:['Le raccordement d’un pack batterie doit être effectué ou contrôlé par un technicien compétent.'],
-      specialBox:'La tension nominale exacte, le courant de charge maximal, les dimensions de câbles et le calibre de protection ne sont pas précisés dans la carte produit. Ne pas les deviner : les confirmer sur la fiche technique détaillée avant installation.'
+      notes:['Configuration projet 4S / 12,8 V nominal : confirmer la tension sur l’étiquette du pack commercialisé.','Énergie théorique indicative : environ 1,33 kWh (12,8 V × 104 Ah), hors pertes et limites d’utilisation.','Courbes de l’annexe : profils pédagogiques indicatifs, non issus d’un essai de laboratoire sur ce pack.']
     },
     v1:{
       id:'greenbridge-v1-6000mah', title:'GreenBridge V1 - 6 000 mAh',
