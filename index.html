@@ -3013,7 +3013,7 @@ function openNewProductModal(productKey, title, description){
   const noticeKeys = { lifepo4:'battery104', v1:'v1', v2:'v2', v3:'v3' };
   const noticeKey = noticeKeys[productKey];
   const noticeAction = productKey === 'lifepo4' ? 'window.downloadLiFePO4TechnicalNotice()' : `window.downloadEmbeddedNotice('${noticeKey}')`;
-  const noticeLabel = productKey === 'lifepo4' ? 'Notice complète + courbes (4 pages)' : 'Télécharger la notice PDF';
+  const noticeLabel = productKey === 'lifepo4' ? 'Notice' : 'Télécharger la notice PDF';
   const noticeButton = noticeKey
     ? `<a class="notice-link-btn" href="#" onclick="event.preventDefault(); closeModal(); ${noticeAction}; return false;"><i class="fa-regular fa-file-pdf"></i> ${noticeLabel}</a>`
     : '';
