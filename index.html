@@ -11,8 +11,8 @@
   </script>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
-<title>GREENBRIDGE TECHNOLOGIES — Powerbanks &amp; Solutions Énergétiques</title>
-<meta content="GREENBRIDGE TECHNOLOGIES — Powerbanks pour téléphones et ordinateurs, alimentation de secours Wi-Fi et batteries de stockage LiFePO4." name="description"/>
+<title>GREENBRIDGE TECHNOLOGIES — Powerbanks, Mini-UPS Wi-Fi &amp; Batteries LiFePO₄ | Afrique de l’Ouest</title>
+<meta content="Découvrez les powerbanks GreenBridge pour téléphones et ordinateurs, les mini-UPS Wi-Fi et les batteries LiFePO₄. Prix, disponibilité et conseils sur WhatsApp en Côte d’Ivoire, au Sénégal et en Afrique de l’Ouest." name="description"/>
 <meta content="#0a4d2e" name="theme-color"/>
 <link href="green bridge domo.png" rel="icon" type="image/png"/>
 <link href="green bridge domo.png" rel="apple-touch-icon"/>
@@ -1633,6 +1633,84 @@
     .gb-premium-universe-grid .gb-universe-card,.gb-family-model-grid .model,.gb-showcase-product,.gb-showcase-image img{transition:none!important}
   }
 
+
+  /* 2026.11 — Conversion premium : visuels plein cadre et commandes visibles. */
+  .gb-showcase-product{min-height:158px;background:#e8eee8}
+  .gb-showcase-image{inset:0!important;padding:0!important;overflow:hidden;background:#e8eee8}
+  .gb-showcase-image img{width:100%!important;height:100%!important;padding:0!important;object-fit:cover!important;object-position:center!important;filter:none!important;transform:scale(1.025);}
+  .gb-showcase-product:hover .gb-showcase-image img{transform:scale(1.075)}
+  .gb-showcase-product-copy{position:absolute!important;left:0;right:0;bottom:0;z-index:2;min-height:72px!important;justify-content:flex-end;padding:25px 34px 10px 11px!important;background:linear-gradient(180deg,rgba(3,29,18,0),rgba(3,29,18,.89) 43%,rgba(3,29,18,.98) 100%)!important}
+  .gb-showcase-product-copy span{font-size:7px}
+  .gb-showcase-product-copy strong{font-size:14px}
+  .gb-showcase-arrow{z-index:3}
+
+  .gb-premium-universe-grid .gb-universe-card{min-height:318px;padding:15px 16px 15px;justify-content:flex-start}
+  .gb-universe-card-top{margin-bottom:10px!important}
+  .gb-universe-card-visual{position:relative;isolation:isolate;height:120px;margin:0 -16px 14px;overflow:hidden;background:linear-gradient(135deg,#edf3ed,#d4e2d6)}
+  .gb-universe-card-visual::after{content:"";position:absolute;inset:38% 0 0;background:linear-gradient(180deg,transparent,rgba(3,27,18,.57));pointer-events:none}
+  .gb-universe-card-visual img{display:block;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center;transition:transform .35s ease}
+  .gb-universe-card-visual span{position:absolute;z-index:1;left:11px;bottom:9px;color:#fff;font-size:7px;font-weight:900;letter-spacing:1.05px;text-shadow:0 2px 7px rgba(0,0,0,.6)}
+  .gb-premium-universe-grid .gb-universe-card:hover .gb-universe-card-visual img{transform:scale(1.08)}
+  .gb-premium-universe-grid .gb-universe-content{flex:1}
+  .gb-premium-universe-grid .gb-universe-content p{font-size:10px;line-height:1.62;margin-bottom:13px}
+  .gb-premium-universe-grid .gb-universe-content strong{margin-top:auto}
+
+  /* Les photos produits occupent toute la zone visuelle des cartes catalogue. */
+  .gb-family-model-grid .model .thumb{flex:0 0 190px;height:190px;border-radius:13px;background:#e8eee8;overflow:hidden}
+  .gb-family-model-grid .model .thumb img{display:block;width:100%;height:100%;padding:0!important;object-fit:cover!important;object-position:center!important;border-radius:13px}
+  .gb-phone-new-grid .new-product-photo-placeholder{height:180px;min-height:180px;max-height:180px;flex-basis:180px;border-radius:12px;background:#e8eee8}
+  .gb-phone-new-grid .new-product-photo-placeholder img{object-fit:cover!important;object-position:center!important;border-radius:12px;transform:scale(1.025)}
+  .gb-phone-new-grid .new-product-card{align-items:stretch;text-align:left}
+  .gb-phone-new-grid .new-product-card h3,.gb-phone-new-grid .new-product-card p{text-align:left;width:100%}
+  .gb-phone-new-grid .new-product-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;width:100%;margin-top:auto}
+  .gb-phone-new-grid .new-product-actions .new-order-btn{grid-column:1/-1;min-height:38px;background:linear-gradient(110deg,#20ad65,#087c43);box-shadow:0 7px 16px rgba(8,95,51,.2)}
+  .gb-phone-new-grid .new-product-actions .new-info-btn,.gb-phone-new-grid .new-product-actions .notice-link-btn{min-height:35px}
+  .gb-family-model-grid .model-new-actions .new-order-btn{flex:1 1 100%;min-height:38px;background:linear-gradient(110deg,#20ad65,#087c43);box-shadow:0 6px 15px rgba(8,95,51,.18);font-size:10px;letter-spacing:.15px}
+  .gb-family-model-grid .model-new-actions .new-info-btn,.gb-family-model-grid .model-new-actions .notice-mini-link{flex:1 1 calc(50% - 4px);min-height:35px}
+  .gb-battery-product-card .new-product-photo-placeholder{height:205px;min-height:205px;max-height:205px;flex-basis:205px;border-radius:13px;background:#e8eee8}
+  .gb-battery-product-card .new-product-photo-placeholder img{width:100%;height:100%;object-fit:cover!important;object-position:center!important}
+
+  .gb-commercial-strip{border-color:rgba(217,187,98,.36);background:linear-gradient(100deg,rgba(217,187,98,.14),rgba(255,255,255,.045) 55%,rgba(37,211,102,.09))}
+  .gb-commercial-strip strong{font-size:12px}
+  .gb-commercial-strip span{font-size:10px}
+  .gb-commercial-strip button{min-height:44px;padding:11px 16px;font-size:10px;box-shadow:0 8px 18px rgba(0,0,0,.18)}
+  .gb-premium-actions .gb-commerce-primary{box-shadow:0 10px 28px rgba(217,187,98,.2)}
+  .gb-premium-actions .gb-commerce-secondary{border-color:rgba(37,211,102,.48);background:linear-gradient(105deg,rgba(37,211,102,.16),rgba(255,255,255,.055))}
+
+  @media(max-width:820px){
+    .gb-premium-universe-grid .gb-universe-card{min-height:312px}
+  }
+  @media(max-width:640px){
+    .gb-showcase-mosaic{grid-template-rows:148px 148px!important}
+    .gb-showcase-image{inset:0!important}
+    .gb-showcase-product-copy{min-height:61px!important;padding:22px 27px 8px 8px!important}
+    .gb-showcase-product-copy span{font-size:5.2px}
+    .gb-showcase-product-copy strong{font-size:10px}
+    .gb-showcase-product-copy small{font-size:6.5px}
+    .gb-showcase-arrow{right:7px;bottom:11px;font-size:8px}
+    .gb-premium-universe-grid .gb-universe-card{min-height:300px;padding:11px 11px 12px}
+    .gb-universe-card-top{margin-bottom:8px!important}
+    .gb-universe-card-visual{height:100px;margin:0 -11px 10px}
+    .gb-universe-card-visual span{left:8px;bottom:7px;font-size:5.4px;letter-spacing:.55px}
+    .gb-premium-universe-grid .gb-universe-content h3{font-size:11px}
+    .gb-premium-universe-grid .gb-universe-content p{font-size:7.7px;line-height:1.5;margin-bottom:9px}
+    .gb-premium-universe-grid .gb-universe-content strong{font-size:7px;padding-top:7px}
+    .gb-family-model-grid .model .thumb{flex-basis:118px;height:118px}
+    .gb-family-model-grid .model .thumb img{padding:0!important}
+    .gb-phone-new-grid .new-product-photo-placeholder{height:128px;min-height:128px;max-height:128px;flex-basis:128px}
+    .gb-phone-new-grid .new-product-card{padding:9px;gap:7px}
+    .gb-phone-new-grid .new-product-actions{grid-template-columns:1fr 1fr;gap:5px}
+    .gb-phone-new-grid .new-product-actions .new-order-btn{min-height:34px;font-size:8px}
+    .gb-phone-new-grid .new-product-actions .new-info-btn,.gb-phone-new-grid .new-product-actions .notice-link-btn{font-size:7px;padding:6px 4px}
+    .gb-family-model-grid .model-new-actions .new-order-btn{font-size:8px;min-height:32px}
+    .gb-battery-product-card .new-product-photo-placeholder{height:150px;min-height:150px;max-height:150px;flex-basis:150px}
+  }
+  @media(max-width:390px){
+    .gb-premium-universe-grid .gb-universe-card{min-height:310px}
+    .gb-universe-card-visual{height:92px}
+    .gb-family-model-grid .model .thumb{flex-basis:108px;height:108px}
+  }
+
 </style>
 <script>
   // Fonction de repli disponible dès le début du chargement des cartes produit.
@@ -1719,23 +1797,23 @@
 <main class="container" role="main"><section aria-labelledby="gb-commerce-title" class="gb-commerce-intro gb-premium-intro">
   <div class="gb-commerce-hero gb-premium-hero">
     <div class="gb-commerce-copy gb-premium-copy">
-      <div class="gb-commerce-eyebrow"><span></span> GREENBRIDGE TECHNOLOGIES <b>·</b> ENERGY SYSTEMS / WEST AFRICA</div>
-      <h1 id="gb-commerce-title">L’énergie qui accompagne <em>vos ambitions.</em></h1>
+      <div class="gb-commerce-eyebrow"><span></span> GREENBRIDGE TECHNOLOGIES <b>·</b> CÔTE D’IVOIRE · SÉNÉGAL · AFRIQUE DE L’OUEST</div>
+      <h1 id="gb-commerce-title">L’énergie qui fait avancer <em>vos activités.</em></h1>
       <p class="gb-commerce-lead">
-        Des solutions énergétiques conçues pour les réalités de l’Afrique de l’Ouest. De la mobilité professionnelle à la continuité de connexion, jusqu’au stockage de l’énergie, <strong>GreenBridge met l’ingénierie et le savoir-faire local au service de vos usages.</strong>
+        Powerbanks pour téléphones et ordinateurs, mini-UPS Wi-Fi et batteries LiFePO₄ : trouvez la solution adaptée à votre besoin. <strong>Consultez les modèles, demandez le prix et la disponibilité, puis échangez directement avec notre équipe sur WhatsApp.</strong>
       </p>
       <div class="gb-premium-audience">
         <span><i class="fa-solid fa-user"></i> Particuliers</span>
-        <span><i class="fa-solid fa-briefcase"></i> Professionnels</span>
+        <span><i class="fa-solid fa-store"></i> Commerçants &amp; pros</span>
         <span><i class="fa-solid fa-building"></i> Entreprises &amp; projets</span>
       </div>
       <div class="gb-commerce-actions gb-premium-actions">
-        <a class="gb-commerce-primary" href="#gb-univers"><i class="fa-solid fa-arrow-down-long"></i> Découvrir nos solutions</a>
-        <button class="gb-commerce-secondary" onclick="openProductWhatsApp('Demande de conseil et de devis — GreenBridge Technologies')" type="button"><i class="fa-brands fa-whatsapp"></i> Obtenir un devis</button>
+        <a class="gb-commerce-primary" href="#gb-univers"><i class="fa-solid fa-bolt"></i> Voir les produits</a>
+        <button class="gb-commerce-secondary" onclick="openProductWhatsApp('Demande de conseil et de devis — GreenBridge Technologies')" type="button"><i class="fa-brands fa-whatsapp"></i> Prix &amp; commande WhatsApp</button>
       </div>
       <div class="gb-commerce-proofline gb-premium-proofline">
-        <span><i class="fa-solid fa-microchip"></i> Expertise technique</span>
-        <span><i class="fa-solid fa-compass-drafting"></i> Solutions pensées pour le terrain</span>
+        <span><i class="fa-solid fa-microchip"></i> Conseil technique avant achat</span>
+        <span><i class="fa-solid fa-file-lines"></i> Fiches produits disponibles</span>
         <span><i class="fa-solid fa-globe-africa"></i> Assemblé en Afrique de l’Ouest</span>
       </div>
     </div>
@@ -1774,33 +1852,37 @@
   <div class="gb-universe-heading gb-premium-universe-heading" id="gb-univers">
     <div>
       <span class="gb-section-kicker">NOS DOMAINES D’EXPERTISE</span>
-      <h2>Quatre univers. Une même exigence.</h2>
-      <p>Identifiez votre besoin et accédez directement à la gamme correspondante.</p>
+      <h2>Choisissez votre solution énergétique.</h2>
+      <p>Ordinateur, connexion, téléphone ou stockage : accédez directement aux produits adaptés à votre usage.</p>
     </div>
     <span class="gb-universe-count">01 <i>—</i> 04 <b>UNIVERS</b></span>
   </div>
   <nav aria-label="Accès direct aux quatre familles GreenBridge" class="gb-universe-grid gb-premium-universe-grid">
     <a class="gb-universe-card" href="#univers-ordinateurs">
-      <div class="gb-universe-card-top"><span class="gb-universe-number">01</span><span class="gb-universe-icon"><i class="fa-solid fa-laptop"></i></span><span class="gb-universe-card-index">POWER / COMPUTING</span></div>
-      <div class="gb-universe-content"><span class="gb-universe-tag">MOBILITÉ PROFESSIONNELLE</span><h3>Ordinateurs portables</h3><p>Des réserves d’énergie haute capacité pour accompagner le travail, les déplacements et les équipements compatibles.</p><strong>GreenLaptop+ · jusqu’à 100 W <i class="fa-solid fa-arrow-right"></i></strong></div>
+      <div class="gb-universe-card-top"><span class="gb-universe-number">01</span><span class="gb-universe-card-index">POWER / COMPUTING</span></div>
+      <div class="gb-universe-card-visual"><img src="Chargeur_ordi_1.png" alt="Powerbank GreenLaptop pour ordinateur portable" loading="lazy"/><span>GREENLAPTOP · JUSQU’À 100 W</span></div>
+      <div class="gb-universe-content"><span class="gb-universe-tag">MOBILITÉ PROFESSIONNELLE</span><h3>Powerbanks pour ordinateur</h3><p>Une réserve d’énergie pour travailler, voyager et rester productif avec les équipements compatibles.</p><strong>Voir les modèles <i class="fa-solid fa-arrow-right"></i></strong></div>
     </a>
     <a class="gb-universe-card" href="#univers-wifi">
-      <div class="gb-universe-card-top"><span class="gb-universe-number">02</span><span class="gb-universe-icon"><i class="fa-solid fa-wifi"></i></span><span class="gb-universe-card-index">POWER / CONNECTIVITY</span></div>
-      <div class="gb-universe-content"><span class="gb-universe-tag">CONNECTIVITÉ &amp; SECOURS</span><h3>Wi-Fi &amp; Mini-UPS</h3><p>Une alimentation de secours compacte pour préserver la connexion de vos routeurs, modems et équipements compatibles lors des coupures.</p><strong>GreenWifi · 12 000 mAh <i class="fa-solid fa-arrow-right"></i></strong></div>
+      <div class="gb-universe-card-top"><span class="gb-universe-number">02</span><span class="gb-universe-card-index">POWER / CONNECTIVITY</span></div>
+      <div class="gb-universe-card-visual"><img src="wifi_2.png" alt="Mini-UPS GreenWifi pour routeur et modem" loading="lazy"/><span>GREENWIFI · MINI-UPS</span></div>
+      <div class="gb-universe-content"><span class="gb-universe-tag">CONNECTIVITÉ &amp; SECOURS</span><h3>Powerbanks Wi-Fi &amp; Mini-UPS</h3><p>Une alimentation de secours compacte pour préserver la connexion de vos routeurs et modems compatibles pendant les coupures.</p><strong>Voir le modèle <i class="fa-solid fa-arrow-right"></i></strong></div>
     </a>
     <a class="gb-universe-card" href="#univers-telephone">
-      <div class="gb-universe-card-top"><span class="gb-universe-number">03</span><span class="gb-universe-icon"><i class="fa-solid fa-mobile-screen-button"></i></span><span class="gb-universe-card-index">POWER / MOBILE</span></div>
-      <div class="gb-universe-content"><span class="gb-universe-tag">ÉNERGIE MOBILE</span><h3>Powerbanks pour téléphones</h3><p>Une gamme complète : charge standard, charge rapide, multi-sorties, éclairage et recharge sans fil.</p><strong>GreenMini · GreenCore · GreenPro <i class="fa-solid fa-arrow-right"></i></strong></div>
+      <div class="gb-universe-card-top"><span class="gb-universe-number">03</span><span class="gb-universe-card-index">POWER / MOBILE</span></div>
+      <div class="gb-universe-card-visual"><img src="Pwkb_Mini_3.png" alt="Powerbank GreenMini pour téléphone" loading="lazy"/><span>GREENMINI · GAMME MOBILE</span></div>
+      <div class="gb-universe-content"><span class="gb-universe-tag">ÉNERGIE MOBILE</span><h3>Powerbanks pour téléphone</h3><p>Des modèles compacts et haute capacité, avec charge standard ou rapide selon les références.</p><strong>Voir les modèles <i class="fa-solid fa-arrow-right"></i></strong></div>
     </a>
     <a class="gb-universe-card" href="#univers-batteries">
-      <div class="gb-universe-card-top"><span class="gb-universe-number">04</span><span class="gb-universe-icon"><i class="fa-solid fa-battery-full"></i></span><span class="gb-universe-card-index">POWER / STORAGE</span></div>
-      <div class="gb-universe-content"><span class="gb-universe-tag">STOCKAGE ÉNERGÉTIQUE</span><h3>Batteries LiFePO₄</h3><p>Des solutions de stockage fondées sur la technologie lithium fer phosphate pour développer l’autonomie.</p><strong>GreenBridge · 104 Ah <i class="fa-solid fa-arrow-right"></i></strong></div>
+      <div class="gb-universe-card-top"><span class="gb-universe-number">04</span><span class="gb-universe-card-index">POWER / STORAGE</span></div>
+      <div class="gb-universe-card-visual"><img src="pack_batterie_1200wh.png" alt="Batterie de stockage GreenBridge LiFePO4" loading="lazy"/><span>GREENBRIDGE · LiFePO₄</span></div>
+      <div class="gb-universe-content"><span class="gb-universe-tag">STOCKAGE ÉNERGÉTIQUE</span><h3>Batteries LiFePO₄</h3><p>Le stockage lithium fer phosphate pour développer l’autonomie de vos installations et équipements.</p><strong>Voir la solution <i class="fa-solid fa-arrow-right"></i></strong></div>
     </a>
   </nav>
   <div class="gb-commercial-strip">
     <div class="gb-commercial-strip-mark"><i class="fa-solid fa-headset"></i></div>
-    <div><strong>Vous avez un besoin précis ou un projet à équiper&nbsp;?</strong><span>Notre équipe vous accompagne dans le choix d’une solution adaptée à votre usage.</span></div>
-    <button type="button" onclick="openProductWhatsApp('Bonjour GreenBridge, je souhaite être conseillé sur une solution énergétique et obtenir un devis.')">Échanger avec GreenBridge <i class="fa-solid fa-arrow-right"></i></button>
+    <div><strong>Un produit vous intéresse&nbsp;?</strong><span>Demandez le prix, vérifiez la disponibilité et obtenez un conseil avant de commander sur WhatsApp.</span></div>
+    <button type="button" onclick="openProductWhatsApp('Bonjour GreenBridge, je souhaite être conseillé sur une solution énergétique et obtenir un devis.')">Prix &amp; commande WhatsApp <i class="fa-solid fa-arrow-right"></i></button>
   </div>
 </section>
 <section aria-label="Catalogue des produits GreenBridge" class="models-wrapper gb-catalogue-shell" id="models" role="region">
@@ -1825,8 +1907,8 @@
 <h4>GreenLaptop+</h4>
 <p>36 000 mAh • 65 à 100 W<br><small>Chargeur pour ordinateur portable.</small></br></p>
 </div>
-<div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(11)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(11); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('GreenLaptop+')" type="button"><i class="fa-brands fa-whatsapp"></i> Contact</button></div>
-</div><div aria-label="GreenLaptop 20 000 mAh" class="model" data-model-index="12" onclick="selectModel(12)" role="button" tabindex="0"><div class="thumb"><img alt="GreenLaptop" loading="lazy" onerror="showModelPhotoPlaceholder(this)" src="GreenLaptop_2.PNG"/></div><div class="meta"><h4>GreenLaptop</h4><p>20 000 mAh • 100 W<br/><small>Téléphone et ordinateur portable.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(12)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(12); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('GreenLaptop — 20 000 mAh')" type="button"><i class="fa-brands fa-whatsapp"></i> Contact</button></div></div></div>
+<div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(11)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(11); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('GreenLaptop+')" type="button"><i class="fa-brands fa-whatsapp"></i> Commander</button></div>
+</div><div aria-label="GreenLaptop 20 000 mAh" class="model" data-model-index="12" onclick="selectModel(12)" role="button" tabindex="0"><div class="thumb"><img alt="GreenLaptop" loading="lazy" onerror="showModelPhotoPlaceholder(this)" src="GreenLaptop_2.PNG"/></div><div class="meta"><h4>GreenLaptop</h4><p>20 000 mAh • 100 W<br/><small>Téléphone et ordinateur portable.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(12)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(12); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('GreenLaptop — 20 000 mAh')" type="button"><i class="fa-brands fa-whatsapp"></i> Commander</button></div></div></div>
 </section>
 <section aria-labelledby="gb-wifi-title" class="gb-product-family" id="univers-wifi">
 <div class="gb-family-header">
@@ -1848,7 +1930,7 @@
 <h4>Green Wifi</h4>
 <p>12 000 mAh<br><small>Autonomie Wi-Fi annoncée : 4 à 6 h.</small></br></p>
 </div>
-<div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(13)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(13); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('Green Wifi')" type="button"><i class="fa-brands fa-whatsapp"></i> Contact</button></div>
+<div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(13)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(13); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('Green Wifi')" type="button"><i class="fa-brands fa-whatsapp"></i> Commander</button></div>
 </div></div>
 </section>
 <section aria-labelledby="gb-phone-title" class="gb-product-family" id="univers-telephone">
@@ -1877,7 +1959,7 @@
 <div class="new-product-actions">
 <button class="new-info-btn" data-new-product-key="v1" type="button">En savoir plus</button>
 <a class="notice-link-btn" href="#" onclick="event.preventDefault(); downloadEmbeddedNotice('v1'); return false;"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a>
-<button class="new-order-btn" onclick="openProductWhatsApp('GreenBridge V1 — 6 000 mAh')" type="button"><i class="fa-brands fa-whatsapp"></i> Contact</button>
+<button class="new-order-btn" onclick="openProductWhatsApp('GreenBridge V1 — 6 000 mAh')" type="button"><i class="fa-brands fa-whatsapp"></i> Commander</button>
 </div>
 </article><article class="new-product-card">
 <span class="new-product-badge">NOUVEAUTÉ</span>
@@ -1889,7 +1971,7 @@
 <div class="new-product-actions">
 <button class="new-info-btn" data-new-product-key="v2" type="button">En savoir plus</button>
 <a class="notice-link-btn" href="#" onclick="event.preventDefault(); downloadEmbeddedNotice('v2'); return false;"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a>
-<button class="new-order-btn" onclick="openProductWhatsApp('GreenBridge V2 — 10 000 mAh')" type="button"><i class="fa-brands fa-whatsapp"></i> Contact</button>
+<button class="new-order-btn" onclick="openProductWhatsApp('GreenBridge V2 — 10 000 mAh')" type="button"><i class="fa-brands fa-whatsapp"></i> Commander</button>
 </div>
 </article><article class="new-product-card">
 <span class="new-product-badge">NOUVEAUTÉ</span>
@@ -1901,46 +1983,46 @@
 <div class="new-product-actions">
 <button class="new-info-btn" data-new-product-key="v3" type="button">En savoir plus</button>
 <a class="notice-link-btn" href="#" onclick="event.preventDefault(); downloadEmbeddedNotice('v3'); return false;"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a>
-<button class="new-order-btn" onclick="openProductWhatsApp('GreenBridge V3 — 12 000 mAh')" type="button"><i class="fa-brands fa-whatsapp"></i> Contact</button>
+<button class="new-order-btn" onclick="openProductWhatsApp('GreenBridge V3 — 12 000 mAh')" type="button"><i class="fa-brands fa-whatsapp"></i> Commander</button>
 </div>
 </article></div>
 </section>
 <div class="gb-family-catalogue-heading"><h3>La gamme complète pour téléphone</h3><span>11 modèles à découvrir</span></div>
-<div class="models gb-family-model-grid" role="list"><div aria-label="Green Only 4 500 mAh" class="model" data-model-index="0" onclick="selectModel(0)" role="button" tabindex="0"><div class="thumb"><img alt="Green Only — aperçu des quatre coloris" loading="lazy" onerror="showModelPhotoPlaceholder(this)" src="Greenonly.jpg"/></div><div class="meta"><h4>Green Only</h4><p>4 500 mAh<br/><small>Powerbank GreenBridge.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(0)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(0); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('Green Only — 4 500 mAh')" type="button"><i class="fa-brands fa-whatsapp"></i> Contact</button></div></div><div aria-label="GreenMini" class="model" data-model-index="1" onclick="selectModel(1)" role="button" tabindex="0">
+<div class="models gb-family-model-grid" role="list"><div aria-label="Green Only 4 500 mAh" class="model" data-model-index="0" onclick="selectModel(0)" role="button" tabindex="0"><div class="thumb"><img alt="Green Only — aperçu des quatre coloris" loading="lazy" onerror="showModelPhotoPlaceholder(this)" src="Greenonly.jpg"/></div><div class="meta"><h4>Green Only</h4><p>4 500 mAh<br/><small>Powerbank GreenBridge.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(0)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(0); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('Green Only — 4 500 mAh')" type="button"><i class="fa-brands fa-whatsapp"></i> Commander</button></div></div><div aria-label="GreenMini" class="model" data-model-index="1" onclick="selectModel(1)" role="button" tabindex="0">
 <div class="thumb"><img alt="GreenMini" fetchpriority="high" loading="eager" onerror="showModelPhotoPlaceholder(this)" src="Pwkb_Mini_3.png"/></div>
 <div class="meta">
 <h4>GreenMini</h4>
 <p>10 000 mAh<br/><small>Versions 15 W et 22,5 W.</small></p>
 </div>
-<div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(1)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(1); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('GreenMini')" type="button"><i class="fa-brands fa-whatsapp"></i> Contact</button></div>
+<div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(1)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(1); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('GreenMini')" type="button"><i class="fa-brands fa-whatsapp"></i> Commander</button></div>
 </div><div aria-label="GreenCore" class="model" data-model-index="2" onclick="selectModel(2)" role="button" tabindex="0">
 <div class="thumb"><img alt="GreenCore" loading="eager" onerror="showModelPhotoPlaceholder(this)" src="pwkb_123.png"/></div>
 <div class="meta">
 <h4>GreenCore</h4>
 <p>10 000 mAh • 15 W<br/><small>Éclairage LED intégré.</small></p>
 </div>
-<div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(2)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(2); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('GreenCore')" type="button"><i class="fa-brands fa-whatsapp"></i> Contact</button></div>
+<div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(2)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(2); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('GreenCore')" type="button"><i class="fa-brands fa-whatsapp"></i> Commander</button></div>
 </div><div aria-label="GreenPlus" class="model" data-model-index="3" onclick="selectModel(3)" role="button" tabindex="0">
 <div class="thumb"><img alt="GreenPlus" loading="lazy" onerror="showModelPhotoPlaceholder(this)" src="Greenplus_1.png"/></div>
 <div class="meta">
 <h4>GreenPlus</h4>
 <p>10 000 mAh • 15 W<br/><small>Trois sorties USB-A.</small></p>
 </div>
-<div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(3)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(3); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('GreenPlus')" type="button"><i class="fa-brands fa-whatsapp"></i> Contact</button></div>
-</div><div aria-label="GreenEco 10 000 mAh" class="model" data-model-index="4" onclick="selectModel(4)" role="button" tabindex="0"><div class="thumb"><img alt="GreenEco" loading="lazy" onerror="showModelPhotoPlaceholder(this)" src="batterie_tropical_1.png"/></div><div class="meta"><h4>GreenEco</h4><p>10 000 mAh<br/><small>Powerbank GreenBridge.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(4)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(4); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('GreenEco — 10 000 mAh')" type="button"><i class="fa-brands fa-whatsapp"></i> Contact</button></div></div><div aria-label="Green Africa 10 000 mAh" class="model" data-model-index="5" onclick="selectModel(5)" role="button" tabindex="0"><div class="thumb"><img alt="Green Africa" loading="lazy" onerror="showModelPhotoPlaceholder(this)" src="Green_africa1.PNG"/></div><div class="meta"><h4>Green Africa</h4><p>10 000 mAh<br/><small>Powerbank GreenBridge.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(5)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(5); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('Green Africa — 10 000 mAh')" type="button"><i class="fa-brands fa-whatsapp"></i> Contact</button></div></div><div aria-label="GreenPro" class="model" data-model-index="6" onclick="selectModel(6)" role="button" tabindex="0">
+<div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(3)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(3); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('GreenPlus')" type="button"><i class="fa-brands fa-whatsapp"></i> Commander</button></div>
+</div><div aria-label="GreenEco 10 000 mAh" class="model" data-model-index="4" onclick="selectModel(4)" role="button" tabindex="0"><div class="thumb"><img alt="GreenEco" loading="lazy" onerror="showModelPhotoPlaceholder(this)" src="batterie_tropical_1.png"/></div><div class="meta"><h4>GreenEco</h4><p>10 000 mAh<br/><small>Powerbank GreenBridge.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(4)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(4); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('GreenEco — 10 000 mAh')" type="button"><i class="fa-brands fa-whatsapp"></i> Commander</button></div></div><div aria-label="Green Africa 10 000 mAh" class="model" data-model-index="5" onclick="selectModel(5)" role="button" tabindex="0"><div class="thumb"><img alt="Green Africa" loading="lazy" onerror="showModelPhotoPlaceholder(this)" src="Green_africa1.PNG"/></div><div class="meta"><h4>Green Africa</h4><p>10 000 mAh<br/><small>Powerbank GreenBridge.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(5)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(5); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('Green Africa — 10 000 mAh')" type="button"><i class="fa-brands fa-whatsapp"></i> Commander</button></div></div><div aria-label="GreenPro" class="model" data-model-index="6" onclick="selectModel(6)" role="button" tabindex="0">
 <div class="thumb"><img alt="GreenPro" loading="lazy" onerror="showModelPhotoPlaceholder(this)" src="pwkb_6.png"/></div>
 <div class="meta">
 <h4>GreenPro</h4>
 <p>12 000 mAh • 15 W<br/><small>Deux sorties USB-A.</small></p>
 </div>
-<div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(6)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(6); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('GreenPro')" type="button"><i class="fa-brands fa-whatsapp"></i> Contact</button></div>
-</div><div aria-label="Green Reck 12 000 mAh" class="model" data-model-index="7" onclick="selectModel(7)" role="button" tabindex="0"><div class="thumb"><img alt="Green Reck" loading="lazy" onerror="showModelPhotoPlaceholder(this)" src="Green_Reck_1.PNG"/></div><div class="meta"><h4>Green Reck</h4><p>12 000 mAh<br/><small>Powerbank GreenBridge.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(7)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(7); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('Green Reck — 12 000 mAh')" type="button"><i class="fa-brands fa-whatsapp"></i> Contact</button></div></div><div aria-label="GreenWire" class="model" data-model-index="8" onclick="selectModel(8)" role="button" tabindex="0">
+<div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(6)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(6); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('GreenPro')" type="button"><i class="fa-brands fa-whatsapp"></i> Commander</button></div>
+</div><div aria-label="Green Reck 12 000 mAh" class="model" data-model-index="7" onclick="selectModel(7)" role="button" tabindex="0"><div class="thumb"><img alt="Green Reck" loading="lazy" onerror="showModelPhotoPlaceholder(this)" src="Green_Reck_1.PNG"/></div><div class="meta"><h4>Green Reck</h4><p>12 000 mAh<br/><small>Powerbank GreenBridge.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(7)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(7); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('Green Reck — 12 000 mAh')" type="button"><i class="fa-brands fa-whatsapp"></i> Commander</button></div></div><div aria-label="GreenWire" class="model" data-model-index="8" onclick="selectModel(8)" role="button" tabindex="0">
 <div class="thumb"><img alt="GreenWire" loading="lazy" onerror="showModelPhotoPlaceholder(this)" src="Greenwire_1.png"/></div>
 <div class="meta">
 <h4>GreenWire</h4>
 <p>Environ 20 000 mAh<br/><small>Versions 15 W et 22,5 W.</small></p>
 </div>
-<div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(8)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(8); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('GreenWire')" type="button"><i class="fa-brands fa-whatsapp"></i> Contact</button></div>
+<div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(8)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(8); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('GreenWire')" type="button"><i class="fa-brands fa-whatsapp"></i> Commander</button></div>
 </div><div aria-label="GreenWireless" class="model" data-model-index="9" onclick="selectModel(9)" role="button" tabindex="0">
 <div class="thumb"><img alt="GreenWireless" loading="lazy" onerror="showModelPhotoPlaceholder(this)" src="pwkb_wireless_1.png"/></div>
 <div class="meta">
@@ -1948,8 +2030,8 @@
 <p>GreenWireless — 20 000 mAh<br/><small>Sans-fil.</small></p>
 <span class="stock-badge"><i class="fa-solid fa-circle-exclamation"></i> RUPTURE DE STOCK</span>
 </div>
-<div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(9)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(9); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('GreenWireless')" type="button"><i class="fa-brands fa-whatsapp"></i> Contact</button></div>
-</div><div aria-label="Green TECH 20 000 mAh" class="model" data-model-index="10" onclick="selectModel(10)" role="button" tabindex="0"><div class="thumb"><img alt="Green TECH" loading="lazy" onerror="showModelPhotoPlaceholder(this)" src="Green_tech_1.PNG"/></div><div class="meta"><h4>Green TECH</h4><p>20 000 mAh • 22,5 W<br/><small>Éclairage LED puissant.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(10)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(10); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('Green TECH — 20 000 mAh')" type="button"><i class="fa-brands fa-whatsapp"></i> Contact</button></div></div></div>
+<div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(9)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(9); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('GreenWireless — actuellement en rupture de stock : je souhaite être informé du réassort')" type="button"><i class="fa-brands fa-whatsapp"></i> Être informé</button></div>
+</div><div aria-label="Green TECH 20 000 mAh" class="model" data-model-index="10" onclick="selectModel(10)" role="button" tabindex="0"><div class="thumb"><img alt="Green TECH" loading="lazy" onerror="showModelPhotoPlaceholder(this)" src="Green_tech_1.PNG"/></div><div class="meta"><h4>Green TECH</h4><p>20 000 mAh • 22,5 W<br/><small>Éclairage LED puissant.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(10)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(10); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('Green TECH — 20 000 mAh')" type="button"><i class="fa-brands fa-whatsapp"></i> Commander</button></div></div></div>
 </section>
 <section aria-labelledby="gb-battery-title" class="gb-product-family gb-battery-family" id="univers-batteries">
 <div class="gb-family-header">
@@ -1978,7 +2060,7 @@
 <div class="new-product-actions">
 <button class="new-info-btn" data-new-product-key="lifepo4" type="button">En savoir plus</button>
 <a class="notice-link-btn" href="#" onclick="event.preventDefault(); window.downloadLiFePO4TechnicalNotice(); return false;"><i class="fa-regular fa-file-pdf"></i> Notice </a>
-<button class="new-order-btn" onclick="openProductWhatsApp('Batterie LiFePO₄ — 104 Ah')" type="button"><i class="fa-brands fa-whatsapp"></i> Contact</button>
+<button class="new-order-btn" onclick="openProductWhatsApp('Batterie LiFePO₄ — 104 Ah')" type="button"><i class="fa-brands fa-whatsapp"></i> Commander</button>
 </div>
 </article></div>
 </div>
