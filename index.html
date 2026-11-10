@@ -1378,7 +1378,271 @@
     .gb-battery-metrics span{min-width:calc(50% - 5px)}
   }
 
+
+
+  /* ============================================================
+     GREENBRIDGE — DIRECTION ARTISTIQUE PREMIUM / WEST AFRICA
+     Surcouche de présentation commerciale, sans modifier les
+     données produit, les index, les fonctions PDF ou les fenêtres.
+     ============================================================ */
+  :root{
+    --gb-ink:#03150f;
+    --gb-night:#041d14;
+    --gb-deep:#06291c;
+    --gb-panel:#0a3524;
+    --gb-line:rgba(220,235,223,.13);
+    --gb-gold:#d9bb62;
+    --gb-lime:#a7d56c;
+    --gb-white:#f5f8f4;
+  }
+  .gb-premium-intro{margin:22px 0 44px;}
+  .gb-premium-hero{
+    position:relative;isolation:isolate;min-height:520px;align-items:stretch;
+    padding:clamp(28px,4.2vw,58px);
+    border:1px solid rgba(217,187,98,.32);border-radius:30px;
+    background:
+      radial-gradient(ellipse at 82% 13%,rgba(129,187,93,.20),transparent 31%),
+      radial-gradient(ellipse at 14% 100%,rgba(217,187,98,.09),transparent 32%),
+      linear-gradient(118deg,#03170f 0%,#06291c 48%,#041d14 100%);
+    box-shadow:0 28px 80px rgba(0,0,0,.30),inset 0 1px 0 rgba(255,255,255,.07);
+  }
+  .gb-premium-hero::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.15;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);background-size:38px 38px;mask-image:linear-gradient(100deg,black,transparent 88%)}
+  .gb-premium-hero::after{content:"GB / 01";position:absolute;right:24px;top:16px;color:rgba(239,221,160,.22);font-size:9px;font-weight:900;letter-spacing:2.5px}
+  .gb-premium-copy{align-self:center;padding:8px 0;}
+  .gb-premium-copy .gb-commerce-eyebrow{gap:10px;margin-bottom:22px;color:#e8d58f;font-size:9px;letter-spacing:1.7px}
+  .gb-premium-copy .gb-commerce-eyebrow b{color:rgba(255,255,255,.36)}
+  .gb-premium-copy .gb-commerce-eyebrow span{width:27px;height:2px;background:linear-gradient(90deg,#d9bb62,#f5e6aa)}
+  .gb-premium-copy h1{max-width:650px;margin-bottom:21px;font-size:clamp(39px,4.9vw,62px);line-height:1.02;letter-spacing:-2.1px;font-weight:800}
+  .gb-premium-copy h1 em{display:inline;color:#d9bb62;background:linear-gradient(100deg,#f1dd9d,#c6a746);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .gb-premium-copy .gb-commerce-lead{max-width:595px;color:#d3e4d8;font-size:14px;line-height:1.9}
+  .gb-premium-copy .gb-commerce-lead strong{color:#fff;font-weight:800}
+  .gb-premium-audience{display:flex;flex-wrap:wrap;gap:8px;margin-top:19px}
+  .gb-premium-audience span{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border:1px solid rgba(255,255,255,.12);border-radius:999px;background:rgba(255,255,255,.045);color:#c7dccd;font-size:9px;font-weight:700}
+  .gb-premium-audience i{color:#d9bb62;font-size:10px}
+  .gb-premium-actions{gap:11px;margin-top:25px}
+  .gb-premium-actions .gb-commerce-primary,.gb-premium-actions .gb-commerce-secondary{min-height:48px;padding:13px 18px;border-radius:10px;font-size:11px;letter-spacing:.1px}
+  .gb-premium-actions .gb-commerce-primary{background:linear-gradient(110deg,#f0d98d,#cfad4f);box-shadow:0 10px 25px rgba(0,0,0,.22);color:#142417}
+  .gb-premium-actions .gb-commerce-secondary{background:rgba(255,255,255,.055);border-color:rgba(255,255,255,.23);color:#fff}
+  .gb-premium-proofline{gap:10px 18px;margin-top:24px;color:#b7cebf;font-size:9px}
+  .gb-premium-proofline i{color:#d9bb62}
+  .gb-premium-showcase{align-self:center;max-width:560px;width:100%;margin-left:auto;padding:15px;border:1px solid rgba(255,255,255,.14);border-radius:22px;background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.025));box-shadow:0 24px 60px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.09);backdrop-filter:blur(12px)}
+  .gb-showcase-head,.gb-showcase-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:3px 4px 12px;color:#bcd2c2;font-size:8px;font-weight:900;letter-spacing:1.25px}
+  .gb-showcase-label{display:inline-flex;align-items:center;gap:8px;color:#f0dfa9}
+  .gb-showcase-label i{width:7px;height:7px;border-radius:50%;background:#a7d56c;box-shadow:0 0 0 4px rgba(167,213,108,.12),0 0 12px rgba(167,213,108,.65)}
+  .gb-showcase-region{color:#97b4a0;font-size:7px;letter-spacing:1px}
+  .gb-showcase-mosaic{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:158px 158px;gap:10px}
+  .gb-showcase-product{position:relative;display:flex;min-width:0;overflow:hidden;flex-direction:column;justify-content:flex-end;border:1px solid rgba(255,255,255,.16);border-radius:15px;background:linear-gradient(145deg,#f7faf6,#dfe9df);text-decoration:none;color:#092417;transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+  .gb-showcase-product:hover{transform:translateY(-3px);border-color:rgba(217,187,98,.72);box-shadow:0 12px 25px rgba(0,0,0,.2)}
+  .gb-showcase-product--laptop{grid-row:auto}
+  .gb-showcase-image{position:absolute;inset:0 0 42px;display:flex;align-items:center;justify-content:center;padding:12px;background:radial-gradient(circle at 50% 45%,#fff 0%,#f4f8f3 58%,#dce8dd 100%)}
+  .gb-showcase-product--laptop .gb-showcase-image{inset:0 0 42px;padding:12px}
+  .gb-showcase-image img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 13px 14px rgba(4,28,16,.12));transition:transform .25s ease}
+  .gb-showcase-product:hover .gb-showcase-image img{transform:scale(1.045)}
+  .gb-showcase-product-copy{position:relative;z-index:1;display:flex;flex-direction:column;gap:2px;min-height:58px;padding:9px 11px;background:linear-gradient(100deg,rgba(3,29,18,.97),rgba(6,51,31,.94));color:#fff}
+  .gb-showcase-product--laptop .gb-showcase-product-copy{min-height:58px;padding:9px 11px}
+  .gb-showcase-product-copy span{color:#d3c17c;font-size:7px;font-weight:900;letter-spacing:1px}
+  .gb-showcase-product-copy strong{font-size:13px;font-weight:900;letter-spacing:.35px}
+  .gb-showcase-product-copy small{color:#c4d9ca;font-size:8px;font-weight:600}
+  .gb-showcase-product--laptop .gb-showcase-product-copy strong{font-size:13px}
+  .gb-showcase-arrow{position:absolute;right:10px;bottom:16px;z-index:2;color:#f0d77e;font-size:11px}
+  .gb-showcase-foot{padding:12px 4px 2px;color:#91ae9a;font-size:7px;letter-spacing:1px}
+  .gb-showcase-foot span:last-child{color:#d7c17b}
+  .gb-premium-universe-heading{align-items:end;margin:38px 3px 17px;padding:0 2px}
+  .gb-premium-universe-heading .gb-section-kicker{margin-bottom:8px;font-size:9px;letter-spacing:2px}
+  .gb-premium-universe-heading h2{font-size:clamp(25px,3vw,34px);letter-spacing:-.9px}
+  .gb-premium-universe-heading p{margin-top:8px;color:#c0d5c7;font-size:12px}
+  .gb-premium-universe-heading .gb-universe-count{display:flex;align-items:center;gap:6px;padding:10px 13px;border-color:rgba(217,187,98,.32);border-radius:8px;background:rgba(3,24,15,.35);color:#e8d58e;font-size:10px;letter-spacing:1.1px}
+  .gb-premium-universe-heading .gb-universe-count i{font-style:normal;color:#7fa68b}
+  .gb-premium-universe-heading .gb-universe-count b{margin-left:5px;color:#a8c0af;font-size:7px;letter-spacing:1.1px}
+  .gb-premium-universe-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:11px}
+  .gb-premium-universe-grid .gb-universe-card{position:relative;min-height:228px;justify-content:space-between;overflow:hidden;padding:16px 16px 15px;border:1px solid rgba(217,187,98,.21);border-radius:17px;background:linear-gradient(155deg,rgba(10,52,35,.95),rgba(3,26,17,.98));color:#fff;box-shadow:0 13px 32px rgba(0,0,0,.17)}
+  .gb-premium-universe-grid .gb-universe-card::before{content:"";position:absolute;right:-48px;top:-60px;width:150px;height:150px;border:1px solid rgba(217,187,98,.10);border-radius:50%;box-shadow:0 0 0 20px rgba(217,187,98,.025),0 0 0 42px rgba(217,187,98,.018);pointer-events:none}
+  .gb-premium-universe-grid .gb-universe-card:hover{transform:translateY(-5px);border-color:rgba(217,187,98,.7);background:linear-gradient(155deg,rgba(12,66,42,.98),rgba(3,26,17,.99));box-shadow:0 22px 42px rgba(0,0,0,.25)}
+  .gb-universe-card-top{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:22px}
+  .gb-premium-universe-grid .gb-universe-number{position:static;width:29px;height:29px;border:1px solid rgba(217,187,98,.32);border-radius:8px;background:rgba(217,187,98,.08);color:#f0d98c;font-size:9px;box-shadow:none}
+  .gb-universe-icon{display:grid;place-items:center;width:39px;height:39px;border:1px solid rgba(217,187,98,.25);border-radius:12px;background:linear-gradient(145deg,rgba(217,187,98,.16),rgba(255,255,255,.035));color:#e3c96f;font-size:16px}
+  .gb-universe-card-index{margin-left:auto;color:#789987;font-size:6px;font-weight:900;letter-spacing:1px}
+  .gb-premium-universe-grid .gb-universe-content{position:relative;z-index:1;padding:0}
+  .gb-premium-universe-grid .gb-universe-tag{margin-bottom:8px;color:#d6bd71;font-size:7px;letter-spacing:1.15px}
+  .gb-premium-universe-grid .gb-universe-content h3{margin:0 0 8px;color:#fff;font-size:15px;line-height:1.25;font-weight:800;letter-spacing:-.15px}
+  .gb-premium-universe-grid .gb-universe-content p{margin:0 0 16px;color:#c1d7c8;font-size:10px;line-height:1.65}
+  .gb-premium-universe-grid .gb-universe-content strong{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-top:10px;border-top:1px solid rgba(255,255,255,.11);color:#f0d984;font-size:8px;line-height:1.4}
+  .gb-premium-universe-grid .gb-universe-content strong i{color:#f0d984}
+  .gb-commercial-strip{display:flex;align-items:center;gap:14px;margin-top:17px;padding:15px 17px;border:1px solid rgba(217,187,98,.25);border-radius:14px;background:linear-gradient(95deg,rgba(217,187,98,.10),rgba(255,255,255,.035) 58%,rgba(37,211,102,.055))}
+  .gb-commercial-strip-mark{display:grid;place-items:center;flex:0 0 40px;width:40px;height:40px;border:1px solid rgba(217,187,98,.32);border-radius:12px;background:rgba(217,187,98,.08);color:#e5cc78;font-size:16px}
+  .gb-commercial-strip>div:nth-child(2){display:flex;flex:1;flex-direction:column;gap:3px;min-width:0}
+  .gb-commercial-strip strong{color:#fff;font-size:11px;font-weight:800}
+  .gb-commercial-strip span{color:#c0d5c7;font-size:9px;line-height:1.5}
+  .gb-commercial-strip button{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:39px;padding:10px 13px;border:1px solid rgba(255,255,255,.14);border-radius:9px;background:#25D366;color:#fff;font-family:inherit;font-size:9px;font-weight:900;cursor:pointer;white-space:nowrap;transition:transform .18s ease,filter .18s ease}
+  .gb-commercial-strip button:hover{transform:translateY(-2px);filter:brightness(1.06)}
+
+  /* Les univers deviennent des chapitres produits premium. */
+  .gb-catalogue-shell{margin-top:35px;padding:20px 17px 26px;border:1px solid rgba(217,187,98,.24);border-radius:25px;background:linear-gradient(145deg,rgba(3,25,16,.78),rgba(5,45,28,.72));box-shadow:0 25px 65px rgba(0,0,0,.18)}
+  .gb-catalogue-shell>.models-header{justify-content:flex-start;padding:0 7px 18px;border-bottom:1px solid rgba(255,255,255,.11)}
+  .gb-catalogue-shell>.models-header .models-title{padding:0;background:none;border:0;border-radius:0;box-shadow:none;color:#fff;font-size:23px;letter-spacing:-.6px}
+  .gb-product-family{position:relative;margin:23px 0 25px;padding:clamp(20px,3vw,32px);border:1px solid rgba(255,255,255,.13);border-radius:22px;background:linear-gradient(145deg,rgba(8,46,30,.92),rgba(3,25,17,.95));box-shadow:0 17px 42px rgba(0,0,0,.18)}
+  .gb-product-family::before{content:"";position:absolute;left:0;top:28px;bottom:28px;width:2px;border-radius:2px;background:linear-gradient(180deg,#e2c66e,rgba(167,213,108,.12))}
+  .gb-family-header{align-items:center;margin-bottom:19px;padding-bottom:19px;border-bottom:1px solid rgba(255,255,255,.11)}
+  .gb-family-kicker{margin-bottom:9px;color:#d8bf70;font-size:8px;letter-spacing:1.8px}
+  .gb-family-heading-copy h2{margin-bottom:9px;font-size:clamp(23px,2.8vw,31px);letter-spacing:-.8px}
+  .gb-family-heading-copy p{max-width:760px;color:#c8dcd0;font-size:12px;line-height:1.8}
+  .gb-family-stamp{min-width:150px;padding:13px 15px;border-color:rgba(217,187,98,.32);border-radius:14px;background:rgba(255,255,255,.045)}
+  .gb-family-stamp i{font-size:24px;color:#e4c86f}
+  .gb-family-stamp span{font-size:7px;letter-spacing:1.2px}
+  .gb-family-stamp strong{font-size:11px}
+  .gb-family-feature-line{gap:0;margin:0 0 18px;padding:0;border:1px solid rgba(255,255,255,.1);border-radius:12px;background:rgba(0,0,0,.15);overflow:hidden}
+  .gb-family-feature-line span{padding:12px 14px;border-right:1px solid rgba(255,255,255,.09);font-size:10px}
+  .gb-family-feature-line span:last-child{border-right:0}
+  .gb-family-model-grid{gap:15px!important;padding:6px 0!important;grid-template-columns:repeat(auto-fit,minmax(min(100%,235px),1fr))!important}
+  .gb-family-model-grid .model{position:relative;gap:12px;min-height:0;padding:13px;border:1px solid rgba(15,55,35,.12);border-radius:17px;background:linear-gradient(160deg,#fff,#f2f6f1)!important;box-shadow:0 10px 24px rgba(0,0,0,.13);transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+  .gb-family-model-grid .model:hover{transform:translateY(-4px);border-color:rgba(197,164,68,.65);box-shadow:0 19px 34px rgba(0,0,0,.2)}
+  .gb-family-model-grid .model .thumb{flex:0 0 180px;height:180px;padding:0!important;border-radius:12px;background:linear-gradient(145deg,#f7faf6,#e7eee7)}
+  .gb-family-model-grid .model .thumb img{padding:9px;object-fit:contain}
+  .gb-family-model-grid .model .meta h4{font-size:17px;letter-spacing:-.3px;color:#073a25}
+  .gb-family-model-grid .model .meta p{margin-top:6px;color:#375647;font-size:11px;line-height:1.5}
+  .gb-family-model-grid .model .meta p small{color:#577363;font-size:10px;line-height:1.5}
+  .gb-family-model-grid .model .stock-badge{font-size:8px}
+  .gb-family-model-grid .model-new-actions{justify-content:flex-start;gap:6px;padding-top:8px;border-top:1px solid rgba(7,58,37,.09)}
+  .gb-family-model-grid .model-new-actions .new-info-btn,.gb-family-model-grid .model-new-actions .new-order-btn,.gb-family-model-grid .model-new-actions .notice-mini-link{min-height:34px;padding:8px 9px;border-radius:8px;font-size:9px}
+  .gb-family-model-grid .model-new-actions .new-info-btn{background:#e8f1e8;color:#0a5835;border:1px solid rgba(10,88,53,.14)}
+  .gb-family-model-grid .model-new-actions .new-order-btn{background:#168e4f;color:#fff}
+  .gb-family-model-grid .model-new-actions .notice-mini-link{background:#f6f5ec;color:#4c5d4d;border-color:rgba(7,58,37,.13)}
+  .gb-phone-new-arrivals{margin:20px 0;padding:19px;border:1px solid rgba(217,187,98,.24);border-radius:17px;background:linear-gradient(130deg,rgba(217,187,98,.075),rgba(255,255,255,.035) 55%,rgba(167,213,108,.05))}
+  .gb-new-arrivals-heading{margin:0 2px 15px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.11)}
+  .gb-new-arrivals-heading h3{font-size:19px;letter-spacing:-.35px}
+  .gb-new-arrivals-heading p{color:#c0d5c7;font-size:11px}
+  .gb-phone-new-grid{gap:14px}
+  .gb-phone-new-grid .new-product-card{padding:15px;border-radius:15px;border:1px solid rgba(217,187,98,.35);box-shadow:0 13px 27px rgba(0,0,0,.14)}
+  .gb-family-catalogue-heading{margin-top:25px;margin-bottom:11px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.13)}
+  .gb-family-catalogue-heading h3{font-size:16px}
+  .gb-family-catalogue-heading span{font-size:9px;color:#d1bd7a}
+  .gb-battery-highlight{gap:28px;padding:20px;border-color:rgba(217,187,98,.2);border-radius:18px;background:radial-gradient(circle at 4% 0%,rgba(167,213,108,.08),transparent 38%),rgba(0,0,0,.15)}
+  .gb-battery-copy h3{font-size:clamp(24px,3vw,34px);letter-spacing:-.8px}
+  .gb-battery-copy p{font-size:12px;line-height:1.85}
+  .gb-battery-metrics span{min-width:115px;padding:11px 12px;border-color:rgba(217,187,98,.2);background:rgba(255,255,255,.045);font-size:9px}
+  .gb-battery-metrics strong{font-size:20px}
+  .gb-battery-contact{min-height:42px;padding:11px 15px;border-radius:9px;font-size:10px}
+  .featured{border-radius:20px;border-color:rgba(217,187,98,.25);box-shadow:0 20px 48px rgba(0,0,0,.18)}
+  .futures-title .models-title{padding:0;background:none;box-shadow:none;color:#fff;font-size:24px;letter-spacing:-.6px}
+  .featured-copy{padding:22px}
+  .featured-copy h3{font-size:23px}
+  .featured-copy p{color:#435b4d;font-size:12px}
+  .featured-copy .btn-small{background:#073a25;color:#fff;border:0;padding:10px 15px}
+  .featured-copy .notice-mini-link{margin-left:7px}
+
+  @media(max-width:1100px){
+    .gb-premium-hero{grid-template-columns:minmax(0,1fr) minmax(320px,.9fr);gap:25px}
+    .gb-premium-copy h1{font-size:clamp(37px,4.5vw,52px)}
+    .gb-showcase-mosaic{grid-template-rows:145px 145px}
+    .gb-premium-universe-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  }
+  @media(max-width:820px){
+    .gb-premium-hero{grid-template-columns:1fr;gap:28px;min-height:0}
+    .gb-premium-copy{max-width:720px}
+    .gb-premium-showcase{max-width:680px;margin:0 auto}
+    .gb-showcase-mosaic{grid-template-rows:190px 190px}
+  }
+  @media(max-width:640px){
+    .gb-premium-intro{margin:14px 0 28px}
+    .gb-premium-hero{padding:24px 17px 19px;border-radius:22px}
+    .gb-premium-copy .gb-commerce-eyebrow{font-size:7px;letter-spacing:1.05px;margin-bottom:17px}
+    .gb-premium-copy h1{font-size:clamp(34px,8vw,43px);letter-spacing:-1.35px}
+    .gb-premium-copy .gb-commerce-lead{font-size:12px;line-height:1.8}
+    .gb-premium-audience span{font-size:8px;padding:6px 8px}
+    .gb-premium-proofline{font-size:8px;gap:8px 12px}
+    .gb-premium-actions{align-items:stretch}
+    .gb-premium-actions .gb-commerce-primary,.gb-premium-actions .gb-commerce-secondary{width:100%;min-height:44px}
+    .gb-premium-showcase{padding:10px;border-radius:16px}
+    .gb-showcase-head,.gb-showcase-foot{font-size:6px;letter-spacing:.7px}
+    .gb-showcase-mosaic{grid-template-rows:130px 130px;gap:7px}
+    .gb-showcase-product{border-radius:11px}
+    .gb-showcase-image{inset:0 0 42px;padding:7px}
+    .gb-showcase-product--laptop .gb-showcase-image{inset:0 0 42px;padding:7px}
+    .gb-showcase-product-copy{min-height:54px;padding:7px 8px}
+    .gb-showcase-product--laptop .gb-showcase-product-copy{min-height:54px;padding:7px 8px}
+    .gb-showcase-product-copy span{font-size:5.5px;letter-spacing:.6px}
+    .gb-showcase-product-copy strong{font-size:10px}
+    .gb-showcase-product-copy small{font-size:7px}
+    .gb-showcase-product--laptop .gb-showcase-product-copy strong{font-size:10px}
+    .gb-showcase-arrow{right:7px;bottom:12px;font-size:9px}
+    .gb-premium-universe-heading{align-items:flex-start;margin:26px 2px 13px}
+    .gb-premium-universe-heading h2{font-size:23px}
+    .gb-premium-universe-heading p{font-size:10px;max-width:270px}
+    .gb-premium-universe-heading .gb-universe-count{font-size:8px;padding:8px}
+    .gb-premium-universe-heading .gb-universe-count b{display:none}
+    .gb-premium-universe-grid{grid-template-columns:1fr 1fr;gap:8px}
+    .gb-premium-universe-grid .gb-universe-card{min-height:220px;padding:12px 11px;border-radius:13px}
+    .gb-universe-card-top{gap:5px;margin-bottom:18px}
+    .gb-universe-card-index{font-size:5px;letter-spacing:.5px}
+    .gb-universe-icon{width:32px;height:32px;font-size:13px;border-radius:9px}
+    .gb-premium-universe-grid .gb-universe-number{width:24px;height:24px;font-size:8px}
+    .gb-premium-universe-grid .gb-universe-content h3{font-size:12px}
+    .gb-premium-universe-grid .gb-universe-content p{font-size:8px;line-height:1.55;margin-bottom:12px}
+    .gb-premium-universe-grid .gb-universe-tag{font-size:6px}
+    .gb-premium-universe-grid .gb-universe-content strong{font-size:7px;padding-top:8px}
+    .gb-commercial-strip{align-items:flex-start;flex-wrap:wrap;padding:12px;gap:10px}
+    .gb-commercial-strip-mark{width:34px;height:34px;flex-basis:34px;font-size:14px}
+    .gb-commercial-strip>div:nth-child(2){width:calc(100% - 48px);flex:1}
+    .gb-commercial-strip strong{font-size:10px}
+    .gb-commercial-strip span{font-size:8px}
+    .gb-commercial-strip button{width:100%;min-height:38px}
+    .gb-catalogue-shell{margin-top:24px;padding:12px 9px 18px;border-radius:18px}
+    .gb-catalogue-shell>.models-header{padding:0 4px 13px}
+    .gb-catalogue-shell>.models-header .models-title{font-size:19px}
+    .gb-product-family{margin:17px 0;padding:17px 12px;border-radius:17px}
+    .gb-product-family::before{top:20px;bottom:20px}
+    .gb-family-header{gap:8px;padding-bottom:14px;margin-bottom:14px}
+    .gb-family-heading-copy h2{font-size:20px}
+    .gb-family-heading-copy p{font-size:10px;line-height:1.7}
+    .gb-family-stamp{display:none}
+    .gb-family-feature-line{display:grid;grid-template-columns:1fr 1fr}
+    .gb-family-feature-line span{padding:9px;font-size:8px;border-bottom:1px solid rgba(255,255,255,.08)}
+    .gb-family-feature-line span:nth-child(2){border-right:0}
+    .gb-family-model-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+    .gb-family-model-grid .model{padding:8px;border-radius:12px;gap:8px}
+    .gb-family-model-grid .model .thumb{flex-basis:118px;height:118px;border-radius:9px}
+    .gb-family-model-grid .model .thumb img{padding:5px}
+    .gb-family-model-grid .model .meta h4{font-size:13px}
+    .gb-family-model-grid .model .meta p{font-size:9px}
+    .gb-family-model-grid .model .meta p small{font-size:8px}
+    .gb-family-model-grid .model-new-actions{gap:5px;padding-top:6px}
+    .gb-family-model-grid .model-new-actions .new-info-btn,.gb-family-model-grid .model-new-actions .new-order-btn,.gb-family-model-grid .model-new-actions .notice-mini-link{flex:1 1 calc(50% - 4px);font-size:7px;padding:7px 5px;min-height:30px}
+    .gb-family-model-grid .model-new-actions .new-order-btn{flex-basis:100%}
+    .gb-phone-new-arrivals{padding:12px 9px}
+    .gb-phone-new-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+    .gb-phone-new-grid .new-product-card{padding:9px;gap:7px}
+    .gb-phone-new-grid .new-product-photo-placeholder{height:125px;min-height:125px;max-height:125px;flex-basis:125px}
+    .gb-phone-new-grid .new-product-card h3{font-size:12px}
+    .gb-phone-new-grid .new-product-card p{font-size:9px}
+    .gb-phone-new-grid .new-product-actions button,.gb-phone-new-grid .new-product-actions .notice-link-btn{font-size:8px;padding:7px 6px}
+    .gb-family-catalogue-heading h3{font-size:12px}
+    .gb-family-catalogue-heading span{font-size:7px}
+    .gb-battery-highlight{padding:11px;gap:15px}
+    .gb-battery-copy{padding:5px}
+    .gb-battery-copy h3{font-size:22px}
+    .gb-battery-copy p{font-size:10px}
+    .gb-battery-metrics span{min-width:calc(50% - 5px)}
+  }
+  @media(max-width:390px){
+    .gb-premium-universe-grid .gb-universe-card{min-height:230px}
+    .gb-premium-universe-grid .gb-universe-content p{font-size:7.5px}
+    .gb-family-model-grid .model .thumb{flex-basis:105px;height:105px}
+    .gb-family-model-grid .model-new-actions .new-info-btn,.gb-family-model-grid .model-new-actions .new-order-btn,.gb-family-model-grid .model-new-actions .notice-mini-link{font-size:6.5px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .gb-premium-universe-grid .gb-universe-card,.gb-family-model-grid .model,.gb-showcase-product,.gb-showcase-image img{transition:none!important}
+  }
+
 </style>
+<script>
+  // Fonction de repli disponible dès le début du chargement des cartes produit.
+  window.showModelPhotoPlaceholder = window.showModelPhotoPlaceholder || function(img){
+    if(!img || !img.parentElement) return;
+    const box = img.parentElement;
+    box.classList.add('new-model-placeholder');
+    box.innerHTML = '<i class="fa-regular fa-image" aria-hidden="true"></i><span>PHOTO À AJOUTER</span>';
+  };
+</script>
 </head>
 <body>
 <img alt="" aria-hidden="true" class="page-bg" src="Energie_blanche.png"/>
@@ -1452,103 +1716,101 @@
 </div>
 </div>
 <div aria-hidden="true" style="height:calc(var(--topbar-h) + var(--opening-h) + var(--header-h) + 8px);"></div>
-<main class="container" role="main"><section aria-labelledby="gb-commerce-title" class="gb-commerce-intro">
-<div class="gb-commerce-hero">
-<div class="gb-commerce-copy">
-<div class="gb-commerce-eyebrow"><span></span> GREENBRIDGE TECHNOLOGIES · NOS SOLUTIONS</div>
-<h1 id="gb-commerce-title">L’énergie et la technologie, <em>adaptées à vos usages.</em></h1>
-<p class="gb-commerce-lead">
-        Des solutions pour rester mobile, travailler en autonomie, maintenir sa connexion et stocker l’énergie.
-        Découvrez nos quatre univers : <strong>powerbanks pour téléphones</strong>, <strong>powerbanks pour ordinateurs</strong>,
-        <strong>alimentation de secours Wi-Fi</strong> et <strong>batteries LiFePO₄</strong>.
+<main class="container" role="main"><section aria-labelledby="gb-commerce-title" class="gb-commerce-intro gb-premium-intro">
+  <div class="gb-commerce-hero gb-premium-hero">
+    <div class="gb-commerce-copy gb-premium-copy">
+      <div class="gb-commerce-eyebrow"><span></span> GREENBRIDGE TECHNOLOGIES <b>·</b> ENERGY SYSTEMS / WEST AFRICA</div>
+      <h1 id="gb-commerce-title">L’énergie qui accompagne <em>vos ambitions.</em></h1>
+      <p class="gb-commerce-lead">
+        Des solutions énergétiques conçues pour les réalités de l’Afrique de l’Ouest. De la mobilité professionnelle à la continuité de connexion, jusqu’au stockage de l’énergie, <strong>GreenBridge met l’ingénierie et le savoir-faire local au service de vos usages.</strong>
       </p>
-<div class="gb-commerce-actions">
-<a class="gb-commerce-primary" href="#gb-univers"><i class="fa-solid fa-layer-group"></i> Explorer nos 4 univers</a>
-<button class="gb-commerce-secondary" onclick="openProductWhatsApp('Demande de conseil et de devis — GreenBridge Technologies')" type="button"><i class="fa-brands fa-whatsapp"></i> Parler à notre équipe</button>
-</div>
-<div class="gb-commerce-proofline">
-<span><i class="fa-solid fa-screwdriver-wrench"></i> Approche technique</span>
-<span><i class="fa-solid fa-lightbulb"></i> Innovation utile</span>
-<span><i class="fa-solid fa-leaf"></i> Savoir-faire local</span>
-</div>
-</div>
-<div aria-label="Aperçu des quatre familles de produits GreenBridge" class="gb-commerce-visual">
-<div class="gb-commerce-visual-grid">
-<a class="gb-commerce-visual-tile" href="#univers-ordinateurs">
-<img alt="GreenLaptop, solution de recharge pour ordinateur" loading="eager" src="Chargeur_ordi_1.png"/>
-<span>GREENLAPTOP <strong>Jusqu’à 100 W</strong></span>
-</a>
-<a class="gb-commerce-visual-tile" href="#univers-wifi">
-<img alt="GreenWifi, alimentation de secours Wi-Fi" loading="lazy" src="wifi_2.png"/>
-<span>GREENWIFI <strong>Continuité de connexion</strong></span>
-</a>
-<a class="gb-commerce-visual-tile" href="#univers-telephone">
-<img alt="Gamme de powerbanks pour téléphones" loading="lazy" src="Pwkb_Mini_3.png"/>
-<span>POWERBANKS <strong>Pour le quotidien</strong></span>
-</a>
-<a class="gb-commerce-visual-tile" href="#univers-batteries">
-<img alt="Batterie GreenBridge LiFePO4" loading="lazy" src="pack_batterie_1200wh.png"/>
-<span>LiFePO₄ <strong>Stockage d’énergie</strong></span>
-</a>
-</div>
-<div class="gb-commerce-visual-caption"><span>QUATRE FAMILLES DE SOLUTIONS</span><span>GREENBRIDGE · AFRIQUE DE L’OUEST</span></div>
-</div>
-</div>
-<div class="gb-universe-heading" id="gb-univers">
-<div>
-<span class="gb-section-kicker">CHOISIR UNE SOLUTION</span>
-<h2>Explorez nos quatre univers</h2>
-<p>Accédez directement à la gamme qui correspond à votre besoin.</p>
-</div>
-<span class="gb-universe-count">01 — 04</span>
-</div>
-<nav aria-label="Accès direct aux quatre familles GreenBridge" class="gb-universe-grid">
-<a class="gb-universe-card" href="#univers-ordinateurs">
-<div class="gb-universe-image"><img alt="Powerbanks GreenLaptop pour ordinateur portable" loading="lazy" src="Chargeur_ordi_1.png"/><span class="gb-universe-number">01</span></div>
-<div class="gb-universe-content">
-<span class="gb-universe-tag">MOBILITÉ PROFESSIONNELLE</span>
-<h3>Powerbanks pour ordinateurs</h3>
-<p>Des solutions de grande capacité pour ordinateurs portables et appareils compatibles.</p>
-<strong>GreenLaptop+ · 65 à 100 W <i class="fa-solid fa-arrow-right"></i></strong>
-</div>
-</a>
-<a class="gb-universe-card" href="#univers-wifi">
-<div class="gb-universe-image"><img alt="GreenWifi, mini UPS pour routeur" loading="lazy" src="wifi_2.png"/><span class="gb-universe-number">02</span></div>
-<div class="gb-universe-content">
-<span class="gb-universe-tag">CONNECTIVITÉ &amp; SECOURS</span>
-<h3>Powerbanks Wi-Fi / Mini-UPS</h3>
-<p>Maintenez l’alimentation de votre routeur et de vos équipements compatibles pendant une coupure.</p>
-<strong>GreenWifi · 12 000 mAh <i class="fa-solid fa-arrow-right"></i></strong>
-</div>
-</a>
-<a class="gb-universe-card" href="#univers-telephone">
-<div class="gb-universe-image"><img alt="Gamme GreenBridge de powerbanks pour téléphone" loading="lazy" src="Pwkb_Mini_3.png"/><span class="gb-universe-number">03</span></div>
-<div class="gb-universe-content">
-<span class="gb-universe-tag">ÉNERGIE MOBILE</span>
-<h3>Powerbanks pour téléphones</h3>
-<p>Une gamme variée : formats compacts, charge standard, charge rapide, multi-sorties et éclairage.</p>
-<strong>GreenMini · GreenPro · GreenTech <i class="fa-solid fa-arrow-right"></i></strong>
-</div>
-</a>
-<a class="gb-universe-card" href="#univers-batteries">
-<div class="gb-universe-image"><img alt="Batterie de stockage GreenBridge LiFePO4" loading="lazy" src="pack_batterie_1200wh.png"/><span class="gb-universe-number">04</span></div>
-<div class="gb-universe-content">
-<span class="gb-universe-tag">STOCKAGE ÉNERGÉTIQUE</span>
-<h3>Batteries LiFePO₄</h3>
-<p>Des solutions de stockage conçues autour de cellules lithium fer phosphate.</p>
-<strong>GreenBridge · 104 Ah <i class="fa-solid fa-arrow-right"></i></strong>
-</div>
-</a>
-</nav>
+      <div class="gb-premium-audience">
+        <span><i class="fa-solid fa-user"></i> Particuliers</span>
+        <span><i class="fa-solid fa-briefcase"></i> Professionnels</span>
+        <span><i class="fa-solid fa-building"></i> Entreprises &amp; projets</span>
+      </div>
+      <div class="gb-commerce-actions gb-premium-actions">
+        <a class="gb-commerce-primary" href="#gb-univers"><i class="fa-solid fa-arrow-down-long"></i> Découvrir nos solutions</a>
+        <button class="gb-commerce-secondary" onclick="openProductWhatsApp('Demande de conseil et de devis — GreenBridge Technologies')" type="button"><i class="fa-brands fa-whatsapp"></i> Obtenir un devis</button>
+      </div>
+      <div class="gb-commerce-proofline gb-premium-proofline">
+        <span><i class="fa-solid fa-microchip"></i> Expertise technique</span>
+        <span><i class="fa-solid fa-compass-drafting"></i> Solutions pensées pour le terrain</span>
+        <span><i class="fa-solid fa-globe-africa"></i> Assemblé en Afrique de l’Ouest</span>
+      </div>
+    </div>
+
+    <div aria-label="Aperçu des quatre univers de solutions GreenBridge" class="gb-commerce-visual gb-premium-showcase">
+      <div class="gb-showcase-head">
+        <span class="gb-showcase-label"><i></i> POWERING EVERYDAY PROGRESS</span>
+        <span class="gb-showcase-region">WEST AFRICA · 01—04</span>
+      </div>
+      <div class="gb-showcase-mosaic">
+        <a class="gb-showcase-product gb-showcase-product--laptop" href="#univers-ordinateurs">
+          <div class="gb-showcase-image"><img alt="Solution GreenLaptop pour ordinateur portable" loading="eager" src="Chargeur_ordi_1.png"/></div>
+          <div class="gb-showcase-product-copy"><span>01 / MOBILITÉ PROFESSIONNELLE</span><strong>GREENLAPTOP</strong><small>Jusqu’à 100 W</small></div>
+          <i class="fa-solid fa-arrow-up-right-from-square gb-showcase-arrow"></i>
+        </a>
+        <a class="gb-showcase-product gb-showcase-product--wifi" href="#univers-wifi">
+          <div class="gb-showcase-image"><img alt="Solution de secours GreenWifi" loading="lazy" src="wifi_2.png"/></div>
+          <div class="gb-showcase-product-copy"><span>02 / CONNECTIVITÉ</span><strong>GREENWIFI</strong><small>Continuité de connexion</small></div>
+          <i class="fa-solid fa-arrow-up-right-from-square gb-showcase-arrow"></i>
+        </a>
+        <a class="gb-showcase-product gb-showcase-product--phone" href="#univers-telephone">
+          <div class="gb-showcase-image"><img alt="Gamme de powerbanks pour téléphone" loading="lazy" src="Pwkb_Mini_3.png"/></div>
+          <div class="gb-showcase-product-copy"><span>03 / ÉNERGIE MOBILE</span><strong>POWERBANKS</strong><small>La puissance au quotidien</small></div>
+          <i class="fa-solid fa-arrow-up-right-from-square gb-showcase-arrow"></i>
+        </a>
+        <a class="gb-showcase-product gb-showcase-product--battery" href="#univers-batteries">
+          <div class="gb-showcase-image"><img alt="Batterie de stockage GreenBridge LiFePO4" loading="lazy" src="pack_batterie_1200wh.png"/></div>
+          <div class="gb-showcase-product-copy"><span>04 / STOCKAGE</span><strong>LiFePO₄</strong><small>Autonomie énergétique</small></div>
+          <i class="fa-solid fa-arrow-up-right-from-square gb-showcase-arrow"></i>
+        </a>
+      </div>
+      <div class="gb-showcase-foot"><span>INGÉNIERIE · ÉNERGIE · CONNECTIVITÉ</span><span>GREENBRIDGE TECHNOLOGIES</span></div>
+    </div>
+  </div>
+
+  <div class="gb-universe-heading gb-premium-universe-heading" id="gb-univers">
+    <div>
+      <span class="gb-section-kicker">NOS DOMAINES D’EXPERTISE</span>
+      <h2>Quatre univers. Une même exigence.</h2>
+      <p>Identifiez votre besoin et accédez directement à la gamme correspondante.</p>
+    </div>
+    <span class="gb-universe-count">01 <i>—</i> 04 <b>UNIVERS</b></span>
+  </div>
+  <nav aria-label="Accès direct aux quatre familles GreenBridge" class="gb-universe-grid gb-premium-universe-grid">
+    <a class="gb-universe-card" href="#univers-ordinateurs">
+      <div class="gb-universe-card-top"><span class="gb-universe-number">01</span><span class="gb-universe-icon"><i class="fa-solid fa-laptop"></i></span><span class="gb-universe-card-index">POWER / COMPUTING</span></div>
+      <div class="gb-universe-content"><span class="gb-universe-tag">MOBILITÉ PROFESSIONNELLE</span><h3>Ordinateurs portables</h3><p>Des réserves d’énergie haute capacité pour accompagner le travail, les déplacements et les équipements compatibles.</p><strong>GreenLaptop+ · jusqu’à 100 W <i class="fa-solid fa-arrow-right"></i></strong></div>
+    </a>
+    <a class="gb-universe-card" href="#univers-wifi">
+      <div class="gb-universe-card-top"><span class="gb-universe-number">02</span><span class="gb-universe-icon"><i class="fa-solid fa-wifi"></i></span><span class="gb-universe-card-index">POWER / CONNECTIVITY</span></div>
+      <div class="gb-universe-content"><span class="gb-universe-tag">CONNECTIVITÉ &amp; SECOURS</span><h3>Wi-Fi &amp; Mini-UPS</h3><p>Une alimentation de secours compacte pour préserver la connexion de vos routeurs, modems et équipements compatibles lors des coupures.</p><strong>GreenWifi · 12 000 mAh <i class="fa-solid fa-arrow-right"></i></strong></div>
+    </a>
+    <a class="gb-universe-card" href="#univers-telephone">
+      <div class="gb-universe-card-top"><span class="gb-universe-number">03</span><span class="gb-universe-icon"><i class="fa-solid fa-mobile-screen-button"></i></span><span class="gb-universe-card-index">POWER / MOBILE</span></div>
+      <div class="gb-universe-content"><span class="gb-universe-tag">ÉNERGIE MOBILE</span><h3>Powerbanks pour téléphones</h3><p>Une gamme complète : charge standard, charge rapide, multi-sorties, éclairage et recharge sans fil.</p><strong>GreenMini · GreenCore · GreenPro <i class="fa-solid fa-arrow-right"></i></strong></div>
+    </a>
+    <a class="gb-universe-card" href="#univers-batteries">
+      <div class="gb-universe-card-top"><span class="gb-universe-number">04</span><span class="gb-universe-icon"><i class="fa-solid fa-battery-full"></i></span><span class="gb-universe-card-index">POWER / STORAGE</span></div>
+      <div class="gb-universe-content"><span class="gb-universe-tag">STOCKAGE ÉNERGÉTIQUE</span><h3>Batteries LiFePO₄</h3><p>Des solutions de stockage fondées sur la technologie lithium fer phosphate pour développer l’autonomie.</p><strong>GreenBridge · 104 Ah <i class="fa-solid fa-arrow-right"></i></strong></div>
+    </a>
+  </nav>
+  <div class="gb-commercial-strip">
+    <div class="gb-commercial-strip-mark"><i class="fa-solid fa-headset"></i></div>
+    <div><strong>Vous avez un besoin précis ou un projet à équiper&nbsp;?</strong><span>Notre équipe vous accompagne dans le choix d’une solution adaptée à votre usage.</span></div>
+    <button type="button" onclick="openProductWhatsApp('Bonjour GreenBridge, je souhaite être conseillé sur une solution énergétique et obtenir un devis.')">Échanger avec GreenBridge <i class="fa-solid fa-arrow-right"></i></button>
+  </div>
 </section>
 <section aria-label="Catalogue des produits GreenBridge" class="models-wrapper gb-catalogue-shell" id="models" role="region">
-<div class="models-header"><div class="models-title">Nos quatre familles de produits</div></div>
+<div class="models-header"><div class="models-title">Nos solutions &amp; équipements</div></div>
 <section aria-labelledby="gb-laptop-title" class="gb-product-family" id="univers-ordinateurs">
 <div class="gb-family-header">
 <div class="gb-family-heading-copy">
 <span class="gb-family-kicker">UNIVERS 01 · MOBILITÉ PROFESSIONNELLE</span>
 <h2 id="gb-laptop-title">Powerbanks pour ordinateurs portables</h2>
-<p>Des réserves d’énergie conçues pour accompagner le travail, les déplacements et la recharge des ordinateurs portables compatibles.</p>
+<p>Des solutions de recharge haute capacité pensées pour les professionnels, les déplacements et les ordinateurs portables compatibles.</p>
 </div>
 <div class="gb-family-stamp"><i class="fa-solid fa-laptop"></i><span>GAMME<br/><strong>GREENLAPTOP</strong></span></div>
 </div>
@@ -1694,7 +1956,7 @@
 <div class="gb-family-heading-copy">
 <span class="gb-family-kicker">UNIVERS 04 · STOCKAGE ÉNERGÉTIQUE</span>
 <h2 id="gb-battery-title">Batteries de stockage LiFePO₄</h2>
-<p>Une gamme dédiée au stockage de l’énergie, avec une approche axée sur l’ingénierie, la sélection des cellules et l’intégration des protections adaptées.</p>
+<p>Des solutions de stockage conçues autour de la technologie LiFePO₄, de la sélection des cellules et de l’intégration des protections adaptées.</p>
 </div>
 <div class="gb-family-stamp"><i class="fa-solid fa-car-battery"></i><span>TECHNOLOGIE<br/><strong>LiFePO₄</strong></span></div>
 </div>
