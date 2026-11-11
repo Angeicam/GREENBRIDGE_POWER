@@ -2077,12 +2077,7 @@ body[data-gb-page="lifepo4"] .featured{margin-top:10px}
   .page-bg,.page-bg-overlay{display:none!important}
   .electric-band{display:block!important;top:calc(var(--topbar-h) + var(--opening-h) + var(--header-h) - 4px);height:12px;z-index:1900}
   .electric-band .lightning-svg{opacity:.22}
-  .electric-band .orb{opacity:1!important;top:50%!important;transform:translate(-50%,-50%)!important;animation:gbMobileOrbPulse 3.2s ease-in-out infinite!important}
-  .electric-band #orbA{left:22%!important;animation-delay:0s!important}
-  .electric-band #orbB{left:50%!important;animation-delay:.45s!important}
-  .electric-band #orbC{left:78%!important;animation-delay:.9s!important}
   .electric-band .glowline{width:100vw;opacity:.42;animation:none!important}
-  @keyframes gbMobileOrbPulse{0%,100%{filter:brightness(.92);opacity:.78}50%{filter:brightness(1.28);opacity:1}}
   .topbar{height:var(--topbar-h);padding:0 13px}
   .promo-text{font-size:9px;letter-spacing:.35px;gap:6px}
   .promo-origin{display:inline!important;font-size:9px}
@@ -2963,6 +2958,538 @@ body {
     box.innerHTML = '<i class="fa-regular fa-image" aria-hidden="true"></i><span>PHOTO À AJOUTER</span>';
   };
 </script>
+
+<style id="greenbridge-orbs-products-wifi-final">
+/* ============================================================
+   GREENBRIDGE — CORRECTION FINALE MOUVEMENT / VISUELS / WIFI
+   - Les trois bulles traversent réellement la bande sur toutes largeurs.
+   - Leurs anciennes positions fixes mobile sont neutralisées.
+   - Les photos principales et cartes produits disposent d'un cadre lisible.
+   - GreenWifi adopte un bleu acier / argent scintillant, sans texte décoratif.
+   ============================================================ */
+
+/* Animation des trois bulles : même comportement sur mobile, tablette et PC. */
+.electric-band {
+  display:block !important;
+  position:fixed !important;
+  left:0 !important;
+  right:0 !important;
+  top:calc(var(--topbar-h) + var(--opening-h) + var(--header-h) - 5px) !important;
+  width:100vw !important;
+  height:16px !important;
+  overflow:visible !important;
+  pointer-events:none !important;
+  z-index:1900 !important;
+  transform:none !important;
+}
+.electric-band .container {
+  position:absolute !important;
+  inset:0 !important;
+  width:100vw !important;
+  max-width:none !important;
+  height:100% !important;
+  margin:0 !important;
+  padding:0 !important;
+  transform:none !important;
+  overflow:visible !important;
+}
+.electric-band .orbs {
+  position:absolute !important;
+  inset:0 !important;
+  width:100vw !important;
+  height:100% !important;
+  overflow:visible !important;
+  pointer-events:none !important;
+}
+.electric-band .orb,
+.electric-band #orbA,
+.electric-band #orbB,
+.electric-band #orbC {
+  display:block !important;
+  position:absolute !important;
+  left:0 !important;
+  right:auto !important;
+  top:50% !important;
+  margin:0 !important;
+  border-radius:50% !important;
+  opacity:1 !important;
+  transform:translate3d(-50%,-50%,0) scale(.72) !important;
+  translate:-18px 0;
+  will-change:transform,translate,opacity,filter !important;
+  animation-name:gbEnergyOrbTravel !important;
+  animation-timing-function:linear !important;
+  animation-iteration-count:infinite !important;
+  animation-fill-mode:both !important;
+  animation-play-state:running !important;
+}
+.electric-band #orbA {
+  width:10px !important; height:10px !important;
+  animation-duration:11.5s !important;
+  animation-delay:-2.4s !important;
+}
+.electric-band #orbB {
+  width:8px !important; height:8px !important;
+  animation-duration:13.2s !important;
+  animation-delay:-7.1s !important;
+}
+.electric-band #orbC {
+  width:11px !important; height:11px !important;
+  animation-duration:15.1s !important;
+  animation-delay:-10.2s !important;
+}
+@keyframes gbEnergyOrbTravel {
+  0% {
+    translate:-18px 0;
+    opacity:0;
+    filter:brightness(.92);
+  }
+  8% { opacity:1; }
+  48% {
+    translate:50vw 0;
+    opacity:1;
+    filter:brightness(1.18);
+  }
+  91% { opacity:.95; }
+  100% {
+    translate:calc(100vw + 18px) 0;
+    opacity:0;
+    filter:brightness(1.05);
+  }
+}
+.electric-band .orb::after {
+  content:"";
+  position:absolute;
+  width:3px;
+  height:3px;
+  top:1px;
+  right:1px;
+  border-radius:50%;
+  background:rgba(255,255,255,.98);
+  box-shadow:0 0 5px rgba(255,255,255,.9),0 0 10px var(--gb-orb-glow,rgba(255,255,255,.55));
+  pointer-events:none;
+}
+.electric-band .lightning-svg {
+  display:block !important;
+  width:100vw !important;
+  height:100% !important;
+  opacity:.48 !important;
+  overflow:visible !important;
+}
+.electric-band .lightning-svg path.zap {
+  stroke:var(--electric-yellow) !important;
+  opacity:.65 !important;
+}
+.electric-band .lightning-svg path.bright {
+  stroke:var(--electric-yellow) !important;
+  stroke-width:2.6 !important;
+  stroke-dasharray:170 1250 !important;
+  animation:gbElectricTraceFinal 4.4s linear infinite !important;
+  opacity:.95 !important;
+}
+@keyframes gbElectricTraceFinal {
+  0% { stroke-dashoffset:1450; opacity:.25; }
+  38% { opacity:.92; }
+  100% { stroke-dashoffset:-1450; opacity:.25; }
+}
+.electric-band .glowline {
+  left:50% !important;
+  top:50% !important;
+  width:100vw !important;
+  height:2px !important;
+  opacity:.48 !important;
+  background:linear-gradient(90deg,transparent,var(--electric-yellow),transparent) !important;
+  box-shadow:0 0 14px var(--gb-orb-soft,rgba(255,214,0,.25)) !important;
+  animation:gbGlowBreathFinal 3.8s ease-in-out infinite !important;
+}
+@keyframes gbGlowBreathFinal {
+  0%,100% { opacity:.22; transform:translate(-50%,-50%) scaleX(.72); }
+  50% { opacity:.64; transform:translate(-50%,-50%) scaleX(1); }
+}
+/* Même si le système demande de réduire les animations, les bulles gardent
+   un déplacement très lent plutôt que de rester figées. */
+@media (prefers-reduced-motion: reduce) {
+  .electric-band .orb,
+  .electric-band #orbA,
+  .electric-band #orbB,
+  .electric-band #orbC {
+    animation-duration:22s !important;
+  }
+  .electric-band .lightning-svg path.bright { animation-duration:9s !important; }
+  .electric-band .glowline { animation-duration:8s !important; }
+}
+
+/* Les images ne sont jamais masquées par les effets décoratifs ou les cartes. */
+.gb-category-visual,
+.gb-category-image,
+.gb-category-image img,
+.gb-family-model-grid .model .thumb,
+.gb-family-model-grid .model .thumb img,
+.gb-showcase-image,
+.gb-showcase-image img,
+.gb-universe-card-visual,
+.gb-universe-card-visual img {
+  visibility:visible !important;
+  opacity:1 !important;
+}
+.gb-category-image {
+  position:relative !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:100% !important;
+  min-width:0 !important;
+  min-height:270px !important;
+  overflow:hidden !important;
+  border-radius:13px !important;
+  background:linear-gradient(145deg,#f5f8f5,#dce8df) !important;
+}
+.gb-category-image img {
+  display:block !important;
+  max-width:100% !important;
+  max-height:100% !important;
+  object-fit:contain !important;
+  object-position:center !important;
+  padding:8px !important;
+  filter:drop-shadow(0 13px 18px rgba(0,0,0,.16)) !important;
+}
+.gb-family-model-grid .model .thumb,
+.gb-single-model-grid .model .thumb {
+  position:relative !important;
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  min-height:0 !important;
+  aspect-ratio:4/3 !important;
+  overflow:hidden !important;
+  border-radius:12px !important;
+  background:linear-gradient(145deg,#f7faf7,#e3ece5) !important;
+}
+.gb-family-model-grid .model .thumb img,
+.gb-single-model-grid .model .thumb img {
+  position:absolute !important;
+  inset:0 !important;
+  display:block !important;
+  width:100% !important;
+  height:100% !important;
+  max-width:none !important;
+  max-height:none !important;
+  object-fit:contain !important;
+  object-position:center !important;
+  padding:7px !important;
+  transform:none !important;
+  filter:drop-shadow(0 9px 12px rgba(0,0,0,.12)) !important;
+}
+.gb-family-model-grid .model,
+.gb-single-model-grid .model {
+  min-width:0 !important;
+  overflow:hidden !important;
+}
+
+/* GreenLaptop : l'image d'usage est mise en avant et les deux références
+   restent affichées avec une photo large, puis leurs caractéristiques. */
+body[data-gb-page="laptop"] {
+  --gb-halo-1:rgba(239,69,79,.17);
+  --gb-halo-2:rgba(176,35,53,.10);
+  background-image:
+    radial-gradient(ellipse at 8% 8%,rgba(239,69,79,.17),transparent 35%),
+    radial-gradient(ellipse at 92% 64%,rgba(176,35,53,.10),transparent 42%),
+    linear-gradient(180deg,#071710 0%,#091b15 52%,#04130d 100%) !important;
+}
+body[data-gb-page="laptop"] .gb-category-hero {
+  grid-template-columns:minmax(0,.94fr) minmax(390px,1.06fr) !important;
+}
+body[data-gb-page="laptop"] .gb-category-image {
+  min-height:350px !important;
+  aspect-ratio:4/3 !important;
+  background:linear-gradient(145deg,#f7f6f4,#e4e7e2) !important;
+}
+body[data-gb-page="laptop"] .gb-category-image img {
+  object-fit:cover !important;
+  object-position:center 66% !important;
+  padding:0 !important;
+  transform:scale(1.035) !important;
+}
+body[data-gb-page="laptop"] .gb-family-model-grid .model .thumb {
+  aspect-ratio:16/10 !important;
+  background:linear-gradient(145deg,#f7f8f6,#e3e9e4) !important;
+}
+body[data-gb-page="laptop"] .gb-family-model-grid .model .thumb img {
+  object-fit:contain !important;
+  padding:4px !important;
+}
+
+/* GreenWifi : bleu acier et argent métallisé, avec de fins scintillements.
+   Les points lumineux sont uniquement décoratifs : aucun texte dans le fond. */
+body[data-gb-page="wifi"] {
+  --electric-yellow:#83caff;
+  --gb-orb-light:#ffffff;
+  --gb-orb-glow:rgba(132,204,255,.98);
+  --gb-orb-soft:rgba(218,235,250,.42);
+  --gb-page-accent:#c7d9e8;
+  --gb-halo-1:rgba(73,157,216,.24);
+  --gb-halo-2:rgba(205,222,238,.16);
+  background-color:#071522 !important;
+  background-image:
+    radial-gradient(ellipse at 14% 7%,rgba(75,165,232,.24),transparent 36%),
+    radial-gradient(ellipse at 88% 24%,rgba(224,237,249,.18),transparent 34%),
+    radial-gradient(ellipse at 55% 88%,rgba(63,130,181,.17),transparent 40%),
+    linear-gradient(155deg,#07121f 0%,#0b1d2e 48%,#071522 100%) !important;
+  background-attachment:scroll !important;
+  color:#f3f8fc !important;
+}
+body[data-gb-page="wifi"]::before {
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  opacity:.25;
+  mix-blend-mode:screen;
+  background-image:
+    radial-gradient(circle at 7% 17%,rgba(255,255,255,.95) 0 1px,transparent 1.8px),
+    radial-gradient(circle at 28% 66%,rgba(190,224,249,.85) 0 1px,transparent 1.9px),
+    radial-gradient(circle at 51% 28%,rgba(255,255,255,.78) 0 .8px,transparent 1.7px),
+    radial-gradient(circle at 72% 77%,rgba(198,224,244,.9) 0 1px,transparent 1.8px),
+    radial-gradient(circle at 91% 42%,rgba(255,255,255,.8) 0 .8px,transparent 1.8px);
+  background-size:310px 280px,370px 340px,290px 330px,390px 310px,340px 360px;
+  animation:gbWifiSilverSparkle 20s ease-in-out infinite alternate;
+}
+@keyframes gbWifiSilverSparkle {
+  0% { opacity:.16; transform:translate3d(0,0,0); }
+  50% { opacity:.29; }
+  100% { opacity:.20; transform:translate3d(0,-9px,0); }
+}
+body[data-gb-page="wifi"] .orb {
+  background:radial-gradient(circle at 28% 24%,#ffffff 0 11%,#eaf7ff 18%,#a6d9ff 37%,#58a9df 60%,rgba(36,105,151,.22) 76%,transparent 86%) !important;
+  box-shadow:0 0 7px rgba(255,255,255,.95),0 0 14px rgba(154,211,250,.88),0 0 29px rgba(93,171,224,.58),0 0 48px rgba(207,226,243,.25) !important;
+}
+body[data-gb-page="wifi"] .orb::after {
+  width:4px;
+  height:4px;
+  top:0;
+  right:0;
+  background:#fff;
+  box-shadow:0 0 5px #fff,0 0 10px rgba(200,231,253,.95);
+}
+body[data-gb-page="wifi"] .electric-band .glowline {
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.9),#7dcaff,rgba(255,255,255,.9),transparent) !important;
+  box-shadow:0 0 17px rgba(139,203,245,.55) !important;
+}
+body[data-gb-page="wifi"] .lightning-svg path.zap,
+body[data-gb-page="wifi"] .lightning-svg path.bright {
+  stroke:#b9dcf5 !important;
+}
+body[data-gb-page="wifi"] .gb-category-hero {
+  border-color:rgba(184,215,239,.30) !important;
+  background:radial-gradient(circle at 86% 8%,rgba(154,207,242,.18),transparent 36%),linear-gradient(128deg,#071726,#102a40 58%,#081b2b) !important;
+}
+body[data-gb-page="wifi"] .gb-category-copy h1 em,
+body[data-gb-page="wifi"] .gb-rd-copy h2 em,
+body[data-gb-page="wifi"] .gb-category-stat strong,
+body[data-gb-page="wifi"] .gb-rd-kicker,
+body[data-gb-page="wifi"] .gb-rd-step .number,
+body[data-gb-page="wifi"] .gb-rd-bottom strong,
+body[data-gb-page="wifi"] .gb-family-feature-line span strong,
+body[data-gb-page="wifi"] .gb-family-stamp i {
+  color:#c8dfef !important;
+}
+body[data-gb-page="wifi"] .gb-category-eyebrow>span,
+body[data-gb-page="wifi"] .gb-rd-kicker::before {
+  background:linear-gradient(90deg,#77bce8,#e8f3fb) !important;
+}
+body[data-gb-page="wifi"] .gb-category-visual {
+  border-color:rgba(205,225,242,.35) !important;
+  background:linear-gradient(145deg,rgba(221,237,250,.15),rgba(87,139,176,.09)) !important;
+}
+body[data-gb-page="wifi"] .gb-category-image {
+  background:linear-gradient(145deg,#eef4f8,#cbd8e2 48%,#f6f8fa) !important;
+}
+body[data-gb-page="wifi"] .gb-category-visual-top,
+body[data-gb-page="wifi"] .gb-category-visual-bottom,
+body[data-gb-page="wifi"] .gb-rd-copy p,
+body[data-gb-page="wifi"] .gb-rd-step p {
+  color:#d4e2ed !important;
+}
+body[data-gb-page="wifi"] .gb-rd-story {
+  border-color:rgba(184,215,239,.27) !important;
+  background:radial-gradient(ellipse at 90% 0%,rgba(117,181,222,.17),transparent 36%),linear-gradient(135deg,#061624,#0d2639 58%,#071a29) !important;
+  box-shadow:0 18px 46px rgba(0,0,0,.24),inset 0 1px 0 rgba(228,242,252,.08) !important;
+}
+body[data-gb-page="wifi"] .gb-rd-step,
+body[data-gb-page="wifi"] .gb-rd-note,
+body[data-gb-page="wifi"] .gb-rd-bottom {
+  border-color:rgba(190,218,239,.20) !important;
+  background:rgba(187,214,236,.065) !important;
+}
+body[data-gb-page="wifi"] .gb-rd-note { border-left:3px solid #b9d6eb !important; }
+body[data-gb-page="wifi"] .gb-rd-note i { color:#e4f2fb !important; }
+body[data-gb-page="wifi"] .gb-product-family {
+  border-color:rgba(190,219,241,.22) !important;
+  background:linear-gradient(145deg,rgba(9,33,51,.96),rgba(12,42,63,.94)) !important;
+}
+body[data-gb-page="wifi"] .gb-family-stamp,
+body[data-gb-page="wifi"] .gb-family-feature-line {
+  border-color:rgba(201,224,241,.22) !important;
+  background:rgba(209,229,243,.07) !important;
+}
+body[data-gb-page="wifi"] .gb-family-model-grid .model {
+  border-color:rgba(160,190,211,.65) !important;
+  background:linear-gradient(155deg,#f7fafc,#e5edf3 72%,#d6e1e9) !important;
+}
+body[data-gb-page="wifi"] .gb-family-model-grid .model .thumb {
+  border:1px solid rgba(130,166,193,.38) !important;
+  background:linear-gradient(145deg,#f9fcfe,#dce7ef) !important;
+}
+body[data-gb-page="wifi"] .gb-family-model-grid .model .meta h4 { color:#102c40 !important; }
+body[data-gb-page="wifi"] .gb-family-model-grid .model .meta p { color:#355267 !important; }
+body[data-gb-page="wifi"] .gb-family-model-grid .model .meta p small { color:#526d81 !important; }
+body[data-gb-page="wifi"] .gb-family-model-grid .model-new-actions .new-info-btn,
+body[data-gb-page="wifi"] .gb-family-model-grid .model-new-actions .notice-mini-link {
+  color:#13344d !important;
+  border-color:rgba(73,131,171,.25) !important;
+  background:linear-gradient(135deg,#f5fbff,#cbddea) !important;
+}
+body[data-gb-page="wifi"] .gb-category-primary {
+  color:#10283a !important;
+  border-color:rgba(255,255,255,.55) !important;
+  background:linear-gradient(105deg,#e7f2fa,#92c8ed 52%,#dce9f2) !important;
+}
+body[data-gb-page="wifi"] .gb-category-secondary {
+  border-color:rgba(200,226,245,.42) !important;
+  background:rgba(193,221,241,.10) !important;
+  color:#f2f8fc !important;
+}
+
+/* Mise en page visuelle : les photos des deux modèles GreenLaptop sont grandes,
+   visibles au-dessus de leur nom et ne sont plus écrasées en vignettes. */
+@media (max-width:980px) {
+  body[data-gb-page="laptop"] .gb-category-hero {
+    grid-template-columns:minmax(0,1fr) !important;
+  }
+}
+@media (max-width:720px) {
+  .container, main.container {
+    width:100% !important;
+    max-width:100% !important;
+    padding-left:14px !important;
+    padding-right:14px !important;
+  }
+  .gb-category-hero {
+    grid-template-columns:minmax(0,1fr) !important;
+    gap:17px !important;
+    width:100% !important;
+    padding:18px 14px !important;
+  }
+  .gb-category-copy { min-width:0 !important; width:100% !important; }
+  .gb-category-copy h1 {
+    font-size:clamp(29px,7.8vw,37px) !important;
+    line-height:1.12 !important;
+    letter-spacing:-.65px !important;
+    text-wrap:balance !important;
+    overflow-wrap:break-word !important;
+  }
+  .gb-category-copy>p { font-size:14px !important; line-height:1.68 !important; }
+  .gb-category-actions { display:grid !important; grid-template-columns:1fr !important; gap:9px !important; }
+  .gb-category-primary,.gb-category-secondary { min-height:48px !important; width:100% !important; font-size:13px !important; }
+  .gb-category-stats { grid-template-columns:repeat(2,minmax(0,1fr)) !important; gap:8px !important; }
+  .gb-category-stat strong { font-size:17px !important; }
+  .gb-category-stat span { font-size:11px !important; }
+  .gb-category-visual { width:100% !important; min-width:0 !important; padding:9px !important; }
+  .gb-category-visual-top,.gb-category-visual-bottom { flex-wrap:wrap !important; gap:7px !important; font-size:9px !important; }
+  .gb-category-image {
+    width:100% !important;
+    min-height:0 !important;
+    height:auto !important;
+    aspect-ratio:4/3 !important;
+    margin:9px 0 !important;
+  }
+  .gb-category-image img { object-fit:contain !important; padding:4px !important; }
+  body[data-gb-page="laptop"] .gb-category-image {
+    aspect-ratio:1.12/1 !important;
+    min-height:0 !important;
+    background:linear-gradient(145deg,#f7f8f6,#e1e8e3) !important;
+  }
+  body[data-gb-page="laptop"] .gb-category-image img {
+    object-fit:cover !important;
+    object-position:center 67% !important;
+    padding:0 !important;
+    transform:scale(1.045) !important;
+  }
+  .gb-family-model-grid,.gb-single-model-grid {
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) !important;
+    gap:14px !important;
+    width:100% !important;
+  }
+  .gb-family-model-grid .model,.gb-single-model-grid .model {
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) !important;
+    grid-template-rows:auto auto auto !important;
+    width:100% !important;
+    padding:12px !important;
+    gap:10px !important;
+    align-items:stretch !important;
+  }
+  .gb-family-model-grid .model .thumb,.gb-single-model-grid .model .thumb {
+    grid-column:1 !important;
+    grid-row:1 !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    aspect-ratio:16/10 !important;
+    background:linear-gradient(145deg,#f6f9f6,#e0e9e2) !important;
+  }
+  .gb-family-model-grid .model .thumb img,.gb-single-model-grid .model .thumb img {
+    object-fit:contain !important;
+    object-position:center !important;
+    padding:5px !important;
+  }
+  body[data-gb-page="laptop"] .gb-family-model-grid .model .thumb {
+    aspect-ratio:16/10 !important;
+    background:linear-gradient(145deg,#f7f9f7,#dfe8e2) !important;
+  }
+  body[data-gb-page="laptop"] .gb-family-model-grid .model .thumb img {
+    object-fit:contain !important;
+    padding:2px !important;
+  }
+  .gb-family-model-grid .model .meta,.gb-single-model-grid .model .meta {
+    grid-column:1 !important; grid-row:2 !important; width:100% !important;
+  }
+  .gb-family-model-grid .model .meta h4,.gb-single-model-grid .model .meta h4 {
+    font-size:19px !important; line-height:1.3 !important;
+  }
+  .gb-family-model-grid .model .meta p,.gb-single-model-grid .model .meta p {
+    font-size:14px !important; line-height:1.6 !important;
+  }
+  .gb-family-model-grid .model .meta p small,.gb-single-model-grid .model .meta p small {
+    font-size:12px !important; line-height:1.5 !important;
+  }
+  .gb-family-model-grid .model-new-actions,.gb-single-model-grid .model-new-actions {
+    grid-column:1 !important; grid-row:3 !important;
+    display:grid !important; grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:8px !important; width:100% !important;
+  }
+  .gb-family-model-grid .model-new-actions button,.gb-family-model-grid .model-new-actions a,
+  .gb-single-model-grid .model-new-actions button,.gb-single-model-grid .model-new-actions a {
+    min-width:0 !important; min-height:46px !important; width:100% !important;
+    font-size:12px !important; line-height:1.3 !important; white-space:normal !important;
+  }
+  .gb-family-model-grid .model-new-actions .new-order-btn,
+  .gb-single-model-grid .model-new-actions .new-order-btn { grid-column:1/-1 !important; }
+  body[data-gb-page="wifi"] .gb-category-image img { object-fit:contain !important; padding:2px !important; }
+  body[data-gb-page="wifi"] .gb-rd-story,
+  body[data-gb-page="wifi"] .gb-product-family,
+  body[data-gb-page="wifi"] .gb-category-hero { border-color:rgba(195,222,242,.3) !important; }
+}
+@media (max-width:390px) {
+  .gb-category-breadcrumb { font-size:10px !important; margin-bottom:16px !important; }
+  .gb-category-eyebrow { font-size:9px !important; letter-spacing:.7px !important; }
+  .gb-family-model-grid .model .thumb,.gb-single-model-grid .model .thumb { aspect-ratio:4/3 !important; }
+  .gb-family-model-grid .model-new-actions button,.gb-family-model-grid .model-new-actions a,
+  .gb-single-model-grid .model-new-actions button,.gb-single-model-grid .model-new-actions a { font-size:11px !important; }
+}
+</style>
+
 </head>
 <body data-gb-page="powerbanks">
 <img alt="" aria-hidden="true" class="page-bg" src="Energie_blanche.png"/>
@@ -5232,11 +5759,19 @@ if(fab){
       img.alt=product.title || 'Produit GreenBridge';
       img.loading='lazy';
       img.decoding='async';
+      var photoCandidates=Array.from(new Set([product.cardImage].concat(Array.isArray(product.images)?product.images:[]).filter(Boolean)));
+      var photoAttempt=0;
       img.onerror=function(){
+        photoAttempt++;
+        if(photoAttempt<photoCandidates.length){
+          img.src=photoCandidates[photoAttempt];
+          return;
+        }
         thumb.classList.add('new-model-placeholder');
-        thumb.innerHTML='<span class="gb-product-image-unavailable">Visuel indisponible — vérifier le nom du fichier image</span>';
+        thumb.innerHTML='<span class="gb-product-image-unavailable">Visuel indisponible — contrôler le nom du fichier image dans le dépôt.</span>';
       };
       if(img.getAttribute('src') !== product.cardImage){
+        photoAttempt=0;
         img.src=product.cardImage;
       }
     });
