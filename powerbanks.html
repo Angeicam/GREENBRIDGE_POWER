@@ -2075,7 +2075,14 @@ body[data-gb-page="lifepo4"] .featured{margin-top:10px}
   html,body{width:100%;max-width:100%;overflow-x:hidden}
   body{background:linear-gradient(180deg,#061810 0%,#071b13 55%,#04130d 100%);-webkit-text-size-adjust:100%;text-size-adjust:100%}
   .page-bg,.page-bg-overlay{display:none!important}
-  .electric-band{display:none!important}
+  .electric-band{display:block!important;top:calc(var(--topbar-h) + var(--opening-h) + var(--header-h) - 4px);height:12px;z-index:1900}
+  .electric-band .lightning-svg{opacity:.22}
+  .electric-band .orb{opacity:1!important;top:50%!important;transform:translate(-50%,-50%)!important;animation:gbMobileOrbPulse 3.2s ease-in-out infinite!important}
+  .electric-band #orbA{left:22%!important;animation-delay:0s!important}
+  .electric-band #orbB{left:50%!important;animation-delay:.45s!important}
+  .electric-band #orbC{left:78%!important;animation-delay:.9s!important}
+  .electric-band .glowline{width:100vw;opacity:.42;animation:none!important}
+  @keyframes gbMobileOrbPulse{0%,100%{filter:brightness(.92);opacity:.78}50%{filter:brightness(1.28);opacity:1}}
   .topbar{height:var(--topbar-h);padding:0 13px}
   .promo-text{font-size:9px;letter-spacing:.35px;gap:6px}
   .promo-origin{display:inline!important;font-size:9px}
@@ -2267,7 +2274,156 @@ body[data-gb-page="powerbanks"]{--gb-current-page:"powerbanks";}
 
 body[data-gb-page="powerbanks"] .gb-category-hero{display:grid}
 
+/* THÈME COULEUR : trois bulles d’énergie et halo discret propres à chaque gamme. */
+body[data-gb-page="powerbanks"]{
+  --electric-yellow:#ffd600;
+  --gb-orb-light:#fff8b8;
+  --gb-orb-glow:rgba(255,214,0,.96);
+  --gb-orb-soft:rgba(255,214,0,.34);
+  --gb-page-accent:#f1cf58;
+  background:radial-gradient(ellipse at 13% 12%,rgba(255,214,0,.105),transparent 34%),radial-gradient(ellipse at 91% 67%,rgba(201,145,24,.065),transparent 39%),linear-gradient(180deg,#061810 0%,#071b13 52%,#04130d 100%);
+}
+body[data-gb-page="powerbanks"] .page-bg-overlay{background:radial-gradient(ellipse at 12% 18%,rgba(255,214,0,.085),transparent 42%),radial-gradient(ellipse at 90% 72%,rgba(201,145,24,.055),transparent 46%),linear-gradient(180deg,rgba(4,20,13,.30),rgba(4,20,13,.70));}
+body[data-gb-page="powerbanks"] .orb{background:radial-gradient(circle at 30% 30%,var(--gb-orb-light),var(--electric-yellow) 53%,transparent 82%);box-shadow:0 0 12px var(--gb-orb-glow),0 0 30px var(--gb-orb-soft),0 0 54px var(--gb-orb-soft);}
+body[data-gb-page="powerbanks"] .electric-band .glowline{background:linear-gradient(90deg,transparent,var(--electric-yellow),transparent);box-shadow:0 6px 20px var(--gb-orb-soft);}
+body[data-gb-page="powerbanks"] .lightning-svg path.zap{stroke:var(--electric-yellow)}
+body[data-gb-page="powerbanks"] .gb-category-copy h1 em,body[data-gb-page="powerbanks"] .gb-category-stat strong,body[data-gb-page="powerbanks"] .gb-rd-copy h2 em,body[data-gb-page="powerbanks"] .gb-rd-kicker,body[data-gb-page="powerbanks"] .gb-rd-step .number,body[data-gb-page="powerbanks"] .gb-rd-bottom strong{color:var(--gb-page-accent)}
+body[data-gb-page="powerbanks"] .gb-category-eyebrow>span{background:linear-gradient(90deg,var(--gb-page-accent),rgba(255,255,255,.55))}
+body[data-gb-page="powerbanks"] .gb-rd-kicker:before{background:var(--gb-page-accent)}
+body[data-gb-page="powerbanks"] .gb-rd-note{border-left-color:var(--gb-page-accent)}
+body[data-gb-page="powerbanks"] .gb-rd-note i{color:var(--gb-page-accent)}
+body[data-gb-page="powerbanks"] .gb-family-feature-line span strong,body[data-gb-page="powerbanks"] .gb-family-stamp i{color:var(--gb-page-accent)}
+/* Photos produit : image entière, sans découpe. La source vient de cardImage. */
+body[data-gb-page="powerbanks"] .gb-family-model-grid .model .thumb img{object-fit:contain!important;object-position:center!important;padding:8px!important}
+
 body.gb-menu-open{overflow:hidden}
+
+
+/* ============================================================
+   GREENBRIDGE — AFFICHAGE MOBILE PRODUITS (CORRECTION FINALE)
+   Priorité : voir réellement le produit, sans vignette minuscule
+   ni recadrage de la photo. Les règles ne changent pas le bureau.
+   ============================================================ */
+@media (min-width:641px) and (max-width:900px){
+  .gb-family-model-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:13px!important}
+  .gb-family-model-grid .model{display:flex!important;flex-direction:column!important;align-items:stretch!important;min-width:0!important;padding:12px!important;gap:10px!important}
+  .gb-family-model-grid .model .thumb{width:100%!important;height:auto!important;min-height:0!important;flex:0 0 auto!important;aspect-ratio:4/3!important;padding:0!important;border-radius:12px!important;overflow:hidden!important}
+  .gb-family-model-grid .model .thumb img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:contain!important;object-position:center!important;padding:12px!important}
+  .gb-phone-new-grid,.new-products-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .new-product-photo-placeholder{width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;flex:0 0 auto!important;aspect-ratio:4/3!important}
+  .new-product-photo-placeholder img{object-fit:contain!important;object-position:center!important;padding:12px!important}
+}
+
+@media (max-width:640px){
+  /* Accueil : une image produit large, puis le texte, jamais une petite colonne. */
+  .gb-universe-grid,
+  .gb-premium-universe-grid{grid-template-columns:minmax(0,1fr)!important;gap:13px!important}
+  .gb-universe-card,
+  .gb-premium-universe-grid .gb-universe-card{display:flex!important;flex-direction:column!important;min-height:0!important;padding:0!important;border-radius:15px!important}
+  .gb-universe-card-visual,
+  .gb-premium-universe-grid .gb-universe-card-visual{width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;aspect-ratio:16/10!important;margin:0!important;overflow:hidden!important;background:linear-gradient(145deg,#f8fbf8,#e5eee7)!important}
+  .gb-universe-card-visual img,
+  .gb-premium-universe-grid .gb-universe-card-visual img{display:block!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:contain!important;object-position:center!important;padding:12px!important;transform:none!important}
+  .gb-universe-card-visual::after{background:linear-gradient(180deg,transparent 58%,rgba(3,27,18,.16))!important}
+  .gb-universe-card-visual span{font-size:9px!important;left:12px!important;bottom:10px!important;letter-spacing:.55px!important}
+  .gb-universe-content,
+  .gb-premium-universe-grid .gb-universe-content{width:100%!important;padding:15px 15px 16px!important;min-width:0!important}
+  .gb-universe-tag,
+  .gb-premium-universe-grid .gb-universe-tag{font-size:9px!important;line-height:1.4!important;letter-spacing:.7px!important}
+  .gb-universe-content h3,
+  .gb-premium-universe-grid .gb-universe-content h3{font-size:18px!important;line-height:1.25!important;margin:0 0 7px!important}
+  .gb-universe-content p,
+  .gb-premium-universe-grid .gb-universe-content p{font-size:12px!important;line-height:1.65!important;margin:0 0 11px!important}
+  .gb-universe-content strong,
+  .gb-premium-universe-grid .gb-universe-content strong{font-size:11px!important;padding-top:5px!important}
+
+  /* Aperçu des univers en haut de page : photos plus grandes et lisibles. */
+  .gb-showcase-mosaic{grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-template-rows:auto!important;gap:9px!important}
+  .gb-showcase-product{min-width:0!important;min-height:0!important;display:flex!important;flex-direction:column!important}
+  .gb-showcase-image,
+  .gb-showcase-product--laptop .gb-showcase-image{position:relative!important;inset:auto!important;width:100%!important;height:auto!important;min-height:0!important;aspect-ratio:1/1!important;padding:8px!important;background:linear-gradient(145deg,#f7faf7,#e6eee7)!important}
+  .gb-showcase-image img{position:static!important;display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;object-position:center!important;padding:4px!important}
+  .gb-showcase-product-copy,
+  .gb-showcase-product--laptop .gb-showcase-product-copy{position:relative!important;min-height:72px!important;padding:9px 9px 10px!important}
+  .gb-showcase-product-copy span{font-size:8px!important;line-height:1.4!important;letter-spacing:.4px!important}
+  .gb-showcase-product-copy strong,.gb-showcase-product--laptop .gb-showcase-product-copy strong{font-size:12px!important;line-height:1.25!important}
+  .gb-showcase-product-copy small{font-size:9px!important;line-height:1.35!important}
+  .gb-showcase-arrow{right:8px!important;top:8px!important;bottom:auto!important;font-size:10px!important}
+
+  /* Catalogue : une fiche par ligne, grande photo au-dessus des informations. */
+  .gb-family-model-grid,
+  .gb-single-model-grid{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:14px!important;padding:0!important}
+  .gb-family-model-grid .model,
+  .gb-single-model-grid .model{display:flex!important;flex-direction:column!important;align-items:stretch!important;justify-content:flex-start!important;width:100%!important;max-width:100%!important;min-width:0!important;min-height:0!important;gap:11px!important;padding:12px!important;border-radius:14px!important;overflow:hidden!important}
+  .gb-family-model-grid .model .thumb,
+  .gb-single-model-grid .model .thumb{position:relative!important;display:block!important;flex:0 0 auto!important;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;aspect-ratio:4/3!important;padding:0!important;margin:0!important;border-radius:11px!important;overflow:hidden!important;background:linear-gradient(145deg,#f7faf7,#e7eee8)!important;border:1px solid rgba(7,58,37,.08)!important}
+  .gb-family-model-grid .model .thumb img,
+  .gb-single-model-grid .model .thumb img{position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:contain!important;object-position:center!important;padding:13px!important;border-radius:10px!important;transform:none!important}
+  .gb-family-model-grid .model .meta,
+  .gb-single-model-grid .model .meta{display:block!important;width:100%!important;min-width:0!important;padding:0 2px!important}
+  .gb-family-model-grid .model .meta h4,
+  .gb-single-model-grid .model .meta h4{margin:0 0 5px!important;font-size:18px!important;line-height:1.3!important;color:#073a25!important;overflow-wrap:anywhere!important}
+  .gb-family-model-grid .model .meta p,
+  .gb-single-model-grid .model .meta p{margin:0!important;font-size:13px!important;line-height:1.6!important;color:#375647!important;overflow-wrap:anywhere!important}
+  .gb-family-model-grid .model .meta p small,
+  .gb-single-model-grid .model .meta p small{display:block!important;margin-top:3px!important;font-size:12px!important;line-height:1.5!important;color:#577363!important}
+  .gb-family-model-grid .model-new-actions,
+  .gb-single-model-grid .model-new-actions{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;width:100%!important;margin:2px 0 0!important;padding-top:10px!important;justify-content:stretch!important}
+  .gb-family-model-grid .model-new-actions .new-info-btn,
+  .gb-family-model-grid .model-new-actions .new-order-btn,
+  .gb-family-model-grid .model-new-actions .notice-mini-link,
+  .gb-single-model-grid .model-new-actions .new-info-btn,
+  .gb-single-model-grid .model-new-actions .new-order-btn,
+  .gb-single-model-grid .model-new-actions .notice-mini-link{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:0!important;width:100%!important;min-height:44px!important;padding:10px 9px!important;font-size:11px!important;line-height:1.25!important;white-space:normal!important;text-align:center!important;overflow-wrap:anywhere!important;flex:none!important}
+  .gb-family-model-grid .model-new-actions .new-order-btn,
+  .gb-single-model-grid .model-new-actions .new-order-btn{grid-column:1/-1!important}
+
+  /* Nouveautés et carte batterie : image de grande taille, sans recadrage. */
+  .gb-phone-new-grid,.new-products-grid{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:13px!important}
+  .gb-phone-new-grid .new-product-card,.new-products-grid .new-product-card{display:flex!important;flex-direction:column!important;align-items:stretch!important;width:100%!important;min-width:0!important;min-height:0!important;padding:13px!important;gap:10px!important;text-align:left!important}
+  .gb-phone-new-grid .new-product-photo-placeholder,
+  .new-products-grid .new-product-photo-placeholder,
+  .gb-battery-product-card .new-product-photo-placeholder{position:relative!important;display:block!important;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;flex:0 0 auto!important;aspect-ratio:4/3!important;border-radius:12px!important;overflow:hidden!important;background:linear-gradient(145deg,#f7faf7,#e7eee8)!important}
+  .gb-phone-new-grid .new-product-photo-placeholder img,
+  .new-products-grid .new-product-photo-placeholder img,
+  .gb-battery-product-card .new-product-photo-placeholder img{position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;max-width:none!important;object-fit:contain!important;object-position:center!important;padding:13px!important;border-radius:11px!important;transform:none!important}
+  .gb-phone-new-grid .new-product-card h3,.new-products-grid .new-product-card h3{font-size:18px!important;line-height:1.3!important;text-align:left!important}
+  .gb-phone-new-grid .new-product-card p,.new-products-grid .new-product-card p{font-size:13px!important;line-height:1.65!important;text-align:left!important}
+  .gb-phone-new-grid .new-product-actions,.new-products-grid .new-product-actions{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;width:100%!important;margin-top:5px!important}
+  .gb-phone-new-grid .new-product-actions button,.gb-phone-new-grid .new-product-actions a,
+  .new-products-grid .new-product-actions button,.new-products-grid .new-product-actions a{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:0!important;min-height:44px!important;padding:10px 8px!important;font-size:10px!important;line-height:1.25!important;text-align:center!important;white-space:normal!important;flex:none!important}
+  .gb-phone-new-grid .new-product-actions .new-order-btn,.new-products-grid .new-product-actions .new-order-btn{grid-column:1/-1!important}
+
+  /* Galerie, grande image de présentation et visuel batterie. */
+  .gb-category-visual{width:100%!important;min-width:0!important;padding:10px!important}
+  .gb-category-image{width:100%!important;height:auto!important;min-height:0!important;aspect-ratio:4/3!important;margin:10px 0!important;overflow:hidden!important;background:linear-gradient(145deg,#f7faf7,#e7eee8)!important}
+  .gb-category-image img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;object-position:center!important;padding:13px!important}
+  .featured-hero{height:auto!important;aspect-ratio:16/10!important;min-height:0!important;max-height:290px!important}
+  .featured-hero img{width:100%!important;height:100%!important;object-fit:contain!important;object-position:center!important}
+  .modal-carousel-stage{height:min(58vw,270px)!important;min-height:190px!important}
+  .modal-carousel-stage img{object-fit:contain!important;padding:8px!important}
+}
+
+@media(max-width:390px){
+  .gb-family-model-grid .model,.gb-single-model-grid .model{padding:10px!important}
+  .gb-family-model-grid .model .thumb,.gb-single-model-grid .model .thumb{aspect-ratio:4/3!important}
+  .gb-family-model-grid .model-new-actions .new-info-btn,
+  .gb-family-model-grid .model-new-actions .new-order-btn,
+  .gb-family-model-grid .model-new-actions .notice-mini-link,
+  .gb-single-model-grid .model-new-actions .new-info-btn,
+  .gb-single-model-grid .model-new-actions .new-order-btn,
+  .gb-single-model-grid .model-new-actions .notice-mini-link{font-size:10px!important}
+  .gb-showcase-mosaic{gap:7px!important}
+  .gb-showcase-product-copy{min-height:76px!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .gb-universe-card,.gb-showcase-image img,.gb-family-model-grid .model{transition:none!important}
+}
+
+
+.gb-product-image-unavailable{display:flex;align-items:center;justify-content:center;width:100%;height:100%;padding:18px;color:#607466;font-size:12px;font-weight:700;line-height:1.5;text-align:center}
+
 </style>
 <script>
   // Fonction de repli disponible dès le début du chargement des cartes produit.
@@ -2633,7 +2789,7 @@ body.gb-menu-open{overflow:hidden}
 <p>10 000 mAh • 15 W<br/><small>Trois sorties USB-A.</small></p>
 </div>
 <div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(3)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(3); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('GreenPlus')" type="button"><i class="fa-brands fa-whatsapp"></i> Commander</button></div>
-</div><div aria-label="GreenEco 10 000 mAh" class="model" data-model-index="4" onclick="selectModel(4)" role="button" tabindex="0"><div class="thumb"><img alt="GreenEco" loading="lazy" onerror="showModelPhotoPlaceholder(this)" src="batterie_tropical_1.png"/></div><div class="meta"><h4>GreenEco</h4><p>10 000 mAh<br/><small>Powerbank GreenBridge.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(4)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(4); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('GreenEco — 10 000 mAh')" type="button"><i class="fa-brands fa-whatsapp"></i> Commander</button></div></div><div aria-label="Green Africa 10 000 mAh" class="model" data-model-index="5" onclick="selectModel(5)" role="button" tabindex="0"><div class="thumb"><img alt="Green Africa" loading="lazy" onerror="showModelPhotoPlaceholder(this)" src="Green_africa1.PNG"/></div><div class="meta"><h4>Green Africa</h4><p>10 000 mAh<br/><small>Powerbank GreenBridge.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(5)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(5); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('Green Africa — 10 000 mAh')" type="button"><i class="fa-brands fa-whatsapp"></i> Commander</button></div></div><div aria-label="GreenPro" class="model" data-model-index="6" onclick="selectModel(6)" role="button" tabindex="0">
+</div><div aria-label="GreenEco 10 000 mAh" class="model" data-model-index="4" onclick="selectModel(4)" role="button" tabindex="0"><div class="thumb"><img alt="GreenEco" loading="lazy" onerror="showModelPhotoPlaceholder(this)" src="GreenEco1.png"/></div><div class="meta"><h4>GreenEco</h4><p>10 000 mAh<br/><small>Powerbank GreenBridge.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(4)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(4); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('GreenEco — 10 000 mAh')" type="button"><i class="fa-brands fa-whatsapp"></i> Commander</button></div></div><div aria-label="Green Africa 10 000 mAh" class="model" data-model-index="5" onclick="selectModel(5)" role="button" tabindex="0"><div class="thumb"><img alt="Green Africa" loading="lazy" onerror="showModelPhotoPlaceholder(this)" src="Green_africa1.PNG"/></div><div class="meta"><h4>Green Africa</h4><p>10 000 mAh<br/><small>Powerbank GreenBridge.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(5)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(5); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('Green Africa — 10 000 mAh')" type="button"><i class="fa-brands fa-whatsapp"></i> Commander</button></div></div><div aria-label="GreenPro" class="model" data-model-index="6" onclick="selectModel(6)" role="button" tabindex="0">
 <div class="thumb"><img alt="GreenPro" loading="lazy" onerror="showModelPhotoPlaceholder(this)" src="pwkb_6.png"/></div>
 <div class="meta">
 <h4>GreenPro</h4>
@@ -4435,7 +4591,7 @@ modalOverlay.addEventListener('click', ev=>{ if(ev.target === modalOverlay) clos
       s.style.width = '2px';
       s.style.height = (8 + Math.random()*22) + 'px';
       s.style.borderRadius = '2px';
-      s.style.background = 'linear-gradient(180deg, rgba(255,246,180,1), rgba(255,214,0,0.95))';
+      s.style.background = 'linear-gradient(180deg, var(--gb-orb-light, rgba(255,255,255,1)), var(--electric-yellow, #ffd600))';
       s.style.filter = 'blur(6px)';
       s.style.opacity = '0';
       s.style.transform = 'translateY(6px)';
@@ -4628,6 +4784,72 @@ if(fab){
   document.addEventListener('keydown',e=>{if(e.key==='Escape') closeMenu();});
 })();
 
+/* Synchronisation des images produit avec la base de données models[].cardImage.
+   Les galeries détaillées restent gérées par models[index].images. */
+(function(){
+  function syncProductCardImages(){
+    try{
+      if(typeof models === 'undefined' || !Array.isArray(models)) return;
+      document.querySelectorAll('.gb-family-model-grid .model[data-model-index]').forEach(card=>{
+        const index=Number(card.getAttribute('data-model-index'));
+        const product=models[index];
+        const img=card.querySelector('.thumb img');
+        if(!product || !img || !product.cardImage) return;
+        img.src=product.cardImage;
+        img.alt=product.title || img.alt || 'Produit GreenBridge';
+        img.loading='lazy';
+        img.decoding='async';
+      });
+    }catch(error){console.warn('Synchronisation des photos produits GreenBridge :',error);}
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',syncProductCardImages,{once:true});
+  else syncProductCardImages();
+})();
+
 </script>
+
+<script id="greenbridge-mobile-product-image-repair">
+/* Synchronisation robuste : restaure la bonne photo depuis models[].cardImage,
+   même si un ancien onerror avait remplacé la balise img par un placeholder. */
+(function(){
+  'use strict';
+  function restoreGreenBridgeProductImages(){
+    if(typeof models==='undefined' || !Array.isArray(models)) return;
+    document.querySelectorAll('.gb-family-model-grid .model[data-model-index]').forEach(function(card){
+      var index=Number(card.getAttribute('data-model-index'));
+      var product=models[index];
+      var thumb=card.querySelector('.thumb');
+      if(!product || !product.cardImage || !thumb) return;
+      var img=thumb.querySelector('img');
+      if(!img){
+        thumb.classList.remove('new-model-placeholder');
+        thumb.innerHTML='';
+        img=document.createElement('img');
+        img.alt=product.title || 'Produit GreenBridge';
+        img.loading='lazy';
+        img.decoding='async';
+        thumb.appendChild(img);
+      }
+      img.alt=product.title || 'Produit GreenBridge';
+      img.loading='lazy';
+      img.decoding='async';
+      img.onerror=function(){
+        thumb.classList.add('new-model-placeholder');
+        thumb.innerHTML='<span class="gb-product-image-unavailable">Visuel indisponible — vérifier le nom du fichier image</span>';
+      };
+      if(img.getAttribute('src') !== product.cardImage){
+        img.src=product.cardImage;
+      }
+    });
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',restoreGreenBridgeProductImages,{once:true});
+  }else{
+    restoreGreenBridgeProductImages();
+  }
+  window.addEventListener('pageshow',restoreGreenBridgeProductImages);
+})();
+</script>
+
 </body>
 </html>
