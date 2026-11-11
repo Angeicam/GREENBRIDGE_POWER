@@ -3637,7 +3637,460 @@ body[data-gb-page="laptop"] .gb-family-model-grid .model .thumb img {
   body[data-gb-page="laptop"] .gb-family-model-grid .model .thumb img { width:145% !important; height:145% !important; }
 }
 </style>
-</head>
+\n<style id="gb-r4-orbital-energy-motion">
+/* GREENBRIDGE R4 — mouvement ondulant/elliptique identique à la référence fournie.
+   Les bulles ne suivent PAS une trajectoire rectiligne : elles oscillent sur l'axe X
+   et montent/descendent légèrement sur l'axe Y, chacune avec son rythme et sa phase. */
+#electricBand,
+#electricBand .container,
+#electricBand .orbs {
+  display:block !important;
+  overflow:visible !important;
+}
+#electricBand .orbs {
+  position:absolute !important;
+  inset:0 !important;
+  width:100vw !important;
+  height:100% !important;
+  pointer-events:none !important;
+}
+#electricBand .orb,
+#electricBand #orbA,
+#electricBand #orbB,
+#electricBand #orbC {
+  display:block !important;
+  position:absolute !important;
+  right:auto !important;
+  margin:0 !important;
+  opacity:1 !important;
+  translate:none !important;
+  transform:translate3d(-50%,-50%,0) !important;
+  animation:none !important;
+  transition:none !important;
+  will-change:left,top !important;
+  pointer-events:none !important;
+}
+#electricBand #orbA { width:10px !important; height:10px !important; }
+#electricBand #orbB { width:8px !important; height:8px !important; }
+#electricBand #orbC { width:11px !important; height:11px !important; }
+/* Le mouvement reste actif sur mobile et tablette : aucun point fixe de remplacement. */
+@media (max-width:820px) {
+  #electricBand { display:block !important; }
+  #electricBand .orb { animation:none !important; opacity:1 !important; }
+}
+@media (prefers-reduced-motion:reduce) {
+  /* Réduction de vitesse pilotée par le script, sans figer les bulles. */
+  #electricBand .orb { animation:none !important; }
+}
+
+
+/* ============================================================
+   GREENBRIDGE R5 — ACCÈS PRODUITS DIRECT & HIÉRARCHIE VISUELLE
+   Images en premier, visuels cliquables, catalogue plus visible.
+   Cette surcouche conserve le système orbital et les identités R4.
+   ============================================================ */
+:root{
+  --gb-page-accent:#d4af37;
+  --gb-page-accent-rgb:212,175,55;
+  --gb-page-accent-soft:rgba(212,175,55,.14);
+}
+body[data-gb-page="laptop"]{
+  --gb-page-accent:#f05a62;
+  --gb-page-accent-rgb:240,90,98;
+  --gb-page-accent-soft:rgba(240,90,98,.14);
+}
+body[data-gb-page="wifi"]{
+  --gb-page-accent:#b9d9ef;
+  --gb-page-accent-rgb:185,217,239;
+  --gb-page-accent-soft:rgba(185,217,239,.16);
+}
+body[data-gb-page="powerbanks"]{
+  --gb-page-accent:#c5cbd1;
+  --gb-page-accent-rgb:197,203,209;
+  --gb-page-accent-soft:rgba(197,203,209,.13);
+}
+body[data-gb-page="lifepo4"]{
+  --gb-page-accent:#b58bff;
+  --gb-page-accent-rgb:181,139,255;
+  --gb-page-accent-soft:rgba(181,139,255,.15);
+}
+
+/* Accueil : le showcase produits passe avant le texte, sans perdre le split desktop. */
+.gb-premium-hero{
+  grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);
+}
+.gb-premium-hero .gb-premium-showcase{
+  grid-column:1;
+  grid-row:1;
+  margin:0 auto 0 0;
+}
+.gb-premium-hero .gb-premium-copy{
+  grid-column:2;
+  grid-row:1;
+}
+.gb-premium-showcase{width:100%;}
+.gb-showcase-product{
+  position:relative;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+.gb-showcase-product:focus-visible,
+.gb-universe-card:focus-visible,
+.gb-category-image-link:focus-visible{
+  outline:3px solid var(--gb-page-accent);
+  outline-offset:4px;
+}
+.gb-showcase-product-copy small{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+.gb-showcase-product-copy small::after{
+  content:"DÉCOUVRIR ↗";
+  color:#f2dc91;
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:.55px;
+}
+
+/* Accueil : chaque carte commence par la photo, puis les informations. */
+.gb-premium-universe-grid .gb-universe-card{
+  display:flex;
+  flex-direction:column;
+  padding:0 0 15px;
+  overflow:hidden;
+  min-width:0;
+}
+.gb-premium-universe-grid .gb-universe-card-visual{
+  order:1;
+  position:relative;
+  isolation:isolate;
+  height:190px;
+  min-height:190px;
+  margin:0;
+  width:100%;
+  border-radius:0;
+  background:
+    radial-gradient(circle at 50% 45%,rgba(255,255,255,.98),rgba(233,241,235,.96) 64%,rgba(205,222,211,.95));
+}
+.gb-premium-universe-grid .gb-universe-card-visual::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:linear-gradient(180deg,transparent 70%,rgba(3,22,15,.25));
+  pointer-events:none;
+}
+.gb-premium-universe-grid .gb-universe-card-visual img{
+  width:100%;
+  height:100%;
+  max-width:none;
+  padding:14px;
+  object-fit:contain !important;
+  object-position:center;
+  display:block;
+}
+.gb-premium-universe-grid .gb-universe-card-visual span{
+  left:13px;
+  bottom:11px;
+  z-index:2;
+  padding:5px 8px;
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:6px;
+  background:rgba(3,23,15,.78);
+  font-size:8px;
+  letter-spacing:.7px;
+}
+.gb-premium-universe-grid .gb-universe-card-top{
+  order:2;
+  margin:13px 16px 9px;
+}
+.gb-premium-universe-grid .gb-universe-content{
+  order:3;
+  flex:1;
+  padding:0 16px;
+}
+.gb-premium-universe-grid .gb-universe-content h3{
+  font-size:17px;
+  line-height:1.25;
+}
+.gb-premium-universe-grid .gb-universe-content p{
+  font-size:11px;
+  line-height:1.65;
+}
+.gb-premium-universe-grid .gb-universe-content strong{
+  min-height:38px;
+  padding-top:10px;
+  font-size:10px;
+}
+
+/* Pages de gamme : la photo principale précède visuellement le texte. */
+.gb-category-hero{
+  grid-template-columns:minmax(0,.98fr) minmax(0,1.02fr);
+}
+.gb-category-hero .gb-category-visual{
+  grid-column:1;
+  grid-row:1;
+}
+.gb-category-hero .gb-category-copy{
+  grid-column:2;
+  grid-row:1;
+}
+.gb-category-image-link{
+  position:relative;
+  display:flex;
+  width:100%;
+  text-decoration:none;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+.gb-category-image-link img{
+  transition:transform .25s ease,filter .25s ease;
+}
+.gb-category-image-link:hover img{
+  transform:scale(1.035);
+  filter:drop-shadow(0 20px 22px rgba(0,0,0,.22));
+}
+.gb-image-product-cta{
+  position:absolute;
+  right:12px;
+  bottom:12px;
+  z-index:3;
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  min-height:38px;
+  padding:0 13px;
+  border:1px solid rgba(255,255,255,.35);
+  border-radius:8px;
+  background:rgba(3,20,14,.88);
+  color:#fff;
+  box-shadow:0 8px 20px rgba(0,0,0,.23);
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.35px;
+  backdrop-filter:blur(7px);
+}
+.gb-image-product-cta i{color:var(--gb-page-accent);}
+.gb-category-image-link:hover .gb-image-product-cta{
+  background:rgba(3,20,14,.96);
+  border-color:var(--gb-page-accent);
+}
+
+/* Accès catalogue placé juste sous le visuel d'accueil de chaque gamme. */
+.gb-product-discovery{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  margin:0 0 18px;
+  padding:15px 17px;
+  border:1px solid rgba(var(--gb-page-accent-rgb),.36);
+  border-radius:14px;
+  background:
+    linear-gradient(100deg,var(--gb-page-accent-soft),rgba(255,255,255,.035) 68%),
+    rgba(3,20,14,.58);
+  box-shadow:0 12px 26px rgba(0,0,0,.15),inset 0 1px 0 rgba(255,255,255,.055);
+}
+.gb-product-discovery-copy{display:flex;flex-direction:column;gap:4px;min-width:0;}
+.gb-product-discovery-copy span{
+  color:var(--gb-page-accent);
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:1.35px;
+}
+.gb-product-discovery-copy strong{
+  color:#fff;
+  font-size:15px;
+  line-height:1.35;
+  font-weight:800;
+}
+.gb-product-discovery-copy small{
+  color:#c5d9cc;
+  font-size:11px;
+  line-height:1.5;
+}
+.gb-product-discovery-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  flex:0 0 auto;
+  min-height:44px;
+  padding:0 17px;
+  border:1px solid rgba(var(--gb-page-accent-rgb),.55);
+  border-radius:9px;
+  background:var(--gb-page-accent-soft);
+  color:#fff;
+  font-size:11px;
+  line-height:1.2;
+  font-weight:900;
+  text-decoration:none;
+  transition:transform .18s ease,background .18s ease,box-shadow .18s ease;
+}
+.gb-product-discovery-link i{color:var(--gb-page-accent);}
+.gb-product-discovery-link:hover{
+  transform:translateY(-2px);
+  background:rgba(var(--gb-page-accent-rgb),.22);
+  box-shadow:0 9px 20px rgba(0,0,0,.18);
+}
+
+/* Le catalogue arrive avant le récit R&D : les produits sont trouvables immédiatement. */
+body[data-gb-page="laptop"] main.container,
+body[data-gb-page="wifi"] main.container,
+body[data-gb-page="powerbanks"] main.container,
+body[data-gb-page="lifepo4"] main.container{
+  display:flex;
+  flex-direction:column;
+}
+body[data-gb-page="laptop"] .gb-category-hero,
+body[data-gb-page="wifi"] .gb-category-hero,
+body[data-gb-page="powerbanks"] .gb-category-hero,
+body[data-gb-page="lifepo4"] .gb-category-hero{order:1;}
+body[data-gb-page="laptop"] .gb-product-discovery,
+body[data-gb-page="wifi"] .gb-product-discovery,
+body[data-gb-page="powerbanks"] .gb-product-discovery,
+body[data-gb-page="lifepo4"] .gb-product-discovery{order:2;}
+body[data-gb-page="laptop"] .models-wrapper,
+body[data-gb-page="wifi"] .models-wrapper,
+body[data-gb-page="powerbanks"] .models-wrapper,
+body[data-gb-page="lifepo4"] .models-wrapper{order:3;}
+body[data-gb-page="laptop"] .gb-rd-story:not(.gb-rd-home),
+body[data-gb-page="wifi"] .gb-rd-story:not(.gb-rd-home),
+body[data-gb-page="powerbanks"] .gb-rd-story:not(.gb-rd-home),
+body[data-gb-page="lifepo4"] .gb-rd-story:not(.gb-rd-home){order:4;}
+body[data-gb-page="laptop"] .futures-title,
+body[data-gb-page="wifi"] .futures-title,
+body[data-gb-page="powerbanks"] .futures-title,
+body[data-gb-page="lifepo4"] .futures-title{order:5;}
+body[data-gb-page="laptop"] .featured,
+body[data-gb-page="wifi"] .featured,
+body[data-gb-page="powerbanks"] .featured,
+body[data-gb-page="lifepo4"] .featured{order:6;}
+body[data-gb-page="laptop"] .gb-about-section,
+body[data-gb-page="wifi"] .gb-about-section,
+body[data-gb-page="powerbanks"] .gb-about-section,
+body[data-gb-page="lifepo4"] .gb-about-section{order:7;}
+
+/* Images catalogue : afficher le produit entier, sans couper ses bords. */
+.gb-family-model-grid .model .thumb{
+  min-height:190px;
+  background:linear-gradient(145deg,#f7faf7,#e5eee7);
+}
+.gb-family-model-grid .model .thumb img{
+  object-fit:contain !important;
+  object-position:center !important;
+  padding:12px !important;
+  background:transparent;
+}
+.gb-phone-new-grid .new-product-photo-placeholder img{
+  object-fit:contain !important;
+  object-position:center !important;
+  padding:10px;
+  transform:none !important;
+}
+
+@media(max-width:900px){
+  /* Les visuels passent en premier dans les héros sur tablette et téléphone. */
+  .gb-premium-hero{
+    display:flex !important;
+    flex-direction:column;
+    align-items:stretch;
+  }
+  .gb-premium-hero .gb-premium-showcase{
+    order:1;
+    max-width:none;
+    margin:0;
+  }
+  .gb-premium-hero .gb-premium-copy{order:2;}
+  .gb-category-hero{
+    display:flex !important;
+    flex-direction:column;
+    align-items:stretch;
+  }
+  .gb-category-hero .gb-category-visual{order:1;width:100%;}
+  .gb-category-hero .gb-category-copy{order:2;width:100%;}
+  .gb-category-image{height:clamp(230px,58vw,360px);}
+  .gb-product-discovery{margin-top:0;}
+}
+@media(max-width:640px){
+  .gb-premium-showcase{padding:10px;border-radius:16px;}
+  .gb-showcase-head,.gb-showcase-foot{font-size:8px;letter-spacing:.7px;}
+  .gb-showcase-mosaic{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:clamp(132px,42vw,172px) clamp(132px,42vw,172px);gap:8px;}
+  .gb-showcase-product{border-radius:12px;}
+  .gb-showcase-image{inset:0 0 48px;padding:7px;}
+  .gb-showcase-product-copy{min-height:48px;padding:7px 8px;gap:3px;}
+  .gb-showcase-product-copy span{font-size:7px;letter-spacing:.45px;}
+  .gb-showcase-product-copy strong{font-size:11px;}
+  .gb-showcase-product-copy small{font-size:7px;line-height:1.3;}
+  .gb-showcase-product-copy small::after{font-size:6px;letter-spacing:.2px;}
+
+  .gb-premium-universe-grid{
+    grid-template-columns:minmax(0,1fr) !important;
+    gap:13px;
+    width:100%;
+    max-width:560px;
+    margin:0 auto;
+  }
+  .gb-premium-universe-grid .gb-universe-card{
+    width:100%;
+    min-height:0;
+    padding:0 0 15px;
+    border-radius:15px;
+  }
+  .gb-premium-universe-grid .gb-universe-card-visual{
+    height:clamp(205px,62vw,270px);
+    min-height:205px;
+  }
+  .gb-premium-universe-grid .gb-universe-card-visual img{
+    padding:15px;
+    object-fit:contain !important;
+  }
+  .gb-premium-universe-grid .gb-universe-card-top{margin:13px 15px 9px;}
+  .gb-premium-universe-grid .gb-universe-content{padding:0 15px;}
+  .gb-premium-universe-grid .gb-universe-tag{font-size:8px;letter-spacing:.9px;}
+  .gb-premium-universe-grid .gb-universe-content h3{font-size:19px;line-height:1.25;}
+  .gb-premium-universe-grid .gb-universe-content p{font-size:13px;line-height:1.65;margin-bottom:12px;}
+  .gb-premium-universe-grid .gb-universe-content strong{font-size:11px;min-height:42px;}
+
+  .gb-category-hero{padding:15px 13px;border-radius:17px;gap:17px;}
+  .gb-category-visual{padding:9px;border-radius:14px;}
+  .gb-category-image{height:clamp(230px,68vw,320px);margin:9px 0;}
+  .gb-category-image img{padding:9px;object-fit:contain;}
+  .gb-image-product-cta{right:9px;bottom:9px;min-height:36px;padding:0 11px;font-size:10px;}
+  .gb-category-copy h1{font-size:clamp(29px,8vw,39px);line-height:1.08;letter-spacing:-.8px;}
+  .gb-category-copy>p{font-size:14px;line-height:1.7;}
+  .gb-category-actions{display:grid;grid-template-columns:1fr;gap:9px;margin-top:17px;}
+  .gb-category-primary,.gb-category-secondary{width:100%;min-height:48px;padding:0 12px;font-size:12px;}
+  .gb-category-stats{grid-template-columns:1fr 1fr;gap:8px;margin-top:17px;}
+  .gb-category-stat{padding:10px 9px;}
+  .gb-category-stat strong{font-size:16px;}
+  .gb-category-stat span{font-size:10px;line-height:1.45;}
+
+  .gb-product-discovery{
+    align-items:stretch;
+    flex-direction:column;
+    gap:11px;
+    padding:14px 13px;
+    margin:0 0 13px;
+  }
+  .gb-product-discovery-copy strong{font-size:15px;}
+  .gb-product-discovery-copy small{font-size:12px;}
+  .gb-product-discovery-link{width:100%;min-height:47px;font-size:12px;}
+
+  .gb-family-model-grid .model .thumb{height:clamp(205px,62vw,270px);min-height:205px;flex-basis:clamp(205px,62vw,270px);}
+  .gb-family-model-grid .model .thumb img{padding:14px !important;object-fit:contain !important;}
+  .gb-phone-new-grid .new-product-photo-placeholder{height:clamp(205px,62vw,270px);min-height:205px;max-height:270px;flex-basis:auto;}
+  .gb-phone-new-grid .new-product-photo-placeholder img{object-fit:contain !important;padding:14px;}
+}
+@media(prefers-reduced-motion:reduce){
+  .gb-showcase-product,.gb-universe-card,.gb-category-image-link img,.gb-product-discovery-link{
+    transition:none !important;
+  }
+}
+
+</style>\n</head>
 <body data-gb-page="powerbanks">
 <img alt="" aria-hidden="true" class="page-bg" src="Energie_blanche.png"/>
 <div aria-hidden="true" class="page-bg-overlay"></div>
@@ -3762,10 +4215,18 @@ body[data-gb-page="laptop"] .gb-family-model-grid .model .thumb img {
   </div>
   <div class="gb-category-visual">
     <div class="gb-category-visual-top"><span><i></i> POWERBANKS POUR LE QUOTIDIEN</span><small>GREENBRIDGE / 03 / ÉNERGIE MOBILE</small></div>
-    <div class="gb-category-image"><img src="Pwkb_Mini_3.png" alt="Gamme de powerbanks GreenBridge" fetchpriority="high" loading="eager"/></div>
+    <a class="gb-category-image gb-category-image-link" href="#models" aria-label="Voir les powerbanks" title="Voir les powerbanks"><img src="Pwkb_Mini_3.png" alt="Gamme de powerbanks GreenBridge" fetchpriority="high" loading="eager"/><span class="gb-image-product-cta">Explorer les powerbanks <i class="fa-solid fa-arrow-right"></i></span></a>
     <div class="gb-category-visual-bottom"><span>ENGINEERING · ENERGY · INNOVATION</span><strong>GREENBRIDGE TECHNOLOGIES</strong></div>
   </div>
 </section>
+<nav class="gb-product-discovery" aria-label="Accès direct aux produits Powerbanks">
+  <div class="gb-product-discovery-copy">
+    <span>ACCÈS DIRECT AU CATALOGUE</span>
+    <strong>Catalogue Powerbanks</strong>
+    <small>Retrouvez les modèles de la gamme mobile.</small>
+  </div>
+  <a class="gb-product-discovery-link" href="#models">Voir les produits <i class="fa-solid fa-arrow-right"></i></a>
+</nav>
 <section class="gb-rd-story" id="histoire-de-la-gamme" aria-label="Histoire et recherche et développement de powerbanks">
   <div class="gb-rd-layout">
     <div class="gb-rd-copy">
@@ -5935,5 +6396,77 @@ if(fab){
 })();
 </script>
 
-</body>
+\n<script id="gb-r4-orbital-energy-runtime">
+/* GREENBRIDGE R4 — trois bulles en trajectoires elliptiques et déphasées.
+   Reprend la logique de la référence : x = cos(angle) et y = sin(angle).
+   Le calcul est identique sur ordinateur, tablette et téléphone. */
+(function(){
+  'use strict';
+  const electricBand = document.getElementById('electricBand');
+  if (!electricBand) return;
+  const holder = electricBand.querySelector('.orbs');
+  if (!holder) return;
+
+  const orbs = [
+    document.getElementById('orbA'),
+    document.getElementById('orbB'),
+    document.getElementById('orbC')
+  ];
+  const params = [
+    { rxRatio:0.50, ry:8,  speed:0.22, phase:0 },
+    { rxRatio:0.33, ry:6,  speed:0.36, phase:Math.PI/2 },
+    { rxRatio:0.42, ry:10, speed:0.18, phase:Math.PI }
+  ];
+  if (!orbs.some(Boolean)) return;
+
+  electricBand.classList.add('active');
+  electricBand.dataset.orbMotion = 'elliptical-wave';
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const speedFactor = reduceMotion ? 0.62 : 1;
+  const startTime = performance.now();
+  let rafId = 0;
+  let stopped = false;
+
+  function tick(now){
+    if (stopped) return;
+    if (!document.hidden) {
+      const rect = holder.getBoundingClientRect();
+      const width = Math.max(rect.width, document.documentElement.clientWidth || window.innerWidth || 320);
+      const height = Math.max(rect.height, electricBand.getBoundingClientRect().height || 14);
+      const cx = width / 2;
+      const cy = height / 2;
+      const elapsed = (now - startTime) / 1000;
+
+      for (let i=0; i<orbs.length; i++) {
+        const orb = orbs[i];
+        if (!orb) continue;
+        const p = params[i];
+        const rx = Math.max(Math.min(width * p.rxRatio, 4000), 120);
+        const angle = elapsed * speedFactor * p.speed * Math.PI * 2 + p.phase;
+        const x = cx + Math.cos(angle) * rx;
+        const y = cy + Math.sin(angle) * p.ry;
+
+        /* Inline !important neutralise les anciennes positions fixes du CSS mobile. */
+        orb.style.setProperty('left', x + 'px', 'important');
+        orb.style.setProperty('top', y + 'px', 'important');
+        orb.style.setProperty('transform', 'translate3d(-50%,-50%,0)', 'important');
+      }
+    }
+    rafId = window.requestAnimationFrame(tick);
+  }
+
+  function stop(){
+    stopped = true;
+    if (rafId) window.cancelAnimationFrame(rafId);
+  }
+  window.addEventListener('pagehide', stop, { once:true });
+  window.addEventListener('pageshow', function(){
+    if (stopped) {
+      stopped = false;
+      rafId = window.requestAnimationFrame(tick);
+    }
+  });
+  rafId = window.requestAnimationFrame(tick);
+})();
+</script>\n</body>
 </html>
