@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-6M3D6J9B24"></script>
@@ -11,9 +10,9 @@
   </script>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
-<title>LiFePO₄ — Conception et développement internes | GreenBridge Technologies</title>
-<meta name="description" content="Découvrez les solutions LiFePO₄ dont la conception et le développement sont exclusivement réalisés en interne par GreenBridge."/>
-<meta name="theme-color" content="#a77aff"/>
+<title>LiFePO₄ | GreenBridge Technologies</title>
+<meta content="Découvrez les solutions LiFePO₄ dont la conception et le développement sont exclusivement réalisés en interne par GreenBridge." name="description"/>
+<meta content="#a77aff" name="theme-color"/>
 <link href="green bridge domo.png" rel="icon" type="image/png"/>
 <link href="green bridge domo.png" rel="apple-touch-icon"/>
 <link as="image" href="Energie_blanche.png" rel="preload"/>
@@ -2958,7 +2957,6 @@ body {
     box.innerHTML = '<i class="fa-regular fa-image" aria-hidden="true"></i><span>PHOTO À AJOUTER</span>';
   };
 </script>
-
 <style id="greenbridge-orbs-products-wifi-final">
 /* ============================================================
    GREENBRIDGE — CORRECTION FINALE MOUVEMENT / VISUELS / WIFI
@@ -3489,7 +3487,6 @@ body[data-gb-page="wifi"] .gb-category-secondary {
   .gb-single-model-grid .model-new-actions button,.gb-single-model-grid .model-new-actions a { font-size:11px !important; }
 }
 </style>
-
 <style id="gb-r3-energy-motion">
 /* GREENBRIDGE R3 — mouvement des trois bulles sur toutes les largeurs.
    Le déplacement utilise transform animé sans déclaration transform !important,
@@ -4090,6 +4087,445 @@ body[data-gb-page="lifepo4"] .gb-about-section{order:7;}
   }
 }
 
+
+
+/* ============================================================
+   GREENBRIDGE R6 — TITRE > IMAGE > CONTENU
+   Hiérarchie claire sur desktop et mobile, accès produits direct,
+   pied de page harmonisé sur les six pages.
+   ============================================================ */
+
+/* Structure générale des introductions : titre au-dessus du visuel. */
+.gb-premium-hero{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:stretch !important;
+  gap:clamp(16px,2.4vw,28px) !important;
+  min-height:0 !important;
+}
+.gb-home-page-heading{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:10px;
+  width:100%;
+  max-width:980px;
+  margin:0 auto;
+  text-align:left;
+  order:1;
+}
+.gb-home-page-kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  color:#e8d58f;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:1.65px;
+  text-transform:uppercase;
+}
+.gb-home-page-kicker::before{
+  content:"";
+  display:block;
+  width:28px;
+  height:2px;
+  border-radius:2px;
+  background:linear-gradient(90deg,#d4af37,#a7d56c);
+}
+.gb-home-page-heading h1{
+  max-width:900px;
+  margin:0;
+  color:#fff;
+  font-size:clamp(32px,5vw,58px);
+  font-weight:900;
+  line-height:1.08;
+  letter-spacing:-1.5px;
+  text-wrap:balance;
+}
+.gb-home-page-heading h1 em{color:#d9bd62;font-style:normal;}
+.gb-premium-hero .gb-premium-showcase{
+  order:2 !important;
+  width:100%;
+  max-width:1120px;
+  margin:0 auto !important;
+}
+.gb-home-page-support{
+  order:3;
+  width:100%;
+  max-width:980px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:14px;
+}
+.gb-home-page-support .gb-commerce-lead{
+  max-width:850px;
+  margin:0;
+  color:#e4f0e7;
+  font-size:clamp(14px,1.3vw,17px);
+  line-height:1.8;
+}
+.gb-home-page-support .gb-premium-audience{display:flex;flex-wrap:wrap;gap:9px;}
+.gb-home-page-support .gb-commerce-actions{display:flex;flex-wrap:wrap;gap:10px;}
+.gb-home-page-support .gb-premium-proofline{display:flex;flex-wrap:wrap;gap:15px;margin-top:2px;}
+
+/* Héros des pages de gamme : le nom de la gamme précède l'image ; les textes suivent. */
+.gb-category-hero{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:stretch !important;
+  gap:clamp(15px,2.2vw,24px) !important;
+  margin-top:20px;
+}
+.gb-category-page-heading{
+  order:1;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:9px;
+  width:100%;
+  max-width:1050px;
+  margin:0 auto;
+}
+.gb-category-page-heading .gb-category-breadcrumb{margin:0 0 5px;}
+.gb-category-page-heading .gb-category-eyebrow{margin:0;}
+.gb-category-page-heading h1{
+  margin:0;
+  max-width:1000px;
+  color:#fff;
+  font-size:clamp(31px,4.7vw,54px);
+  font-weight:900;
+  line-height:1.08;
+  letter-spacing:-1.25px;
+  text-wrap:balance;
+}
+.gb-category-page-heading h1 em{font-style:normal;color:var(--gb-page-accent,#d9bd5d);}
+.gb-category-hero .gb-category-visual{
+  order:2;
+  display:flex;
+  flex-direction:column;
+  width:100%;
+  min-width:0;
+  max-width:1120px;
+  min-height:0;
+  margin:0 auto;
+}
+.gb-category-hero .gb-category-image,
+.gb-category-hero .gb-category-image-link{
+  width:100%;
+  height:clamp(270px,35vw,430px);
+  min-height:270px;
+  aspect-ratio:auto !important;
+  margin:0;
+  border-radius:14px;
+  overflow:hidden;
+  background:linear-gradient(145deg,rgba(255,255,255,.97),rgba(226,237,229,.95));
+}
+.gb-category-hero .gb-category-image img{
+  width:100% !important;
+  height:100% !important;
+  max-width:none;
+  padding:clamp(12px,2.4vw,28px) !important;
+  object-fit:contain !important;
+  object-position:center !important;
+  display:block;
+}
+.gb-category-hero .gb-category-after-image{
+  order:3;
+  width:100%;
+  max-width:1050px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:14px;
+}
+.gb-category-after-image>p{
+  max-width:900px;
+  margin:0;
+  color:#d2e2d6;
+  font-size:clamp(14px,1.25vw,16px);
+  line-height:1.8;
+}
+.gb-category-after-image .gb-category-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  width:100%;
+}
+.gb-category-after-image .gb-category-stats{
+  width:100%;
+  margin:5px 0 0;
+}
+.gb-category-visual-top,.gb-category-visual-bottom{
+  width:100%;
+  flex:0 0 auto;
+}
+.gb-image-product-cta{z-index:4;}
+
+/* Le titre institutionnel À propos est placé au-dessus du schéma SVG. */
+.gb-about-hero{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:stretch !important;
+  gap:18px !important;
+}
+.gb-about-heading{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:9px;
+  width:100%;
+}
+.gb-about-heading .gb-about-topline{margin:0;}
+.gb-about-heading h2{
+  margin:0;
+  max-width:1000px;
+  color:#fff;
+  font-size:clamp(30px,4.6vw,52px);
+  line-height:1.1;
+  letter-spacing:-1.2px;
+  font-weight:900;
+  text-wrap:balance;
+}
+.gb-about-heading h2 em{font-style:normal;color:#d7bd65;}
+.gb-about-hero .gb-about-art{
+  order:2;
+  width:100%;
+  max-width:1120px;
+  margin:0 auto;
+}
+.gb-about-hero .gb-about-after-art{
+  order:3;
+  width:100%;
+  max-width:1050px;
+  margin:0 auto;
+}
+.gb-about-hero .gb-about-after-art .gb-about-lead{max-width:100%;}
+
+/* Repère de navigation : la page courante reste visible dans le menu. */
+.gb-main-nav a[aria-current="page"]{
+  color:#f4d978 !important;
+  border-bottom:2px solid #d4af37 !important;
+  background:linear-gradient(180deg,rgba(212,175,55,.10),transparent) !important;
+}
+.gb-mobile-menu nav a[aria-current="page"]{
+  color:#f4d978 !important;
+  border-color:rgba(212,175,55,.46) !important;
+  background:rgba(212,175,55,.10) !important;
+}
+
+/* Liens vers les gammes depuis les quatre visuels de l'accueil. */
+.gb-showcase-product,
+.gb-premium-universe-grid .gb-universe-card{
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+.gb-showcase-product:focus-visible,
+.gb-premium-universe-grid .gb-universe-card:focus-visible,
+.gb-footer-nav a:focus-visible{
+  outline:3px solid #d4af37;
+  outline-offset:4px;
+}
+.gb-showcase-product-copy small::after{
+  content:"DÉCOUVRIR ↗";
+  color:#f2dc91;
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:.45px;
+}
+
+/* Pied de page commun : marque, liens distincts, pays identifiés et version mobile. */
+.gb-site-footer{
+  position:relative;
+  z-index:50;
+  width:100%;
+  margin-top:42px;
+  padding:30px clamp(16px,4vw,54px) 16px;
+  color:#f4f8f4;
+  background:
+    radial-gradient(ellipse at 12% 0%,rgba(124,179,66,.12),transparent 34%),
+    linear-gradient(180deg,#08271a 0%,#04170f 100%);
+  border-top:2px solid #d4af37;
+  box-shadow:0 -14px 38px rgba(0,0,0,.18);
+}
+.gb-site-footer::before{
+  content:"";
+  position:absolute;
+  top:-2px;
+  left:12%;
+  right:12%;
+  height:2px;
+  background:linear-gradient(90deg,transparent,#f2d77e,transparent);
+  pointer-events:none;
+}
+.gb-site-footer-inner{max-width:1240px;margin:0 auto;}
+.gb-footer-brand-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  padding:0 0 22px;
+  border-bottom:1px solid rgba(255,255,255,.11);
+}
+.gb-footer-brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:0;
+  color:inherit;
+  text-decoration:none;
+}
+.gb-footer-brand img{width:49px;height:49px;object-fit:contain;flex:0 0 auto;}
+.gb-footer-brand-copy{display:flex;flex-direction:column;gap:4px;min-width:0;}
+.gb-footer-brand-copy strong{color:#e0c15e;font-size:17px;line-height:1.1;font-weight:900;letter-spacing:.65px;}
+.gb-footer-brand-copy span{color:#d7e8dc;font-size:9px;font-weight:700;letter-spacing:2.7px;}
+.gb-footer-brand-copy small{margin-top:3px;color:#a9c4b1;font-size:10px;line-height:1.45;}
+.gb-footer-countries{display:flex;align-items:center;justify-content:flex-end;gap:9px;flex-wrap:wrap;}
+.gb-footer-country{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  min-height:36px;
+  padding:7px 10px;
+  border:1px solid rgba(212,175,55,.22);
+  border-radius:9px;
+  background:rgba(255,255,255,.045);
+  color:#e8f2e9;
+  font-size:10px;
+  font-weight:700;
+  white-space:nowrap;
+}
+.gb-footer-country img{width:24px;height:16px;object-fit:cover;border-radius:3px;box-shadow:0 2px 7px rgba(0,0,0,.25);}
+.gb-footer-nav-wrap{padding:19px 0 18px;}
+.gb-footer-nav-label{display:block;margin:0 0 11px;color:#d8bd68;font-size:9px;font-weight:900;letter-spacing:1.6px;text-transform:uppercase;}
+.gb-footer-nav{
+  display:grid !important;
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  align-items:stretch;
+  gap:8px;
+  width:100%;
+  margin:0 !important;
+  padding:0 !important;
+}
+.gb-footer-nav a{
+  display:flex !important;
+  align-items:center;
+  justify-content:center;
+  min-width:0;
+  min-height:42px;
+  padding:9px 8px !important;
+  border:1px solid rgba(255,255,255,.10) !important;
+  border-radius:9px !important;
+  background:rgba(255,255,255,.035) !important;
+  color:#edf6ef !important;
+  font-size:11px !important;
+  font-weight:700 !important;
+  line-height:1.3 !important;
+  text-align:center;
+  text-decoration:none !important;
+  white-space:normal !important;
+  transition:background .18s ease,border-color .18s ease,color .18s ease,transform .18s ease;
+}
+.gb-footer-nav a:hover{
+  background:rgba(212,175,55,.10) !important;
+  color:#f2d77e !important;
+  border-color:rgba(212,175,55,.42) !important;
+  transform:translateY(-2px);
+}
+.gb-footer-nav a[aria-current="page"]{
+  color:#f6df8c !important;
+  border-color:rgba(212,175,55,.52) !important;
+  background:linear-gradient(135deg,rgba(212,175,55,.15),rgba(255,255,255,.035)) !important;
+  box-shadow:inset 0 0 0 1px rgba(212,175,55,.07);
+}
+.gb-footer-bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding-top:13px;
+  border-top:1px solid rgba(255,255,255,.09);
+  color:#9eb8a6;
+  font-size:10px;
+  line-height:1.6;
+}
+.gb-footer-bottom a{color:#e1c86e;font-weight:800;text-decoration:none;white-space:nowrap;}
+.gb-footer-bottom a:hover{color:#fff0ae;}
+
+@media(max-width:900px){
+  .gb-footer-nav{grid-template-columns:repeat(3,minmax(0,1fr));}
+}
+@media(max-width:640px){
+  .gb-premium-hero{padding:19px 14px !important;gap:15px !important;border-radius:18px !important;}
+  .gb-home-page-heading{gap:8px;}
+  .gb-home-page-kicker{font-size:9px;letter-spacing:1.1px;}
+  .gb-home-page-heading h1{font-size:clamp(28px,8.2vw,37px);line-height:1.12;letter-spacing:-.8px;}
+  .gb-premium-hero .gb-premium-showcase{padding:10px !important;border-radius:14px;}
+  .gb-showcase-mosaic{grid-template-columns:repeat(2,minmax(0,1fr)) !important;grid-template-rows:clamp(142px,43vw,180px) clamp(142px,43vw,180px) !important;gap:8px !important;}
+  .gb-showcase-image{inset:0 0 48px !important;padding:7px !important;}
+  .gb-showcase-product-copy{min-height:48px !important;padding:7px 8px !important;gap:3px !important;}
+  .gb-showcase-product-copy span{font-size:7px !important;line-height:1.35 !important;}
+  .gb-showcase-product-copy strong{font-size:11px !important;line-height:1.2 !important;}
+  .gb-showcase-product-copy small{font-size:7px !important;}
+  .gb-home-page-support{gap:12px;}
+  .gb-home-page-support .gb-commerce-lead{font-size:14px;line-height:1.7;}
+  .gb-home-page-support .gb-premium-audience{gap:7px;}
+  .gb-home-page-support .gb-commerce-actions{display:grid;grid-template-columns:1fr;width:100%;}
+  .gb-home-page-support .gb-commerce-actions a,
+  .gb-home-page-support .gb-commerce-actions button{width:100%;min-height:46px;justify-content:center;}
+  .gb-home-page-support .gb-premium-proofline{gap:8px 12px;font-size:10px;line-height:1.5;}
+
+  .gb-category-hero{padding:18px 13px !important;gap:13px !important;margin:13px 0 19px !important;border-radius:17px !important;}
+  .gb-category-page-heading{gap:8px;}
+  .gb-category-page-heading .gb-category-breadcrumb{font-size:10px;margin-bottom:2px;}
+  .gb-category-page-heading .gb-category-eyebrow{font-size:8px;letter-spacing:1.1px;}
+  .gb-category-page-heading h1{font-size:clamp(28px,8vw,36px);line-height:1.13;letter-spacing:-.7px;}
+  .gb-category-hero .gb-category-visual{padding:9px !important;border-radius:13px !important;}
+  .gb-category-hero .gb-category-visual-top{font-size:8px;line-height:1.45;gap:8px;}
+  .gb-category-hero .gb-category-visual-top small{font-size:7px;}
+  .gb-category-hero .gb-category-image,
+  .gb-category-hero .gb-category-image-link{height:clamp(220px,66vw,300px) !important;min-height:220px !important;border-radius:10px !important;}
+  .gb-category-hero .gb-category-image img{padding:8px !important;object-fit:contain !important;}
+  .gb-image-product-cta{right:8px;bottom:8px;min-height:36px;padding:0 10px;font-size:9px;}
+  .gb-category-hero .gb-category-visual-bottom{font-size:7px;gap:8px;}
+  .gb-category-hero .gb-category-visual-bottom strong{font-size:7px;}
+  .gb-category-after-image{gap:11px !important;}
+  .gb-category-after-image>p{font-size:13px;line-height:1.7;}
+  .gb-category-after-image .gb-category-actions{display:grid;grid-template-columns:1fr;gap:8px;}
+  .gb-category-after-image .gb-category-actions a,
+  .gb-category-after-image .gb-category-actions button{width:100%;min-height:46px;justify-content:center;}
+  .gb-category-after-image .gb-category-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;}
+  .gb-category-after-image .gb-category-stat{min-width:0;padding:10px 9px;}
+  .gb-category-after-image .gb-category-stat strong{font-size:15px;}
+  .gb-category-after-image .gb-category-stat span{font-size:10px;line-height:1.4;}
+
+  .gb-about-section{padding:20px 14px !important;border-radius:17px !important;}
+  .gb-about-heading h2{font-size:clamp(28px,8vw,36px);line-height:1.12;}
+  .gb-about-hero .gb-about-art{padding:8px;border-radius:14px;}
+  .gb-about-hero .gb-about-art-caption{font-size:8px;letter-spacing:.7px;}
+  .gb-about-hero .gb-about-after-art .gb-about-lead{font-size:13px;line-height:1.72;}
+
+  .gb-site-footer{margin-top:27px;padding:23px 14px 13px;}
+  .gb-footer-brand-row{flex-direction:column;align-items:center;justify-content:center;gap:14px;padding-bottom:17px;text-align:center;}
+  .gb-footer-brand img{width:44px;height:44px;}
+  .gb-footer-brand-copy strong{font-size:16px;}
+  .gb-footer-brand-copy span{font-size:8px;letter-spacing:2.5px;}
+  .gb-footer-brand-copy small{font-size:9px;}
+  .gb-footer-countries{justify-content:center;gap:7px;}
+  .gb-footer-country{min-height:33px;padding:6px 9px;font-size:9px;}
+  .gb-footer-country img{width:22px;height:15px;}
+  .gb-footer-nav-wrap{padding:16px 0 14px;}
+  .gb-footer-nav-label{font-size:8px;text-align:center;}
+  .gb-footer-nav{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:8px !important;}
+  .gb-footer-nav a{min-height:43px !important;padding:9px 6px !important;font-size:11px !important;}
+  .gb-footer-bottom{flex-direction:column;justify-content:center;text-align:center;gap:7px;padding-top:12px;font-size:9px;}
+}
+@media(prefers-reduced-motion:reduce){
+  .gb-footer-nav a{transition:none !important;}
+  .gb-footer-nav a:hover{transform:none !important;}
+}
 </style>\n</head>
 <body data-gb-page="lifepo4">
 <img alt="" aria-hidden="true" class="page-bg" src="Energie_blanche.png"/>
@@ -4138,47 +4574,47 @@ body[data-gb-page="lifepo4"] .gb-about-section{order:7;}
 </div>
 </div>
 </div>
-<header aria-label="En-tête principal GreenBridge" role="banner" class="gb-site-header">
+<header aria-label="En-tête principal GreenBridge" class="gb-site-header" role="banner">
 <div class="gb-header-inner">
-  <a class="logo-text gb-brand" href="index.html" aria-label="GreenBridge Technologies — Accueil">
-    <img alt="Logo GreenBridge" fetchpriority="high" loading="eager" src="green bridge domo.png"/>
-    <span class="brand-stack">
-      <span class="company-name">GREENBRIDGE</span>
-      <span class="company-tagline">TECHNOLOGIES</span>
-    </span>
-  </a>
-  <nav class="gb-main-nav" aria-label="Navigation principale">
-    <a href="index.html">Accueil</a>
-    <a href="greenlaptop.html">GreenLaptop</a>
-    <a href="greenwifi.html">GreenWifi</a>
-    <a href="powerbanks.html">Powerbanks</a>
-    <a href="lifepo4.html" aria-current="page">LiFePO₄</a>
-    <a href="apropos.html">À propos</a>
-  </nav>
-  <button class="gb-header-whatsapp" type="button" onclick="openProductWhatsApp('Demande de conseil et de devis — GreenBridge Technologies')">
-    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i><span>Contacter l’équipe</span>
-  </button>
-  <button class="gb-menu-toggle" id="gbMenuToggle" type="button" aria-label="Ouvrir le menu" aria-controls="gbMobileMenu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
+<a aria-label="GreenBridge Technologies — Accueil" class="logo-text gb-brand" href="index.html">
+<img alt="Logo GreenBridge" fetchpriority="high" loading="eager" src="green bridge domo.png"/>
+<span class="brand-stack">
+<span class="company-name">GREENBRIDGE</span>
+<span class="company-tagline">TECHNOLOGIES</span>
+</span>
+</a>
+<nav aria-label="Navigation principale" class="gb-main-nav">
+<a href="index.html">Accueil</a>
+<a href="greenlaptop.html">GreenLaptop</a>
+<a href="greenwifi.html">GreenWifi</a>
+<a href="powerbanks.html">Powerbanks</a>
+<a aria-current="page" class="is-current-page" href="lifepo4.html">LiFePO₄</a>
+<a href="apropos.html">À propos</a>
+</nav>
+<button class="gb-header-whatsapp" onclick="openProductWhatsApp('Demande de conseil et de devis — GreenBridge Technologies')" type="button">
+<i aria-hidden="true" class="fa-brands fa-whatsapp"></i><span>Contacter l’équipe</span>
+</button>
+<button aria-controls="gbMobileMenu" aria-expanded="false" aria-label="Ouvrir le menu" class="gb-menu-toggle" id="gbMenuToggle" type="button">
+<span></span><span></span><span></span>
+</button>
 </div>
 </header>
-<div class="gb-mobile-menu" id="gbMobileMenu" aria-hidden="true">
-  <div class="gb-mobile-menu-panel">
-    <button class="gb-mobile-close" id="gbMobileClose" type="button" aria-label="Fermer le menu">×</button>
-    <a class="gb-mobile-brand" href="index.html"><img src="green bridge domo.png" alt=""/><span><strong>GREENBRIDGE</strong><small>TECHNOLOGIES</small></span></a>
-    <span class="gb-mobile-kicker">EXPLORER NOS UNIVERS</span>
-    <nav aria-label="Navigation mobile">
-      <a href="index.html">Accueil<span>HOME</span></a>
-      <a href="greenlaptop.html">GreenLaptop<span>01 / COMPUTING</span></a>
-      <a href="greenwifi.html">GreenWifi<span>02 / CONNECTIVITY</span></a>
-      <a href="powerbanks.html">Powerbanks<span>03 / MOBILE</span></a>
-      <a href="lifepo4.html" aria-current="page">LiFePO₄<span>04 / STORAGE</span></a>
-      <a href="apropos.html">À propos<span>05 / ENGINEERING</span></a>
-    </nav>
-    <button class="gb-mobile-contact" type="button" onclick="openProductWhatsApp('Demande de conseil et de devis — GreenBridge Technologies')"><i class="fa-brands fa-whatsapp"></i> Contacter GreenBridge</button>
-    <div class="gb-mobile-region">CÔTE D’IVOIRE <span>·</span> SÉNÉGAL <span>·</span> AFRIQUE DE L’OUEST</div>
-  </div>
+<div aria-hidden="true" class="gb-mobile-menu" id="gbMobileMenu">
+<div class="gb-mobile-menu-panel">
+<button aria-label="Fermer le menu" class="gb-mobile-close" id="gbMobileClose" type="button">×</button>
+<a class="gb-mobile-brand" href="index.html"><img alt="" src="green bridge domo.png"/><span><strong>GREENBRIDGE</strong><small>TECHNOLOGIES</small></span></a>
+<span class="gb-mobile-kicker">EXPLORER NOS UNIVERS</span>
+<nav aria-label="Navigation mobile">
+<a href="index.html">Accueil<span>HOME</span></a>
+<a href="greenlaptop.html">GreenLaptop<span>01 / COMPUTING</span></a>
+<a href="greenwifi.html">GreenWifi<span>02 / CONNECTIVITY</span></a>
+<a href="powerbanks.html">Powerbanks<span>03 / MOBILE</span></a>
+<a aria-current="page" class="is-current-page" href="lifepo4.html">LiFePO₄<span>04 / STORAGE</span></a>
+<a href="apropos.html">À propos<span>05 / ENGINEERING</span></a>
+</nav>
+<button class="gb-mobile-contact" onclick="openProductWhatsApp('Demande de conseil et de devis — GreenBridge Technologies')" type="button"><i class="fa-brands fa-whatsapp"></i> Contacter GreenBridge</button>
+<div class="gb-mobile-region">CÔTE D’IVOIRE <span>·</span> SÉNÉGAL <span>·</span> AFRIQUE DE L’OUEST</div>
+</div>
 </div>
 <div aria-hidden="true" class="electric-band active" id="electricBand">
 <div class="container">
@@ -4196,140 +4632,131 @@ body[data-gb-page="lifepo4"] .gb-about-section{order:7;}
 </div>
 </div>
 <div aria-hidden="true" style="height:calc(var(--topbar-h) + var(--opening-h) + var(--header-h) + 8px);"></div>
-<main class="container" role="main">
-<section class="gb-category-hero" aria-label="Présentation de la gamme LiFePO₄">
-  <div class="gb-category-copy">
-    <div class="gb-category-breadcrumb"><a href="index.html">Accueil</a><i class="fa-solid fa-chevron-right"></i><span>LiFePO₄</span></div>
-    <div class="gb-category-eyebrow"><span></span>GREENBRIDGE · ENERGY STORAGE</div>
-    <h1>Stocker l’énergie. Renforcer <em>l’autonomie.</em></h1>
-    <p>Des solutions de stockage construites autour de la technologie LiFePO₄, de la sélection des cellules et de l’intégration de protections adaptées. Découvrez notre batterie 104 Ah et nos développements modulaires.</p>
-    <div class="gb-category-actions">
-      <a class="gb-category-primary" href="#models"><i class="fa-solid fa-arrow-down"></i>Découvrir nos solutions LiFePO₄</a>
-      <button class="gb-category-secondary" type="button" onclick="openProductWhatsApp('Je souhaite un conseil technique et un devis pour les solutions LiFePO4 GreenBridge.')"><i class="fa-brands fa-whatsapp"></i> Demander un devis</button>
-    </div>
-    <div class="gb-category-stats">
-      <div class="gb-category-stat"><strong>104 Ah</strong><span>Capacité nominale annoncée</span></div>
-      <div class="gb-category-stat"><strong>100 A</strong><span>Courant de décharge annoncé</span></div>
-      <div class="gb-category-stat"><strong>2,5 kWh</strong><span>Projet modulaire en développement</span></div>
-    </div>
-  </div>
-  <div class="gb-category-visual">
-    <div class="gb-category-visual-top"><span><i></i> STOCKAGE & AUTONOMIE</span><small>GREENBRIDGE / 04 / STOCKAGE ÉNERGÉTIQUE</small></div>
-    <a class="gb-category-image gb-category-image-link" href="#models" aria-label="Voir les batteries LiFePO₄" title="Voir les batteries LiFePO₄"><img src="pack_batterie_1200wh.png" alt="Batterie GreenBridge LiFePO4" fetchpriority="high" loading="eager"/><span class="gb-image-product-cta">Explorer les batteries LiFePO₄ <i class="fa-solid fa-arrow-right"></i></span></a>
-    <div class="gb-category-visual-bottom"><span>ENGINEERING · ENERGY · INNOVATION</span><strong>GREENBRIDGE TECHNOLOGIES</strong></div>
-  </div>
-</section>
-<nav class="gb-product-discovery" aria-label="Accès direct aux produits LiFePO4">
-  <div class="gb-product-discovery-copy">
-    <span>ACCÈS DIRECT AU CATALOGUE</span>
-    <strong>Catalogue LiFePO₄</strong>
-    <small>Découvrez les solutions de stockage.</small>
-  </div>
-  <a class="gb-product-discovery-link" href="#models">Voir les produits <i class="fa-solid fa-arrow-right"></i></a>
+<main class="container" id="top" role="main">
+<section aria-label="Présentation de la gamme LiFePO₄" class="gb-category-hero">
+
+
+<div class="gb-category-page-heading"><div class="gb-category-breadcrumb"><a href="index.html">Accueil</a><i class="fa-solid fa-chevron-right"></i><span>LiFePO₄</span></div><div class="gb-category-eyebrow"><span></span>GREENBRIDGE · ENERGY STORAGE</div><h1>Stocker l’énergie. Renforcer <em>l’autonomie.</em></h1></div><div class="gb-category-visual">
+<div class="gb-category-visual-top"><span><i></i> STOCKAGE &amp; AUTONOMIE</span><small>GREENBRIDGE / 04 / STOCKAGE ÉNERGÉTIQUE</small></div>
+<a aria-label="Voir les batteries LiFePO₄" class="gb-category-image gb-category-image-link" href="#models" title="Voir les batteries LiFePO₄"><img alt="Batterie GreenBridge LiFePO4" fetchpriority="high" loading="eager" src="pack_batterie_1200wh.png"/><span class="gb-image-product-cta">Explorer les batteries LiFePO₄ <i class="fa-solid fa-arrow-right"></i></span></a>
+<div class="gb-category-visual-bottom"><span>ENGINEERING · ENERGY · INNOVATION</span><strong>GREENBRIDGE TECHNOLOGIES</strong></div>
+</div><div class="gb-category-after-image"><p>Des solutions de stockage construites autour de la technologie LiFePO₄, de la sélection des cellules et de l’intégration de protections adaptées. Découvrez notre batterie 104 Ah et nos développements modulaires.</p><div class="gb-category-actions">
+<a class="gb-category-primary" href="#models"><i class="fa-solid fa-arrow-down"></i>Découvrir nos solutions LiFePO₄</a>
+<button class="gb-category-secondary" onclick="openProductWhatsApp('Je souhaite un conseil technique et un devis pour les solutions LiFePO4 GreenBridge.')" type="button"><i class="fa-brands fa-whatsapp"></i> Demander un devis</button>
+</div><div class="gb-category-stats">
+<div class="gb-category-stat"><strong>104 Ah</strong><span>Capacité nominale annoncée</span></div>
+<div class="gb-category-stat"><strong>100 A</strong><span>Courant de décharge annoncé</span></div>
+<div class="gb-category-stat"><strong>2,5 kWh</strong><span>Projet modulaire en développement</span></div>
+</div></div></section>
+<nav aria-label="Accès direct aux produits LiFePO4" class="gb-product-discovery">
+<div class="gb-product-discovery-copy">
+<span>ACCÈS DIRECT AU CATALOGUE</span>
+<strong>Catalogue LiFePO₄</strong>
+<small>Découvrez les solutions de stockage.</small>
+</div>
+<a class="gb-product-discovery-link" href="#models">Voir les produits <i class="fa-solid fa-arrow-right"></i></a>
 </nav>
-<section class="gb-rd-story" id="histoire-de-la-gamme" aria-label="Histoire et recherche et développement de lifepo4">
-  <div class="gb-rd-layout">
-    <div class="gb-rd-copy">
-      <div class="gb-rd-kicker">L’HISTOIRE DES BATTERIES LiFePO₄ · DÉVELOPPEMENT EXCLUSIVEMENT INTERNE</div>
-      <h2>Une solution énergétique portée de bout en bout par <em>notre ingénierie.</em></h2>
-      <p>La gamme LiFePO₄ représente l’engagement le plus poussé de GreenBridge dans la recherche et le développement. Ici, la solution est développée exclusivement en interne : les ingénieurs associés et l’équipe GreenBridge conduisent le travail de conception, d’étude, d’intégration et de réalisation du pack.</p>
-      <p>Le travail porte sur l’architecture énergétique, la configuration du pack, l’intégration du système de gestion de batterie (BMS), les protections et la cohérence de l’ensemble avec les usages visés. Cette démarche donne naissance à une solution pensée comme un système complet, et non comme la simple juxtaposition de composants.</p>
-      <div class="gb-rd-note"><i class="fa-solid fa-microchip"></i><span>La conception et le développement de la solution LiFePO₄ sont exclusivement réalisés en interne par les ingénieurs associés et l’équipe GreenBridge. Les données de capacité, de courant et de configuration sont précisées dans les fiches de chaque référence.</span></div>
-    </div>
-    <div class="gb-rd-process"><article class="gb-rd-step"><span class="number">01 / LA RECHERCHE</span><h3>Étudier le besoin énergétique</h3><p>Définir les usages visés, la capacité recherchée et les contraintes de fonctionnement.</p></article><article class="gb-rd-step"><span class="number">02 / L’INGÉNIERIE</span><h3>Concevoir l’architecture</h3><p>Travailler la configuration du pack, le BMS, les protections et l’intégration électrique.</p></article><article class="gb-rd-step"><span class="number">03 / LE DÉVELOPPEMENT</span><h3>Réaliser la solution</h3><p>Conduire en interne le développement et l’assemblage de l’ensemble GreenBridge.</p></article><article class="gb-rd-step"><span class="number">04 / L’ÉVOLUTION</span><h3>Développer de nouvelles capacités</h3><p>Faire évoluer les solutions, de la batterie 104 Ah au projet modulaire 2,5 kWh.</p></article></div>
-  </div>
-  <div class="gb-rd-bottom"><strong>LiFePO₄ · CONCEPTION & DÉVELOPPEMENT EXCLUSIVEMENT INTERNES</strong><span>Un savoir-faire développé par les ingénieurs associés et l’équipe GreenBridge.</span></div>
+<section aria-label="Histoire et recherche et développement de lifepo4" class="gb-rd-story" id="histoire-de-la-gamme">
+<div class="gb-rd-layout">
+<div class="gb-rd-copy">
+<div class="gb-rd-kicker">L’HISTOIRE DES BATTERIES LiFePO₄ · DÉVELOPPEMENT EXCLUSIVEMENT INTERNE</div>
+<h2>Une solution énergétique portée de bout en bout par <em>notre ingénierie.</em></h2>
+<p>La gamme LiFePO₄ représente l’engagement le plus poussé de GreenBridge dans la recherche et le développement. Ici, la solution est développée exclusivement en interne : les ingénieurs associés et l’équipe GreenBridge conduisent le travail de conception, d’étude, d’intégration et de réalisation du pack.</p>
+<p>Le travail porte sur l’architecture énergétique, la configuration du pack, l’intégration du système de gestion de batterie (BMS), les protections et la cohérence de l’ensemble avec les usages visés. Cette démarche donne naissance à une solution pensée comme un système complet, et non comme la simple juxtaposition de composants.</p>
+<div class="gb-rd-note"><i class="fa-solid fa-microchip"></i><span>La conception et le développement de la solution LiFePO₄ sont exclusivement réalisés en interne par les ingénieurs associés et l’équipe GreenBridge. Les données de capacité, de courant et de configuration sont précisées dans les fiches de chaque référence.</span></div>
+</div>
+<div class="gb-rd-process"><article class="gb-rd-step"><span class="number">01 / LA RECHERCHE</span><h3>Étudier le besoin énergétique</h3><p>Définir les usages visés, la capacité recherchée et les contraintes de fonctionnement.</p></article><article class="gb-rd-step"><span class="number">02 / L’INGÉNIERIE</span><h3>Concevoir l’architecture</h3><p>Travailler la configuration du pack, le BMS, les protections et l’intégration électrique.</p></article><article class="gb-rd-step"><span class="number">03 / LE DÉVELOPPEMENT</span><h3>Réaliser la solution</h3><p>Conduire en interne le développement et l’assemblage de l’ensemble GreenBridge.</p></article><article class="gb-rd-step"><span class="number">04 / L’ÉVOLUTION</span><h3>Développer de nouvelles capacités</h3><p>Faire évoluer les solutions, de la batterie 104 Ah au projet modulaire 2,5 kWh.</p></article></div>
+</div>
+<div class="gb-rd-bottom"><strong>LiFePO₄ · CONCEPTION &amp; DÉVELOPPEMENT EXCLUSIVEMENT INTERNES</strong><span>Un savoir-faire développé par les ingénieurs associés et l’équipe GreenBridge.</span></div>
 </section>
 <section aria-labelledby="gb-commerce-title" class="gb-commerce-intro gb-premium-intro">
-  <div class="gb-commerce-hero gb-premium-hero">
-    <div class="gb-commerce-copy gb-premium-copy">
-      <div class="gb-commerce-eyebrow"><span></span> GREENBRIDGE TECHNOLOGIES <b>·</b> CÔTE D’IVOIRE · SÉNÉGAL · AFRIQUE DE L’OUEST</div>
-      <h1 id="gb-commerce-title">L’énergie qui fait avancer <em>vos activités.</em></h1>
-      <p class="gb-commerce-lead">
+<div class="gb-commerce-hero gb-premium-hero">
+<div class="gb-commerce-copy gb-premium-copy">
+<div class="gb-commerce-eyebrow"><span></span> GREENBRIDGE TECHNOLOGIES <b>·</b> CÔTE D’IVOIRE · SÉNÉGAL · AFRIQUE DE L’OUEST</div>
+<h1 id="gb-commerce-title">L’énergie qui fait avancer <em>vos activités.</em></h1>
+<p class="gb-commerce-lead">
         Powerbanks pour téléphones et ordinateurs, mini-UPS Wi-Fi et batteries LiFePO₄ : trouvez la solution adaptée à votre besoin. <strong>Consultez les modèles, demandez le prix et la disponibilité, puis échangez directement avec notre équipe sur WhatsApp.</strong>
-      </p>
-      <div class="gb-premium-audience">
-        <span><i class="fa-solid fa-user"></i> Particuliers</span>
-        <span><i class="fa-solid fa-store"></i> Commerçants &amp; pros</span>
-        <span><i class="fa-solid fa-building"></i> Entreprises &amp; projets</span>
-      </div>
-      <div class="gb-commerce-actions gb-premium-actions">
-        <a class="gb-commerce-primary" href="#gb-univers"><i class="fa-solid fa-bolt"></i> Voir les produits</a>
-        <button class="gb-commerce-secondary" onclick="openProductWhatsApp('Demande de conseil et de devis — GreenBridge Technologies')" type="button"><i class="fa-brands fa-whatsapp"></i> Prix &amp; commande WhatsApp</button>
-      </div>
-      <div class="gb-commerce-proofline gb-premium-proofline">
-        <span><i class="fa-solid fa-microchip"></i> Conseil technique avant achat</span>
-        <span><i class="fa-solid fa-file-lines"></i> Fiches produits disponibles</span>
-        <span><i class="fa-solid fa-globe-africa"></i> Assemblé en Afrique de l’Ouest</span>
-      </div>
-    </div>
-
-    <div aria-label="Aperçu des quatre univers de solutions GreenBridge" class="gb-commerce-visual gb-premium-showcase">
-      <div class="gb-showcase-head">
-        <span class="gb-showcase-label"><i></i> POWERING EVERYDAY PROGRESS</span>
-        <span class="gb-showcase-region">WEST AFRICA · 01—04</span>
-      </div>
-      <div class="gb-showcase-mosaic">
-        <a class="gb-showcase-product gb-showcase-product--laptop" href="greenlaptop.html">
-          <div class="gb-showcase-image"><img alt="Solution GreenLaptop pour ordinateur portable" loading="eager" src="Chargeur_ordi_1.png"/></div>
-          <div class="gb-showcase-product-copy"><span>01 / MOBILITÉ PROFESSIONNELLE</span><strong>GREENLAPTOP</strong><small>Jusqu’à 100 W</small></div>
-          <i class="fa-solid fa-arrow-up-right-from-square gb-showcase-arrow"></i>
-        </a>
-        <a class="gb-showcase-product gb-showcase-product--wifi" href="greenwifi.html">
-          <div class="gb-showcase-image"><img alt="Solution de secours GreenWifi" loading="lazy" src="wifi_2.png"/></div>
-          <div class="gb-showcase-product-copy"><span>02 / CONNECTIVITÉ</span><strong>GREENWIFI</strong><small>Continuité de connexion</small></div>
-          <i class="fa-solid fa-arrow-up-right-from-square gb-showcase-arrow"></i>
-        </a>
-        <a class="gb-showcase-product gb-showcase-product--phone" href="powerbanks.html">
-          <div class="gb-showcase-image"><img alt="Gamme de powerbanks pour téléphone" loading="lazy" src="Pwkb_Mini_3.png"/></div>
-          <div class="gb-showcase-product-copy"><span>03 / ÉNERGIE MOBILE</span><strong>POWERBANKS</strong><small>La puissance au quotidien</small></div>
-          <i class="fa-solid fa-arrow-up-right-from-square gb-showcase-arrow"></i>
-        </a>
-        <a class="gb-showcase-product gb-showcase-product--battery" href="lifepo4.html">
-          <div class="gb-showcase-image"><img alt="Batterie de stockage GreenBridge LiFePO4" loading="lazy" src="pack_batterie_1200wh.png"/></div>
-          <div class="gb-showcase-product-copy"><span>04 / STOCKAGE</span><strong>LiFePO₄</strong><small>Autonomie énergétique</small></div>
-          <i class="fa-solid fa-arrow-up-right-from-square gb-showcase-arrow"></i>
-        </a>
-      </div>
-      <div class="gb-showcase-foot"><span>INGÉNIERIE · ÉNERGIE · CONNECTIVITÉ</span><span>GREENBRIDGE TECHNOLOGIES</span></div>
-    </div>
-  </div>
-
-  <div class="gb-universe-heading gb-premium-universe-heading" id="gb-univers">
-    <div>
-      <span class="gb-section-kicker">NOS DOMAINES D’EXPERTISE</span>
-      <h2>Choisissez votre solution énergétique.</h2>
-      <p>Ordinateur, connexion, téléphone ou stockage : accédez directement aux produits adaptés à votre usage.</p>
-    </div>
-    <span class="gb-universe-count">01 <i>—</i> 04 <b>UNIVERS</b></span>
-  </div>
-  <nav aria-label="Accès direct aux quatre familles GreenBridge" class="gb-universe-grid gb-premium-universe-grid">
-    <a class="gb-universe-card" href="greenlaptop.html">
-      <div class="gb-universe-card-top"><span class="gb-universe-number">01</span><span class="gb-universe-card-index">POWER / COMPUTING</span></div>
-      <div class="gb-universe-card-visual"><img src="Chargeur_ordi_1.png" alt="Powerbank GreenLaptop pour ordinateur portable" loading="lazy"/><span>GREENLAPTOP · JUSQU’À 100 W</span></div>
-      <div class="gb-universe-content"><span class="gb-universe-tag">MOBILITÉ PROFESSIONNELLE</span><h3>Powerbanks pour ordinateur</h3><p>Une réserve d’énergie pour travailler, voyager et rester productif avec les équipements compatibles.</p><strong>Voir les modèles <i class="fa-solid fa-arrow-right"></i></strong></div>
-    </a>
-    <a class="gb-universe-card" href="greenwifi.html">
-      <div class="gb-universe-card-top"><span class="gb-universe-number">02</span><span class="gb-universe-card-index">POWER / CONNECTIVITY</span></div>
-      <div class="gb-universe-card-visual"><img src="wifi_2.png" alt="Mini-UPS GreenWifi pour routeur et modem" loading="lazy"/><span>GREENWIFI · MINI-UPS</span></div>
-      <div class="gb-universe-content"><span class="gb-universe-tag">CONNECTIVITÉ &amp; SECOURS</span><h3>Powerbanks Wi-Fi &amp; Mini-UPS</h3><p>Une alimentation de secours compacte pour préserver la connexion de vos routeurs et modems compatibles pendant les coupures.</p><strong>Voir le modèle <i class="fa-solid fa-arrow-right"></i></strong></div>
-    </a>
-    <a class="gb-universe-card" href="powerbanks.html">
-      <div class="gb-universe-card-top"><span class="gb-universe-number">03</span><span class="gb-universe-card-index">POWER / MOBILE</span></div>
-      <div class="gb-universe-card-visual"><img src="Pwkb_Mini_3.png" alt="Powerbank GreenMini pour téléphone" loading="lazy"/><span>GREENMINI · GAMME MOBILE</span></div>
-      <div class="gb-universe-content"><span class="gb-universe-tag">ÉNERGIE MOBILE</span><h3>Powerbanks pour téléphone</h3><p>Des modèles compacts et haute capacité, avec charge standard ou rapide selon les références.</p><strong>Voir les modèles <i class="fa-solid fa-arrow-right"></i></strong></div>
-    </a>
-    <a class="gb-universe-card" href="lifepo4.html">
-      <div class="gb-universe-card-top"><span class="gb-universe-number">04</span><span class="gb-universe-card-index">POWER / STORAGE</span></div>
-      <div class="gb-universe-card-visual"><img src="pack_batterie_1200wh.png" alt="Batterie de stockage GreenBridge LiFePO4" loading="lazy"/><span>GREENBRIDGE · LiFePO₄</span></div>
-      <div class="gb-universe-content"><span class="gb-universe-tag">STOCKAGE ÉNERGÉTIQUE</span><h3>Batteries LiFePO₄</h3><p>Le stockage lithium fer phosphate pour développer l’autonomie de vos installations et équipements.</p><strong>Voir la solution <i class="fa-solid fa-arrow-right"></i></strong></div>
-    </a>
-  </nav>
-  <div class="gb-commercial-strip">
-    <div class="gb-commercial-strip-mark"><i class="fa-solid fa-headset"></i></div>
-    <div><strong>Un produit vous intéresse&nbsp;?</strong><span>Demandez le prix, vérifiez la disponibilité et obtenez un conseil avant de commander sur WhatsApp.</span></div>
-    <button type="button" onclick="openProductWhatsApp('Bonjour GreenBridge, je souhaite être conseillé sur une solution énergétique et obtenir un devis.')">Prix &amp; commande WhatsApp <i class="fa-solid fa-arrow-right"></i></button>
-  </div>
+</p>
+<div class="gb-premium-audience">
+<span><i class="fa-solid fa-user"></i> Particuliers</span>
+<span><i class="fa-solid fa-store"></i> Commerçants &amp; pros</span>
+<span><i class="fa-solid fa-building"></i> Entreprises &amp; projets</span>
+</div>
+<div class="gb-commerce-actions gb-premium-actions">
+<a class="gb-commerce-primary" href="#gb-univers"><i class="fa-solid fa-bolt"></i> Voir les produits</a>
+<button class="gb-commerce-secondary" onclick="openProductWhatsApp('Demande de conseil et de devis — GreenBridge Technologies')" type="button"><i class="fa-brands fa-whatsapp"></i> Prix &amp; commande WhatsApp</button>
+</div>
+<div class="gb-commerce-proofline gb-premium-proofline">
+<span><i class="fa-solid fa-microchip"></i> Conseil technique avant achat</span>
+<span><i class="fa-solid fa-file-lines"></i> Fiches produits disponibles</span>
+<span><i class="fa-solid fa-globe-africa"></i> Assemblé en Afrique de l’Ouest</span>
+</div>
+</div>
+<div aria-label="Aperçu des quatre univers de solutions GreenBridge" class="gb-commerce-visual gb-premium-showcase">
+<div class="gb-showcase-head">
+<span class="gb-showcase-label"><i></i> POWERING EVERYDAY PROGRESS</span>
+<span class="gb-showcase-region">WEST AFRICA · 01—04</span>
+</div>
+<div class="gb-showcase-mosaic">
+<a class="gb-showcase-product gb-showcase-product--laptop" href="greenlaptop.html">
+<div class="gb-showcase-image"><img alt="Solution GreenLaptop pour ordinateur portable" loading="eager" src="Chargeur_ordi_1.png"/></div>
+<div class="gb-showcase-product-copy"><span>01 / MOBILITÉ PROFESSIONNELLE</span><strong>GREENLAPTOP</strong><small>Jusqu’à 100 W</small></div>
+<i class="fa-solid fa-arrow-up-right-from-square gb-showcase-arrow"></i>
+</a>
+<a class="gb-showcase-product gb-showcase-product--wifi" href="greenwifi.html">
+<div class="gb-showcase-image"><img alt="Solution de secours GreenWifi" loading="lazy" src="wifi_2.png"/></div>
+<div class="gb-showcase-product-copy"><span>02 / CONNECTIVITÉ</span><strong>GREENWIFI</strong><small>Continuité de connexion</small></div>
+<i class="fa-solid fa-arrow-up-right-from-square gb-showcase-arrow"></i>
+</a>
+<a class="gb-showcase-product gb-showcase-product--phone" href="powerbanks.html">
+<div class="gb-showcase-image"><img alt="Gamme de powerbanks pour téléphone" loading="lazy" src="Pwkb_Mini_3.png"/></div>
+<div class="gb-showcase-product-copy"><span>03 / ÉNERGIE MOBILE</span><strong>POWERBANKS</strong><small>La puissance au quotidien</small></div>
+<i class="fa-solid fa-arrow-up-right-from-square gb-showcase-arrow"></i>
+</a>
+<a class="gb-showcase-product gb-showcase-product--battery" href="lifepo4.html">
+<div class="gb-showcase-image"><img alt="Batterie de stockage GreenBridge LiFePO4" loading="lazy" src="pack_batterie_1200wh.png"/></div>
+<div class="gb-showcase-product-copy"><span>04 / STOCKAGE</span><strong>LiFePO₄</strong><small>Autonomie énergétique</small></div>
+<i class="fa-solid fa-arrow-up-right-from-square gb-showcase-arrow"></i>
+</a>
+</div>
+<div class="gb-showcase-foot"><span>INGÉNIERIE · ÉNERGIE · CONNECTIVITÉ</span><span>GREENBRIDGE TECHNOLOGIES</span></div>
+</div>
+</div>
+<div class="gb-universe-heading gb-premium-universe-heading" id="gb-univers">
+<div>
+<span class="gb-section-kicker">NOS DOMAINES D’EXPERTISE</span>
+<h2>Choisissez votre solution énergétique.</h2>
+<p>Ordinateur, connexion, téléphone ou stockage : accédez directement aux produits adaptés à votre usage.</p>
+</div>
+<span class="gb-universe-count">01 <i>—</i> 04 <b>UNIVERS</b></span>
+</div>
+<nav aria-label="Accès direct aux quatre familles GreenBridge" class="gb-universe-grid gb-premium-universe-grid">
+<a class="gb-universe-card" href="greenlaptop.html">
+<div class="gb-universe-card-top"><span class="gb-universe-number">01</span><span class="gb-universe-card-index">POWER / COMPUTING</span></div>
+<div class="gb-universe-card-visual"><img alt="Powerbank GreenLaptop pour ordinateur portable" loading="lazy" src="Chargeur_ordi_1.png"/><span>GREENLAPTOP · JUSQU’À 100 W</span></div>
+<div class="gb-universe-content"><span class="gb-universe-tag">MOBILITÉ PROFESSIONNELLE</span><h3>Powerbanks pour ordinateur</h3><p>Une réserve d’énergie pour travailler, voyager et rester productif avec les équipements compatibles.</p><strong>Voir les modèles <i class="fa-solid fa-arrow-right"></i></strong></div>
+</a>
+<a class="gb-universe-card" href="greenwifi.html">
+<div class="gb-universe-card-top"><span class="gb-universe-number">02</span><span class="gb-universe-card-index">POWER / CONNECTIVITY</span></div>
+<div class="gb-universe-card-visual"><img alt="Mini-UPS GreenWifi pour routeur et modem" loading="lazy" src="wifi_2.png"/><span>GREENWIFI · MINI-UPS</span></div>
+<div class="gb-universe-content"><span class="gb-universe-tag">CONNECTIVITÉ &amp; SECOURS</span><h3>Powerbanks Wi-Fi &amp; Mini-UPS</h3><p>Une alimentation de secours compacte pour préserver la connexion de vos routeurs et modems compatibles pendant les coupures.</p><strong>Voir le modèle <i class="fa-solid fa-arrow-right"></i></strong></div>
+</a>
+<a class="gb-universe-card" href="powerbanks.html">
+<div class="gb-universe-card-top"><span class="gb-universe-number">03</span><span class="gb-universe-card-index">POWER / MOBILE</span></div>
+<div class="gb-universe-card-visual"><img alt="Powerbank GreenMini pour téléphone" loading="lazy" src="Pwkb_Mini_3.png"/><span>GREENMINI · GAMME MOBILE</span></div>
+<div class="gb-universe-content"><span class="gb-universe-tag">ÉNERGIE MOBILE</span><h3>Powerbanks pour téléphone</h3><p>Des modèles compacts et haute capacité, avec charge standard ou rapide selon les références.</p><strong>Voir les modèles <i class="fa-solid fa-arrow-right"></i></strong></div>
+</a>
+<a class="gb-universe-card" href="lifepo4.html">
+<div class="gb-universe-card-top"><span class="gb-universe-number">04</span><span class="gb-universe-card-index">POWER / STORAGE</span></div>
+<div class="gb-universe-card-visual"><img alt="Batterie de stockage GreenBridge LiFePO4" loading="lazy" src="pack_batterie_1200wh.png"/><span>GREENBRIDGE · LiFePO₄</span></div>
+<div class="gb-universe-content"><span class="gb-universe-tag">STOCKAGE ÉNERGÉTIQUE</span><h3>Batteries LiFePO₄</h3><p>Le stockage lithium fer phosphate pour développer l’autonomie de vos installations et équipements.</p><strong>Voir la solution <i class="fa-solid fa-arrow-right"></i></strong></div>
+</a>
+</nav>
+<div class="gb-commercial-strip">
+<div class="gb-commercial-strip-mark"><i class="fa-solid fa-headset"></i></div>
+<div><strong>Un produit vous intéresse ?</strong><span>Demandez le prix, vérifiez la disponibilité et obtenez un conseil avant de commander sur WhatsApp.</span></div>
+<button onclick="openProductWhatsApp('Bonjour GreenBridge, je souhaite être conseillé sur une solution énergétique et obtenir un devis.')" type="button">Prix &amp; commande WhatsApp <i class="fa-solid fa-arrow-right"></i></button>
+</div>
 </section>
 <section aria-label="Catalogue des produits GreenBridge" class="models-wrapper gb-catalogue-shell" id="models" role="region">
 <div class="models-header"><div class="models-title">Solutions de stockage LiFePO₄</div></div>
@@ -4351,7 +4778,7 @@ body[data-gb-page="lifepo4"] .gb-about-section{order:7;}
 <div class="thumb"><img alt="GreenLaptop+" loading="lazy" onerror="showModelPhotoPlaceholder(this)" src="Chargeur_ordi_1.png"/></div>
 <div class="meta">
 <h4>GreenLaptop+</h4>
-<p>36 000 mAh • 65 à 100 W<br><small>Chargeur pour ordinateur portable.</small></br></p>
+<p>36 000 mAh • 65 à 100 W<br/><small>Chargeur pour ordinateur portable.</small></p>
 </div>
 <div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(11)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(11); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('GreenLaptop+')" type="button"><i class="fa-brands fa-whatsapp"></i> Commander</button></div>
 </div><div aria-label="GreenLaptop 20 000 mAh" class="model" data-model-index="12" onclick="selectModel(12)" role="button" tabindex="0"><div class="thumb"><img alt="GreenLaptop" loading="lazy" onerror="showModelPhotoPlaceholder(this)" src="GreenLaptop_2.PNG"/></div><div class="meta"><h4>GreenLaptop</h4><p>20 000 mAh • 100 W<br/><small>Téléphone et ordinateur portable.</small></p></div><div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(12)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(12); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('GreenLaptop — 20 000 mAh')" type="button"><i class="fa-brands fa-whatsapp"></i> Commander</button></div></div></div>
@@ -4374,7 +4801,7 @@ body[data-gb-page="lifepo4"] .gb-about-section{order:7;}
 <div class="thumb"><img alt="Green Wifi" loading="lazy" onerror="showModelPhotoPlaceholder(this)" src="wifi_2.png"/></div>
 <div class="meta">
 <h4>Green Wifi</h4>
-<p>12 000 mAh<br><small>Autonomie Wi-Fi annoncée : 4 à 6 h.</small></br></p>
+<p>12 000 mAh<br/><small>Autonomie Wi-Fi annoncée : 4 à 6 h.</small></p>
 </div>
 <div class="actions model-new-actions"><button class="new-info-btn" onclick="event.stopPropagation();openTechModal(13)" type="button">En savoir plus</button><a class="notice-mini-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); downloadModelPdf(13); return false;"><i class="fa-regular fa-file-pdf"></i> Fiche PDF</a><button class="new-order-btn" onclick="event.stopPropagation();openProductWhatsApp('Green Wifi')" type="button"><i class="fa-brands fa-whatsapp"></i> Commander</button></div>
 </div></div>
@@ -4401,7 +4828,7 @@ body[data-gb-page="lifepo4"] .gb-about-section{order:7;}
 <img alt="Greenbridge V1, 6000 mAh" loading="lazy" src="Greenbridge_V2.png"/>
 </div>
 <h3>GreenBridge V1</h3>
-<p>Powerbank <strong>6 000 mAh</strong><br>Conçu et assemblé par GreenBridge Technologies.</br></p>
+<p>Powerbank <strong>6 000 mAh</strong><br/>Conçu et assemblé par GreenBridge Technologies.</p>
 <div class="new-product-actions">
 <button class="new-info-btn" data-new-product-key="v1" type="button">En savoir plus</button>
 <a class="notice-link-btn" href="#" onclick="event.preventDefault(); downloadEmbeddedNotice('v1'); return false;"><i class="fa-regular fa-file-pdf"></i> Notice PDF</a>
@@ -4502,7 +4929,7 @@ body[data-gb-page="lifepo4"] .gb-about-section{order:7;}
 <img alt="Batterie GreenBridge LiFePO4 de 104 Ah" loading="lazy" src="pack_batterie_1200wh.png"/>
 </div>
 <h3>Batterie LiFePO₄</h3>
-<p>Capacité nominale : <strong>104 Ah</strong><br>Cellules LiFePO₄ Grade A · Décharge 100 A · Garantie 3 ans.</br></p>
+<p>Capacité nominale : <strong>104 Ah</strong><br/>Cellules LiFePO₄ Grade A · Décharge 100 A · Garantie 3 ans.</p>
 <div class="new-product-actions">
 <button class="new-info-btn" data-new-product-key="lifepo4" type="button">En savoir plus</button>
 <a class="notice-link-btn" href="#" onclick="event.preventDefault(); window.downloadLiFePO4TechnicalNotice(); return false;"><i class="fa-regular fa-file-pdf"></i> Notice </a>
@@ -4512,7 +4939,6 @@ body[data-gb-page="lifepo4"] .gb-about-section{order:7;}
 </div>
 </section>
 </section>
-
 <div class="futures-title" id="futures">
 <div class="models-title">Développements en cours</div>
 </div>
@@ -4671,15 +5097,7 @@ body[data-gb-page="lifepo4"] .gb-about-section{order:7;}
 <div id="modalContent"></div>
 </div>
 </div>
-<footer>
-<div class="footer-company">GREENBRIDGE TECHNOLOGIES</div>
-<nav class="gb-footer-nav" aria-label="Navigation de pied de page"><a href="index.html">Accueil</a><a href="greenlaptop.html">GreenLaptop</a><a href="greenwifi.html">GreenWifi</a><a href="powerbanks.html">Powerbanks</a><a href="lifepo4.html" aria-current="page">LiFePO₄</a><a href="apropos.html">À propos</a></nav>
-<div style="display:flex;justify-content:center;align-items:center;gap:10px;margin:10px 0 8px;flex-wrap:wrap">
-<img alt="Drapeau Côte d'Ivoire" src="https://flagcdn.com/w80/ci.png" style="width:32px;height:22px;object-fit:cover;border-radius:4px;box-shadow:0 4px 12px rgba(0,0,0,0.28)"/>
-<img alt="Drapeau Sénégal" src="https://flagcdn.com/w80/sn.png" style="width:32px;height:22px;object-fit:cover;border-radius:4px;box-shadow:0 4px 12px rgba(0,0,0,0.28)"/>
-</div>
-<div style="color:#e6f7ea">© <span id="year"></span> GREENBRIDGE TECHNOLOGIES — Assemblé par des africains</div>
-</footer>
+<footer class="gb-site-footer"><div class="gb-site-footer-inner"><div class="gb-footer-brand-row"><a aria-label="GreenBridge Technologies — Accueil" class="gb-footer-brand" href="index.html"><img alt="Logo GreenBridge Technologies" loading="lazy" src="green bridge domo.png"/><span class="gb-footer-brand-copy"><strong>GREENBRIDGE</strong><span>TECHNOLOGIES</span><small>Ingénierie · Énergie · Connectivité</small></span></a><div aria-label="Présence régionale" class="gb-footer-countries"><span class="gb-footer-country"><img alt="" loading="lazy" src="https://flagcdn.com/w80/ci.png"/><span>Côte d’Ivoire</span></span><span class="gb-footer-country"><img alt="" loading="lazy" src="https://flagcdn.com/w80/sn.png"/><span>Sénégal</span></span></div></div><div class="gb-footer-nav-wrap"><span class="gb-footer-nav-label">Explorer GreenBridge</span><nav aria-label="Navigation de pied de page" class="gb-footer-nav"><a href="index.html">Accueil</a><a href="greenlaptop.html">GreenLaptop</a><a href="greenwifi.html">GreenWifi</a><a href="powerbanks.html">Powerbanks</a><a aria-current="page" class="is-current-page" href="lifepo4.html">LiFePO₄</a><a href="apropos.html">À propos</a></nav></div><div class="gb-footer-bottom"><span>© <span id="year">2026</span> GREENBRIDGE TECHNOLOGIES · Tous droits réservés · Assemblé en Afrique de l’Ouest</span><a aria-label="Retour en haut de page" href="#top">Retour en haut ↑</a></div></div></footer><script>document.addEventListener('DOMContentLoaded',function(){var y=document.getElementById('year');if(y)y.textContent=new Date().getFullYear();});</script>
 <script>
 /* Emplacements photo PNG des modèles : les fichiers sont à placer à la racine du site. */
 function showModelPhotoPlaceholder(img){
@@ -6344,7 +6762,6 @@ if(fab){
 })();
 
 </script>
-
 <script id="greenbridge-mobile-product-image-repair">
 /* Synchronisation robuste : restaure la bonne photo depuis models[].cardImage,
    même si un ancien onerror avait remplacé la balise img par un placeholder. */
