@@ -2512,7 +2512,7 @@ body {
   border-radius:50% !important;
   background:radial-gradient(circle at 30% 28%,var(--gb-orb-light),var(--electric-yellow) 57%,transparent 84%) !important;
   box-shadow:0 0 11px var(--gb-orb-glow),0 0 27px var(--gb-orb-soft),0 0 43px var(--gb-orb-soft) !important;
-  transform:translate3d(-50%,-50%,0) !important;
+  transform:translate3d(-50%,-50%,0);
   will-change:transform,opacity;
   animation:gbOrbTravel var(--gb-orb-duration,12s) linear infinite var(--gb-orb-delay,0s) !important;
 }
@@ -3013,7 +3013,7 @@ body {
   margin:0 !important;
   border-radius:50% !important;
   opacity:1 !important;
-  transform:translate3d(-50%,-50%,0) scale(.72) !important;
+  transform:translate3d(-50%,-50%,0) scale(.72);
   translate:-18px 0;
   will-change:transform,translate,opacity,filter !important;
   animation-name:gbEnergyOrbTravel !important;
@@ -3490,6 +3490,153 @@ body[data-gb-page="wifi"] .gb-category-secondary {
 }
 </style>
 
+<style id="gb-r3-energy-motion">
+/* GREENBRIDGE R3 — mouvement des trois bulles sur toutes les largeurs.
+   Le déplacement utilise transform animé sans déclaration transform !important,
+   afin que les keyframes restent actives sur Chrome mobile et desktop. */
+.electric-band,
+.electric-band .container,
+.electric-band .orbs { overflow:visible !important; }
+.electric-band .orb,
+.electric-band #orbA,
+.electric-band #orbB,
+.electric-band #orbC {
+  display:block !important;
+  position:absolute !important;
+  left:0 !important;
+  right:auto !important;
+  top:50% !important;
+  margin:0 !important;
+  opacity:1 !important;
+  translate:none !important;
+  transform:translate3d(-50%,-50%,0) scale(.78);
+  transform-origin:center center !important;
+  will-change:transform !important;
+  animation-name:gbR3EnergyAcross !important;
+  animation-duration:var(--gb-orb-duration,13s) !important;
+  animation-delay:var(--gb-orb-delay,0s) !important;
+  animation-timing-function:linear !important;
+  animation-iteration-count:infinite !important;
+  animation-fill-mode:both !important;
+  animation-play-state:running !important;
+}
+.electric-band #orbA { --gb-orb-duration:11.8s; --gb-orb-delay:-2.1s; width:10px !important; height:10px !important; }
+.electric-band #orbB { --gb-orb-duration:13.6s; --gb-orb-delay:-7.3s; width:8px !important; height:8px !important; }
+.electric-band #orbC { --gb-orb-duration:15.4s; --gb-orb-delay:-10.6s; width:11px !important; height:11px !important; }
+@keyframes gbR3EnergyAcross {
+  0%   { transform:translate3d(calc(-50% - 18px),-50%,0) scale(.72); }
+  8%   { transform:translate3d(calc(-50% + 2vw),-50%,0) scale(.92); }
+  50%  { transform:translate3d(calc(-50% + 50vw),-50%,0) scale(1.13); }
+  92%  { transform:translate3d(calc(-50% + 96vw),-50%,0) scale(.94); }
+  100% { transform:translate3d(calc(-50% + 100vw + 20px),-50%,0) scale(.74); }
+}
+/* Le mode économie de mouvement ralentit le courant, mais ne fige jamais les bulles. */
+@media (prefers-reduced-motion:reduce) {
+  .electric-band .orb,
+  .electric-band #orbA,
+  .electric-band #orbB,
+  .electric-band #orbC {
+    animation-name:gbR3EnergyAcross !important;
+    animation-duration:24s !important;
+    animation-iteration-count:infinite !important;
+    animation-play-state:running !important;
+  }
+}
+/* Palette des bulles par gamme. */
+body[data-gb-page="laptop"] {
+  --electric-yellow:#f04d58;
+  --gb-orb-light:#fff5f5;
+  --gb-orb-glow:rgba(244,75,88,.98);
+  --gb-orb-soft:rgba(208,48,64,.42);
+}
+body[data-gb-page="wifi"] {
+  --electric-yellow:#b8d6ea;
+  --gb-orb-light:#ffffff;
+  --gb-orb-glow:rgba(193,222,244,.98);
+  --gb-orb-soft:rgba(151,194,226,.52);
+}
+body[data-gb-page="wifi"] .electric-band .orb {
+  background:radial-gradient(circle at 28% 22%,#fff 0 9%,#e9f5fd 18%,#b5d8ef 38%,#638cac 63%,rgba(45,72,96,.28) 79%,transparent 88%) !important;
+  border:1px solid rgba(235,247,255,.72) !important;
+  box-shadow:0 0 7px rgba(255,255,255,.94),0 0 15px rgba(172,214,243,.92),0 0 31px rgba(119,169,207,.65),0 0 48px rgba(218,233,246,.28) !important;
+}
+body[data-gb-page="powerbanks"] {
+  --electric-yellow:#b9c1c8;
+  --gb-orb-light:#f7f9fb;
+  --gb-orb-glow:rgba(190,199,207,.78);
+  --gb-orb-soft:rgba(72,82,91,.56);
+}
+body[data-gb-page="powerbanks"] .electric-band .orb {
+  background:radial-gradient(circle at 28% 22%,#ffffff 0 6%,#aab2b9 11%,#46505a 27%,#151a1f 52%,#020304 76%,rgba(0,0,0,.1) 88%,transparent 92%) !important;
+  border:1px solid rgba(223,230,236,.78) !important;
+  box-shadow:0 0 6px rgba(236,241,245,.72),0 0 15px rgba(131,143,153,.5),0 0 29px rgba(24,31,37,.58) !important;
+}
+body[data-gb-page="powerbanks"] .electric-band .orb::after {
+  background:#fff !important;
+  box-shadow:0 0 4px #fff,0 0 9px rgba(222,231,238,.9) !important;
+}
+body[data-gb-page="powerbanks"] .electric-band .glowline {
+  background:linear-gradient(90deg,transparent,rgba(190,199,207,.85),rgba(255,255,255,.48),rgba(190,199,207,.85),transparent) !important;
+  box-shadow:0 0 14px rgba(160,171,181,.34) !important;
+}
+body[data-gb-page="powerbanks"] .lightning-svg path.zap,
+body[data-gb-page="powerbanks"] .lightning-svg path.bright { stroke:#aeb7bf !important; }
+body[data-gb-page="lifepo4"] {
+  --electric-yellow:#b78aff;
+  --gb-orb-light:#f7f0ff;
+  --gb-orb-glow:rgba(183,138,255,.98);
+  --gb-orb-soft:rgba(139,83,215,.48);
+}
+body[data-gb-page="about"] {
+  --electric-yellow:#d8b64e;
+  --gb-orb-light:#fff7d5;
+  --gb-orb-glow:rgba(216,182,78,.95);
+  --gb-orb-soft:rgba(124,179,66,.40);
+  background-color:#04130d !important;
+  background-image:radial-gradient(ellipse at 12% 9%,rgba(124,179,66,.14),transparent 34%),radial-gradient(ellipse at 90% 34%,rgba(216,182,78,.10),transparent 37%),linear-gradient(180deg,#061810 0%,#071b13 55%,#04130d 100%) !important;
+}
+/* Le visuel GreenLaptop doit montrer le produit, pas les larges marges de la photo source. */
+body[data-gb-page="laptop"] .gb-category-image {
+  position:relative !important;
+  min-height:360px !important;
+  aspect-ratio:4/3 !important;
+  overflow:hidden !important;
+  background:linear-gradient(145deg,#f5f7f4,#e0e8e2) !important;
+}
+body[data-gb-page="laptop"] .gb-category-image img {
+  position:absolute !important;
+  left:50% !important;
+  top:50% !important;
+  width:150% !important;
+  height:150% !important;
+  max-width:none !important;
+  max-height:none !important;
+  object-fit:contain !important;
+  object-position:center !important;
+  padding:0 !important;
+  transform:translate(-50%,-50%) !important;
+  filter:drop-shadow(0 12px 17px rgba(0,0,0,.12)) !important;
+}
+body[data-gb-page="laptop"] .gb-family-model-grid .model .thumb img {
+  position:absolute !important;
+  left:50% !important;
+  top:50% !important;
+  width:145% !important;
+  height:145% !important;
+  max-width:none !important;
+  max-height:none !important;
+  object-fit:contain !important;
+  object-position:center !important;
+  padding:0 !important;
+  transform:translate(-50%,-50%) !important;
+}
+@media (max-width:720px) {
+  body[data-gb-page="laptop"] .gb-category-image { min-height:0 !important; aspect-ratio:4/3 !important; }
+  body[data-gb-page="laptop"] .gb-category-image img { width:150% !important; height:150% !important; }
+  body[data-gb-page="laptop"] .gb-family-model-grid .model .thumb { aspect-ratio:4/3 !important; }
+  body[data-gb-page="laptop"] .gb-family-model-grid .model .thumb img { width:145% !important; height:145% !important; }
+}
+</style>
 </head>
 <body data-gb-page="wifi">
 <img alt="" aria-hidden="true" class="page-bg" src="Energie_blanche.png"/>
@@ -3553,6 +3700,7 @@ body[data-gb-page="wifi"] .gb-category-secondary {
     <a href="greenwifi.html" aria-current="page">GreenWifi</a>
     <a href="powerbanks.html">Powerbanks</a>
     <a href="lifepo4.html">LiFePO₄</a>
+    <a href="apropos.html">À propos</a>
   </nav>
   <button class="gb-header-whatsapp" type="button" onclick="openProductWhatsApp('Demande de conseil et de devis — GreenBridge Technologies')">
     <i class="fa-brands fa-whatsapp" aria-hidden="true"></i><span>Contacter l’équipe</span>
@@ -3569,10 +3717,11 @@ body[data-gb-page="wifi"] .gb-category-secondary {
     <span class="gb-mobile-kicker">EXPLORER NOS UNIVERS</span>
     <nav aria-label="Navigation mobile">
       <a href="index.html">Accueil<span>HOME</span></a>
-    <a href="greenlaptop.html">GreenLaptop<span>01 / COMPUTING</span></a>
-    <a href="greenwifi.html" aria-current="page">GreenWifi<span>02 / CONNECTIVITY</span></a>
-    <a href="powerbanks.html">Powerbanks<span>03 / MOBILE</span></a>
-    <a href="lifepo4.html">LiFePO₄<span>04 / STORAGE</span></a>
+      <a href="greenlaptop.html">GreenLaptop<span>01 / COMPUTING</span></a>
+      <a href="greenwifi.html" aria-current="page">GreenWifi<span>02 / CONNECTIVITY</span></a>
+      <a href="powerbanks.html">Powerbanks<span>03 / MOBILE</span></a>
+      <a href="lifepo4.html">LiFePO₄<span>04 / STORAGE</span></a>
+      <a href="apropos.html">À propos<span>05 / ENGINEERING</span></a>
     </nav>
     <button class="gb-mobile-contact" type="button" onclick="openProductWhatsApp('Demande de conseil et de devis — GreenBridge Technologies')"><i class="fa-brands fa-whatsapp"></i> Contacter GreenBridge</button>
     <div class="gb-mobile-region">CÔTE D’IVOIRE <span>·</span> SÉNÉGAL <span>·</span> AFRIQUE DE L’OUEST</div>
@@ -4063,6 +4212,7 @@ body[data-gb-page="wifi"] .gb-category-secondary {
 </div>
 <footer>
 <div class="footer-company">GREENBRIDGE TECHNOLOGIES</div>
+<nav class="gb-footer-nav" aria-label="Navigation de pied de page"><a href="index.html">Accueil</a><a href="greenlaptop.html">GreenLaptop</a><a href="greenwifi.html" aria-current="page">GreenWifi</a><a href="powerbanks.html">Powerbanks</a><a href="lifepo4.html">LiFePO₄</a><a href="apropos.html">À propos</a></nav>
 <div style="display:flex;justify-content:center;align-items:center;gap:10px;margin:10px 0 8px;flex-wrap:wrap">
 <img alt="Drapeau Côte d'Ivoire" src="https://flagcdn.com/w80/ci.png" style="width:32px;height:22px;object-fit:cover;border-radius:4px;box-shadow:0 4px 12px rgba(0,0,0,0.28)"/>
 <img alt="Drapeau Sénégal" src="https://flagcdn.com/w80/sn.png" style="width:32px;height:22px;object-fit:cover;border-radius:4px;box-shadow:0 4px 12px rgba(0,0,0,0.28)"/>
