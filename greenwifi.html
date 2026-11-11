@@ -11,8 +11,8 @@
   </script>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
-<title>GREENWIFI — Alimentation de secours Wi-Fi | GreenBridge Technologies</title>
-<meta name="description" content="Découvrez GreenWifi, la solution Mini-UPS pour routeurs, modems et équipements compatibles."/>
+<title>GREENWIFI — Mini-UPS développé en interne | GreenBridge Technologies</title>
+<meta name="description" content="Découvrez GreenWifi, une solution de secours pour routeurs et modems compatibles, développée en interne par GreenBridge."/>
 <meta content="#0a4d2e" name="theme-color"/>
 <link href="green bridge domo.png" rel="icon" type="image/png"/>
 <link href="green bridge domo.png" rel="apple-touch-icon"/>
@@ -2032,7 +2032,238 @@ body[data-gb-page="lifepo4"] .featured{margin-top:10px}
   *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
 
-body[data-gb-page="wifi"]{--gb-current-page:"wifi"}
+/* ============================================================
+   GREENBRIDGE — RÉCIT DE CONCEPTION & R&D
+   Les textes décrivent le travail interne communiqué par GreenBridge.
+   ============================================================ */
+.gb-rd-story{position:relative;isolation:isolate;margin:26px 0 34px;padding:clamp(22px,3.5vw,42px);border:1px solid rgba(216,182,78,.25);border-radius:20px;background:radial-gradient(circle at 88% 0%,rgba(109,190,116,.12),transparent 33%),linear-gradient(135deg,#071e14,#0a3020 58%,#061a12);box-shadow:0 18px 46px rgba(0,0,0,.20);overflow:hidden}
+.gb-rd-story:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(120deg,rgba(0,0,0,.7),transparent 80%)}
+.gb-rd-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(330px,.92fr);gap:clamp(22px,4vw,48px);align-items:center}
+.gb-rd-copy{min-width:0}
+.gb-rd-kicker{display:flex;align-items:center;gap:9px;margin:0 0 13px;color:#e5cf80;font-size:10px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase}
+.gb-rd-kicker:before{content:"";width:26px;height:2px;border-radius:2px;background:#d8b64e}
+.gb-rd-copy h2{margin:0 0 14px;color:#f7faf5;font-size:clamp(26px,3.2vw,39px);line-height:1.13;letter-spacing:-.9px;font-weight:900}
+.gb-rd-copy h2 em{color:#c6e5a3;font-style:normal}
+.gb-rd-copy p{margin:0 0 12px;color:#cfdfd2;font-size:13px;line-height:1.85}
+.gb-rd-copy strong{color:#fff;font-weight:800}
+.gb-rd-note{display:flex;gap:11px;align-items:flex-start;margin-top:18px;padding:13px 14px;border:1px solid rgba(216,182,78,.26);border-left:3px solid #d8b64e;border-radius:10px;background:rgba(255,255,255,.045);color:#dfe9df;font-size:11px;line-height:1.7}
+.gb-rd-note i{margin-top:2px;color:#ead27c;font-size:16px;flex:0 0 auto}
+.gb-rd-process{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.gb-rd-step{min-width:0;min-height:132px;padding:15px 14px;border:1px solid rgba(255,255,255,.12);border-radius:13px;background:rgba(255,255,255,.045)}
+.gb-rd-step .number{display:block;margin-bottom:11px;color:#e0c66f;font-size:10px;font-weight:900;letter-spacing:1.2px}
+.gb-rd-step h3{margin:0 0 6px;color:#f5f8f3;font-size:14px;line-height:1.35;font-weight:800}
+.gb-rd-step p{margin:0;color:#bfd0c2;font-size:11px;line-height:1.65}
+.gb-rd-bottom{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:22px;padding-top:16px;border-top:1px solid rgba(255,255,255,.12)}
+.gb-rd-bottom strong{color:#f0d77e;font-size:10px;letter-spacing:1px;text-transform:uppercase}
+.gb-rd-bottom span{color:#a9c4b0;font-size:10px;line-height:1.55;text-align:right}
+.gb-rd-home{margin:30px 0 34px}
+.gb-rd-home .gb-rd-layout{grid-template-columns:minmax(0,1.03fr) minmax(360px,.97fr)}
+.gb-rd-home .gb-rd-process{grid-template-columns:repeat(2,minmax(0,1fr))}
+.gb-rd-home .gb-rd-step{min-height:118px}
+.gb-rd-highlight{margin-top:12px;padding:16px 17px;border:1px solid rgba(216,182,78,.3);border-radius:13px;background:linear-gradient(100deg,rgba(216,182,78,.10),rgba(255,255,255,.035));}
+.gb-rd-highlight span{display:block;margin-bottom:5px;color:#e6cd77;font-size:9px;font-weight:900;letter-spacing:1.2px;text-transform:uppercase}
+.gb-rd-highlight strong{display:block;color:#f4f8f3;font-size:14px;line-height:1.55}
+
+/* ============================================================
+   MOBILE FIRST : tailles lisibles, cartes simples, pas d'effets
+   gourmands au scroll. Les règles précédentes sont volontairement
+   remplacées sur téléphone pour éviter les textes minuscules.
+   ============================================================ */
+@media(max-width:720px){
+  :root{--topbar-h:34px;--opening-h:31px;--header-h:64px}
+  html{scroll-padding-top:145px;scroll-behavior:smooth}
+  html,body{width:100%;max-width:100%;overflow-x:hidden}
+  body{background:linear-gradient(180deg,#061810 0%,#071b13 55%,#04130d 100%);-webkit-text-size-adjust:100%;text-size-adjust:100%}
+  .page-bg,.page-bg-overlay{display:none!important}
+  .electric-band{display:none!important}
+  .topbar{height:var(--topbar-h);padding:0 13px}
+  .promo-text{font-size:9px;letter-spacing:.35px;gap:6px}
+  .promo-origin{display:inline!important;font-size:9px}
+  .maintenance-status{display:none!important}
+  .topbar-actions{display:none!important}
+  .opening-strip{height:var(--opening-h);top:var(--topbar-h)}
+  .opening-strip-track{animation-duration:32s}
+  .opening-strip-group{gap:13px;padding-right:13px}
+  .opening-strip-title{font-size:9px;letter-spacing:.5px}
+  .opening-strip-date{font-size:9px;padding:3px 8px}
+  .opening-strip-location{font-size:8.5px;letter-spacing:.2px}
+  header.gb-site-header{top:calc(var(--topbar-h) + var(--opening-h));height:var(--header-h);padding:0 14px;backdrop-filter: none}
+  .gb-header-inner{gap:8px}
+  .gb-brand{min-width:0;gap:7px}
+  .gb-brand img{width:42px;height:42px;max-width:42px}
+  .gb-brand .company-name{font-size:21px;letter-spacing:.15px}
+  .gb-brand .company-tagline{font-size:8px;letter-spacing:2.7px;margin-top:3px}
+  .gb-menu-toggle{display:flex;width:44px;height:42px;flex:0 0 44px}
+  .gb-mobile-menu{backdrop-filter:none;background:rgba(0,0,0,.78)}
+  .gb-mobile-menu-panel{width:min(390px,92vw);padding:22px 18px max(22px,env(safe-area-inset-bottom));}
+  .gb-mobile-menu nav a{min-height:52px;padding:14px 13px;font-size:15px}
+  .gb-mobile-menu nav a span{font-size:9px}
+  .container{width:100%;max-width:100%;padding:13px 14px 54px;margin:0 auto}
+  .gb-commerce-intro{margin:10px 0 20px}
+  .gb-commerce-hero{display:grid;grid-template-columns:minmax(0,1fr);gap:19px;padding:21px 16px;border-radius:16px}
+  .gb-commerce-copy h1{font-size:clamp(30px,8.2vw,38px);line-height:1.12;letter-spacing:-.9px;margin-bottom:12px}
+  .gb-commerce-lead{font-size:14px;line-height:1.75}
+  .gb-commerce-eyebrow{font-size:9px;letter-spacing:.8px;line-height:1.5;flex-wrap:wrap}
+  .gb-premium-audience{gap:8px}
+  .gb-premium-audience span{font-size:10px}
+  .gb-commerce-actions{display:grid;grid-template-columns:1fr;gap:9px;margin-top:17px}
+  .gb-commerce-primary,.gb-commerce-secondary{width:100%;min-height:46px;padding:12px 14px;font-size:12px}
+  .gb-commerce-proofline{display:grid;grid-template-columns:1fr;gap:8px;margin-top:17px;font-size:11px}
+  .gb-commerce-visual{width:100%;min-width:0;padding:9px;border-radius:13px}
+  .gb-showcase-head,.gb-showcase-foot{font-size:8px;letter-spacing:.55px;gap:8px}
+  .gb-showcase-mosaic{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .gb-showcase-product{min-width:0;min-height:0;border-radius:10px}
+  .gb-showcase-image{height:126px;min-height:126px}
+  .gb-showcase-image img{width:100%;height:100%;object-fit:contain;padding:7px}
+  .gb-showcase-product-copy{padding:8px 8px 9px}
+  .gb-showcase-product-copy span{font-size:8px;line-height:1.35;letter-spacing:.3px}
+  .gb-showcase-product-copy strong{font-size:12px}
+  .gb-showcase-product-copy small{font-size:9px;line-height:1.35}
+  .gb-showcase-arrow{right:8px;top:8px;font-size:10px}
+  .gb-universe-heading{display:block;margin:27px 1px 14px}
+  .gb-universe-heading h2{font-size:25px;line-height:1.2;letter-spacing:-.5px}
+  .gb-universe-heading p{font-size:13px;line-height:1.7}
+  .gb-universe-count{display:inline-flex;margin-top:10px;font-size:9px;padding:7px 10px}
+  .gb-universe-grid{display:grid;grid-template-columns:1fr;gap:11px}
+  .gb-universe-card{display:grid;grid-template-columns:minmax(112px,36%) minmax(0,1fr);min-height:150px;border-radius:12px;overflow:hidden}
+  .gb-universe-card-visual{height:100%;min-height:150px;display:flex;align-items:center;justify-content:center}
+  .gb-universe-card-visual img{width:100%;height:100%;max-height:155px;object-fit:contain;padding:7px}
+  .gb-universe-content{padding:13px 12px;justify-content:center;min-width:0}
+  .gb-universe-tag{font-size:8px;line-height:1.35;letter-spacing:.5px;margin-bottom:6px}
+  .gb-universe-content h3{font-size:17px;line-height:1.22;margin-bottom:6px}
+  .gb-universe-content p{font-size:12px;line-height:1.55;margin-bottom:9px}
+  .gb-universe-content strong{font-size:11px;line-height:1.4}
+  .gb-commercial-strip{display:grid;grid-template-columns:44px minmax(0,1fr);gap:10px;padding:15px;margin-top:18px;border-radius:13px}
+  .gb-commercial-strip-mark{width:42px;height:42px}
+  .gb-commercial-strip>div:nth-child(2) strong{font-size:13px}
+  .gb-commercial-strip>div:nth-child(2) span{font-size:11px;line-height:1.55}
+  .gb-commercial-strip button{grid-column:1 / -1;width:100%;min-height:45px;font-size:11px}
+  .gb-category-hero{display:grid;grid-template-columns:minmax(0,1fr);gap:17px;margin:12px 0 18px;padding:20px 15px;border-radius:16px}
+  .gb-category-breadcrumb{font-size:11px;gap:8px;margin-bottom:15px}
+  .gb-category-eyebrow{font-size:9px;line-height:1.5;letter-spacing:.8px;margin-bottom:10px}
+  .gb-category-copy h1{font-size:clamp(30px,8vw,38px);line-height:1.12;letter-spacing:-.8px;margin:0 0 12px}
+  .gb-category-copy>p{font-size:14px;line-height:1.75}
+  .gb-category-actions{display:grid;grid-template-columns:1fr;gap:9px;margin-top:17px}
+  .gb-category-primary,.gb-category-secondary{width:100%;min-height:46px;padding:12px 14px;font-size:12px}
+  .gb-category-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:17px}
+  .gb-category-stat{padding:11px 10px;border-radius:9px}
+  .gb-category-stat strong{font-size:17px;line-height:1.25}
+  .gb-category-stat span{font-size:10px;line-height:1.45}
+  .gb-category-visual{padding:9px;border-radius:13px}
+  .gb-category-visual-top,.gb-category-visual-bottom{font-size:8px;line-height:1.4;letter-spacing:.4px}
+  .gb-category-visual-top small,.gb-category-visual-bottom strong{font-size:8px}
+  .gb-category-image{height:245px;margin:9px 0;border-radius:10px}
+  .gb-category-image img{width:100%;height:100%;object-fit:contain;padding:12px}
+  .gb-page-section-heading{display:block;margin:0 2px 14px}
+  .gb-page-section-heading h2{font-size:24px;line-height:1.2}
+  .gb-page-section-heading p{font-size:13px;line-height:1.65}
+  .gb-page-section-heading .gb-page-number{display:inline-block;margin-top:8px;font-size:10px}
+  .gb-catalogue-shell{padding:13px 9px 18px;border-radius:14px}
+  .gb-catalogue-shell>.models-header{justify-content:flex-start;margin:0 3px 13px}
+  .gb-catalogue-shell>.models-header .models-title{font-size:11px;padding:0;background:transparent;color:#f2d77e;box-shadow:none}
+  .gb-product-family{margin:15px 0;padding:16px 12px;border-radius:14px}
+  .gb-family-header{display:flex;flex-direction:column;align-items:flex-start;gap:10px;margin-bottom:13px}
+  .gb-family-heading-copy h2{font-size:22px;line-height:1.22}
+  .gb-family-heading-copy p{font-size:13px;line-height:1.65}
+  .gb-family-stamp{display:flex;min-width:0;padding:8px 10px}
+  .gb-family-stamp i{font-size:17px}
+  .gb-family-stamp span{font-size:8px}
+  .gb-family-feature-line{display:grid;grid-template-columns:1fr;gap:8px;padding:11px;margin:0 0 13px}
+  .gb-family-feature-line span{font-size:12px;line-height:1.5;flex-basis:auto}
+  .gb-family-model-grid{display:grid;grid-template-columns:1fr;gap:11px;padding:0}
+  .gb-family-model-grid .model{display:grid;grid-template-columns:116px minmax(0,1fr);grid-template-rows:auto auto;align-items:center;gap:7px 12px;padding:10px;border-radius:12px;min-height:0}
+  .gb-family-model-grid .model .thumb{grid-column:1;grid-row:1 / span 2;width:116px;height:116px;min-height:116px;padding:0;border-radius:9px}
+  .gb-family-model-grid .model .thumb img{object-fit:contain;padding:7px}
+  .gb-family-model-grid .model .meta{grid-column:2;grid-row:1;align-self:end}
+  .gb-family-model-grid .model .meta h4{font-size:16px;line-height:1.25}
+  .gb-family-model-grid .model .meta p{font-size:12px;line-height:1.5;margin-top:5px}
+  .gb-family-model-grid .model .meta p small{font-size:11px;line-height:1.45}
+  .gb-family-model-grid .model-new-actions{grid-column:1 / -1;grid-row:3;display:flex;gap:7px;justify-content:flex-start;flex-wrap:wrap;margin-top:3px}
+  .gb-family-model-grid .model-new-actions button,.gb-family-model-grid .model-new-actions a{min-height:40px;padding:9px 11px;font-size:11px;white-space:normal}
+  .new-products-section{padding:14px 11px;margin:15px 0;border-radius:13px}
+  .gb-new-arrivals-heading{align-items:flex-start;gap:12px}
+  .gb-new-arrivals-heading h3{font-size:19px;line-height:1.25}
+  .gb-new-arrivals-heading p{font-size:12px;line-height:1.55}
+  .gb-phone-new-grid,.new-products-grid{grid-template-columns:1fr!important;gap:11px}
+  .new-product-card{width:100%;min-height:0;padding:14px;border-radius:12px;gap:10px}
+  .new-product-badge{font-size:10px}
+  .new-product-photo-placeholder{width:100%;height:190px;min-height:190px;max-height:190px;flex:0 0 190px;border-radius:10px}
+  .new-product-card h3{font-size:18px;line-height:1.25}
+  .new-product-card p{font-size:13px;line-height:1.6}
+  .new-product-actions{display:flex;flex-wrap:wrap;gap:8px;width:100%}
+  .new-product-actions button,.new-product-actions a{min-height:42px;padding:10px 12px;font-size:11px;flex:1 1 115px}
+  .gb-rd-story{margin:17px 0 22px;padding:20px 15px;border-radius:15px}
+  .gb-rd-layout,.gb-rd-home .gb-rd-layout{grid-template-columns:minmax(0,1fr);gap:17px}
+  .gb-rd-kicker{font-size:9px;letter-spacing:1px}
+  .gb-rd-copy h2{font-size:27px;line-height:1.16;letter-spacing:-.5px}
+  .gb-rd-copy p{font-size:13px;line-height:1.75}
+  .gb-rd-note{font-size:12px;line-height:1.65;padding:12px}
+  .gb-rd-process,.gb-rd-home .gb-rd-process{grid-template-columns:1fr;gap:8px}
+  .gb-rd-step{min-height:0;padding:13px 13px}
+  .gb-rd-step .number{font-size:10px;margin-bottom:7px}
+  .gb-rd-step h3{font-size:15px}
+  .gb-rd-step p{font-size:12px;line-height:1.6}
+  .gb-rd-bottom{display:block;margin-top:15px;padding-top:13px}
+  .gb-rd-bottom strong{display:block;font-size:9px;line-height:1.5}
+  .gb-rd-bottom span{display:block;margin-top:5px;text-align:left;font-size:10px}
+  .gb-rd-highlight{padding:13px}
+  .gb-rd-highlight strong{font-size:13px}
+  .gb-about-section{margin:22px 0 8px;padding:21px 15px;border-radius:15px}
+  .gb-about-copy h2{font-size:28px;line-height:1.15}
+  .gb-about-lead{font-size:13px;line-height:1.75}
+  .gb-about-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .gb-about-pillars{grid-template-columns:1fr;gap:9px}
+  .gb-about-pillar{padding:13px}
+  .gb-about-pillar h4{font-size:14px}
+  .gb-about-pillar p{font-size:12px;line-height:1.6}
+  .featured{border-radius:14px}
+  .featured-hero{height:210px}
+  .featured-copy{padding:15px 12px}
+  .featured-copy h3{font-size:19px;line-height:1.3}
+  .featured-copy p{font-size:13px;line-height:1.6}
+  .availability-badge{font-size:12px;padding:8px 12px}
+  .modal-overlay{padding:8px;align-items:center}
+  .modal{width:100%;max-width:100%;max-height:calc(100dvh - 16px);padding:14px;border-radius:13px;overflow:auto}
+  .modal h2{font-size:18px;line-height:1.3}
+  .modal-body{font-size:13px;line-height:1.6}
+  .modal-carousel-stage{height:220px}
+  .modal-carousel-stage img{object-fit:contain}
+  .carousel-btn{width:42px;height:42px}
+  .whatsapp-card{padding:13px}
+  .whatsapp-card h4{font-size:15px}
+  .whatsapp-card p{font-size:12px}
+  footer{margin-top:25px;padding:22px 15px max(30px,env(safe-area-inset-bottom));}
+  .footer-contact{font-size:12px;line-height:1.7}
+  .footer-company{font-size:17px}
+  .fab{width:52px;height:52px;right:12px;bottom:13px}
+  .fab button{font-size:22px}
+  .gb-rd-story,.gb-product-family,.gb-commerce-hero,.gb-category-hero{transform:none!important;filter:none!important}
+}
+@media(max-width:390px){
+  .gb-brand img{width:36px;height:36px}
+  .gb-brand .company-name{font-size:18px;letter-spacing:0}
+  .gb-brand .company-tagline{font-size:7px;letter-spacing:2.2px}
+  header.gb-site-header{padding:0 11px}
+  .gb-menu-toggle{width:41px;height:40px;flex-basis:41px}
+  .container{padding-left:11px;padding-right:11px}
+  .gb-universe-card{grid-template-columns:105px minmax(0,1fr);min-height:142px}
+  .gb-universe-card-visual{min-height:142px}
+  .gb-universe-content{padding:11px 10px}
+  .gb-universe-content h3{font-size:16px}
+  .gb-universe-content p{font-size:11px}
+  .gb-family-model-grid .model{grid-template-columns:100px minmax(0,1fr);gap:7px 9px}
+  .gb-family-model-grid .model .thumb{width:100px;height:100px;min-height:100px}
+  .gb-family-model-grid .model-new-actions button,.gb-family-model-grid .model-new-actions a{flex:1 1 95px;font-size:10px}
+  .gb-category-image{height:205px}
+  .gb-category-stats{grid-template-columns:1fr 1fr}
+  .gb-category-stat strong{font-size:15px}
+}
+@media(hover:none){
+  .gb-universe-card:hover,.gb-family-model-grid .model:hover,.gb-about-pillar:hover{transform:none;box-shadow:inherit}
+}
+
+
+body[data-gb-page="wifi"]{--gb-current-page:"wifi";}
 
 body[data-gb-page="wifi"] .gb-category-hero{display:grid}
 
@@ -2173,7 +2404,21 @@ body.gb-menu-open{overflow:hidden}
     <div class="gb-category-image"><img src="wifi_2.png" alt="Équipement GreenWifi mini-UPS" fetchpriority="high" loading="eager"/></div>
     <div class="gb-category-visual-bottom"><span>ENGINEERING · ENERGY · INNOVATION</span><strong>GREENBRIDGE TECHNOLOGIES</strong></div>
   </div>
-</section><section aria-labelledby="gb-commerce-title" class="gb-commerce-intro gb-premium-intro">
+</section>
+<section class="gb-rd-story" id="histoire-de-la-gamme" aria-label="Histoire et recherche et développement de wifi">
+  <div class="gb-rd-layout">
+    <div class="gb-rd-copy">
+      <div class="gb-rd-kicker">L’HISTOIRE DE GREENWIFI · R&D INTERNE</div>
+      <h2>Parce qu’une coupure électrique ne devrait pas interrompre <em>la connexion.</em></h2>
+      <p>GreenWifi est née d’un besoin concret : préserver l’alimentation d’un routeur ou d’un modem compatible lorsque le courant est interrompu. Dans un quotidien où la connexion soutient le travail, les échanges et les activités professionnelles, la continuité électrique devient essentielle.</p>
+      <p>Les ingénieurs associés et l’équipe GreenBridge ont développé cette gamme en interne autour des usages de connectivité. Le travail consiste à penser une alimentation de secours compacte, les sorties adaptées aux équipements compatibles et le fonctionnement de prise de relais sur batterie. La solution peut aussi répondre à certains besoins de vidéosurveillance, sous réserve de compatibilité.</p>
+      <div class="gb-rd-note"><i class="fa-solid fa-microchip"></i><span>GreenWifi est une gamme développée en interne. L’autonomie réelle dépend de la consommation du routeur, du modem ou de la caméra raccordée et de la configuration utilisée.</span></div>
+    </div>
+    <div class="gb-rd-process"><article class="gb-rd-step"><span class="number">01 / LE CONSTAT</span><h3>La connexion doit continuer</h3><p>Identifier le besoin de maintenir un routeur ou un modem compatible pendant une coupure de courant.</p></article><article class="gb-rd-step"><span class="number">02 / L’ARCHITECTURE</span><h3>Adapter l’alimentation</h3><p>Définir une solution basse tension, ses sorties et le principe de relais sur batterie.</p></article><article class="gb-rd-step"><span class="number">03 / LE DÉVELOPPEMENT</span><h3>Intégrer dans un format compact</h3><p>Développer une solution pratique, pensée pour les équipements de connectivité compatibles.</p></article><article class="gb-rd-step"><span class="number">04 / L’USAGE</span><h3>Servir plusieurs besoins</h3><p>Permettre l’alimentation d’un routeur, d’un modem ou d’une caméra compatible selon les caractéristiques du produit.</p></article></div>
+  </div>
+  <div class="gb-rd-bottom"><strong>GREENWIFI · DÉVELOPPEMENT INTERNE</strong><span>Une réponse technique au besoin de continuité de connexion.</span></div>
+</section>
+<section aria-labelledby="gb-commerce-title" class="gb-commerce-intro gb-premium-intro">
   <div class="gb-commerce-hero gb-premium-hero">
     <div class="gb-commerce-copy gb-premium-copy">
       <div class="gb-commerce-eyebrow"><span></span> GREENBRIDGE TECHNOLOGIES <b>·</b> CÔTE D’IVOIRE · SÉNÉGAL · AFRIQUE DE L’OUEST</div>
@@ -4242,7 +4487,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const pageImageSets={
     home:['Nos_produits_1.png','Chargeur_ordi_1.png','wifi_2.png','Pwkb_Mini_3.png','pack_batterie_1200wh.png'],
     laptop:['Chargeur_ordi_1.png','GreenLaptop_2.PNG'],
-    wifi:['wifi_2.png'],
+    wifi:['wifi_2.png','GreenWifi2.png'],
     powerbanks:['Pwkb_Mini_3.png','Greenonly.jpg','Greenplus_1.png'],
     lifepo4:['pack_batterie_1200wh.png','Future_Pack_1.png']
   };
