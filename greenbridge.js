@@ -1080,10 +1080,10 @@ function downloadModelPdf(index){
   };
   window.GB_NOVELTY_NOTICES=noveltyNotices;
   const noveltyCardImages={
-    battery104:'pack_batterie_1200wh.png',
-    v1:'Greenbridge_V2.png',
-    v2:'Greenbridge_v1.jpg',
-    v3:'greenbridge_v3.jpg'
+    battery104:'gb-lifepo4-1.webp',
+    v1:'gb-v1-1.webp',
+    v2:'gb-v2-1.webp',
+    v3:'gb-v3-1.webp'
   };
   window.downloadLiFePO4TechnicalNotice=function(){
     const product=noveltyNotices.battery104;
@@ -1111,13 +1111,129 @@ function downloadModelPdf(index){
 
 const GB_WHATSAPP = { coteivoire:'2250172611537', senegal:'221774015004' };
 
-/* Galeries des nouveautés */
-const newProductGalleryImages = {
-  lifepo4:['pack_batterie_1200wh.png','pack_batterie_1200wh_2.png','pack_batterie_1200wh_3.png','pack_batterie_1200w_4.jpg'],
-  v1:['Greenbridge_V2.png','pack_batterie_1200wh_5.png','pack_batterie_1200wh_6.png','pack_batterie_1200wh_7.png'],
-  v2:['Greenbridge_v1.jpg'],
-  v3:['greenbridge_v3.jpg']
+/* =====================================================================
+   PHOTOS : une seule liste par produit (la 1re = photo de la carte)
+   ===================================================================== */
+const GB_IMAGES = {
+ "m0": [
+  "gb-greenonly-1.webp",
+  "gb-greenonly-2.webp",
+  "gb-greenonly-3.webp",
+  "gb-greenonly-4.webp",
+  "gb-greenonly-5.webp",
+  "gb-greenonly-6.webp"
+ ],
+ "v1": [
+  "gb-v1-1.webp",
+  "gb-v1-2.webp",
+  "gb-v1-3.webp"
+ ],
+ "m3": [
+  "gb-greenplus-1.webp",
+  "gb-greenplus-2.webp",
+  "gb-greenplus-3.webp",
+  "gb-greenplus-4.webp"
+ ],
+ "m2": [
+  "gb-greencore-1.webp",
+  "gb-greencore-2.webp",
+  "gb-greencore-3.webp",
+  "gb-greencore-4.webp",
+  "gb-greencore-5.webp"
+ ],
+ "m4": [
+  "gb-greeneco-1.webp",
+  "gb-greeneco-2.webp",
+  "gb-greeneco-3.webp",
+  "gb-greeneco-4.webp",
+  "gb-greeneco-5.webp"
+ ],
+ "m5": [
+  "gb-greenafrica-1.webp",
+  "gb-greenafrica-2.webp",
+  "gb-greenafrica-3.webp",
+  "gb-greenafrica-4.webp",
+  "gb-greenafrica-5.webp"
+ ],
+ "v2": [
+  "gb-v2-1.webp",
+  "gb-v2-2.webp"
+ ],
+ "m1": [
+  "gb-greenmini-1.webp",
+  "gb-greenmini-2.webp",
+  "gb-greenmini-3.webp",
+  "gb-greenmini-4.webp"
+ ],
+ "m7": [
+  "gb-greenreck-1.webp",
+  "gb-greenreck-2.webp"
+ ],
+ "m6": [
+  "gb-greenpro-1.webp",
+  "gb-greenpro-2.webp",
+  "gb-greenpro-3.webp",
+  "gb-greenpro-4.webp",
+  "gb-greenpro-5.webp"
+ ],
+ "v3": [
+  "gb-v3-1.webp",
+  "gb-v3-2.webp"
+ ],
+ "m8": [
+  "gb-greenwire-1.webp",
+  "gb-greenwire-2.webp"
+ ],
+ "m9": [
+  "gb-greenwireless-1.webp",
+  "gb-greenwireless-2.webp",
+  "gb-greenwireless-3.webp",
+  "gb-greenwireless-4.webp"
+ ],
+ "m10": [
+  "gb-greentech-1.webp",
+  "gb-greentech-2.webp",
+  "gb-greentech-3.webp"
+ ],
+ "m12": [
+  "gb-greenlaptop-1.webp",
+  "gb-greenlaptop-2.webp",
+  "gb-greenlaptop-3.webp"
+ ],
+ "m11": [
+  "gb-greenlaptop-plus-1.webp",
+  "gb-greenlaptop-plus-2.webp",
+  "gb-greenlaptop-plus-3.webp"
+ ],
+ "m13": [
+  "gb-greenwifi-1.webp",
+  "gb-greenwifi-2.webp",
+  "gb-greenwifi-3.webp"
+ ],
+ "lifepo4": [
+  "gb-lifepo4-1.webp",
+  "gb-lifepo4-2.webp",
+  "gb-lifepo4-3.webp",
+  "gb-lifepo4-4.webp",
+  "gb-lifepo4-5.webp"
+ ],
+ "pack": [
+  "gb-pack25-1.webp",
+  "gb-pack25-2.webp",
+  "gb-pack25-3.webp"
+ ]
 };
+/* Synchronise l’ancien code (galeries, notices PDF) avec cette liste */
+(function(){
+  for(const id in GB_IMAGES){
+    if(id.startsWith('m') && typeof models !== 'undefined' && models[Number(id.slice(1))]){
+      const m = models[Number(id.slice(1))]; m.cardImage = GB_IMAGES[id][0]; m.images = GB_IMAGES[id].slice();
+    }
+  }
+})();
+
+/* Galeries des nouveautés */
+const newProductGalleryImages = { lifepo4:GB_IMAGES.lifepo4, v1:GB_IMAGES.v1, v2:GB_IMAGES.v2, v3:GB_IMAGES.v3 };
 window.newProductGalleryImages = newProductGalleryImages;
 
 const NEW_PRODUCT_INFO = {
@@ -1133,23 +1249,23 @@ const NEW_PRODUCT_INFO = {
    ===================================================================== */
 const GB_CARDS = {
   m0:{ name:'GreenOnly',    mah:4500,  price:6000,  spec:'4 500 mAh, 10 W',         use:'≈ 1 recharge de smartphone',     pitch:'Le format de poche pour dépanner votre téléphone dans la journée.', family:'phone', tags:['compact'] },
-  v1:{ name:'GreenBridge V1',mah:6000, price:6000,  spec:'6 000 mAh, 22,5 W',       use:'≈ 1 recharge de smartphone',     pitch:'Compacte et rapide : jusqu’à 22,5 W en USB-C.', family:'phone', tags:['compact','fast'], isNew:true, img:'Greenbridge_V2.png' },
+  v1:{ name:'GreenBridge V1',mah:6000, price:6000,  spec:'6 000 mAh, 22,5 W',       use:'≈ 1 recharge de smartphone',     pitch:'Compacte et rapide : jusqu’à 22,5 W en USB-C.', family:'phone', tags:['compact','fast'], isNew:true },
   m3:{ name:'GreenPlus',    mah:10000, price:6000,  spec:'10 000 mAh, 15 W',        use:'≈ 2 recharges de smartphone',    pitch:'Trois sorties pour recharger trois appareils en même temps.', family:'phone', tags:[] },
   m2:{ name:'GreenCore',    mah:10000, price:7000,  spec:'10 000 mAh, 15 W',        use:'≈ 2 recharges de smartphone',    pitch:'Powerbank et lampe LED à 4 niveaux, utile pendant les coupures.', family:'phone', tags:['led'] },
   m4:{ name:'GreenEco',     mah:10000, price:7000,  spec:'10 000 mAh, 15 W',        use:'≈ 2 recharges de smartphone',    pitch:'Se recharge en USB-C ou Micro-USB : le câble que vous avez sous la main.', family:'phone', tags:[] },
   m5:{ name:'GreenAfrica',  mah:10000, price:7000,  spec:'10 000 mAh, 15 W',        use:'≈ 2 recharges de smartphone',    pitch:'L’essentiel, simple et fiable : entrée USB-C, sortie USB-A.', family:'phone', tags:[] },
-  v2:{ name:'GreenBridge V2',mah:10000,price:7500,  spec:'10 000 mAh, 22,5 W',      use:'≈ 2 recharges de smartphone',    pitch:'10 000 mAh avec la charge rapide 22,5 W en USB-C.', family:'phone', tags:['fast'], isNew:true, img:'Greenbridge_v1.jpg' },
+  v2:{ name:'GreenBridge V2',mah:10000,price:7500,  spec:'10 000 mAh, 22,5 W',      use:'≈ 2 recharges de smartphone',    pitch:'10 000 mAh avec la charge rapide 22,5 W en USB-C.', family:'phone', tags:['fast'], isNew:true },
   m1:{ name:'GreenMini',    mah:10000, price:8000,  spec:'10 000 mAh, 15 ou 22,5 W',use:'≈ 2 recharges de smartphone',    pitch:'Compacte, en version 15 W ou en charge rapide 22,5 W.', family:'phone', tags:['fast'] },
   m7:{ name:'GreenReck',    mah:12000, price:7500,  spec:'12 000 mAh, 15 W',        use:'≈ 2 à 3 recharges de smartphone',pitch:'Deux sorties pour recharger deux appareils à la fois.', family:'phone', tags:[] },
   m6:{ name:'GreenPro',     mah:12000, price:9000,  spec:'12 000 mAh, 15 W',        use:'≈ 2 à 3 recharges de smartphone',pitch:'De quoi tenir toute la journée, avec deux sorties USB-A.', family:'phone', tags:[] },
-  v3:{ name:'GreenBridge V3',mah:12000,price:9000,  spec:'12 000 mAh, 22,5 W',      use:'≈ 2 à 3 recharges de smartphone',pitch:'La plus endurante des nouveautés, en charge rapide.', family:'phone', tags:['fast'], isNew:true, img:'greenbridge_v3.jpg' },
+  v3:{ name:'GreenBridge V3',mah:12000,price:9000,  spec:'12 000 mAh, 22,5 W',      use:'≈ 2 à 3 recharges de smartphone',pitch:'La plus endurante des nouveautés, en charge rapide.', family:'phone', tags:['fast'], isNew:true },
   m8:{ name:'GreenWire',    mah:20000, price:15000, spec:'20 000 mAh, 15 ou 22,5 W',use:'≈ 4 recharges de smartphone',    pitch:'Grande capacité, avec recharge sans fil en version 22,5 W.', family:'phone', tags:['fast','wireless'] },
   m9:{ name:'GreenWireless',mah:20000, price:18000, spec:'20 000 mAh, sans fil',    use:'≈ 4 recharges de smartphone',    pitch:'Posez votre téléphone dessus : il se recharge sans câble.', family:'phone', tags:['fast','wireless'], soldOut:true },
   m10:{name:'GreenTech',    mah:20000, price:18000, spec:'20 000 mAh, 22,5 W',      use:'≈ 4 recharges de smartphone',    pitch:'Charge rapide et lampe LED puissante pour les délestages.', family:'phone', tags:['fast','led'] },
   m12:{name:'GreenLaptop',  mah:20000, price:20000, spec:'20 000 mAh, 100 W',       use:'≈ 1 recharge d’ordinateur portable', pitch:'Ordinateur et téléphone rechargés, jusqu’à 100 W.', family:'laptop', tags:['fast'] },
   m11:{name:'GreenLaptop+', mah:36000, price:40000, spec:'36 000 mAh, 65 à 100 W',  use:'≈ 1,5 à 2 recharges d’ordinateur', pitch:'Une journée de travail loin des prises.', family:'laptop', tags:['fast'] },
   m13:{name:'GreenWifi',    mah:12000, price:30000, spec:'Mini-UPS 12 000 mAh',     use:'Jusqu’à 6 h de Wi-Fi pendant une coupure', pitch:'Votre box reste allumée quand le courant saute.', family:'wifi', tags:[] },
-  lifepo4:{name:'Batterie LiFePO₄', mah:1330000, price:250000, spec:'104 Ah, 12,8 V', use:'≈ 1,3 kWh d’énergie stockée', pitch:'Lumière, ventilateur et télé pendant les délestages.', family:'storage', tags:[], isNew:true, img:'pack_batterie_1200wh.png' }
+  lifepo4:{name:'Batterie LiFePO₄', mah:1330000, price:250000, spec:'104 Ah, 12,8 V', use:'≈ 1,3 kWh d’énergie stockée', pitch:'Lumière, ventilateur et télé pendant les délestages.', family:'storage', tags:[], isNew:true }
 };
 /* Ordre d’affichage par défaut : capacité, puis prix */
 const GB_ORDER = Object.keys(GB_CARDS);
@@ -1164,13 +1280,7 @@ function escapeHTML(value){
   return String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 
-function gbImagesFor(id){
-  if(id.startsWith('m')){
-    const m = models[Number(id.slice(1))] || {};
-    return [...new Set([m.cardImage, ...(m.images || [])].filter(Boolean))];
-  }
-  return [...new Set([GB_CARDS[id] && GB_CARDS[id].img, ...(newProductGalleryImages[id] || [])].filter(Boolean))];
-}
+function gbImagesFor(id){ return (GB_IMAGES[id] || []).slice(); }
 
 /* Image robuste : essaie chaque photo disponible, puis affiche un visuel neutre. */
 function gbAttachImageFallback(img, candidates){
@@ -1476,9 +1586,9 @@ window.openNewProductModal = openNewProductModal;
 
 function openPackModal(){
   const packImages = [
-    {src:'Future_Pack_1.png', alt:'Pack 2,5 kWh, vue 1'},
-    {src:'Future_pack_2.1.png', alt:'Pack 2,5 kWh, vue 2'},
-    {src:'Future_Pack_3.png', alt:'Pack 2,5 kWh, vue 3'}
+    {src:GB_IMAGES.pack[0], alt:'Pack 2,5 kWh, vue 1'},
+    {src:GB_IMAGES.pack[1], alt:'Pack 2,5 kWh, vue 2'},
+    {src:GB_IMAGES.pack[2], alt:'Pack 2,5 kWh, vue 3'}
   ];
   const html = `
     <header class="m-head">
