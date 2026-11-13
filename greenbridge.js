@@ -1614,17 +1614,6 @@ gbInitFilters();
       const id = `ebw${uid}${i}`;
       el('path', {id, d, fill:'none', stroke:wire.color, 'stroke-width':'1'}, svg);
     });
-    if(reduce) return;
-    /* vitesse constante quelle que soit la largeur de l’écran */
-    const base = w / 140;
-    electron(svg, `ebw${uid}0`, base * 1.0, 0,          '#E9D79B', 'ebGlow', 55);
-    electron(svg, `ebw${uid}0`, base * 1.0, base * .5,  '#B7E57E', 'ebGlow', 40);
-    electron(svg, `ebw${uid}1`, base * 1.35, base * .3, '#B7E57E', 'ebGlow', 45);
-    electron(svg, `ebw${uid}1`, base * 1.35, base * 1,  '#E9D79B', 'ebGlow', 35);
-    electron(svg, `ebw${uid}2`, base * .8, base * .55,  '#FFF1BF', 'ebGlow', 60);
-    /* arc électrique qui jaillit entre les fils */
-    const arc = el('path', {class:'eb-arc', fill:'none', stroke:'#F6E7AE', 'stroke-width':'1.4', filter:'url(#ebGlow)', 'stroke-linejoin':'round'}, svg);
-    band._arc = arc; band._w = w; band._h = h;
   }
   function zap(band){
     const arc = band._arc; if(!arc) return;
@@ -1664,9 +1653,184 @@ gbInitFilters();
     const all = () => { bands.forEach(buildBand); frames.forEach(buildFrame); };
     all();
     let t; window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(all, 200); });
-    if(!reduce && bands.length){
-      setInterval(() => { if(!document.hidden) bands.forEach(zap); }, 2600);
-    }
+    const mountPlasma = () => bands.forEach(band => { if(window.GBPlasma) window.GBPlasma.mount(band); });
+    if(window.GBPlasma) mountPlasma(); else window.addEventListener('load', mountPlasma);
   }
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+
+/* =====================================================================
+   Boules de plasma : sphères d’énergie avec éclairs internes
+   Couleurs modifiables dans PLASMA_COLORS (valeurs R, G, B).
+   ===================================================================== */
+(function(){
+  'use strict';
+  const PLASMA_COLORS = {
+    halo:  [40, 170, 255],   /* lueur extérieure bleue */
+    shell: [90, 230, 255],   /* paroi cyan */
+    bolt:  [200, 250, 255],  /* éclairs */
+    core:  [255, 255, 255],  /* cœur blanc */
+    nebula:[200, 60, 220]    /* reflets violets à l’intérieur */
+  };
+  const rgba = (c, a) => `rgba(${c[0]},${c[1]},${c[2]},${a})`;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const rand = (a, b) => a + Math.random() * (b - a);
+
+  /* Éclair irrégulier par déplacement du point milieu */
+  function jagged(x1, y1, x2, y2, rough, depth){
+    let pts = [[x1, y1], [x2, y2]];
+    for(let d = 0; d < depth; d++){
+      const next = [pts[0]];
+      for(let i = 0; i < pts.length - 1; i++){
+        const [ax, ay] = pts[i], [bx, by] = pts[i + 1];
+        const len = Math.hypot(bx - ax, by - ay) || 1;
+        const off = (Math.random() - .5) * rough * len;
+        next.push([(ax + bx) / 2 + (-(by - ay) / len) * off, (ay + by) / 2 + ((bx - ax) / len) * off], pts[i + 1]);
+      }
+      pts = next;
+    }
+    return pts;
+  }
+  function strokePts(ctx, pts){
+    ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]);
+    for(let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
+    ctx.stroke();
+  }
+
+  function makeOrb(i){
+    return {
+      rxRatio:[.46, .3, .4][i], ry:[.18, .12, .22][i], speed:[.05, .08, .04][i] * (i % 2 ? -1 : 1),
+      phase:[0, 2.1, 4.2][i], spin:rand(-.6, .6),
+      bolts:Array.from({length:10}, () => ({angle:rand(0, Math.PI * 2), drift:rand(-.9, .9), pts:null, next:0}))
+    };
+  }
+
+  function drawOrb(ctx, o, x, y, r, now){
+    ctx.save();
+    ctx.globalCompositeOperation = 'lighter';
+    const C = PLASMA_COLORS;
+
+    /* halo */
+    let g = ctx.createRadialGradient(x, y, r * .5, x, y, r * 2.8);
+    g.addColorStop(0, rgba(C.halo, .38)); g.addColorStop(.45, rgba(C.halo, .12)); g.addColorStop(1, rgba(C.halo, 0));
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r * 2.8, 0, Math.PI * 2); ctx.fill();
+
+    /* corps de la sphère */
+    g = ctx.createRadialGradient(x, y, 0, x, y, r);
+    g.addColorStop(0, rgba(C.halo, .28)); g.addColorStop(.7, rgba(C.halo, .14)); g.addColorStop(.93, rgba(C.shell, .45)); g.addColorStop(1, rgba(C.shell, 0));
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+
+    /* reflets violets qui tournent */
+    for(let k = 0; k < 2; k++){
+      const a = now * .0006 * (k ? -1 : 1) + k * 2.5 + o.phase;
+      const nx = x + Math.cos(a) * r * .38, ny = y + Math.sin(a) * r * .38;
+      g = ctx.createRadialGradient(nx, ny, 0, nx, ny, r * .55);
+      g.addColorStop(0, rgba(C.nebula, .32)); g.addColorStop(1, rgba(C.nebula, 0));
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(nx, ny, r * .55, 0, Math.PI * 2); ctx.fill();
+    }
+
+    /* éclairs du centre vers la paroi */
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    o.bolts.forEach(b => {
+      b.angle += b.drift * .012;
+      if(!b.pts || now > b.next){
+        const ex = Math.cos(b.angle) * r * .96, ey = Math.sin(b.angle) * r * .96;
+        b.pts = jagged(rand(-r * .06, r * .06), rand(-r * .06, r * .06), ex, ey, .55, 4);
+        /* petite ramification */
+        const m = b.pts[Math.floor(b.pts.length * rand(.35, .65))];
+        const ba = b.angle + rand(-.9, .9);
+        b.branch = jagged(m[0], m[1], Math.cos(ba) * r * .92, Math.sin(ba) * r * .92, .6, 3);
+        b.next = now + rand(60, 140);
+      }
+      ctx.save(); ctx.translate(x, y);
+      ctx.strokeStyle = rgba(C.shell, .28); ctx.lineWidth = Math.max(2, r * .12); strokePts(ctx, b.pts);
+      ctx.strokeStyle = rgba(C.bolt, .95); ctx.lineWidth = Math.max(.6, r * .03); strokePts(ctx, b.pts);
+      ctx.strokeStyle = rgba(C.bolt, .55); ctx.lineWidth = Math.max(.5, r * .022); strokePts(ctx, b.branch);
+      /* point d’impact sur la paroi */
+      const end = b.pts[b.pts.length - 1];
+      g = ctx.createRadialGradient(end[0], end[1], 0, end[0], end[1], r * .16);
+      g.addColorStop(0, rgba(C.core, .9)); g.addColorStop(1, rgba(C.shell, 0));
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(end[0], end[1], r * .16, 0, Math.PI * 2); ctx.fill();
+      ctx.restore();
+    });
+
+    /* paroi électrique qui crépite */
+    const ring = [];
+    for(let k = 0; k <= 56; k++){
+      const a = (k / 56) * Math.PI * 2, rr = r * (.965 + Math.random() * .055);
+      ring.push([x + Math.cos(a) * rr, y + Math.sin(a) * rr]);
+    }
+    ctx.strokeStyle = rgba(C.shell, .22); ctx.lineWidth = Math.max(2, r * .11); strokePts(ctx, ring);
+    ctx.strokeStyle = rgba(C.bolt, .7); ctx.lineWidth = Math.max(.6, r * .028); strokePts(ctx, ring);
+
+    /* cœur */
+    g = ctx.createRadialGradient(x, y, 0, x, y, r * .32);
+    g.addColorStop(0, rgba(C.core, 1)); g.addColorStop(.35, rgba(C.bolt, .7)); g.addColorStop(1, rgba(C.halo, 0));
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r * .32, 0, Math.PI * 2); ctx.fill();
+    ctx.restore();
+  }
+
+  /* éclair entre deux boules proches */
+  function drawArc(ctx, a, b){
+    const pts = jagged(a.x, a.y, b.x, b.y, .35, 5);
+    ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.strokeStyle = rgba(PLASMA_COLORS.shell, .3); ctx.lineWidth = 4; strokePts(ctx, pts);
+    ctx.strokeStyle = rgba(PLASMA_COLORS.bolt, .95); ctx.lineWidth = 1.2; strokePts(ctx, pts);
+    ctx.restore();
+  }
+
+  function mount(host){
+    if(host._plasma) return;
+    const canvas = document.createElement('canvas');
+    canvas.className = 'plasma-layer';
+    canvas.setAttribute('aria-hidden', 'true');
+    host.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+    const orbs = [0, 1, 2].map(makeOrb);
+    let w = 0, h = 0, dpr = 1, raf = 0, visible = true, arcUntil = 0, arcPair = null;
+    const start = performance.now();
+
+    function size(){
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = host.clientWidth; h = host.clientHeight;
+      canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+      canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    function frame(now){
+      ctx.clearRect(0, 0, w, h);
+      const r = Math.max(13, Math.min(h * .36, 26));
+      const t = (now - start) / 1000;
+      const pos = orbs.map(o => {
+        const ang = t * o.speed * Math.PI * 2 + o.phase;
+        const depth = (Math.sin(ang) + 1) / 2;            /* 0 = au fond, 1 = devant */
+        return { o, x:w / 2 + Math.cos(ang) * Math.max(110, w * o.rxRatio), y:h / 2 + Math.sin(ang) * Math.min(h * o.ry, Math.max(0, h / 2 - r * 1.12)), r:r * (.78 + depth * .3), depth };
+      }).sort((a, b) => a.depth - b.depth);
+
+      /* éclair entre deux boules quand elles se croisent */
+      if(now > arcUntil){
+        arcPair = null;
+        for(let i = 0; i < pos.length; i++) for(let j = i + 1; j < pos.length; j++){
+          if(Math.abs(pos[i].x - pos[j].x) < Math.max(140, w * .12) && Math.random() < .04){ arcPair = [pos[i].o, pos[j].o]; arcUntil = now + rand(90, 220); }
+        }
+      }
+      if(arcPair){
+        const a = pos.find(p => p.o === arcPair[0]), b = pos.find(p => p.o === arcPair[1]);
+        if(a && b) drawArc(ctx, a, b);
+      }
+      pos.forEach(p => drawOrb(ctx, p.o, p.x, p.y, p.r, now));
+    }
+    function loop(now){
+      raf = 0;
+      if(visible && !document.hidden) frame(now);
+      if(!reduce) raf = requestAnimationFrame(loop);
+    }
+    size(); loop(performance.now());
+    window.addEventListener('resize', () => { size(); if(reduce) frame(performance.now()); });
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(entries => { visible = entries[0].isIntersecting; }).observe(host);
+    }
+    host._plasma = true;
+  }
+  window.GBPlasma = { mount, colors:PLASMA_COLORS };
 })();
