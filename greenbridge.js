@@ -1558,279 +1558,239 @@ gbInitFilters();
 (function(){ const y = document.getElementById('year'); if(y) y.textContent = new Date().getFullYear(); })();
 
 /* =====================================================================
-   Énergie : électrons qui circulent sur des fils et autour des photos
+   ÉNERGIE GREENBRIDGE
+   - Bande collée sous le menu avec des boules de plasma
+   - Courant électrique autour des grandes photos
+   Une couleur par page : modifiez GB_ENERGY_THEMES pour changer.
+   Couleurs en [Rouge, Vert, Bleu].
    ===================================================================== */
+const GB_ENERGY_THEMES = {
+  home:      { name:'Jaune soleil',   halo:[255,196,0],   shell:[255,226,90],  bolt:[255,250,215], core:[255,255,255], nebula:[255,120,0]   },
+  laptop:    { name:'Bleu électrique',halo:[30,150,255],  shell:[90,220,255],  bolt:[215,248,255], core:[255,255,255], nebula:[150,70,255]  },
+  wifi:      { name:'Violet signal',  halo:[150,80,255],  shell:[200,150,255], bolt:[245,230,255], core:[255,255,255], nebula:[255,70,200]  },
+  powerbanks:{ name:'Vert énergie',   halo:[60,220,90],   shell:[150,255,120], bolt:[235,255,215], core:[255,255,255], nebula:[0,200,170]   },
+  lifepo4:   { name:'Orange batterie',halo:[255,110,20],  shell:[255,170,70],  bolt:[255,238,205], core:[255,255,255], nebula:[255,40,60]   },
+  about:     { name:'Rose électrique',halo:[255,60,170],  shell:[255,140,215], bolt:[255,232,248], core:[255,255,255], nebula:[160,80,255]  }
+};
+
 (function(){
   'use strict';
-  const NS = 'http://www.w3.org/2000/svg';
+  const page = document.body.getAttribute('data-gb-page') || 'home';
+  const T = GB_ENERGY_THEMES[page] || GB_ENERGY_THEMES.home;
+  const rgba = (c, a) => `rgba(${c[0]},${c[1]},${c[2]},${a})`;
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const rand = (a, b) => a + Math.random() * (b - a);
+  const NS = 'http://www.w3.org/2000/svg';
   const el = (tag, attrs, parent) => {
     const n = document.createElementNS(NS, tag);
     for(const k in attrs) n.setAttribute(k, attrs[k]);
     if(parent) parent.appendChild(n);
     return n;
   };
-  const glowFilter = (svg, id, blur) => {
-    const defs = el('defs', {}, svg);
-    const f = el('filter', {id, x:'-50%', y:'-50%', width:'200%', height:'200%'}, defs);
-    el('feGaussianBlur', {stdDeviation:String(blur), result:'b'}, f);
-    const m = el('feMerge', {}, f);
-    el('feMergeNode', {in:'b'}, m); el('feMergeNode', {in:'b'}, m); el('feMergeNode', {in:'SourceGraphic'}, m);
-    return defs;
-  };
-  /* Un électron = une traînée lumineuse + un noyau brillant, synchronisés */
-  const electron = (svg, pathId, dur, delay, color, filterId, trail) => {
-    const src = svg.querySelector('#' + pathId);
-    if(!src) return;
-    const g = el('g', {filter:`url(#${filterId})`}, svg);
-    const tail = el('path', {d:src.getAttribute('d'), fill:'none', stroke:color, 'stroke-width':'2.2', 'stroke-linecap':'round',
-      pathLength:'1000', 'stroke-dasharray':`${trail} ${1000 - trail}`, 'stroke-dashoffset':'0', opacity:'.9'}, g);
-    el('animate', {attributeName:'stroke-dashoffset', from:'0', to:'-1000', dur:dur.toFixed(2) + 's', begin:(-delay).toFixed(2) + 's', repeatCount:'indefinite'}, tail);
-    const dot = el('circle', {r:'3.2', fill:'#FFF6D6'}, g);
-    /* le noyau se place en tête de la traînée */
-    const lead = dur * trail / 1000;
-    const mo = el('animateMotion', {dur:dur.toFixed(2) + 's', begin:(-(delay + lead)).toFixed(2) + 's', repeatCount:'indefinite'}, dot);
-    el('mpath', {href:'#' + pathId}, mo);
-  };
+  document.documentElement.style.setProperty('--energy', `rgb(${T.shell.join(',')})`);
 
-  /* ---------- Bande sous le menu ---------- */
-  function buildBand(band){
-    const w = Math.max(320, band.clientWidth), h = band.clientHeight || 44;
-    band.innerHTML = '';
-    const svg = el('svg', {viewBox:`0 0 ${w} ${h}`, width:w, height:h, 'aria-hidden':'true'}, band);
-    glowFilter(svg, 'ebGlow', 2.4);
-    const wires = [
-      {amp:h * .22, len:420, phase:0,   color:'rgba(140,193,82,.32)'},
-      {amp:h * .16, len:300, phase:1.9, color:'rgba(201,166,70,.28)'},
-      {amp:h * .26, len:560, phase:3.6, color:'rgba(234,242,236,.12)'}
-    ];
-    const uid = Math.random().toString(36).slice(2, 7);
-    wires.forEach((wire, i) => {
+  /* ---------- Fils de la bande (SVG statique, très léger) ---------- */
+  function drawWires(band){
+    let svg = band.querySelector('svg.energy-wires');
+    const w = band.clientWidth, h = band.clientHeight;
+    if(!w || !h) return;
+    if(svg && svg._w === w && svg._h === h) return;
+    if(svg) svg.remove();
+    svg = el('svg', {class:'energy-wires', viewBox:`0 0 ${w} ${h}`, 'aria-hidden':'true'});
+    svg._w = w; svg._h = h;
+    band.prepend(svg);
+    [[.2, 420, 0, .30], [.14, 300, 1.9, .22], [.24, 560, 3.6, .12]].forEach(([amp, len, ph, op]) => {
       let d = '';
-      for(let x = -10; x <= w + 10; x += 12){
-        const y = h / 2 + wire.amp * Math.sin((x / wire.len) * Math.PI * 2 + wire.phase);
-        d += (x === -10 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1);
+      for(let x = -10; x <= w + 10; x += 14){
+        const y = h / 2 + h * amp * Math.sin((x / len) * Math.PI * 2 + ph);
+        d += (x === -10 ? 'M' : 'L') + x + ',' + y.toFixed(1);
       }
-      const id = `ebw${uid}${i}`;
-      el('path', {id, d, fill:'none', stroke:wire.color, 'stroke-width':'1'}, svg);
+      el('path', {d, fill:'none', stroke:rgba(T.shell, op), 'stroke-width':'1'}, svg);
     });
-  }
-  function zap(band){
-    const arc = band._arc; if(!arc) return;
-    const w = band._w, h = band._h;
-    const x0 = 40 + Math.random() * (w - 200), len = 70 + Math.random() * 130;
-    let d = `M${x0},${h / 2}`;
-    for(let x = x0 + 8; x < x0 + len; x += 7 + Math.random() * 9){
-      d += ` L${x.toFixed(1)},${(h / 2 + (Math.random() - .5) * h * .8).toFixed(1)}`;
-    }
-    arc.setAttribute('d', d);
-    arc.classList.remove('is-on'); void arc.getBoundingClientRect(); arc.classList.add('is-on');
   }
 
   /* ---------- Courant autour d’un cadre photo ---------- */
   function buildFrame(box){
-    const old = box.querySelector(':scope > .energy-frame');
-    if(old) old.remove();
     const w = box.clientWidth, h = box.clientHeight;
     if(!w || !h) return;
+    const old = box.querySelector(':scope > .energy-frame');
+    if(old && old._w === w && old._h === h) return;
+    if(old) old.remove();
     const r = parseFloat(getComputedStyle(box).borderTopLeftRadius) || 24;
     const svg = el('svg', {class:'energy-frame', viewBox:`0 0 ${w} ${h}`, 'aria-hidden':'true'});
+    svg._w = w; svg._h = h;
     box.appendChild(svg);
-    glowFilter(svg, 'efGlow', 3);
     const i = 1.5, rr = Math.max(0, r - i);
-    const id = 'ef' + Math.random().toString(36).slice(2, 7);
     const d = `M${i + rr},${i} H${w - i - rr} A${rr},${rr} 0 0 1 ${w - i},${i + rr} V${h - i - rr} A${rr},${rr} 0 0 1 ${w - i - rr},${h - i} H${i + rr} A${rr},${rr} 0 0 1 ${i},${h - i - rr} V${i + rr} A${rr},${rr} 0 0 1 ${i + rr},${i} Z`;
-    el('path', {id, d, fill:'none', stroke:'rgba(201,166,70,.28)', 'stroke-width':'1.2'}, svg);
+    el('path', {d, fill:'none', stroke:rgba(T.shell, .3), 'stroke-width':'1.2'}, svg);
     if(reduce) return;
-    const per = (w + h) * 2 / 120; /* environ 120 px par seconde */
-    electron(svg, id, per, 0,         '#E9D79B', 'efGlow', 90);
-    electron(svg, id, per, per / 2,   '#B7E57E', 'efGlow', 70);
+    const dur = ((w + h) * 2 / 120).toFixed(2);
+    [[0, rgba(T.shell, 1), 90], [dur / 2, rgba(T.bolt, 1), 70]].forEach(([delay, color, trail]) => {
+      const tail = el('path', {d, fill:'none', stroke:color, 'stroke-width':'2.4', 'stroke-linecap':'round', pathLength:'1000',
+        'stroke-dasharray':`${trail} ${1000 - trail}`, class:'energy-trail'}, svg);
+      el('animate', {attributeName:'stroke-dashoffset', from:'0', to:'-1000', dur:dur + 's', begin:'-' + delay + 's', repeatCount:'indefinite'}, tail);
+    });
   }
 
-  function init(){
-    const bands = Array.from(document.querySelectorAll('.energy-band'));
-    const frames = Array.from(document.querySelectorAll('[data-energy-frame]'));
-    const all = () => { bands.forEach(buildBand); frames.forEach(buildFrame); };
-    all();
-    let t; window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(all, 200); });
-    const mountPlasma = () => bands.forEach(band => { if(window.GBPlasma) window.GBPlasma.mount(band); });
-    if(window.GBPlasma) mountPlasma(); else window.addEventListener('load', mountPlasma);
-  }
-  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
-})();
-
-/* =====================================================================
-   Boules de plasma : sphères d’énergie avec éclairs internes
-   Couleurs modifiables dans PLASMA_COLORS (valeurs R, G, B).
-   ===================================================================== */
-(function(){
-  'use strict';
-  const PLASMA_COLORS = {
-    halo:  [40, 170, 255],   /* lueur extérieure bleue */
-    shell: [90, 230, 255],   /* paroi cyan */
-    bolt:  [200, 250, 255],  /* éclairs */
-    core:  [255, 255, 255],  /* cœur blanc */
-    nebula:[200, 60, 220]    /* reflets violets à l’intérieur */
-  };
-  const rgba = (c, a) => `rgba(${c[0]},${c[1]},${c[2]},${a})`;
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const rand = (a, b) => a + Math.random() * (b - a);
-
-  /* Éclair irrégulier par déplacement du point milieu */
+  /* ---------- Boules de plasma (canvas) ---------- */
   function jagged(x1, y1, x2, y2, rough, depth){
     let pts = [[x1, y1], [x2, y2]];
     for(let d = 0; d < depth; d++){
       const next = [pts[0]];
-      for(let i = 0; i < pts.length - 1; i++){
-        const [ax, ay] = pts[i], [bx, by] = pts[i + 1];
-        const len = Math.hypot(bx - ax, by - ay) || 1;
-        const off = (Math.random() - .5) * rough * len;
-        next.push([(ax + bx) / 2 + (-(by - ay) / len) * off, (ay + by) / 2 + ((bx - ax) / len) * off], pts[i + 1]);
+      for(let k = 0; k < pts.length - 1; k++){
+        const [ax, ay] = pts[k], [bx, by] = pts[k + 1];
+        const len = Math.hypot(bx - ax, by - ay) || 1, off = (Math.random() - .5) * rough * len;
+        next.push([(ax + bx) / 2 - (by - ay) / len * off, (ay + by) / 2 + (bx - ax) / len * off], pts[k + 1]);
       }
       pts = next;
     }
     return pts;
   }
-  function strokePts(ctx, pts){
+  function line(ctx, pts){
     ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]);
-    for(let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
+    for(let k = 1; k < pts.length; k++) ctx.lineTo(pts[k][0], pts[k][1]);
     ctx.stroke();
   }
 
-  function makeOrb(i){
-    return {
-      rxRatio:[.46, .3, .4][i], ry:[.18, .12, .22][i], speed:[.05, .08, .04][i] * (i % 2 ? -1 : 1),
-      phase:[0, 2.1, 4.2][i], spin:rand(-.6, .6),
-      bolts:Array.from({length:10}, () => ({angle:rand(0, Math.PI * 2), drift:rand(-.9, .9), pts:null, next:0}))
-    };
-  }
-
-  function drawOrb(ctx, o, x, y, r, now){
-    ctx.save();
-    ctx.globalCompositeOperation = 'lighter';
-    const C = PLASMA_COLORS;
-
-    /* halo */
-    let g = ctx.createRadialGradient(x, y, r * .5, x, y, r * 2.8);
-    g.addColorStop(0, rgba(C.halo, .38)); g.addColorStop(.45, rgba(C.halo, .12)); g.addColorStop(1, rgba(C.halo, 0));
-    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r * 2.8, 0, Math.PI * 2); ctx.fill();
-
-    /* corps de la sphère */
-    g = ctx.createRadialGradient(x, y, 0, x, y, r);
-    g.addColorStop(0, rgba(C.halo, .28)); g.addColorStop(.7, rgba(C.halo, .14)); g.addColorStop(.93, rgba(C.shell, .45)); g.addColorStop(1, rgba(C.shell, 0));
-    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
-
-    /* reflets violets qui tournent */
-    for(let k = 0; k < 2; k++){
-      const a = now * .0006 * (k ? -1 : 1) + k * 2.5 + o.phase;
-      const nx = x + Math.cos(a) * r * .38, ny = y + Math.sin(a) * r * .38;
-      g = ctx.createRadialGradient(nx, ny, 0, nx, ny, r * .55);
-      g.addColorStop(0, rgba(C.nebula, .32)); g.addColorStop(1, rgba(C.nebula, 0));
-      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(nx, ny, r * .55, 0, Math.PI * 2); ctx.fill();
-    }
-
-    /* éclairs du centre vers la paroi */
-    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-    o.bolts.forEach(b => {
-      b.angle += b.drift * .012;
-      if(!b.pts || now > b.next){
-        const ex = Math.cos(b.angle) * r * .96, ey = Math.sin(b.angle) * r * .96;
-        b.pts = jagged(rand(-r * .06, r * .06), rand(-r * .06, r * .06), ex, ey, .55, 4);
-        /* petite ramification */
-        const m = b.pts[Math.floor(b.pts.length * rand(.35, .65))];
-        const ba = b.angle + rand(-.9, .9);
-        b.branch = jagged(m[0], m[1], Math.cos(ba) * r * .92, Math.sin(ba) * r * .92, .6, 3);
-        b.next = now + rand(60, 140);
-      }
-      ctx.save(); ctx.translate(x, y);
-      ctx.strokeStyle = rgba(C.shell, .28); ctx.lineWidth = Math.max(2, r * .12); strokePts(ctx, b.pts);
-      ctx.strokeStyle = rgba(C.bolt, .95); ctx.lineWidth = Math.max(.6, r * .03); strokePts(ctx, b.pts);
-      ctx.strokeStyle = rgba(C.bolt, .55); ctx.lineWidth = Math.max(.5, r * .022); strokePts(ctx, b.branch);
-      /* point d’impact sur la paroi */
-      const end = b.pts[b.pts.length - 1];
-      g = ctx.createRadialGradient(end[0], end[1], 0, end[0], end[1], r * .16);
-      g.addColorStop(0, rgba(C.core, .9)); g.addColorStop(1, rgba(C.shell, 0));
-      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(end[0], end[1], r * .16, 0, Math.PI * 2); ctx.fill();
-      ctx.restore();
+  /* Le halo, le corps et les reflets sont dessinés UNE fois dans une image
+     réutilisée : c’est ce qui rend l’animation légère. */
+  function makeSprite(R, dpr){
+    const S = Math.ceil(R * 3 * 2), c = document.createElement('canvas');
+    c.width = c.height = Math.round(S * dpr);
+    const g = c.getContext('2d'); g.scale(dpr, dpr);
+    const x = S / 2, y = S / 2;
+    g.globalCompositeOperation = 'lighter';
+    let gr = g.createRadialGradient(x, y, R * .5, x, y, R * 2.6);
+    gr.addColorStop(0, rgba(T.halo, .42)); gr.addColorStop(.45, rgba(T.halo, .12)); gr.addColorStop(1, rgba(T.halo, 0));
+    g.fillStyle = gr; g.beginPath(); g.arc(x, y, R * 2.6, 0, 7); g.fill();
+    gr = g.createRadialGradient(x, y, 0, x, y, R);
+    gr.addColorStop(0, rgba(T.halo, .32)); gr.addColorStop(.7, rgba(T.halo, .14)); gr.addColorStop(.93, rgba(T.shell, .5)); gr.addColorStop(1, rgba(T.shell, 0));
+    g.fillStyle = gr; g.beginPath(); g.arc(x, y, R, 0, 7); g.fill();
+    [[.38, 0], [.32, 2.6]].forEach(([d, a]) => {
+      const nx = x + Math.cos(a) * R * d, ny = y + Math.sin(a) * R * d;
+      gr = g.createRadialGradient(nx, ny, 0, nx, ny, R * .55);
+      gr.addColorStop(0, rgba(T.nebula, .34)); gr.addColorStop(1, rgba(T.nebula, 0));
+      g.fillStyle = gr; g.beginPath(); g.arc(nx, ny, R * .55, 0, 7); g.fill();
     });
-
-    /* paroi électrique qui crépite */
-    const ring = [];
-    for(let k = 0; k <= 56; k++){
-      const a = (k / 56) * Math.PI * 2, rr = r * (.965 + Math.random() * .055);
-      ring.push([x + Math.cos(a) * rr, y + Math.sin(a) * rr]);
-    }
-    ctx.strokeStyle = rgba(C.shell, .22); ctx.lineWidth = Math.max(2, r * .11); strokePts(ctx, ring);
-    ctx.strokeStyle = rgba(C.bolt, .7); ctx.lineWidth = Math.max(.6, r * .028); strokePts(ctx, ring);
-
-    /* cœur */
-    g = ctx.createRadialGradient(x, y, 0, x, y, r * .32);
-    g.addColorStop(0, rgba(C.core, 1)); g.addColorStop(.35, rgba(C.bolt, .7)); g.addColorStop(1, rgba(C.halo, 0));
-    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r * .32, 0, Math.PI * 2); ctx.fill();
-    ctx.restore();
+    gr = g.createRadialGradient(x, y, 0, x, y, R * .34);
+    gr.addColorStop(0, rgba(T.core, 1)); gr.addColorStop(.35, rgba(T.bolt, .75)); gr.addColorStop(1, rgba(T.halo, 0));
+    g.fillStyle = gr; g.beginPath(); g.arc(x, y, R * .34, 0, 7); g.fill();
+    return {canvas:c, size:S};
   }
 
-  /* éclair entre deux boules proches */
-  function drawArc(ctx, a, b){
-    const pts = jagged(a.x, a.y, b.x, b.y, .35, 5);
-    ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-    ctx.strokeStyle = rgba(PLASMA_COLORS.shell, .3); ctx.lineWidth = 4; strokePts(ctx, pts);
-    ctx.strokeStyle = rgba(PLASMA_COLORS.bolt, .95); ctx.lineWidth = 1.2; strokePts(ctx, pts);
-    ctx.restore();
-  }
-
-  function mount(host){
+  function mountPlasma(host){
     if(host._plasma) return;
+    host._plasma = true;
     const canvas = document.createElement('canvas');
     canvas.className = 'plasma-layer';
     canvas.setAttribute('aria-hidden', 'true');
     host.appendChild(canvas);
     const ctx = canvas.getContext('2d');
-    const orbs = [0, 1, 2].map(makeOrb);
-    let w = 0, h = 0, dpr = 1, raf = 0, visible = true, arcUntil = 0, arcPair = null;
-    const start = performance.now();
+    const orbs = [0, 1, 2].map(i => ({
+      rx:[.46, .3, .4][i], ry:[.2, .12, .24][i], speed:[.045, .07, .035][i] * (i % 2 ? -1 : 1), phase:[0, 2.1, 4.2][i],
+      bolts:Array.from({length:8}, () => ({a:rand(0, 6.28), drift:rand(-.9, .9), pts:null, br:null, next:0}))
+    }));
+    let w = 0, h = 0, dpr = 1, R = 12, sprite = null, last = 0, arcUntil = 0, arcPair = null;
+    const t0 = performance.now();
 
     function size(){
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      w = host.clientWidth; h = host.clientHeight;
+      const nw = host.clientWidth, nh = host.clientHeight;
+      if(!nw || !nh) return false;
+      if(nw === w && nh === h && sprite) return true;
+      w = nw; h = nh;
+      dpr = Math.min(window.devicePixelRatio || 1, 1.75);
       canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
       canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      R = Math.max(8, Math.min(h * .3, 13));
+      sprite = makeSprite(R, dpr);
+      drawWires(host);
+      return true;
     }
+
     function frame(now){
+      if(!size()) return;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, w, h);
-      const r = Math.max(13, Math.min(h * .36, 26));
-      const t = (now - start) / 1000;
+      const t = (now - t0) / 1000;
       const pos = orbs.map(o => {
-        const ang = t * o.speed * Math.PI * 2 + o.phase;
-        const depth = (Math.sin(ang) + 1) / 2;            /* 0 = au fond, 1 = devant */
-        return { o, x:w / 2 + Math.cos(ang) * Math.max(110, w * o.rxRatio), y:h / 2 + Math.sin(ang) * Math.min(h * o.ry, Math.max(0, h / 2 - r * 1.12)), r:r * (.78 + depth * .3), depth };
+        const ang = t * o.speed * Math.PI * 2 + o.phase, depth = (Math.sin(ang) + 1) / 2;
+        const r = R * (.8 + depth * .28);
+        return {o, r, depth,
+          x:w / 2 + Math.cos(ang) * Math.max(90, w * o.rx),
+          y:h / 2 + Math.sin(ang) * Math.min(h * o.ry, Math.max(0, h / 2 - r * 1.1))};
       }).sort((a, b) => a.depth - b.depth);
 
-      /* éclair entre deux boules quand elles se croisent */
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+
+      /* éclair entre deux boules qui se croisent */
       if(now > arcUntil){
         arcPair = null;
-        for(let i = 0; i < pos.length; i++) for(let j = i + 1; j < pos.length; j++){
-          if(Math.abs(pos[i].x - pos[j].x) < Math.max(140, w * .12) && Math.random() < .04){ arcPair = [pos[i].o, pos[j].o]; arcUntil = now + rand(90, 220); }
-        }
+        for(let i = 0; i < pos.length; i++) for(let j = i + 1; j < pos.length; j++)
+          if(Math.abs(pos[i].x - pos[j].x) < Math.max(120, w * .1) && Math.random() < .05){ arcPair = [pos[i], pos[j]]; arcUntil = now + rand(90, 200); }
       }
       if(arcPair){
-        const a = pos.find(p => p.o === arcPair[0]), b = pos.find(p => p.o === arcPair[1]);
-        if(a && b) drawArc(ctx, a, b);
+        const pts = jagged(arcPair[0].x, arcPair[0].y, arcPair[1].x, arcPair[1].y, .35, 5);
+        ctx.strokeStyle = rgba(T.shell, .3); ctx.lineWidth = 3.5; line(ctx, pts);
+        ctx.strokeStyle = rgba(T.bolt, .95); ctx.lineWidth = 1; line(ctx, pts);
       }
-      pos.forEach(p => drawOrb(ctx, p.o, p.x, p.y, p.r, now));
+
+      pos.forEach(({o, x, y, r}) => {
+        /* image pré-rendue, qui tourne doucement */
+        const sz = sprite.size * (r / R);
+        ctx.save(); ctx.translate(x, y); ctx.rotate(t * .5 + o.phase);
+        ctx.drawImage(sprite.canvas, -sz / 2, -sz / 2, sz, sz);
+        ctx.restore();
+        /* éclairs vivants */
+        ctx.save(); ctx.translate(x, y);
+        o.bolts.forEach(b => {
+          b.a += b.drift * .015;
+          if(!b.pts || now > b.next){
+            b.pts = jagged(rand(-r * .06, r * .06), rand(-r * .06, r * .06), Math.cos(b.a) * r * .95, Math.sin(b.a) * r * .95, .55, 3);
+            const m = b.pts[Math.floor(b.pts.length / 2)], ba = b.a + rand(-.9, .9);
+            b.br = jagged(m[0], m[1], Math.cos(ba) * r * .9, Math.sin(ba) * r * .9, .6, 2);
+            b.next = now + rand(70, 150);
+          }
+          ctx.strokeStyle = rgba(T.shell, .3); ctx.lineWidth = Math.max(1.6, r * .13); line(ctx, b.pts);
+          ctx.strokeStyle = rgba(T.bolt, .95); ctx.lineWidth = Math.max(.6, r * .045); line(ctx, b.pts);
+          ctx.strokeStyle = rgba(T.bolt, .5); ctx.lineWidth = .5; line(ctx, b.br);
+        });
+        /* paroi qui crépite */
+        ctx.beginPath();
+        for(let k = 0; k <= 36; k++){
+          const a = k / 36 * Math.PI * 2, rr = r * (.965 + Math.random() * .06);
+          k ? ctx.lineTo(Math.cos(a) * rr, Math.sin(a) * rr) : ctx.moveTo(rr, 0);
+        }
+        ctx.strokeStyle = rgba(T.shell, .25); ctx.lineWidth = Math.max(1.6, r * .12); ctx.stroke();
+        ctx.strokeStyle = rgba(T.bolt, .75); ctx.lineWidth = Math.max(.5, r * .035); ctx.stroke();
+        ctx.restore();
+      });
+      ctx.globalCompositeOperation = 'source-over';
     }
+
+    /* 30 images par seconde : fluide pour l’œil, deux fois moins de travail */
     function loop(now){
-      raf = 0;
-      if(visible && !document.hidden) frame(now);
-      if(!reduce) raf = requestAnimationFrame(loop);
+      if(!document.hidden && now - last >= 33){ last = now; frame(now); }
+      requestAnimationFrame(loop);
     }
-    size(); loop(performance.now());
-    window.addEventListener('resize', () => { size(); if(reduce) frame(performance.now()); });
-    if('IntersectionObserver' in window){
-      new IntersectionObserver(entries => { visible = entries[0].isIntersecting; }).observe(host);
-    }
-    host._plasma = true;
+    if('ResizeObserver' in window) new ResizeObserver(() => { if(reduce) frame(performance.now()); }).observe(host);
+    if(reduce){ frame(performance.now()); }
+    else requestAnimationFrame(loop);
+    /* au retour sur la page (bouton précédent, rafraîchissement depuis le cache) */
+    window.addEventListener('pageshow', () => { w = 0; frame(performance.now()); });
   }
-  window.GBPlasma = { mount, colors:PLASMA_COLORS };
+
+  function start(){
+    document.querySelectorAll('.energy-band').forEach(band => { drawWires(band); mountPlasma(band); });
+    const frames = Array.from(document.querySelectorAll('[data-energy-frame]'));
+    const run = () => frames.forEach(buildFrame);
+    run();
+    /* reconstruit seulement si la taille change vraiment (pas au défilement mobile) */
+    if('ResizeObserver' in window){
+      let t; const ro = new ResizeObserver(() => { clearTimeout(t); t = setTimeout(run, 150); });
+      frames.forEach(f => ro.observe(f));
+    }
+    window.addEventListener('load', run);
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })();
