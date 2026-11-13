@@ -668,20 +668,6 @@ p{margin:0}
 
 .p-grid--2{grid-template-columns:repeat(2,minmax(0,1fr));max-width:920px}
 
-/* ---------- Énergie : fils, électrons et arcs ---------- */
-.energy-band{
-  position:relative;height:44px;overflow:hidden;background:var(--forest-950);
-  border-bottom:1px solid var(--line-dark);
-}
-.energy-band svg{position:absolute;inset:0;display:block}
-.energy-band::before,.energy-band::after{ /* fondu sur les bords */
-  content:"";position:absolute;top:0;bottom:0;width:60px;z-index:1;pointer-events:none;
-}
-.energy-band::before{left:0;background:linear-gradient(90deg,var(--forest-950),transparent)}
-.energy-band::after{right:0;background:linear-gradient(-90deg,var(--forest-950),transparent)}
-.eb-arc{opacity:0}
-.eb-arc.is-on{animation:gb-zap .42s steps(4,end) 1}
-@keyframes gb-zap{0%{opacity:0}20%{opacity:1}45%{opacity:.25}65%{opacity:.95}100%{opacity:0}}
 .energy-frame{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;overflow:visible}
 
 /* Schéma de l’accueil */
@@ -689,9 +675,21 @@ p{margin:0}
 .about-home__copy{display:grid;gap:18px}
 .about-home__copy > p{color:var(--muted)}
 @media (max-width:920px){.about-home{grid-template-columns:1fr}}
-@media (max-width:640px){.energy-band{height:36px}}
 
-/* Boules de plasma dans la bande d’énergie */
-.energy-band{height:64px}
-.plasma-layer{position:absolute;inset:0;z-index:2;display:block;pointer-events:none}
-@media (max-width:640px){.energy-band{height:54px}}
+
+/* ---------- Bande d’énergie collée sous le menu ---------- */
+:root{--band-h:38px}
+html{scroll-padding-top:calc(var(--header-h) + var(--band-h) + 16px)}
+.energy-band{
+  position:sticky;top:var(--header-h);z-index:999;height:var(--band-h);overflow:hidden;pointer-events:none;
+  background:rgba(5,36,23,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line-dark);contain:strict;
+}
+.energy-wires,.plasma-layer{position:absolute;inset:0;width:100%;height:100%;display:block}
+.plasma-layer{z-index:2}
+.energy-band::after{
+  content:"";position:absolute;inset:0;z-index:3;pointer-events:none;
+  background:linear-gradient(90deg,rgba(5,36,23,.95),transparent 6%,transparent 94%,rgba(5,36,23,.95));
+}
+body.no-scroll .energy-band{visibility:hidden}
+@media (max-width:640px){:root{--band-h:34px}}
