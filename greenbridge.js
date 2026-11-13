@@ -1556,3 +1556,117 @@ document.addEventListener('keydown', e => {
 gbRenderGrids();
 gbInitFilters();
 (function(){ const y = document.getElementById('year'); if(y) y.textContent = new Date().getFullYear(); })();
+
+/* =====================================================================
+   Énergie : électrons qui circulent sur des fils et autour des photos
+   ===================================================================== */
+(function(){
+  'use strict';
+  const NS = 'http://www.w3.org/2000/svg';
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const el = (tag, attrs, parent) => {
+    const n = document.createElementNS(NS, tag);
+    for(const k in attrs) n.setAttribute(k, attrs[k]);
+    if(parent) parent.appendChild(n);
+    return n;
+  };
+  const glowFilter = (svg, id, blur) => {
+    const defs = el('defs', {}, svg);
+    const f = el('filter', {id, x:'-50%', y:'-50%', width:'200%', height:'200%'}, defs);
+    el('feGaussianBlur', {stdDeviation:String(blur), result:'b'}, f);
+    const m = el('feMerge', {}, f);
+    el('feMergeNode', {in:'b'}, m); el('feMergeNode', {in:'b'}, m); el('feMergeNode', {in:'SourceGraphic'}, m);
+    return defs;
+  };
+  /* Un électron = une traînée lumineuse + un noyau brillant, synchronisés */
+  const electron = (svg, pathId, dur, delay, color, filterId, trail) => {
+    const src = svg.querySelector('#' + pathId);
+    if(!src) return;
+    const g = el('g', {filter:`url(#${filterId})`}, svg);
+    const tail = el('path', {d:src.getAttribute('d'), fill:'none', stroke:color, 'stroke-width':'2.2', 'stroke-linecap':'round',
+      pathLength:'1000', 'stroke-dasharray':`${trail} ${1000 - trail}`, 'stroke-dashoffset':'0', opacity:'.9'}, g);
+    el('animate', {attributeName:'stroke-dashoffset', from:'0', to:'-1000', dur:dur.toFixed(2) + 's', begin:(-delay).toFixed(2) + 's', repeatCount:'indefinite'}, tail);
+    const dot = el('circle', {r:'3.2', fill:'#FFF6D6'}, g);
+    /* le noyau se place en tête de la traînée */
+    const lead = dur * trail / 1000;
+    const mo = el('animateMotion', {dur:dur.toFixed(2) + 's', begin:(-(delay + lead)).toFixed(2) + 's', repeatCount:'indefinite'}, dot);
+    el('mpath', {href:'#' + pathId}, mo);
+  };
+
+  /* ---------- Bande sous le menu ---------- */
+  function buildBand(band){
+    const w = Math.max(320, band.clientWidth), h = band.clientHeight || 44;
+    band.innerHTML = '';
+    const svg = el('svg', {viewBox:`0 0 ${w} ${h}`, width:w, height:h, 'aria-hidden':'true'}, band);
+    glowFilter(svg, 'ebGlow', 2.4);
+    const wires = [
+      {amp:h * .22, len:420, phase:0,   color:'rgba(140,193,82,.32)'},
+      {amp:h * .16, len:300, phase:1.9, color:'rgba(201,166,70,.28)'},
+      {amp:h * .26, len:560, phase:3.6, color:'rgba(234,242,236,.12)'}
+    ];
+    const uid = Math.random().toString(36).slice(2, 7);
+    wires.forEach((wire, i) => {
+      let d = '';
+      for(let x = -10; x <= w + 10; x += 12){
+        const y = h / 2 + wire.amp * Math.sin((x / wire.len) * Math.PI * 2 + wire.phase);
+        d += (x === -10 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1);
+      }
+      const id = `ebw${uid}${i}`;
+      el('path', {id, d, fill:'none', stroke:wire.color, 'stroke-width':'1'}, svg);
+    });
+    if(reduce) return;
+    /* vitesse constante quelle que soit la largeur de l’écran */
+    const base = w / 140;
+    electron(svg, `ebw${uid}0`, base * 1.0, 0,          '#E9D79B', 'ebGlow', 55);
+    electron(svg, `ebw${uid}0`, base * 1.0, base * .5,  '#B7E57E', 'ebGlow', 40);
+    electron(svg, `ebw${uid}1`, base * 1.35, base * .3, '#B7E57E', 'ebGlow', 45);
+    electron(svg, `ebw${uid}1`, base * 1.35, base * 1,  '#E9D79B', 'ebGlow', 35);
+    electron(svg, `ebw${uid}2`, base * .8, base * .55,  '#FFF1BF', 'ebGlow', 60);
+    /* arc électrique qui jaillit entre les fils */
+    const arc = el('path', {class:'eb-arc', fill:'none', stroke:'#F6E7AE', 'stroke-width':'1.4', filter:'url(#ebGlow)', 'stroke-linejoin':'round'}, svg);
+    band._arc = arc; band._w = w; band._h = h;
+  }
+  function zap(band){
+    const arc = band._arc; if(!arc) return;
+    const w = band._w, h = band._h;
+    const x0 = 40 + Math.random() * (w - 200), len = 70 + Math.random() * 130;
+    let d = `M${x0},${h / 2}`;
+    for(let x = x0 + 8; x < x0 + len; x += 7 + Math.random() * 9){
+      d += ` L${x.toFixed(1)},${(h / 2 + (Math.random() - .5) * h * .8).toFixed(1)}`;
+    }
+    arc.setAttribute('d', d);
+    arc.classList.remove('is-on'); void arc.getBoundingClientRect(); arc.classList.add('is-on');
+  }
+
+  /* ---------- Courant autour d’un cadre photo ---------- */
+  function buildFrame(box){
+    const old = box.querySelector(':scope > .energy-frame');
+    if(old) old.remove();
+    const w = box.clientWidth, h = box.clientHeight;
+    if(!w || !h) return;
+    const r = parseFloat(getComputedStyle(box).borderTopLeftRadius) || 24;
+    const svg = el('svg', {class:'energy-frame', viewBox:`0 0 ${w} ${h}`, 'aria-hidden':'true'});
+    box.appendChild(svg);
+    glowFilter(svg, 'efGlow', 3);
+    const i = 1.5, rr = Math.max(0, r - i);
+    const id = 'ef' + Math.random().toString(36).slice(2, 7);
+    const d = `M${i + rr},${i} H${w - i - rr} A${rr},${rr} 0 0 1 ${w - i},${i + rr} V${h - i - rr} A${rr},${rr} 0 0 1 ${w - i - rr},${h - i} H${i + rr} A${rr},${rr} 0 0 1 ${i},${h - i - rr} V${i + rr} A${rr},${rr} 0 0 1 ${i + rr},${i} Z`;
+    el('path', {id, d, fill:'none', stroke:'rgba(201,166,70,.28)', 'stroke-width':'1.2'}, svg);
+    if(reduce) return;
+    const per = (w + h) * 2 / 120; /* environ 120 px par seconde */
+    electron(svg, id, per, 0,         '#E9D79B', 'efGlow', 90);
+    electron(svg, id, per, per / 2,   '#B7E57E', 'efGlow', 70);
+  }
+
+  function init(){
+    const bands = Array.from(document.querySelectorAll('.energy-band'));
+    const frames = Array.from(document.querySelectorAll('[data-energy-frame]'));
+    const all = () => { bands.forEach(buildBand); frames.forEach(buildFrame); };
+    all();
+    let t; window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(all, 200); });
+    if(!reduce && bands.length){
+      setInterval(() => { if(!document.hidden) bands.forEach(zap); }, 2600);
+    }
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
