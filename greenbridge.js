@@ -1078,6 +1078,7 @@ function downloadModelPdf(index){
       ],notes:['Entrées : USB-C et Micro-USB.','Sortie : USB-C.','Câble fourni.']
     }
   };
+  window.GB_NOVELTY_NOTICES=noveltyNotices;
   const noveltyCardImages={
     battery104:'pack_batterie_1200wh.png',
     v1:'Greenbridge_V2.png',
@@ -1126,27 +1127,38 @@ const NEW_PRODUCT_INFO = {
   v3:{ title:'GreenBridge V3 — 12 000 mAh', description:'Powerbank de 12 000 mAh avec 2 cellules lithium-ion de haute qualité, USB-C en entrée et en sortie, entrée Micro-USB et puissance annoncée jusqu’à 22,5 W.', specs:['Capacité : 12 000 mAh','2 cellules lithium-ion','Entrées : USB-C et Micro-USB','Sortie : USB-C','Jusqu’à 22,5 W annoncés'] }
 };
 
-/* Contenu des cartes produit. m0…m13 = models[0…13]. */
+/* =====================================================================
+   CATALOGUE : prix, capacités et arguments de chaque produit
+   price = prix « à partir de » en FCFA, mah = capacité en mAh (tri)
+   ===================================================================== */
 const GB_CARDS = {
-  m0:{ name:'Green Only', spec:'4 500 mAh, 10 W', note:'Compact, sorties USB-C et Lightning', family:'phone', order:'Green Only — 4 500 mAh' },
-  m1:{ name:'GreenMini', spec:'10 000 mAh', note:'Versions 15 W et 22,5 W', family:'phone', order:'GreenMini — 10 000 mAh' },
-  m2:{ name:'GreenCore', spec:'10 000 mAh, 15 W', note:'Éclairage LED intégré', family:'phone', order:'GreenCore — 10 000 mAh' },
-  m3:{ name:'GreenPlus', spec:'10 000 mAh, 15 W', note:'Trois sorties USB-A', family:'phone', order:'GreenPlus — 10 000 mAh' },
-  m4:{ name:'GreenEco', spec:'10 000 mAh, 15 W', note:'Entrées Micro-USB et USB-C', family:'phone', order:'GreenEco — 10 000 mAh' },
-  m5:{ name:'Green Africa', spec:'10 000 mAh, 15 W', note:'Entrée USB-C, sortie USB-A', family:'phone', order:'Green Africa — 10 000 mAh' },
-  m6:{ name:'GreenPro', spec:'12 000 mAh, 15 W', note:'Deux sorties USB-A', family:'phone', order:'GreenPro — 12 000 mAh' },
-  m7:{ name:'Green Reck', spec:'12 000 mAh, 15 W', note:'Deux sorties USB-A', family:'phone', order:'Green Reck — 12 000 mAh' },
-  m8:{ name:'GreenWire', spec:'Environ 20 000 mAh', note:'15 W ou 22,5 W, recharge sans fil', family:'phone', order:'GreenWire — 20 000 mAh' },
-  m9:{ name:'GreenWireless', spec:'20 000 mAh', note:'Recharge sans fil, USB-C PD', family:'phone', order:'GreenWireless — en rupture de stock : je souhaite être informé du réassort', soldOut:true },
-  m10:{ name:'Green TECH', spec:'20 000 mAh, 22,5 W', note:'Éclairage LED puissant', family:'phone', order:'Green TECH — 20 000 mAh' },
-  m11:{ name:'GreenLaptop+', spec:'36 000 mAh, 65 à 100 W', note:'Pour ordinateur portable', family:'laptop', order:'GreenLaptop+ — 36 000 mAh' },
-  m12:{ name:'GreenLaptop', spec:'20 000 mAh, 100 W', note:'Téléphone et ordinateur portable', family:'laptop', order:'GreenLaptop — 20 000 mAh' },
-  m13:{ name:'GreenWifi', spec:'12 000 mAh', note:'Mini-UPS, 4 à 6 h de Wi-Fi annoncées', family:'wifi', order:'GreenWifi — 12 000 mAh' },
-  v1:{ name:'GreenBridge V1', spec:'6 000 mAh', note:'Jusqu’à 22,5 W, USB-C', family:'phone', order:'GreenBridge V1 — 6 000 mAh', img:'Greenbridge_V2.png', isNew:true },
-  v2:{ name:'GreenBridge V2', spec:'10 000 mAh', note:'Jusqu’à 22,5 W, USB-C', family:'phone', order:'GreenBridge V2 — 10 000 mAh', img:'Greenbridge_v1.jpg', isNew:true },
-  v3:{ name:'GreenBridge V3', spec:'12 000 mAh', note:'Jusqu’à 22,5 W, USB-C', family:'phone', order:'GreenBridge V3 — 12 000 mAh', img:'greenbridge_v3.jpg', isNew:true },
-  lifepo4:{ name:'Batterie LiFePO₄', spec:'104 Ah, 100 A', note:'Cellules Grade A, garantie 3 ans', family:'storage', order:'Batterie LiFePO₄ — 104 Ah', img:'pack_batterie_1200wh.png', isNew:true }
+  m0:{ name:'GreenOnly',    mah:4500,  price:6000,  spec:'4 500 mAh, 10 W',         use:'≈ 1 recharge de smartphone',     pitch:'Le format de poche pour dépanner votre téléphone dans la journée.', family:'phone', tags:['compact'] },
+  v1:{ name:'GreenBridge V1',mah:6000, price:6000,  spec:'6 000 mAh, 22,5 W',       use:'≈ 1 recharge de smartphone',     pitch:'Compacte et rapide : jusqu’à 22,5 W en USB-C.', family:'phone', tags:['compact','fast'], isNew:true, img:'Greenbridge_V2.png' },
+  m3:{ name:'GreenPlus',    mah:10000, price:6000,  spec:'10 000 mAh, 15 W',        use:'≈ 2 recharges de smartphone',    pitch:'Trois sorties pour recharger trois appareils en même temps.', family:'phone', tags:[] },
+  m2:{ name:'GreenCore',    mah:10000, price:7000,  spec:'10 000 mAh, 15 W',        use:'≈ 2 recharges de smartphone',    pitch:'Powerbank et lampe LED à 4 niveaux, utile pendant les coupures.', family:'phone', tags:['led'] },
+  m4:{ name:'GreenEco',     mah:10000, price:7000,  spec:'10 000 mAh, 15 W',        use:'≈ 2 recharges de smartphone',    pitch:'Se recharge en USB-C ou Micro-USB : le câble que vous avez sous la main.', family:'phone', tags:[] },
+  m5:{ name:'GreenAfrica',  mah:10000, price:7000,  spec:'10 000 mAh, 15 W',        use:'≈ 2 recharges de smartphone',    pitch:'L’essentiel, simple et fiable : entrée USB-C, sortie USB-A.', family:'phone', tags:[] },
+  v2:{ name:'GreenBridge V2',mah:10000,price:7500,  spec:'10 000 mAh, 22,5 W',      use:'≈ 2 recharges de smartphone',    pitch:'10 000 mAh avec la charge rapide 22,5 W en USB-C.', family:'phone', tags:['fast'], isNew:true, img:'Greenbridge_v1.jpg' },
+  m1:{ name:'GreenMini',    mah:10000, price:8000,  spec:'10 000 mAh, 15 ou 22,5 W',use:'≈ 2 recharges de smartphone',    pitch:'Compacte, en version 15 W ou en charge rapide 22,5 W.', family:'phone', tags:['fast'] },
+  m7:{ name:'GreenReck',    mah:12000, price:7500,  spec:'12 000 mAh, 15 W',        use:'≈ 2 à 3 recharges de smartphone',pitch:'Deux sorties pour recharger deux appareils à la fois.', family:'phone', tags:[] },
+  m6:{ name:'GreenPro',     mah:12000, price:9000,  spec:'12 000 mAh, 15 W',        use:'≈ 2 à 3 recharges de smartphone',pitch:'De quoi tenir toute la journée, avec deux sorties USB-A.', family:'phone', tags:[] },
+  v3:{ name:'GreenBridge V3',mah:12000,price:9000,  spec:'12 000 mAh, 22,5 W',      use:'≈ 2 à 3 recharges de smartphone',pitch:'La plus endurante des nouveautés, en charge rapide.', family:'phone', tags:['fast'], isNew:true, img:'greenbridge_v3.jpg' },
+  m8:{ name:'GreenWire',    mah:20000, price:15000, spec:'20 000 mAh, 15 ou 22,5 W',use:'≈ 4 recharges de smartphone',    pitch:'Grande capacité, avec recharge sans fil en version 22,5 W.', family:'phone', tags:['fast','wireless'] },
+  m9:{ name:'GreenWireless',mah:20000, price:18000, spec:'20 000 mAh, sans fil',    use:'≈ 4 recharges de smartphone',    pitch:'Posez votre téléphone dessus : il se recharge sans câble.', family:'phone', tags:['fast','wireless'], soldOut:true },
+  m10:{name:'GreenTech',    mah:20000, price:18000, spec:'20 000 mAh, 22,5 W',      use:'≈ 4 recharges de smartphone',    pitch:'Charge rapide et lampe LED puissante pour les délestages.', family:'phone', tags:['fast','led'] },
+  m12:{name:'GreenLaptop',  mah:20000, price:20000, spec:'20 000 mAh, 100 W',       use:'≈ 1 recharge d’ordinateur portable', pitch:'Ordinateur et téléphone rechargés, jusqu’à 100 W.', family:'laptop', tags:['fast'] },
+  m11:{name:'GreenLaptop+', mah:36000, price:40000, spec:'36 000 mAh, 65 à 100 W',  use:'≈ 1,5 à 2 recharges d’ordinateur', pitch:'Une journée de travail loin des prises.', family:'laptop', tags:['fast'] },
+  m13:{name:'GreenWifi',    mah:12000, price:30000, spec:'Mini-UPS 12 000 mAh',     use:'Jusqu’à 6 h de Wi-Fi pendant une coupure', pitch:'Votre box reste allumée quand le courant saute.', family:'wifi', tags:[] },
+  lifepo4:{name:'Batterie LiFePO₄', mah:1330000, price:250000, spec:'104 Ah, 12,8 V', use:'≈ 1,3 kWh d’énergie stockée', pitch:'Lumière, ventilateur et télé pendant les délestages.', family:'storage', tags:[], isNew:true, img:'pack_batterie_1200wh.png' }
 };
+/* Ordre d’affichage par défaut : capacité, puis prix */
+const GB_ORDER = Object.keys(GB_CARDS);
+for(const id in GB_CARDS){ const c = GB_CARDS[id]; c.order = `${c.name} — ${c.spec} (à partir de ${gbPrice(c.price)})`; }
+const GB_FAMILY_PAGE = { phone:'powerbanks.html', laptop:'greenlaptop.html', wifi:'greenwifi.html', storage:'lifepo4.html' };
+const GB_FAMILY_LABEL = { phone:'Powerbanks', laptop:'GreenLaptop', wifi:'GreenWifi', storage:'LiFePO₄' };
+
+function gbPrice(n){ return n.toLocaleString('fr-FR').replace(/\s/g, '\u202F') + '\u00A0FCFA'; }
+function gbFicheUrl(id){ return 'fiche.html?p=' + encodeURIComponent(id); }
 
 function escapeHTML(value){
   return String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -1174,6 +1186,11 @@ function gbAttachImageFallback(img, candidates){
   });
 }
 
+function gbCapGroup(c){
+  if(c.family !== 'phone') return c.family;
+  return c.mah <= 6000 ? 'cap-s' : c.mah <= 10000 ? 'cap-m' : c.mah <= 12000 ? 'cap-l' : 'cap-xl';
+}
+
 function gbCardHTML(id){
   const c = GB_CARDS[id];
   if(!c) return '';
@@ -1181,67 +1198,144 @@ function gbCardHTML(id){
   const name = escapeHTML(c.name);
   const badge = c.soldOut ? '<span class="p-card__badge p-card__badge--out">Rupture de stock</span>'
               : c.isNew ? '<span class="p-card__badge">Nouveauté</span>' : '';
+  const chips = [c.tags.includes('fast') ? 'Charge rapide' : '', c.tags.includes('led') ? 'Lampe LED' : '', c.tags.includes('wireless') ? 'Sans fil' : '']
+    .filter(Boolean).map(t => `<li>${t}</li>`).join('');
   return `
-  <article class="p-card" data-family="${c.family}" data-id="${id}">
-    <button class="p-card__media" type="button" data-open="${id}" aria-label="Voir la fiche de ${name}">
+  <article class="p-card" data-family="${c.family}" data-cap="${gbCapGroup(c)}" data-mah="${c.mah}" data-price="${c.price}" data-rank="${GB_ORDER.indexOf(id)}" data-id="${id}">
+    <button class="p-card__media" type="button" data-open="${id}" aria-label="Aperçu rapide de ${name}">
       <img src="${escapeHTML(imgs[0] || '')}" alt="${name}" loading="lazy" decoding="async">
       ${badge}
     </button>
     <div class="p-card__body">
-      <h3 class="p-card__name">${name}</h3>
+      <h3 class="p-card__name"><a href="${gbFicheUrl(id)}">${name}</a></h3>
       <p class="p-card__spec">${escapeHTML(c.spec)}</p>
-      <p class="p-card__note">${escapeHTML(c.note)}</p>
+      <p class="p-card__use">${escapeHTML(c.use)}</p>
+      ${chips ? `<ul class="p-card__chips">${chips}</ul>` : ''}
+      <p class="p-card__price"><small>À partir de</small> ${gbPrice(c.price)}</p>
     </div>
     <div class="p-card__actions">
-      <button class="btn btn--wa btn--block btn--sm" type="button" data-order="${escapeHTML(c.order)}">
+      <button class="btn btn--wa btn--block btn--sm" type="button" data-order="${escapeHTML(c.soldOut ? c.name + ' — en rupture : je souhaite être informé du réassort' : c.order)}">
         <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>${c.soldOut ? 'Être informé' : 'Commander'}
       </button>
-      <div class="p-card__links">
-        <button type="button" data-open="${id}">Détails</button>
-        <button type="button" data-pdf="${id}"><i class="fa-regular fa-file-pdf" aria-hidden="true"></i> Fiche PDF</button>
-      </div>
+      <a class="p-card__more" href="${gbFicheUrl(id)}">Fiche technique <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
     </div>
   </article>`;
 }
 
 function gbRenderGrids(){
   document.querySelectorAll('[data-gb-grid]').forEach(grid => {
-    const ids = grid.dataset.gbGrid.split(',').map(s => s.trim()).filter(Boolean);
+    let ids = grid.dataset.gbGrid.split(',').map(s => s.trim()).filter(Boolean);
+    if(grid.dataset.gbSort === 'default') ids = ids.sort((a, b) => GB_ORDER.indexOf(a) - GB_ORDER.indexOf(b));
     grid.innerHTML = ids.map(gbCardHTML).join('');
     grid.querySelectorAll('.p-card').forEach(card => {
       const img = card.querySelector('img');
       if(img) gbAttachImageFallback(img, gbImagesFor(card.dataset.id));
     });
   });
-  /* Images statiques (vitrines, univers, produit vedette) */
   document.querySelectorAll('img[data-fallback]').forEach(img => {
     const list = [img.getAttribute('src'), ...img.dataset.fallback.split('|')].filter(Boolean);
     gbAttachImageFallback(img, list);
   });
 }
 
-/* ---------- Filtres du catalogue ---------- */
+/* ---------- Filtres et tri du catalogue ---------- */
 function gbInitFilters(){
-  document.querySelectorAll('[data-gb-filter]').forEach(bar => {
-    const target = document.getElementById(bar.dataset.gbFilter);
-    if(!target) return;
-    const counter = document.querySelector('[data-gb-count="' + bar.dataset.gbFilter + '"]');
-    const apply = value => {
+  document.querySelectorAll('[data-gb-tools]').forEach(tools => {
+    const grid = document.getElementById(tools.dataset.gbTools);
+    if(!grid) return;
+    const counter = tools.querySelector('[data-count]');
+    const select = tools.querySelector('select');
+    const attr = tools.dataset.filterBy || 'family';
+    let value = 'all';
+    const apply = () => {
+      const cards = Array.from(grid.querySelectorAll('.p-card'));
       let n = 0;
-      target.querySelectorAll('.p-card').forEach(card => {
-        const show = value === 'all' || card.dataset.family === value;
-        card.hidden = !show;
-        if(show) n++;
+      cards.forEach(card => {
+        const show = value === 'all' || card.dataset[attr] === value;
+        card.hidden = !show; if(show) n++;
       });
+      const mode = select ? select.value : 'default';
+      const key = { default:c => [+c.dataset.rank], 'price-asc':c => [+c.dataset.price, +c.dataset.mah], 'price-desc':c => [-c.dataset.price, -c.dataset.mah], 'cap-desc':c => [-c.dataset.mah, +c.dataset.price] }[mode];
+      cards.sort((a, b) => { const ka = key(a), kb = key(b); return ka[0] - kb[0] || (ka[1] || 0) - (kb[1] || 0); }).forEach(c => grid.appendChild(c));
       if(counter) counter.textContent = n + (n > 1 ? ' produits' : ' produit');
-      bar.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.filter === value)));
+      tools.querySelectorAll('button[data-filter]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.filter === value)));
     };
-    bar.addEventListener('click', e => {
+    tools.addEventListener('click', e => {
       const b = e.target.closest('button[data-filter]');
-      if(b) apply(b.dataset.filter);
+      if(b){ value = b.dataset.filter; apply(); }
     });
-    apply('all');
+    if(select) select.addEventListener('change', apply);
+    apply();
   });
+}
+
+/* ---------- Guide « Quel modèle pour vous ? » ---------- */
+function gbInitGuide(){
+  const box = document.querySelector('[data-gb-guide]');
+  if(!box) return;
+  const state = {};
+  const out = box.querySelector('.guide__result');
+  const steps = Array.from(box.querySelectorAll('.guide__step'));
+  const show = name => steps.forEach(s => s.hidden = s.dataset.step !== name);
+  const result = () => {
+    let ids = [], note = '';
+    if(state.device === 'laptop') ids = ['m12', 'm11'];
+    else if(state.device === 'wifi') ids = ['m13'];
+    else if(state.device === 'home') ids = ['lifepo4'];
+    else {
+      const range = { one:[0, 6000], two:[10000, 12000], four:[20000, 20000] }[state.amount] || [0, 1e9];
+      let list = GB_ORDER.filter(id => GB_CARDS[id].family === 'phone' && !GB_CARDS[id].soldOut && GB_CARDS[id].mah >= range[0] && GB_CARDS[id].mah <= range[1]);
+      if(state.extra && state.extra !== 'any'){
+        const filtered = list.filter(id => GB_CARDS[id].tags.includes(state.extra));
+        if(filtered.length) list = filtered;
+        else note = 'Aucun modèle de cette capacité n’a cette option : voici les plus proches.';
+      }
+      ids = list.sort((a, b) => GB_CARDS[a].price - GB_CARDS[b].price).slice(0, 3);
+    }
+    out.innerHTML = `<p class="guide__note">${note || 'Notre sélection pour vous, du moins cher au plus complet.'}</p><div class="p-grid p-grid--3">${ids.map(gbCardHTML).join('')}</div>
+      <button class="guide__restart" type="button" data-guide-restart><i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Recommencer</button>`;
+    out.querySelectorAll('.p-card').forEach(card => { const img = card.querySelector('img'); if(img) gbAttachImageFallback(img, gbImagesFor(card.dataset.id)); });
+    show('result');
+  };
+  box.addEventListener('click', e => {
+    const opt = e.target.closest('[data-set]');
+    if(opt){
+      const [k, v] = opt.dataset.set.split(':');
+      state[k] = v;
+      if(k === 'device') v === 'phone' ? show('amount') : result();
+      else if(k === 'amount') show('extra');
+      else result();
+      return;
+    }
+    if(e.target.closest('[data-guide-restart]')){ for(const k in state) delete state[k]; show('device'); }
+    const back = e.target.closest('[data-guide-back]');
+    if(back) show(back.dataset.guideBack);
+  });
+  show('device');
+}
+
+/* ---------- Calculateur d’autonomie (LiFePO₄) ---------- */
+function gbInitCalculator(){
+  const calc = document.querySelector('[data-gb-calc]');
+  if(!calc) return;
+  const usable = Number(calc.dataset.wh) * 0.85; /* énergie utile après onduleur et réserve */
+  const total = calc.querySelector('[data-total]'), hours = calc.querySelector('[data-hours]');
+  const update = () => {
+    let w = 0;
+    calc.querySelectorAll('[data-watt]').forEach(row => { w += Number(row.dataset.watt) * Number(row.querySelector('output').value); });
+    total.textContent = w + ' W';
+    if(!w){ hours.textContent = '—'; return; }
+    const h = usable / w;
+    hours.textContent = h >= 1 ? '≈ ' + (h >= 10 ? Math.round(h) : h.toFixed(1).replace('.', ',')) + ' h' : '≈ ' + Math.round(h * 60) + ' min';
+  };
+  calc.addEventListener('click', e => {
+    const b = e.target.closest('button[data-step]');
+    if(!b) return;
+    const o = b.closest('[data-watt]').querySelector('output');
+    o.value = Math.max(0, Math.min(20, Number(o.value) + Number(b.dataset.step)));
+    update();
+  });
+  update();
 }
 
 /* ---------- Fenêtre modale ---------- */
@@ -1341,56 +1435,43 @@ function gbCarouselHTML(label){
 
 function gbJsString(v){ return String(v).replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/[\r\n]/g,' '); }
 
-function openTechModal(i){
-  const m = models[i] || models[0];
-  const card = GB_CARDS['m' + i] || {};
-  const images = gbImagesFor('m' + i).map(src => ({src, alt:m.title}));
-  const orderLabel = gbJsString(card.order || m.title);
-  const html = `
-    <header class="m-head">
-      <p class="m-kicker">Fiche produit GreenBridge</p>
-      <h2 id="modalTitle">${escapeHTML(m.title)}</h2>
-      <p class="m-sub">${escapeHTML(m.subtitle || '')}</p>
-    </header>
-    ${gbCarouselHTML(m.title)}
-    <div class="m-body">
-      ${m.details || ''}
-      <h3>Caractéristiques</h3>
-      <ul class="m-specs">${(m.specs || []).map(s => `<li>${escapeHTML(s)}</li>`).join('')}</ul>
-    </div>
-    <div class="m-actions">
-      <button class="btn btn--wa" type="button" onclick="openProductWhatsApp('${orderLabel}')"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i>${card.soldOut ? 'Être informé du réassort' : 'Prix et commande'}</button>
-      <button class="btn btn--line" type="button" onclick="downloadModelPdf(${i})"><i class="fa-regular fa-file-pdf" aria-hidden="true"></i>Télécharger la fiche PDF</button>
-    </div>`;
-  openModal(html);
-  startModalCarousel(images);
+/* Données détaillées d’un produit, quelle que soit sa source */
+function gbProduct(id){
+  const c = GB_CARDS[id] || {};
+  if(id.startsWith('m')){
+    const i = Number(id.slice(1)), m = models[i] || {};
+    return { id, card:c, title:c.name || m.title, subtitle:m.subtitle || '', details:(m.details || '').replace(/<strong>[\s\S]*?<\/strong>\s*<br>/i, '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim(),
+      specs:m.specs || [], guide:(typeof MODEL_NOTICE_GUIDES !== 'undefined' && MODEL_NOTICE_GUIDES[m.id]) || {}, pdf:() => downloadModelPdf(i) };
+  }
+  const info = NEW_PRODUCT_INFO[id] || {};
+  const guide = (window.GB_NOVELTY_NOTICES || {})[id === 'lifepo4' ? 'battery104' : id] || {};
+  return { id, card:c, title:c.name, subtitle:guide.subtitle || 'Conçu et assemblé par GreenBridge Technologies', details:info.description || '',
+    specs:guide.specs || info.specs || [], guide, pdf:() => id === 'lifepo4' ? window.downloadLiFePO4TechnicalNotice() : window.downloadEmbeddedNotice(id) };
 }
 
-function openNewProductModal(key){
-  const info = NEW_PRODUCT_INFO[key];
-  if(!info) return;
-  const card = GB_CARDS[key] || {};
-  const images = gbImagesFor(key).map((src, n) => ({src, alt:`${info.title} — photo ${n + 1}`}));
-  const noticeAction = key === 'lifepo4' ? 'window.downloadLiFePO4TechnicalNotice()' : `window.downloadEmbeddedNotice('${key}')`;
+function openQuickView(id){
+  const p = gbProduct(id), c = p.card;
+  const images = gbImagesFor(id).map(src => ({src, alt:p.title}));
   const html = `
     <header class="m-head">
-      <p class="m-kicker">Nouveauté GreenBridge</p>
-      <h2 id="modalTitle">${escapeHTML(info.title)}</h2>
-      <p class="m-sub">Conçu et assemblé par GreenBridge Technologies</p>
+      <p class="m-kicker">${escapeHTML(GB_FAMILY_LABEL[c.family] || 'GreenBridge')}${c.isNew ? ' · Nouveauté' : ''}</p>
+      <h2 id="modalTitle">${escapeHTML(p.title)}</h2>
+      <p class="m-sub">${escapeHTML(c.pitch || p.subtitle)}</p>
     </header>
-    ${gbCarouselHTML(info.title)}
+    ${gbCarouselHTML(p.title)}
+    <div class="m-price"><span><small>À partir de</small> <b>${gbPrice(c.price)}</b></span><span class="m-use"><i class="fa-solid fa-bolt" aria-hidden="true"></i>${escapeHTML(c.use)}</span></div>
     <div class="m-body">
-      <p>${escapeHTML(info.description)}</p>
-      <h3>Caractéristiques</h3>
-      <ul class="m-specs">${info.specs.map(s => `<li>${escapeHTML(s)}</li>`).join('')}</ul>
+      <ul class="m-specs">${p.specs.slice(0, 6).map(x => `<li>${escapeHTML(x)}</li>`).join('')}</ul>
     </div>
     <div class="m-actions">
-      <button class="btn btn--wa" type="button" onclick="openProductWhatsApp('${gbJsString(card.order || info.title)}')"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i>Prix et commande</button>
-      <button class="btn btn--line" type="button" onclick="${noticeAction}"><i class="fa-regular fa-file-pdf" aria-hidden="true"></i>Télécharger la notice PDF</button>
+      <button class="btn btn--wa" type="button" data-order="${escapeHTML(c.soldOut ? c.name + ' — en rupture : je souhaite être informé du réassort' : c.order)}"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i>${c.soldOut ? 'Être informé du réassort' : 'Commander sur WhatsApp'}</button>
+      <a class="btn btn--line" href="${gbFicheUrl(id)}">Fiche technique complète <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
     </div>`;
   openModal(html);
   startModalCarousel(images);
 }
+function openTechModal(i){ openQuickView('m' + i); }
+function openNewProductModal(key){ openQuickView(key); }
 window.openNewProductModal = openNewProductModal;
 
 function openPackModal(){
@@ -1471,18 +1552,13 @@ document.addEventListener('click', e => {
   const open = e.target.closest('[data-open]');
   if(open){
     e.preventDefault();
-    const id = open.dataset.open;
-    if(id.startsWith('m')) openTechModal(Number(id.slice(1)));
-    else openNewProductModal(id);
+    openQuickView(open.dataset.open);
     return;
   }
   const pdf = e.target.closest('[data-pdf]');
   if(pdf){
     e.preventDefault();
-    const id = pdf.dataset.pdf;
-    if(id.startsWith('m')) downloadModelPdf(Number(id.slice(1)));
-    else if(id === 'lifepo4') window.downloadLiFePO4TechnicalNotice();
-    else window.downloadEmbeddedNotice(id);
+    gbProduct(pdf.dataset.pdf).pdf();
     return;
   }
   const order = e.target.closest('[data-order]');
@@ -1553,8 +1629,177 @@ document.addEventListener('keydown', e => {
 })();
 
 /* ---------- Démarrage ---------- */
-gbRenderGrids();
+/* =====================================================================
+   FICHE TECHNIQUE EN LIGNE  (fiche.html?p=identifiant)
+   ===================================================================== */
+const GB_SAFETY = {
+  battery:[
+    'Ne pas exposer au soleil direct, à une forte chaleur (voiture fermée, tableau de bord) ni à l’humidité.',
+    'Ne pas percer, écraser, démonter ni ouvrir le boîtier.',
+    'Utiliser des câbles et un adaptateur secteur en bon état.',
+    'Recharger sur une surface dure et dégagée, jamais sous un oreiller ou sur un lit.',
+    'Tenir hors de portée des jeunes enfants.',
+    'Arrêter immédiatement l’utilisation si le produit gonfle, chauffe anormalement ou dégage une odeur.'
+  ],
+  storage:[
+    'Le raccordement d’un pack batterie doit être effectué ou contrôlé par un technicien compétent.',
+    'Respecter la polarité : positif sur positif, négatif sur négatif. Ne jamais mettre les bornes en court-circuit.',
+    'Utiliser uniquement un chargeur ou un onduleur compatible avec la technologie LiFePO₄ et la tension du pack.',
+    'Installer la batterie dans un endroit ventilé, sec, à l’abri du soleil et de la pluie.',
+    'Protéger l’installation par un fusible ou un disjoncteur dimensionné par un professionnel.'
+  ]
+};
+const GB_TROUBLE = [
+  ['La powerbank ne se recharge pas', 'Vérifiez que le câble est branché sur l’entrée (IN) et non sur une sortie, puis essayez un autre câble ou un autre adaptateur.'],
+  ['Mon téléphone ne se recharge pas', 'Vérifiez le niveau de la powerbank, la sortie utilisée et l’état du câble.'],
+  ['La recharge est lente', 'La charge rapide demande un téléphone, un câble et une sortie compatibles. Avec un câble ordinaire, la recharge reste standard.']
+];
+
+function gbRenderFiche(){
+  const root = document.querySelector('[data-gb-fiche]');
+  if(!root) return;
+  const id = new URLSearchParams(location.search).get('p');
+  if(!id || !GB_CARDS[id]){
+    root.innerHTML = `<div class="wrap fiche-missing"><h1>Choisissez un produit</h1><p>Cette fiche n’existe pas ou le lien est incomplet. Retrouvez tous nos produits ci-dessous.</p><div class="p-grid" data-gb-grid="${GB_ORDER.join(',')}"></div></div>`;
+    gbRenderGrids();
+    return;
+  }
+  const P = gbProduct(id), c = P.card, g = P.guide || {};
+  const imgs = gbImagesFor(id);
+  const fam = c.family, famPage = GB_FAMILY_PAGE[fam], famLabel = GB_FAMILY_LABEL[fam];
+  const url = location.origin + location.pathname + '?p=' + id;
+
+  document.title = `${c.name} : fiche technique et prix | GreenBridge Technologies`;
+  const md = document.querySelector('meta[name="description"]');
+  if(md) md.setAttribute('content', `${c.name}, ${c.spec}. ${c.pitch} À partir de ${c.price.toLocaleString('fr-FR')} FCFA, commande sur WhatsApp en Côte d’Ivoire et au Sénégal.`);
+  const ld = document.createElement('script'); ld.type = 'application/ld+json';
+  ld.textContent = JSON.stringify({'@context':'https://schema.org','@type':'Product', name:c.name, description:c.pitch, image:imgs.map(i => location.origin + '/' + i), brand:{'@type':'Brand', name:'GreenBridge'},
+    offers:{'@type':'Offer', priceCurrency:'XOF', price:String(c.price), availability:c.soldOut ? 'https://schema.org/OutOfStock' : 'https://schema.org/InStock', url}});
+  document.head.appendChild(ld);
+
+  const keyFigs = [
+    [c.spec.split(',')[0], 'Capacité'],
+    [g.power || (c.spec.split(',')[1] || '').trim() || '—', 'Puissance'],
+    [c.use.replace(/^≈\s*/, '≈ '), 'En pratique']
+  ];
+  const ports = (list, empty) => list && list.length ? `<ul class="port-list">${list.map(x => `<li><i class="fa-solid fa-plug" aria-hidden="true"></i>${escapeHTML(x)}</li>`).join('')}</ul>` : `<p class="fiche-muted">${escapeHTML(empty)}</p>`;
+  const variants = (g.variants || []).map(v => `<div class="variant"><h4>${escapeHTML(v.name)}${v.name.includes(v.power) ? '' : ' · ' + escapeHTML(v.power)}</h4>${ports(v.outputs, '')}<p class="fiche-muted">${escapeHTML(v.detail || '')}</p></div>`).join('');
+  const steps = (g.steps || []).map(st => `<li><h4>${escapeHTML(st.title)}</h4><p>${escapeHTML(st.text)}</p></li>`).join('');
+  const internal = /renseign|confirmer|à vérifier|selon la carte|catalogue actuel|disponibles/i;
+  const notes = [...(g.notes || []), ...(g.extraPrecautions || [])].filter(n => !internal.test(n));
+  const inputNote = g.inputNote && !internal.test(g.inputNote) ? g.inputNote : 'Repérez l’entrée marquée IN ou INPUT sur le boîtier.';
+  const safety = fam === 'storage' ? GB_SAFETY.storage : GB_SAFETY.battery;
+  const similar = GB_ORDER.filter(x => x !== id && GB_CARDS[x].family === fam && !GB_CARDS[x].soldOut)
+    .sort((a, b) => Math.abs(GB_CARDS[a].mah - c.mah) - Math.abs(GB_CARDS[b].mah - c.mah)).slice(0, 3);
+  const shareText = encodeURIComponent(`${c.name} (${c.spec}) chez GreenBridge, à partir de ${c.price.toLocaleString('fr-FR')} FCFA : ${url}`);
+
+  root.innerHTML = `
+  <section class="fiche-top">
+    <div class="wrap">
+      <nav class="crumbs crumbs--light" aria-label="Fil d’Ariane"><a href="index.html">Accueil</a><i class="fa-solid fa-chevron-right" aria-hidden="true"></i><a href="${famPage}">${famLabel}</a><i class="fa-solid fa-chevron-right" aria-hidden="true"></i><span aria-current="page">${escapeHTML(c.name)}</span></nav>
+      <div class="fiche-grid">
+        <div class="fiche-gallery">
+          <div class="fiche-gallery__main">${c.isNew ? '<span class="p-card__badge">Nouveauté</span>' : ''}${c.soldOut ? '<span class="p-card__badge p-card__badge--out">Rupture de stock</span>' : ''}<img id="ficheMain" src="${escapeHTML(imgs[0] || '')}" alt="${escapeHTML(c.name)}" fetchpriority="high"></div>
+          <div class="fiche-gallery__thumbs" role="list">${imgs.map((src, n) => `<button type="button" role="listitem" class="${n ? '' : 'is-active'}" data-thumb="${escapeHTML(src)}" aria-label="Photo ${n + 1}"><img src="${escapeHTML(src)}" alt="" loading="lazy"></button>`).join('')}</div>
+        </div>
+        <div class="fiche-info">
+          <p class="m-kicker">${famLabel}${c.isNew ? ' · Nouveauté' : ''}</p>
+          <h1>${escapeHTML(c.name)}</h1>
+          <p class="fiche-pitch">${escapeHTML(c.pitch)}</p>
+          <p class="fiche-price"><small>À partir de</small> ${gbPrice(c.price)}</p>
+          <dl class="fiche-figs">${keyFigs.map(([v, l]) => `<div><dt>${escapeHTML(l)}</dt><dd>${escapeHTML(v)}</dd></div>`).join('')}</dl>
+          <div class="btn-row">
+            <button class="btn btn--wa" type="button" data-order="${escapeHTML(c.soldOut ? c.name + ' — en rupture : je souhaite être informé du réassort' : c.order)}"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i>${c.soldOut ? 'Être informé du réassort' : 'Commander sur WhatsApp'}</button>
+          </div>
+          <div class="fiche-tools">
+            <button type="button" data-share><i class="fa-solid fa-share-nodes" aria-hidden="true"></i>Partager</button>
+            <a href="https://wa.me/?text=${shareText}" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i>Envoyer à un proche</a>
+            <button type="button" data-print><i class="fa-solid fa-print" aria-hidden="true"></i>Imprimer ou PDF</button>
+            <button type="button" data-pdf="${id}"><i class="fa-regular fa-file-pdf" aria-hidden="true"></i>Notice PDF</button>
+          </div>
+          <p class="fiche-toast" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <nav class="fiche-tabs" aria-label="Sections de la fiche"><div class="wrap">
+    <a href="#caracteristiques">Caractéristiques</a>${(g.inputPorts || g.outputPorts || g.variants) ? '<a href="#connectique">Connectique</a>' : ''}${steps ? '<a href="#utilisation">Utilisation</a>' : ''}<a href="#securite">Sécurité</a>
+  </div></nav>
+
+  <div class="wrap fiche-body">
+    <section id="caracteristiques" class="fiche-sec">
+      <h2>Caractéristiques</h2>
+      ${P.details ? `<p class="fiche-lead">${escapeHTML(P.details)}</p>` : ''}
+      <table class="spec-table"><tbody>
+        ${P.specs.map(x => x.replace(/ (indiquée sur le catalogue actuel|annoncée)( :)/i, '$2').replace(/ \(à confirmer[^)]*\)/i, '')).map(x => { const k = x.indexOf(' : '); return k > 0 ? `<tr><th scope="row">${escapeHTML(x.slice(0, k))}</th><td>${escapeHTML(x.slice(k + 3))}</td></tr>` : `<tr><td colspan="2">${escapeHTML(x)}</td></tr>`; }).join('')}
+        <tr><th scope="row">Prix</th><td>À partir de ${gbPrice(c.price)}</td></tr>
+        <tr><th scope="row">Marque</th><td>GreenBridge Technologies</td></tr>
+      </tbody></table>
+    </section>
+
+    ${(g.inputPorts || g.outputPorts || g.variants) ? `
+    <section id="connectique" class="fiche-sec">
+      <h2>Connectique</h2>
+      <div class="ports">
+        <div class="port-card"><h3><i class="fa-solid fa-arrow-right-to-bracket" aria-hidden="true"></i> Pour recharger la ${fam === 'storage' ? 'batterie' : 'powerbank'}</h3>${ports(g.inputPorts, inputNote)}</div>
+        ${g.variants ? `<div class="port-card port-card--wide"><h3><i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i> Pour recharger vos appareils</h3><div class="variants">${variants}</div></div>`
+          : `<div class="port-card"><h3><i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i> Pour recharger vos appareils</h3>${ports(g.outputPorts, 'Sorties précisées sur le boîtier.')}</div>`}
+      </div>
+    </section>` : ''}
+
+    ${steps ? `
+    <section id="utilisation" class="fiche-sec">
+      <h2>Mode d’emploi</h2>
+      <ol class="howto">${steps}</ol>
+      ${notes.length ? `<div class="fiche-notes"><h3>Bon à savoir</h3><ul>${notes.map(n => `<li>${escapeHTML(n)}</li>`).join('')}</ul></div>` : ''}
+    </section>` : ''}
+
+    <section id="securite" class="fiche-sec">
+      <h2>Sécurité</h2>
+      <ul class="safety-list">${safety.map(x => `<li><i class="fa-solid fa-shield-halved" aria-hidden="true"></i>${escapeHTML(x)}</li>`).join('')}</ul>
+      ${fam !== 'storage' ? `<h3 class="fiche-h3">En cas de problème</h3><div class="faq">${GB_TROUBLE.map(([q, a]) => `<details><summary>${q}</summary><p>${a}</p></details>`).join('')}</div>` : ''}
+      <p class="fiche-muted fiche-foot">Valeurs constructeur. L’autonomie et la vitesse de recharge réelles dépendent de l’appareil, du câble et de l’adaptateur utilisés. Un doute sur la compatibilité ? Écrivez-nous sur WhatsApp avant d’acheter.</p>
+    </section>
+
+    ${similar.length ? `
+    <section class="fiche-sec no-print">
+      <h2>Vous aimerez aussi</h2>
+      <div class="p-grid p-grid--3" data-gb-grid="${similar.join(',')}"></div>
+    </section>` : ''}
+  </div>`;
+
+  /* galerie */
+  const main = document.getElementById('ficheMain');
+  gbAttachImageFallback(main, imgs);
+  root.querySelectorAll('[data-thumb]').forEach(b => {
+    const im = b.querySelector('img');
+    im.addEventListener('error', () => b.remove());
+    b.addEventListener('click', () => {
+      main.src = b.dataset.thumb;
+      root.querySelectorAll('[data-thumb]').forEach(x => x.classList.toggle('is-active', x === b));
+    });
+  });
+  /* partager / imprimer */
+  const toast = root.querySelector('.fiche-toast');
+  root.querySelector('[data-share]').addEventListener('click', async () => {
+    try{
+      if(navigator.share){ await navigator.share({title:c.name + ' | GreenBridge', text:c.pitch, url}); return; }
+      await navigator.clipboard.writeText(url);
+      toast.textContent = 'Lien copié. Vous pouvez le coller dans un message.';
+    }catch(err){ toast.textContent = 'Copiez le lien dans la barre d’adresse pour le partager.'; }
+  });
+  root.querySelector('[data-print]').addEventListener('click', () => window.print());
+  /* page active dans le menu */
+  document.querySelectorAll('.main-nav a, .mobile-menu nav a').forEach(a => { if(a.getAttribute('href') === famPage) a.setAttribute('aria-current', 'page'); });
+  document.body.setAttribute('data-gb-page', { phone:'powerbanks', laptop:'laptop', wifi:'wifi', storage:'lifepo4' }[fam]);
+  gbRenderGrids();
+}
+
+if(document.querySelector('[data-gb-fiche]')) gbRenderFiche(); else gbRenderGrids();
 gbInitFilters();
+gbInitGuide();
+gbInitCalculator();
 (function(){ const y = document.getElementById('year'); if(y) y.textContent = new Date().getFullYear(); })();
 
 /* =====================================================================
