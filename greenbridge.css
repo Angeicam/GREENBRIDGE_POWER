@@ -690,3 +690,8 @@ p{margin:0}
 .about-home__copy > p{color:var(--muted)}
 @media (max-width:920px){.about-home{grid-template-columns:1fr}}
 @media (max-width:640px){.energy-band{height:36px}}
+
+/* Boules de plasma dans la bande d’énergie */
+.energy-band{height:64px}
+.plasma-layer{position:absolute;inset:0;z-index:2;display:block;pointer-events:none}
+@media (max-width:640px){.energy-band{height:54px}}
