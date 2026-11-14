@@ -1182,7 +1182,8 @@ const GB_IMAGES = {
  ],
  "m8": [
   "gb-greenwire-1.webp",
-  "gb-greenwire-2.webp"
+  "gb-greenwire-2.webp",
+  "gb-greenwire-3.webp"
  ],
  "m9": [
   "gb-greenwireless-1.webp",
