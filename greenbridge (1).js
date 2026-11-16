@@ -1855,7 +1855,9 @@ const GB_SHAPES = {
     { id:'galet',   name:'Galet',   desc:'Formes douces, tient dans la main', w:72,  h:118, d:24, r:24, bevel:7,   screen:'round' },
     { id:'carre',   name:'Carré',   desc:'Compact et généreux',               w:92,  h:92,  d:26, r:16, bevel:4,   screen:'round' },
     { id:'slim',    name:'Slim',    desc:'Très fin, se glisse partout',        w:70,  h:142, d:15, r:11, bevel:3,   screen:'bar' },
-    { id:'capsule', name:'Capsule', desc:'Silhouette arrondie et moderne',     w:62,  h:132, d:28, r:31, bevel:6,   screen:'round' }
+    { id:'capsule', name:'Capsule', desc:'Silhouette arrondie et moderne',     w:62,  h:132, d:28, r:31, bevel:6,   screen:'round' },
+    { id:'mini',    name:'Mini',    desc:'Ultra-compacte, tient dans la paume', w:54,  h:86,  d:22, r:16, bevel:5,   screen:'round' },
+    { id:'stick',   name:'Stick',   desc:'Format tube, pour le sac ou la poche', w:34,  h:104, d:28, r:17, bevel:9,   screen:'round' }
   ]},
   laptop:{ label:'Powerbank ordinateur', icon:'fa-laptop', models:[
     { id:'plate',    name:'Plate',    desc:'Format fin, se glisse dans la sacoche', w:112, h:166, d:19, r:11, bevel:3, screen:'bar' },
@@ -1879,7 +1881,9 @@ const GB_PRO = {
     vert:  { name:'Vert GreenBridge', hex:'#145A3C' },
     nuit:  { name:'Bleu nuit',        hex:'#22365F' },
     rouge: { name:'Rouge',            hex:'#A2232C' },
-    sable: { name:'Sable',            hex:'#CDB98F' }
+    sable: { name:'Sable',            hex:'#CDB98F' },
+    violet:{ name:'Violet',           hex:'#7B4FB8' },
+    rose:  { name:'Rose',             hex:'#E58FB0' }
   },
   finishes:{ mat:{ name:'Mat', rough:0.74, coat:0 }, satin:{ name:'Satiné', rough:0.5, coat:0.12 } },
   markings:{
