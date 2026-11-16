@@ -1203,13 +1203,11 @@ const GB_IMAGES = {
  ],
  "m11": [
   "gb-greenlaptop-plus-1.webp",
-  "gb-greenlaptop-plus-2.webp",
-  "gb-greenlaptop-plus-3.webp"
+  "gb-greenlaptop-plus-2.webp"
  ],
  "m13": [
   "gb-greenwifi-1.webp",
-  "gb-greenwifi-2.webp",
-  "gb-greenwifi-3.webp"
+  "gb-greenwifi-2.webp"
  ],
  "lifepo4": [
   "gb-lifepo4-1.webp",
@@ -1622,7 +1620,7 @@ function openProductWhatsApp(productName){
   openCountryModal();
 }
 function openCountryModal(){
-  const subject = pendingOrderProduct ? `<p class="m-sub">Demande : ${escapeHTML(pendingOrderProduct)}</p>` : '<p class="m-sub">Prix, disponibilité et conseil technique.</p>';
+  const subject = pendingCustomMessage ? '<p class="m-sub">Votre demande de devis est prête : il ne reste qu’à l’envoyer.</p>' : pendingOrderProduct ? `<p class="m-sub">Demande : ${escapeHTML(pendingOrderProduct)}</p>` : '<p class="m-sub">Prix, disponibilité et conseil technique.</p>';
   const html = `
     <header class="m-head">
       <p class="m-kicker">WhatsApp</p>
@@ -1644,12 +1642,15 @@ function openCountryModal(){
     <p class="m-note">Votre message est préparé automatiquement, il ne reste qu’à l’envoyer.</p>`;
   openModal(html);
 }
+let pendingCustomMessage = '';
 function sendWhatsApp(country){
   const number = GB_WHATSAPP[country] || GB_WHATSAPP.senegal;
   const countryLabel = country === 'coteivoire' ? 'la Côte d’Ivoire' : 'le Sénégal';
   const productText = pendingOrderProduct ? ` concernant ${pendingOrderProduct}` : '';
-  const message = `Bonjour, je souhaite obtenir des informations${productText} pour ${countryLabel}. Merci de me communiquer le prix et les disponibilités.`;
-  pendingOrderProduct = '';
+  const message = pendingCustomMessage
+    ? pendingCustomMessage.replace('{PAYS}', countryLabel)
+    : `Bonjour, je souhaite obtenir des informations${productText} pour ${countryLabel}. Merci de me communiquer le prix et les disponibilités.`;
+  pendingOrderProduct = ''; pendingCustomMessage = '';
   closeModal();
   window.open(`https://wa.me/${number}?text=` + encodeURIComponent(message), '_blank', 'noopener,noreferrer');
 }
@@ -1738,6 +1739,333 @@ document.addEventListener('keydown', e => {
   document.addEventListener('visibilitychange', () => stage.classList.toggle('is-hidden-tab', document.hidden));
   show(0);
 })();
+
+
+/* =====================================================================
+   OFFRE ENTREPRISES : simulateur de powerbank personnalisée
+   ===================================================================== */
+const GB_PRO = {
+  models:{
+    m1: { name:'GreenMini',      spec:'10 000 mAh',          shape:'square' },
+    v2: { name:'GreenBridge V2', spec:'10 000 mAh, 22,5 W',  shape:'compact' },
+    m6: { name:'GreenPro',       spec:'12 000 mAh',          shape:'slim' },
+    m8: { name:'GreenWire',      spec:'20 000 mAh',          shape:'tall' },
+    m12:{ name:'GreenLaptop',    spec:'20 000 mAh, 100 W',   shape:'laptop' }
+  },
+  colors:{
+    noir:  { name:'Noir',            hex:'#1B1E1D' },
+    blanc: { name:'Blanc',           hex:'#EEEEE9' },
+    vert:  { name:'Vert GreenBridge',hex:'#0C4A31' },
+    nuit:  { name:'Bleu nuit',       hex:'#1C2C4C' },
+    rouge: { name:'Rouge',           hex:'#9B1D25' },
+    sable: { name:'Sable',           hex:'#D9C8A4' }
+  },
+  markings:{
+    relief:  { name:'Logo en relief', hint:'Il ressort de la coque, on le sent au toucher.' },
+    bicolore:{ name:'Logo bicolore',  hint:'Intégré à la coque, dans une seconde couleur.' },
+    creux:   { name:'Logo en creux',  hint:'Gravé dans la matière, discret et élégant.' }
+  },
+  inks:{ blanc:'#F4F4F0', noir:'#151515', or:'#C9A646', vert:'#1E9E5A', rouge:'#B3262E' }
+};
+
+function gbHexMix(hex, target, t){
+  const h = hex.replace('#',''), n = parseInt(h, 16);
+  const c = [n >> 16 & 255, n >> 8 & 255, n & 255];
+  const tt = target === 'w' ? 255 : 0;
+  return '#' + c.map(v => Math.round(v + (tt - v) * t).toString(16).padStart(2, '0')).join('');
+}
+function gbIsLight(hex){
+  const n = parseInt(hex.replace('#',''), 16);
+  return (0.299 * (n >> 16 & 255) + 0.587 * (n >> 8 & 255) + 0.114 * (n & 255)) > 150;
+}
+
+/* Dessin SVG de la maquette (produit ou coffret) */
+function gbProMockup(cfg, view, opts){
+  opts = opts || {};
+  const S = 600, uid = 'p' + Math.random().toString(36).slice(2, 7);
+  const body = (GB_PRO.colors[cfg.color] || GB_PRO.colors.noir).hex;
+  const light = gbIsLight(body);
+  /* couleurs selon la finition de la coque */
+  let ink;
+  if(cfg.marking === 'relief') ink = gbHexMix(body, light ? 'b' : 'w', light ? 0.06 : 0.14);
+  else if(cfg.marking === 'creux') ink = light ? gbHexMix(body, 'b', 0.28) : gbHexMix(body, 'w', 0.05);
+  else ink = GB_PRO.inks[cfg.ink] || (light ? GB_PRO.inks.noir : GB_PRO.inks.blanc);
+  const mono = true;
+  const brand = escapeHTML((cfg.brand || 'VOTRE MARQUE').slice(0, 24));
+  const slogan = escapeHTML((cfg.slogan || '').slice(0, 40));
+  const font = "Archivo, 'Helvetica Neue', Arial, sans-serif";
+  const inkRGB = (() => { const n = parseInt(ink.replace('#',''), 16); return [(n >> 16 & 255) / 255, (n >> 8 & 255) / 255, (n & 255) / 255]; })();
+  const defs = `
+    <linearGradient id="${uid}b" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="${gbHexMix(body, 'w', light ? 0.35 : 0.16)}"/><stop offset=".45" stop-color="${body}"/><stop offset="1" stop-color="${gbHexMix(body, 'b', 0.28)}"/>
+    </linearGradient>
+    <linearGradient id="${uid}g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset=".35" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <radialGradient id="${uid}s" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#000" stop-opacity=".32"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+    <filter id="${uid}m" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 ${inkRGB[0]} 0 0 0 0 ${inkRGB[1]} 0 0 0 0 ${inkRGB[2]} 0 0 0 1 0"/></filter>
+    <filter id="${uid}k" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0"/><feGaussianBlur stdDeviation="${cfg.marking === 'bicolore' ? 0.6 : 0.9}"/></filter>
+    <filter id="${uid}w" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"/><feGaussianBlur stdDeviation=".5"/></filter>
+    ${opts.bg ? `<radialGradient id="${uid}bg" cx=".5" cy=".38" r=".75"><stop offset="0" stop-color="#FAFBF9"/><stop offset="1" stop-color="#E2E8E1"/></radialGradient>` : ''}`;
+  const bg = opts.bg ? `<rect width="${S}" height="${S}" fill="url(#${uid}bg)"/>` : '';
+
+  /* bloc logo + nom + slogan, centré dans une zone */
+  const brandLayer = (cx, cy, w, scale, fill, filterId) => {
+    let out = '', y;
+    const logoH = cfg.logo ? Math.min(w * 0.55, 96 * scale) : 0;
+    const nameSize = Math.max(14, Math.min(38 * scale, (w * 1.55) / Math.max(4, (cfg.brand || 'VOTRE MARQUE').length)));
+    const total = logoH + (logoH ? 14 * scale : 0) + nameSize + (slogan ? 10 * scale + 13 * scale : 0);
+    y = cy - total / 2;
+    if(cfg.logo){
+      out += `<image href="${cfg.logo}" x="${cx - w * 0.4}" y="${y}" width="${w * 0.8}" height="${logoH}" preserveAspectRatio="xMidYMid meet" filter="url(#${filterId})"/>`;
+      y += logoH + 14 * scale;
+    }
+    out += `<text x="${cx}" y="${y + nameSize * 0.82}" text-anchor="middle" font-family="${font}" font-weight="800" font-size="${nameSize.toFixed(1)}" letter-spacing="${(nameSize * 0.04).toFixed(1)}" fill="${fill}">${brand}</text>`;
+    if(slogan) out += `<text x="${cx}" y="${y + nameSize + 10 * scale + 11 * scale}" text-anchor="middle" font-family="${font}" font-weight="600" font-size="${(12.5 * scale).toFixed(1)}" fill="${fill}" opacity=".9">${slogan}</text>`;
+    return out;
+  };
+  /* effet de matière : relief (lumière en haut, ombre en bas), creux (inverse), bicolore (légère ombre) */
+  const brandBlock = (cx, cy, w, scale, inkOverride) => {
+    const main = brandLayer(cx, cy, w, scale, inkOverride || ink, uid + 'm');
+    const sh = brandLayer(cx, cy, w, scale, '#000', uid + 'k');
+    const hi = brandLayer(cx, cy, w, scale, '#fff', uid + 'w');
+    const d = Math.max(1.2, 2.2 * scale);
+    if(cfg.marking === 'relief') return `<g transform="translate(${d},${d * 1.3})" opacity="${light ? .28 : .6}">${sh}</g><g transform="translate(${-d * .5},${-d * .5})" opacity="${light ? .9 : .35}">${hi}</g>${main}`;
+    if(cfg.marking === 'creux') return `<g transform="translate(${d * .5},${d * .7})" opacity="${light ? .8 : .5}">${hi}</g><g transform="translate(${-d * .35},${-d * .45})" opacity="${light ? .4 : .95}">${sh}</g>${main}`;
+    return `<g transform="translate(${d * .5},${d * .6})" opacity=".3">${sh}</g>${main}`;
+  };
+
+  if(view === 'box'){
+    const box = cfg.color === 'blanc' || cfg.color === 'sable' ? '#F4F1EA' : '#123B2A';
+    const boxInk = gbIsLight(box) ? '#1A1A1A' : '#F3EEDD';
+    const bx = 70, by = 150, bw = 460, bh = 330;
+    const svgBox = `
+      <ellipse cx="300" cy="${by + bh + 22}" rx="250" ry="24" fill="url(#${uid}s)"/>
+      <rect x="${bx + 10}" y="${by + 14}" width="${bw}" height="${bh}" rx="10" fill="${gbHexMix(box, 'b', 0.3)}"/>
+      <rect x="${bx}" y="${by}" width="${bw}" height="${bh}" rx="10" fill="${box}"/>
+      <rect x="${bx}" y="${by}" width="${bw}" height="${bh}" rx="10" fill="url(#${uid}g)"/>
+      <rect x="${bx}" y="${by + bh - 46}" width="${bw}" height="46" rx="0" fill="${gbHexMix(box, 'b', 0.12)}"/>
+      ${brandLayer(300, by + (bh - 46) / 2, bw * 0.7, 1.15, boxInk, uid + 'bx')}
+      ${cfg.cobrand ? `<text x="300" y="${by + bh - 18}" text-anchor="middle" font-family="${font}" font-size="12" letter-spacing="1.5" fill="${boxInk}" opacity=".75">ÉNERGIE CONÇUE PAR GREENBRIDGE TECHNOLOGIES</text>` : ''}`;
+    const bxRGB = gbIsLight(box) ? '0.1 0.1 0.1' : '0.95 0.93 0.87'; const [br,bgc,bb] = bxRGB.split(' ');
+    const bxFilter = `<filter id="${uid}bx" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 ${br} 0 0 0 0 ${bgc} 0 0 0 0 ${bb} 0 0 0 1 0"/></filter>`;
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${S} ${S}" role="img" aria-label="Maquette du coffret ${brand}"><defs>${defs}${bxFilter}</defs>${bg}${svgBox}</svg>`;
+  }
+
+  /* gabarits des modèles */
+  const shapes = {
+    square: { w:330, h:330, r:52, screen:'bar' },
+    compact:{ w:300, h:360, r:46, screen:'round' },
+    slim:   { w:280, h:430, r:38, screen:'bar' },
+    tall:   { w:290, h:450, r:34, screen:'round' },
+    laptop: { w:250, h:470, r:44, screen:'panel' }
+  };
+  const model = GB_PRO.models[cfg.model] || GB_PRO.models.m1;
+  const sh = shapes[model.shape];
+  const x = (S - sh.w) / 2, y = (S - sh.h) / 2 + 10;
+  const ports = [-46, 0, 46].map(d => `<rect x="${S / 2 + d - 13}" y="${y + 9}" width="26" height="7" rx="3.5" fill="${gbHexMix(body, 'b', 0.6)}"/>`).join('');
+  let screen = '';
+  if(sh.screen === 'round') screen = `<circle cx="300" cy="${y + 70}" r="30" fill="#0B0D10"/><text x="300" y="${y + 76}" text-anchor="middle" font-family="${font}" font-size="17" font-weight="700" fill="#64D8FF">100%</text>`;
+  if(sh.screen === 'bar') screen = `<rect x="250" y="${y + 40}" width="100" height="34" rx="9" fill="#0B0D10"/><text x="300" y="${y + 63}" text-anchor="middle" font-family="${font}" font-size="17" font-weight="700" fill="#64D8FF">100%</text>`;
+  if(sh.screen === 'panel') screen = `<rect x="${x + 34}" y="${y + 50}" width="${sh.w - 68}" height="120" rx="20" fill="#0B0D10"/><text x="300" y="${y + 120}" text-anchor="middle" font-family="${font}" font-size="26" font-weight="700" fill="#64D8FF">100W</text>`;
+  const zoneTop = sh.screen === 'panel' ? y + 190 : y + 110;
+  const zoneBottom = y + sh.h - 40;
+  const product = `
+    <ellipse cx="300" cy="${y + sh.h + 26}" rx="${sh.w * 0.62}" ry="22" fill="url(#${uid}s)"/>
+    <rect x="${x + 12}" y="${y + 14}" width="${sh.w}" height="${sh.h}" rx="${sh.r}" fill="${gbHexMix(body, 'b', 0.45)}"/>
+    <rect x="${x}" y="${y}" width="${sh.w}" height="${sh.h}" rx="${sh.r}" fill="url(#${uid}b)"/>
+    <rect x="${x}" y="${y}" width="${sh.w}" height="${sh.h}" rx="${sh.r}" fill="url(#${uid}g)"/>
+    <rect x="${x + 1}" y="${y + 1}" width="${sh.w - 2}" height="${sh.h - 2}" rx="${sh.r - 1}" fill="none" stroke="#fff" stroke-opacity="${light ? 0.5 : 0.08}"/>
+    ${ports}${screen}
+    ${brandBlock(300, (zoneTop + zoneBottom) / 2, sh.w * 0.82, sh.w / 330)}`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${S} ${S}" role="img" aria-label="Maquette powerbank ${brand}"><defs>${defs}</defs>${bg}${product}</svg>`;
+}
+
+/* Logo : lecture locale + fond blanc rendu transparent */
+function gbReadLogo(file){
+  return new Promise((resolve, reject) => {
+    if(!file || !/^image\//.test(file.type)) return reject(new Error('format'));
+    if(file.size > 6 * 1024 * 1024) return reject(new Error('taille'));
+    const fr = new FileReader();
+    fr.onerror = () => reject(new Error('lecture'));
+    fr.onload = () => {
+      if(file.type === 'image/svg+xml') return resolve(fr.result);
+      const img = new Image();
+      img.onload = () => {
+        const max = 600, k = Math.min(1, max / Math.max(img.width, img.height));
+        const c = document.createElement('canvas'); c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
+        const g = c.getContext('2d'); g.drawImage(img, 0, 0, c.width, c.height);
+        try{
+          const d = g.getImageData(0, 0, c.width, c.height), p = d.data;
+          const corner = i => p[i] > 235 && p[i + 1] > 235 && p[i + 2] > 235 && p[i + 3] > 240;
+          const w = c.width, h = c.height;
+          const opaqueWhiteBg = corner(0) && corner((w - 1) * 4) && corner(((h - 1) * w) * 4) && corner(((h - 1) * w + w - 1) * 4);
+          if(opaqueWhiteBg){
+            for(let i = 0; i < p.length; i += 4){
+              const m = Math.min(p[i], p[i + 1], p[i + 2]);
+              if(m > 238) p[i + 3] = 0; else if(m > 215) p[i + 3] = Math.round(p[i + 3] * (238 - m) / 23);
+            }
+            g.putImageData(d, 0, 0);
+          }
+        }catch(e){ /* image protégée : on garde telle quelle */ }
+        resolve(c.toDataURL('image/png'));
+      };
+      img.onerror = () => reject(new Error('image'));
+      img.src = fr.result;
+    };
+    fr.readAsDataURL(file);
+  });
+}
+
+/* Logos d’exemple (fictifs) */
+function gbMonogram(letters, color, shape){
+  const s = shape === 'leaf'
+    ? `<path d="M60 8C30 18 12 40 14 70c2 26 22 42 46 42s44-16 46-42C108 40 90 18 60 8z" fill="${color}"/><path d="M60 26v80" stroke="#fff" stroke-width="5" stroke-linecap="round"/>`
+    : shape === 'sun'
+    ? `<circle cx="60" cy="60" r="30" fill="${color}"/>${Array.from({length:12},(_,i)=>{const a=i*Math.PI/6;return `<line x1="${60+Math.cos(a)*40}" y1="${60+Math.sin(a)*40}" x2="${60+Math.cos(a)*54}" y2="${60+Math.sin(a)*54}" stroke="${color}" stroke-width="6" stroke-linecap="round"/>`}).join('')}`
+    : shape === 'letter'
+    ? `<text x="60" y="88" text-anchor="middle" font-family="Georgia, serif" font-weight="700" font-size="96" fill="${color}">${letters}</text>`
+    : `<rect x="10" y="10" width="100" height="100" rx="26" fill="${color}"/><text x="60" y="76" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="46" fill="#fff">${letters}</text>`;
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">${s}</svg>`);
+}
+const GB_PRO_EXAMPLES = [
+  { title:'Cabinet de conseil', sector:'Entreprise', desc:'GreenPro bleu nuit, logo en creux.', cfg:{ brand:'KORA CONSEIL', slogan:'Stratégie et finance', model:'m6', color:'nuit', marking:'creux', ink:'blanc', logo:gbMonogram('K','#2F6FD6','letter'), box:true, cobrand:true } },
+  { title:'Festival', sector:'Événementiel', desc:'GreenMini noire, logo bicolore or.', cfg:{ brand:'FESTIVAL LUMIÈRES', slogan:'Édition 2027', model:'m1', color:'noir', marking:'bicolore', ink:'or', logo:gbMonogram('','#F2B705','sun'), box:true, cobrand:false } },
+  { title:'Coopérative agricole', sector:'Agriculture', desc:'GreenWire verte, logo en relief.', cfg:{ brand:'COOP CACAO SUD', slogan:'Ensemble, plus forts', model:'m8', color:'vert', marking:'relief', ink:'or', logo:gbMonogram('','#C9A646','leaf'), box:false, cobrand:true } },
+  { title:'Pharmacie de quartier', sector:'Santé et commerce', desc:'GreenBridge V2 blanche, logo bicolore vert.', cfg:{ brand:'PHARMACIE DU PARC', slogan:'Votre santé, notre priorité', model:'v2', color:'blanc', marking:'bicolore', ink:'vert', logo:gbMonogram('+','#1E9E5A'), box:true, cobrand:true } }
+];
+
+function gbInitPro(){
+  document.querySelectorAll('[data-pro-art]').forEach(el => {
+    const k = el.dataset.proArt;
+    const cfg = k === 'hero'
+      ? { brand:'VOTRE MARQUE', slogan:'Votre slogan ici', model:'m6', color:'vert', marking:'bicolore', ink:'or', logo:gbMonogram('VM','#C9A646'), cobrand:true }
+      : GB_PRO_EXAMPLES[+k].cfg;
+    el.insertAdjacentHTML('afterbegin', gbProMockup(cfg, el.dataset.view || 'product'));
+  });
+  const root = document.querySelector('[data-gb-pro]');
+  if(!root) return;
+  const $ = s => root.querySelector(s);
+  const cfg = { brand:'', slogan:'', model:'m1', color:'noir', marking:'relief', ink:'blanc', logo:'', box:true, cobrand:true, qty:'100 à 249', deadline:'', sector:'', city:'', note:'' };
+  let view = 'product';
+  const stage = $('[data-pro-stage]'), summary = $('[data-pro-summary]'), prices = root.querySelectorAll('[data-pro-price]');
+
+  /* listes de choix */
+  $('[data-pro-models]').innerHTML = Object.entries(GB_PRO.models).map(([id, m]) => `
+    <label class="pick"><input type="radio" name="pmodel" value="${id}" ${id === cfg.model ? 'checked' : ''}>
+      <span class="pick__img"><img src="${escapeHTML((GB_IMAGES[id] || [])[0] || '')}" alt="" loading="lazy"></span>
+      <span class="pick__txt"><b>${m.name}</b><small>${m.spec}</small></span></label>`).join('');
+  $('[data-pro-colors]').innerHTML = Object.entries(GB_PRO.colors).map(([id, c]) => `
+    <label class="swatch" title="${c.name}"><input type="radio" name="pcolor" value="${id}" ${id === cfg.color ? 'checked' : ''}><span style="--c:${c.hex}"></span><small>${c.name}</small></label>`).join('');
+  $('[data-pro-markings]').innerHTML = Object.entries(GB_PRO.markings).map(([id, m]) => `
+    <label class="seg"><input type="radio" name="pmark" value="${id}" ${id === cfg.marking ? 'checked' : ''}><span><b>${m.name}</b><small>${m.hint}</small></span></label>`).join('');
+
+  const render = () => {
+    stage.innerHTML = gbProMockup(cfg, view);
+    const m = GB_PRO.models[cfg.model], card = GB_CARDS[cfg.model] || {};
+    summary.innerHTML = [
+      ['Marque', cfg.brand || '—'], ['Modèle', `${m.name}, ${m.spec}`], ['Coque', GB_PRO.colors[cfg.color].name],
+      ['Logo', GB_PRO.markings[cfg.marking].name + (cfg.marking === 'bicolore' ? `, ${cfg.ink}` : '')],
+      ['Coffret', cfg.box ? 'Personnalisé' : 'Standard'], ['Quantité', cfg.qty]
+    ].map(([k, v]) => `<div><dt>${k}</dt><dd>${escapeHTML(v)}</dd></div>`).join('');
+    const priceHTML = card.price ? `Prix catalogue du ${escapeHTML(m.name)} : <b>à partir de ${gbPrice(card.price)}</b> l’unité, hors personnalisation. Votre tarif est établi après étude, selon la quantité et la finition.` : '';
+    prices.forEach(p => p.innerHTML = priceHTML);
+    $('[data-pro-ink]').hidden = cfg.marking !== 'bicolore';
+    root.querySelectorAll('[data-pro-view]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.proView === view)));
+  };
+  const sync = () => {
+    $('#proBrand').value = cfg.brand; $('#proSlogan').value = cfg.slogan;
+    root.querySelectorAll('input[name=pmodel]').forEach(i => i.checked = i.value === cfg.model);
+    root.querySelectorAll('input[name=pcolor]').forEach(i => i.checked = i.value === cfg.color);
+    root.querySelectorAll('input[name=pmark]').forEach(i => i.checked = i.value === cfg.marking);
+    root.querySelectorAll('input[name=pink]').forEach(i => i.checked = i.value === cfg.ink);
+    $('#proBox').checked = cfg.box; $('#proCobrand').checked = cfg.cobrand;
+    $('[data-pro-logo-name]').textContent = cfg.logo ? 'Logo chargé' : 'Aucun logo';
+    render();
+  };
+
+  root.addEventListener('input', e => {
+    const t = e.target;
+    if(t.id === 'proBrand') cfg.brand = t.value;
+    else if(t.id === 'proSlogan') cfg.slogan = t.value;
+    else if(t.name === 'pmodel') cfg.model = t.value;
+    else if(t.name === 'pcolor') cfg.color = t.value;
+    else if(t.name === 'pmark') cfg.marking = t.value;
+    else if(t.name === 'pink') cfg.ink = t.value;
+    else if(t.id === 'proBox') cfg.box = t.checked;
+    else if(t.id === 'proCobrand') cfg.cobrand = t.checked;
+    else if(t.id === 'proQty') cfg.qty = t.value;
+    else if(t.id === 'proDeadline') cfg.deadline = t.value;
+    else if(t.id === 'proSector') cfg.sector = t.value;
+    else if(t.id === 'proCity') cfg.city = t.value;
+    else if(t.id === 'proNote') cfg.note = t.value;
+    else return;
+    render();
+  });
+  $('#proLogo').addEventListener('change', async e => {
+    const msg = $('[data-pro-logo-name]');
+    try{ cfg.logo = await gbReadLogo(e.target.files[0]); msg.textContent = e.target.files[0].name; }
+    catch(err){ msg.textContent = err.message === 'taille' ? 'Fichier trop lourd (6 Mo maximum)' : 'Format non reconnu : PNG, JPG ou SVG'; }
+    render();
+  });
+  $('[data-pro-logo-clear]').addEventListener('click', () => { cfg.logo = ''; $('#proLogo').value = ''; $('[data-pro-logo-name]').textContent = 'Aucun logo'; render(); });
+  root.querySelectorAll('[data-pro-view]').forEach(b => b.addEventListener('click', () => { view = b.dataset.proView; render(); }));
+
+  /* exemples */
+  const ex = document.querySelector('[data-pro-examples]');
+  if(ex){
+    ex.innerHTML = GB_PRO_EXAMPLES.map((e, i) => `
+      <article class="ex-card">
+        <div class="ex-card__art">${gbProMockup(e.cfg, i % 2 ? 'box' : 'product')}</div>
+        <div class="ex-card__body"><small>${e.sector}</small><h3>${e.title}</h3>
+          <p>${e.desc}</p>
+          <button class="btn btn--line btn--sm" type="button" data-pro-example="${i}">Partir de cet exemple</button></div>
+      </article>`).join('');
+    ex.addEventListener('click', e => {
+      const b = e.target.closest('[data-pro-example]'); if(!b) return;
+      Object.assign(cfg, GB_PRO_EXAMPLES[+b.dataset.proExample].cfg);
+      sync(); document.getElementById('simulateur').scrollIntoView({behavior:'smooth'});
+    });
+  }
+
+  /* téléchargement de la maquette en image */
+  root.querySelectorAll('[data-pro-download]').forEach(btn => btn.addEventListener('click', async () => {
+    const svg = gbProMockup(cfg, view, { bg:true });
+    const url = URL.createObjectURL(new Blob([svg], { type:'image/svg+xml' }));
+    const img = new Image();
+    img.onload = () => {
+      const c = document.createElement('canvas'); c.width = c.height = 1200;
+      c.getContext('2d').drawImage(img, 0, 0, 1200, 1200); URL.revokeObjectURL(url);
+      const a = document.createElement('a');
+      a.download = `maquette-${(cfg.brand || 'greenbridge').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'greenbridge'}.png`;
+      try{ a.href = c.toDataURL('image/png'); a.click(); }
+      catch(err){ a.href = url; a.download = a.download.replace('.png', '.svg'); a.click(); }
+    };
+    img.src = url;
+  }));
+
+  /* demande sur WhatsApp */
+  root.querySelectorAll('[data-pro-send]').forEach(btn => btn.addEventListener('click', () => {
+    const m = GB_PRO.models[cfg.model];
+    pendingCustomMessage = [
+      'Bonjour GreenBridge, je souhaite un devis pour des powerbanks personnalisées, pour {PAYS}.',
+      '',
+      `• Marque : ${cfg.brand || 'à préciser'}${cfg.slogan ? ` (slogan : ${cfg.slogan})` : ''}`,
+      `• Secteur : ${cfg.sector || 'à préciser'}`,
+      `• Modèle de base : ${m.name}, ${m.spec}`,
+      `• Couleur de la coque : ${GB_PRO.colors[cfg.color].name}`,
+      `• Coque personnalisée : ${GB_PRO.markings[cfg.marking].name}${cfg.marking === 'bicolore' ? `, logo ${cfg.ink}` : ''}`,
+      `• Coffret personnalisé : ${cfg.box ? 'oui' : 'non'}`,
+      `• Quantité : ${cfg.qty}`,
+      `• Échéance souhaitée : ${cfg.deadline ? new Date(cfg.deadline).toLocaleDateString('fr-FR') : 'à préciser'}`,
+      `• Ville : ${cfg.city || 'à préciser'}`,
+      cfg.note ? `• Précisions : ${cfg.note}` : '',
+      '',
+      cfg.logo ? 'Je vous envoie mon logo dans cette conversation.' : 'Je vous enverrai mon logo.'
+    ].filter((l, i, a) => l !== '' || a[i - 1] !== '').join('\n');
+    openCountryModal();
+  }));
+
+  sync();
+}
 
 /* ---------- Démarrage ---------- */
 /* =====================================================================
@@ -1911,6 +2239,7 @@ if(document.querySelector('[data-gb-fiche]')) gbRenderFiche(); else gbRenderGrid
 gbInitFilters();
 gbInitGuide();
 gbInitCalculator();
+gbInitPro();
 (function(){ const y = document.getElementById('year'); if(y) y.textContent = new Date().getFullYear(); })();
 
 /* =====================================================================
@@ -1926,6 +2255,7 @@ const GB_ENERGY_THEMES = {
   wifi:      { name:'Violet signal',  halo:[150,80,255],  shell:[200,150,255], bolt:[245,230,255], core:[255,255,255], nebula:[255,70,200]  },
   powerbanks:{ name:'Vert énergie',   halo:[60,220,90],   shell:[150,255,120], bolt:[235,255,215], core:[255,255,255], nebula:[0,200,170]   },
   lifepo4:   { name:'Orange batterie',halo:[255,110,20],  shell:[255,170,70],  bolt:[255,238,205], core:[255,255,255], nebula:[255,40,60]   },
+  pro:       { name:'Turquoise pro',  halo:[0,200,190],   shell:[110,240,225], bolt:[225,255,250], core:[255,255,255], nebula:[60,110,255]  },
   about:     { name:'Rose électrique',halo:[255,60,170],  shell:[255,140,215], bolt:[255,232,248], core:[255,255,255], nebula:[160,80,255]  }
 };
 
