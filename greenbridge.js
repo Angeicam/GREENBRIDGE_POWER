@@ -1858,10 +1858,8 @@ const GB_SHAPES = {
     { id:'capsule', name:'Capsule', desc:'Silhouette arrondie et moderne',     w:62,  h:132, d:28, r:31, bevel:6,   screen:'round' }
   ]},
   laptop:{ label:'Powerbank ordinateur', icon:'fa-laptop', models:[
-    { id:'pro',     name:'Pro',        desc:'Écran large, look professionnel', w:86,  h:168, d:30, r:13, bevel:4, screen:'panel' },
-    { id:'brique',  name:'Brique',     desc:'Robuste, grande capacité',         w:104, h:158, d:36, r:8,  bevel:3, screen:'bar' },
-    { id:'station', name:'Station',    desc:'Posée sur le bureau',              w:126, h:150, d:52, r:18, bevel:5, screen:'panel' },
-    { id:'plat',    name:'Ultra-plat', desc:'Se range avec l’ordinateur',       w:118, h:176, d:17, r:12, bevel:3, screen:'bar' }
+    { id:'plate',    name:'Plate',    desc:'Format fin, se glisse dans la sacoche', w:112, h:166, d:19, r:11, bevel:3, screen:'bar' },
+    { id:'compacte', name:'Compacte', desc:'Format bloc, écran de puissance',        w:156, h:62,  d:54, r:13, bevel:5, screen:'side' }
   ]},
   ups:{ label:'Mini-UPS Wi-Fi', icon:'fa-wifi', models:[
     { id:'plat',  name:'Plat',  desc:'Se pose sous la box',       w:161, h:105, d:34, r:9,  bevel:3, screen:'leds', lay:true },
@@ -1899,12 +1897,12 @@ function gbShape(cfg){
 }
 
 /* ---------- textures ---------- */
-function gbScreenTexture(kind){
+function gbScreenTexture(kind, text){
   const c = gbCanvas(512, kind === 'round' ? 512 : 256), x = c.getContext('2d');
   x.fillStyle = '#07090B'; x.fillRect(0, 0, c.width, c.height);
   x.fillStyle = '#5FD4FF'; x.shadowColor = '#3CC8FF'; x.shadowBlur = 18;
   x.font = `700 ${kind === 'round' ? 150 : 120}px Archivo, Arial, sans-serif`; x.textAlign = 'center'; x.textBaseline = 'middle';
-  x.fillText(kind === 'panel' ? '100W' : '100%', c.width / 2, c.height / 2 + 6);
+  x.fillText(text || (kind === 'panel' ? '100W' : '100%'), c.width / 2, c.height / 2 + 6);
   return c;
 }
 function gbLogoTexture(cfg, logo, bodyHex, aspect){
@@ -1924,6 +1922,68 @@ function gbLogoTexture(cfg, logo, bodyHex, aspect){
   return c;
 }
 
+
+/* Puissance et connectique proposées pour chaque type de produit */
+const GB_CONNECT = {
+  powerbank:{
+    power:{ label:'Puissance', def:'rapide', options:{
+      standard:{ name:'Standard 10 W', hint:'Ports à languette noire' },
+      rapide:  { name:'Rapide 22,5 W', hint:'Ports à languette orange' } } },
+    ports:{ label:'Connectique', face:'top', def:['usbc','usba'], options:{ usbc:'USB-C', usba:'USB-A', micro:'Micro-USB', lightning:'Lightning (iPhone)' } }
+  },
+  laptop:{
+    power:{ label:'Puissance', def:'p100', options:{
+      p65: { name:'65 W',  hint:'Ultrabooks et tablettes' },
+      p100:{ name:'100 W', hint:'Ordinateurs jusqu’à 16 pouces' } } },
+    ports:{ label:'Connectique', face:'top', def:['usbc','usbc2','usba'], options:{ usbc:'USB-C PD', usbc2:'2ᵉ USB-C PD', usba:'USB-A', dc:'Sortie DC ordinateur' } }
+  },
+  ups:{
+    power:null,
+    ports:{ label:'Sorties', face:'side', def:['dc12','dc9','usb5'], options:{ dc12:'DC 12 V', dc9:'DC 9 V', usb5:'USB 5 V', poe:'PoE 24 V', lan:'Port LAN' } }
+  },
+  battery:{
+    power:null,
+    ports:{ label:'Connectique', face:'side', def:['bornes','usbc'], options:{ bornes:'Bornes M8', anderson:'Prise Anderson', usbc:'USB-C', usba:'USB-A', cig:'Allume-cigare 12 V' } }
+  }
+};
+const GB_ORANGE = 0xF27A1A;
+
+/* Un port, face vers +Z, dimensions réelles en mm */
+function gbPort(kind, fast){
+  const g = new THREE.Group();
+  const metal = new THREE.MeshStandardMaterial({ color:0xB7BCC2, metalness:0.85, roughness:0.32 });
+  const hole = new THREE.MeshBasicMaterial({ color:0x050505 });
+  const tongueMat = new THREE.MeshBasicMaterial({ color:new THREE.Color(fast ? GB_ORANGE : 0x1a1a1a).convertSRGBToLinear() });
+  const flat = (w, h, r, mat, z) => {
+    const geo = new THREE.ShapeGeometry(gbRoundedShape(w, h, r), 8); const m = new THREE.Mesh(geo, mat);
+    m.position.z = z || 0; return m;
+  };
+  const circ = (r, mat, z) => { const m = new THREE.Mesh(new THREE.CircleGeometry(r, 32), mat); m.position.z = z || 0; return m; };
+  let w = 10, h = 5, label = '';
+  if(kind === 'usbc' || kind === 'usbc2'){ w = 9; h = 3.3; g.add(flat(9, 3.3, 1.6, metal, 0), flat(8.1, 2.5, 1.2, hole, 0.05), flat(5.8, 0.75, 0.3, tongueMat, 0.1)); label = 'USB-C'; }
+  else if(kind === 'usba' || kind === 'usb5'){ w = 12.6; h = 5; g.add(flat(12.6, 5, 0.5, metal, 0), flat(11.8, 4.3, 0.3, hole, 0.05)); const t = flat(10.2, 1.9, 0.2, tongueMat, 0.1); t.position.y = 0.9; g.add(t); label = kind === 'usb5' ? 'USB 5V' : 'USB-A'; }
+  else if(kind === 'micro'){ w = 7.6; h = 2.8; g.add(flat(7.6, 2.8, 0.9, metal, 0), flat(6.9, 2.1, 0.7, hole, 0.05)); label = 'Micro'; }
+  else if(kind === 'lightning'){ w = 8; h = 2.6; g.add(flat(8, 2.6, 1.3, hole, 0), flat(6.4, 0.9, 0.4, new THREE.MeshStandardMaterial({ color:0xd8d8d8, metalness:0.6, roughness:0.3 }), 0.06)); label = 'Lightning'; }
+  else if(kind === 'dc' || kind === 'dc12' || kind === 'dc9'){ w = 8; h = 8; g.add(circ(4, metal, 0), circ(3.2, hole, 0.05), circ(0.9, metal, 0.1)); label = kind === 'dc12' ? '12V' : kind === 'dc9' ? '9V' : 'DC'; }
+  else if(kind === 'lan' || kind === 'poe'){ w = 13; h = 11; g.add(flat(13, 11, 0.6, hole, 0)); const tab = flat(5, 2, 0.2, hole, 0.02); tab.position.y = -6; g.add(tab);
+    const gold = new THREE.MeshStandardMaterial({ color:0xC9A646, metalness:0.9, roughness:0.3 });
+    for(let i = 0; i < 8; i++){ const c = flat(0.6, 2.2, 0.1, gold, 0.05); c.position.set(-3.5 + i, 3.4, 0); g.add(c); }
+    label = kind === 'poe' ? 'PoE' : 'LAN'; }
+  else if(kind === 'anderson'){ w = 20; h = 10; const red = new THREE.MeshStandardMaterial({ color:new THREE.Color(0xB3121C).convertSRGBToLinear(), roughness:0.55 }), blk = new THREE.MeshStandardMaterial({ color:0x111111, roughness:0.45 });
+    const a = new THREE.Mesh(new THREE.BoxGeometry(9.6, 10, 5), red); a.position.set(-5, 0, 2.5); const b = new THREE.Mesh(new THREE.BoxGeometry(9.6, 10, 5), blk); b.position.set(5, 0, 2.5);
+    g.add(a, b); [-5, 5].forEach(x => { const s = flat(4, 3, 0.4, hole, 5.05); s.position.x = x; g.add(s); }); label = 'Anderson'; }
+  else if(kind === 'cig'){ w = 26; h = 26; g.add(circ(13, metal, 0), circ(11.4, hole, 0.05), circ(2.6, metal, 0.1)); label = '12V'; }
+  g.userData = { w, h, label };
+  return g;
+}
+function gbLabelMesh(text, colorHex, mmH){
+  const c = gbCanvas(256, 64), x = c.getContext('2d');
+  x.fillStyle = colorHex; x.font = '700 40px Archivo, Arial, sans-serif'; x.textAlign = 'center'; x.textBaseline = 'middle';
+  x.fillText(text, 128, 34);
+  const t = new THREE.CanvasTexture(c); t.encoding = THREE.sRGBEncoding;
+  return new THREE.Mesh(new THREE.PlaneGeometry(mmH * 4, mmH), new THREE.MeshBasicMaterial({ map:t, transparent:true, polygonOffset:true, polygonOffsetFactor:-2 }));
+}
+
 /* ---------- géométrie ---------- */
 function gbRoundedShape(w, h, r){
   r = Math.min(r, w / 2, h / 2);
@@ -1934,13 +1994,26 @@ function gbRoundedShape(w, h, r){
   s.lineTo(x, y + r); s.quadraticCurveTo(x, y, x + r, y);
   return s;
 }
+function gbSmoothNormals(geo){
+  const pos = geo.attributes.position, n = pos.count, acc = new Map(), keys = new Array(n);
+  const a = new THREE.Vector3(), b = new THREE.Vector3(), c = new THREE.Vector3(), cb = new THREE.Vector3(), ab = new THREE.Vector3();
+  for(let i = 0; i < n; i++) keys[i] = `${Math.round(pos.getX(i) * 100)},${Math.round(pos.getY(i) * 100)},${Math.round(pos.getZ(i) * 100)}`;
+  for(let i = 0; i < n; i += 3){
+    a.fromBufferAttribute(pos, i); b.fromBufferAttribute(pos, i + 1); c.fromBufferAttribute(pos, i + 2);
+    cb.subVectors(c, b); ab.subVectors(a, b); cb.cross(ab);              /* normale pondérée par l’aire */
+    for(let k = 0; k < 3; k++){ const key = keys[i + k]; const v = acc.get(key); if(v) v.add(cb); else acc.set(key, cb.clone()); }
+  }
+  const nrm = new Float32Array(n * 3);
+  for(let i = 0; i < n; i++){ const v = acc.get(keys[i]).clone().normalize(); nrm[i * 3] = v.x; nrm[i * 3 + 1] = v.y; nrm[i * 3 + 2] = v.z; }
+  geo.setAttribute('normal', new THREE.BufferAttribute(nrm, 3));
+}
 function gbBody(def, mat){
   const b = def.bevel;
   const geo = new THREE.ExtrudeGeometry(gbRoundedShape(def.w - 2 * b, def.h - 2 * b, Math.max(1, def.r - b)), {
-    depth: def.d - 2 * b, bevelEnabled:true, bevelThickness:b, bevelSize:b, bevelSegments:8, curveSegments:28
+    depth: def.d - 2 * b, bevelEnabled:true, bevelThickness:b, bevelSize:b, bevelSegments:14, curveSegments:32
   });
   geo.translate(0, 0, -(def.d - 2 * b) / 2);
-  geo.computeVertexNormals();
+  gbSmoothNormals(geo);
   const m = new THREE.Mesh(geo, mat); m.castShadow = true; m.receiveShadow = true;
   return m;
 }
@@ -1949,8 +2022,8 @@ function gbTexMat(canvas, opts){
   return new THREE.MeshStandardMaterial(Object.assign({ map:t, transparent:true, roughness:0.6, polygonOffset:true, polygonOffsetFactor:-2 }, opts || {}));
 }
 
-function gbScreenMat(kind){
-  const t = new THREE.CanvasTexture(gbScreenTexture(kind)); t.encoding = THREE.sRGBEncoding;
+function gbScreenMat(kind, text){
+  const t = new THREE.CanvasTexture(gbScreenTexture(kind, text)); t.encoding = THREE.sRGBEncoding;
   return new THREE.MeshBasicMaterial({ map:t, polygonOffset:true, polygonOffsetFactor:-2 });
 }
 /* Construit le produit complet. Face avant = +Z. */
@@ -1962,19 +2035,29 @@ function gbBuildProduct(cfg, logo){
   g.add(gbBody(def, bodyMat));
   const fz = def.d / 2 + 0.05, dark = new THREE.MeshStandardMaterial({ color:0x0d0f10, roughness:0.45 });
   const W = def.w, H = def.h;
-  let logoTop = H * 0.18, logoBottom = -H * 0.4;   /* zone du logo sur la face avant (en Y) */
+  const conn = GB_CONNECT[cfg.type] || GB_CONNECT.powerbank;
+  const ports = (cfg.ports && cfg.ports.length ? cfg.ports : conn.ports.def).filter(p => conn.ports.options[p]);
+  const fast = cfg.type === 'powerbank' ? cfg.power !== 'standard' : cfg.type === 'laptop';
+  const screenText = cfg.type === 'laptop' ? (cfg.power === 'p65' ? '65W' : '100W') : (cfg.type === 'powerbank' && cfg.power === 'standard' ? '10W' : '100%');
+  let logoTop = H * 0.18, logoBottom = -H * 0.4, logoX = 0, logoW = null;   /* zone du logo sur la face avant (en Y) */
 
   /* écran / indicateurs */
   if(def.screen === 'round'){
     const r = Math.min(W, H) * 0.15, cy = H * 0.27;
-    const disc = new THREE.Mesh(new THREE.CircleGeometry(r, 48), gbScreenMat('round'));
+    const disc = new THREE.Mesh(new THREE.CircleGeometry(r, 48), gbScreenMat('round', cfg.type === 'powerbank' && cfg.power === 'standard' ? '10W' : '100%'));
     disc.position.set(0, cy, fz); g.add(disc); logoTop = cy - r - H * 0.06;
   } else if(def.screen === 'bar' || def.screen === 'panel'){
     const sw = W * (def.screen === 'panel' ? 0.66 : 0.5), sh = def.screen === 'panel' ? H * 0.2 : H * 0.075, cy = H * (def.screen === 'panel' ? 0.26 : 0.32);
     const geo = new THREE.ShapeGeometry(gbRoundedShape(sw, sh, Math.min(sw, sh) * 0.25));
-    const mat = gbScreenMat(def.screen);
+    const mat = gbScreenMat(def.screen, screenText);
     const uv = geo.attributes.uv; for(let i = 0; i < uv.count; i++){ uv.setXY(i, uv.getX(i) / sw + 0.5, uv.getY(i) / sh + 0.5); }
     const m = new THREE.Mesh(geo, mat); m.position.set(0, cy, fz); g.add(m); logoTop = cy - sh / 2 - H * 0.06;
+  } else if(def.screen === 'side'){
+    const sw = W * 0.28, sh = H * 0.56, cx = -W * 0.3;
+    const geo = new THREE.ShapeGeometry(gbRoundedShape(sw, sh, sh * 0.18));
+    const uv = geo.attributes.uv; for(let i = 0; i < uv.count; i++){ uv.setXY(i, uv.getX(i) / sw + 0.5, uv.getY(i) / sh + 0.5); }
+    const m = new THREE.Mesh(geo, gbScreenMat('bar', screenText)); m.position.set(cx, 0, fz); g.add(m);
+    logoTop = H * 0.36; logoBottom = -H * 0.36; logoX = W * 0.17; logoW = W * 0.56;
   } else if(def.screen === 'leds'){
     const y = H * 0.33, sp = Math.min(W, 110) * 0.06;
     for(let i = 0; i < 4; i++){
@@ -1988,7 +2071,7 @@ function gbBuildProduct(cfg, logo){
     /* bornes sur le dessus, petit afficheur */
     const gold = new THREE.MeshStandardMaterial({ color:0xC79A3B, metalness:0.9, roughness:0.3 });
     if(def.screen === 'battery'){
-      [-1, 1].forEach(sx => {
+      if(ports.includes('bornes')) [-1, 1].forEach(sx => {
         const base = new THREE.Mesh(new THREE.CylinderGeometry(W * 0.045, W * 0.05, 8, 6), gold);
         base.position.set(sx * W * 0.34, H / 2 + 4, def.d * 0.12); base.castShadow = true; g.add(base);
         const stud = new THREE.Mesh(new THREE.CylinderGeometry(W * 0.016, W * 0.016, 16, 16), gold);
@@ -2009,27 +2092,47 @@ function gbBuildProduct(cfg, logo){
       });
       const gp = new THREE.Mesh(new THREE.CylinderGeometry(9, 9, 7, 24), gold); gp.rotation.x = Math.PI / 2; gp.position.set(W * 0.33, -H * 0.2, fz + 3); g.add(gp);
       const gm = gp.clone(); gm.position.x = W * 0.22; g.add(gm);
-      logoTop = H * 0.32; logoBottom = -H * 0.36;
+      logoTop = H * 0.32; logoBottom = -H * 0.36; logoX = -W * 0.12; logoW = W * 0.55;
     }
   }
   if(def.handle){
     const h = new THREE.Mesh(new THREE.TorusGeometry(W * 0.2, 7, 14, 40, Math.PI), new THREE.MeshPhysicalMaterial({ color:0x1b1d1c, roughness:0.5 }));
     h.position.set(0, H / 2, 0); h.castShadow = true; g.add(h);
   }
-  /* ports sur la tranche supérieure (petits produits) */
-  if(cfg.type === 'powerbank' || cfg.type === 'laptop' || cfg.type === 'ups'){
-    const n = cfg.type === 'ups' ? 0 : 3;
-    for(let i = 0; i < n; i++){
-      const p = new THREE.Mesh(new THREE.PlaneGeometry(Math.min(W * 0.13, 11), Math.min(def.d * 0.24, 4.5)), new THREE.MeshBasicMaterial({ color:0x050505 }));
-      p.rotation.x = -Math.PI / 2; p.position.set((i - (n - 1) / 2) * Math.min(W * 0.2, 17), H / 2 + 0.15, 0); g.add(p);
+  /* connectique : ports réels, sur la tranche du haut ou sur le côté */
+  const list = ports.filter(p => p !== 'bornes').map(p => gbPort(p, fast && !['micro','lightning','dc'].includes(p)));
+  const portsGroup = new THREE.Group();
+  if(list.length){
+    const gap = cfg.type === 'battery' ? 14 : cfg.type === 'ups' ? 7 : 4.5;
+    const total = list.reduce((t, p) => t + p.userData.w, 0) + gap * (list.length - 1);
+    let x = -total / 2;
+    const labelColor = gbIsLight(bodyHex) ? '#2b2b2b' : '#e9e9e4';
+    list.forEach(p => {
+      p.position.x = x + p.userData.w / 2; x += p.userData.w + gap; portsGroup.add(p);
+      if(conn.ports.face === 'side'){
+        const lb = gbLabelMesh(p.userData.label, labelColor, cfg.type === 'battery' ? 6 : 3.4);
+        lb.position.set(p.position.x, -p.userData.h / 2 - (cfg.type === 'battery' ? 6 : 3.6), 0.1); portsGroup.add(lb);
+      }
+    });
+    if(conn.ports.face === 'top'){
+      /* tranche supérieure : les ports regardent vers le haut */
+      const fit = Math.min(1, (W - 2 * def.bevel - 6) / total);
+      portsGroup.scale.setScalar(fit);
+      portsGroup.rotation.x = -Math.PI / 2; portsGroup.position.set(0, H / 2 + 0.12, 0);
+    } else {
+      /* côté droit : les ports regardent vers la droite */
+      const fit = Math.min(1, (def.d - 2 * def.bevel - 6) / (total + 6));
+      portsGroup.scale.setScalar(fit);
+      portsGroup.rotation.y = Math.PI / 2; portsGroup.position.set(W / 2 + 0.12, cfg.type === 'battery' ? -H * 0.05 : -H * 0.08, 0);
     }
+    g.add(portsGroup);
   }
   /* logo + nom */
-  const zoneW = (cfg.type === 'battery' ? W * (def.screen === 'rack' ? 0.55 : 0.82) : W * 0.8), zoneH = Math.max(10, logoTop - logoBottom);
+  const zoneW = logoW || (cfg.type === 'battery' ? W * 0.82 : W * 0.8), zoneH = Math.max(10, logoTop - logoBottom);
   const tex = gbLogoTexture(cfg, logo, bodyHex, zoneW / zoneH);
   const lm = new THREE.Mesh(new THREE.PlaneGeometry(zoneW, zoneH), gbTexMat(tex, { roughness:fin.rough }));
-  lm.position.set(def.screen === 'rack' ? -W * 0.12 : 0, (logoTop + logoBottom) / 2, fz + 0.06); g.add(lm);
-  g.userData = { def, logoY:(logoTop + logoBottom) / 2, logoX:lm.position.x, zoneW, zoneH, logoMesh:lm };
+  lm.position.set(logoX, (logoTop + logoBottom) / 2, fz + 0.06); g.add(lm);
+  g.userData = { def, logoY:(logoTop + logoBottom) / 2, logoX:lm.position.x, zoneW, zoneH, logoMesh:lm, portsGroup:list.length ? portsGroup : null, portsFace:conn.ports.face };
   /* orientation de présentation */
   if(def.lay){ g.rotation.x = -1.05; }
   return g;
@@ -2051,7 +2154,7 @@ function gbCreateStage(canvas, opts){
   const ground = new THREE.Mesh(new THREE.PlaneGeometry(4000, 4000), new THREE.ShadowMaterial({ opacity:0.15 }));
   ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
   const pivot = new THREE.Group(); scene.add(pivot);
-  let product = null, yaw = -0.42, pitch = 0.12, zoom = false;
+  let product = null, yaw = -0.42, pitch = 0.12, view = 'all';
 
   const fit = () => {
     if(!product) return;
@@ -2059,8 +2162,20 @@ function gbCreateStage(canvas, opts){
     product.position.sub(c); product.position.y += size.y / 2;           /* posé sur le sol */
     const R = size.length() / 2;
     ground.position.y = 0;
-    if(zoom){
+    if(view === 'ports' && product.userData.portsGroup){
+      /* cadrage sur la connectique, légèrement de biais */
+      pivot.rotation.set(0, 0, 0); pivot.updateMatrixWorld(true);
+      const pg = product.userData.portsGroup, box2 = new THREE.Box3().setFromObject(pg);
+      const pos = box2.getCenter(new THREE.Vector3()), sz = box2.getSize(new THREE.Vector3());
+      const nrm = product.userData.portsFace === 'top' ? new THREE.Vector3(0, 1, 0.55) : new THREE.Vector3(1, 0.25, 0.5);
+      nrm.applyQuaternion(product.getWorldQuaternion(new THREE.Quaternion())).normalize();
+      const span = Math.max(sz.x, sz.y, sz.z) * 1.35 + 6;
+      const dist = span / (2 * Math.tan(THREE.MathUtils.degToRad(cam.fov / 2)));
+      cam.up.set(0, 1, 0).applyQuaternion(product.getWorldQuaternion(new THREE.Quaternion())).normalize();
+      cam.position.copy(pos).addScaledVector(nrm, dist); cam.lookAt(pos);
+    } else if(view === 'logo'){
       /* cadrage sur la zone du logo, face à elle */
+      cam.up.set(0, 1, 0);
       pivot.rotation.set(0, 0, 0); pivot.updateMatrixWorld(true);
       const lm = product.userData.logoMesh, pos = lm.getWorldPosition(new THREE.Vector3());
       const nrm = new THREE.Vector3(0, 0, 1).applyQuaternion(lm.getWorldQuaternion(new THREE.Quaternion())).normalize();
@@ -2068,6 +2183,7 @@ function gbCreateStage(canvas, opts){
       const dist = span / (2 * Math.tan(THREE.MathUtils.degToRad(cam.fov / 2)));
       cam.position.copy(pos).addScaledVector(nrm, dist); cam.position.y += dist * 0.04; cam.lookAt(pos);
     } else {
+      cam.up.set(0, 1, 0);
       const d = R / Math.sin(THREE.MathUtils.degToRad(cam.fov / 2)) * (opts.tight ? 1.12 : 1.42);
       cam.position.set(0, size.y * 0.5 + d * 0.18, d); cam.lookAt(0, size.y * 0.5, 0);
     }
@@ -2075,7 +2191,7 @@ function gbCreateStage(canvas, opts){
     const s = R * 2.2; Object.assign(key.shadow.camera, { left:-s, right:s, top:s, bottom:-s, near:1, far:R * 12 }); key.shadow.camera.updateProjectionMatrix();
     fill.position.set(-R * 3, R * 1.5, R * 2); rim.position.set(0, R * 2.5, -R * 4);
   };
-  const render = () => { if(zoom) pivot.rotation.set(0, 0, 0); else pivot.rotation.set(pitch * 0.4, yaw, 0); renderer.render(scene, cam); };
+  const render = () => { if(view !== 'all') pivot.rotation.set(0, 0, 0); else pivot.rotation.set(pitch * 0.4, yaw, 0); renderer.render(scene, cam); };
   const resize = () => {
     const w = canvas.clientWidth || opts.size || 600, h = canvas.clientHeight || opts.size || 600;
     renderer.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); render();
@@ -2091,7 +2207,7 @@ function gbCreateStage(canvas, opts){
   /* rotation au doigt / à la souris */
   if(opts.interactive){
     let drag = null;
-    canvas.addEventListener('pointerdown', e => { if(zoom) return; drag = { x:e.clientX, y:e.clientY, yaw, pitch }; canvas.setPointerCapture(e.pointerId); canvas.classList.add('is-grabbing'); });
+    canvas.addEventListener('pointerdown', e => { if(view !== 'all') return; drag = { x:e.clientX, y:e.clientY, yaw, pitch }; canvas.setPointerCapture(e.pointerId); canvas.classList.add('is-grabbing'); });
     canvas.addEventListener('pointermove', e => { if(!drag) return; yaw = drag.yaw + (e.clientX - drag.x) * 0.01; pitch = Math.max(-0.6, Math.min(0.9, drag.pitch + (e.clientY - drag.y) * 0.006)); render(); });
     const end = () => { drag = null; canvas.classList.remove('is-grabbing'); };
     canvas.addEventListener('pointerup', end); canvas.addEventListener('pointercancel', end);
@@ -2100,7 +2216,8 @@ function gbCreateStage(canvas, opts){
   }
   return {
     set, render, resize,
-    setZoom(z){ zoom = z; if(!z){ yaw = product && product.userData.def.lay ? -0.3 : -0.42; pitch = 0.12; } fit(); render(); },
+    setView(v){ view = v; if(v === 'all'){ yaw = product && product.userData.def.lay ? -0.3 : -0.42; pitch = 0.12; } fit(); render(); },
+    hasPorts(){ return !!(product && product.userData.portsGroup); },
     snapshot(w){
       const prev = renderer.getSize(new THREE.Vector2()); renderer.setPixelRatio(1); renderer.setSize(w, w, false); cam.aspect = 1; cam.updateProjectionMatrix(); render();
       const url = canvas.toDataURL('image/png');
@@ -2138,7 +2255,7 @@ function gbInitPro(){
   const root = document.querySelector('[data-gb-pro]');
   if(!root) return;
   const $ = s => root.querySelector(s);
-  const cfg = { type:'powerbank', shape:'galet', brand:'', slogan:'', color:'noir', finish:'satin', marking:'bicolore', ink:'or', logo:'', qty:'100 à 249', deadline:'', sector:'', city:'', note:'' };
+  const cfg = { type:'powerbank', shape:'galet', power:'rapide', ports:['usbc','usba'], brand:'', slogan:'', color:'noir', finish:'satin', marking:'bicolore', ink:'or', logo:'', qty:'100 à 249', deadline:'', sector:'', city:'', note:'' };
   const caption = $('[data-pro-caption]'), summary = $('[data-pro-summary]');
 
   /* aperçu 3D interactif */
@@ -2174,6 +2291,22 @@ function gbInitPro(){
       }
     })();
   };
+  const powerEl = $('[data-pro-power]'), portsEl = $('[data-pro-ports]');
+  const renderConn = () => {
+    const c = GB_CONNECT[cfg.type];
+    powerEl.closest('.field').hidden = !c.power;
+    if(c.power) powerEl.innerHTML = Object.entries(c.power.options).map(([id, o]) => `
+      <label class="seg"><input type="radio" name="ppower" value="${id}" ${id === cfg.power ? 'checked' : ''}><span><b>${o.name}</b><small>${o.hint}</small></span></label>`).join('');
+    $('[data-pro-ports-label]').textContent = c.ports.label;
+    portsEl.innerHTML = Object.entries(c.ports.options).map(([id, name]) => `
+      <label class="chip"><input type="checkbox" name="pport" value="${id}" ${cfg.ports.includes(id) ? 'checked' : ''}><span><i class="fa-solid fa-check" aria-hidden="true"></i>${name}</span></label>`).join('');
+  };
+  const setTypeDefaults = () => {
+    const c = GB_CONNECT[cfg.type];
+    if(!c.power || !c.power.options[cfg.power]) cfg.power = c.power ? c.power.def : '';
+    cfg.ports = (cfg.ports || []).filter(p => c.ports.options[p]);
+    if(!cfg.ports.length) cfg.ports = c.ports.def.slice();
+  };
   $('[data-pro-colors]').innerHTML = Object.entries(GB_PRO.colors).map(([id, c]) => `
     <label class="swatch" title="${c.name}"><input type="radio" name="pcolor" value="${id}" ${id === cfg.color ? 'checked' : ''}><span style="--c:${c.hex}"></span><small>${c.name}</small></label>`).join('');
   $('[data-pro-finishes]').innerHTML = Object.entries(GB_PRO.finishes).map(([id, f]) => `
@@ -2188,14 +2321,16 @@ function gbInitPro(){
     await new Promise(r => requestAnimationFrame(r));
     if(t !== pending) return;
     await stage.set(cfg, !structural); structural = false;
+    if(view !== 'all') stage.setView(view);
   };
   const render = () => {
     draw();
     const sh = gbShape(cfg), t = GB_SHAPES[cfg.type];
-    if(caption) caption.innerHTML = [`${t.label} ${sh.name}`, GB_PRO.colors[cfg.color].name, GB_PRO.finishes[cfg.finish].name, GB_PRO.markings[cfg.marking].name + (cfg.marking === 'bicolore' ? ' ' + cfg.ink : '')]
+    const c = GB_CONNECT[cfg.type], pw = c.power ? c.power.options[cfg.power].name : '';
+    if(caption) caption.innerHTML = [`${t.label} ${sh.name}`, pw, GB_PRO.colors[cfg.color].name, GB_PRO.markings[cfg.marking].name + (cfg.marking === 'bicolore' ? ' ' + cfg.ink : '')].filter(Boolean)
       .map(x => `<span>${escapeHTML(x)}</span>`).join('');
     summary.innerHTML = [
-      ['Produit', t.label], ['Forme', sh.name], ['Marque', cfg.brand || '—'],
+      ['Produit', `${t.label}, ${sh.name}`], ['Puissance', pw || '—'], ['Connectique', cfg.ports.map(p => c.ports.options[p]).join(', ') || '—'], ['Marque', cfg.brand || '—'],
       ['Coque', `${GB_PRO.colors[cfg.color].name}, ${GB_PRO.finishes[cfg.finish].name.toLowerCase()}`],
       ['Logo', GB_PRO.markings[cfg.marking].name + (cfg.marking === 'bicolore' ? `, ${cfg.ink}` : '')], ['Quantité', cfg.qty]
     ].map(([k, v]) => `<div><dt>${k}</dt><dd>${escapeHTML(v)}</dd></div>`).join('');
@@ -2204,7 +2339,7 @@ function gbInitPro(){
   const sync = () => {
     $('#proBrand').value = cfg.brand; $('#proSlogan').value = cfg.slogan;
     root.querySelectorAll('input[name=ptype]').forEach(i => i.checked = i.value === cfg.type);
-    renderShapes();
+    setTypeDefaults(); renderShapes(); renderConn();
     root.querySelectorAll('input[name=pcolor]').forEach(i => i.checked = i.value === cfg.color);
     root.querySelectorAll('input[name=pfinish]').forEach(i => i.checked = i.value === cfg.finish);
     root.querySelectorAll('input[name=pmark]').forEach(i => i.checked = i.value === cfg.marking);
@@ -2215,7 +2350,9 @@ function gbInitPro(){
 
   root.addEventListener('input', e => {
     const t = e.target;
-    if(t.name === 'ptype'){ cfg.type = t.value; cfg.shape = GB_SHAPES[t.value].models[0].id; renderShapes(); structural = true; }
+    if(t.name === 'ptype'){ cfg.type = t.value; cfg.shape = GB_SHAPES[t.value].models[0].id; cfg.ports = []; setTypeDefaults(); renderShapes(); renderConn(); structural = true; }
+    else if(t.name === 'ppower'){ cfg.power = t.value; structural = true; }
+    else if(t.name === 'pport'){ cfg.ports = Array.from(root.querySelectorAll('input[name=pport]:checked')).map(i => i.value); structural = true; }
     else if(t.name === 'pshape'){ cfg.shape = t.value; structural = true; }
     else if(t.id === 'proBrand') cfg.brand = t.value;
     else if(t.id === 'proSlogan') cfg.slogan = t.value;
@@ -2238,13 +2375,15 @@ function gbInitPro(){
     render();
   });
   $('[data-pro-logo-clear]').addEventListener('click', () => { cfg.logo = ''; $('#proLogo').value = ''; $('[data-pro-logo-name]').textContent = 'Aucun logo'; render(); });
-  const zoomBtn = $('[data-pro-zoom]'); let zoom = false;
-  if(zoomBtn) zoomBtn.addEventListener('click', () => {
-    if(!stage) return; zoom = !zoom; zoomBtn.setAttribute('aria-pressed', String(zoom));
-    zoomBtn.innerHTML = zoom ? '<i class="fa-solid fa-magnifying-glass-minus" aria-hidden="true"></i>Vue d’ensemble' : '<i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i>Zoom sur le logo';
-    stage.setZoom(zoom);
-  });
-
+  /* vues : ensemble, logo, connectique */
+  let view = 'all';
+  const viewBtns = root.querySelectorAll('[data-pro-view]');
+  const setView = v => {
+    view = view === v ? 'all' : v;
+    viewBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.proView === view)));
+    if(stage) stage.setView(view);
+  };
+  viewBtns.forEach(b => b.addEventListener('click', () => setView(b.dataset.proView)));
   /* exemples */
   const ex = document.querySelector('[data-pro-examples]');
   if(ex){
@@ -2282,6 +2421,8 @@ function gbInitPro(){
       'Bonjour GreenBridge, je souhaite un devis pour des produits personnalisés à notre marque, pour {PAYS}.',
       '',
       `• Produit : ${t.label}, forme ${sh.name}`,
+      GB_CONNECT[cfg.type].power ? `• Puissance : ${GB_CONNECT[cfg.type].power.options[cfg.power].name}` : '',
+      `• ${GB_CONNECT[cfg.type].ports.label} : ${cfg.ports.map(p => GB_CONNECT[cfg.type].ports.options[p]).join(', ') || 'à préciser'}`,
       `• Marque : ${cfg.brand || 'à préciser'}${cfg.slogan ? ` (slogan : ${cfg.slogan})` : ''}`,
       `• Secteur : ${cfg.sector || 'à préciser'}`,
       `• Coque : ${GB_PRO.colors[cfg.color].name}, finition ${GB_PRO.finishes[cfg.finish].name.toLowerCase()}`,
