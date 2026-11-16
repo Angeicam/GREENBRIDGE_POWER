@@ -13,6 +13,7 @@
 <meta property="og:locale" content="fr_FR">
 <link rel="canonical" href="https://www.greenbridge-technologies.com/entreprises.html">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Quelle quantité minimum ?", "acceptedAnswer": {"@type": "Answer", "text": "Elle dépend du modèle et de la finition choisie. Comme nos coques sont fabriquées dans notre atelier, nous pouvons aussi réaliser de petites séries : le minimum vous est indiqué dès le premier échange."}}, {"@type": "Question", "name": "Quels fichiers fournir pour notre logo ?", "acceptedAnswer": {"@type": "Answer", "text": "Idéalement un fichier vectoriel (SVG, PDF, AI ou EPS), indispensable pour un rendu net en relief ou en creux. Un PNG en haute définition sur fond transparent peut aussi convenir. Nous adaptons ensuite votre logo à la coque."}}, {"@type": "Question", "name": "Pourrons-nous voir le rendu avant la production ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui. Nous vous envoyons une maquette, puis un bon à tirer à valider. Rien n’est produit sans votre accord écrit."}}, {"@type": "Question", "name": "Peut-on créer une powerbank entièrement à notre nom ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui, après étude. La coque est conçue à votre image, et selon les volumes la capacité, la connectique, le coffret et la notice peuvent aussi être adaptés, y compris pour une revente sous votre propre nom."}}, {"@type": "Question", "name": "Quels sont les délais ?", "acceptedAnswer": {"@type": "Answer", "text": "Ils dépendent du modèle, de la quantité et de la personnalisation choisie. Ils sont précisés dans notre proposition, avec une date de livraison."}}, {"@type": "Question", "name": "Livrez-vous en Côte d’Ivoire et au Sénégal ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui. Les modalités et les frais de livraison sont fixés avec vous dans la proposition."}}]}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 <link rel="icon" type="image/png" href="green%20bridge%20domo.png">
 <link rel="apple-touch-icon" href="green%20bridge%20domo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -115,16 +116,18 @@
 
 <section class="section" id="simulateur" aria-labelledby="sim-title">
   <div class="wrap">
-    <div class="section-head"><span class="label">Simulateur</span><h2 id="sim-title">Visualisez votre produit.</h2><p>Saisissez votre marque, ajoutez votre logo, choisissez le modèle, la couleur de la coque et la finition. L’aperçu se met à jour en direct.</p></div>
+    <div class="section-head"><span class="label">Simulateur</span><h2 id="sim-title">Visualisez votre produit.</h2><p>Choisissez un produit et une forme de coque, ajoutez votre marque et votre logo, puis faites pivoter votre création en 3D.</p></div>
     <div class="config" data-gb-pro>
       <div class="preview">
         <div class="preview__stage">
-          <span class="preview__badge">Aperçu en direct</span><span class="preview__note">Rendu indicatif</span>
-          <div data-pro-stage></div>
+          <span class="preview__badge">Aperçu 3D</span><span class="preview__note"><i class="fa-solid fa-hand-pointer" aria-hidden="true"></i> Glissez pour faire pivoter</span>
+          <div data-pro-stage class="pro-stage"></div>
+          <p class="preview__caption" data-pro-caption aria-live="polite"></p>
+          <button class="preview__zoom" type="button" data-pro-zoom aria-pressed="false"><i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i>Zoom sur le logo</button>
         </div>
         <div class="preview__details">
           <dl class="recap" data-pro-summary></dl>
-            <p class="pro-price" data-pro-price></p>
+            <p class="pro-price">Tarif établi après étude, selon la forme, la quantité et la finition.</p>
             <div class="btn-row">
               <button class="btn btn--wa" type="button" data-pro-send><i class="fa-brands fa-whatsapp" aria-hidden="true"></i>Demander mon devis</button>
               <button class="btn btn--line" type="button" data-pro-download><i class="fa-solid fa-download" aria-hidden="true"></i>Télécharger la maquette</button>
@@ -134,24 +137,26 @@
       </div>
 
       <div class="config__form">
-        <div class="step-title"><b>1</b>Votre marque</div>
+        <div class="step-title"><b>1</b>Votre produit</div>
+        <div class="field"><span class="field__label">Type de produit</span><div class="types" data-pro-types></div></div>
+        <div class="field"><span class="field__label">Forme de la coque <small>4 modèles par produit</small></span><div class="picks picks--shapes" data-pro-shapes></div></div>
+
+        <div class="step-title"><b>2</b>Votre marque</div>
         <div class="field"><label for="proBrand">Nom de la marque <small>24 caractères maximum</small></label><input class="input" id="proBrand" maxlength="24" placeholder="Ex. : KORA CONSEIL" autocomplete="organization"></div>
         <div class="field"><label for="proSlogan">Slogan <small>Facultatif</small></label><input class="input" id="proSlogan" maxlength="40" placeholder="Ex. : L’énergie de vos projets"></div>
         <div class="field"><span class="field__label">Logo <small>PNG, JPG ou SVG</small></span>
           <div class="upload"><input type="file" id="proLogo" accept="image/png,image/jpeg,image/svg+xml,image/webp"><label class="btn btn--line btn--sm" for="proLogo"><i class="fa-solid fa-upload" aria-hidden="true"></i>Ajouter mon logo</label><span data-pro-logo-name>Aucun logo</span><button type="button" data-pro-logo-clear>Retirer</button></div>
-          <p class="field__hint">Votre logo reste sur votre appareil : il n’est envoyé nulle part. Un fond blanc est automatiquement rendu transparent.</p></div>
+          <p class="field__hint">Votre logo reste sur votre appareil : il n’est envoyé nulle part. Un logo simple, en une couleur, donne le plus beau rendu.</p></div>
 
-        <div class="step-title"><b>2</b>Le produit</div>
-        <div class="field"><span class="field__label">Produit de base</span><div class="picks" data-pro-models></div></div>
+        <div class="step-title"><b>3</b>Couleur et finition</div>
         <div class="field"><span class="field__label">Couleur de la coque <small>Autres teintes sur demande</small></span><div class="swatches" data-pro-colors></div></div>
-
-        <div class="step-title"><b>3</b>Votre logo sur la coque</div>
-        <div class="field"><span class="field__label">Finition</span><div class="segs" data-pro-markings></div><p class="field__hint">Un logo simple, en une couleur, donne le plus beau rendu en relief ou en creux.</p></div>
+        <div class="field"><span class="field__label">Aspect de la coque</span><div class="segs segs--2" data-pro-finishes></div></div>
+        <div class="field"><span class="field__label">Finition du logo</span><div class="segs" data-pro-markings></div></div>
         <div class="field" data-pro-ink hidden><span class="field__label">Couleur du logo</span>
           <div class="inks">
-            <label class="seg"><input type="radio" name="pink" value="blanc" checked><span><b>Blanc</b></span></label>
+            <label class="seg"><input type="radio" name="pink" value="blanc"><span><b>Blanc</b></span></label>
             <label class="seg"><input type="radio" name="pink" value="noir"><span><b>Noir</b></span></label>
-            <label class="seg"><input type="radio" name="pink" value="or"><span><b>Or</b></span></label>
+            <label class="seg"><input type="radio" name="pink" value="or" checked><span><b>Or</b></span></label>
             <label class="seg"><input type="radio" name="pink" value="vert"><span><b>Vert</b></span></label>
             <label class="seg"><input type="radio" name="pink" value="rouge"><span><b>Rouge</b></span></label>
           </div></div>
@@ -167,7 +172,7 @@
         </div>
         <div class="field"><label for="proNote">Précisions <small>Facultatif</small></label><textarea class="input" id="proNote" placeholder="Usage, public visé, budget, événement…"></textarea></div>
         <div class="mobile-only">
-            <p class="pro-price" data-pro-price></p>
+            <p class="pro-price">Tarif établi après étude, selon la forme, la quantité et la finition.</p>
             <div class="btn-row">
               <button class="btn btn--wa" type="button" data-pro-send><i class="fa-brands fa-whatsapp" aria-hidden="true"></i>Demander mon devis</button>
               <button class="btn btn--line" type="button" data-pro-download><i class="fa-solid fa-download" aria-hidden="true"></i>Télécharger la maquette</button>
