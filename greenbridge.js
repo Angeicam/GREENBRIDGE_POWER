@@ -1751,9 +1751,11 @@ const GB_PRO = {
     v1:{ name:'GreenBridge V1', spec:'6 000 mAh, 22,5 W',  asset:'v1' },
     v2:{ name:'GreenBridge V2', spec:'10 000 mAh, 22,5 W', asset:'v2' },
     v3:{ name:'GreenBridge V3', spec:'12 000 mAh, 22,5 W', asset:'v3' },
-    m4:{ name:'GreenEco',       spec:'10 000 mAh',          asset:'greeneco' }
+    m4:{ name:'GreenEco',       spec:'10 000 mAh',          asset:'greeneco' },
+    m13:{ name:'GreenWifi',     spec:'Mini-UPS Wi-Fi',      asset:'wifi' },
+    lifepo4:{ name:'Batterie LiFePO₄', spec:'104 Ah',        asset:'lifepo4' }
   },
-  geo:{"v1": {"w": 726, "h": 676, "zone": [90, 300, 630, 640]}, "v2": {"w": 533, "h": 700, "zone": [95, 330, 470, 610]}, "v3": {"w": 545, "h": 674, "zone": [80, 290, 520, 635]}, "greeneco": {"w": 271, "h": 700, "zone": [32, 300, 240, 640]}},
+  geo:{"v1": {"w": 726, "h": 676, "zone": [90, 320, 630, 640]}, "v2": {"w": 533, "h": 700, "zone": [95, 340, 470, 610]}, "v3": {"w": 545, "h": 674, "zone": [80, 300, 520, 635]}, "greeneco": {"w": 271, "h": 700, "zone": [32, 300, 240, 640]}, "lifepo4": {"w": 760, "h": 451, "zone": [95, 140, 665, 415]}, "wifi": {"w": 760, "h": 634, "center": [262, 338], "size": [235, 250], "u": [0.8439, -0.5365], "v": [0.7629, 0.6465]}},
   colors:{
     noir:  { name:'Noir',            hex:'#2A2D2C' },
     blanc: { name:'Blanc',           hex:'#E6E5E0' },
@@ -1824,10 +1826,22 @@ async function gbProRender(canvas, cfg, opts){
   opts = opts || {};
   const S = opts.size || 1000;
   const m = GB_PRO.models[cfg.model] || GB_PRO.models.v1, g = GB_PRO.geo[m.asset];
-  const [shade, keep, logo] = await Promise.all([
-    gbProImg(`pro-${m.asset}-shade.webp`), gbProImg(`pro-${m.asset}-keep.webp`),
-    cfg.logo ? gbProImg(cfg.logo).catch(() => null) : Promise.resolve(null)
-  ]);
+  let shade, keep, logo;
+  try{
+    [shade, keep, logo] = await Promise.all([
+      gbProImg(`pro-${m.asset}-shade.webp`), gbProImg(`pro-${m.asset}-keep.webp`),
+      cfg.logo ? gbProImg(cfg.logo).catch(() => null) : Promise.resolve(null)
+    ]);
+  }catch(err){
+    /* secours : photo normale du produit si les fichiers du simulateur manquent */
+    canvas.width = S; canvas.height = S;
+    const c = canvas.getContext('2d'), id = Object.keys(GB_PRO.models).find(k => GB_PRO.models[k] === m);
+    try{
+      const ph = await gbProImg((GB_IMAGES[id] || [])[0]);
+      const k = Math.min(S / ph.width, S / ph.height); c.drawImage(ph, (S - ph.width * k) / 2, (S - ph.height * k) / 2, ph.width * k, ph.height * k);
+    }catch(e){}
+    return canvas;
+  }
   try{ await document.fonts.ready; }catch(e){}
   const coque = (GB_PRO.colors[cfg.color] || GB_PRO.colors.noir).hex, light = gbIsLight(coque);
 
@@ -1839,7 +1853,13 @@ async function gbProRender(canvas, cfg, opts){
   p.globalCompositeOperation = 'source-over'; p.drawImage(keep, 0, 0);
 
   /* 2. logo et marque sur la face avant */
-  const [x0, y0, x1, y1] = g.zone, zw = x1 - x0, zh = y1 - y0;
+  let zw, zh, T;
+  if(g.u){
+    [zw, zh] = g.size;
+    T = [g.u[0], g.u[1], g.v[0], g.v[1], g.center[0] - g.u[0] * zw / 2 - g.v[0] * zh / 2, g.center[1] - g.u[1] * zw / 2 - g.v[1] * zh / 2];
+  } else {
+    const [x0, y0, x1, y1] = g.zone; zw = x1 - x0; zh = y1 - y0; T = [1, 0, 0, 1, x0, y0];
+  }
   const mask = gbBrandMask(cfg, logo, zw, zh);
   const d = Math.max(1.6, zh * 0.0075);
   let ink;
@@ -1847,8 +1867,9 @@ async function gbProRender(canvas, cfg, opts){
   else if(cfg.marking === 'creux') ink = light ? gbHexMix(coque, 'b', 0.3) : gbHexMix(coque, 'b', 0.35);
   else ink = GB_PRO.inks[cfg.ink] || (light ? GB_PRO.inks.noir : GB_PRO.inks.blanc);
   const layer = (img, dx, dy, alpha, blur) => {
-    p.save(); p.globalAlpha = alpha; if(blur && 'filter' in p) p.filter = `blur(${blur}px)`;
-    p.drawImage(img, x0 + dx, y0 + dy); p.restore();
+    p.save(); p.setTransform(T[0], T[1], T[2], T[3], T[4], T[5]); p.globalAlpha = alpha;
+    if(blur && 'filter' in p) p.filter = `blur(${blur}px)`;
+    p.drawImage(img, dx, dy); p.restore();
   };
   const black = gbTint(mask, '#000'), white = gbTint(mask, '#fff'), main = gbTint(mask, ink);
   if(cfg.marking === 'relief'){
@@ -1860,9 +1881,10 @@ async function gbProRender(canvas, cfg, opts){
     layer(main, 0, 0, 1, 0);
     layer(black, -d * 0.35, -d * 0.45, light ? 0.3 : 0.55, d * 0.5);
     /* l'intérieur de la gravure reprend un peu la texture de la coque */
+    if(!g.u){ const [x0, y0] = g.zone;
     const tex = gbCanvas(zw, zh), tx = tex.getContext('2d');
     tx.drawImage(shade, x0, y0, zw, zh, 0, 0, zw, zh); tx.globalCompositeOperation = 'destination-in'; tx.drawImage(mask, 0, 0);
-    p.save(); p.globalAlpha = 0.18; p.globalCompositeOperation = 'overlay'; p.drawImage(tex, x0, y0); p.restore();
+    p.save(); p.globalAlpha = 0.18; p.globalCompositeOperation = 'overlay'; p.drawImage(tex, x0, y0); p.restore(); }
   } else {
     layer(black, d * 0.4, d * 0.5, 0.35, d * 0.5);
     layer(main, 0, 0, 1, 0);
@@ -1959,7 +1981,7 @@ function gbInitPro(){
   const $ = s => root.querySelector(s);
   const cfg = { brand:'', slogan:'', model:'v3', color:'noir', marking:'relief', ink:'or', logo:'', qty:'100 à 249', deadline:'', sector:'', city:'', note:'' };
   const canvas = document.createElement('canvas');
-  canvas.setAttribute('role', 'img'); canvas.setAttribute('aria-label', 'Aperçu de votre powerbank personnalisée');
+  canvas.setAttribute('role', 'img'); canvas.setAttribute('aria-label', 'Aperçu de votre produit personnalisé');
   $('[data-pro-stage]').appendChild(canvas);
   const summary = $('[data-pro-summary]'), prices = root.querySelectorAll('[data-pro-price]');
 
@@ -2061,11 +2083,11 @@ function gbInitPro(){
   root.querySelectorAll('[data-pro-send]').forEach(btn => btn.addEventListener('click', () => {
     const m = GB_PRO.models[cfg.model];
     pendingCustomMessage = [
-      'Bonjour GreenBridge, je souhaite un devis pour des powerbanks personnalisées, pour {PAYS}.',
+      'Bonjour GreenBridge, je souhaite un devis pour des produits personnalisés à notre marque, pour {PAYS}.',
       '',
       `• Marque : ${cfg.brand || 'à préciser'}${cfg.slogan ? ` (slogan : ${cfg.slogan})` : ''}`,
       `• Secteur : ${cfg.sector || 'à préciser'}`,
-      `• Modèle de base : ${m.name}, ${m.spec}`,
+      `• Produit de base : ${m.name}, ${m.spec}`,
       `• Couleur de la coque : ${GB_PRO.colors[cfg.color].name}`,
       `• Logo : ${GB_PRO.markings[cfg.marking].name}${cfg.marking === 'bicolore' ? `, couleur ${cfg.ink}` : ''}`,
       `• Quantité : ${cfg.qty}`,
