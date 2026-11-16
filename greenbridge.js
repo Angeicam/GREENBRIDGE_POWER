@@ -1852,7 +1852,7 @@ function gbMonogram(letters, color, shape){
    ===================================================================== */
 const GB_SHAPES = {
   powerbank:{ label:'Powerbank', icon:'fa-mobile-screen-button', models:[
-    { id:'galet',   name:'Galet',   desc:'Formes douces, tient dans la main', w:72,  h:118, d:24, r:24, bevel:7,   screen:'round' },
+    { id:'galet',   name:'Galet',   desc:'Compacte, câble intégré en boucle',  w:48,  h:88,  d:30, r:13, bevel:9,   screen:'pill', loop:true, portsFront:true },
     { id:'carre',   name:'Carré',   desc:'Compact et généreux',               w:92,  h:92,  d:26, r:16, bevel:4,   screen:'round' },
     { id:'slim',    name:'Slim',    desc:'Très fin, se glisse partout',        w:70,  h:142, d:15, r:11, bevel:3,   screen:'bar' },
     { id:'capsule', name:'Capsule', desc:'Silhouette arrondie et moderne',     w:62,  h:132, d:28, r:31, bevel:6,   screen:'round' },
@@ -1900,6 +1900,15 @@ function gbShape(cfg){
 
 /* ---------- textures ---------- */
 function gbScreenTexture(kind, text){
+  if(kind === 'pill'){
+    const c = gbCanvas(256, 448), x = c.getContext('2d');
+    x.fillStyle = '#07090B'; x.fillRect(0, 0, c.width, c.height);
+    x.save(); x.translate(c.width / 2, c.height / 2); x.rotate(Math.PI / 2);
+    x.fillStyle = '#F2F6F8'; x.shadowColor = '#BFE9FF'; x.shadowBlur = 12;
+    x.font = '700 150px Archivo, Arial, sans-serif'; x.textAlign = 'center'; x.textBaseline = 'middle';
+    x.fillText(text && text !== '100%' ? text.replace('W', '') : '100', 0, 6); x.restore();
+    return c;
+  }
   const c = gbCanvas(512, kind === 'round' ? 512 : 256), x = c.getContext('2d');
   x.fillStyle = '#07090B'; x.fillRect(0, 0, c.width, c.height);
   x.fillStyle = '#5FD4FF'; x.shadowColor = '#3CC8FF'; x.shadowBlur = 18;
@@ -2044,7 +2053,13 @@ function gbBuildProduct(cfg, logo){
   let logoTop = H * 0.18, logoBottom = -H * 0.4, logoX = 0, logoW = null;   /* zone du logo sur la face avant (en Y) */
 
   /* écran / indicateurs */
-  if(def.screen === 'round'){
+  if(def.screen === 'pill'){
+    const sw = W * 0.34, sh = H * 0.27, cy = H * 0.2;
+    const geo = new THREE.ShapeGeometry(gbRoundedShape(sw, sh, sw / 2), 24);
+    const uv = geo.attributes.uv; for(let i = 0; i < uv.count; i++){ uv.setXY(i, uv.getX(i) / sw + 0.5, uv.getY(i) / sh + 0.5); }
+    const m = new THREE.Mesh(geo, gbScreenMat('pill', screenText)); m.position.set(0, cy, fz); g.add(m);
+    logoTop = cy - sh / 2 - H * 0.05; logoBottom = -H / 2 + H * 0.2;
+  } else if(def.screen === 'round'){
     const r = Math.min(W, H) * 0.15, cy = H * 0.27;
     const disc = new THREE.Mesh(new THREE.CircleGeometry(r, 48), gbScreenMat('round', cfg.type === 'powerbank' && cfg.power === 'standard' ? '10W' : '100%'));
     disc.position.set(0, cy, fz); g.add(disc); logoTop = cy - r - H * 0.06;
@@ -2097,6 +2112,25 @@ function gbBuildProduct(cfg, logo){
       logoTop = H * 0.32; logoBottom = -H * 0.36; logoX = -W * 0.12; logoW = W * 0.55;
     }
   }
+  if(def.loop){
+    const top = H / 2 - 1, z = -def.d * 0.12;
+    const curve = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(-W * 0.32, top, z),
+      new THREE.Vector3(-W * 0.5, top + H * 0.2, z - 1),
+      new THREE.Vector3(-W * 0.78, top + H * 0.52, z - 3),
+      new THREE.Vector3(-W * 0.62, top + H * 0.82, z - 4),
+      new THREE.Vector3(-W * 0.2, top + H * 0.9, z - 4),
+      new THREE.Vector3(W * 0.12, top + H * 0.66, z - 3),
+      new THREE.Vector3(W * 0.14, top + H * 0.32, z - 1),
+      new THREE.Vector3(W * 0.04, top, z)
+    ]);
+    const cable = new THREE.Mesh(new THREE.TubeGeometry(curve, 140, 1.7, 16, false), bodyMat);
+    cable.castShadow = true; g.add(cable);
+    [[-W * 0.32, top], [W * 0.04, top]].forEach(([x, y]) => {
+      const sleeve = new THREE.Mesh(new THREE.CylinderGeometry(3.2, 3.6, 5, 20), bodyMat);
+      sleeve.position.set(x, y + 1.5, z); g.add(sleeve);
+    });
+  }
   if(def.handle){
     const h = new THREE.Mesh(new THREE.TorusGeometry(W * 0.2, 7, 14, 40, Math.PI), new THREE.MeshPhysicalMaterial({ color:0x1b1d1c, roughness:0.5 }));
     h.position.set(0, H / 2, 0); h.castShadow = true; g.add(h);
@@ -2116,7 +2150,12 @@ function gbBuildProduct(cfg, logo){
         lb.position.set(p.position.x, -p.userData.h / 2 - (cfg.type === 'battery' ? 6 : 3.6), 0.1); portsGroup.add(lb);
       }
     });
-    if(conn.ports.face === 'top'){
+    if(def.portsFront){
+      /* façade, en bas : les ports regardent vers l’avant */
+      const fit = Math.min(1, (W * 0.62) / total);
+      portsGroup.scale.setScalar(fit);
+      portsGroup.position.set(0, -H / 2 + H * 0.11, fz + 0.02);
+    } else if(conn.ports.face === 'top'){
       /* tranche supérieure : les ports regardent vers le haut */
       const fit = Math.min(1, (W - 2 * def.bevel - 6) / total);
       portsGroup.scale.setScalar(fit);
