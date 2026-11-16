@@ -1140,3 +1140,11 @@ textarea.input{min-height:90px;resize:vertical}
   .preview__views2 button{min-height:32px;padding:0 10px;font-size:.74rem}
   .preview__caption{max-width:calc(100% - 200px)}
 }
+.custom-shape{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:12px;padding:14px 16px;border-radius:14px;border:1.5px dashed #B8C6BC;background:#FAFBF9}
+.custom-shape > i{width:40px;height:40px;flex:0 0 40px;border-radius:12px;display:grid;place-items:center;background:var(--paper);color:var(--forest-600);font-size:1.05rem}
+.custom-shape div{flex:1 1 220px;display:grid;gap:2px}
+.custom-shape b{font-size:.95rem}
+.custom-shape p{color:var(--muted);font-size:.86rem}
+/* 6 formes : deux lignes de trois */
+.picks--shapes:has(.pick:nth-child(5)){grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:640px){.picks--shapes:has(.pick:nth-child(5)){grid-template-columns:repeat(2,minmax(0,1fr))}}
