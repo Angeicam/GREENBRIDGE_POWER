@@ -123,7 +123,10 @@
           <span class="preview__badge">Aperçu 3D</span><span class="preview__note"><i class="fa-solid fa-hand-pointer" aria-hidden="true"></i> Glissez pour faire pivoter</span>
           <div data-pro-stage class="pro-stage"></div>
           <p class="preview__caption" data-pro-caption aria-live="polite"></p>
-          <button class="preview__zoom" type="button" data-pro-zoom aria-pressed="false"><i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i>Zoom sur le logo</button>
+          <div class="preview__views2" role="group" aria-label="Vues">
+            <button type="button" data-pro-view="logo" aria-pressed="false"><i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i>Logo</button>
+            <button type="button" data-pro-view="ports" aria-pressed="false"><i class="fa-solid fa-plug" aria-hidden="true"></i>Connectique</button>
+          </div>
         </div>
         <div class="preview__details">
           <dl class="recap" data-pro-summary></dl>
@@ -139,16 +142,20 @@
       <div class="config__form">
         <div class="step-title"><b>1</b>Votre produit</div>
         <div class="field"><span class="field__label">Type de produit</span><div class="types" data-pro-types></div></div>
-        <div class="field"><span class="field__label">Forme de la coque <small>4 modèles par produit</small></span><div class="picks picks--shapes" data-pro-shapes></div></div>
+        <div class="field"><span class="field__label">Forme de la coque</span><div class="picks picks--shapes" data-pro-shapes></div></div>
 
-        <div class="step-title"><b>2</b>Votre marque</div>
+        <div class="step-title"><b>2</b>Puissance et connectique</div>
+        <div class="field"><span class="field__label">Puissance</span><div class="segs segs--2" data-pro-power></div></div>
+        <div class="field"><span class="field__label"><span data-pro-ports-label>Connectique</span> <small>Plusieurs choix possibles</small></span><div class="chips" data-pro-ports></div></div>
+
+        <div class="step-title"><b>3</b>Votre marque</div>
         <div class="field"><label for="proBrand">Nom de la marque <small>24 caractères maximum</small></label><input class="input" id="proBrand" maxlength="24" placeholder="Ex. : KORA CONSEIL" autocomplete="organization"></div>
         <div class="field"><label for="proSlogan">Slogan <small>Facultatif</small></label><input class="input" id="proSlogan" maxlength="40" placeholder="Ex. : L’énergie de vos projets"></div>
         <div class="field"><span class="field__label">Logo <small>PNG, JPG ou SVG</small></span>
           <div class="upload"><input type="file" id="proLogo" accept="image/png,image/jpeg,image/svg+xml,image/webp"><label class="btn btn--line btn--sm" for="proLogo"><i class="fa-solid fa-upload" aria-hidden="true"></i>Ajouter mon logo</label><span data-pro-logo-name>Aucun logo</span><button type="button" data-pro-logo-clear>Retirer</button></div>
           <p class="field__hint">Votre logo reste sur votre appareil : il n’est envoyé nulle part. Un logo simple, en une couleur, donne le plus beau rendu.</p></div>
 
-        <div class="step-title"><b>3</b>Couleur et finition</div>
+        <div class="step-title"><b>4</b>Couleur et finition</div>
         <div class="field"><span class="field__label">Couleur de la coque <small>Autres teintes sur demande</small></span><div class="swatches" data-pro-colors></div></div>
         <div class="field"><span class="field__label">Aspect de la coque</span><div class="segs segs--2" data-pro-finishes></div></div>
         <div class="field"><span class="field__label">Finition du logo</span><div class="segs" data-pro-markings></div></div>
@@ -161,7 +168,7 @@
             <label class="seg"><input type="radio" name="pink" value="rouge"><span><b>Rouge</b></span></label>
           </div></div>
 
-        <div class="step-title"><b>4</b>Votre projet</div>
+        <div class="step-title"><b>5</b>Votre projet</div>
         <div class="field-row">
           <div class="field"><label for="proQty">Quantité</label><select class="input" id="proQty"><option>Moins de 50</option><option>50 à 99</option><option selected>100 à 249</option><option>250 à 499</option><option>500 à 999</option><option>1 000 et plus</option></select></div>
           <div class="field"><label for="proDeadline">Échéance souhaitée</label><input class="input" type="date" id="proDeadline"></div>
