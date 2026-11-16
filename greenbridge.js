@@ -1855,7 +1855,9 @@ const GB_SHAPES = {
     { id:'galet',   name:'Galet',   desc:'Formes douces, tient dans la main', w:72,  h:118, d:24, r:24, bevel:7,   screen:'round' },
     { id:'carre',   name:'Carré',   desc:'Compact et généreux',               w:92,  h:92,  d:26, r:16, bevel:4,   screen:'round' },
     { id:'slim',    name:'Slim',    desc:'Très fin, se glisse partout',        w:70,  h:142, d:15, r:11, bevel:3,   screen:'bar' },
-    { id:'capsule', name:'Capsule', desc:'Silhouette arrondie et moderne',     w:62,  h:132, d:28, r:31, bevel:6,   screen:'round' }
+    { id:'capsule', name:'Capsule', desc:'Silhouette arrondie et moderne',     w:62,  h:132, d:28, r:31, bevel:6,   screen:'round' },
+    { id:'mini',    name:'Mini',    desc:'Ultra-compacte, tient dans la paume', w:54,  h:86,  d:22, r:16, bevel:5,   screen:'round' },
+    { id:'stick',   name:'Stick',   desc:'Format tube, pour le sac ou la poche', w:34,  h:104, d:28, r:17, bevel:9,   screen:'round' }
   ]},
   laptop:{ label:'Powerbank ordinateur', icon:'fa-laptop', models:[
     { id:'plate',    name:'Plate',    desc:'Format fin, se glisse dans la sacoche', w:112, h:166, d:19, r:11, bevel:3, screen:'bar' },
@@ -1863,15 +1865,13 @@ const GB_SHAPES = {
   ]},
   ups:{ label:'Mini-UPS Wi-Fi', icon:'fa-wifi', models:[
     { id:'plat',  name:'Plat',  desc:'Se pose sous la box',       w:161, h:105, d:34, r:9,  bevel:3, screen:'leds', lay:true },
-    { id:'tour',  name:'Tour',  desc:'Vertical, peu encombrant',  w:72,  h:142, d:72, r:10, bevel:3, screen:'leds' },
     { id:'cube',  name:'Cube',  desc:'Compact et original',       w:104, h:104, d:104,r:16, bevel:5, screen:'leds' },
     { id:'mural', name:'Mural', desc:'Se fixe au mur',             w:150, h:112, d:26, r:8,  bevel:3, screen:'leds' }
   ]},
   battery:{ label:'Batterie LiFePO₄', icon:'fa-car-battery', models:[
     { id:'bloc',   name:'Bloc',             desc:'Format standard 12 V',        w:330, h:215, d:172, r:10, bevel:4, screen:'battery' },
     { id:'bas',    name:'Bas profil',       desc:'Se glisse sous un meuble',    w:400, h:150, d:180, r:10, bevel:4, screen:'battery' },
-    { id:'coffre', name:'Coffre à poignée', desc:'Transportable',               w:300, h:230, d:200, r:22, bevel:6, screen:'battery', handle:true },
-    { id:'rack',   name:'Rack',             desc:'Pour armoire technique',      w:440, h:178, d:130, r:5,  bevel:2, screen:'rack' }
+    { id:'coffre', name:'Coffre à poignée', desc:'Transportable',               w:300, h:230, d:200, r:22, bevel:6, screen:'battery', handle:true }
   ]}
 };
 const GB_PRO = {
@@ -1881,9 +1881,11 @@ const GB_PRO = {
     vert:  { name:'Vert GreenBridge', hex:'#145A3C' },
     nuit:  { name:'Bleu nuit',        hex:'#22365F' },
     rouge: { name:'Rouge',            hex:'#A2232C' },
-    sable: { name:'Sable',            hex:'#CDB98F' }
+    sable: { name:'Sable',            hex:'#CDB98F' },
+    violet:{ name:'Violet',           hex:'#7B4FB8' },
+    rose:  { name:'Rose',             hex:'#E58FB0' }
   },
-  finishes:{ mat:{ name:'Mat', rough:0.72, coat:0 }, satin:{ name:'Satiné', rough:0.42, coat:0.35 } },
+  finishes:{ mat:{ name:'Mat', rough:0.74, coat:0 }, satin:{ name:'Satiné', rough:0.5, coat:0.12 } },
   markings:{
     relief:  { name:'Logo en relief', hint:'Il ressort de la coque, on le sent au toucher.' },
     bicolore:{ name:'Logo bicolore',  hint:'Intégré à la coque, dans une seconde couleur.' },
@@ -2031,7 +2033,7 @@ function gbBuildProduct(cfg, logo){
   const def = gbShape(cfg), g = new THREE.Group();
   const bodyHex = (GB_PRO.colors[cfg.color] || GB_PRO.colors.noir).hex;
   const fin = GB_PRO.finishes[cfg.finish] || GB_PRO.finishes.mat;
-  const bodyMat = new THREE.MeshPhysicalMaterial({ color:new THREE.Color(bodyHex).convertSRGBToLinear(), roughness:fin.rough, metalness:0, clearcoat:fin.coat, clearcoatRoughness:0.35 });
+  const bodyMat = new THREE.MeshPhongMaterial({ color:new THREE.Color(bodyHex).convertSRGBToLinear(), specular:new THREE.Color(cfg.finish === 'satin' ? 0x3a3a3a : 0x141414), shininess:cfg.finish === 'satin' ? 38 : 10 });
   g.add(gbBody(def, bodyMat));
   const fz = def.d / 2 + 0.05, dark = new THREE.MeshStandardMaterial({ color:0x0d0f10, roughness:0.45 });
   const W = def.w, H = def.h;
@@ -2143,13 +2145,13 @@ function gbCreateStage(canvas, opts){
   opts = opts || {};
   const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true, preserveDrawingBuffer:!!opts.snapshot });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-  renderer.outputEncoding = THREE.sRGBEncoding; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+  renderer.outputEncoding = THREE.sRGBEncoding; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 0.84;
   renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   const scene = new THREE.Scene();
   const cam = new THREE.PerspectiveCamera(28, 1, 1, 6000);
-  scene.add(new THREE.HemisphereLight(0xffffff, 0x8f9a92, 0.85));
-  const key = new THREE.DirectionalLight(0xffffff, 1.7); key.castShadow = true; key.shadow.mapSize.set(1024, 1024); key.shadow.radius = 6; scene.add(key, key.target);
-  const fill = new THREE.DirectionalLight(0xEAF2FF, 0.55); scene.add(fill);
+  scene.add(new THREE.HemisphereLight(0xDDE6E0, 0x9aa59d, 0.38));
+  const key = new THREE.DirectionalLight(0xffffff, 1.55); key.castShadow = true; key.shadow.mapSize.set(1024, 1024); key.shadow.radius = 6; scene.add(key, key.target);
+  const fill = new THREE.DirectionalLight(0xEAF2FF, 0.85); scene.add(fill);
   const rim = new THREE.DirectionalLight(0xffffff, 0.9); scene.add(rim);
   const ground = new THREE.Mesh(new THREE.PlaneGeometry(4000, 4000), new THREE.ShadowMaterial({ opacity:0.15 }));
   ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
@@ -2187,7 +2189,7 @@ function gbCreateStage(canvas, opts){
       const d = R / Math.sin(THREE.MathUtils.degToRad(cam.fov / 2)) * (opts.tight ? 1.12 : 1.42);
       cam.position.set(0, size.y * 0.5 + d * 0.18, d); cam.lookAt(0, size.y * 0.5, 0);
     }
-    key.position.set(R * 1.4, R * 5, R * 3.2); key.target.position.set(0, 0, 0);
+    key.position.set(R * 1.6, R * 1.7, R * 4.2); key.target.position.set(0, 0, 0);
     const s = R * 2.2; Object.assign(key.shadow.camera, { left:-s, right:s, top:s, bottom:-s, near:1, far:R * 12 }); key.shadow.camera.updateProjectionMatrix();
     fill.position.set(-R * 3, R * 1.5, R * 2); rim.position.set(0, R * 2.5, -R * 4);
   };
@@ -2239,9 +2241,78 @@ const GB_PRO_EXAMPLES = [
   { title:'Cabinet de conseil', sector:'Entreprise', desc:'Powerbank Slim bleu nuit, logo en creux.', cfg:{ type:'powerbank', shape:'slim', brand:'KORA CONSEIL', slogan:'Stratégie et finance', color:'nuit', finish:'satin', marking:'creux', ink:'blanc', logo:gbMonogram('K','#2F6FD6','letter') } },
   { title:'Festival', sector:'Événementiel', desc:'Powerbank Galet noire, logo bicolore or.', cfg:{ type:'powerbank', shape:'galet', brand:'FESTIVAL LUMIÈRES', slogan:'Édition 2027', color:'noir', finish:'mat', marking:'bicolore', ink:'or', logo:gbMonogram('','#F2B705','sun') } },
   { title:'Installateur solaire', sector:'Énergie', desc:'Batterie Bloc verte, logo en relief.', cfg:{ type:'battery', shape:'bloc', brand:'SOLAIRE PLUS', slogan:'Installateur agréé', color:'vert', finish:'mat', marking:'relief', ink:'or', logo:gbMonogram('','#C9A646','ring') } },
-  { title:'Opérateur internet', sector:'Télécoms', desc:'Mini-UPS Tour blanc, logo bicolore vert.', cfg:{ type:'ups', shape:'tour', brand:'NET EXPRESS', slogan:'Toujours connecté', color:'blanc', finish:'satin', marking:'bicolore', ink:'vert', logo:gbMonogram('','#1E9E5A','cross') } }
+  { title:'Opérateur internet', sector:'Télécoms', desc:'Mini-UPS Cube blanc, logo bicolore vert.', cfg:{ type:'ups', shape:'cube', brand:'NET EXPRESS', slogan:'Toujours connecté', color:'blanc', finish:'satin', marking:'bicolore', ink:'vert', logo:gbMonogram('','#1E9E5A','cross') } }
 ];
 const GB_PRO_HERO = { type:'powerbank', shape:'capsule', brand:'VOTRE MARQUE', slogan:'Votre slogan ici', color:'nuit', finish:'satin', marking:'bicolore', ink:'or', logo:gbMonogram('','#C9A646','ring') };
+
+
+/* Référence unique de la demande (reprise dans la fiche et dans WhatsApp) */
+function gbProRef(){
+  const d = new Date(), p = n => String(n).padStart(2, '0');
+  return `GB-${String(d.getFullYear()).slice(2)}${p(d.getMonth() + 1)}${p(d.getDate())}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
+}
+function gbProSpecs(cfg){
+  const t = GB_SHAPES[cfg.type], sh = gbShape(cfg), c = GB_CONNECT[cfg.type];
+  return [
+    ['Produit', t.label],
+    ['Forme', `${sh.name} : ${sh.desc.toLowerCase()}`],
+    ['Dimensions indicatives', `${sh.w} × ${sh.h} × ${sh.d} mm`],
+    c.power ? ['Puissance', c.power.options[cfg.power].name] : null,
+    [c.ports.label, cfg.ports.map(p => c.ports.options[p]).join(', ') || 'à préciser'],
+    ['Couleur de la coque', GB_PRO.colors[cfg.color].name],
+    ['Aspect', GB_PRO.finishes[cfg.finish].name],
+    ['Logo', GB_PRO.markings[cfg.marking].name + (cfg.marking === 'bicolore' ? `, couleur ${cfg.ink}` : '')],
+    ['Marque', cfg.brand || 'à préciser'],
+    cfg.slogan ? ['Slogan', cfg.slogan] : null,
+    ['Quantité', cfg.qty],
+    cfg.deadline ? ['Échéance souhaitée', new Date(cfg.deadline).toLocaleDateString('fr-FR')] : null,
+    cfg.city ? ['Ville', cfg.city] : null
+  ].filter(Boolean);
+}
+async function gbProSheet(cfg, ref){
+  const W = 1800, H = 1100, c = gbCanvas(W, H), x = c.getContext('2d');
+  try{ await document.fonts.ready; }catch(e){}
+  const F = getComputedStyle(document.body).fontFamily || 'Arial, sans-serif';
+  x.fillStyle = '#FFFFFF'; x.fillRect(0, 0, W, H);
+  /* visuel */
+  const gr = x.createRadialGradient(470, 520, 0, 470, 560, 620); gr.addColorStop(0, '#FAFBF9'); gr.addColorStop(1, '#DCE4DB');
+  x.fillStyle = gr; x.fillRect(0, 0, 940, H);
+  const img = await gbProImg(await gbProSnapshot(cfg, 900));
+  x.drawImage(img, 20, 140, 900, 900);
+  /* bandeau */
+  x.fillStyle = '#052417'; x.fillRect(0, 0, W, 104);
+  x.fillStyle = '#C9A646'; x.fillRect(0, 104, W, 5);
+  x.fillStyle = '#FFFFFF'; x.font = `800 34px ${F}`; x.textBaseline = 'middle'; x.fillText('GREENBRIDGE TECHNOLOGIES', 48, 52);
+  x.fillStyle = '#E9D79B'; x.font = `600 24px ${F}`; x.textAlign = 'right'; x.fillText('Fiche de personnalisation', W - 48, 40);
+  x.fillStyle = '#A9C2B2'; x.font = `500 20px ${F}`; x.fillText(`Réf. ${ref}  ·  ${new Date().toLocaleDateString('fr-FR')}`, W - 48, 72);
+  x.textAlign = 'left';
+  /* caractéristiques */
+  const X = 1000, specs = gbProSpecs(cfg);
+  x.fillStyle = '#0F1D16'; x.font = `800 44px ${F}`; x.fillText(cfg.brand || 'Votre marque', X, 180);
+  x.fillStyle = '#56665D'; x.font = `500 24px ${F}`; x.fillText(`${GB_SHAPES[cfg.type].label}, forme ${gbShape(cfg).name}`, X, 226);
+  let y = 290; const rowH = Math.min(54, (H - 250 - 290) / specs.length);
+  specs.forEach(([k, v], i) => {
+    if(i % 2 === 0){ x.fillStyle = '#F2F4EF'; x.fillRect(X - 16, y - rowH * 0.56, W - X - 32, rowH); }
+    x.fillStyle = '#56665D'; x.font = `500 21px ${F}`; x.fillText(k, X, y);
+    x.fillStyle = '#0F1D16'; x.font = `700 22px ${F}`;
+    let val = String(v); while(x.measureText(val).width > 470 - (cfg.logo && y < 330 ? 0 : 0) && val.length > 4) val = val.slice(0, -2);
+    if(val !== String(v)) val = val.slice(0, -1) + '…';
+    x.fillText(val, X + 280, y); y += rowH;
+  });
+  /* logo fourni : en haut à droite, à côté du nom */
+  if(cfg.logo){
+    const lg = await gbProImg(cfg.logo).catch(() => null);
+    if(lg){ const k = Math.min(130 / lg.width, 80 / lg.height); x.drawImage(lg, W - 48 - lg.width * k, 150, lg.width * k, lg.height * k); }
+  }
+  /* engagement et contact */
+  x.fillStyle = '#0A3A26'; x.fillRect(X - 16, H - 210, W - X - 32, 150);
+  x.fillStyle = '#FFFFFF'; x.font = `700 22px ${F}`; x.fillText('Conception et fabrication GreenBridge, du début à la fin.', X + 8, H - 168);
+  x.fillStyle = '#C9D9CE'; x.font = `500 19px ${F}`;
+  x.fillText('Maquette indicative. Le rendu final est validé avec vous sur un bon à tirer.', X + 8, H - 132);
+  x.fillText('WhatsApp : +225 01 72 61 15 37 (CI)  ·  +221 77 401 50 04 (SN)', X + 8, H - 98);
+  x.fillStyle = '#A9C2B2'; x.font = `500 18px ${F}`; x.fillText('greenbridge-technologies.com', 48, H - 34);
+  return c;
+}
 
 function gbInitPro(){
   const has3D = typeof THREE !== 'undefined';
@@ -2406,22 +2477,26 @@ function gbInitPro(){
   }
 
   /* téléchargement */
+  let ref = gbProRef();
   root.querySelectorAll('[data-pro-download]').forEach(btn => btn.addEventListener('click', async () => {
     if(!has3D) return;
-    const url = await gbProSnapshot(cfg, 1400);
-    const a = document.createElement('a'); a.href = url;
-    a.download = `maquette-${(cfg.brand || 'greenbridge').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'greenbridge'}.png`;
-    document.body.appendChild(a); a.click(); a.remove();
-  }));
+    const old = btn.innerHTML; btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i>Préparation…';
+    try{
+      const sheet = await gbProSheet(cfg, ref);
+      const name = `fiche-${(cfg.brand || 'greenbridge').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'greenbridge'}-${ref}.png`;
+      sheet.toBlob(blob => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); }, 'image/png');
+    }finally{ btn.disabled = false; btn.innerHTML = old; }
+  }));;
 
   /* demande sur WhatsApp */
   root.querySelectorAll('[data-pro-send]').forEach(btn => btn.addEventListener('click', () => {
     const sh = gbShape(cfg), t = GB_SHAPES[cfg.type];
     pendingCustomMessage = [
-      'Bonjour GreenBridge, je souhaite un devis pour des produits personnalisés à notre marque, pour {PAYS}.',
+      'Bonjour GreenBridge, je souhaite un devis pour un produit conçu à notre marque, pour {PAYS}.',
+      `Référence de ma fiche : ${ref}`,
       '',
-      `• Produit : ${t.label}, forme ${sh.name}`,
-      GB_CONNECT[cfg.type].power ? `• Puissance : ${GB_CONNECT[cfg.type].power.options[cfg.power].name}` : '',
+      `• Produit : ${t.label}, forme ${sh.name} (${sh.w} × ${sh.h} × ${sh.d} mm)`,
+      GB_CONNECT[cfg.type].power ? `• Puissance : ${GB_CONNECT[cfg.type].power.options[cfg.power].name}` : null,
       `• ${GB_CONNECT[cfg.type].ports.label} : ${cfg.ports.map(p => GB_CONNECT[cfg.type].ports.options[p]).join(', ') || 'à préciser'}`,
       `• Marque : ${cfg.brand || 'à préciser'}${cfg.slogan ? ` (slogan : ${cfg.slogan})` : ''}`,
       `• Secteur : ${cfg.sector || 'à préciser'}`,
@@ -2433,7 +2508,7 @@ function gbInitPro(){
       cfg.note ? `• Précisions : ${cfg.note}` : '',
       '',
       cfg.logo ? 'Je vous envoie mon logo dans cette conversation.' : 'Je vous enverrai mon logo.'
-    ].filter((l, i, a) => l !== '' || a[i - 1] !== '').join('\n');
+    ].filter(l => l !== null).filter((l, i, a) => l !== '' || a[i - 1] !== '').join('\n');
     openCountryModal();
   }));
 
