@@ -1741,37 +1741,7 @@ document.addEventListener('keydown', e => {
 })();
 
 
-/* =====================================================================
-   OFFRE ENTREPRISES : simulateur de coque personnalisée
-   Le rendu part des vraies photos produit : la coque est recolorée
-   en gardant ses ombres, puis le logo est posé sur sa face avant.
-   ===================================================================== */
-const GB_PRO = {
-  models:{
-    v1:{ name:'GreenBridge V1', spec:'6 000 mAh, 22,5 W',  asset:'v1' },
-    v2:{ name:'GreenBridge V2', spec:'10 000 mAh, 22,5 W', asset:'v2' },
-    v3:{ name:'GreenBridge V3', spec:'12 000 mAh, 22,5 W', asset:'v3' },
-    m4:{ name:'GreenEco',       spec:'10 000 mAh',          asset:'greeneco' },
-    m13:{ name:'GreenWifi',     spec:'Mini-UPS Wi-Fi',      asset:'wifi' },
-    lifepo4:{ name:'Batterie LiFePO₄', spec:'104 Ah',        asset:'lifepo4' }
-  },
-  geo:{"v1": {"w": 726, "h": 676, "zone": [90, 320, 630, 640]}, "v2": {"w": 533, "h": 700, "zone": [95, 340, 470, 610]}, "v3": {"w": 545, "h": 674, "zone": [80, 300, 520, 635]}, "greeneco": {"w": 271, "h": 700, "zone": [32, 300, 240, 640]}, "lifepo4": {"w": 760, "h": 451, "zone": [95, 140, 665, 415]}, "wifi": {"w": 760, "h": 634, "center": [262, 338], "size": [235, 250], "u": [0.8439, -0.5365], "v": [0.7629, 0.6465]}},
-  colors:{
-    noir:  { name:'Noir',            hex:'#2A2D2C' },
-    blanc: { name:'Blanc',           hex:'#E6E5E0' },
-    vert:  { name:'Vert GreenBridge',hex:'#155C3E' },
-    nuit:  { name:'Bleu nuit',       hex:'#253A66' },
-    rouge: { name:'Rouge',           hex:'#A3232B' },
-    sable: { name:'Sable',           hex:'#CDB98F' }
-  },
-  markings:{
-    relief:  { name:'Logo en relief', hint:'Il ressort de la coque, on le sent au toucher.' },
-    bicolore:{ name:'Logo bicolore',  hint:'Intégré à la coque, dans une seconde couleur.' },
-    creux:   { name:'Logo en creux',  hint:'Gravé dans la matière, discret et élégant.' }
-  },
-  inks:{ blanc:'#F4F4F0', noir:'#161616', or:'#C9A646', vert:'#1E9E5A', rouge:'#C0303A' }
-};
-
+/* Outils partagés du configurateur */
 function gbHexMix(hex, target, t){
   const n = parseInt(hex.replace('#',''), 16);
   const c = [n >> 16 & 255, n >> 8 & 255, n & 255], tt = target === 'w' ? 255 : 0;
@@ -1798,12 +1768,12 @@ function gbBrandMask(cfg, logo, zw, zh){
   const c = gbCanvas(zw, zh), x = c.getContext('2d');
   const family = getComputedStyle(document.body).fontFamily || 'Arial, sans-serif';
   const name = (cfg.brand || 'VOTRE MARQUE').slice(0, 24), slogan = (cfg.slogan || '').slice(0, 40);
-  let size = Math.min(zh * 0.2, 78);
+  let size = zh * (cfg.slogan ? 0.2 : 0.24);
   x.font = `800 ${size}px ${family}`;
   while(size > 12 && x.measureText(name).width > zw * 0.88){ size -= 1; x.font = `800 ${size}px ${family}`; }
   const sSize = Math.max(11, size * 0.36);
   let lw = 0, lh = 0;
-  if(logo){ const k = Math.min(zw * 0.55 / logo.width, zh * 0.4 / logo.height); lw = logo.width * k; lh = logo.height * k; }
+  if(logo){ const k = Math.min(zw * 0.5 / logo.width, zh * 0.38 / logo.height); lw = logo.width * k; lh = logo.height * k; }
   const gap = size * 0.35, total = lh + (lh ? gap : 0) + size + (slogan ? sSize * 0.6 + sSize : 0);
   let y = (zh - total) / 2;
   if(logo){
@@ -1822,94 +1792,6 @@ function gbBrandMask(cfg, logo, zw, zh){
 }
 
 /* Composition finale de la maquette */
-async function gbProRender(canvas, cfg, opts){
-  opts = opts || {};
-  const S = opts.size || 1000;
-  const m = GB_PRO.models[cfg.model] || GB_PRO.models.v1, g = GB_PRO.geo[m.asset];
-  let shade, keep, logo;
-  try{
-    [shade, keep, logo] = await Promise.all([
-      gbProImg(`pro-${m.asset}-shade.webp`), gbProImg(`pro-${m.asset}-keep.webp`),
-      cfg.logo ? gbProImg(cfg.logo).catch(() => null) : Promise.resolve(null)
-    ]);
-  }catch(err){
-    /* secours : photo normale du produit si les fichiers du simulateur manquent */
-    canvas.width = S; canvas.height = S;
-    const c = canvas.getContext('2d'), id = Object.keys(GB_PRO.models).find(k => GB_PRO.models[k] === m);
-    try{
-      const ph = await gbProImg((GB_IMAGES[id] || [])[0]);
-      const k = Math.min(S / ph.width, S / ph.height); c.drawImage(ph, (S - ph.width * k) / 2, (S - ph.height * k) / 2, ph.width * k, ph.height * k);
-    }catch(e){}
-    return canvas;
-  }
-  try{ await document.fonts.ready; }catch(e){}
-  const coque = (GB_PRO.colors[cfg.color] || GB_PRO.colors.noir).hex, light = gbIsLight(coque);
-
-  /* 1. coque recolorée avec les ombres de la photo */
-  const pc = gbCanvas(g.w, g.h), p = pc.getContext('2d');
-  p.fillStyle = coque; p.fillRect(0, 0, g.w, g.h);
-  p.globalCompositeOperation = 'hard-light'; p.drawImage(shade, 0, 0);
-  p.globalCompositeOperation = 'destination-in'; p.drawImage(shade, 0, 0);
-  p.globalCompositeOperation = 'source-over'; p.drawImage(keep, 0, 0);
-
-  /* 2. logo et marque sur la face avant */
-  let zw, zh, T;
-  if(g.u){
-    [zw, zh] = g.size;
-    T = [g.u[0], g.u[1], g.v[0], g.v[1], g.center[0] - g.u[0] * zw / 2 - g.v[0] * zh / 2, g.center[1] - g.u[1] * zw / 2 - g.v[1] * zh / 2];
-  } else {
-    const [x0, y0, x1, y1] = g.zone; zw = x1 - x0; zh = y1 - y0; T = [1, 0, 0, 1, x0, y0];
-  }
-  const mask = gbBrandMask(cfg, logo, zw, zh);
-  const d = Math.max(1.6, zh * 0.0075);
-  let ink;
-  if(cfg.marking === 'relief') ink = gbHexMix(coque, light ? 'b' : 'w', light ? 0.07 : 0.22);
-  else if(cfg.marking === 'creux') ink = light ? gbHexMix(coque, 'b', 0.3) : gbHexMix(coque, 'b', 0.35);
-  else ink = GB_PRO.inks[cfg.ink] || (light ? GB_PRO.inks.noir : GB_PRO.inks.blanc);
-  const layer = (img, dx, dy, alpha, blur) => {
-    p.save(); p.setTransform(T[0], T[1], T[2], T[3], T[4], T[5]); p.globalAlpha = alpha;
-    if(blur && 'filter' in p) p.filter = `blur(${blur}px)`;
-    p.drawImage(img, dx, dy); p.restore();
-  };
-  const black = gbTint(mask, '#000'), white = gbTint(mask, '#fff'), main = gbTint(mask, ink);
-  if(cfg.marking === 'relief'){
-    layer(black, d, d * 1.5, light ? 0.35 : 0.75, d * 0.9);
-    layer(white, -d * 0.6, -d * 0.6, light ? 0.85 : 0.42, 0.4);
-    layer(main, 0, 0, 1, 0);
-  } else if(cfg.marking === 'creux'){
-    layer(white, d * 0.5, d * 0.7, light ? 0.8 : 0.28, 0.4);
-    layer(main, 0, 0, 1, 0);
-    layer(black, -d * 0.35, -d * 0.45, light ? 0.3 : 0.55, d * 0.5);
-    /* l'intérieur de la gravure reprend un peu la texture de la coque */
-    if(!g.u){ const [x0, y0] = g.zone;
-    const tex = gbCanvas(zw, zh), tx = tex.getContext('2d');
-    tx.drawImage(shade, x0, y0, zw, zh, 0, 0, zw, zh); tx.globalCompositeOperation = 'destination-in'; tx.drawImage(mask, 0, 0);
-    p.save(); p.globalAlpha = 0.18; p.globalCompositeOperation = 'overlay'; p.drawImage(tex, x0, y0); p.restore(); }
-  } else {
-    layer(black, d * 0.4, d * 0.5, 0.35, d * 0.5);
-    layer(main, 0, 0, 1, 0);
-  }
-
-  /* 3. mise en scène : fond studio + ombre portée */
-  canvas.width = S; canvas.height = S;
-  const ctx = canvas.getContext('2d');
-  if(opts.bg === 'dark'){
-    const gr = ctx.createRadialGradient(S / 2, S * 0.4, 0, S / 2, S * 0.45, S * 0.75);
-    gr.addColorStop(0, '#1A5A3E'); gr.addColorStop(1, '#0A3A26'); ctx.fillStyle = gr; ctx.fillRect(0, 0, S, S);
-  } else if(opts.bg !== false){
-    const gr = ctx.createRadialGradient(S / 2, S * 0.38, 0, S / 2, S * 0.45, S * 0.8);
-    gr.addColorStop(0, '#FAFBF9'); gr.addColorStop(1, '#DEE5DD'); ctx.fillStyle = gr; ctx.fillRect(0, 0, S, S);
-  } else ctx.clearRect(0, 0, S, S);
-  const k = Math.min(S * 0.72 / g.h, S * 0.7 / g.w), w = g.w * k, h = g.h * k;
-  const x = (S - w) / 2, y = S * 0.5 - h / 2;
-  ctx.save(); ctx.translate(S / 2, y + h + S * 0.006); ctx.scale(1, 0.12);
-  const sg = ctx.createRadialGradient(0, 0, 0, 0, 0, w * 0.62);
-  sg.addColorStop(0, opts.bg === 'dark' ? 'rgba(0,0,0,.55)' : 'rgba(20,30,24,.42)'); sg.addColorStop(1, 'rgba(0,0,0,0)');
-  ctx.fillStyle = sg; ctx.beginPath(); ctx.arc(0, 0, w * 0.62, 0, Math.PI * 2); ctx.fill(); ctx.restore();
-  ctx.imageSmoothingQuality = 'high'; ctx.drawImage(pc, x, y, w, h);
-  return canvas;
-}
-
 /* Logo : lecture locale + fond blanc rendu transparent */
 function gbReadLogo(file){
   return new Promise((resolve, reject) => {
@@ -1961,78 +1843,384 @@ function gbMonogram(letters, color, shape){
     : `<rect x="10" y="10" width="100" height="100" rx="26" fill="${color}"/><text x="60" y="76" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="46" fill="#fff">${letters}</text>`;
   return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">${s}</svg>`);
 }
+
+/* =====================================================================
+   OFFRE ENTREPRISES : configurateur 3D de coques personnalisées
+   4 types de produit x 4 formes. Rendu WebGL (three.js), rotation
+   au doigt ou à la souris, logo appliqué sur la face avant.
+   Dimensions en millimètres (largeur w, hauteur h, épaisseur d).
+   ===================================================================== */
+const GB_SHAPES = {
+  powerbank:{ label:'Powerbank', icon:'fa-mobile-screen-button', models:[
+    { id:'galet',   name:'Galet',   desc:'Formes douces, tient dans la main', w:72,  h:118, d:24, r:24, bevel:7,   screen:'round' },
+    { id:'carre',   name:'Carré',   desc:'Compact et généreux',               w:92,  h:92,  d:26, r:16, bevel:4,   screen:'round' },
+    { id:'slim',    name:'Slim',    desc:'Très fin, se glisse partout',        w:70,  h:142, d:15, r:11, bevel:3,   screen:'bar' },
+    { id:'capsule', name:'Capsule', desc:'Silhouette arrondie et moderne',     w:62,  h:132, d:28, r:31, bevel:6,   screen:'round' }
+  ]},
+  laptop:{ label:'Powerbank ordinateur', icon:'fa-laptop', models:[
+    { id:'pro',     name:'Pro',        desc:'Écran large, look professionnel', w:86,  h:168, d:30, r:13, bevel:4, screen:'panel' },
+    { id:'brique',  name:'Brique',     desc:'Robuste, grande capacité',         w:104, h:158, d:36, r:8,  bevel:3, screen:'bar' },
+    { id:'station', name:'Station',    desc:'Posée sur le bureau',              w:126, h:150, d:52, r:18, bevel:5, screen:'panel' },
+    { id:'plat',    name:'Ultra-plat', desc:'Se range avec l’ordinateur',       w:118, h:176, d:17, r:12, bevel:3, screen:'bar' }
+  ]},
+  ups:{ label:'Mini-UPS Wi-Fi', icon:'fa-wifi', models:[
+    { id:'plat',  name:'Plat',  desc:'Se pose sous la box',       w:161, h:105, d:34, r:9,  bevel:3, screen:'leds', lay:true },
+    { id:'tour',  name:'Tour',  desc:'Vertical, peu encombrant',  w:72,  h:142, d:72, r:10, bevel:3, screen:'leds' },
+    { id:'cube',  name:'Cube',  desc:'Compact et original',       w:104, h:104, d:104,r:16, bevel:5, screen:'leds' },
+    { id:'mural', name:'Mural', desc:'Se fixe au mur',             w:150, h:112, d:26, r:8,  bevel:3, screen:'leds' }
+  ]},
+  battery:{ label:'Batterie LiFePO₄', icon:'fa-car-battery', models:[
+    { id:'bloc',   name:'Bloc',             desc:'Format standard 12 V',        w:330, h:215, d:172, r:10, bevel:4, screen:'battery' },
+    { id:'bas',    name:'Bas profil',       desc:'Se glisse sous un meuble',    w:400, h:150, d:180, r:10, bevel:4, screen:'battery' },
+    { id:'coffre', name:'Coffre à poignée', desc:'Transportable',               w:300, h:230, d:200, r:22, bevel:6, screen:'battery', handle:true },
+    { id:'rack',   name:'Rack',             desc:'Pour armoire technique',      w:440, h:178, d:130, r:5,  bevel:2, screen:'rack' }
+  ]}
+};
+const GB_PRO = {
+  colors:{
+    noir:  { name:'Noir',             hex:'#232625' },
+    blanc: { name:'Blanc',            hex:'#ECEBE6' },
+    vert:  { name:'Vert GreenBridge', hex:'#145A3C' },
+    nuit:  { name:'Bleu nuit',        hex:'#22365F' },
+    rouge: { name:'Rouge',            hex:'#A2232C' },
+    sable: { name:'Sable',            hex:'#CDB98F' }
+  },
+  finishes:{ mat:{ name:'Mat', rough:0.72, coat:0 }, satin:{ name:'Satiné', rough:0.42, coat:0.35 } },
+  markings:{
+    relief:  { name:'Logo en relief', hint:'Il ressort de la coque, on le sent au toucher.' },
+    bicolore:{ name:'Logo bicolore',  hint:'Intégré à la coque, dans une seconde couleur.' },
+    creux:   { name:'Logo en creux',  hint:'Gravé dans la matière, discret et élégant.' }
+  },
+  inks:{ blanc:'#F4F4F0', noir:'#161616', or:'#C9A646', vert:'#1E9E5A', rouge:'#C0303A' }
+};
+function gbShape(cfg){
+  const t = GB_SHAPES[cfg.type] || GB_SHAPES.powerbank;
+  return t.models.find(m => m.id === cfg.shape) || t.models[0];
+}
+
+/* ---------- textures ---------- */
+function gbScreenTexture(kind){
+  const c = gbCanvas(512, kind === 'round' ? 512 : 256), x = c.getContext('2d');
+  x.fillStyle = '#07090B'; x.fillRect(0, 0, c.width, c.height);
+  x.fillStyle = '#5FD4FF'; x.shadowColor = '#3CC8FF'; x.shadowBlur = 18;
+  x.font = `700 ${kind === 'round' ? 150 : 120}px Archivo, Arial, sans-serif`; x.textAlign = 'center'; x.textBaseline = 'middle';
+  x.fillText(kind === 'panel' ? '100W' : '100%', c.width / 2, c.height / 2 + 6);
+  return c;
+}
+function gbLogoTexture(cfg, logo, bodyHex, aspect){
+  const W = 1024, H = Math.round(W / aspect);
+  const mask = gbBrandMask(cfg, logo, W, H);
+  const c = gbCanvas(W, H), x = c.getContext('2d');
+  const light = gbIsLight(bodyHex), d = Math.max(3, H * 0.012);
+  let ink;
+  if(cfg.marking === 'relief') ink = gbHexMix(bodyHex, light ? 'b' : 'w', light ? 0.1 : 0.3);
+  else if(cfg.marking === 'creux') ink = light ? gbHexMix(bodyHex, 'b', 0.34) : gbHexMix(bodyHex, 'w', 0.1);
+  else ink = GB_PRO.inks[cfg.ink] || (light ? GB_PRO.inks.noir : GB_PRO.inks.blanc);
+  const put = (img, dx, dy, a, blur) => { x.save(); x.globalAlpha = a; if(blur && 'filter' in x) x.filter = `blur(${blur}px)`; x.drawImage(img, dx, dy); x.restore(); };
+  const black = gbTint(mask, '#000'), white = gbTint(mask, '#fff'), main = gbTint(mask, ink);
+  if(cfg.marking === 'relief'){ put(black, d, d * 1.4, light ? 0.35 : 0.7, d); put(white, -d * 0.6, -d * 0.6, light ? 0.8 : 0.5, 1); put(main, 0, 0, 1, 0); }
+  else if(cfg.marking === 'creux'){ put(white, d * 0.5, d * 0.7, light ? 0.8 : 0.45, 1); put(main, 0, 0, 1, 0); put(black, -d * 0.4, -d * 0.5, light ? 0.35 : 0.6, d * 0.6); }
+  else { put(black, d * 0.4, d * 0.5, 0.3, d * 0.6); put(main, 0, 0, 1, 0); }
+  return c;
+}
+
+/* ---------- géométrie ---------- */
+function gbRoundedShape(w, h, r){
+  r = Math.min(r, w / 2, h / 2);
+  const s = new THREE.Shape(), x = -w / 2, y = -h / 2;
+  s.moveTo(x + r, y); s.lineTo(x + w - r, y); s.quadraticCurveTo(x + w, y, x + w, y + r);
+  s.lineTo(x + w, y + h - r); s.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  s.lineTo(x + r, y + h); s.quadraticCurveTo(x, y + h, x, y + h - r);
+  s.lineTo(x, y + r); s.quadraticCurveTo(x, y, x + r, y);
+  return s;
+}
+function gbBody(def, mat){
+  const b = def.bevel;
+  const geo = new THREE.ExtrudeGeometry(gbRoundedShape(def.w - 2 * b, def.h - 2 * b, Math.max(1, def.r - b)), {
+    depth: def.d - 2 * b, bevelEnabled:true, bevelThickness:b, bevelSize:b, bevelSegments:8, curveSegments:28
+  });
+  geo.translate(0, 0, -(def.d - 2 * b) / 2);
+  geo.computeVertexNormals();
+  const m = new THREE.Mesh(geo, mat); m.castShadow = true; m.receiveShadow = true;
+  return m;
+}
+function gbTexMat(canvas, opts){
+  const t = new THREE.CanvasTexture(canvas); t.encoding = THREE.sRGBEncoding; t.anisotropy = 4;
+  return new THREE.MeshStandardMaterial(Object.assign({ map:t, transparent:true, roughness:0.6, polygonOffset:true, polygonOffsetFactor:-2 }, opts || {}));
+}
+
+function gbScreenMat(kind){
+  const t = new THREE.CanvasTexture(gbScreenTexture(kind)); t.encoding = THREE.sRGBEncoding;
+  return new THREE.MeshBasicMaterial({ map:t, polygonOffset:true, polygonOffsetFactor:-2 });
+}
+/* Construit le produit complet. Face avant = +Z. */
+function gbBuildProduct(cfg, logo){
+  const def = gbShape(cfg), g = new THREE.Group();
+  const bodyHex = (GB_PRO.colors[cfg.color] || GB_PRO.colors.noir).hex;
+  const fin = GB_PRO.finishes[cfg.finish] || GB_PRO.finishes.mat;
+  const bodyMat = new THREE.MeshPhysicalMaterial({ color:new THREE.Color(bodyHex).convertSRGBToLinear(), roughness:fin.rough, metalness:0, clearcoat:fin.coat, clearcoatRoughness:0.35 });
+  g.add(gbBody(def, bodyMat));
+  const fz = def.d / 2 + 0.05, dark = new THREE.MeshStandardMaterial({ color:0x0d0f10, roughness:0.45 });
+  const W = def.w, H = def.h;
+  let logoTop = H * 0.18, logoBottom = -H * 0.4;   /* zone du logo sur la face avant (en Y) */
+
+  /* écran / indicateurs */
+  if(def.screen === 'round'){
+    const r = Math.min(W, H) * 0.15, cy = H * 0.27;
+    const disc = new THREE.Mesh(new THREE.CircleGeometry(r, 48), gbScreenMat('round'));
+    disc.position.set(0, cy, fz); g.add(disc); logoTop = cy - r - H * 0.06;
+  } else if(def.screen === 'bar' || def.screen === 'panel'){
+    const sw = W * (def.screen === 'panel' ? 0.66 : 0.5), sh = def.screen === 'panel' ? H * 0.2 : H * 0.075, cy = H * (def.screen === 'panel' ? 0.26 : 0.32);
+    const geo = new THREE.ShapeGeometry(gbRoundedShape(sw, sh, Math.min(sw, sh) * 0.25));
+    const mat = gbScreenMat(def.screen);
+    const uv = geo.attributes.uv; for(let i = 0; i < uv.count; i++){ uv.setXY(i, uv.getX(i) / sw + 0.5, uv.getY(i) / sh + 0.5); }
+    const m = new THREE.Mesh(geo, mat); m.position.set(0, cy, fz); g.add(m); logoTop = cy - sh / 2 - H * 0.06;
+  } else if(def.screen === 'leds'){
+    const y = H * 0.33, sp = Math.min(W, 110) * 0.06;
+    for(let i = 0; i < 4; i++){
+      const led = new THREE.Mesh(new THREE.CircleGeometry(Math.max(1.3, W * 0.009), 16), new THREE.MeshBasicMaterial({ color:i === 0 ? 0x45E07A : 0x2C9B55 }));
+      led.position.set(-W * 0.3 + i * sp, y, fz); g.add(led);
+    }
+    const ring = new THREE.Mesh(new THREE.RingGeometry(W * 0.028, W * 0.04, 32), new THREE.MeshBasicMaterial({ color:0xE0303A }));
+    ring.position.set(W * 0.32, y, fz); g.add(ring);
+    logoTop = y - H * 0.1;
+  } else if(def.screen === 'battery' || def.screen === 'rack'){
+    /* bornes sur le dessus, petit afficheur */
+    const gold = new THREE.MeshStandardMaterial({ color:0xC79A3B, metalness:0.9, roughness:0.3 });
+    if(def.screen === 'battery'){
+      [-1, 1].forEach(sx => {
+        const base = new THREE.Mesh(new THREE.CylinderGeometry(W * 0.045, W * 0.05, 8, 6), gold);
+        base.position.set(sx * W * 0.34, H / 2 + 4, def.d * 0.12); base.castShadow = true; g.add(base);
+        const stud = new THREE.Mesh(new THREE.CylinderGeometry(W * 0.016, W * 0.016, 16, 16), gold);
+        stud.position.set(sx * W * 0.34, H / 2 + 14, def.d * 0.12); g.add(stud);
+      });
+      const red = new THREE.Mesh(new THREE.PlaneGeometry(W * 0.05, W * 0.016), new THREE.MeshBasicMaterial({ color:0xD62B2B }));
+      red.rotation.x = -Math.PI / 2; red.position.set(-W * 0.45, H / 2 + 0.3, def.d * 0.12); g.add(red);
+      const disp = new THREE.Mesh(new THREE.PlaneGeometry(W * 0.26, def.d * 0.22), gbScreenMat('bar'));
+      disp.rotation.x = -Math.PI / 2; disp.position.set(0, H / 2 + 0.4, -def.d * 0.1); g.add(disp);
+      logoTop = H * 0.32; logoBottom = -H * 0.36;
+    } else {
+      const panel = new THREE.Mesh(new THREE.PlaneGeometry(W * 0.2, H * 0.24), gbScreenMat('bar'));
+      panel.position.set(W * 0.33, H * 0.18, fz); g.add(panel);
+      [-1, 1].forEach(sx => {
+        const ear = new THREE.Mesh(new THREE.BoxGeometry(18, H * 0.9, 4), bodyMat);
+        ear.position.set(sx * (W / 2 + 9), 0, def.d / 2 - 2); ear.castShadow = true; g.add(ear);
+        [-1, 1].forEach(sy => { const hole = new THREE.Mesh(new THREE.CircleGeometry(3.2, 16), dark); hole.position.set(sx * (W / 2 + 9), sy * H * 0.3, def.d / 2 + 0.2); g.add(hole); });
+      });
+      const gp = new THREE.Mesh(new THREE.CylinderGeometry(9, 9, 7, 24), gold); gp.rotation.x = Math.PI / 2; gp.position.set(W * 0.33, -H * 0.2, fz + 3); g.add(gp);
+      const gm = gp.clone(); gm.position.x = W * 0.22; g.add(gm);
+      logoTop = H * 0.32; logoBottom = -H * 0.36;
+    }
+  }
+  if(def.handle){
+    const h = new THREE.Mesh(new THREE.TorusGeometry(W * 0.2, 7, 14, 40, Math.PI), new THREE.MeshPhysicalMaterial({ color:0x1b1d1c, roughness:0.5 }));
+    h.position.set(0, H / 2, 0); h.castShadow = true; g.add(h);
+  }
+  /* ports sur la tranche supérieure (petits produits) */
+  if(cfg.type === 'powerbank' || cfg.type === 'laptop' || cfg.type === 'ups'){
+    const n = cfg.type === 'ups' ? 0 : 3;
+    for(let i = 0; i < n; i++){
+      const p = new THREE.Mesh(new THREE.PlaneGeometry(Math.min(W * 0.13, 11), Math.min(def.d * 0.24, 4.5)), new THREE.MeshBasicMaterial({ color:0x050505 }));
+      p.rotation.x = -Math.PI / 2; p.position.set((i - (n - 1) / 2) * Math.min(W * 0.2, 17), H / 2 + 0.15, 0); g.add(p);
+    }
+  }
+  /* logo + nom */
+  const zoneW = (cfg.type === 'battery' ? W * (def.screen === 'rack' ? 0.55 : 0.82) : W * 0.8), zoneH = Math.max(10, logoTop - logoBottom);
+  const tex = gbLogoTexture(cfg, logo, bodyHex, zoneW / zoneH);
+  const lm = new THREE.Mesh(new THREE.PlaneGeometry(zoneW, zoneH), gbTexMat(tex, { roughness:fin.rough }));
+  lm.position.set(def.screen === 'rack' ? -W * 0.12 : 0, (logoTop + logoBottom) / 2, fz + 0.06); g.add(lm);
+  g.userData = { def, logoY:(logoTop + logoBottom) / 2, logoX:lm.position.x, zoneW, zoneH, logoMesh:lm };
+  /* orientation de présentation */
+  if(def.lay){ g.rotation.x = -1.05; }
+  return g;
+}
+
+/* ---------- moteur de rendu ---------- */
+function gbCreateStage(canvas, opts){
+  opts = opts || {};
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true, preserveDrawingBuffer:!!opts.snapshot });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.outputEncoding = THREE.sRGBEncoding; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+  renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  const scene = new THREE.Scene();
+  const cam = new THREE.PerspectiveCamera(28, 1, 1, 6000);
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x8f9a92, 0.85));
+  const key = new THREE.DirectionalLight(0xffffff, 1.7); key.castShadow = true; key.shadow.mapSize.set(1024, 1024); key.shadow.radius = 6; scene.add(key, key.target);
+  const fill = new THREE.DirectionalLight(0xEAF2FF, 0.55); scene.add(fill);
+  const rim = new THREE.DirectionalLight(0xffffff, 0.9); scene.add(rim);
+  const ground = new THREE.Mesh(new THREE.PlaneGeometry(4000, 4000), new THREE.ShadowMaterial({ opacity:0.15 }));
+  ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
+  const pivot = new THREE.Group(); scene.add(pivot);
+  let product = null, yaw = -0.42, pitch = 0.12, zoom = false;
+
+  const fit = () => {
+    if(!product) return;
+    const box = new THREE.Box3().setFromObject(product), size = box.getSize(new THREE.Vector3()), c = box.getCenter(new THREE.Vector3());
+    product.position.sub(c); product.position.y += size.y / 2;           /* posé sur le sol */
+    const R = size.length() / 2;
+    ground.position.y = 0;
+    if(zoom){
+      /* cadrage sur la zone du logo, face à elle */
+      pivot.rotation.set(0, 0, 0); pivot.updateMatrixWorld(true);
+      const lm = product.userData.logoMesh, pos = lm.getWorldPosition(new THREE.Vector3());
+      const nrm = new THREE.Vector3(0, 0, 1).applyQuaternion(lm.getWorldQuaternion(new THREE.Quaternion())).normalize();
+      const span = Math.max(product.userData.zoneW, product.userData.zoneH * cam.aspect) * 1.25;
+      const dist = span / (2 * Math.tan(THREE.MathUtils.degToRad(cam.fov / 2)));
+      cam.position.copy(pos).addScaledVector(nrm, dist); cam.position.y += dist * 0.04; cam.lookAt(pos);
+    } else {
+      const d = R / Math.sin(THREE.MathUtils.degToRad(cam.fov / 2)) * (opts.tight ? 1.12 : 1.42);
+      cam.position.set(0, size.y * 0.5 + d * 0.18, d); cam.lookAt(0, size.y * 0.5, 0);
+    }
+    key.position.set(R * 1.4, R * 5, R * 3.2); key.target.position.set(0, 0, 0);
+    const s = R * 2.2; Object.assign(key.shadow.camera, { left:-s, right:s, top:s, bottom:-s, near:1, far:R * 12 }); key.shadow.camera.updateProjectionMatrix();
+    fill.position.set(-R * 3, R * 1.5, R * 2); rim.position.set(0, R * 2.5, -R * 4);
+  };
+  const render = () => { if(zoom) pivot.rotation.set(0, 0, 0); else pivot.rotation.set(pitch * 0.4, yaw, 0); renderer.render(scene, cam); };
+  const resize = () => {
+    const w = canvas.clientWidth || opts.size || 600, h = canvas.clientHeight || opts.size || 600;
+    renderer.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); render();
+  };
+  const set = async (cfg, keepAngle) => {
+    const logo = cfg.logo ? await gbProImg(cfg.logo).catch(() => null) : null;
+    try{ await document.fonts.ready; }catch(e){}
+    if(product){ pivot.remove(product); product.traverse(o => { if(o.geometry) o.geometry.dispose(); if(o.material){ if(o.material.map) o.material.map.dispose(); o.material.dispose(); } }); }
+    product = gbBuildProduct(cfg, logo); pivot.add(product);
+    if(!keepAngle){ yaw = product.userData.def.lay ? -0.3 : -0.42; pitch = 0.12; }
+    fit(); render();
+  };
+  /* rotation au doigt / à la souris */
+  if(opts.interactive){
+    let drag = null;
+    canvas.addEventListener('pointerdown', e => { if(zoom) return; drag = { x:e.clientX, y:e.clientY, yaw, pitch }; canvas.setPointerCapture(e.pointerId); canvas.classList.add('is-grabbing'); });
+    canvas.addEventListener('pointermove', e => { if(!drag) return; yaw = drag.yaw + (e.clientX - drag.x) * 0.01; pitch = Math.max(-0.6, Math.min(0.9, drag.pitch + (e.clientY - drag.y) * 0.006)); render(); });
+    const end = () => { drag = null; canvas.classList.remove('is-grabbing'); };
+    canvas.addEventListener('pointerup', end); canvas.addEventListener('pointercancel', end);
+    canvas.addEventListener('dblclick', () => { yaw = product && product.userData.def.lay ? -0.3 : -0.42; pitch = 0.12; render(); });
+    if('ResizeObserver' in window) new ResizeObserver(resize).observe(canvas);
+  }
+  return {
+    set, render, resize,
+    setZoom(z){ zoom = z; if(!z){ yaw = product && product.userData.def.lay ? -0.3 : -0.42; pitch = 0.12; } fit(); render(); },
+    snapshot(w){
+      const prev = renderer.getSize(new THREE.Vector2()); renderer.setPixelRatio(1); renderer.setSize(w, w, false); cam.aspect = 1; cam.updateProjectionMatrix(); render();
+      const url = canvas.toDataURL('image/png');
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2)); renderer.setSize(prev.x, prev.y, false); cam.aspect = prev.x / prev.y; cam.updateProjectionMatrix(); render();
+      return url;
+    }
+  };
+}
+
+/* Un seul moteur caché sert à produire les vignettes et visuels fixes */
+let gbStudio = null;
+async function gbProSnapshot(cfg, size){
+  if(!gbStudio){ const c = gbCanvas(size, size); gbStudio = gbCreateStage(c, { snapshot:true, size, tight:true }); gbStudio._c = c; }
+  await gbStudio.set(cfg);
+  return gbStudio.snapshot(size);
+}
+
 const GB_PRO_EXAMPLES = [
-  { title:'Cabinet de conseil', sector:'Entreprise', desc:'V2 bleu nuit, logo en creux.', cfg:{ brand:'KORA CONSEIL', slogan:'Stratégie et finance', model:'v2', color:'nuit', marking:'creux', ink:'blanc', logo:gbMonogram('K','#2F6FD6','letter') } },
-  { title:'Festival', sector:'Événementiel', desc:'V1 noire, logo bicolore or.', cfg:{ brand:'FESTIVAL LUMIÈRES', slogan:'Édition 2027', model:'v1', color:'noir', marking:'bicolore', ink:'or', logo:gbMonogram('','#F2B705','sun') } },
-  { title:'Coopérative agricole', sector:'Agriculture', desc:'GreenEco verte, logo en relief.', cfg:{ brand:'COOP CACAO', slogan:'Ensemble', model:'m4', color:'vert', marking:'relief', ink:'or', logo:gbMonogram('','#C9A646','leaf') } },
-  { title:'Pharmacie de quartier', sector:'Santé et commerce', desc:'V3 blanche, logo bicolore vert.', cfg:{ brand:'PHARMACIE DU PARC', slogan:'Votre santé, notre priorité', model:'v3', color:'blanc', marking:'bicolore', ink:'vert', logo:gbMonogram('','#1E9E5A','cross') } }
+  { title:'Cabinet de conseil', sector:'Entreprise', desc:'Powerbank Slim bleu nuit, logo en creux.', cfg:{ type:'powerbank', shape:'slim', brand:'KORA CONSEIL', slogan:'Stratégie et finance', color:'nuit', finish:'satin', marking:'creux', ink:'blanc', logo:gbMonogram('K','#2F6FD6','letter') } },
+  { title:'Festival', sector:'Événementiel', desc:'Powerbank Galet noire, logo bicolore or.', cfg:{ type:'powerbank', shape:'galet', brand:'FESTIVAL LUMIÈRES', slogan:'Édition 2027', color:'noir', finish:'mat', marking:'bicolore', ink:'or', logo:gbMonogram('','#F2B705','sun') } },
+  { title:'Installateur solaire', sector:'Énergie', desc:'Batterie Bloc verte, logo en relief.', cfg:{ type:'battery', shape:'bloc', brand:'SOLAIRE PLUS', slogan:'Installateur agréé', color:'vert', finish:'mat', marking:'relief', ink:'or', logo:gbMonogram('','#C9A646','ring') } },
+  { title:'Opérateur internet', sector:'Télécoms', desc:'Mini-UPS Tour blanc, logo bicolore vert.', cfg:{ type:'ups', shape:'tour', brand:'NET EXPRESS', slogan:'Toujours connecté', color:'blanc', finish:'satin', marking:'bicolore', ink:'vert', logo:gbMonogram('','#1E9E5A','cross') } }
 ];
-const GB_PRO_HERO = { brand:'VOTRE MARQUE', slogan:'Votre slogan ici', model:'v3', color:'nuit', marking:'bicolore', ink:'or', logo:gbMonogram('','#C9A646','ring') };
+const GB_PRO_HERO = { type:'powerbank', shape:'capsule', brand:'VOTRE MARQUE', slogan:'Votre slogan ici', color:'nuit', finish:'satin', marking:'bicolore', ink:'or', logo:gbMonogram('','#C9A646','ring') };
 
 function gbInitPro(){
-  /* visuels d’illustration (haut de page, accueil) */
-  document.querySelectorAll('[data-pro-art]').forEach(el => {
+  const has3D = typeof THREE !== 'undefined';
+  /* visuels fixes (haut de page) */
+  document.querySelectorAll('[data-pro-art]').forEach(async el => {
+    if(!has3D) return;
     const k = el.dataset.proArt, cfg = k === 'hero' ? GB_PRO_HERO : GB_PRO_EXAMPLES[+k].cfg;
-    const c = document.createElement('canvas'); c.setAttribute('role', 'img'); c.setAttribute('aria-label', 'Exemple de powerbank personnalisée');
-    el.prepend(c); gbProRender(c, cfg, { size:900, bg:el.dataset.bg === 'light' ? undefined : 'dark' }).catch(() => {});
+    const img = new Image(); img.alt = 'Exemple de produit personnalisé'; img.className = 'pro-art-img';
+    try{ img.src = await gbProSnapshot(cfg, 900); el.prepend(img); }catch(e){}
   });
   const root = document.querySelector('[data-gb-pro]');
   if(!root) return;
   const $ = s => root.querySelector(s);
-  const cfg = { brand:'', slogan:'', model:'v3', color:'noir', marking:'relief', ink:'or', logo:'', qty:'100 à 249', deadline:'', sector:'', city:'', note:'' };
-  const canvas = document.createElement('canvas');
-  canvas.setAttribute('role', 'img'); canvas.setAttribute('aria-label', 'Aperçu de votre produit personnalisé');
-  $('[data-pro-stage]').appendChild(canvas);
-  const summary = $('[data-pro-summary]'), prices = root.querySelectorAll('[data-pro-price]');
+  const cfg = { type:'powerbank', shape:'galet', brand:'', slogan:'', color:'noir', finish:'satin', marking:'bicolore', ink:'or', logo:'', qty:'100 à 249', deadline:'', sector:'', city:'', note:'' };
+  const caption = $('[data-pro-caption]'), summary = $('[data-pro-summary]');
 
-  $('[data-pro-models]').innerHTML = Object.entries(GB_PRO.models).map(([id, m]) => `
-    <label class="pick"><input type="radio" name="pmodel" value="${id}" ${id === cfg.model ? 'checked' : ''}>
-      <span class="pick__img"><img src="${escapeHTML((GB_IMAGES[id] || [])[0] || '')}" alt="" loading="lazy"></span>
-      <span class="pick__txt"><b>${m.name}</b><small>${m.spec}</small></span></label>`).join('');
+  /* aperçu 3D interactif */
+  let stage = null;
+  const holder = $('[data-pro-stage]');
+  if(has3D){
+    try{
+      const cv = document.createElement('canvas'); cv.className = 'pro-3d'; cv.setAttribute('aria-label', 'Aperçu 3D de votre produit : faites-le pivoter');
+      holder.appendChild(cv); stage = gbCreateStage(cv, { interactive:true }); stage.resize();
+    }catch(e){ stage = null; }
+  }
+  if(!stage) holder.innerHTML = '<p class="pro-no3d">L’aperçu 3D n’est pas disponible sur cet appareil. Votre demande peut quand même être envoyée : nous vous préparons une maquette.</p>';
+
+  /* types et formes */
+  const typesEl = $('[data-pro-types]'), shapesEl = $('[data-pro-shapes]');
+  typesEl.innerHTML = Object.entries(GB_SHAPES).map(([id, t]) => `
+    <label class="type"><input type="radio" name="ptype" value="${id}" ${id === cfg.type ? 'checked' : ''}><span><i class="fa-solid ${t.icon}" aria-hidden="true"></i>${t.label}</span></label>`).join('');
+  const thumbs = {};
+  const renderShapes = () => {
+    const t = GB_SHAPES[cfg.type];
+    shapesEl.innerHTML = t.models.map(m => `
+      <label class="pick"><input type="radio" name="pshape" value="${m.id}" ${m.id === cfg.shape ? 'checked' : ''}>
+        <span class="pick__img" data-thumb="${cfg.type}-${m.id}">${thumbs[cfg.type + '-' + m.id] ? `<img src="${thumbs[cfg.type + '-' + m.id]}" alt="">` : '<span class="pick__load"></span>'}</span>
+        <span class="pick__txt"><b>${m.name}</b><small>${m.desc}</small></span></label>`).join('');
+    if(!has3D) return;
+    (async () => {
+      for(const m of t.models){
+        const key = cfg.type + '-' + m.id; if(thumbs[key]) continue;
+        try{
+          thumbs[key] = await gbProSnapshot({ type:cfg.type, shape:m.id, brand:' ', slogan:'', color:'noir', finish:'satin', marking:'bicolore', ink:'blanc', logo:'' }, 320);
+          const box = shapesEl.querySelector(`[data-thumb="${key}"]`); if(box) box.innerHTML = `<img src="${thumbs[key]}" alt="">`;
+        }catch(e){}
+      }
+    })();
+  };
   $('[data-pro-colors]').innerHTML = Object.entries(GB_PRO.colors).map(([id, c]) => `
     <label class="swatch" title="${c.name}"><input type="radio" name="pcolor" value="${id}" ${id === cfg.color ? 'checked' : ''}><span style="--c:${c.hex}"></span><small>${c.name}</small></label>`).join('');
+  $('[data-pro-finishes]').innerHTML = Object.entries(GB_PRO.finishes).map(([id, f]) => `
+    <label class="seg"><input type="radio" name="pfinish" value="${id}" ${id === cfg.finish ? 'checked' : ''}><span><b>${f.name}</b></span></label>`).join('');
   $('[data-pro-markings]').innerHTML = Object.entries(GB_PRO.markings).map(([id, m]) => `
     <label class="seg"><input type="radio" name="pmark" value="${id}" ${id === cfg.marking ? 'checked' : ''}><span><b>${m.name}</b><small>${m.hint}</small></span></label>`).join('');
 
-  let ticket = 0, queued = false;
-  const draw = () => {
-    if(queued) return; queued = true;
-    requestAnimationFrame(async () => {
-      queued = false; const t = ++ticket;
-      const off = document.createElement('canvas');
-      try{ await gbProRender(off, cfg, { size:1000, bg:false }); }catch(e){ return; }
-      if(t !== ticket) return;
-      canvas.width = off.width; canvas.height = off.height; canvas.getContext('2d').drawImage(off, 0, 0);
-    });
+  let pending = 0, structural = true;
+  const draw = async () => {
+    if(!stage) return;
+    const t = ++pending;
+    await new Promise(r => requestAnimationFrame(r));
+    if(t !== pending) return;
+    await stage.set(cfg, !structural); structural = false;
   };
   const render = () => {
     draw();
-    const m = GB_PRO.models[cfg.model], card = GB_CARDS[cfg.model] || {};
+    const sh = gbShape(cfg), t = GB_SHAPES[cfg.type];
+    if(caption) caption.innerHTML = [`${t.label} ${sh.name}`, GB_PRO.colors[cfg.color].name, GB_PRO.finishes[cfg.finish].name, GB_PRO.markings[cfg.marking].name + (cfg.marking === 'bicolore' ? ' ' + cfg.ink : '')]
+      .map(x => `<span>${escapeHTML(x)}</span>`).join('');
     summary.innerHTML = [
-      ['Marque', cfg.brand || '—'], ['Modèle', `${m.name}, ${m.spec}`], ['Coque', GB_PRO.colors[cfg.color].name],
-      ['Logo', GB_PRO.markings[cfg.marking].name + (cfg.marking === 'bicolore' ? `, ${cfg.ink}` : '')],
-      ['Quantité', cfg.qty], ['Ville', cfg.city || '—']
+      ['Produit', t.label], ['Forme', sh.name], ['Marque', cfg.brand || '—'],
+      ['Coque', `${GB_PRO.colors[cfg.color].name}, ${GB_PRO.finishes[cfg.finish].name.toLowerCase()}`],
+      ['Logo', GB_PRO.markings[cfg.marking].name + (cfg.marking === 'bicolore' ? `, ${cfg.ink}` : '')], ['Quantité', cfg.qty]
     ].map(([k, v]) => `<div><dt>${k}</dt><dd>${escapeHTML(v)}</dd></div>`).join('');
-    const priceHTML = card.price ? `Prix catalogue du ${escapeHTML(m.name)} : <b>à partir de ${gbPrice(card.price)}</b> l’unité, hors personnalisation. Votre tarif est établi après étude, selon la quantité et la finition.` : '';
-    prices.forEach(p => p.innerHTML = priceHTML);
     $('[data-pro-ink]').hidden = cfg.marking !== 'bicolore';
   };
   const sync = () => {
     $('#proBrand').value = cfg.brand; $('#proSlogan').value = cfg.slogan;
-    root.querySelectorAll('input[name=pmodel]').forEach(i => i.checked = i.value === cfg.model);
+    root.querySelectorAll('input[name=ptype]').forEach(i => i.checked = i.value === cfg.type);
+    renderShapes();
     root.querySelectorAll('input[name=pcolor]').forEach(i => i.checked = i.value === cfg.color);
+    root.querySelectorAll('input[name=pfinish]').forEach(i => i.checked = i.value === cfg.finish);
     root.querySelectorAll('input[name=pmark]').forEach(i => i.checked = i.value === cfg.marking);
     root.querySelectorAll('input[name=pink]').forEach(i => i.checked = i.value === cfg.ink);
     $('[data-pro-logo-name]').textContent = cfg.logo ? 'Logo chargé' : 'Aucun logo';
-    render();
+    structural = true; render();
   };
 
   root.addEventListener('input', e => {
     const t = e.target;
-    if(t.id === 'proBrand') cfg.brand = t.value;
+    if(t.name === 'ptype'){ cfg.type = t.value; cfg.shape = GB_SHAPES[t.value].models[0].id; renderShapes(); structural = true; }
+    else if(t.name === 'pshape'){ cfg.shape = t.value; structural = true; }
+    else if(t.id === 'proBrand') cfg.brand = t.value;
     else if(t.id === 'proSlogan') cfg.slogan = t.value;
-    else if(t.name === 'pmodel') cfg.model = t.value;
     else if(t.name === 'pcolor') cfg.color = t.value;
+    else if(t.name === 'pfinish') cfg.finish = t.value;
     else if(t.name === 'pmark') cfg.marking = t.value;
     else if(t.name === 'pink') cfg.ink = t.value;
     else if(t.id === 'proQty') cfg.qty = t.value;
@@ -2050,19 +2238,27 @@ function gbInitPro(){
     render();
   });
   $('[data-pro-logo-clear]').addEventListener('click', () => { cfg.logo = ''; $('#proLogo').value = ''; $('[data-pro-logo-name]').textContent = 'Aucun logo'; render(); });
+  const zoomBtn = $('[data-pro-zoom]'); let zoom = false;
+  if(zoomBtn) zoomBtn.addEventListener('click', () => {
+    if(!stage) return; zoom = !zoom; zoomBtn.setAttribute('aria-pressed', String(zoom));
+    zoomBtn.innerHTML = zoom ? '<i class="fa-solid fa-magnifying-glass-minus" aria-hidden="true"></i>Vue d’ensemble' : '<i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i>Zoom sur le logo';
+    stage.setZoom(zoom);
+  });
 
+  /* exemples */
   const ex = document.querySelector('[data-pro-examples]');
   if(ex){
     ex.innerHTML = GB_PRO_EXAMPLES.map((e, i) => `
       <article class="ex-card">
-        <div class="ex-card__art" data-ex="${i}"></div>
+        <div class="ex-card__art" data-ex="${i}"><span class="pick__load"></span></div>
         <div class="ex-card__body"><small>${e.sector}</small><h3>${e.title}</h3><p>${e.desc}</p>
           <button class="btn btn--line btn--sm" type="button" data-pro-example="${i}">Partir de cet exemple</button></div>
       </article>`).join('');
-    ex.querySelectorAll('[data-ex]').forEach(el => {
-      const c = document.createElement('canvas'); el.appendChild(c);
-      gbProRender(c, GB_PRO_EXAMPLES[+el.dataset.ex].cfg, { size:700, bg:false }).catch(() => {});
-    });
+    if(has3D) (async () => {
+      for(const el of ex.querySelectorAll('[data-ex]')){
+        try{ const url = await gbProSnapshot(GB_PRO_EXAMPLES[+el.dataset.ex].cfg, 640); el.innerHTML = `<img src="${url}" alt="">`; }catch(e){}
+      }
+    })();
     ex.addEventListener('click', e => {
       const b = e.target.closest('[data-pro-example]'); if(!b) return;
       Object.assign(cfg, GB_PRO_EXAMPLES[+b.dataset.proExample].cfg);
@@ -2070,25 +2266,25 @@ function gbInitPro(){
     });
   }
 
+  /* téléchargement */
   root.querySelectorAll('[data-pro-download]').forEach(btn => btn.addEventListener('click', async () => {
-    const c = document.createElement('canvas');
-    await gbProRender(c, cfg, { size:1400 });
-    const name = `maquette-${(cfg.brand || 'greenbridge').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'greenbridge'}.png`;
-    c.toBlob(blob => {
-      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
-      document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
-    }, 'image/png');
+    if(!has3D) return;
+    const url = await gbProSnapshot(cfg, 1400);
+    const a = document.createElement('a'); a.href = url;
+    a.download = `maquette-${(cfg.brand || 'greenbridge').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'greenbridge'}.png`;
+    document.body.appendChild(a); a.click(); a.remove();
   }));
 
+  /* demande sur WhatsApp */
   root.querySelectorAll('[data-pro-send]').forEach(btn => btn.addEventListener('click', () => {
-    const m = GB_PRO.models[cfg.model];
+    const sh = gbShape(cfg), t = GB_SHAPES[cfg.type];
     pendingCustomMessage = [
       'Bonjour GreenBridge, je souhaite un devis pour des produits personnalisés à notre marque, pour {PAYS}.',
       '',
+      `• Produit : ${t.label}, forme ${sh.name}`,
       `• Marque : ${cfg.brand || 'à préciser'}${cfg.slogan ? ` (slogan : ${cfg.slogan})` : ''}`,
       `• Secteur : ${cfg.sector || 'à préciser'}`,
-      `• Produit de base : ${m.name}, ${m.spec}`,
-      `• Couleur de la coque : ${GB_PRO.colors[cfg.color].name}`,
+      `• Coque : ${GB_PRO.colors[cfg.color].name}, finition ${GB_PRO.finishes[cfg.finish].name.toLowerCase()}`,
       `• Logo : ${GB_PRO.markings[cfg.marking].name}${cfg.marking === 'bicolore' ? `, couleur ${cfg.ink}` : ''}`,
       `• Quantité : ${cfg.qty}`,
       `• Échéance souhaitée : ${cfg.deadline ? new Date(cfg.deadline).toLocaleDateString('fr-FR') : 'à préciser'}`,
