@@ -1885,7 +1885,15 @@ const GB_PRO = {
     violet:{ name:'Violet',           hex:'#7B4FB8' },
     rose:  { name:'Rose',             hex:'#E58FB0' }
   },
-  finishes:{ mat:{ name:'Mat', rough:0.74, coat:0 }, satin:{ name:'Satiné', rough:0.5, coat:0.12 } },
+  finishes:{
+    fin:    { name:'Mat fin',     hint:'Stries très fines, aspect presque lisse.' },
+    texture:{ name:'Mat texturé', hint:'Stries régulières, toucher technique.' },
+    granite:{ name:'Granité',     hint:'Grain antidérapant, masque rayures et traces.' }
+  },
+  materials:{
+    abs:{ name:'ABS, standard',  hint:'Robuste, résiste aux chocs et à la chaleur.' },
+    asa:{ name:'ASA, extérieur', hint:'Résiste au soleil et aux intempéries.' }
+  },
   markings:{
     relief:  { name:'Logo en relief', hint:'Il ressort de la coque, on le sent au toucher.' },
     bicolore:{ name:'Logo bicolore',  hint:'Intégré à la coque, dans une seconde couleur.' },
@@ -2037,12 +2045,38 @@ function gbScreenMat(kind, text){
   const t = new THREE.CanvasTexture(gbScreenTexture(kind, text)); t.encoding = THREE.sRGBEncoding;
   return new THREE.MeshBasicMaterial({ map:t, polygonOffset:true, polygonOffsetFactor:-2 });
 }
+let gbStriesTex = null, gbStriesFineTex = null, gbGrainTex = null;
+function gbGrainTexture(){
+  if(gbGrainTex) return gbGrainTex;
+  const S = 128, c = gbCanvas(S, S), x = c.getContext('2d'), d = x.createImageData(S, S);
+  for(let i = 0; i < S * S; i++){ const v = 90 + Math.floor(Math.random() * 90); d.data.set([v, v, v, 255], i * 4); }
+  x.putImageData(d, 0, 0); x.filter = 'blur(0.6px)'; x.drawImage(c, 0, 0);
+  const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(0.09, 0.09); t.anisotropy = 8;
+  gbGrainTex = t; return t;
+}
+function gbStriesTexture(fine){
+  if(fine){
+    if(gbStriesFineTex) return gbStriesFineTex;
+    const c = gbCanvas(8, 64), x = c.getContext('2d');
+    for(let y = 0; y < 64; y++){ const v = 128 + Math.round(55 * Math.sin((y / 64) * Math.PI * 2 * 4)); x.fillStyle = `rgb(${v},${v},${v})`; x.fillRect(0, y, 8, 1); }
+    const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(0.05, 0.4); t.anisotropy = 8;
+    gbStriesFineTex = t; return t;
+  }
+  if(gbStriesTex) return gbStriesTex;
+  const c = gbCanvas(8, 64), x = c.getContext('2d');
+  for(let y = 0; y < 64; y++){ const v = 128 + Math.round(70 * Math.sin((y / 64) * Math.PI * 2 * 4)); x.fillStyle = `rgb(${v},${v},${v})`; x.fillRect(0, y, 8, 1); }
+  const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping;
+  t.repeat.set(0.05, 0.22); t.anisotropy = 8;              /* une strie ≈ 1,1 mm : visible sans moirage */
+  gbStriesTex = t; return t;
+}
 /* Construit le produit complet. Face avant = +Z. */
 function gbBuildProduct(cfg, logo){
   const def = gbShape(cfg), g = new THREE.Group();
   const bodyHex = (GB_PRO.colors[cfg.color] || GB_PRO.colors.noir).hex;
-  const fin = GB_PRO.finishes[cfg.finish] || GB_PRO.finishes.mat;
-  const bodyMat = new THREE.MeshPhongMaterial({ color:new THREE.Color(bodyHex).convertSRGBToLinear(), specular:new THREE.Color(cfg.finish === 'satin' ? 0x3a3a3a : 0x141414), shininess:cfg.finish === 'satin' ? 38 : 10 });
+  const finKey = GB_PRO.finishes[cfg.finish] ? cfg.finish : 'texture';
+  const bodyMat = new THREE.MeshPhongMaterial({ color:new THREE.Color(bodyHex).convertSRGBToLinear(), specular:new THREE.Color(finKey === 'fin' ? 0x262626 : 0x121212), shininess:finKey === 'fin' ? 20 : finKey === 'granite' ? 5 : 9 });
+  bodyMat.bumpMap = finKey === 'granite' ? gbGrainTexture() : gbStriesTexture(finKey === 'fin');
+  bodyMat.bumpScale = finKey === 'fin' ? 0.18 : finKey === 'granite' ? 0.8 : 0.45;
   g.add(gbBody(def, bodyMat));
   const fz = def.d / 2 + 0.05, dark = new THREE.MeshStandardMaterial({ color:0x0d0f10, roughness:0.45 });
   const W = def.w, H = def.h;
@@ -2171,7 +2205,7 @@ function gbBuildProduct(cfg, logo){
   /* logo + nom */
   const zoneW = logoW || (cfg.type === 'battery' ? W * 0.82 : W * 0.8), zoneH = Math.max(10, logoTop - logoBottom);
   const tex = gbLogoTexture(cfg, logo, bodyHex, zoneW / zoneH);
-  const lm = new THREE.Mesh(new THREE.PlaneGeometry(zoneW, zoneH), gbTexMat(tex, { roughness:fin.rough }));
+  const lm = new THREE.Mesh(new THREE.PlaneGeometry(zoneW, zoneH), gbTexMat(tex, { roughness:0.6 }));
   lm.position.set(logoX, (logoTop + logoBottom) / 2, fz + 0.06); g.add(lm);
   g.userData = { def, logoY:(logoTop + logoBottom) / 2, logoX:lm.position.x, zoneW, zoneH, logoMesh:lm, portsGroup:list.length ? portsGroup : null, portsFace:conn.ports.face };
   /* orientation de présentation */
@@ -2277,12 +2311,12 @@ async function gbProSnapshot(cfg, size){
 }
 
 const GB_PRO_EXAMPLES = [
-  { title:'Cabinet de conseil', sector:'Entreprise', desc:'Powerbank Slim bleu nuit, logo en creux.', cfg:{ type:'powerbank', shape:'slim', brand:'KORA CONSEIL', slogan:'Stratégie et finance', color:'nuit', finish:'satin', marking:'creux', ink:'blanc', logo:gbMonogram('K','#2F6FD6','letter') } },
-  { title:'Festival', sector:'Événementiel', desc:'Powerbank Galet noire, logo bicolore or.', cfg:{ type:'powerbank', shape:'galet', brand:'FESTIVAL LUMIÈRES', slogan:'Édition 2027', color:'noir', finish:'mat', marking:'bicolore', ink:'or', logo:gbMonogram('','#F2B705','sun') } },
-  { title:'Installateur solaire', sector:'Énergie', desc:'Batterie Bloc verte, logo en relief.', cfg:{ type:'battery', shape:'bloc', brand:'SOLAIRE PLUS', slogan:'Installateur agréé', color:'vert', finish:'mat', marking:'relief', ink:'or', logo:gbMonogram('','#C9A646','ring') } },
-  { title:'Opérateur internet', sector:'Télécoms', desc:'Mini-UPS Cube blanc, logo bicolore vert.', cfg:{ type:'ups', shape:'cube', brand:'NET EXPRESS', slogan:'Toujours connecté', color:'blanc', finish:'satin', marking:'bicolore', ink:'vert', logo:gbMonogram('','#1E9E5A','cross') } }
+  { title:'Cabinet de conseil', sector:'Entreprise', desc:'Powerbank Slim bleu nuit, logo en creux.', cfg:{ type:'powerbank', shape:'slim', brand:'KORA CONSEIL', slogan:'Stratégie et finance', color:'nuit', finish:'fin', marking:'creux', ink:'blanc', logo:gbMonogram('K','#2F6FD6','letter') } },
+  { title:'Festival', sector:'Événementiel', desc:'Powerbank Galet noire, logo bicolore or.', cfg:{ type:'powerbank', shape:'galet', brand:'FESTIVAL LUMIÈRES', slogan:'Édition 2027', color:'noir', finish:'texture', marking:'bicolore', ink:'or', logo:gbMonogram('','#F2B705','sun') } },
+  { title:'Installateur solaire', sector:'Énergie', desc:'Batterie Bloc verte, logo en relief.', cfg:{ type:'battery', shape:'bloc', brand:'SOLAIRE PLUS', slogan:'Installateur agréé', color:'vert', finish:'granite', material:'asa', marking:'relief', ink:'or', logo:gbMonogram('','#C9A646','ring') } },
+  { title:'Opérateur internet', sector:'Télécoms', desc:'Mini-UPS Cube blanc, logo bicolore vert.', cfg:{ type:'ups', shape:'cube', brand:'NET EXPRESS', slogan:'Toujours connecté', color:'blanc', finish:'texture', marking:'bicolore', ink:'vert', logo:gbMonogram('','#1E9E5A','cross') } }
 ];
-const GB_PRO_HERO = { type:'powerbank', shape:'capsule', brand:'VOTRE MARQUE', slogan:'Votre slogan ici', color:'nuit', finish:'satin', marking:'bicolore', ink:'or', logo:gbMonogram('','#C9A646','ring') };
+const GB_PRO_HERO = { type:'powerbank', shape:'capsule', brand:'VOTRE MARQUE', slogan:'Votre slogan ici', color:'nuit', finish:'texture', marking:'bicolore', ink:'or', logo:gbMonogram('','#C9A646','ring') };
 
 
 /* Référence unique de la demande (reprise dans la fiche et dans WhatsApp) */
@@ -2299,7 +2333,8 @@ function gbProSpecs(cfg){
     c.power ? ['Puissance', c.power.options[cfg.power].name] : null,
     [c.ports.label, cfg.ports.map(p => c.ports.options[p]).join(', ') || 'à préciser'],
     ['Couleur de la coque', GB_PRO.colors[cfg.color].name],
-    ['Aspect', GB_PRO.finishes[cfg.finish].name],
+    ['Aspect', (GB_PRO.finishes[cfg.finish] || GB_PRO.finishes.texture).name],
+    ['Matière', (GB_PRO.materials[cfg.material] || GB_PRO.materials.abs).name],
     ['Logo', GB_PRO.markings[cfg.marking].name + (cfg.marking === 'bicolore' ? `, couleur ${cfg.ink}` : '')],
     ['Marque', cfg.brand || 'à préciser'],
     cfg.slogan ? ['Slogan', cfg.slogan] : null,
@@ -2365,7 +2400,7 @@ function gbInitPro(){
   const root = document.querySelector('[data-gb-pro]');
   if(!root) return;
   const $ = s => root.querySelector(s);
-  const cfg = { type:'powerbank', shape:'galet', power:'rapide', ports:['usbc','usba'], brand:'', slogan:'', color:'noir', finish:'satin', marking:'bicolore', ink:'or', logo:'', qty:'100 à 249', deadline:'', sector:'', city:'', note:'' };
+  const cfg = { type:'powerbank', shape:'galet', power:'rapide', ports:['usbc','usba'], brand:'', slogan:'', color:'noir', finish:'texture', material:'abs', marking:'bicolore', ink:'or', logo:'', qty:'100 à 249', deadline:'', sector:'', city:'', note:'' };
   const caption = $('[data-pro-caption]'), summary = $('[data-pro-summary]');
 
   /* aperçu 3D interactif */
@@ -2395,7 +2430,7 @@ function gbInitPro(){
       for(const m of t.models){
         const key = cfg.type + '-' + m.id; if(thumbs[key]) continue;
         try{
-          thumbs[key] = await gbProSnapshot({ type:cfg.type, shape:m.id, brand:' ', slogan:'', color:'noir', finish:'satin', marking:'bicolore', ink:'blanc', logo:'' }, 320);
+          thumbs[key] = await gbProSnapshot({ type:cfg.type, shape:m.id, brand:' ', slogan:'', color:'noir', finish:'texture', marking:'bicolore', ink:'blanc', logo:'' }, 320);
           const box = shapesEl.querySelector(`[data-thumb="${key}"]`); if(box) box.innerHTML = `<img src="${thumbs[key]}" alt="">`;
         }catch(e){}
       }
@@ -2420,7 +2455,10 @@ function gbInitPro(){
   $('[data-pro-colors]').innerHTML = Object.entries(GB_PRO.colors).map(([id, c]) => `
     <label class="swatch" title="${c.name}"><input type="radio" name="pcolor" value="${id}" ${id === cfg.color ? 'checked' : ''}><span style="--c:${c.hex}"></span><small>${c.name}</small></label>`).join('');
   $('[data-pro-finishes]').innerHTML = Object.entries(GB_PRO.finishes).map(([id, f]) => `
-    <label class="seg"><input type="radio" name="pfinish" value="${id}" ${id === cfg.finish ? 'checked' : ''}><span><b>${f.name}</b></span></label>`).join('');
+    <label class="seg"><input type="radio" name="pfinish" value="${id}" ${id === cfg.finish ? 'checked' : ''}><span><b>${f.name}</b><small>${f.hint}</small></span></label>`).join('');
+  const matEl = $('[data-pro-materials]');
+  if(matEl) matEl.innerHTML = Object.entries(GB_PRO.materials).map(([id, m]) => `
+    <label class="seg"><input type="radio" name="pmaterial" value="${id}" ${id === cfg.material ? 'checked' : ''}><span><b>${m.name}</b><small>${m.hint}</small></span></label>`).join('');
   $('[data-pro-markings]').innerHTML = Object.entries(GB_PRO.markings).map(([id, m]) => `
     <label class="seg"><input type="radio" name="pmark" value="${id}" ${id === cfg.marking ? 'checked' : ''}><span><b>${m.name}</b><small>${m.hint}</small></span></label>`).join('');
 
@@ -2441,7 +2479,7 @@ function gbInitPro(){
       .map(x => `<span>${escapeHTML(x)}</span>`).join('');
     summary.innerHTML = [
       ['Produit', `${t.label}, ${sh.name}`], ['Puissance', pw || '—'], ['Connectique', cfg.ports.map(p => c.ports.options[p]).join(', ') || '—'], ['Marque', cfg.brand || '—'],
-      ['Coque', `${GB_PRO.colors[cfg.color].name}, ${GB_PRO.finishes[cfg.finish].name.toLowerCase()}`],
+      ['Coque', `${GB_PRO.colors[cfg.color].name}, ${(GB_PRO.finishes[cfg.finish] || GB_PRO.finishes.texture).name.toLowerCase()}`], ['Matière', (GB_PRO.materials[cfg.material] || GB_PRO.materials.abs).name],
       ['Logo', GB_PRO.markings[cfg.marking].name + (cfg.marking === 'bicolore' ? `, ${cfg.ink}` : '')], ['Quantité', cfg.qty]
     ].map(([k, v]) => `<div><dt>${k}</dt><dd>${escapeHTML(v)}</dd></div>`).join('');
     $('[data-pro-ink]').hidden = cfg.marking !== 'bicolore';
@@ -2452,6 +2490,7 @@ function gbInitPro(){
     setTypeDefaults(); renderShapes(); renderConn();
     root.querySelectorAll('input[name=pcolor]').forEach(i => i.checked = i.value === cfg.color);
     root.querySelectorAll('input[name=pfinish]').forEach(i => i.checked = i.value === cfg.finish);
+    root.querySelectorAll('input[name=pmaterial]').forEach(i => i.checked = i.value === (cfg.material || 'abs'));
     root.querySelectorAll('input[name=pmark]').forEach(i => i.checked = i.value === cfg.marking);
     root.querySelectorAll('input[name=pink]').forEach(i => i.checked = i.value === cfg.ink);
     $('[data-pro-logo-name]').textContent = cfg.logo ? 'Logo chargé' : 'Aucun logo';
@@ -2468,6 +2507,7 @@ function gbInitPro(){
     else if(t.id === 'proSlogan') cfg.slogan = t.value;
     else if(t.name === 'pcolor') cfg.color = t.value;
     else if(t.name === 'pfinish') cfg.finish = t.value;
+    else if(t.name === 'pmaterial') cfg.material = t.value;
     else if(t.name === 'pmark') cfg.marking = t.value;
     else if(t.name === 'pink') cfg.ink = t.value;
     else if(t.id === 'proQty') cfg.qty = t.value;
@@ -2539,7 +2579,7 @@ function gbInitPro(){
       `• ${GB_CONNECT[cfg.type].ports.label} : ${cfg.ports.map(p => GB_CONNECT[cfg.type].ports.options[p]).join(', ') || 'à préciser'}`,
       `• Marque : ${cfg.brand || 'à préciser'}${cfg.slogan ? ` (slogan : ${cfg.slogan})` : ''}`,
       `• Secteur : ${cfg.sector || 'à préciser'}`,
-      `• Coque : ${GB_PRO.colors[cfg.color].name}, finition ${GB_PRO.finishes[cfg.finish].name.toLowerCase()}`,
+      `• Coque : ${GB_PRO.colors[cfg.color].name}, ${(GB_PRO.finishes[cfg.finish] || GB_PRO.finishes.texture).name.toLowerCase()}, ${(GB_PRO.materials[cfg.material] || GB_PRO.materials.abs).name}`,
       `• Logo : ${GB_PRO.markings[cfg.marking].name}${cfg.marking === 'bicolore' ? `, couleur ${cfg.ink}` : ''}`,
       `• Quantité : ${cfg.qty}`,
       `• Échéance souhaitée : ${cfg.deadline ? new Date(cfg.deadline).toLocaleDateString('fr-FR') : 'à préciser'}`,
