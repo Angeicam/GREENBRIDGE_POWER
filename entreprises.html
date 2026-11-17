@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-<link rel="stylesheet" href="greenbridge.css?v=7">
+<link rel="stylesheet" href="greenbridge.css?v=9">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..700&display=swap">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"></noscript>
@@ -140,16 +140,25 @@
       </div>
 
       <div class="config__form">
+        <div class="wiz-progress" aria-live="polite">
+          <div class="wiz-progress__rail"><span data-wiz-fill></span></div>
+          <p><span>Étape <b data-wiz-num>1</b> sur 5</span><span data-wiz-title>Votre produit</span></p>
+        </div>
+        <section class="wiz-step is-current" data-step="1" data-title="Votre produit">
         <div class="step-title"><b>1</b>Votre produit</div>
         <div class="field"><span class="field__label">Type de produit</span><div class="types" data-pro-types></div></div>
         <div class="field"><span class="field__label">Forme de la coque</span><div class="picks picks--shapes" data-pro-shapes></div>
           <div class="custom-shape"><i class="fa-solid fa-pen-ruler" aria-hidden="true"></i><div><b>Votre forme n’est pas dans la liste ?</b><p>Décrivez-nous le modèle que vous imaginez : nous l’étudions et le concevons sur mesure.</p></div>
             <button class="btn btn--line btn--sm" type="button" data-order="Offre entreprises : je souhaite faire concevoir un modèle sur mesure, avec une forme qui n’est pas dans la liste"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i>Proposer ma forme</button></div></div>
 
+        </section>
+        <section class="wiz-step" data-step="2" data-title="Puissance et connectique">
         <div class="step-title"><b>2</b>Puissance et connectique</div>
         <div class="field"><span class="field__label">Puissance</span><div class="segs segs--2" data-pro-power></div></div>
         <div class="field"><span class="field__label"><span data-pro-ports-label>Connectique</span> <small>Plusieurs choix possibles</small></span><div class="chips" data-pro-ports></div></div>
 
+        </section>
+        <section class="wiz-step" data-step="3" data-title="Votre marque">
         <div class="step-title"><b>3</b>Votre marque</div>
         <div class="field"><label for="proBrand">Nom de la marque <small>24 caractères maximum</small></label><input class="input" id="proBrand" maxlength="24" placeholder="Ex. : KORA CONSEIL" autocomplete="organization"></div>
         <div class="field"><label for="proSlogan">Slogan <small>Facultatif</small></label><input class="input" id="proSlogan" maxlength="40" placeholder="Ex. : L’énergie de vos projets"></div>
@@ -157,6 +166,8 @@
           <div class="upload"><input type="file" id="proLogo" accept="image/png,image/jpeg,image/svg+xml,image/webp"><label class="btn btn--line btn--sm" for="proLogo"><i class="fa-solid fa-upload" aria-hidden="true"></i>Ajouter mon logo</label><span data-pro-logo-name>Aucun logo</span><button type="button" data-pro-logo-clear>Retirer</button></div>
           <p class="field__hint">Votre logo reste sur votre appareil : il n’est envoyé nulle part. Un logo simple, en une couleur, donne le plus beau rendu.</p></div>
 
+        </section>
+        <section class="wiz-step" data-step="4" data-title="Couleur et finition">
         <div class="step-title"><b>4</b>Couleur et finition</div>
         <div class="field"><span class="field__label">Couleur de la coque <small>Autres teintes sur demande</small></span><div class="swatches" data-pro-colors></div></div>
         <div class="field"><span class="field__label">Aspect de la coque</span><div class="segs segs--3" data-pro-finishes></div></div>
@@ -171,6 +182,8 @@
             <label class="seg"><input type="radio" name="pink" value="rouge"><span><b>Rouge</b></span></label>
           </div></div>
 
+        </section>
+        <section class="wiz-step" data-step="5" data-title="Votre projet">
         <div class="step-title"><b>5</b>Votre projet</div>
         <div class="field-row">
           <div class="field"><label for="proQty">Quantité</label><select class="input" id="proQty"><option>Moins de 50</option><option>50 à 99</option><option selected>100 à 249</option><option>250 à 499</option><option>500 à 999</option><option>1 000 et plus</option></select></div>
@@ -181,6 +194,7 @@
           <div class="field"><label for="proCity">Ville</label><input class="input" id="proCity" placeholder="Ex. : Abidjan, Dakar" autocomplete="address-level2"></div>
         </div>
         <div class="field"><label for="proNote">Précisions <small>Facultatif</small></label><textarea class="input" id="proNote" placeholder="Usage, public visé, budget, événement…"></textarea></div>
+        <div class="wiz-recap"><span class="field__label">Votre récapitulatif</span><dl class="recap" data-pro-summary-m></dl></div>
         <div class="mobile-only">
             <p class="pro-price">Tarif établi après étude, selon la forme, la quantité et la finition.</p>
             <div class="btn-row">
@@ -188,6 +202,13 @@
               <button class="btn btn--line" type="button" data-pro-download><i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i>Télécharger la fiche</button>
             </div>
             <p class="disclaimer">La fiche reprend toutes les caractéristiques de votre modèle et une référence, à joindre à votre demande. Maquette indicative : le rendu final est validé ensemble sur un bon à tirer.</p></div>
+        </section>
+        <div class="pro-mobilebar" aria-label="Navigation du simulateur">
+          <button class="btn btn--line wiz-prev" type="button" data-wiz-prev><i class="fa-solid fa-arrow-left" aria-hidden="true"></i><span>Retour</span></button>
+          <button class="btn wiz-next" type="button" data-wiz-next>Suivant<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+          <button class="btn btn--wa wiz-send" type="button" data-pro-send><i class="fa-brands fa-whatsapp" aria-hidden="true"></i>Demander mon devis</button>
+          <button class="btn btn--line pro-mobilebar__icon wiz-dl" type="button" data-pro-download aria-label="Télécharger la fiche"><i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i></button>
+        </div>
       </div>
     </div>
   </div>
@@ -300,6 +321,6 @@
   </div>
 </div>
 
-<script src="greenbridge.js?v=7" defer></script>
+<script src="greenbridge.js?v=9" defer></script>
 </body>
 </html>
