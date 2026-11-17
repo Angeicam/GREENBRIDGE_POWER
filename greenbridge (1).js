@@ -2304,10 +2304,16 @@ function gbCreateStage(canvas, opts){
 
 /* Un seul moteur caché sert à produire les vignettes et visuels fixes */
 let gbStudio = null;
-async function gbProSnapshot(cfg, size){
-  if(!gbStudio){ const c = gbCanvas(size, size); gbStudio = gbCreateStage(c, { snapshot:true, size, tight:true }); gbStudio._c = c; }
-  await gbStudio.set(cfg);
-  return gbStudio.snapshot(size);
+let gbStudioQueue = Promise.resolve();
+function gbProSnapshot(cfg, size){
+  /* le moteur est partagé : chaque image attend la précédente, sinon elles se mélangent */
+  const job = gbStudioQueue.then(async () => {
+    if(!gbStudio){ const c = gbCanvas(size, size); gbStudio = gbCreateStage(c, { snapshot:true, size, tight:true }); gbStudio._c = c; }
+    await gbStudio.set(Object.assign({}, cfg));
+    return gbStudio.snapshot(size);
+  });
+  gbStudioQueue = job.catch(() => {});
+  return job;
 }
 
 const GB_PRO_EXAMPLES = [
@@ -2430,7 +2436,7 @@ function gbInitPro(){
       for(const m of t.models){
         const key = cfg.type + '-' + m.id; if(thumbs[key]) continue;
         try{
-          thumbs[key] = await gbProSnapshot({ type:cfg.type, shape:m.id, brand:' ', slogan:'', color:'noir', finish:'texture', marking:'bicolore', ink:'blanc', logo:'' }, 320);
+          thumbs[key] = await gbProSnapshot({ type:cfg.type, shape:m.id, brand:' ', slogan:'', color:'noir', finish:'fin', marking:'bicolore', ink:'blanc', logo:'' }, 320);
           const box = shapesEl.querySelector(`[data-thumb="${key}"]`); if(box) box.innerHTML = `<img src="${thumbs[key]}" alt="">`;
         }catch(e){}
       }
@@ -2482,6 +2488,7 @@ function gbInitPro(){
       ['Coque', `${GB_PRO.colors[cfg.color].name}, ${(GB_PRO.finishes[cfg.finish] || GB_PRO.finishes.texture).name.toLowerCase()}`], ['Matière', (GB_PRO.materials[cfg.material] || GB_PRO.materials.abs).name],
       ['Logo', GB_PRO.markings[cfg.marking].name + (cfg.marking === 'bicolore' ? `, ${cfg.ink}` : '')], ['Quantité', cfg.qty]
     ].map(([k, v]) => `<div><dt>${k}</dt><dd>${escapeHTML(v)}</dd></div>`).join('');
+    const sm = $('[data-pro-summary-m]'); if(sm) sm.innerHTML = summary.innerHTML;
     $('[data-pro-ink]').hidden = cfg.marking !== 'bicolore';
   };
   const sync = () => {
@@ -2534,6 +2541,43 @@ function gbInitPro(){
     if(stage) stage.setView(view);
   };
   viewBtns.forEach(b => b.addEventListener('click', () => setView(b.dataset.proView)));
+  const forceView = v => {
+    view = v; viewBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.proView === view)));
+    if(stage) stage.setView(view);
+  };
+  /* parcours guidé (téléphone) : une étape à la fois */
+  const wizSteps = Array.from(root.querySelectorAll('.wiz-step'));
+  const wizMq = window.matchMedia('(max-width: 920px)');
+  let wizCur = 0;
+  const wizShow = (i, scroll) => {
+    wizCur = Math.max(0, Math.min(wizSteps.length - 1, i));
+    wizSteps.forEach((st, k) => st.classList.toggle('is-current', k === wizCur));
+    const last = wizCur === wizSteps.length - 1;
+    root.classList.toggle('wiz-first', wizCur === 0); root.classList.toggle('wiz-last', last);
+    const num = root.querySelector('[data-wiz-num]'), tt = root.querySelector('[data-wiz-title]'), fill = root.querySelector('[data-wiz-fill]');
+    if(num) num.textContent = wizCur + 1;
+    if(tt) tt.textContent = wizSteps[wizCur].dataset.title;
+    if(fill) fill.style.width = ((wizCur + 1) / wizSteps.length * 100) + '%';
+    /* la caméra suit l'étape : ports à l'étape 2, logo à l'étape 3, vue d'ensemble ailleurs */
+    if(wizMq.matches && stage){
+      const want = wizCur === 1 ? 'ports' : wizCur === 2 ? 'logo' : 'all';
+      if(want !== view) forceView(want);
+    }
+    if(scroll && wizMq.matches){
+      const prog = root.querySelector('.wiz-progress');
+      (prog || wizSteps[wizCur]).scrollIntoView({ behavior:'smooth', block:'start' });
+    }
+  };
+  root.querySelectorAll('[data-wiz-next]').forEach(b => b.addEventListener('click', () => wizShow(wizCur + 1, true)));
+  root.querySelectorAll('[data-wiz-prev]').forEach(b => b.addEventListener('click', () => wizShow(wizCur - 1, true)));
+  wizShow(0, false);
+
+  /* barre d'action fixe sur téléphone, seulement pendant le simulateur */
+  const sim = document.getElementById('simulateur');
+  if(sim && 'IntersectionObserver' in window){
+    new IntersectionObserver(entries => document.body.classList.toggle('pro-in-view', entries[0].isIntersecting), { rootMargin:'-30% 0px -30% 0px' }).observe(sim);
+  }
+
   /* exemples */
   const ex = document.querySelector('[data-pro-examples]');
   if(ex){
