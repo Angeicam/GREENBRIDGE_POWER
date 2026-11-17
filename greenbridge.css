@@ -1150,3 +1150,78 @@ textarea.input{min-height:90px;resize:vertical}
 @media (max-width:640px){.picks--shapes:has(.pick:nth-child(5)){grid-template-columns:repeat(2,minmax(0,1fr))}}
 .segs--3{grid-template-columns:repeat(3,1fr)}
 @media (max-width:640px){.segs--3{grid-template-columns:1fr}}
+
+/* =====================================================================
+   Simulateur sur téléphone : compact, carrousel, barre d'action fixe
+   ===================================================================== */
+.pro-mobilebar{display:none}
+@media (max-width:920px){
+  .preview__stage{height:min(27vh,230px)}
+  .preview__caption,.preview__badge{display:none}
+  .preview__note{top:8px;right:8px;font-size:.7rem;padding:4px 8px}
+  .pro-3d{touch-action:pan-y}                 /* glisser vertical = défiler la page */
+  .pro-mobilebar{
+    position:fixed;left:0;right:0;bottom:0;z-index:950;display:flex;gap:8px;
+    padding:10px var(--gutter) max(10px, env(safe-area-inset-bottom));
+    background:rgba(255,255,255,.96);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+    border-top:1px solid var(--line);box-shadow:0 -10px 30px -18px rgba(0,0,0,.35);
+    transform:translateY(110%);transition:transform .25s var(--ease);
+  }
+  .pro-mobilebar .btn{flex:1 1 auto;min-height:48px}
+  .pro-mobilebar .pro-mobilebar__icon{flex:0 0 52px;padding:0}
+  body.pro-in-view .pro-mobilebar{transform:none}
+  body.pro-in-view .fab{opacity:0;pointer-events:none}
+  body.pro-in-view .config__form{padding-bottom:70px}
+}
+@media (max-width:640px){
+  /* formes : carrousel horizontal à faire glisser */
+  .picks--shapes,.picks--shapes:has(.pick:nth-child(5)){
+    display:flex;grid-template-columns:none;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;
+    margin-inline:calc(var(--gutter) * -1);padding:2px var(--gutter) 6px;scrollbar-width:none;max-width:none
+  }
+  .picks--shapes::-webkit-scrollbar{display:none}
+  .picks--shapes .pick{flex:0 0 40%;scroll-snap-align:start}
+  .picks--shapes .pick__txt small{display:none}
+  .swatches{gap:8px}
+  .swatch{width:62px}
+  .field__hint{font-size:.78rem}
+}
+
+/* =====================================================================
+   Parcours guidé sur téléphone (une étape à la fois)
+   ===================================================================== */
+.wiz-step{display:grid;gap:26px}
+.wiz-progress,.wiz-recap{display:none}
+.wiz-prev,.wiz-next{display:none}
+@media (max-width:920px){
+  .wiz-progress{display:grid;gap:8px;position:relative;scroll-margin-top:calc(var(--header-h) + var(--band-h) + min(27vh,230px) + 30px)}
+  .wiz-progress__rail{height:4px;border-radius:4px;background:var(--line);overflow:hidden}
+  .wiz-progress__rail span{display:block;height:100%;width:20%;border-radius:4px;background:linear-gradient(90deg,var(--brass),#E0C46A);transition:width .45s var(--ease)}
+  .wiz-progress p{display:flex;justify-content:space-between;gap:12px;font-size:.84rem;color:var(--muted)}
+  .wiz-progress p b{color:var(--ink)}
+  .wiz-progress [data-wiz-title]{font-weight:600;color:var(--forest-800)}
+  .wiz-step{display:none}
+  .wiz-step.is-current{display:grid;animation:gb-wiz-in .38s var(--ease)}
+  .wiz-step > .step-title{display:none}
+  .wiz-recap{display:grid;gap:10px}
+  .wiz-recap .recap{grid-template-columns:repeat(2,1fr)}
+  .config__form .mobile-only .btn-row{display:none}      /* les actions sont dans la barre du bas */
+  @keyframes gb-wiz-in{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+
+  /* barre du bas : Retour / Suivant, puis Devis à la dernière étape */
+  .pro-mobilebar .wiz-prev{display:inline-flex;flex:0 0 auto;padding:0 16px}
+  .pro-mobilebar .wiz-next{display:inline-flex;flex:1 1 auto;gap:10px;--bg:var(--forest-800);--fg:#fff}
+  .pro-mobilebar .wiz-send,.pro-mobilebar .wiz-dl{display:none}
+  .config.wiz-first .pro-mobilebar .wiz-prev{display:none}
+  .config.wiz-last .pro-mobilebar .wiz-next{display:none}
+  .config.wiz-last .pro-mobilebar .wiz-send{display:inline-flex}
+  .config.wiz-last .pro-mobilebar .wiz-dl{display:inline-flex}
+  .pro-mobilebar .wiz-prev span{display:inline}
+}
+@media (max-width:380px){.pro-mobilebar .wiz-prev span{display:none}}
+@media (prefers-reduced-motion: reduce){.wiz-step.is-current{animation:none}}
+@media (max-width:920px){
+  .config.wiz-last .pro-mobilebar .wiz-prev{flex:0 0 48px;padding:0}
+  .config.wiz-last .pro-mobilebar .wiz-prev span{display:none}
+  .config.wiz-last .pro-mobilebar .wiz-send{flex:1 1 auto;min-width:0}
+}
